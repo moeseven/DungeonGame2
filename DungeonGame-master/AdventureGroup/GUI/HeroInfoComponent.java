@@ -20,6 +20,8 @@ import gameEncounter.Hero;
 public class HeroInfoComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
+		private JPanel jp_Equip;
+		private JPanel jp_Stats;
 		private JScrollPane sp;
 		private GameWindow gf;
 		public HeroInfoComponent(GameWindow gf,Hero hero){
@@ -30,6 +32,17 @@ public class HeroInfoComponent extends JComponent{
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
+			jp_Equip= new JPanel();
+			jp_Equip.add(new HeroInventoryPaintComponent(gf, hero));
+			jp_Stats=new JPanel();
+			jp_Stats.add(new HeroStatsPaintComponent(gf, hero));
+			jp=new JPanel();
+			sp=new JScrollPane();
+			sp.add(jp);
+			jp.add(new DeckPaintComponent(gf, hero));
+			this.add(sp, BorderLayout.LINE_END);
+			this.add(jp_Equip, BorderLayout.CENTER);
+			this.add(jp_Stats, BorderLayout.BEFORE_FIRST_LINE);
 			setVisible(true);
 		}
 
@@ -50,8 +63,6 @@ public class HeroInfoComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);
-		//paint Hero info
 	}
 }
 

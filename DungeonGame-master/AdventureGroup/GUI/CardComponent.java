@@ -18,13 +18,13 @@ import gameEncounter.Card;
 public class CardComponent extends JComponent{
 	private Card card;
 	private Image image;
-	private GameWindow gf;
-	public CardComponent(GameWindow gf, Card card) {
+	private FightWindow fw;
+	public CardComponent(FightWindow fw, Card card) {
 //		try {
 //		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
 //		} catch (IOException e) {
 //		}
-		this.gf=gf;
+		this.fw=fw;
 		this.card=card;
 		super.setPreferredSize(new Dimension(100,80));
 		MyMouseListener ml = new MyMouseListener();
@@ -36,8 +36,8 @@ public class CardComponent extends JComponent{
 	private class MyMouseListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			if(e.getButton()==1){
-				gf.getGame().getPlayer().getSelectedHero().setSelectedCard(card);;	
-				gf.repaint();
+				fw.getGame().getPlayer().getSelectedHero().setSelectedCard(card);;	
+				fw.repaint();
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -48,8 +48,8 @@ public class CardComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
-		if(gf!=null){			
-			if(gf.getGame().getPlayer().getSelectedHero().getSelectedCard()==card){
+		if(fw!=null){			
+			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==card){
 				g.setColor(Color.red);
 				g.drawRect(1, 1, 100, 80);
 			}

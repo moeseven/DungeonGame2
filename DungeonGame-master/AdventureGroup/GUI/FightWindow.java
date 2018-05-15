@@ -6,20 +6,24 @@ import javax.swing.JFrame;
 
 import game.Game;
 
-public class GameWindow extends JFrame{
+public class FightWindow extends JFrame{
 	private Game game;
+	private GuiFight guiFight;
+	private GameWindow gw;
 	private GuiRoom guiRoom;
-	private FightWindow fw;
-	public GameWindow(Game game) {
-		fw=new FightWindow(game,this);
+	public FightWindow(Game game, GameWindow gw) {
 		this.game=game;
-		this.setVisible(false);
+		this.gw=gw;
+		this.setVisible(true);
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		guiRoom=new GuiRoom(this);
-		this.add(guiRoom);
-		setLocation(10, 10);	
+		if(this.game.getRoom().getFight()!=null) {
+			guiFight=new GuiFight(this);
+			add(guiFight,BorderLayout.CENTER);
+		}
+		setLocation(10, 10);
+		
 	}
 	public Game getGame() {
 		return game;
@@ -28,7 +32,7 @@ public class GameWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {
-		fw.setVisible(true);
+		gw.setVisible(true);
 		this.setVisible(false);
 	}
 }

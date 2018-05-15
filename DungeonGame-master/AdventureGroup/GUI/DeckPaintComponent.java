@@ -17,13 +17,13 @@ import javax.swing.border.LineBorder;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class HandPaintComponent extends JComponent{
+public class DeckPaintComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
-		private FightWindow fw;
-		public HandPaintComponent(FightWindow fw,Hero hero){
-			this.fw=fw;
+		private GameWindow gw;
+		public DeckPaintComponent(GameWindow gw,Hero hero){
+			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
 			super.setPreferredSize(new Dimension(1000,90));
@@ -41,8 +41,8 @@ public class HandPaintComponent extends JComponent{
 				//get card position from click
 				int i=Math.round(x/100);
 				if (i<hero.getHand().size()) {
-					fw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getHand().get(i));;	
-					fw.repaint();
+					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getHand().get(i));;	
+					gw.repaint();
 				}				
 			}else{
 				if (e.getButton()==3){
@@ -54,11 +54,11 @@ public class HandPaintComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
-		for (int i=0;i<hero.getHand().size();i++){
+		for (int i=0;i<hero.getDeck().getCards().size();i++){
 			g.setColor(Color.black);
-			g.drawString(hero.getHand().get(i).getName(), 20+i*100, 15);
-			g.drawString(""+hero.getHand().get(i).getManaCost(), 5+i*100, 10);
-			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getHand().get(i)){
+			g.drawString(hero.getDeck().getCards().get(i).getName(), 20+i*100, 15);
+			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5+i*100, 10);
+			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1+i*100, 1, 100, 80);
 			}

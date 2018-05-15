@@ -16,7 +16,7 @@ import gameEncounter.Fight;
 
 public class GuiFight extends JPanel{
 	private Fight fight;
-	private GameWindow gf;
+	private FightWindow fw;
 	private HeroComponent hc;
 	private MonstersComponent mc;
 	private JButton b;
@@ -29,10 +29,10 @@ public class GuiFight extends JPanel{
 	private JPanel jp_mid_1;
 	private JTextField tf;
 	private Player player;
-	public GuiFight(GameWindow gf) {
-		this.gf=gf;
-		if(this.gf.getGame().getRoom().getFight()!=null) {
-			this.fight=this.gf.getGame().getRoom().getFight();	
+	public GuiFight(FightWindow fw) {
+		this.fw=fw;
+		if(this.fw.getGame().getRoom().getFight()!=null) {
+			this.fight=this.fw.getGame().getRoom().getFight();	
 			
 			setLayout(new BorderLayout());
 //			// Player dialog
@@ -44,15 +44,18 @@ public class GuiFight extends JPanel{
 	}
 	private class ml extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			gf.getGame().getRoom().getFight().monstersTurn();
-			gf.revalidate();
-			gf.repaint();
+			fw.getGame().getRoom().getFight().monstersTurn();
+			fw.revalidate();
+			fw.repaint();
+			if(fw.getGame().getRoom().getFight().isFightOver()) {
+				fw.windowswitch();
+			}
 		}
 	}
 	public void myUpdate() {
 		// TODO Auto-generated method stub
-		hc=new HeroComponent(this.gf, this.gf.getGame().getHeroes().getFirst());
-		mc=new MonstersComponent(this.gf);
+		hc=new HeroComponent(this.fw, this.fw.getGame().getHeroes().getFirst());
+		mc=new MonstersComponent(this.fw);
 		jp_mid_1= new JPanel();
 		jp_mid_1.setLayout(new BorderLayout());
 		jp_mid_1.add(mc,BorderLayout.NORTH);

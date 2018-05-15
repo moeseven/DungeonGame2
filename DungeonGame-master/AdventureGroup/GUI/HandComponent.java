@@ -17,15 +17,15 @@ public class HandComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
-		private GameWindow gf;
-		public HandComponent(GameWindow gf,Hero hero){
-			this.gf=gf;
+		private FightWindow fw;
+		public HandComponent(FightWindow fw,Hero hero){
+			this.fw=fw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
 			setLayout(new GridLayout());
 			jp=new JPanel();
 			for (int i=0;i<hero.getHand().size();i++){
-				jp.add(new CardComponent(gf,hero.getHand().get(i)));
+				jp.add(new CardComponent(fw,hero.getHand().get(i)));
 			}
 			sp= new JScrollPane(jp);
 			add(sp,BorderLayout.CENTER);
@@ -33,7 +33,7 @@ public class HandComponent extends JComponent{
 		public void myUpdate() {
 			jp=new JPanel();
 			for (int i=0;i<hero.getHand().size();i++){
-				jp.add(new CardComponent(gf,hero.getHand().get(i)));
+				jp.add(new CardComponent(fw,hero.getHand().get(i)));
 			}
 		}
 }

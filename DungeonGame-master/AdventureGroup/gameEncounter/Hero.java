@@ -19,6 +19,7 @@ public abstract class Hero {
 	private Hero target;
 	private Card selectedCard;
 	private boolean isDead;
+	protected boolean good;
 	//stats
 	protected int hp;
 	private int mana;
@@ -38,8 +39,8 @@ public abstract class Hero {
 	public void initialize() {
 		isDead=false;
 		isReady=false;
-		backpack= new Backpack();
-		inventory= new Equipment();
+		backpack= new Backpack(this);
+		inventory= new Equipment(this);
 	}
 	//functions
 	public void setUpHandPile() {
@@ -241,6 +242,12 @@ public abstract class Hero {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public boolean isGood() {
+		return good;
+	}
+	public void setGood(boolean isgood) {
+		this.good = isgood;
 	}
 	
 }

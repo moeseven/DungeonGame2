@@ -17,15 +17,15 @@ public class MonstersComponent extends JComponent{
 	private LinkedList<Hero> monsters;
 	private JPanel jp;
 	private JScrollPane sp;
-	private GameWindow gf;
-	public MonstersComponent(GameWindow gf){
-		this.gf=gf;
+	private FightWindow fw;
+	public MonstersComponent(FightWindow fw){
+		this.fw=fw;
 		setBorder(new LineBorder(Color.RED));
 		setLayout(new GridLayout());
-		this.monsters= gf.getGame().getRoom().getFight().getMonsters();
+		this.monsters= fw.getGame().getRoom().getFight().getMonsters();
 		jp=new JPanel();
 		for (int i=0;i<monsters.size();i++){
-			jp.add(new MonsterComponent(gf,monsters.get(i)));
+			jp.add(new MonsterComponent(fw,monsters.get(i)));
 		}
 		sp= new JScrollPane(jp);
 		add(sp,BorderLayout.CENTER);

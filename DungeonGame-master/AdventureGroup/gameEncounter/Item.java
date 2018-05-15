@@ -4,6 +4,7 @@ public abstract class Item {
 	private int weight;
 	private int gold;
 	private int category;
+	private String name;
 	//1: Hand1  //2: Hand2  //3: BiHand //4: Armor
 	public Item() {
 		super();

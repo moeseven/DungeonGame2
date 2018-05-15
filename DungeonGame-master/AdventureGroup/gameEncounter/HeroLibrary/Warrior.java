@@ -6,6 +6,7 @@ import gameEncounter.Card;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
+import gameEncounter.CardLibrary.Cleave;
 import gameEncounter.CardLibrary.MeeleAttack;
 
 public class Warrior extends Hero{
@@ -13,6 +14,7 @@ public class Warrior extends Hero{
 	public Warrior() {
 		// TODO Auto-generated constructor stub
 		this.initialize();
+		good=true;
 		turnBlock=0;
 		turnMana=3;
 		turnDraw=4;
@@ -28,6 +30,7 @@ public class Warrior extends Hero{
 		for (int i=0; i<5;i++) {
 			deck.addCard(new Block());
 		}
+		deck.addCard(new Cleave());
 	}
 
 }

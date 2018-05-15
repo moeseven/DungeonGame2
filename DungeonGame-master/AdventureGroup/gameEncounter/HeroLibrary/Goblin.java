@@ -13,10 +13,11 @@ public class Goblin extends Hero{
 	public Goblin() {
 		// TODO Auto-generated constructor stub
 		this.initialize();
+		good=false;
 		turnBlock=0;
 		turnMana=2;
 		turnDraw=3;
-		maxHp=40+(int) Math.random()*50;
+		maxHp=40+(int) (Math.random()*50);
 		hp=maxHp;
 		gold=(int)Math.random()*5;
 		name="Goblin";
