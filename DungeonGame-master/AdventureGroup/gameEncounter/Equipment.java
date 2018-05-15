@@ -5,8 +5,8 @@ public class Equipment {
 	private Item hand1=null;
 	private Item hand2=null;
 	private Item armor=null;
-	public Equipment() {
-		super();
+	public Equipment(Hero hero) {
+		this.hero=hero;
 	}
 	public void equipHand1(Item item) {
 		if(hand1!=null) {
@@ -45,4 +45,29 @@ public class Equipment {
 		armor=item;		
 		item.mod(hero);	
 	}
+	public Hero getHero() {
+		return hero;
+	}
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+	public Item getHand1() {
+		return hand1;
+	}
+	public void setHand1(Item hand1) {
+		this.hand1 = hand1;
+	}
+	public Item getHand2() {
+		return hand2;
+	}
+	public void setHand2(Item hand2) {
+		this.hand2 = hand2;
+	}
+	public Item getArmor() {
+		return armor;
+	}
+	public void setArmor(Item armor) {
+		this.armor = armor;
+	}
+	
 }

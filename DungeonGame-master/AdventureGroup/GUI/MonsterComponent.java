@@ -19,14 +19,14 @@ import gameEncounter.Hero;
 public class MonsterComponent extends JComponent{
 	private Hero monster;
 	private Image image;
-	private GameWindow gf;
-	public MonsterComponent(GameWindow gf, Hero monster) {
+	private FightWindow fw;
+	public MonsterComponent(FightWindow fw, Hero monster) {
 //		try {
 //		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
 //		} catch (IOException e) {
 //		}
 		this.monster=monster;
-		this.gf=gf;
+		this.fw=fw;
 		super.setPreferredSize(new Dimension(120,150));
 		MyMouseListener ml = new MyMouseListener();
 		super.addMouseListener(ml);
@@ -37,11 +37,10 @@ public class MonsterComponent extends JComponent{
 	private class MyMouseListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			if(e.getButton()==1){
-				gf.getGame().getPlayer().getSelectedHero().setTarget(monster);
-				gf.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(gf.getGame().getPlayer().getSelectedHero());
-				gf.revalidate();
-				gf.repaint();
-				gf.updateHand();
+				fw.getGame().getPlayer().getSelectedHero().setTarget(monster);
+				fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
+				fw.revalidate();
+				fw.repaint();
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -52,8 +51,8 @@ public class MonsterComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
-		if(gf!=null){			
-			if(gf.getGame().getPlayer().getSelectedHero().getTarget()==monster){
+		if(fw!=null){			
+			if(fw.getGame().getPlayer().getSelectedHero().getTarget()==monster){
 				g.setColor(Color.red);
 				g.drawRect(1, 1, 98, 148);
 			}

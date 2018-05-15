@@ -12,9 +12,11 @@ public class Fight {
 		this.heroes=heroes;
 		for (Hero h : this.heroes) {		
 		    h.setUpHandPile();
+		    h.setFight(this);
 		}
 		for (Hero m : this.monsters) {	
-		    m.setUpHandPile();	  
+		    m.setUpHandPile();	 
+		    m.setFight(this);
 		}
 		this.determineBeginner();
 	}

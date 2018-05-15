@@ -17,10 +17,10 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 
 public class HeroStatsComponent extends JComponent{
-	private GameWindow gf;
+	private FightWindow fw;
 	private Hero hero;
-	public HeroStatsComponent(GameWindow gf, Hero hero) {
-		this.gf=gf;
+	public HeroStatsComponent(FightWindow fw, Hero hero) {
+		this.fw=fw;
 		this.hero=hero;
 		super.setPreferredSize(new Dimension(100,80));
 		setLayout(new BorderLayout());

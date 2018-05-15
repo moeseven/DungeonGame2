@@ -18,17 +18,17 @@ public class HeroComponent extends JComponent{
 	private HandPaintComponent hpc;
 	private JPanel jp;
 	private JScrollPane sp;
-	private GameWindow gf;
-	public HeroComponent(GameWindow gf, Hero hero) {
-		this.gf=gf;
+	private FightWindow fw;
+	public HeroComponent(FightWindow fw, Hero hero) {
+		this.fw=fw;
 		this.hero=hero;
-		handComponent=new HandComponent(gf,hero);
-		hpc=new HandPaintComponent(gf,hero);
+		handComponent=new HandComponent(fw,hero);
+		hpc=new HandPaintComponent(fw,hero);
 		setLayout(new BorderLayout());
 		jp=new JPanel();
 		jp.add(hpc);
 		add(jp,BorderLayout.CENTER);
-		add(new HeroStatsComponent(gf,hero),BorderLayout.WEST);
+		add(new HeroStatsComponent(fw,hero),BorderLayout.WEST);
 	}
 	public HandComponent getHandComponent() {
 		return handComponent;
