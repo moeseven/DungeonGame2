@@ -24,7 +24,7 @@ public class HeroStatsPaintComponent extends JComponent{
 			this.gf=gf;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(800,600));
+			super.setPreferredSize(new Dimension(300,200));
 			setVisible(true);
 		}
 

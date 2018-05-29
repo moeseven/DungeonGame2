@@ -42,7 +42,7 @@ public class HeroInfoComponent extends JComponent{
 			jp.add(new DeckPaintComponent(gf, hero));
 			this.add(sp, BorderLayout.LINE_END);
 			this.add(jp_Equip, BorderLayout.CENTER);
-			this.add(jp_Stats, BorderLayout.BEFORE_FIRST_LINE);
+			this.add(jp_Stats, BorderLayout.NORTH);
 			setVisible(true);
 		}
 

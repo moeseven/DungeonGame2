@@ -26,7 +26,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(1000,90));
+			super.setPreferredSize(new Dimension(600,120));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
@@ -51,9 +51,23 @@ public class HeroInventoryPaintComponent extends JComponent{
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);		
 			g.setColor(Color.black);
-			g.drawString(hero.getInventory().getArmor().toString(), 30, 15);
-			g.drawString(hero.getInventory().getHand1().toString(), 10, 35);
-			g.drawString(hero.getInventory().getHand2().toString(), 50, 35);
+			g.drawRect(10, 20, 40, 40);//hand1
+			g.drawString("hand1", 13, 31);
+			g.drawRect(110, 20, 40, 40);//hand2
+			g.drawString("hand2", 113, 31);
+			//armor
+			g.drawRect(60, 60, 40, 40);			
+			if(hero.getInventory().getArmor()!=null) {
+				g.drawString(hero.getInventory().getArmor().toString(), 63, 71);
+			}else {
+				g.drawString("body", 63, 71);
+			}
+			//head
+			g.drawRect(60, 10, 40, 40);		
+			g.drawString("head", 63, 21);
+			
+			//g.drawString(hero.getInventory().getHand1().toString(), 10, 35);
+			//g.drawString(hero.getInventory().getHand2().toString(), 50, 35);
 	}
 }
 

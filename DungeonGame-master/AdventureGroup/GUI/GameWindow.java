@@ -13,7 +13,7 @@ public class GameWindow extends JFrame{
 	public GameWindow(Game game) {
 		fw=new FightWindow(game,this);
 		this.game=game;
-		this.setVisible(false);
+		this.setVisible(true);
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
