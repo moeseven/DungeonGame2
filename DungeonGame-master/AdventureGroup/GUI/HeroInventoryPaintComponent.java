@@ -16,30 +16,137 @@ import javax.swing.border.LineBorder;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import tools.ClickableRectangle;
+import tools.RectangleClicker;
 
 public class HeroInventoryPaintComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
 		private GameWindow gw;
-		public HeroInventoryPaintComponent(GameWindow gw,Hero hero){
+		private RectangleClicker rc;
+		public HeroInventoryPaintComponent(GameWindow gw,Hero h){
 			this.gw=gw;
-			this.hero=hero;
+			this.hero=h;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(600,120));
+			super.setPreferredSize(new Dimension(600,200));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
 			setVisible(true);
+			//rectangles
+			rc=new RectangleClicker();
+			//Inventory
+			rc.addRect(new ClickableRectangle("Inventory",330,10,60,60) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(hero.getInventory().size()>1) {
+						hero.getInventory().addLast(hero.getInventory().removeFirst());
+					}	
+					System.out.println("clicked inventory");
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						caption=hero.getSelectedItem().getName();
+					}else {
+						caption=name;
+					}					
+				}		
+			});
+			//head
+			rc.addRect(new ClickableRectangle("head",60,10,40,40) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						hero.getEquipment().equipHead(hero.getSelectedItem());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub
+					if(hero.getEquipment().getHead()!=null) {
+						caption=hero.getEquipment().getHead().getName();
+					}else {
+						caption=name;
+					}					
+				}		
+			});
+			//body
+			rc.addRect(new ClickableRectangle("body",60,60,40,40) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						hero.getEquipment().equipBody(hero.getSelectedItem());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub					
+					if(hero.getEquipment().getBody()!=null) {
+						caption=hero.getEquipment().getBody().getName();
+					}else {
+						caption=name;
+					}
+				}		
+			});
+			//hand1
+			rc.addRect(new ClickableRectangle("hand1",10,20,40,40) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						hero.getEquipment().equipHand1(hero.getSelectedItem());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub					
+					if(hero.getEquipment().getHand1()!=null) {
+						caption=hero.getEquipment().getHand1().getName();
+					}else {
+						caption=name;
+					}
+				}		
+			});
+			//hand2
+			rc.addRect(new ClickableRectangle("hand2",110,20,40,40) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						hero.getEquipment().equipHand2(hero.getSelectedItem());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub					
+					if(hero.getEquipment().getHand2()!=null) {
+						caption=hero.getEquipment().getHand2().getName();
+					}else {
+						caption=name;
+					}
+				}		
+			});
+			rc.updateCaptions();
 		}
 
 	private class MyMouseListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){	
 			if(e.getButton()==1){
-				int x=e.getX();
-				int y=e.getY();
 				//get equipment position from click
-					gw.repaint();				
+				rc.triggerClick(e.getX(), e.getY());
+				if(hero.getInventory().size()>0){
+					hero.setSelectedItem(hero.getInventory().getFirst());
+				}else {
+					hero.setSelectedItem(null);
+				}
+				rc.updateCaptions();
+				gw.repaint();				
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -49,25 +156,10 @@ public class HeroInventoryPaintComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);		
-			g.setColor(Color.black);
-			g.drawRect(10, 20, 40, 40);//hand1
-			g.drawString("hand1", 13, 31);
-			g.drawRect(110, 20, 40, 40);//hand2
-			g.drawString("hand2", 113, 31);
-			//armor
-			g.drawRect(60, 60, 40, 40);			
-			if(hero.getInventory().getArmor()!=null) {
-				g.drawString(hero.getInventory().getArmor().toString(), 63, 71);
-			}else {
-				g.drawString("body", 63, 71);
-			}
-			//head
-			g.drawRect(60, 10, 40, 40);		
-			g.drawString("head", 63, 21);
-			
-			//g.drawString(hero.getInventory().getHand1().toString(), 10, 35);
-			//g.drawString(hero.getInventory().getHand2().toString(), 50, 35);
+		for(int i=0; i<rc.rectAngles.size();i++) {
+			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			g.drawString(rc.rectAngles.get(i).getCaption(), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11);
+		}
 	}
 }
 

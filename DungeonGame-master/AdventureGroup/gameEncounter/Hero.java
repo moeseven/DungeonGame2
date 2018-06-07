@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public abstract class Hero {
 
-	private Backpack backpack;
-	private Equipment inventory;
+	private LinkedList<Item> inventory;
+	private Equipment equipment;
 	protected String name;
 	protected int gold;
 	protected int experience;
@@ -18,6 +18,7 @@ public abstract class Hero {
 	private Fight fight;
 	private Hero target;
 	private Card selectedCard;
+	private Item selectedItem;
 	private boolean isDead;
 	protected boolean good;
 	//stats
@@ -27,6 +28,7 @@ public abstract class Hero {
 	private LinkedList<Card> drawPile;
 	private LinkedList<Card> hand;
 	//skills
+	private int thorns;
 	protected int turnDraw;
 	protected int turnMana;
 	public int turnBlock;
@@ -37,10 +39,11 @@ public abstract class Hero {
 		this.initialize();
 	}
 	public void initialize() {
+		thorns=0;
 		isDead=false;
 		isReady=false;
-		backpack= new Backpack(this);
-		inventory= new Equipment(this);
+		inventory= new LinkedList<Item>();
+		equipment= new Equipment(this);
 	}
 	//functions
 	public void setUpHandPile() {
@@ -67,12 +70,26 @@ public abstract class Hero {
 		this.block+=block;
 	}
 	public void dealAttackDamage(Hero hero, int damage) {
-		hero.takeDamage(hero, damage+this.attackBonus);
+		hero.takeDamage(this, damage+this.attackBonus);
 	}
 	public void dealDamage(Hero hero,int damage) {
-		hero.takeDamage(hero,damage);
+		hero.takeDamage(this,damage);
 	}
 	public void takeDamage(Hero hero,int damage) {
+		hero.takeThornDamage(this, thorns);//thorns
+		int hpDamage=block-damage;
+		if(hpDamage<0) {
+			this.setHp(hp+hpDamage);
+			block=0;
+		}else {
+			this.setBlock(block-damage);
+		}
+		if(hp<=0) {
+			hp=0;
+			this.die();
+		}
+	}
+	public void takeThornDamage(Hero hero,int damage) {//prevent infinite thorn looping
 		int hpDamage=block-damage;
 		if(hpDamage<0) {
 			this.setHp(hp+hpDamage);
@@ -98,10 +115,6 @@ public abstract class Hero {
 		}		
 	}
 	//getters and setters
-	
-	public Backpack getBackpack() {
-		return backpack;
-	}
 	public int getGold() {
 		return gold;
 	}
@@ -144,14 +157,11 @@ public abstract class Hero {
 	public void setTarget(Hero target) {
 		this.target = target;
 	}
-	public void setBackpack(Backpack backpack) {
-		this.backpack = backpack;
+	public Equipment getEquipment() {
+		return equipment;
 	}
-	public Equipment getInventory() {
-		return inventory;
-	}
-	public void setInventory(Equipment inventory) {
-		this.inventory = inventory;
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
 	}
 	public Deck getDeck() {
 		return deck;
@@ -248,6 +258,24 @@ public abstract class Hero {
 	}
 	public void setGood(boolean isgood) {
 		this.good = isgood;
+	}
+	public Item getSelectedItem() {
+		return selectedItem;
+	}
+	public void setSelectedItem(Item selectedItem) {
+		this.selectedItem = selectedItem;
+	}
+	public int getThorns() {
+		return thorns;
+	}
+	public void setThorns(int thorns) {
+		this.thorns = thorns;
+	}
+	public LinkedList<Item> getInventory() {
+		return inventory;
+	}
+	public void setInventory(LinkedList<Item> inventory) {
+		this.inventory = inventory;
 	}
 	
 }

@@ -4,12 +4,17 @@ import gameEncounter.Equipment;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public abstract class Armor extends Item{
+public abstract class ItemHand2 extends Item{
 
+
+	public ItemHand2() {
+		super();
+		category=2;
+	}
 
 	@Override
 	public boolean equip(Equipment e) {
-		e.equipArmor(this);
+		e.equipHand2(this);
 		return false;
 	}
 

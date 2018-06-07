@@ -7,7 +7,7 @@ import game.Player;
 import game.RoomLibrary.GoblinRoom1;
 import gameEncounter.Hero;
 import gameEncounter.HeroLibrary.Warrior;
-import gameEncounter.ItemLibrary.ArmorThinLeather;
+import gameEncounter.ItemLibrary.*;
 
 public class Main {
 	public static LinkedList<Hero> heroes;
@@ -16,7 +16,11 @@ public class Main {
 	public static void main(String[] args) {
 		heroes= new LinkedList<Hero>();
 		heroes.add(new Warrior());
-		heroes.getFirst().getInventory().equipArmor(new ArmorThinLeather());
+		heroes.getFirst().getEquipment().equipBody(new ArmorThinLeather());
+		heroes.getFirst().getInventory().add(new ShortSword());
+		heroes.getFirst().getInventory().add(new Buckler());
+		heroes.getFirst().getInventory().add(new CrownOfThorns());
+		heroes.getFirst().getInventory().add(new HeavySword());
 		game = new Game(heroes);
 		game.enterRoom(new GoblinRoom1(heroes));
 		player = new Player(game);
