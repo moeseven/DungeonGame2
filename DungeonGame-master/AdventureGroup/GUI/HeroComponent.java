@@ -13,22 +13,20 @@ import javax.swing.border.LineBorder;
 import gameEncounter.Hero;
 
 public class HeroComponent extends JComponent{
-	private Hero hero;
 	private HandComponent handComponent;
 	private HandPaintComponent hpc;
 	private JPanel jp;
 	private JScrollPane sp;
 	private FightWindow fw;
-	public HeroComponent(FightWindow fw, Hero hero) {
+	public HeroComponent(FightWindow fw) {
 		this.fw=fw;
-		this.hero=hero;
-		handComponent=new HandComponent(fw,hero);
-		hpc=new HandPaintComponent(fw,hero);
+		handComponent=new HandComponent(fw);
+		hpc=new HandPaintComponent(fw);
 		setLayout(new BorderLayout());
 		jp=new JPanel();
 		jp.add(hpc);
 		add(jp,BorderLayout.CENTER);
-		add(new HeroStatsComponent(fw,hero),BorderLayout.WEST);
+		add(new HeroStatsComponent(fw),BorderLayout.WEST);
 	}
 	public HandComponent getHandComponent() {
 		return handComponent;

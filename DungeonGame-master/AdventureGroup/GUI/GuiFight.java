@@ -18,7 +18,7 @@ public class GuiFight extends JPanel{
 	private Fight fight;
 	private FightWindow fw;
 	private HeroComponent hc;
-	private MonstersComponent mc;
+	private CombatComponent mc;
 	private JButton b;
 	private JPanel jp_east;
 	private JPanel jpp;
@@ -44,7 +44,7 @@ public class GuiFight extends JPanel{
 	}
 	private class ml extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			fw.getGame().getRoom().getFight().monstersTurn();
+			fw.getGame().getRoom().getFight().nextTurn();
 			fw.revalidate();
 			fw.repaint();
 			if(fw.getGame().getRoom().getFight().isFightOver()) {
@@ -54,8 +54,8 @@ public class GuiFight extends JPanel{
 	}
 	public void myUpdate() {
 		// TODO Auto-generated method stub
-		hc=new HeroComponent(this.fw, this.fw.getGame().getHeroes().getFirst());
-		mc=new MonstersComponent(this.fw);
+		hc=new HeroComponent(this.fw);
+		mc=new CombatComponent(this.fw);
 		jp_mid_1= new JPanel();
 		jp_mid_1.setLayout(new BorderLayout());
 		jp_mid_1.add(mc,BorderLayout.NORTH);
@@ -71,10 +71,10 @@ public class GuiFight extends JPanel{
 	public void setHc(HeroComponent hc) {
 		this.hc = hc;
 	}
-	public MonstersComponent getMc() {
+	public CombatComponent getMc() {
 		return mc;
 	}
-	public void setMc(MonstersComponent mc) {
+	public void setMc(CombatComponent mc) {
 		this.mc = mc;
 	}
 	

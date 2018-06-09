@@ -16,16 +16,16 @@ import javax.swing.JComponent;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class MonsterComponent extends JComponent{
-	private Hero monster;
+public class HeroFightComponent extends JComponent{
+	private Hero hero;
 	private Image image;
 	private FightWindow fw;
-	public MonsterComponent(FightWindow fw, Hero monster) {
+	public HeroFightComponent(FightWindow fw, Hero hero) {
 //		try {
 //		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
 //		} catch (IOException e) {
 //		}
-		this.monster=monster;
+		this.hero=hero;
 		this.fw=fw;
 		super.setPreferredSize(new Dimension(120,150));
 		MyMouseListener ml = new MyMouseListener();
@@ -37,31 +37,31 @@ public class MonsterComponent extends JComponent{
 	private class MyMouseListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			if(e.getButton()==1){
-				fw.getGame().getPlayer().getSelectedHero().setTarget(monster);
-				fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
-				fw.revalidate();
-				fw.repaint();
+				fw.getGame().getPlayer().setSelectedHero(hero);						
 			}else{
 				if (e.getButton()==3){
-					//new CardView(card);
+					fw.getGame().getPlayer().getSelectedHero().setTarget(hero);
+					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
 				}
 			}
+			fw.revalidate();
+			fw.repaint();
 		} 
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
 		if(fw!=null){			
-			if(fw.getGame().getPlayer().getSelectedHero().getTarget()==monster){
-				g.setColor(Color.red);
+			if(fw.getGame().getPlayer().getSelectedHero()==hero){
+				g.setColor(Color.green);
 				g.drawRect(1, 1, 98, 148);
 			}
 		}
 		g.setColor(Color.black);
-		g.drawString(monster.getName(), 10, 15);
+		g.drawString(hero.getName(), 10, 15);
 		g.setColor(Color.blue);
-		g.drawString(""+monster.getBlock(), 10, 45);
+		g.drawString(""+hero.getBlock(), 10, 45);
 		g.setColor(Color.red);
-		g.drawString(""+monster.getHp(), 10, 65);
+		g.drawString(""+hero.getHp(), 10, 65);
 	}
 }

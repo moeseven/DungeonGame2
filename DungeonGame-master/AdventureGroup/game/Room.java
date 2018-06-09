@@ -10,8 +10,10 @@ public abstract class Room {
 	protected Fight fight;
 	protected boolean readyToLeave;
 	protected LinkedList<Hero> heroes;
-	public Room(LinkedList<Hero> heroes) {
+	protected Game game;
+	public Room(Game game, LinkedList<Hero> heroes) {
 		this.heroes=heroes;
+		this.game=game;
 	}
 	public void initialize() {
 		readyToLeave=false;

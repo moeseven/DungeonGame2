@@ -6,6 +6,7 @@ import game.Game;
 import game.Player;
 import game.RoomLibrary.GoblinRoom1;
 import gameEncounter.Hero;
+import gameEncounter.HeroLibrary.Halfling;
 import gameEncounter.HeroLibrary.Warrior;
 import gameEncounter.ItemLibrary.*;
 
@@ -21,8 +22,9 @@ public class Main {
 		heroes.getFirst().getInventory().add(new Buckler());
 		heroes.getFirst().getInventory().add(new CrownOfThorns());
 		heroes.getFirst().getInventory().add(new HeavySword());
+		heroes.add(new Halfling());
 		game = new Game(heroes);
-		game.enterRoom(new GoblinRoom1(heroes));
+		game.enterRoom(new GoblinRoom1(game,heroes));
 		player = new Player(game);
 		StatsWindow gw=new StatsWindow(game);
 		//FightWindow fw=new FightWindow(game,gw);

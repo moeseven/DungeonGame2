@@ -6,31 +6,31 @@ import gameEncounter.Card;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
+import gameEncounter.CardLibrary.Cleave;
 import gameEncounter.CardLibrary.MeeleAttack;
 
-public class Goblin extends Hero{
+public class Halfling extends Hero{
 
-	public Goblin() {
+	public Halfling() {
 		// TODO Auto-generated constructor stub
 		this.initialize();
-		good=false;
+		good=true;
 		speed=7;
-		attackSkill=7;
-		blockSkill=4;
-		armor=1;
+		attackSkill=5;
+		blockSkill=5;
+		armor=0;
 		manaPower=2;
-		draw=3;
-		maxHp=40+(int) (Math.random()*50);
+		draw=4;
+		maxHp=200;
 		hp=maxHp;
-		gold=(int)Math.random()*5;
-		name="Goblin";
-		experienceValue=10;
+		gold=100;
+		name="Halfling";
 		//deck
 		deck=new Deck();
 		for (int i=0; i<4;i++) {
 			deck.addCard(new MeeleAttack());
 		}
-		for (int i=0; i<3;i++) {
+		for (int i=0; i<5;i++) {
 			deck.addCard(new Block());
 		}
 	}

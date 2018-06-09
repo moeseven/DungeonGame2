@@ -14,26 +14,24 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 
 public class HandComponent extends JComponent{
-		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
 		private FightWindow fw;
-		public HandComponent(FightWindow fw,Hero hero){
+		public HandComponent(FightWindow fw){
 			this.fw=fw;
-			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
 			setLayout(new GridLayout());
 			jp=new JPanel();
-			for (int i=0;i<hero.getHand().size();i++){
-				jp.add(new CardComponent(fw,hero.getHand().get(i)));
+			for (int i=0;i<fw.getGame().getPlayer().getSelectedHero().getHand().size();i++){
+				jp.add(new CardComponent(fw,fw.getGame().getPlayer().getSelectedHero().getHand().get(i)));
 			}
 			sp= new JScrollPane(jp);
 			add(sp,BorderLayout.CENTER);
 		}
 		public void myUpdate() {
 			jp=new JPanel();
-			for (int i=0;i<hero.getHand().size();i++){
-				jp.add(new CardComponent(fw,hero.getHand().get(i)));
+			for (int i=0;i<fw.getGame().getPlayer().getSelectedHero().getHand().size();i++){
+				jp.add(new CardComponent(fw,fw.getGame().getPlayer().getSelectedHero().getHand().get(i)));
 			}
 		}
 }

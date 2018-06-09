@@ -6,20 +6,20 @@ import javax.swing.JFrame;
 
 import game.Game;
 
-public class StatsWindow extends JFrame{
+public class RoomWindow extends JFrame{
 	private Game game;
-	private GuiInventory guiInv;
-	private FightWindow fw;
-	public StatsWindow(Game game) {
-		fw=new FightWindow(game,this);
+	private StatsWindow gw;
+	private GuiRoom gr;
+	public RoomWindow(Game game, StatsWindow gw) {
 		this.game=game;
+		this.gw=gw;
 		this.setVisible(true);
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		guiInv=new GuiInventory(this);
-		this.add(guiInv);
-		setLocation(10, 10);	
+		setLocation(10, 10);
+		gr=new GuiRoom(this);
+		add(gr,BorderLayout.CENTER);
 	}
 	public Game getGame() {
 		return game;
@@ -28,7 +28,7 @@ public class StatsWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {
-		fw.setVisible(true);
+		gw.setVisible(true);
 		this.setVisible(false);
 	}
 }

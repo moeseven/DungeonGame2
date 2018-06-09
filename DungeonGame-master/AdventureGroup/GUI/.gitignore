@@ -34,3 +34,11 @@
 /StatsWindow.class
 /GuiInventory$ml.class
 /GuiInventory.class
+/RoomWindow.class
+/RoomHeroes.class
+/RoomHeroesComponent.class
+/HeroFightComponent.class
+/HeroFightComponent$MyMouseListener.class
+/MonsterFightComponent$MyMouseListener.class
+/MonsterFightComponent.class
+/CombatComponent.class

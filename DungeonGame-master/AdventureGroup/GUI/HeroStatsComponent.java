@@ -18,21 +18,17 @@ import gameEncounter.Hero;
 
 public class HeroStatsComponent extends JComponent{
 	private FightWindow fw;
-	private Hero hero;
-	public HeroStatsComponent(FightWindow fw, Hero hero) {
+	public HeroStatsComponent(FightWindow fw) {
 		this.fw=fw;
-		this.hero=hero;
 		super.setPreferredSize(new Dimension(100,80));
 		setLayout(new BorderLayout());
 		setVisible(true);
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);		
-		g.setColor(Color.red);
-		g.drawString(hero.getHp()+"", 5, 25);
-		g.setColor(Color.blue);
-		g.drawString(""+hero.getBlock(), 5, 10);
 		g.setColor(Color.black);
-		g.drawString(""+hero.getMana(), 20, 35);
+		for(int i=0;i<fw.getGame().getPlayer().getSelectedHero().getMana();i++) {
+			g.drawOval(80, 1+i*12, 10, 10);
+		}
 	}
 }

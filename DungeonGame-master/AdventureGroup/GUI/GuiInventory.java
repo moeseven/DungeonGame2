@@ -17,7 +17,7 @@ import gameEncounter.Fight;
 public class GuiInventory extends JPanel{
 	private StatsWindow gf;
 	private HeroComponent hc;
-	private MonstersComponent mc;
+	private CombatComponent mc;
 	private JButton b;
 	private JPanel jp_center;
 	private JPanel jp_south;
@@ -53,10 +53,10 @@ public class GuiInventory extends JPanel{
 	public void setHc(HeroComponent hc) {
 		this.hc = hc;
 	}
-	public MonstersComponent getMc() {
+	public CombatComponent getMc() {
 		return mc;
 	}
-	public void setMc(MonstersComponent mc) {
+	public void setMc(CombatComponent mc) {
 		this.mc = mc;
 	}
 	

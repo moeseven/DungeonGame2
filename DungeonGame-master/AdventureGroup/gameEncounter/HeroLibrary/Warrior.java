@@ -15,6 +15,7 @@ public class Warrior extends Hero{
 		// TODO Auto-generated constructor stub
 		this.initialize();
 		good=true;
+		speed=6;
 		attackSkill=10;
 		blockSkill=8;
 		armor=1;

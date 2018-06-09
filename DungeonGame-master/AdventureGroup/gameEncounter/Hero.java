@@ -21,6 +21,7 @@ public abstract class Hero {
 	private boolean isDead;
 	protected boolean good;
 	//stats
+	protected int speed;
 	protected ModableHeroStats stats;			
 	protected Deck deck;	
 	private int thorns;
@@ -31,6 +32,7 @@ public abstract class Hero {
 	protected int attackSkill;
 	protected int maxHp;
 	//current values
+	private int currentSpeed;
 	private LinkedList<Card> drawPile;
 	private int mana;
 	protected int hp;
@@ -64,7 +66,8 @@ public abstract class Hero {
 		this.mana=manaPower;
 		for(int i=0; i<draw;i++) {
 			this.hand.add(drawPile.removeFirst());
-		}	
+		}
+		this.setSelectedCard(hand.getFirst());
 	}
 	public void block(int block) {
 		this.block+=block;
@@ -269,4 +272,20 @@ public abstract class Hero {
 		this.inventory = inventory;
 	}
 	
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public int getCurrentSpeed() {
+		return currentSpeed;
+	}
+	public void setCurrentSpeed(int currentSpeed) {
+		this.currentSpeed = currentSpeed;
+	}
+	public int rollSpeed() {
+		int s=speed+(int)(Math.random()*9);
+		return s;
+	}
 }
