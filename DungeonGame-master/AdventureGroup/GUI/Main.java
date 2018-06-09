@@ -24,7 +24,7 @@ public class Main {
 		game = new Game(heroes);
 		game.enterRoom(new GoblinRoom1(heroes));
 		player = new Player(game);
-		GameWindow gw=new GameWindow(game);
+		StatsWindow gw=new StatsWindow(game);
 		//FightWindow fw=new FightWindow(game,gw);
 	}
 

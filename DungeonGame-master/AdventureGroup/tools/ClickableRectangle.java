@@ -1,12 +1,14 @@
 package tools;
 
+import java.util.LinkedList;
+
 public abstract class ClickableRectangle {
 	private int x;
 	private int y;
 	private int height;
 	private int length;
 	protected String name;
-	protected String caption;
+	protected LinkedList<String> caption;
 	public ClickableRectangle(String name,int x, int y,int length, int height) {
 		super();
 		this.name=name;
@@ -14,7 +16,8 @@ public abstract class ClickableRectangle {
 		this.y = y;
 		this.height = height;
 		this.length = length;
-		caption=name;
+		caption=new LinkedList<String>();
+		caption.add(name);
 	}	
 	public boolean isClicked(int xClick, int yClick) {
 		if(xClick>x&&xClick<x+length&&yClick>y&&yClick<y+height) {
@@ -56,11 +59,12 @@ public abstract class ClickableRectangle {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCaption() {
+	public LinkedList<String> getCaption() {
 		return caption;
 	}
-	public void setCaption(String caption) {
+	public void setCaption(LinkedList<String> caption) {
 		this.caption = caption;
 	}
+
 	
 }

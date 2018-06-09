@@ -13,13 +13,13 @@ public class Cleave extends Card{
 		if(self.isGood()) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
-					self.dealAttackDamage(self.getFight().getMonsters().get(i), 25);
+					self.dealDamage(self.getFight().getMonsters().get(i), self.getAttackSkill()+5);
 				}	
 			}
 		}else {
 			for(int i=0; i<self.getFight().getHeroes().size();i++) {
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
-					self.dealAttackDamage(self.getFight().getHeroes().get(i), 25);
+					self.dealDamage(self.getFight().getHeroes().get(i), self.getAttackSkill()+5);
 				}	
 			}
 		}				
@@ -29,8 +29,8 @@ public class Cleave extends Card{
 		return "cleave";
 	}
 	@Override
-	public String getCardText() {
-		return "deal 25 attack damage to all enemies";
+	public String getCardText(Hero self) {
+		return "deal "+ (self.getAttackSkill()+5)+" attack damage to all enemies";
 	}
 
 }

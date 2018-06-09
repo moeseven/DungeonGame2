@@ -15,9 +15,11 @@ public class Warrior extends Hero{
 		// TODO Auto-generated constructor stub
 		this.initialize();
 		good=true;
-		turnBlock=0;
-		turnMana=3;
-		turnDraw=4;
+		attackSkill=10;
+		blockSkill=8;
+		armor=1;
+		manaPower=3;
+		draw=4;
 		maxHp=500;
 		hp=maxHp;
 		gold=100;

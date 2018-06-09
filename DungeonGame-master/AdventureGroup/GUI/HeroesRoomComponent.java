@@ -21,8 +21,8 @@ public class HeroesRoomComponent extends JComponent{
 		private LinkedList<Hero> heros;
 		private JPanel jp;
 		private JScrollPane sp;
-		private GameWindow gf;
-		public HeroesRoomComponent(GameWindow gf,LinkedList<Hero> heros){
+		private StatsWindow gf;
+		public HeroesRoomComponent(StatsWindow gf,LinkedList<Hero> heros){
 			this.gf=gf;
 			this.heros=heros;
 			setBorder(new LineBorder(Color.GREEN));

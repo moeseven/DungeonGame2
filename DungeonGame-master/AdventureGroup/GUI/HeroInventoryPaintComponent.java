@@ -23,9 +23,9 @@ public class HeroInventoryPaintComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
-		private GameWindow gw;
+		private StatsWindow gw;
 		private RectangleClicker rc;
-		public HeroInventoryPaintComponent(GameWindow gw,Hero h){
+		public HeroInventoryPaintComponent(StatsWindow gw,Hero h){
 			this.gw=gw;
 			this.hero=h;
 			setBorder(new LineBorder(Color.YELLOW));
@@ -37,7 +37,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
-			rc.addRect(new ClickableRectangle("Inventory",330,10,60,60) {
+			rc.addRect(new ClickableRectangle("inventory",330,10,60,60) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -50,9 +50,28 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub
 					if(hero.getSelectedItem()!=null) {
-						caption=hero.getSelectedItem().getName();
+						caption.removeFirst();						
+						caption.addFirst(hero.getSelectedItem().getName());
 					}else {
-						caption=name;
+						caption.removeFirst();
+						caption.addFirst(name);
+					}					
+				}		
+			});
+			//item description
+			rc.addRect(new ClickableRectangle("description",305,70,110,60) {
+				@Override
+				public void onClick() {
+
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub
+					if(hero.getSelectedItem()!=null) {
+						hero.getSelectedItem().generateItemDescription();
+						caption=hero.getSelectedItem().getDescription();
+					}else {
+						caption=new LinkedList<String>();
 					}					
 				}		
 			});
@@ -69,9 +88,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub
 					if(hero.getEquipment().getHead()!=null) {
-						caption=hero.getEquipment().getHead().getName();
+						caption.removeFirst();						
+						caption.addFirst(hero.getEquipment().getHead().getName());
 					}else {
-						caption=name;
+						caption.removeFirst();
+						caption.addFirst(name);
 					}					
 				}		
 			});
@@ -88,9 +109,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(hero.getEquipment().getBody()!=null) {
-						caption=hero.getEquipment().getBody().getName();
+						caption.removeFirst();						
+						caption.addFirst(hero.getEquipment().getBody().getName());
 					}else {
-						caption=name;
+						caption.removeFirst();
+						caption.addFirst(name);
 					}
 				}		
 			});
@@ -107,9 +130,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(hero.getEquipment().getHand1()!=null) {
-						caption=hero.getEquipment().getHand1().getName();
+						caption.removeFirst();						
+						caption.addFirst(hero.getEquipment().getHand1().getName());
 					}else {
-						caption=name;
+						caption.removeFirst();
+						caption.addFirst(name);
 					}
 				}		
 			});
@@ -126,9 +151,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(hero.getEquipment().getHand2()!=null) {
-						caption=hero.getEquipment().getHand2().getName();
+						caption.removeFirst();						
+						caption.addFirst(hero.getEquipment().getHand2().getName());
 					}else {
-						caption=name;
+						caption.removeFirst();
+						caption.addFirst(name);
 					}
 				}		
 			});
@@ -158,7 +185,9 @@ public class HeroInventoryPaintComponent extends JComponent{
 		super.paintComponent(g);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
-			g.drawString(rc.rectAngles.get(i).getCaption(), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11);
+			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+			}
 		}
 	}
 }

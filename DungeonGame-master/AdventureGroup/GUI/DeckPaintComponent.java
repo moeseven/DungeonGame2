@@ -21,8 +21,8 @@ public class DeckPaintComponent extends JComponent{
 		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
-		private GameWindow gw;
-		public DeckPaintComponent(GameWindow gw,Hero hero){
+		private StatsWindow gw;
+		public DeckPaintComponent(StatsWindow gw,Hero hero){
 			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));

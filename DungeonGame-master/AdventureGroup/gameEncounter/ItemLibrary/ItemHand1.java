@@ -23,5 +23,4 @@ public abstract class ItemHand1 extends Item{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

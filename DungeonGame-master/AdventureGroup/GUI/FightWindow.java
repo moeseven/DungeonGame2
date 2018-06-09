@@ -9,9 +9,9 @@ import game.Game;
 public class FightWindow extends JFrame{
 	private Game game;
 	private GuiFight guiFight;
-	private GameWindow gw;
-	private GuiRoom guiRoom;
-	public FightWindow(Game game, GameWindow gw) {
+	private StatsWindow gw;
+	private GuiInventory guiRoom;
+	public FightWindow(Game game, StatsWindow gw) {
 		this.game=game;
 		this.gw=gw;
 		this.setVisible(true);

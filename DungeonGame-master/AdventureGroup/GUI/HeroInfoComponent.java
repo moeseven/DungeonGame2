@@ -23,8 +23,8 @@ public class HeroInfoComponent extends JComponent{
 		private JPanel jp_Equip;
 		private JPanel jp_Stats;
 		private JScrollPane sp;
-		private GameWindow gf;
-		public HeroInfoComponent(GameWindow gf,Hero hero){
+		private StatsWindow gf;
+		public HeroInfoComponent(StatsWindow gf,Hero hero){
 			this.gf=gf;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.GREEN));

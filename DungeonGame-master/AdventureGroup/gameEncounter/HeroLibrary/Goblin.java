@@ -14,9 +14,11 @@ public class Goblin extends Hero{
 		// TODO Auto-generated constructor stub
 		this.initialize();
 		good=false;
-		turnBlock=0;
-		turnMana=2;
-		turnDraw=3;
+		attackSkill=7;
+		blockSkill=4;
+		armor=1;
+		manaPower=2;
+		draw=3;
 		maxHp=40+(int) (Math.random()*50);
 		hp=maxHp;
 		gold=(int)Math.random()*5;

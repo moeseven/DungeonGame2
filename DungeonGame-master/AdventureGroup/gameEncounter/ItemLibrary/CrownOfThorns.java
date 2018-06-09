@@ -3,6 +3,7 @@ package gameEncounter.ItemLibrary;
 import gameEncounter.Equipment;
 import gameEncounter.Hero;
 import gameEncounter.Item;
+import gameEncounter.ModableHeroStats;
 
 public class CrownOfThorns extends ItemHead{
 
@@ -10,18 +11,8 @@ public class CrownOfThorns extends ItemHead{
 	public CrownOfThorns() {
 		super();
 		name="crown of thorns";
-	}
-
-	@Override
-	public void mod(Hero hero) {
-		hero.setTurnBlock(hero.getTurnBlock()+2);
-		hero.setThorns(hero.getThorns()+5);
-	}
-
-	@Override
-	public void demod(Hero hero) {
-		hero.setTurnBlock(hero.getTurnBlock()-2);
-		hero.setThorns(hero.getThorns()-5);
+		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=2;
+		stats.getStats()[ModableHeroStats.nameResolveStat("thorns")]=5;
 	}
 
 }

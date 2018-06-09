@@ -9,8 +9,7 @@ public abstract class Hero {
 	private Equipment equipment;
 	protected String name;
 	protected int gold;
-	protected int experience;
-	protected Deck deck;
+	protected int experience;	
 	protected int experienceValue;
 	//game
 	private boolean isReady;
@@ -22,21 +21,25 @@ public abstract class Hero {
 	private boolean isDead;
 	protected boolean good;
 	//stats
-	protected int hp;
-	private int mana;
-	private int block;
-	private LinkedList<Card> drawPile;
-	private LinkedList<Card> hand;
-	//skills
+	protected ModableHeroStats stats;			
+	protected Deck deck;	
 	private int thorns;
-	protected int turnDraw;
-	protected int turnMana;
-	public int turnBlock;
-	private int blockBonus;
-	private int attackBonus;
+	protected int draw;
+	protected int manaPower;
+	public int armor;
+	protected int blockSkill;
+	protected int attackSkill;
 	protected int maxHp;
+	//current values
+	private LinkedList<Card> drawPile;
+	private int mana;
+	protected int hp;
+	private int block;
+	private LinkedList<Card> hand;
+	//
 	public Hero(){
 		this.initialize();
+		stats=new ModableHeroStats();
 	}
 	public void initialize() {
 		thorns=0;
@@ -57,20 +60,14 @@ public abstract class Hero {
 	}
 	public void turnBegin(){
 		this.discardHand();
-		this.block=turnBlock;
-		this.mana=turnMana;
-		for(int i=0; i<turnDraw;i++) {
+		this.block=armor;
+		this.mana=manaPower;
+		for(int i=0; i<draw;i++) {
 			this.hand.add(drawPile.removeFirst());
 		}	
 	}
-	public void blockWithBonus(int block) {
-		this.block+=block+this.blockBonus;
-	}
 	public void block(int block) {
 		this.block+=block;
-	}
-	public void dealAttackDamage(Hero hero, int damage) {
-		hero.takeDamage(this, damage+this.attackBonus);
 	}
 	public void dealDamage(Hero hero,int damage) {
 		hero.takeDamage(this,damage);
@@ -145,12 +142,6 @@ public abstract class Hero {
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-	public int getAttackBonus() {
-		return attackBonus;
-	}
-	public void setAttackBonus(int attackBonus) {
-		this.attackBonus = attackBonus;
-	}
 	public Hero getTarget() {
 		return target;
 	}
@@ -187,35 +178,35 @@ public abstract class Hero {
 	public void setBlock(int block) {
 		this.block = block;
 	}
-	public int getTurnDraw() {
-		return turnDraw;
+	public int getDraw() {
+		return draw;
 	}
-	public void setTurnDraw(int turnDraw) {
-		this.turnDraw = turnDraw;
+	public void setDraw(int draw) {
+		this.draw = draw;
 	}
-	public int getTurnMana() {
-		return turnMana;
+	public int getManaPower() {
+		return manaPower;
 	}
-	public void setTurnMana(int turnMana) {
-		this.turnMana = turnMana;
+	public void setManaPower(int manaPower) {
+		this.manaPower = manaPower;
 	}
-	public int getTurnBlock() {
-		return turnBlock;
+	public int getArmor() {
+		return armor;
 	}
-	public void setTurnBlock(int turnBlock) {
-		this.turnBlock = turnBlock;
+	public void setArmor(int armor) {
+		this.armor = armor;
 	}
-	public int getBlockBonus() {
-		return blockBonus;
+	public int getBlockSkill() {
+		return blockSkill;
 	}
-	public void setBlockBonus(int blockBonus) {
-		this.blockBonus = blockBonus;
+	public void setBlockSkill(int blockSkill) {
+		this.blockSkill = blockSkill;
 	}
-	public int getDamageBonus() {
-		return attackBonus;
+	public int getAttackSkill() {
+		return attackSkill;
 	}
-	public void setDamageBonus(int damageBonus) {
-		this.attackBonus = damageBonus;
+	public void setAttackSkill(int attackSkill) {
+		this.attackSkill = attackSkill;
 	}
 	public int getMaxHp() {
 		return maxHp;

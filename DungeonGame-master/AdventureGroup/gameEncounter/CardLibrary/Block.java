@@ -10,14 +10,14 @@ public class Block extends Card{
 		
 	}
 	public void applyEffect(Hero self) {
-		self.blockWithBonus(15);
+		self.block(self.getBlockSkill());
 	}
 	@Override
 	public String getName() {
 		return "parry";
 	}
 	@Override
-	public String getCardText() {
-		return "get 15 block";
+	public String getCardText(Hero self) {
+		return "block for "+self.getBlockSkill();
 	}
 }

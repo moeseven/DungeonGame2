@@ -6,18 +6,18 @@ import javax.swing.JFrame;
 
 import game.Game;
 
-public class GameWindow extends JFrame{
+public class StatsWindow extends JFrame{
 	private Game game;
-	private GuiRoom guiRoom;
+	private GuiInventory guiRoom;
 	private FightWindow fw;
-	public GameWindow(Game game) {
+	public StatsWindow(Game game) {
 		fw=new FightWindow(game,this);
 		this.game=game;
 		this.setVisible(true);
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		guiRoom=new GuiRoom(this);
+		guiRoom=new GuiInventory(this);
 		this.add(guiRoom);
 		setLocation(10, 10);	
 	}

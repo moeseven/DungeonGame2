@@ -20,7 +20,7 @@ public abstract class Card {
 	}
 	public abstract void applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
-	public abstract String getCardText();
+	public abstract String getCardText(Hero self);
 	//getters and setters
 	public int getManaCost() {
 		return manaCost;

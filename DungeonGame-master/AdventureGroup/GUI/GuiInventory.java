@@ -14,8 +14,8 @@ import javax.swing.border.LineBorder;
 import game.Player;
 import gameEncounter.Fight;
 
-public class GuiRoom extends JPanel{
-	private GameWindow gf;
+public class GuiInventory extends JPanel{
+	private StatsWindow gf;
 	private HeroComponent hc;
 	private MonstersComponent mc;
 	private JButton b;
@@ -23,7 +23,7 @@ public class GuiRoom extends JPanel{
 	private JPanel jp_south;
 	private JTextField tf;
 	private Player player;
-	public GuiRoom(GameWindow gf) {
+	public GuiInventory(StatsWindow gf) {
 		this.gf=gf;
 		setLayout(new BorderLayout());
 		jp_center= new JPanel();
@@ -34,14 +34,15 @@ public class GuiRoom extends JPanel{
 		jp_south.setLayout(new BorderLayout());
 		this.add(jp_south,BorderLayout.SOUTH);
 		jp_south.add(new HeroesRoomComponent(gf,gf.getGame().getHeroes()));
-		b=new JButton("leave room");
+		b=new JButton("done");
 		b.addMouseListener(new ml());
 		this.add(b,BorderLayout.SOUTH);
 		setVisible(true);
 	}
 	private class ml extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			// leave room
+			//done
+			gf.setVisible(false);
 			gf.revalidate();
 			gf.repaint();
 		}

@@ -16,11 +16,12 @@ import javax.swing.border.LineBorder;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.ModableHeroStats;
 
 public class HeroStatsPaintComponent extends JComponent{
 		private Hero hero;
-		private GameWindow gf;
-		public HeroStatsPaintComponent(GameWindow gf,Hero hero){
+		private StatsWindow gf;
+		public HeroStatsPaintComponent(StatsWindow gf,Hero hero){
 			this.gf=gf;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.GREEN));
@@ -48,7 +49,13 @@ public class HeroStatsPaintComponent extends JComponent{
 		//g.drawImage(image,0,0,null);
 		//paint Hero info
 		g.drawString(hero.getName(), 10, 10);
-		g.drawString("HP: "+hero.getHp()+"/"+hero.getMaxHp(), 10, 20);
+		g.drawString("HP: "+hero.getHp()+"/"+hero.getMaxHp(), 10, 10+1*11);		
+		g.drawString("attack skill: "+hero.getAttackSkill(), 10, 10+2*11);
+		g.drawString("block skill: "+hero.getBlockSkill(), 10, 10+3*11);
+		g.drawString("wisdom: "+hero.getDraw(), 10, 10+7*11);
+		g.drawString("mana: "+hero.getManaPower(), 10, 10+5*11);
+		g.drawString("thorns: "+hero.getThorns(), 10, 10+6*11);
+		g.drawString("armor: "+hero.getArmor(), 10, 10+4*11);
 	}
 }
 
