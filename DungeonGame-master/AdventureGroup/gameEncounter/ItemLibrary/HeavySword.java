@@ -10,7 +10,11 @@ public class HeavySword extends ItemBiHand{
 	public HeavySword() {
 		super();
 		name="heavy sword";
-		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-2;
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack skill")]=9;
+		this.baseDamage=15;
+		this.damageRange=12;
+		this.facStr=0.1;
+		this.weaponRange=3;
+		this.requiredStrength=20;
+		stats.getStats()[ModableHeroStats.nameResolveStat("dexterity")]=-4;
 	}
 }

@@ -6,6 +6,10 @@ public abstract class Item {
 	private int weight;
 	private int goldValue;
 	protected int category;
+	protected int requiredStrength=1;
+	protected int requiredDexterity=1;
+	protected int requiredIntelligence=1;
+	protected int requiredVitality=1;
 	protected ModableHeroStats stats;
 	protected LinkedList<String> description;
 	protected String name;
@@ -15,8 +19,6 @@ public abstract class Item {
 		description=new LinkedList<String>();
 		stats=new ModableHeroStats();
 	}
-	public abstract boolean equip(Equipment e); //move from backpack to Equipment
-	public abstract boolean unequip(Equipment e); //move from Equipment to backpack (maybe not needed, inventory handles this)
 	public void mod(Hero hero) {
 		ModableHeroStats.modStats(hero,stats.getStats());
 	}
@@ -31,6 +33,7 @@ public abstract class Item {
 	public void generateItemDescription() {
 		description=new LinkedList<String>();
 		description.add("category: "+ getItemCategoryName(category));
+		description.add("requirements: "+requiredStrength+"str, "+requiredDexterity+"dex, "+requiredIntelligence+"int");
 		for(int i=0; i<stats.getStats().length;i++) {
 			if(stats.getStats()[i]!=0) {
 				if(stats.getStats()[i]>0) {

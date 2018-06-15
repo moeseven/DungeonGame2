@@ -10,7 +10,7 @@ public class ArmorThinLeather extends ItemBody{
 	
 	public ArmorThinLeather() {
 		super();
-		name="Thin Leather";
+		name="thin leather";
 		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=1;
 	}	
 }

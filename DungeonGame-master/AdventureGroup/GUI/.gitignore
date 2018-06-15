@@ -42,3 +42,15 @@
 /MonsterFightComponent$MyMouseListener.class
 /MonsterFightComponent.class
 /CombatComponent.class
+/CharcterBuilderInfoComponent.class
+/FrameCharacterBuilder$ButtonClassListener.class
+/FrameCharacterBuilder$ButtonCreateHeroListener.class
+/FrameCharacterBuilder$ButtonRaceListener.class
+/FrameCharacterBuilder.class
+/MainMenu$ButtonBuildCharacterListener.class
+/MainMenu$ButtonLoadUserListener.class
+/MainMenu$ButtonSaveUserListener.class
+/MainMenu$ButtonStartListener.class
+/MainMenu.class
+/TestMain.class
+/HeroInventoryPaintComponent$7.class

@@ -9,6 +9,7 @@ public class Game {
 private LinkedList<Hero> heroes;
 private Player player; //change this for multiplayer
 private Room room;
+private Room nextRoom;
 public Game(LinkedList<Hero> heroes) {
 	super();
 	this.heroes = heroes;
@@ -17,7 +18,7 @@ public Game(LinkedList<Hero> heroes) {
 }
 public void enterRoom(Room room) {
 	this.room=room;
-	room.enterRoom();
+	room.enterRoom(heroes);
 }
 //getters and setters
 public LinkedList<Hero> getHeroes() {
@@ -37,6 +38,12 @@ public Player getPlayer() {
 }
 public void setPlayer(Player player) {
 	this.player = player;
+}
+public Room getNextRoom() {
+	return nextRoom;
+}
+public void setNextRoom(Room nextRoom) {
+	this.nextRoom = nextRoom;
 }
 
 }

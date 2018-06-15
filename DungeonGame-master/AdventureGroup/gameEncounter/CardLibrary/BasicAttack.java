@@ -2,23 +2,25 @@ package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Weapon;
 
-public class MeeleAttack extends Card{
-	public MeeleAttack() {
+public class BasicAttack extends Card{
+	public BasicAttack() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		
 	}
 	public void applyEffect(Hero self) {
-		self.dealDamage(self.getTarget(), self.getAttackSkill());
+		self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1());	
 	}
 	@Override
 	public String getName() {
-		return "meele attack";
+		return "basic attack";
 	}
 	@Override
 	public String getCardText(Hero self) {
-		return "deal "+ self.getAttackSkill()+" physical damage";
+		//TODO correct number display
+		return "deal "+ 0+" physical damage";
 	}
 
 }

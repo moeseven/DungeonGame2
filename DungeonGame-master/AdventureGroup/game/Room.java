@@ -11,14 +11,13 @@ public abstract class Room {
 	protected boolean readyToLeave;
 	protected LinkedList<Hero> heroes;
 	protected Game game;
-	public Room(Game game, LinkedList<Hero> heroes) {
-		this.heroes=heroes;
+	public Room(Game game) {
 		this.game=game;
 	}
 	public void initialize() {
 		readyToLeave=false;
 	}
-	public abstract void enterRoom();
+	public abstract void enterRoom(LinkedList<Hero> heroes);
 	//here the room is set up//food consumption//torch level
 	
 	public Fight getFight() {

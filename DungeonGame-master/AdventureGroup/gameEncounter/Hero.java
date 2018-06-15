@@ -3,7 +3,10 @@ package gameEncounter;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public abstract class Hero {
+import game.CharacterClass;
+import game.CharacterRace;
+
+public class Hero {
 
 	private LinkedList<Item> inventory;
 	private Equipment equipment;
@@ -20,6 +23,9 @@ public abstract class Hero {
 	private Item selectedItem;
 	private boolean isDead;
 	protected boolean good;
+	//type
+	protected CharacterClass charClass;
+	protected CharacterRace charRace;
 	//stats
 	protected int speed;
 	protected ModableHeroStats stats;			
@@ -28,54 +34,95 @@ public abstract class Hero {
 	protected int draw;
 	protected int manaPower;
 	public int armor;
+	public int dodge;//TODO
 	protected int blockSkill;
-	protected int attackSkill;
-	protected int maxHp;
+	protected int attackSkill; //no longer usefull
+	//protected int maxHp;
+	protected int baseHp;
+	protected int strength;
+	protected int vitality;
+	protected int dexterity;
+	protected int intelligence;
 	//current values
 	private int currentSpeed;
 	private LinkedList<Card> drawPile;
+	private LinkedList<Card> discardPile;
 	private int mana;
 	protected int hp;
 	private int block;
 	private LinkedList<Card> hand;
 	//
-	public Hero(){
-		this.initialize();
+	public Hero(String name, CharacterRace charRace,CharacterClass charClass){
+		this.name=name;
+		this.charRace=charRace;
+		this.charClass=charClass;
 		stats=new ModableHeroStats();
+		this.initialize();
 	}
 	public void initialize() {
-		thorns=0;
+		setDeck(new Deck());
 		isDead=false;
 		isReady=false;
 		inventory= new LinkedList<Item>();
 		equipment= new Equipment(this);
+		deck=new Deck();
+		charRace.modifyHero(this);
+		charClass.modifyHero(this);
+		hp=computeMaxHp();
 	}
 	//functions
 	public void setUpHandPile() {
-		//shuffle + new hand
-		this.hand=new LinkedList<Card>();
-		this.setDrawPile(new LinkedList<Card>());
+		//shuffle
+		hand=new LinkedList<Card>();
+		drawPile=new LinkedList<Card>();
+		discardPile=new LinkedList<Card>();
 		for(Card c: this.getDeck().getCards()) {
 	    	this.getDrawPile().add(c);
 	    }
 		Collections.shuffle(this.getDrawPile());
 	}
+	public void drawCard() {
+		if(drawPile.size()==0) {
+			drawPile=discardPile;
+			Collections.shuffle(this.getDrawPile());
+			discardPile=new LinkedList<Card>();
+		}
+		hand.add(drawPile.removeFirst());
+	}
 	public void turnBegin(){
 		this.discardHand();
-		this.block=armor;
+		this.block=0;
 		this.mana=manaPower;
 		for(int i=0; i<draw;i++) {
-			this.hand.add(drawPile.removeFirst());
+			drawCard();
 		}
 		this.setSelectedCard(hand.getFirst());
 	}
 	public void block(int block) {
 		this.block+=block;
 	}
-	public void dealDamage(Hero hero,int damage) {
-		hero.takeDamage(this,damage);
+	public boolean attackHero(Hero hero) {
+		//TODO check Block and Dodge
+		return true;
 	}
-	public void takeDamage(Hero hero,int damage) {
+	public boolean dealWeaponDamage(Hero hero, Item item) {//weapon damage str dependant or dexterity dependant
+		boolean success=false;
+		 if(item instanceof Weapon) {
+			 Weapon weapon= (Weapon) item;
+			 int dmg=weapon.computeAttackDamage(strength);
+			 hero.takeDamageArmor(this, dmg);
+			 success=true;
+		 }else {
+			 int dmg=GameEquations.FistDamage(strength);
+			 hero.takeDamageArmor(this, dmg);
+			 success=true;
+		 }
+		 return success;		
+	}
+	public void dealDamage(Hero hero,int damage) {
+		hero.takeDamageArmor(this,damage);
+	}
+	public void takeDamageArmor(Hero hero,int damage) {
 		hero.takeThornDamage(this, thorns);//thorns
 		int hpDamage=block-damage;
 		if(hpDamage<0) {
@@ -90,9 +137,9 @@ public abstract class Hero {
 		}
 	}
 	public void takeThornDamage(Hero hero,int damage) {//prevent infinite thorn looping
-		int hpDamage=block-damage;
-		if(hpDamage<0) {
-			this.setHp(hp+hpDamage);
+		int armorDamage=block-damage;
+		if(armorDamage<0) {
+			this.setHp(hp+GameEquations.damageReducedByArmor(armorDamage, armor));
 			block=0;
 		}else {
 			this.setBlock(block-damage);
@@ -211,11 +258,8 @@ public abstract class Hero {
 	public void setAttackSkill(int attackSkill) {
 		this.attackSkill = attackSkill;
 	}
-	public int getMaxHp() {
-		return maxHp;
-	}
-	public void setMaxHp(int maxHp) {
-		this.maxHp = maxHp;
+	public int computeMaxHp() {
+		return GameEquations.maxHealthCalc(baseHp, vitality);
 	}
 	public Fight getFight() {
 		return fight;
@@ -288,4 +332,50 @@ public abstract class Hero {
 		int s=speed+(int)(Math.random()*9);
 		return s;
 	}
+	public CharacterClass getCharClass() {
+		return charClass;
+	}
+	public CharacterRace getCharRace() {
+		return charRace;
+	}
+	public int getStrength() {
+		return strength;
+	}
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+	public int getVitality() {
+		return vitality;
+	}
+	public void setVitality(int vitality) {
+		this.vitality = vitality;
+	}
+	public int getDexterity() {
+		return dexterity;
+	}
+	public void setDexterity(int dexterity) {
+		this.dexterity = dexterity;
+	}
+	public int getIntelligence() {
+		return intelligence;
+	}
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+	public LinkedList<Card> getDiscardPile() {
+		return discardPile;
+	}
+	public void setDiscardPile(LinkedList<Card> discardPile) {
+		this.discardPile = discardPile;
+	}
+	public int getBaseHp() {
+		return baseHp;
+	}
+	public void setBaseHp(int baseHp) {
+		this.baseHp = baseHp;
+	}
+	public void setDodge(int dodge) {
+		this.dodge = dodge;
+	}
+	
 }

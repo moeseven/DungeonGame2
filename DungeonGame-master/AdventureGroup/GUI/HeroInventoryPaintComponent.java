@@ -20,14 +20,12 @@ import tools.ClickableRectangle;
 import tools.RectangleClicker;
 
 public class HeroInventoryPaintComponent extends JComponent{
-		private Hero hero;
 		private JPanel jp;
 		private JScrollPane sp;
 		private StatsWindow gw;
 		private RectangleClicker rc;
-		public HeroInventoryPaintComponent(StatsWindow gw,Hero h){
+		public HeroInventoryPaintComponent(StatsWindow gw){
 			this.gw=gw;
-			this.hero=h;
 			setBorder(new LineBorder(Color.YELLOW));
 			super.setPreferredSize(new Dimension(600,200));
 			MyMouseListener ml = new MyMouseListener();
@@ -37,29 +35,23 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
-			rc.addRect(new ClickableRectangle("inventory",330,10,60,60) {
+			rc.addRect(new ClickableRectangle("search inventory",435,10,90,40) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(hero.getInventory().size()>1) {
-						hero.getInventory().addLast(hero.getInventory().removeFirst());
+					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
+					if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>1) {
+						gw.getGame().getPlayer().getSelectedHero().getInventory().addLast(gw.getGame().getPlayer().getSelectedHero().getInventory().removeFirst());
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
 					}	
-					System.out.println("clicked inventory");
 				}
 				@Override
 				public void updateCaption() {
-					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						caption.removeFirst();						
-						caption.addFirst(hero.getSelectedItem().getName());
-					}else {
-						caption.removeFirst();
-						caption.addFirst(name);
-					}					
+					// TODO Auto-generated method stub					
 				}		
 			});
 			//item description
-			rc.addRect(new ClickableRectangle("description",305,70,110,60) {
+			rc.addRect(new ClickableRectangle("description",305,10,130,110) {
 				@Override
 				public void onClick() {
 
@@ -67,11 +59,37 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						hero.getSelectedItem().generateItemDescription();
-						caption=hero.getSelectedItem().getDescription();
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
+						caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
+						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
 					}else {
 						caption=new LinkedList<String>();
+					}					
+				}		
+			});
+			//equip/unequip
+			rc.addRect(new ClickableRectangle("equip",210,10,55,20) {
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+							gw.getGame().getPlayer().getSelectedHero().getEquipment().equipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+						}else {
+							gw.getGame().getPlayer().getSelectedHero().getEquipment().unequipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+						}				
+					}
+				}
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub
+					if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						caption.removeFirst();						
+						caption.addFirst(name);
+					}else {
+						caption.removeFirst();
+						caption.addFirst("unequip");
 					}					
 				}		
 			});
@@ -80,16 +98,16 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						hero.getEquipment().equipHead(hero.getSelectedItem());
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead());
 					}
 				}
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub
-					if(hero.getEquipment().getHead()!=null) {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
 						caption.removeFirst();						
-						caption.addFirst(hero.getEquipment().getHead().getName());
+						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead().getName());
 					}else {
 						caption.removeFirst();
 						caption.addFirst(name);
@@ -101,16 +119,16 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						hero.getEquipment().equipBody(hero.getSelectedItem());
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody());
 					}
 				}
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
-					if(hero.getEquipment().getBody()!=null) {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
 						caption.removeFirst();						
-						caption.addFirst(hero.getEquipment().getBody().getName());
+						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody().getName());
 					}else {
 						caption.removeFirst();
 						caption.addFirst(name);
@@ -122,16 +140,16 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						hero.getEquipment().equipHand1(hero.getSelectedItem());
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1());
 					}
 				}
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
-					if(hero.getEquipment().getHand1()!=null) {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
 						caption.removeFirst();						
-						caption.addFirst(hero.getEquipment().getHand1().getName());
+						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1().getName());
 					}else {
 						caption.removeFirst();
 						caption.addFirst(name);
@@ -143,16 +161,16 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(hero.getSelectedItem()!=null) {
-						hero.getEquipment().equipHand2(hero.getSelectedItem());
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2());
 					}
 				}
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
-					if(hero.getEquipment().getHand2()!=null) {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
 						caption.removeFirst();						
-						caption.addFirst(hero.getEquipment().getHand2().getName());
+						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2().getName());
 					}else {
 						caption.removeFirst();
 						caption.addFirst(name);
@@ -167,11 +185,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 			if(e.getButton()==1){
 				//get equipment position from click
 				rc.triggerClick(e.getX(), e.getY());
-				if(hero.getInventory().size()>0){
-					hero.setSelectedItem(hero.getInventory().getFirst());
-				}else {
-					hero.setSelectedItem(null);
-				}
+//				if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>0){
+//					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
+//				}else {
+//					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(null);
+//				}
 				rc.updateCaptions();
 				gw.repaint();				
 			}else{

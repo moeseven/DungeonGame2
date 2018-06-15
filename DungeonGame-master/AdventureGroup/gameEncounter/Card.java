@@ -12,7 +12,7 @@ public abstract class Card {
 			self.setMana(self.getMana()-manaCost);
 			this.applyEffect(self);
 			self.getHand().remove(this);
-			self.getDrawPile().add(this);
+			self.getDiscardPile().add(this);
 			return true;
 		}else {
 			return false;

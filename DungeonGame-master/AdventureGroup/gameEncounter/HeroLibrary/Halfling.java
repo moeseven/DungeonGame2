@@ -7,7 +7,7 @@ import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Cleave;
-import gameEncounter.CardLibrary.MeeleAttack;
+import gameEncounter.CardLibrary.BasicAttack;
 
 public class Halfling extends Hero{
 
@@ -28,7 +28,7 @@ public class Halfling extends Hero{
 		//deck
 		deck=new Deck();
 		for (int i=0; i<4;i++) {
-			deck.addCard(new MeeleAttack());
+			deck.addCard(new BasicAttack());
 		}
 		for (int i=0; i<5;i++) {
 			deck.addCard(new Block());

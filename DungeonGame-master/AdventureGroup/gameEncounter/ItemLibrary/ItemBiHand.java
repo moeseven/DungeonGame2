@@ -3,25 +3,13 @@ package gameEncounter.ItemLibrary;
 import gameEncounter.Equipment;
 import gameEncounter.Hero;
 import gameEncounter.Item;
+import gameEncounter.Weapon;
 
-public abstract class ItemBiHand extends Item{
+public abstract class ItemBiHand extends Weapon{
 
 
 	public ItemBiHand() {
 		super();
 		category=3;
 	}
-
-	@Override
-	public boolean equip(Equipment e) {
-		e.equipBiHand(this);
-		return false;
-	}
-
-	@Override
-	public boolean unequip(Equipment e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

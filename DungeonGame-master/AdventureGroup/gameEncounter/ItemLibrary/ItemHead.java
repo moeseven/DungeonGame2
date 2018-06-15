@@ -11,17 +11,4 @@ public abstract class ItemHead extends Item{
 		super();
 		category=5;
 	}
-
-	@Override
-	public boolean equip(Equipment e) {
-		e.equipHead(this);
-		return false;
-	}
-
-	@Override
-	public boolean unequip(Equipment e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

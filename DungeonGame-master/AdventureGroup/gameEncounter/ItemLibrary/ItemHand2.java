@@ -11,17 +11,4 @@ public abstract class ItemHand2 extends Item{
 		super();
 		category=2;
 	}
-
-	@Override
-	public boolean equip(Equipment e) {
-		e.equipHand2(this);
-		return false;
-	}
-
-	@Override
-	public boolean unequip(Equipment e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

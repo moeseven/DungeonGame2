@@ -33,9 +33,9 @@ public class HeroInfoComponent extends JComponent{
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
 			jp_Equip= new JPanel();
-			jp_Equip.add(new HeroInventoryPaintComponent(gf, hero));
+			jp_Equip.add(new HeroInventoryPaintComponent(gf));
 			jp_Stats=new JPanel();
-			jp_Stats.add(new HeroStatsPaintComponent(gf, hero));
+			jp_Stats.add(new HeroStatsPaintComponent(gf));
 			jp=new JPanel();
 			sp=new JScrollPane();
 			sp.add(jp);

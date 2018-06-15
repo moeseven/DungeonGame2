@@ -10,7 +10,10 @@ public class ShortSword extends ItemHand1{
 	public ShortSword() {
 		super();
 		name="short sword";
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack skill")]=3;
+		this.baseDamage=12;
+		this.damageRange=8;
+		this.facStr=0.05;
+		this.weaponRange=2;
 	}
 
 }

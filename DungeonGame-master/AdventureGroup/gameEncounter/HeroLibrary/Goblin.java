@@ -6,7 +6,7 @@ import gameEncounter.Card;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.MeeleAttack;
+import gameEncounter.CardLibrary.BasicAttack;
 
 public class Goblin extends Hero{
 
@@ -28,7 +28,7 @@ public class Goblin extends Hero{
 		//deck
 		deck=new Deck();
 		for (int i=0; i<4;i++) {
-			deck.addCard(new MeeleAttack());
+			deck.addCard(new BasicAttack());
 		}
 		for (int i=0; i<3;i++) {
 			deck.addCard(new Block());
