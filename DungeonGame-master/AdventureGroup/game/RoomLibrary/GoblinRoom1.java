@@ -8,7 +8,6 @@ import game.characterTypeLibrary.RaceGoblin;
 import game.characterTypeLibrary.TypeWarrior;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
-import gameEncounter.HeroLibrary.Goblin;
 
 public class GoblinRoom1 extends Room{
 
