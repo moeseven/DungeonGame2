@@ -8,13 +8,12 @@ import gameEncounter.Hero;
 
 public class Town extends Room{
 
-	public Town(Game game) {
-		super(game);
+	public Town() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void enterRoom(LinkedList<Hero> heroes) {
+	public void enterRoom(Game game) {
 		// TODO Auto-generated method stub
 		
 	}

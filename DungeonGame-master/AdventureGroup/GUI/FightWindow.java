@@ -9,12 +9,13 @@ import game.Game;
 public class FightWindow extends JFrame{
 	private Game game;
 	private GuiFight guiFight;
-	private StatsWindow gw;
+	private RoomWindow rw;
 	private GuiInventory guiRoom;
-	public FightWindow(Game game, StatsWindow gw) {
+	public FightWindow(Game game, RoomWindow rw) {
+		setTitle("Fight");
 		this.game=game;
-		this.gw=gw;
-		this.setVisible(true);
+		this.rw=rw;
+		
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -23,7 +24,8 @@ public class FightWindow extends JFrame{
 			add(guiFight,BorderLayout.CENTER);
 		}
 		setLocation(10, 10);
-		
+		this.setVisible(true);
+		rw.setVisible(false);
 	}
 	public Game getGame() {
 		return game;
@@ -32,7 +34,7 @@ public class FightWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {
-		gw.setVisible(true);
+		rw.setVisible(true);
 		this.setVisible(false);
 	}
 }

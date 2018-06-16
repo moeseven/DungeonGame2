@@ -11,18 +11,16 @@ import gameEncounter.Hero;
 
 public class GoblinRoom1 extends Room{
 
-	public GoblinRoom1(Game game) {
-		super(game);
+	public GoblinRoom1() {
 		this.hasFight=true;
 	}
 
 	@Override
-	public void enterRoom(LinkedList<Hero> heroes) {
-		this.heroes=heroes;
+	public void enterRoom(Game game) {
 		LinkedList<Hero> foes=new LinkedList<Hero>();
 		foes.add(new Hero("", new RaceGoblin(), new TypeWarrior()));
 		foes.add(new Hero("", new RaceGoblin(), new TypeWarrior()));
-		this.fight= new Fight(game,foes, heroes);
+		this.fight= new Fight(game,foes, game.getPlayer().getHeroes());
 		
 	}
 	

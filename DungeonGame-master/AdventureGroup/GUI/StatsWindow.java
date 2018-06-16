@@ -9,11 +9,12 @@ import game.Game;
 public class StatsWindow extends JFrame{
 	private Game game;
 	private GuiInventory guiInv;
-	private FightWindow fw;
-	public StatsWindow(Game game) {
-		fw=new FightWindow(game,this);
+	private RoomWindow rw;
+	public StatsWindow(Game game, RoomWindow rw) {
+		setTitle("inventory");
+		this.rw=rw;
 		this.game=game;
-		this.setVisible(true);
+		this.setVisible(false);
 		this.setSize(1300, 650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -28,7 +29,7 @@ public class StatsWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {
-		fw.setVisible(true);
+		rw.setVisible(true);
 		this.setVisible(false);
 	}
 }

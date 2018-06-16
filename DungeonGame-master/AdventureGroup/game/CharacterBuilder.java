@@ -8,11 +8,11 @@ import gameEncounter.Hero;
 public class CharacterBuilder {
 	private LinkedList<CharacterClass> charClasses;
 	private LinkedList<CharacterRace> charRaces;
+	private Game game;
 	private Hero hero;
-	private String name;
-	public CharacterBuilder() {
+	public CharacterBuilder(Game game) {
 		super();
-		name="Olg";
+		this.game=game;
 		charClasses=new LinkedList<CharacterClass>();
 		charRaces=new LinkedList<CharacterRace>();
 		charClasses.add(new TypeWarrior());
@@ -31,8 +31,9 @@ public class CharacterBuilder {
 	public void scrollThroughCharRaces() {
 		charRaces.add(charRaces.removeFirst());
 	}
-	public void createHero() {
+	public void createHero(String name) {
 		hero=new Hero(name, charRaces.getFirst(), charClasses.getFirst());
+		game.getPlayer().getHeroes().add(hero);
 	}
 	public LinkedList<CharacterClass> getCharClasses() {
 		return charClasses;
@@ -57,12 +58,6 @@ public class CharacterBuilder {
 	}
 	public void setHero(Hero hero) {
 		this.hero = hero;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 //classes: warrior, thief, cleric, mage

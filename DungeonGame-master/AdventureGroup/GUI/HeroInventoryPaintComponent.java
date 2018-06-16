@@ -39,11 +39,14 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
-					if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>1) {
-						gw.getGame().getPlayer().getSelectedHero().getInventory().addLast(gw.getGame().getPlayer().getSelectedHero().getInventory().removeFirst());
+					if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>0) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
-					}	
+						if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>1) {
+							gw.getGame().getPlayer().getSelectedHero().getInventory().addLast(gw.getGame().getPlayer().getSelectedHero().getInventory().removeFirst());
+							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
+						}
+					}					
+						
 				}
 				@Override
 				public void updateCaption() {

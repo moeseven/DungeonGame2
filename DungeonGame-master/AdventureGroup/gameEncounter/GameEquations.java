@@ -4,7 +4,7 @@ public class GameEquations {
 	
 	//health calculation from vitality and base health
 	public static int maxHealthCalc(int baseHealth, int vitality) {
-		return (int) (baseHealth*(1+vitality/20));
+		return (int) (baseHealth*(1+vitality/20.0));
 	}
 	
 	//dodge chance calculation
@@ -19,7 +19,7 @@ public class GameEquations {
 	
 	//damage reduction by armor
 	public static int damageReducedByArmor(int damage, int armor) {
-		return (int) (damage/(1+armor/100));
+		return (int) (damage/(1+armor/100.0));
 	}
 	
 	//unarmed fist damage

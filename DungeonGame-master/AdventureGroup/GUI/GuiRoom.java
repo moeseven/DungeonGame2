@@ -13,29 +13,21 @@ public class GuiRoom extends JPanel{
 	private RoomWindow rw;
 	private JPanel jp_center;
 	private JPanel jp_south;
-	private JButton b;
+	private JButton buttonLeaveRoom;
+	private JButton buttonInventory;
 	public GuiRoom(RoomWindow rw) {
 		this.rw=rw;
 		setLayout(new BorderLayout());
-		jp_center= new JPanel();
-		jp_center.setLayout(new BorderLayout());
-		this.add(jp_center,BorderLayout.CENTER);
-		//jp_center.add(new HeroInfoComponent(gf,gf.getGame().getPlayer().getSelectedHero()));
 		jp_south= new JPanel();
 		jp_south.setLayout(new BorderLayout());
-		this.add(jp_south,BorderLayout.SOUTH);
-		jp_south.add(new RoomHeroesComponent(rw));
-		b=new JButton("leave room");
-		b.addMouseListener(new ml());
-		this.add(b,BorderLayout.SOUTH);
+		jp_south.add(new RoomHeroesComponent(rw));		
+		add(jp_south,BorderLayout.SOUTH);
+		jp_center=new JPanel();
+		jp_center.setLayout(new BorderLayout());
+		jp_center.add(new RoomButtonComponent(rw));
+		add(jp_center, BorderLayout.CENTER);
 		setVisible(true);
 	}
-	private class ml extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
-			//leave room
-			rw.revalidate();
-			rw.repaint();
-		}
-	}
+
 
 }

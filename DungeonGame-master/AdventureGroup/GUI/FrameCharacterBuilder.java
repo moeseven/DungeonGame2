@@ -26,7 +26,7 @@ public class FrameCharacterBuilder extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setVisible(true);
+		
 		jp01= new JPanel();
 		buttonNextRace= new JButton("race");
 		buttonNextRace.addMouseListener(new ButtonRaceListener());
@@ -42,7 +42,7 @@ public class FrameCharacterBuilder extends JFrame{
 		jpDraw.setLayout(new BorderLayout());
 		jpDraw.add(cbi, BorderLayout.CENTER);
 		add(jpDraw, BorderLayout.CENTER);
-		
+		setVisible(true);
 	}
 	private class ButtonRaceListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
@@ -59,7 +59,7 @@ public class FrameCharacterBuilder extends JFrame{
 	private class ButtonCreateHeroListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			//TODO set up game window and start game
-			cb.createHero();
+			cb.createHero(cbi.getTf().getText());
 		} 
 	}
 	public CharacterBuilder getCb() {

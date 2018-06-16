@@ -22,7 +22,6 @@ public class GuiInventory extends JPanel{
 	private JPanel jp_center;
 	private JPanel jp_south;
 	private JTextField tf;
-	private Player player;
 	public GuiInventory(StatsWindow gf) {
 		this.gf=gf;
 		setLayout(new BorderLayout());
@@ -33,7 +32,7 @@ public class GuiInventory extends JPanel{
 		jp_south= new JPanel();
 		jp_south.setLayout(new BorderLayout());
 		this.add(jp_south,BorderLayout.SOUTH);
-		jp_south.add(new HeroesRoomComponent(gf,gf.getGame().getHeroes()));
+		jp_south.add(new HeroesRoomComponent(gf,gf.getGame().getHeroes()));//is this visible???
 		b=new JButton("done");
 		b.addMouseListener(new ml());
 		this.add(b,BorderLayout.SOUTH);
@@ -42,7 +41,7 @@ public class GuiInventory extends JPanel{
 	private class ml extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			//done
-			gf.setVisible(false);
+			gf.windowswitch();
 			gf.revalidate();
 			gf.repaint();
 		}

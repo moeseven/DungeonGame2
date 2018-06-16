@@ -2,6 +2,7 @@ package game;
 
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.BasicAttack;
+import gameEncounter.CardLibrary.Block;
 
 public abstract class CharacterRace extends CharacterType{
 
@@ -26,6 +27,9 @@ public abstract class CharacterRace extends CharacterType{
 		//deck
 		for (int i=0; i<5;i++) {
 			hero.getDeck().addCard(new BasicAttack());
+		}
+		for (int i=0; i<3;i++) {
+			hero.getDeck().addCard(new Block());
 		}
 	}
 	

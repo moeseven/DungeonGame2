@@ -28,13 +28,14 @@ public class MainMenu extends JFrame{
 	private JButton buttonLoadGame;
 	private Game game;
 	protected StatsWindow gw;
+	protected RoomWindow rw;
 	public MainMenu(){
 		this.setTitle("Menu");
 		setSize(650,500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setVisible(true);
+		
 		jp01= new JPanel();
 		buttonSaveGame= new JButton("Save");
 		buttonSaveGame.addMouseListener(new ButtonSaveUserListener());
@@ -49,16 +50,17 @@ public class MainMenu extends JFrame{
 		jp01.add(buttonSaveGame);
 		jp01.add(buttonLoadGame);
 		add(jp01);
+		setVisible(true);
 	}
 	private class ButtonStartListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			game.enterRoom(game.getNextRoom());
-			gw=new StatsWindow(game);
+			game.enterRoom(game.getRoom());			
+			rw=new RoomWindow(game);
 		} 
 	}
 	private class ButtonBuildCharacterListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			new FrameCharacterBuilder(new CharacterBuilder());
+			new FrameCharacterBuilder(new CharacterBuilder(game));
 		} 
 	}
 	private class ButtonSaveUserListener extends MouseAdapter{

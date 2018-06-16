@@ -54,3 +54,9 @@
 /MainMenu.class
 /TestMain.class
 /HeroInventoryPaintComponent$7.class
+/HeroRoomComponent$MyMouseListener.class
+/HeroRoomComponent.class
+/GuiRoom$mouseListenerInventory.class
+/RoomButtonComponent.class
+/RoomButtonComponent$ml.class
+/RoomButtonComponent$mouseListenerInventory.class

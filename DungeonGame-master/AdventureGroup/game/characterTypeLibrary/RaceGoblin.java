@@ -14,26 +14,18 @@ public class RaceGoblin extends CharacterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setGood(true);
+		hero.setSpeed(hero.getSpeed()+1);
+		hero.setStrength(hero.getStrength()-3);
+		hero.setDexterity(hero.getDexterity()+1);
+		hero.setIntelligence(hero.getIntelligence()-5);
+		hero.setVitality(hero.getVitality()-7);
+		hero.setBaseHp(hero.getBaseHp()-10);
 		hero.setGood(false);
-		hero.setSpeed(7);
-		hero.setAttackSkill(7);
-		hero.setBlockSkill(4);
-		hero.setArmor(1);
-		hero.setManaPower(2);
-		hero.setDraw(3);
-		hero.setBaseHp(40+(int) (Math.random()*50));
 		hero.setGold((int)Math.random()*5);
 		hero.setName("Goblin");
 		hero.setExperienceValue(10);
-		//deck
-		for (int i=0; i<4;i++) {
-			hero.getDeck().addCard(new BasicAttack());
-		}
-		for (int i=0; i<3;i++) {
-			hero.getDeck().addCard(new Block());
-		}
-		
-		
+		//deck				
 	}
 
 	@Override
