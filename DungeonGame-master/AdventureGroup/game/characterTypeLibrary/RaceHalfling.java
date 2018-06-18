@@ -15,11 +15,8 @@ public class RaceHalfling extends CharacterRace{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		hero.setGood(true);
-		hero.setSpeed(hero.getSpeed()+4);
-		hero.setStrength(hero.getStrength()-3);
-		hero.setDexterity(hero.getDexterity()+6);
-		hero.setIntelligence(hero.getIntelligence()+1);
-		hero.setVitality(hero.getVitality()-1);
+		hero.setDodge(hero.getDodge()+3);
+		hero.setSpeed(hero.getSpeed()+1);
 		hero.setBaseHp(hero.getBaseHp()-10);
 		//deck
 		for (int i=0; i<1;i++) {

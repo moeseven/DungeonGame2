@@ -16,14 +16,17 @@ public abstract class CharacterRace extends CharacterType{
 		hero.setStrength(10);
 		hero.setDexterity(10);
 		hero.setVitality(10);
-		hero.setIntelligence(10);
-		hero.setBlockSkill(10);
-		hero.setArmor(1);
+		hero.setIntelligence(10);		
+		hero.setAttackSkill(10);
+		hero.setBlockSkill(15);
+		hero.setAccuracy(15);
 		hero.setDodge(10);
+		hero.setArmor(0);
 		hero.setManaPower(2);
 		hero.setDraw(3);
 		hero.setBaseHp(100);
 		hero.setGold((int)(100*Math.random()));
+		hero.setExperienceValue(10);
 		//deck
 		for (int i=0; i<5;i++) {
 			hero.getDeck().addCard(new BasicAttack());

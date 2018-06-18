@@ -15,10 +15,7 @@ public class RaceElf extends CharacterRace{
 		super.modifyHero(hero);
 		hero.setGood(true);
 		hero.setSpeed(hero.getSpeed()+4);
-		hero.setStrength(hero.getStrength()-1);
-		hero.setDexterity(hero.getDexterity()+5);
-		hero.setIntelligence(hero.getIntelligence());
-		hero.setVitality(hero.getVitality()-2);
+		hero.setAccuracy(hero.getAccuracy()+4);
 		hero.setBaseHp(hero.getBaseHp()-5);
 	}
 

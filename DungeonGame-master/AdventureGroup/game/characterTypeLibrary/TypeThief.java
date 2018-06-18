@@ -11,7 +11,9 @@ public class TypeThief extends CharacterClass{
 
 	public void modifyHero(Hero hero) {
 		// TODO Auto-generated method stub
-		
+		hero.setDexterity(hero.getDexterity()+3);
+		hero.setStrength(hero.getStrength()-1);
+		hero.setVitality(hero.getVitality()-1);
 	}
 
 	@Override

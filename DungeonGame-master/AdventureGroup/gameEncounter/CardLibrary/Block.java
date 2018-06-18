@@ -10,7 +10,7 @@ public class Block extends Card{
 		
 	}
 	public void applyEffect(Hero self) {
-		self.block(self.getBlockSkill());
+		self.block(self.computeBlockSkill());
 	}
 	@Override
 	public String getName() {
@@ -18,6 +18,6 @@ public class Block extends Card{
 	}
 	@Override
 	public String getCardText(Hero self) {
-		return "block for "+self.getBlockSkill();
+		return "block for "+self.computeBlockSkill();
 	}
 }

@@ -47,12 +47,14 @@ public class FrameCharacterBuilder extends JFrame{
 	private class ButtonRaceListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			cb.scrollThroughCharRaces();
+			cb.updateHero("");
 			cbi.repaint();
 		} 
 	}
 	private class ButtonClassListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			cb.scrollThroughCharClasses();
+			cb.updateHero("");
 			cbi.repaint();
 		} 
 	}

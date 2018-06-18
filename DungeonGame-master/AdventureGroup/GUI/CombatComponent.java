@@ -24,8 +24,8 @@ public class CombatComponent extends JComponent{
 		setLayout(new GridLayout());
 		this.monsters= fw.getGame().getRoom().getFight().getMonsters();
 		jp=new JPanel();
-		for (int i=0;i<fw.getGame().getHeroes().size();i++) {
-			jp.add(new HeroFightComponent(fw,fw.getGame().getHeroes().get(i)));
+		for (int i=0;i<fw.getGame().getPlayer().getHeroes().size();i++) {
+			jp.add(new HeroFightComponent(fw,fw.getGame().getPlayer().getHeroes().get(i)));
 		}
 		for (int i=0;i<monsters.size();i++){
 			jp.add(new MonsterFightComponent(fw,monsters.get(i)));

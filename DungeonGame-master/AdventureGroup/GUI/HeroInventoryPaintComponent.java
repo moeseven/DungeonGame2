@@ -24,8 +24,8 @@ public class HeroInventoryPaintComponent extends JComponent{
 		private JScrollPane sp;
 		private StatsWindow gw;
 		private RectangleClicker rc;
-		public HeroInventoryPaintComponent(StatsWindow gw){
-			this.gw=gw;
+		public HeroInventoryPaintComponent(StatsWindow sw){
+			this.gw=sw;
 			setBorder(new LineBorder(Color.YELLOW));
 			super.setPreferredSize(new Dimension(600,200));
 			MyMouseListener ml = new MyMouseListener();

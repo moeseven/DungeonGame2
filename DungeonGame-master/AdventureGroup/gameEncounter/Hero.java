@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Player;
 
 public class Hero {
 
@@ -34,9 +35,10 @@ public class Hero {
 	protected int draw;
 	protected int manaPower;
 	public int armor;
+	public int accuracy;//vs dodge
 	public int dodge;//TODO
+	protected int attackSkill;// vs block skill
 	protected int blockSkill;
-	protected int attackSkill; //no longer usefull
 	//protected int maxHp;
 	protected int baseHp;
 	protected int strength;
@@ -52,10 +54,11 @@ public class Hero {
 	private int block;
 	private LinkedList<Card> hand;
 	//
-	public Hero(String name, CharacterRace charRace,CharacterClass charClass){
+	public Hero(String name,Player player, CharacterRace charRace,CharacterClass charClass){
 		this.name=name;
 		this.charRace=charRace;
 		this.charClass=charClass;
+		this.inventory=player.getInventory();
 		stats=new ModableHeroStats();
 		this.initialize();
 	}
@@ -63,7 +66,6 @@ public class Hero {
 		setDeck(new Deck());
 		isDead=false;
 		isReady=false;
-		inventory= new LinkedList<Item>();
 		equipment= new Equipment(this);
 		deck=new Deck();
 		charRace.modifyHero(this);
@@ -101,53 +103,58 @@ public class Hero {
 	public void block(int block) {
 		this.block+=block;
 	}
+	//Attack stages dodge-block-armor-hp
 	public boolean attackHero(Hero hero) {
 		//TODO check Block and Dodge
-		return true;
+		if(!GameEquations.dodge(this, hero)) {
+			if(breachBlock(hero)) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}else {
+			return false;
+		}		
+	}
+	public boolean breachBlock(Hero hero) {
+		if(!GameEquations.block(this, hero)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	public boolean dealWeaponDamage(Hero hero, Item item) {//weapon damage str dependant or dexterity dependant
 		boolean success=false;
 		 if(item instanceof Weapon) {
 			 Weapon weapon= (Weapon) item;
 			 int dmg=weapon.computeAttackDamage(strength);
-			 hero.takeDamageArmor(this, dmg);
+			 hero.takeArmorDamage(this, dmg);
 			 success=true;
 		 }else {
 			 int dmg=GameEquations.FistDamage(strength);
-			 hero.takeDamageArmor(this, dmg);
+			 hero.takeArmorDamage(this, dmg);
 			 success=true;
 		 }
 		 return success;		
 	}
 	public void dealDamage(Hero hero,int damage) {
-		hero.takeDamageArmor(this,damage);
+		hero.takeArmorDamage(this,damage);
 	}
-	public void takeDamageArmor(Hero hero,int damage) {
-		hero.takeThornDamage(this, thorns);//thorns
-		int hpDamage=block-damage;
-		if(hpDamage<0) {
-			this.setHp(hp+hpDamage);
-			block=0;
-		}else {
-			this.setBlock(block-damage);
-		}
+	public void takeArmorDamage(Hero damagingHero,int damage) {
+		damagingHero.takeUnreflectableArmorDamage(this, thorns);//thorns
+		this.takeUnreflectableArmorDamage(damagingHero, damage);
+	}
+	public void takeDamage(Hero damagingHero, int damage){
+		this.setHp(hp-damage);
 		if(hp<=0) {
 			hp=0;
 			this.die();
 		}
 	}
-	public void takeThornDamage(Hero hero,int damage) {//prevent infinite thorn looping
-		int armorDamage=block-damage;
-		if(armorDamage<0) {
-			this.setHp(hp+GameEquations.damageReducedByArmor(armorDamage, armor));
-			block=0;
-		}else {
-			this.setBlock(block-damage);
-		}
-		if(hp<=0) {
-			hp=0;
-			this.die();
-		}
+	public void takeUnreflectableArmorDamage(Hero damagingHero,int damage) {//prevent infinite thorn looping
+		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
+		takeDamage(damagingHero, armorDamage);
 	}
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
@@ -161,7 +168,32 @@ public class Hero {
 			drawPile.add(hand.removeFirst());
 		}		
 	}
-	//getters and setters
+	//compute functions
+	public int computeAccuracy() {
+		return GameEquations.accuracyCalc(accuracy, dexterity);
+	}
+	public int computeDodge() {
+		return GameEquations.dodgeCalc(dodge, dexterity);
+	}
+	public int computeAttackSkill() {
+		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
+	}
+	public int computeBlockSkill() {
+		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
+	}
+	public int computeMaxHp() {
+		return GameEquations.maxHealthCalc(baseHp, vitality);
+	}
+	public int computeSpeed() {
+		return GameEquations.speedCalc(speed, dexterity);
+	}
+		
+	public int rollSpeed() {
+		currentSpeed=GameEquations.speedRoll(computeSpeed());
+		return currentSpeed;
+	}
+	//Getters and Setters
+	
 	public int getGold() {
 		return gold;
 	}
@@ -258,9 +290,6 @@ public class Hero {
 	public void setAttackSkill(int attackSkill) {
 		this.attackSkill = attackSkill;
 	}
-	public int computeMaxHp() {
-		return GameEquations.maxHealthCalc(baseHp, vitality);
-	}
 	public Fight getFight() {
 		return fight;
 	}
@@ -315,7 +344,6 @@ public class Hero {
 	public void setInventory(LinkedList<Item> inventory) {
 		this.inventory = inventory;
 	}
-	
 	public int getSpeed() {
 		return speed;
 	}
@@ -327,10 +355,6 @@ public class Hero {
 	}
 	public void setCurrentSpeed(int currentSpeed) {
 		this.currentSpeed = currentSpeed;
-	}
-	public int rollSpeed() {
-		int s=speed+(int)(Math.random()*9);
-		return s;
 	}
 	public CharacterClass getCharClass() {
 		return charClass;
@@ -376,6 +400,15 @@ public class Hero {
 	}
 	public void setDodge(int dodge) {
 		this.dodge = dodge;
+	}
+	public int getAccuracy() {
+		return accuracy;
+	}
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
+	}
+	public int getDodge() {
+		return dodge;
 	}
 	
 }

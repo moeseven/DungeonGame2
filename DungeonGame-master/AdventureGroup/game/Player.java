@@ -4,13 +4,15 @@ import java.util.LinkedList;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 
 public class Player {
 	private Hero selectedHero;
 	private LinkedList<Hero> heroes;
+	private LinkedList<Item> inventory;
 	public Player(Game game) {
-		selectedHero=game.getHeroes().getFirst();
-		heroes=game.getHeroes();
+		heroes=new LinkedList<Hero>();
+		inventory=new LinkedList<Item>();
 	}
 	public Hero getSelectedHero() {
 		return selectedHero;
@@ -23,6 +25,12 @@ public class Player {
 	}
 	public void setHeroes(LinkedList<Hero> heroes) {
 		this.heroes = heroes;
+	}
+	public LinkedList<Item> getInventory() {
+		return inventory;
+	}
+	public void setInventory(LinkedList<Item> inventory) {
+		this.inventory = inventory;
 	}
 	
 }

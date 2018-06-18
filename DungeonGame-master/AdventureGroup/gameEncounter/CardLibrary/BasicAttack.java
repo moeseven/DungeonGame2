@@ -11,7 +11,10 @@ public class BasicAttack extends Card{
 		
 	}
 	public void applyEffect(Hero self) {
-		self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1());	
+		if(self.attackHero(self.getTarget())) {
+			self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1());
+		}
+			
 	}
 	@Override
 	public String getName() {

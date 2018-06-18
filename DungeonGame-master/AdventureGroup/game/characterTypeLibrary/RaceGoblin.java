@@ -16,11 +16,9 @@ public class RaceGoblin extends CharacterRace{
 		super.modifyHero(hero);
 		hero.setGood(true);
 		hero.setSpeed(hero.getSpeed()+1);
-		hero.setStrength(hero.getStrength()-3);
-		hero.setDexterity(hero.getDexterity()+1);
-		hero.setIntelligence(hero.getIntelligence()-5);
-		hero.setVitality(hero.getVitality()-7);
-		hero.setBaseHp(hero.getBaseHp()-10);
+		hero.setBaseHp(hero.getBaseHp()-15);
+		hero.setDodge(hero.getDodge()+2);
+		
 		hero.setGood(false);
 		hero.setGold((int)Math.random()*5);
 		hero.setName("Goblin");

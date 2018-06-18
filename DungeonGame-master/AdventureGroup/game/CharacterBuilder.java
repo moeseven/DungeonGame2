@@ -23,6 +23,7 @@ public class CharacterBuilder {
 		charRaces.add(new RaceDwarf());
 		charRaces.add(new RaceHalfling());
 		charRaces.add(new RaceElf());
+		updateHero("Öfterus");
 		// TODO Auto-generated constructor stub
 	}
 	public void scrollThroughCharClasses() {
@@ -31,8 +32,11 @@ public class CharacterBuilder {
 	public void scrollThroughCharRaces() {
 		charRaces.add(charRaces.removeFirst());
 	}
+	public void updateHero(String name) {
+		hero=new Hero(name,game.getPlayer(), charRaces.getFirst(), charClasses.getFirst());
+	}
 	public void createHero(String name) {
-		hero=new Hero(name, charRaces.getFirst(), charClasses.getFirst());
+		hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
 		game.getPlayer().getHeroes().add(hero);
 	}
 	public LinkedList<CharacterClass> getCharClasses() {
@@ -53,7 +57,7 @@ public class CharacterBuilder {
 	public CharacterRace getCharRace() {
 		return charRaces.getFirst();
 	}
-	public Hero getHero() {
+	public Hero getHero(){
 		return hero;
 	}
 	public void setHero(Hero hero) {

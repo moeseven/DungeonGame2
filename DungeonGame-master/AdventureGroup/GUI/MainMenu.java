@@ -54,6 +54,7 @@ public class MainMenu extends JFrame{
 	}
 	private class ButtonStartListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
+			game.getPlayer().setSelectedHero(game.getPlayer().getHeroes().getFirst());
 			game.enterRoom(game.getRoom());			
 			rw=new RoomWindow(game);
 		} 
