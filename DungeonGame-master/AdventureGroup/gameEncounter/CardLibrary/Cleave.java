@@ -10,7 +10,7 @@ public class Cleave extends Card{
 		
 	}
 	public void applyEffect(Hero self) {
-		if(self.isGood()) {
+		if(self.getFight().getHeroes().contains(self)) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getMonsters().get(i))) {

@@ -171,7 +171,7 @@ public class Hero {
 	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
 		looter.setGold(looter.getGold()+gold); //!!! gold has to go to the player
-		
+		System.out.println(name+" got looted");
 	}
 	public void discardHand() {
 		while(hand.size()>0) {
@@ -187,12 +187,12 @@ public class Hero {
 	public boolean targetInRange(Hero target2, int range) {
 		//this seems to not work for targeting own heroes
 		if(this.getPlayer()!=target2.getPlayer()) {
-			if(player.getHeroes().size()-player.getHeroes().indexOf(this)+target2.getPlayer().getHeroes().indexOf(target2)<=range) {
+			if(player.getHeroes().indexOf(this)+target2.getPlayer().getHeroes().indexOf(target2)<range) {
 				return true;
-			}else {
-				System.out.println("target out of Range");
-				return false;
-			}
+				}else {
+					System.out.println("target out of Range");
+					return false;
+				}			
 		}else {
 			return true;
 		}					

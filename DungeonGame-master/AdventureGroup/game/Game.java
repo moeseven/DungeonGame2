@@ -15,7 +15,7 @@ public Game(LinkedList<Room> roomChain) {
 	this.roomChain=roomChain;
 	room=roomChain.getFirst();
 	player=new Player(this);
-	dungeonMaster=new Player(this);
+	dungeonMaster=new DungeonMaster(this);
 }
 public void enterRoom(Room room) {
 	this.room=room;
@@ -45,6 +45,7 @@ public Room getNextRoom() {
 public void enterNextRoom() {
 	room=getNextRoom();
 	room.enterRoom(this);
+	System.out.println("roomNr: "+roomChain.indexOf(room));
 }
 
 }

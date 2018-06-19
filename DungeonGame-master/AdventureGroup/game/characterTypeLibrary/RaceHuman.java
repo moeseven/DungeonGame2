@@ -15,7 +15,6 @@ public class RaceHuman extends CharacterRace{
 
 	public  void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setGood(true);
 		//deck
 				
 	}

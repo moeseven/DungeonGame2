@@ -54,7 +54,7 @@ public class HeroesRoomComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
-		for (int i=0;i<heros.size();i++){
+		for (int i=heros.size()-1;i>=0;i--){
 			g.setColor(Color.black);
 			g.drawString(heros.get(i).getName(), 20+i*100, 15);
 			g.drawString("Health: "+heros.get(i).getHp(), 5+i*100, 10);

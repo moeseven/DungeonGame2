@@ -8,9 +8,10 @@ import gameEncounter.Item;
 
 public class StandardCorpse extends RoomInteraction{
 	private Hero corpse;
-	private boolean hasBeenLooted=false;
+	private boolean hasBeenLooted;
 	public StandardCorpse(Hero corpse) {
 		super();
+		hasBeenLooted=false;
 		this.corpse=corpse;
 		name=corpse.getName()+" corpse";
 		// TODO Auto-generated constructor stub

@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import game.Room;
+import game.RoomLibrary.GoblinRoom1;
+import game.RoomLibrary.Town;
 
 public class GuiRoom extends JPanel{
 	private RoomWindow rw;
@@ -32,6 +34,13 @@ public class GuiRoom extends JPanel{
 		jp_north.add(new RoomInteractionComponent(rw));
 		add(jp_north, BorderLayout.NORTH);
 		setVisible(true);
+	}
+	public void upadate(){
+		this.remove(jp_north);
+		jp_north=new JPanel();
+		jp_north.setLayout(new BorderLayout());
+		jp_north.add(new RoomInteractionComponent(rw));
+		add(jp_north, BorderLayout.NORTH);
 	}
 
 

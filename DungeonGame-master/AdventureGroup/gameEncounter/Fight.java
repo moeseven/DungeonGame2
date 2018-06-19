@@ -81,7 +81,7 @@ public class Fight {
 		for(int i=0; i<heroes.size();i++) {
 			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
 				game.getRoom().getInteractions().add(new StandardCorpse(heroes.get(i))); //generate corpses
-				dead.add(monsters.get(i));
+				dead.add(heroes.get(i));
 			}	
 		}
 		for(int i=0; i<dead.size();i++) {
@@ -99,8 +99,9 @@ public class Fight {
 				}else {
 					System.out.println(turnOrder.get(turnOrderCounter).getName()+"'s turn");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
-					if(monsters.contains(turnOrder.get(turnOrderCounter))){						
-						turnOrder.get(turnOrderCounter).setTarget(heroes.get((int) Math.round(Math.random()*(heroes.size()-1))));//choose target for attacks
+					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
+						//monster chooses random target here TODO make sure it attacks only targets in range!
+						turnOrder.get(turnOrderCounter).setTarget(heroes.get((int) (Math.random()*(heroes.size()-1.0))));//choose target for attacks
 					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
 					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
 					    		i=i-1;

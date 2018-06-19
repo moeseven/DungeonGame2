@@ -11,7 +11,7 @@ public class RoomWindow extends JFrame{
 	private Game game;
 	private StatsWindow sw;
 	private FightWindow fw;
-	private GuiRoom gr;
+	private GuiRoom guiRoom;
 	public RoomWindow(Game game) {
 		setTitle("room");
 		this.game=game;		
@@ -19,8 +19,8 @@ public class RoomWindow extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setLocation(10, 10);
-		gr=new GuiRoom(this);
-		add(gr,BorderLayout.NORTH);
+		guiRoom=new GuiRoom(this);
+		add(guiRoom,BorderLayout.NORTH);
 		this.setVisible(true);
 		this.sw=new StatsWindow(game,this);
 	}
@@ -34,8 +34,29 @@ public class RoomWindow extends JFrame{
 		fw=new FightWindow(game,this);
 	}
 	public void windowswitch() {
+		if(fw!=null){
+			fw.setVisible(false);
+		}		
 		sw.setVisible(true);
 		this.setVisible(false);
+	}
+	public StatsWindow getSw() {
+		return sw;
+	}
+	public void setSw(StatsWindow sw) {
+		this.sw = sw;
+	}
+	public FightWindow getFw() {
+		return fw;
+	}
+	public void setFw(FightWindow fw) {
+		this.fw = fw;
+	}
+	public GuiRoom getGuiRoom() {
+		return guiRoom;
+	}
+	public void setGr(GuiRoom gr) {
+		this.guiRoom = gr;
 	}
 	
 }

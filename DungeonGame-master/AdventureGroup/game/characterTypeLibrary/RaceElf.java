@@ -13,7 +13,6 @@ public class RaceElf extends CharacterRace{
 	public void modifyHero(Hero hero) {
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);
-		hero.setGood(true);
 		hero.setSpeed(hero.getSpeed()+4);
 		hero.setAccuracy(hero.getAccuracy()+4);
 		hero.setBaseHp(hero.getBaseHp()-5);

@@ -39,6 +39,7 @@ public class GuiFight extends JPanel{
 	private class ml extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
 			fw.getGame().getRoom().getFight().nextTurn();
+			fw.getGuiFight().upadate();
 			fw.revalidate();
 			fw.repaint();
 			if(fw.getGame().getRoom().getFight().isFightOver()) {
@@ -58,6 +59,16 @@ public class GuiFight extends JPanel{
 		b=new JButton("done");
 		b.addMouseListener(new ml());
 		this.add(b,BorderLayout.SOUTH);
+	}
+	public void upadate(){
+		this.remove(jp_mid_1);
+		hc=new HeroComponent(this.fw);
+		mc=new CombatComponent(this.fw);
+		jp_mid_1= new JPanel();
+		jp_mid_1.setLayout(new BorderLayout());
+		jp_mid_1.add(mc,BorderLayout.NORTH);
+		jp_mid_1.add(hc,BorderLayout.CENTER);
+		this.add(jp_mid_1,BorderLayout.CENTER);
 	}
 	public HeroComponent getHc() {
 		return hc;

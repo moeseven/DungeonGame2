@@ -34,7 +34,16 @@ public class FightWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {		
-		rw=new RoomWindow(game);
+		//rw=new RoomWindow(game);
+		rw.getGuiRoom().upadate();
+		rw.setVisible(true);
 		this.setVisible(false);
 	}
+	public GuiFight getGuiFight() {
+		return guiFight;
+	}
+	public void setGuiFight(GuiFight guiFight) {
+		this.guiFight = guiFight;
+	}
+	
 }

@@ -6,28 +6,25 @@ import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.BasicAttack;
 
-public class RaceHalfling extends CharacterRace{
+public class Weakling extends CharacterRace{
 
-	public RaceHalfling() {
-		name="halfling";
+	public Weakling() {
+		name="weakling";
 	}
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setDodge(hero.getDodge()+3);
-		hero.setSpeed(hero.getSpeed()+1);
-		hero.setBaseHp(hero.getBaseHp()-10);
-		//deck
-		for (int i=0; i<1;i++) {
-			hero.getDeck().addCard(new Block());
-		}
-		
+		hero.setGood(true);
+		hero.setBaseHp(hero.getBaseHp()-90);
+		hero.setGold((int)Math.random()*5);
+		hero.setExperienceValue(10);
+		//deck				
 	}
 
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		return "halfling";
+		return "goblin";
 	}
 
 }

@@ -37,7 +37,7 @@ public class RoomButtonComponent extends JComponent{
 		}
 		private class mouseListenerInventory extends MouseAdapter{
 			public void mouseClicked(MouseEvent e){
-				//leave room
+				//show inventory
 				rw.windowswitch();
 			}
 		}
@@ -45,7 +45,8 @@ public class RoomButtonComponent extends JComponent{
 			public void mouseClicked(MouseEvent e){
 				//leave room			
 				rw.getGame().enterNextRoom();
-				rw=new RoomWindow(rw.getGame());				
+				rw.getGuiRoom().upadate();
+				rw.setVisible(true);
 				if(rw.getGame().getRoom().isHasFight()){
 					rw.setUpFightWindow();
 					rw.setVisible(false);
