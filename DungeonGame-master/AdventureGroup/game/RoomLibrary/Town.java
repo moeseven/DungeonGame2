@@ -1,15 +1,16 @@
 package game.RoomLibrary;
 
-import java.util.LinkedList;
 
 import game.Game;
 import game.Room;
-import gameEncounter.Hero;
+import game.RoomInteractionLibrary.Well;
 
 public class Town extends Room{
 
 	public Town() {
 		// TODO Auto-generated constructor stub
+		super();
+		getInteractions().add(new Well());
 	}
 
 	@Override

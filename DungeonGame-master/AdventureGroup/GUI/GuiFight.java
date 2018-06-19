@@ -20,12 +20,6 @@ public class GuiFight extends JPanel{
 	private HeroComponent hc;
 	private CombatComponent mc;
 	private JButton b;
-	private JPanel jp_east;
-	private JPanel jpp;
-	private JPanel jp_mid;
-	private JPanel jp_west;
-	private JPanel jp_west_1;
-	private JPanel jp_west_1_1;
 	private JPanel jp_mid_1;
 	private JTextField tf;
 	private Player player;

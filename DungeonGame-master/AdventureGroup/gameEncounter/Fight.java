@@ -5,12 +5,13 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import game.Game;
+import game.RoomInteractionLibrary.StandardCorpse;
 
 public class Fight {
 	private Game game;
+	private LinkedList<Hero> turnOrder;
 	private LinkedList<Hero> monsters;
 	private LinkedList<Hero> heroes;
-	private LinkedList<Hero> turnOrder;
 	private int turnOrderCounter;
 	private LinkedList<LinkedList<Hero>> meele;
 	public Fight(Game game,LinkedList<Hero> monsters, LinkedList<Hero> heroes) {
@@ -18,51 +19,75 @@ public class Fight {
 		this.game=game;
 		this.monsters=monsters;
 		this.heroes=heroes;
-		for (Hero h : this.heroes) {		
+		for (Hero h : heroes) {		
 		    h.setUpHandPile();
 		    h.setFight(this);
 		}
-		for (Hero m : this.monsters) {	
+		for (Hero m : monsters) {	
 		    m.setUpHandPile();	 
 		    m.setFight(this);
 		}
 		this.newRound();
 	}
 	public void newRound() {
+		System.out.println("new round");
+		LinkedList<Hero> allFightParticipants;
+		allFightParticipants=new LinkedList<Hero>();
 		turnOrder=new LinkedList<Hero>();
 		turnOrderCounter=-1;
 		for (Hero h : heroes) {		
-			h.setCurrentSpeed(h.rollSpeed());
-			turnOrder.add(h);
+			if(!h.isDead()) {
+				h.setCurrentSpeed(h.rollSpeed());
+				allFightParticipants.add(h);
+			}			
 		}
-		for (Hero m : monsters) {		
-			m.setCurrentSpeed(m.rollSpeed());
-			turnOrder.add(m);
+		for (Hero m : monsters) {
+			if(!m.isDead()) {
+				m.setCurrentSpeed(m.rollSpeed());
+				allFightParticipants.add(m);
+			}
 		}
-		//order
-		turnOrder.sort(new Comparator<Hero>(){
-		    @Override
-		        public int compare(Hero h1,Hero h2){
-		    		if(h2.getCurrentSpeed()>h1.getCurrentSpeed()) {
-		    			return 0;
-		    		}else {
-		    			return 1;
-		    		}		            
-		    }
-		});
+		//my own sorting
+		int highestSpeed=0;
+		int fastestHeroIndex=0;
+		while(allFightParticipants.size()>0) {
+			for(int i=0; i<allFightParticipants.size(); i++) {
+				if(allFightParticipants.get(i).getCurrentSpeed()>highestSpeed) {
+					fastestHeroIndex=i;
+					highestSpeed=allFightParticipants.get(i).getCurrentSpeed();
+				}
+			}
+			turnOrder.add(allFightParticipants.remove(fastestHeroIndex));
+			highestSpeed=0;
+		}
 		nextTurn();
 	}
 	public void nextTurn() {
-		if (this.isFightOver()) {
-			int exp=0; //give experience to heroes
-			for (Hero m: monsters) {
-				exp+=m.getExperienceValue();
-			}
-			exp=(int) (exp/heroes.size());
-			for (Hero h: heroes) {
-				h.setExperience(h.getExperience()+exp);
-			}
-			//handle monster loot here
+		int exp; 
+		LinkedList<Hero> dead= new LinkedList<Hero>();
+		for(int i=0; i<monsters.size();i++) {
+			if(monsters.get(i).isDead()) {//remove bodies from fight and handle experience
+				exp=monsters.get(i).getExperienceValue();
+				game.getRoom().getInteractions().add(new StandardCorpse(monsters.get(i))); //generate corpses
+				dead.add(monsters.get(i));
+				for (Hero h: heroes) {//give experience to heroes
+						h.setExperience(h.getExperience()+(int) (exp/heroes.size()));			
+				}
+			}	
+		}
+		for(int i=0; i<dead.size();i++) {
+			monsters.remove(dead.get(i));	
+		}
+		for(int i=0; i<heroes.size();i++) {
+			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
+				game.getRoom().getInteractions().add(new StandardCorpse(heroes.get(i))); //generate corpses
+				dead.add(monsters.get(i));
+			}	
+		}
+		for(int i=0; i<dead.size();i++) {
+			heroes.remove(dead.get(i));	
+		}
+		if (this.isFightOver()){
 			
 		}else {
 			turnOrderCounter+=1;
@@ -72,6 +97,7 @@ public class Fight {
 				if(turnOrder.get(turnOrderCounter).isDead()) {
 					//don't participate in fight
 				}else {
+					System.out.println(turnOrder.get(turnOrderCounter).getName()+"'s turn");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){						
 						turnOrder.get(turnOrderCounter).setTarget(heroes.get((int) Math.round(Math.random()*(heroes.size()-1))));//choose target for attacks
@@ -88,52 +114,9 @@ public class Fight {
 			}						
 		}		
 	}
-//	public void determineBeginner() {
-//		//speed roll
-//		for (Hero h : heroes) {		
-//			h.setTarget(monsters.get((int) Math.round(Math.random()*(monsters.size()-1))));
-//		}
-//		if(Math.random()<0.5) {
-//			heroesTurn();
-//		}else {
-//			monstersTurn();
-//		}
-//	}
-//	public void heroesTurn() {		
-//		for (Hero h : heroes) {		
-//			h.turnBegin();
-//		}	
-//	}
-//	public void monstersTurn() {
-//		this.isFightOver();
-//		for (Hero m: monsters) {
-//			if(m.isDead()) {
-//				//don't participate in fight
-//			}else {
-//				m.turnBegin();//draw cards and reset buffs/debuffs
-//				m.setTarget(heroes.get((int) Math.round(Math.random()*(heroes.size()-1))));//choose target for attacks
-//			    for(int i=0; i<m.getHand().size(); i++){
-//			    	if(m.getHand().get(i).playCard(m)) {
-//			    		i=i-1;
-//			    	}
-//			    }
-//			}			
-//		}	
-//		if (this.isFightOver()) {
-//			int exp=0; //give experience to heroes
-//			for (Hero m: monsters) {
-//				exp+=m.getExperienceValue();
-//			}
-//			exp=(int) (exp/heroes.size());
-//			for (Hero h: heroes) {
-//				h.setExperience(h.getExperience()+exp);
-//			}
-//			//handle monster loot here
-//			
-//		}else {
-//			heroesTurn();
-//		}
-//	}
+	public void handleFightisOver() {
+		//TODO
+	}
 	public boolean isFightOver() {
 		int alive=0;
 		for (Hero m: monsters) {
@@ -147,28 +130,28 @@ public class Fight {
 			return true;
 		}		
 	}
-	public void createMeele() {//give heroes a foe not good like this! Rework!!!
-		if(monsters.size()>=heroes.size()) {
-			for (int i=0; i<heroes.size();i++) {
-				LinkedList<Hero> newList =new LinkedList<Hero>();
-				newList.add(heroes.get(i));
-				meele.add(newList);
-			}
-			for (int i=0; i<monsters.size();i++) {
-				meele.get(i % heroes.size()).add(monsters.get(i));
-			}
-			
-		}else {
-			for (int i=0; i<monsters.size();i++) {
-				LinkedList<Hero> newList =new LinkedList<Hero>();
-				newList.add(monsters.get(i));
-				meele.add(newList);
-			}
-			for (int i=0; i<heroes.size();i++) {
-				meele.get(i % monsters.size()).add(heroes.get(i));
-			}
-		}
-	}
+//	public void createMeele() {//give heroes a foe not good like this! Rework!!!
+//		if(monsters.size()>=heroes.size()) {
+//			for (int i=0; i<heroes.size();i++) {
+//				LinkedList<Hero> newList =new LinkedList<Hero>();
+//				newList.add(heroes.get(i));
+//				meele.add(newList);
+//			}
+//			for (int i=0; i<monsters.size();i++) {
+//				meele.get(i % heroes.size()).add(monsters.get(i));
+//			}
+//			
+//		}else {
+//			for (int i=0; i<monsters.size();i++) {
+//				LinkedList<Hero> newList =new LinkedList<Hero>();
+//				newList.add(monsters.get(i));
+//				meele.add(newList);
+//			}
+//			for (int i=0; i<heroes.size();i++) {
+//				meele.get(i % monsters.size()).add(heroes.get(i));
+//			}
+//		}
+//	}
 	//getters and setters
 	public LinkedList<Hero> getMonsters() {
 		return monsters;

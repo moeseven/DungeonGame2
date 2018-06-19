@@ -20,4 +20,9 @@ public class Block extends Card{
 	public String getCardText(Hero self) {
 		return "block for "+self.computeBlockSkill();
 	}
+	@Override
+	public int rangeOfCard(Hero hero) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

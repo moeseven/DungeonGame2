@@ -15,6 +15,7 @@ public class Hero {
 	protected int gold;
 	protected int experience;	
 	protected int experienceValue;
+	protected Player player;
 	//game
 	private boolean isReady;
 	//Fight
@@ -54,22 +55,25 @@ public class Hero {
 	private int block;
 	private LinkedList<Card> hand;
 	//
-	public Hero(String name,Player player, CharacterRace charRace,CharacterClass charClass){
-		this.name=name;
+	public Hero(String name,Player player, CharacterRace charRace,CharacterClass charClass){		
+		//order is important here
+		this.player=player;
 		this.charRace=charRace;
 		this.charClass=charClass;
+		equipment= new Equipment(this);	
 		this.inventory=player.getInventory();
+		deck=new Deck();		
+		charRace.modifyHero(this);
+		charClass.modifyHero(this);
+		if(!name.equals("")&&!name.equals("type name here")) {
+			this.name=name;
+		}			
 		stats=new ModableHeroStats();
 		this.initialize();
 	}
-	public void initialize() {
-		setDeck(new Deck());
+	public void initialize() {		
 		isDead=false;
-		isReady=false;
-		equipment= new Equipment(this);
-		deck=new Deck();
-		charRace.modifyHero(this);
-		charClass.modifyHero(this);
+		isReady=false;			
 		hp=computeMaxHp();
 	}
 	//functions
@@ -158,15 +162,40 @@ public class Hero {
 	}
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
+		block=0;
 		this.isDead=true;
 	}
-	public void loot(Hero looter) {
+	public void loot(Hero looted) {		
+		looted.getLooted(this);
+	}
+	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
+		looter.setGold(looter.getGold()+gold); //!!! gold has to go to the player
+		
 	}
 	public void discardHand() {
 		while(hand.size()>0) {
 			drawPile.add(hand.removeFirst());
 		}		
+	}
+	public void heal(int heal) {//prevent overhealing
+		this.setHp(this.getHp()+heal);
+		if(this.getHp()>computeMaxHp()) {
+			this.setHp(computeMaxHp());
+		}		
+	}
+	public boolean targetInRange(Hero target2, int range) {
+		//this seems to not work for targeting own heroes
+		if(this.getPlayer()!=target2.getPlayer()) {
+			if(player.getHeroes().size()-player.getHeroes().indexOf(this)+target2.getPlayer().getHeroes().indexOf(target2)<=range) {
+				return true;
+			}else {
+				System.out.println("target out of Range");
+				return false;
+			}
+		}else {
+			return true;
+		}					
 	}
 	//compute functions
 	public int computeAccuracy() {
@@ -192,6 +221,7 @@ public class Hero {
 		currentSpeed=GameEquations.speedRoll(computeSpeed());
 		return currentSpeed;
 	}
+
 	//Getters and Setters
 	
 	public int getGold() {
@@ -410,5 +440,13 @@ public class Hero {
 	public int getDodge() {
 		return dodge;
 	}
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
 	
 }

@@ -33,8 +33,8 @@ public class FightWindow extends JFrame{
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	public void windowswitch() {
-		rw.setVisible(true);
+	public void windowswitch() {		
+		rw=new RoomWindow(game);
 		this.setVisible(false);
 	}
 }

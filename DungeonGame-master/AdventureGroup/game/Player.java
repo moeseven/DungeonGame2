@@ -10,9 +10,11 @@ public class Player {
 	private Hero selectedHero;
 	private LinkedList<Hero> heroes;
 	private LinkedList<Item> inventory;
+	private int gold;
 	public Player(Game game) {
 		heroes=new LinkedList<Hero>();
 		inventory=new LinkedList<Item>();
+		gold=0;
 	}
 	public Hero getSelectedHero() {
 		return selectedHero;
@@ -31,6 +33,12 @@ public class Player {
 	}
 	public void setInventory(LinkedList<Item> inventory) {
 		this.inventory = inventory;
+	}
+	public int getGold() {
+		return gold;
+	}
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 	
 }

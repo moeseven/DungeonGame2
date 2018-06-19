@@ -29,10 +29,6 @@ public class GuiInventory extends JPanel{
 		jp_center.setLayout(new BorderLayout());
 		this.add(jp_center,BorderLayout.CENTER);
 		jp_center.add(new HeroInfoComponent(gf,gf.getGame().getPlayer().getSelectedHero()));
-		jp_south= new JPanel();
-		jp_south.setLayout(new BorderLayout());
-		this.add(jp_south,BorderLayout.SOUTH);
-		jp_south.add(new HeroesRoomComponent(gf,gf.getGame().getPlayer().getHeroes()));//is this visible???
 		b=new JButton("done");
 		b.addMouseListener(new ml());
 		this.add(b,BorderLayout.SOUTH);

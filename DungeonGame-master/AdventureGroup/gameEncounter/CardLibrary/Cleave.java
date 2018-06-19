@@ -36,5 +36,10 @@ public class Cleave extends Card{
 	public String getCardText(Hero self) {
 		return "deal "+ 0+" attack damage to all enemies";
 	}
+	@Override
+	public int rangeOfCard(Hero hero) {
+		// TODO Auto-generated method stub
+		return 8;
+	}
 
 }

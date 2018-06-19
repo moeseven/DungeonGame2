@@ -4,11 +4,12 @@ public abstract class Card {
 	protected int manaCost;
 	private String type;
 	protected String name;
+	protected int range;
 	public Card() {
 		// TODO Auto-generated constructor stub
 	}
 	public boolean playCard(Hero self){
-		if(self.getMana()>=manaCost&&self.getHand().contains(this)) {
+		if(self.getMana()>=manaCost&&self.getHand().contains(this)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
 			self.setMana(self.getMana()-manaCost);
 			this.applyEffect(self);
 			self.getHand().remove(this);
@@ -18,6 +19,7 @@ public abstract class Card {
 			return false;
 		}
 	}
+	public abstract int rangeOfCard(Hero hero);
 	public abstract void applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract String getCardText(Hero self);

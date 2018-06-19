@@ -15,7 +15,7 @@ import javax.swing.JComponent;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
-
+//!! heroes and monsters should be drawn not be components
 public class HeroFightComponent extends JComponent{
 	private Hero hero;
 	private Image image;
@@ -55,6 +55,11 @@ public class HeroFightComponent extends JComponent{
 			if(fw.getGame().getPlayer().getSelectedHero()==hero){
 				g.setColor(Color.green);
 				g.drawRect(1, 1, 98, 148);
+			}
+			if(hero.isDead()){
+				g.setColor(Color.BLACK);
+				g.fillRect(50, 30, 10, 60);
+				g.fillRect(35, 45, 40, 10);
 			}
 		}
 		g.setColor(Color.black);

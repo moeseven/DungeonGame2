@@ -60,3 +60,7 @@
 /RoomButtonComponent.class
 /RoomButtonComponent$ml.class
 /RoomButtonComponent$mouseListenerInventory.class
+/RoomInteractionComponent.class
+/RoomInteractionComponent$Ri.class
+/RoomInteractionComponent$Ri$MyMouseListener.class
+/HeroInventoryPaintComponent$8.class

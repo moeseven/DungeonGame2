@@ -7,6 +7,7 @@ import gameEncounter.Hero;
 
 public class Game {
 private Player player; //change this for multiplayer
+public Player dungeonMaster;
 private Room room;
 private LinkedList<Room> roomChain;
 public Game(LinkedList<Room> roomChain) {
@@ -14,7 +15,7 @@ public Game(LinkedList<Room> roomChain) {
 	this.roomChain=roomChain;
 	room=roomChain.getFirst();
 	player=new Player(this);
-	
+	dungeonMaster=new Player(this);
 }
 public void enterRoom(Room room) {
 	this.room=room;

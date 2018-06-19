@@ -56,6 +56,11 @@ public class MonsterFightComponent extends JComponent{
 				g.setColor(Color.red);
 				g.drawRect(1, 1, 98, 148);
 			}
+			if(monster.isDead()){
+				g.setColor(Color.BLACK);
+				g.fillRect(50, 30, 10, 60);
+				g.fillRect(35, 45, 40, 10);
+			}
 		}
 		g.setColor(Color.black);
 		g.drawString(monster.getName(), 10, 15);

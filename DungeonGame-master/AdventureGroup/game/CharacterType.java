@@ -1,10 +1,14 @@
 package game;
 
+import java.util.LinkedList;
+
 import gameEncounter.Hero;
+import gameEncounter.Item;
 import gameEncounter.ModableHeroStats;
 
 public abstract class CharacterType {
 	protected String name;
+	protected LinkedList<Item> items= new LinkedList<Item>();
 	protected ModableHeroStats stats;
 	public CharacterType() {
 		// TODO Auto-generated constructor stub

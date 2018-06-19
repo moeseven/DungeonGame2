@@ -24,7 +24,9 @@ public class Main {
 		heroes= new LinkedList<Hero>();
 		roomChain=new LinkedList<Room>();
 		roomChain.add(new Town());
-		roomChain.add(new GoblinRoom1());		
+		roomChain.add(new GoblinRoom1());
+		roomChain.add(new Town());
+		roomChain.add(new GoblinRoom1());
 		game = new Game(roomChain);
 		player = new Player(game);
 		game.setPlayer(player);

@@ -45,11 +45,11 @@ public class RoomButtonComponent extends JComponent{
 			public void mouseClicked(MouseEvent e){
 				//leave room			
 				rw.getGame().enterNextRoom();
+				rw=new RoomWindow(rw.getGame());				
 				if(rw.getGame().getRoom().isHasFight()){
 					rw.setUpFightWindow();
+					rw.setVisible(false);
 				}
-				rw.revalidate();
-				rw.repaint();
 			}
 		}
 }

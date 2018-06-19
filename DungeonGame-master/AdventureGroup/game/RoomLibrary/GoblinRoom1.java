@@ -17,10 +17,11 @@ public class GoblinRoom1 extends Room{
 
 	@Override
 	public void enterRoom(Game game) {
-		LinkedList<Hero> foes=new LinkedList<Hero>();
-		foes.add(new Hero("", null,new RaceGoblin(), new TypeWarrior()));
-		foes.add(new Hero("", null,new RaceGoblin(), new TypeWarrior()));
-		this.fight= new Fight(game,foes, game.getPlayer().getHeroes());
+		game.dungeonMaster.setHeroes(new LinkedList<Hero>());
+		game.dungeonMaster.getHeroes().add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior()));
+		game.dungeonMaster.getHeroes().add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior()));
+		game.dungeonMaster.getHeroes().add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior()));
+		this.fight= new Fight(game,game.dungeonMaster.getHeroes(), game.getPlayer().getHeroes());
 		
 	}
 	

@@ -38,9 +38,9 @@ public class HeroInfoComponent extends JComponent{
 			jp_Stats.add(new HeroStatsPaintComponent(gf));
 			jp=new JPanel();
 			sp=new JScrollPane();
-			sp.add(jp);
-			jp.add(new DeckPaintComponent(gf, hero));
-			this.add(sp, BorderLayout.LINE_END);
+			sp.add(new DeckPaintComponent(gf, hero));
+			sp.setVisible(true);
+			this.add(sp, BorderLayout.NORTH); //not visible!
 			this.add(jp_Equip, BorderLayout.CENTER);
 			this.add(jp_Stats, BorderLayout.NORTH);
 			setVisible(true);

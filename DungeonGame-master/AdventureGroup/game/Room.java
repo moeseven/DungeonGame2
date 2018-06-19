@@ -10,7 +10,9 @@ public abstract class Room {
 	protected Fight fight;
 	protected boolean readyToLeave;
 	protected LinkedList<Hero> heroes;
+	private LinkedList<RoomInteraction> interactions;
 	public Room() {
+		interactions=new LinkedList<RoomInteraction>();
 	}
 	public void initialize() {
 		readyToLeave=false;
@@ -28,6 +30,12 @@ public abstract class Room {
 	}
 	public void setHasFight(boolean hasFight) {
 		this.hasFight = hasFight;
+	}
+	public LinkedList<RoomInteraction> getInteractions() {
+		return interactions;
+	}
+	public void setInteractions(LinkedList<RoomInteraction> interactions) {
+		this.interactions = interactions;
 	}
 	
 }

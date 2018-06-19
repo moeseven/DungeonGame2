@@ -16,5 +16,12 @@ public abstract class Weapon extends Item{
 	public void generateItemDescription() {
 		super.generateItemDescription();
 		description.add("damage: "+baseDamage+"-"+(baseDamage+damageRange));
+	}
+	public int getWeaponRange() {
+		return weaponRange;
+	}
+	public void setWeaponRange(int weaponRange) {
+		this.weaponRange = weaponRange;
 	} 
+	
 }
