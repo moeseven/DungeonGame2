@@ -9,6 +9,7 @@ public abstract class Card {
 		// TODO Auto-generated constructor stub
 	}
 	public boolean playCard(Hero self){
+		
 		if(self.getMana()>=manaCost&&self.getHand().contains(this)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
 			self.setMana(self.getMana()-manaCost);
 			this.applyEffect(self);
@@ -23,6 +24,7 @@ public abstract class Card {
 	public abstract void applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract String getCardText(Hero self);
+	public abstract boolean isFriendly();
 	//getters and setters
 	public int getManaCost() {
 		return manaCost;
@@ -33,5 +35,6 @@ public abstract class Card {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	
 }

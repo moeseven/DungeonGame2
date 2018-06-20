@@ -34,5 +34,10 @@ public class BasicAttack extends Card{
 		}
 		return 1;
 	}
+	@Override
+	public boolean isFriendly() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

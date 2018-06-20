@@ -101,12 +101,25 @@ public class Fight {
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
 						//monster chooses random target here TODO make sure it attacks only targets in range!
-						turnOrder.get(turnOrderCounter).setTarget(heroes.get((int) (Math.random()*(heroes.size()-1.0))));//choose target for attacks
+						
 					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
-					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
-					    		i=i-1;
-					    	}
+					    	int range=turnOrder.get(turnOrderCounter).getHand().get(i).rangeOfCard(turnOrder.get(turnOrderCounter));
+					    	int eligibleTargets=Math.min(range-monsters.indexOf(turnOrder.get(turnOrderCounter)),heroes.size());
+					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).isFriendly()) {
+					    		turnOrder.get(turnOrderCounter).setTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
+					    		if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
+						    		i=i-1;
+						    	}
+					    	}else {
+					    		if(eligibleTargets>=0) {
+						    		turnOrder.get(turnOrderCounter).setTarget(heroes.get(Math.min((int) (Math.random()*(eligibleTargets+0.0)),heroes.size()-1)));//choose target for attacks
+							    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
+							    		i=i-1;
+							    	}
+						    	}
+					    	}					    					    	
 					    }
+					    //
 					    nextTurn();
 					}else {
 						this.game.getPlayer().setSelectedHero(turnOrder.get(turnOrderCounter));
@@ -119,13 +132,18 @@ public class Fight {
 		//TODO
 	}
 	public boolean isFightOver() {
-		int alive=0;
+		int monstersAlive=0,heroesAlive=0;
 		for (Hero m: monsters) {
 			if(!m.isDead()){
-				alive+=1;
+				monstersAlive+=1;
 			}
 		}
-		if(alive>0) {
+		for (Hero h: heroes) {
+			if(!h.isDead()){
+				heroesAlive+=1;
+			}
+		}
+		if(monstersAlive>0&&heroesAlive>0) {
 			return false;
 		}else {
 			return true;

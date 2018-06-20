@@ -44,6 +44,16 @@ public Room getNextRoom() {
 }
 public void enterNextRoom() {
 	room=getNextRoom();
+	//check here if all heroes are dead
+	int deadCount=0;
+	for(int i=0; i<this.getPlayer().getHeroes().size();i++) {
+		if(getPlayer().getHeroes().get(i).isDead()) {
+			deadCount+=1;
+		}
+	}
+	if(deadCount==getPlayer().getHeroes().size()) {
+		//TODO return to town here -- Quest over!
+	}
 	room.enterRoom(this);
 	System.out.println("roomNr: "+roomChain.indexOf(room));
 }

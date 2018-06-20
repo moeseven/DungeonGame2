@@ -41,5 +41,10 @@ public class Cleave extends Card{
 		// TODO Auto-generated method stub
 		return 8;
 	}
+	@Override
+	public boolean isFriendly() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

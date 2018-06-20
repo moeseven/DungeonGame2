@@ -23,6 +23,11 @@ public class Block extends Card{
 	@Override
 	public int rangeOfCard(Hero hero) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 10;
+	}
+	@Override
+	public boolean isFriendly() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

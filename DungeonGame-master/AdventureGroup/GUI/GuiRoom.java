@@ -1,23 +1,16 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import game.Room;
-import game.RoomLibrary.GoblinRoom1;
-import game.RoomLibrary.Town;
 
 public class GuiRoom extends JPanel{
 	private RoomWindow rw;
 	private JPanel jp_buttons;
 	private JPanel jp_south;
 	private JPanel jp_north;
-	private JButton buttonLeaveRoom;
-	private JButton buttonInventory;
 	public GuiRoom(RoomWindow rw) {
 		this.rw=rw;
 		setLayout(new BorderLayout());
@@ -42,6 +35,5 @@ public class GuiRoom extends JPanel{
 		jp_north.add(new RoomInteractionComponent(rw));
 		add(jp_north, BorderLayout.NORTH);
 	}
-
 
 }
