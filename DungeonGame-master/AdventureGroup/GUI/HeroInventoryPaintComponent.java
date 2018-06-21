@@ -106,7 +106,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub	
 					caption.removeFirst();
-					caption.addFirst("gold: "+gw.getGame().getPlayer().getSelectedHero().getGold());					
+					caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());					
 				}		
 			});
 			//head

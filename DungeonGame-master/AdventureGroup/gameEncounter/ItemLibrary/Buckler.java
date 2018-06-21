@@ -11,6 +11,7 @@ public class Buckler extends ItemHand2{
 	public Buckler() {
 		super();
 		name="buckler";
+		setGoldValue(120);
 		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=8;
 		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=2;
 	}

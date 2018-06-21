@@ -23,6 +23,7 @@ public class RoomButtonComponent extends JComponent{
 		private RoomWindow rw;
 		private JButton buttonLeaveRoom;
 		private JButton buttonInventory;
+		private JButton buttonMove;
 		public RoomButtonComponent(RoomWindow rw){
 			this.rw=rw;
 			this.setLayout(new FlowLayout());
@@ -30,8 +31,12 @@ public class RoomButtonComponent extends JComponent{
 			buttonLeaveRoom.addMouseListener(new ml());
 			buttonInventory=new JButton("inventory");
 			buttonInventory.addMouseListener(new mouseListenerInventory());
+			buttonMove=new JButton("move hero to front");
+			buttonMove.addMouseListener(new mHTF());
+			this.add(buttonMove);
 			this.add(buttonInventory);
 			this.add(buttonLeaveRoom);
+			
 			setVisible(true);
 			
 		}
@@ -51,6 +56,15 @@ public class RoomButtonComponent extends JComponent{
 					rw.setUpFightWindow();
 					rw.setVisible(false);
 				}
+			}
+		}
+		private class mHTF extends MouseAdapter{
+			public void mouseClicked(MouseEvent e){
+				//move Hero to front
+				Hero hero= rw.getGame().getPlayer().getSelectedHero();
+				rw.getGame().getPlayer().getHeroes().remove(rw.getGame().getPlayer().getSelectedHero());
+				rw.getGame().getPlayer().getHeroes().addFirst(hero);
+				rw.getGuiRoom().upadate();
 			}
 		}
 }

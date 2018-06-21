@@ -12,7 +12,7 @@ public class RoomHeroesComponent extends JComponent{
 	public RoomHeroesComponent(RoomWindow rw) {
 		this.rw=rw;
 		this.setLayout(new FlowLayout());
-		for (int i=0;i<rw.getGame().getPlayer().getHeroes().size();i++) {
+		for (int i=rw.getGame().getPlayer().getHeroes().size()-1;i>=0;i--) {
 			add(new HeroRoomComponent(rw,rw.getGame().getPlayer().getHeroes().get(i)));
 		}
 		this.setVisible(true);

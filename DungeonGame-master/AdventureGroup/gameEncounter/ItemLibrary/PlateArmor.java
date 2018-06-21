@@ -11,7 +11,8 @@ public class PlateArmor extends ItemBody{
 	public PlateArmor() {
 		super();
 		name="plate armor";
-		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=9;
+		setGoldValue(400);
+		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=10;
 		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-2;
 	}	
 }

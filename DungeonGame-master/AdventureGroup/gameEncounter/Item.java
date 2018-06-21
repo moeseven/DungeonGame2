@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public abstract class Item {
 	private int weight;
-	private int goldValue;
+	private int goldValue=100;
 	protected int category;
 	protected int requiredStrength=1;
 	protected int requiredDexterity=1;

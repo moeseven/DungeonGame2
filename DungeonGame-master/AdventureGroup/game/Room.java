@@ -2,11 +2,14 @@ package game;
 
 import java.util.LinkedList;
 
+import game.RoomInteractionLibrary.Shop;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 
 public abstract class Room {
 	protected boolean hasFight;
+	protected boolean shopOpen;
+	protected Shop shop;
 	protected Fight fight;
 	protected boolean readyToLeave;
 	protected LinkedList<Hero> heroes;
@@ -36,6 +39,18 @@ public abstract class Room {
 	}
 	public void setInteractions(LinkedList<RoomInteraction> interactions) {
 		this.interactions = interactions;
+	}
+	public boolean isShopOpen() {
+		return shopOpen;
+	}
+	public void setShopOpen(boolean shopOpen) {
+		this.shopOpen = shopOpen;
+	}
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 	
 }

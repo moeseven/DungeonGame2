@@ -170,7 +170,7 @@ public class Hero {
 	}
 	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
-		looter.setGold(looter.getGold()+gold); //!!! gold has to go to the player
+		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
 		System.out.println(name+" got looted");
 	}
 	public void discardHand() {
