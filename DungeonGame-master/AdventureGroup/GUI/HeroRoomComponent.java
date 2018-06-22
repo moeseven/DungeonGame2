@@ -43,8 +43,7 @@ public class HeroRoomComponent extends JComponent{
 					//rw.getGame().getPlayer().getSelectedHero().setTarget(hero);
 				}
 			}
-			rw.revalidate();
-			rw.repaint();
+			rw.getGuiRoom().upadate();
 		} 
 	}
 	protected void paintComponent(Graphics g){

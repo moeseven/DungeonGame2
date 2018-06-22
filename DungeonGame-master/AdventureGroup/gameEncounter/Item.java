@@ -1,8 +1,9 @@
 package gameEncounter;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public abstract class Item {
+public abstract class Item implements Serializable{
 	private int weight;
 	private int goldValue=100;
 	protected int category;
@@ -12,7 +13,7 @@ public abstract class Item {
 	protected int requiredVitality=1;
 	protected ModableHeroStats stats;
 	protected LinkedList<String> description;
-	protected String name;
+	protected String name="";
 	
 	public Item() {
 		super();

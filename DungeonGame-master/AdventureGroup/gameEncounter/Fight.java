@@ -1,5 +1,6 @@
 package gameEncounter;
 
+import java.io.Serializable;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -7,7 +8,7 @@ import java.util.LinkedList;
 import game.Game;
 import game.RoomInteractionLibrary.StandardCorpse;
 
-public class Fight {
+public class Fight implements Serializable{
 	private Game game;
 	private LinkedList<Hero> turnOrder;
 	private LinkedList<Hero> monsters;
@@ -81,6 +82,8 @@ public class Fight {
 		for(int i=0; i<heroes.size();i++) {
 			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
 				game.getRoom().getInteractions().add(new StandardCorpse(heroes.get(i))); //generate corpses
+				//add items to corpse
+				
 				dead.add(heroes.get(i));
 			}	
 		}

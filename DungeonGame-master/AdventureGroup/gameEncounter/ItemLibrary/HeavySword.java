@@ -11,7 +11,7 @@ public class HeavySword extends ItemBiHand{
 		super();
 		name="heavy sword";
 		setGoldValue(175);
-		this.baseDamage=18;
+		this.baseDamage=12;
 		this.damageRange=15;
 		this.facStr=0.1;
 		this.weaponRange=3;

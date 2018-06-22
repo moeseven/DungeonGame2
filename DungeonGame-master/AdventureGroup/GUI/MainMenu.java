@@ -29,24 +29,25 @@ public class MainMenu extends JFrame{
 	private Game game;
 	protected StatsWindow gw;
 	protected RoomWindow rw;
+	protected MainMenu mm;
 	public MainMenu(){
 		this.setTitle("Menu");
 		setSize(650,500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		
+		mm=this;
 		jp01= new JPanel();
 		buttonSaveGame= new JButton("Save");
 		buttonSaveGame.addMouseListener(new ButtonSaveUserListener());
 		buttonLoadGame= new JButton("Load");
 		buttonLoadGame.addMouseListener(new ButtonLoadUserListener());
-		buttonStart=new JButton("Start");
+		buttonStart=new JButton("Play");
 		buttonStart.addMouseListener(new ButtonStartListener());
 		buttonCharacterBuilder= new JButton("Charakter Builder");
 		buttonCharacterBuilder.addMouseListener(new ButtonBuildCharacterListener());
 		jp01.add(buttonStart);
-		jp01.add(buttonCharacterBuilder);
+		//jp01.add(buttonCharacterBuilder); integrated in start of game
 		jp01.add(buttonSaveGame);
 		jp01.add(buttonLoadGame);
 		add(jp01);
@@ -54,14 +55,20 @@ public class MainMenu extends JFrame{
 	}
 	private class ButtonStartListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			game.getPlayer().setSelectedHero(game.getPlayer().getHeroes().getFirst());
-			game.enterRoom(game.getRoom());			
-			rw=new RoomWindow(game);
+			if(game.getPlayer().getHeroes().size()>0) {
+				game.getPlayer().setSelectedHero(game.getPlayer().getHeroes().getFirst());
+				game.enterRoom(game.getRoom());			
+				rw=new RoomWindow(game,mm);
+				
+			}else {
+				new FrameCharacterBuilder(new CharacterBuilder(game),mm);
+			}
+			mm.setVisible(false);
 		} 
 	}
 	private class ButtonBuildCharacterListener extends MouseAdapter{
 		public void mouseClicked(MouseEvent e){
-			new FrameCharacterBuilder(new CharacterBuilder(game));
+			new FrameCharacterBuilder(new CharacterBuilder(game),mm);
 		} 
 	}
 	private class ButtonSaveUserListener extends MouseAdapter{

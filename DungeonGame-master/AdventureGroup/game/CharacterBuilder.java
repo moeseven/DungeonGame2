@@ -19,6 +19,7 @@ public class CharacterBuilder {
 		charClasses.add(new TypeThief());
 		charClasses.add(new TypeMage());
 		charClasses.add(new TypeCleric());
+		charClasses.add(new TypeArcher());
 		charRaces.add(new RaceHuman());
 		charRaces.add(new RaceDwarf());
 		charRaces.add(new RaceHalfling());
@@ -37,7 +38,7 @@ public class CharacterBuilder {
 	}
 	public void createHero(String name) {
 		hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
-		game.getPlayer().getHeroes().add(hero);
+		game.getPlayer().addHero(hero);
 	}
 	public LinkedList<CharacterClass> getCharClasses() {
 		return charClasses;
@@ -62,6 +63,12 @@ public class CharacterBuilder {
 	}
 	public void setHero(Hero hero) {
 		this.hero = hero;
+	}
+	public Game getGame() {
+		return game;
+	}
+	public void setGame(Game game) {
+		this.game = game;
 	}
 	
 //classes: warrior, thief, cleric, mage

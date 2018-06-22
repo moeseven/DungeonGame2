@@ -17,9 +17,13 @@ public class FrameCharacterBuilder extends JFrame{
 	private JButton buttonNextClass;
 	private JButton buttonCreateHero;
 	private CharacterBuilder cb;
+	protected FrameCharacterBuilder fcb;
 	private CharcterBuilderInfoComponent cbi;
-	public FrameCharacterBuilder(CharacterBuilder cb) {
+	protected MainMenu mainMenu;
+	public FrameCharacterBuilder(CharacterBuilder cb, MainMenu mm) {
 		this.cb=cb;
+		mainMenu=mm;
+		fcb=this;
 		this.setTitle("character builder");
 		cbi=new CharcterBuilderInfoComponent(this);
 		setSize(650,500);
@@ -62,6 +66,9 @@ public class FrameCharacterBuilder extends JFrame{
 		public void mouseClicked(MouseEvent e){
 			//TODO set up game window and start game
 			cb.createHero(cbi.getTf().getText());
+			fcb.setVisible(false);			
+			cb.getGame().enterRoom(cb.getGame().getRoom());	
+			mainMenu.rw=new RoomWindow(cb.getGame(),mainMenu);
 		} 
 	}
 	public CharacterBuilder getCb() {

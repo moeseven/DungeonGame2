@@ -1,18 +1,23 @@
 package gameEncounter;
 
-public class Equipment {
+import java.io.Serializable;
+import java.util.LinkedList;
+
+public class Equipment implements Serializable{
 	private Hero hero;
+	
 	private Item hand1=null;
 	private Item hand2=null;
 	private Item body=null;
 	private Item head=null;
-	//1: Hand1  //2: Hand2  //3: BiHand //4: Body //5: Head
+	//1: Hand1  //2: Hand2  //3: BiHand //4: Body //5: Head //0: Consumable
 	public Equipment(Hero hero) {
 		this.hero=hero;
 	}
 	public boolean equipItem(Item item) {
 		boolean success=true;
 		switch (item.getCategory()) {
+		case 0:  consume(item);
         case 1:  equipHand1(item);
         case 2:  equipHand2(item);
         case 3:  equipBiHand(item);
@@ -22,6 +27,7 @@ public class Equipment {
 		}
 		return success;
 	}
+
 	public boolean unequipItem(Item item) {
 		boolean success=true;
 		switch (item.getCategory()) {
@@ -33,6 +39,29 @@ public class Equipment {
         default: success=false;
 		}
 		return success;
+	}
+	public LinkedList<Item> getAllEquippedItems(){
+		LinkedList<Item> allItems=new LinkedList<Item>();
+		if(hand1!=null) {
+			allItems.add(hand1);
+		}		
+		if(hand1!=hand2&&hand2!=null) {
+			allItems.add(hand2);
+		}
+		if(head!=null) {
+			allItems.add(head);
+		}
+		if(body!=null) {
+			allItems.add(body);
+		}		
+		return allItems;
+	}
+	private void consume(Item item) {
+		if(item.getCategory()==0&&hero.getInventory().contains(item)) {
+			item.mod(hero);
+			hero.getInventory().remove(item);
+		}	
+		
 	}
 	public void equipHand1(Item item) {
 		if(item.getCategory()==1) {

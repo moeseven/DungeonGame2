@@ -17,9 +17,7 @@ public class TrapRoom extends Room{
 	@Override
 	public void enterRoom(Game game) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).takeDamage(game.getPlayer().getHeroes().get(i), 9);
-		}		
+		
 	}
 
 }

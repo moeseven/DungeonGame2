@@ -1,5 +1,6 @@
 package gameEncounter;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -7,7 +8,7 @@ import game.CharacterClass;
 import game.CharacterRace;
 import game.Player;
 
-public class Hero {
+public class Hero implements Serializable{
 
 	private LinkedList<Item> inventory;
 	private Equipment equipment;
@@ -37,10 +38,17 @@ public class Hero {
 	protected int manaPower;
 	public int armor;
 	public int accuracy;//vs dodge
-	public int dodge;//TODO
+	public int dodge;
 	protected int attackSkill;// vs block skill
 	protected int blockSkill;
-	//protected int maxHp;
+	protected int spellPower;//vs spell resist
+	protected int spellResist;
+	//resistance
+	protected int resistFire;
+	protected int resistCold;
+	protected int resistPoison;	
+	protected int resistBleed;
+	protected int resistStun;
 	protected int baseHp;
 	protected int strength;
 	protected int vitality;
@@ -57,11 +65,16 @@ public class Hero {
 	//
 	public Hero(String name,Player player, CharacterRace charRace,CharacterClass charClass){		
 		//order is important here
+		basicStats();
 		this.player=player;
 		this.charRace=charRace;
 		this.charClass=charClass;
 		equipment= new Equipment(this);	
-		this.inventory=player.getInventory();
+		if(player!=null) {
+			this.inventory=player.getInventory();
+		}else {
+			inventory=new LinkedList<Item>();
+		}		
 		deck=new Deck();		
 		charRace.modifyHero(this);
 		charClass.modifyHero(this);
@@ -71,9 +84,36 @@ public class Hero {
 		stats=new ModableHeroStats();
 		this.initialize();
 	}
+	private void basicStats() {
+		//set here basic values for stats
+		//attributes		
+		setStrength(10);
+		setDexterity(10);
+		setIntelligence(10);
+		setVitality(10);
+		//base stats	
+		setAttackSkill(10);
+		setBlockSkill(10);
+		setAccuracy(10);
+		setDodge(10);
+		setSpellPower(10);
+		setSpellResist(10);
+		setBaseHp(100);
+		setSpeed(10);
+		//other
+		resistFire=0;
+		resistPoison=0;
+		resistCold=0;
+		resistBleed=0;
+		resistStun=0;
+		setArmor(0);
+		setManaPower(2);
+		setDraw(3);		
+		setExperienceValue(10);
+	}
 	public void initialize() {		
 		isDead=false;
-		isReady=false;			
+		isReady=false;	
 		hp=computeMaxHp();
 	}
 	//functions
@@ -106,6 +146,14 @@ public class Hero {
 	}
 	public void block(int block) {
 		this.block+=block;
+	}
+	//Cast spell
+	public boolean castSpellOnHero(Hero hero) {
+		if(GameEquations.resist(this, hero)) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	//Attack stages dodge-block-armor-hp
 	public boolean attackHero(Hero hero) {
@@ -171,6 +219,7 @@ public class Hero {
 	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
 		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
+		looter.getInventory().addAll(this.equipment.getAllEquippedItems());
 		System.out.println(name+" got looted");
 	}
 	public void discardHand() {
@@ -199,7 +248,7 @@ public class Hero {
 	}
 	//compute functions
 	public int computeAccuracy() {
-		return GameEquations.accuracyCalc(accuracy, dexterity);
+		return GameEquations.dodgeCalc(accuracy, dexterity);
 	}
 	public int computeDodge() {
 		return GameEquations.dodgeCalc(dodge, dexterity);
@@ -210,13 +259,20 @@ public class Hero {
 	public int computeBlockSkill() {
 		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
 	}
+	public int computeSpellPower() {
+		return GameEquations.spellPowerCalc(spellPower, intelligence);
+	}
+	public int computeSpellResist() {
+		return GameEquations.spellPowerCalc(spellResist, intelligence);
+	}
 	public int computeMaxHp() {
 		return GameEquations.maxHealthCalc(baseHp, vitality);
 	}
 	public int computeSpeed() {
 		return GameEquations.speedCalc(speed, dexterity);
 	}
-		
+	
+	
 	public int rollSpeed() {
 		currentSpeed=GameEquations.speedRoll(computeSpeed());
 		return currentSpeed;
@@ -445,6 +501,18 @@ public class Hero {
 	}
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	public int getSpellPower() {
+		return spellPower;
+	}
+	public void setSpellPower(int spellPower) {
+		this.spellPower = spellPower;
+	}
+	public int getSpellResist() {
+		return spellResist;
+	}
+	public void setSpellResist(int spellResist) {
+		this.spellResist = spellResist;
 	}
 
 

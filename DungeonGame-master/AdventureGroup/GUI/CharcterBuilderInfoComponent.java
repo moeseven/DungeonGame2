@@ -22,8 +22,8 @@ public class CharcterBuilderInfoComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.drawString("create your starting hero", 100, 10);
-		g.drawString("hero class: "+fcb.getCb().getCharClass().getInfo(), 10, 50);
-		g.drawString("hero race : "+fcb.getCb().getCharRace().getInfo(), 10, 64);
+//		g.drawString("hero class: "+fcb.getCb().getCharClass().getInfo(), 10, 50);
+//		g.drawString("hero race : "+fcb.getCb().getCharRace().getInfo(), 10, 64);
 		g.drawString(fcb.getCb().getHero().getName()+" ("+fcb.getCb().getHero().getCharRace().getName()+", "+fcb.getCb().getHero().getCharClass().getName()+")", 10, 80);
 		g.drawString("HP: "+fcb.getCb().getHero().getHp()+"/"+fcb.getCb().getHero().computeMaxHp(), 10, 80+1*11);
 		if(fcb.getCb().getHero().getEquipment().getHand1() instanceof Weapon) {
@@ -32,7 +32,7 @@ public class CharcterBuilderInfoComponent extends JComponent{
 		}else {
 			g.drawString("damage: "+GameEquations.FistDamageToString(fcb.getCb().getHero().getStrength(), fcb.getCb().getHero().getDexterity()), 10, 80+2*11);
 		}
-		g.drawString("block skill: "+fcb.getCb().getHero().getBlockSkill(), 10, 80+3*11);
+		//g.drawString("block skill: "+fcb.getCb().getHero().getBlockSkill(), 10, 80+3*11);
 		g.drawString("wisdom: "+fcb.getCb().getHero().getDraw(), 10, 80+7*11);
 		g.drawString("mana: "+fcb.getCb().getHero().getManaPower(), 10, 80+5*11);
 		g.drawString("thorns: "+fcb.getCb().getHero().getThorns(), 10, 80+6*11);
@@ -42,6 +42,12 @@ public class CharcterBuilderInfoComponent extends JComponent{
 		g.drawString("intelligence: "+fcb.getCb().getHero().getIntelligence(), 10, 80+10*11);
 		g.drawString("vitality: "+fcb.getCb().getHero().getVitality(), 10, 80+11*11);
 		g.drawString("speed: "+fcb.getCb().getHero().getSpeed(), 10, 80+12*11);
+		g.drawString("attack skill: "+fcb.getCb().getHero().getAttackSkill(), 10, 80+13*11);
+		g.drawString("block skill: "+fcb.getCb().getHero().getBlockSkill(), 10, 80+14*11);
+		g.drawString("accuracy: "+fcb.getCb().getHero().getAccuracy(), 10, 80+15*11);
+		g.drawString("dodge: "+fcb.getCb().getHero().getDodge(), 10, 80+16*11);
+		g.drawString("spell power: "+fcb.getCb().getHero().getSpellPower(), 10, 80+17*11);
+		g.drawString("spell resist: "+fcb.getCb().getHero().getSpellResist(), 10, 80+18*11);
 	}
 	public JTextField getTf() {
 		return tf;

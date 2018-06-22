@@ -1,6 +1,8 @@
 package gameEncounter;
 
-public abstract class Card {
+import java.io.Serializable;
+
+public abstract class Card implements Serializable{
 	protected int manaCost;
 	private String type;
 	protected String name;
@@ -11,10 +13,10 @@ public abstract class Card {
 	public boolean playCard(Hero self){
 		
 		if(self.getMana()>=manaCost&&self.getHand().contains(this)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
-			self.setMana(self.getMana()-manaCost);
-			this.applyEffect(self);
+			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
+			this.applyEffect(self);
 			return true;
 		}else {
 			return false;

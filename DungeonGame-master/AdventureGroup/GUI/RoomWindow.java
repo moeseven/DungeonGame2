@@ -11,8 +11,10 @@ public class RoomWindow extends JFrame{
 	private Game game;
 	private StatsWindow sw;
 	private FightWindow fw;
+	private MainMenu mm;
 	private GuiRoom guiRoom;
-	public RoomWindow(Game game) {
+	public RoomWindow(Game game,MainMenu mm) {
+		this.mm=mm;
 		setTitle("room");
 		this.game=game;		
 		this.setSize(1300, 650);
@@ -39,6 +41,10 @@ public class RoomWindow extends JFrame{
 		}		
 		sw.setVisible(true);
 		this.setVisible(false);
+	}
+	public void openMenu() {
+		this.setVisible(false);
+		mm.setVisible(true);
 	}
 	public StatsWindow getSw() {
 		return sw;

@@ -1,15 +1,19 @@
 package game;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import game.RoomInteractionLibrary.Shop;
+import game.RoomInteractionLibrary.Tavern;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 
-public abstract class Room {
+public abstract class Room implements Serializable{
 	protected boolean hasFight;
 	protected boolean shopOpen;
+	protected boolean tavernOpen;
 	protected Shop shop;
+	protected Tavern tavern;
 	protected Fight fight;
 	protected boolean readyToLeave;
 	protected LinkedList<Hero> heroes;
@@ -19,6 +23,12 @@ public abstract class Room {
 	}
 	public void initialize() {
 		readyToLeave=false;
+	}
+	public void prepareRoomAndEnter(Game game) {
+		for(int i=0; i<interactions.size();i++) {
+			interactions.get(i).onEnter(game);
+		}
+		enterRoom(game);
 	}
 	public abstract void enterRoom(Game game);
 	//here the room is set up//food consumption//torch level
@@ -51,6 +61,18 @@ public abstract class Room {
 	}
 	public void setShop(Shop shop) {
 		this.shop = shop;
+	}
+	public boolean isTavernOpen() {
+		return tavernOpen;
+	}
+	public void setTavernOpen(boolean tavernOpen) {
+		this.tavernOpen = tavernOpen;
+	}
+	public Tavern getTavern() {
+		return tavern;
+	}
+	public void setTavern(Tavern tavern) {
+		this.tavern = tavern;
 	}
 	
 }

@@ -2,6 +2,7 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.CardLibrary.SleepCharm;
 import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeMage extends CharacterClass{
@@ -9,15 +10,13 @@ public class TypeMage extends CharacterClass{
 	public TypeMage() {
 		name="mage";
 		items.add(new RustyBlade());
+		cards.add(new SleepCharm());
 	}
 
 	public void modifyHero(Hero hero) {
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);
-		hero.setIntelligence(hero.getIntelligence()+4);
-		hero.setVitality(hero.getVitality()-1);
-		hero.setStrength(hero.getStrength()-2);
-		
+		hero.setSpellPower(hero.getSpellPower()+2);		
 	}
 
 	@Override

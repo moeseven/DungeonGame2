@@ -14,6 +14,9 @@ public abstract class CharacterClass extends CharacterType{
 			hero.getInventory().add(items.get(i));
 			hero.getEquipment().equipItem(items.get(i));
 		}
+		for(int i=0; i<cards.size();i++) {
+			hero.getDeck().addCard(cards.get(i));
+		}
 		hero.setName(hero.getName()+" "+name);
 	}
 

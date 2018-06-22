@@ -16,8 +16,6 @@ public class TypeArcher extends CharacterClass{
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);
 		hero.setAccuracy(hero.getAccuracy()+2);
-		hero.setStrength(hero.getStrength()-1);
-		hero.setVitality(hero.getVitality()-1);
 	}
 
 	@Override

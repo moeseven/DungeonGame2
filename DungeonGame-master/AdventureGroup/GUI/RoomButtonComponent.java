@@ -24,15 +24,19 @@ public class RoomButtonComponent extends JComponent{
 		private JButton buttonLeaveRoom;
 		private JButton buttonInventory;
 		private JButton buttonMove;
+		private JButton buttonMenu;
 		public RoomButtonComponent(RoomWindow rw){
 			this.rw=rw;
 			this.setLayout(new FlowLayout());
-			buttonLeaveRoom=new JButton("leave room");
-			buttonLeaveRoom.addMouseListener(new ml());
+			buttonLeaveRoom=new JButton("leave");
+			buttonLeaveRoom.addMouseListener(new mouselistenerLeave());
 			buttonInventory=new JButton("inventory");
 			buttonInventory.addMouseListener(new mouseListenerInventory());
 			buttonMove=new JButton("move hero to front");
 			buttonMove.addMouseListener(new mHTF());
+			buttonMenu=new JButton("menu");
+			buttonMenu.addMouseListener(new mouseListenerMenu());
+			this.add(buttonMenu);
 			this.add(buttonMove);
 			this.add(buttonInventory);
 			this.add(buttonLeaveRoom);
@@ -46,16 +50,26 @@ public class RoomButtonComponent extends JComponent{
 				rw.windowswitch();
 			}
 		}
-		private class ml extends MouseAdapter{
+		private class mouselistenerLeave extends MouseAdapter{
 			public void mouseClicked(MouseEvent e){
-				//leave room			
-				rw.getGame().enterNextRoom();
-				rw.getGuiRoom().upadate();
-				rw.setVisible(true);
-				if(rw.getGame().getRoom().isHasFight()){
-					rw.setUpFightWindow();
-					rw.setVisible(false);
-				}
+				//leave room
+				if(rw.getGame().getPlayer().getHeroes().size()>0) {
+					if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()) {
+						rw.getGame().getRoom().setShopOpen(false);
+						rw.getGame().getRoom().setTavernOpen(false);
+						rw.getGuiRoom().upadate();
+					}else {
+						rw.getGame().enterNextRoom();
+						rw.getGuiRoom().upadate();
+						rw.setVisible(true);
+						if(rw.getGame().getRoom().isHasFight()){
+							rw.setUpFightWindow();
+							rw.setVisible(false);
+						}
+					}
+				}else {
+					System.out.println("you dont have any heroes!");
+				}								
 			}
 		}
 		private class mHTF extends MouseAdapter{
@@ -65,6 +79,12 @@ public class RoomButtonComponent extends JComponent{
 				rw.getGame().getPlayer().getHeroes().remove(rw.getGame().getPlayer().getSelectedHero());
 				rw.getGame().getPlayer().getHeroes().addFirst(hero);
 				rw.getGuiRoom().upadate();
+			}
+		}
+		private class mouseListenerMenu extends MouseAdapter{
+			public void mouseClicked(MouseEvent e){
+				//open menu 
+				rw.openMenu();
 			}
 		}
 }

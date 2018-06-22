@@ -1,11 +1,12 @@
 package game;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 
-public class Game {
+public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
 private Room room;
@@ -19,7 +20,7 @@ public Game(LinkedList<Room> roomChain) {
 }
 public void enterRoom(Room room) {
 	this.room=room;
-	room.enterRoom(this);
+	room.prepareRoomAndEnter(this);
 }
 //getters and setters
 public Room getRoom() {
@@ -54,7 +55,7 @@ public void enterNextRoom() {
 	if(deadCount==getPlayer().getHeroes().size()) {
 		//TODO return to town here -- Quest over!
 	}
-	room.enterRoom(this);
+	room.prepareRoomAndEnter(this);
 	System.out.println("roomNr: "+roomChain.indexOf(room));
 }
 

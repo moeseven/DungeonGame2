@@ -2,10 +2,12 @@ package game.RoomInteractionLibrary;
 
 import java.util.LinkedList;
 
+import game.Game;
 import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ItemLibrary.*;
+import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Shop extends RoomInteraction{
 	private LinkedList<Item> items;
@@ -18,11 +20,20 @@ public class Shop extends RoomInteraction{
 		items.add(new Speer());
 		items.add(new ShortBow());
 		items.add(new ArmorThinLeather());
+		items.add(new ShortSword());
+		items.add(new Buckler());
+		items.add(new CrownOfThorns());
+		items.add(new HeavySword());
+		items.add(new PlateArmor());
+		items.add(new ArmorThinLeather());
+		items.add(new HealingPotion());
+		items.add(new HealingPotion());
+		items.add(new HealingPotion());
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void onEnter() {
+	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
 		
 	}

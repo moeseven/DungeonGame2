@@ -13,7 +13,6 @@ import game.characterTypeLibrary.*;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ItemLibrary.*;
-import sun.security.util.LegacyAlgorithmConstraints;
 
 public class Main {
 	public static MainMenu mm;
@@ -24,6 +23,9 @@ public class Main {
 	public static Game game;
 	public static void main(String[] args) {
 		heroes= new LinkedList<Hero>();
+		heroes.add(new Hero("Irbal", null,new RaceElf(), new TypeArcher()));
+		heroes.add(new Hero("Mandor",null,new RaceHuman(),new TypeWarrior()));		
+		heroes.add(new Hero("Filt",null,new RaceHalfling(),new TypeThief()));
 		roomChain=new LinkedList<Room>();
 		roomChain.add(new Town());
 		roomChain.add(new TrapRoom());
@@ -35,18 +37,10 @@ public class Main {
 		roomChain.add(new GoblinRoom1());
 		game = new Game(roomChain);
 		player = new Player(game);
-		game.setPlayer(player);
-		items= new LinkedList<Item>();
-		items.add(new ShortSword());
-		items.add(new Buckler());
-		items.add(new CrownOfThorns());
-		items.add(new HeavySword());
-		items.add(new PlateArmor());
-		items.add(new ArmorThinLeather());
-		player.setInventory(items);
-		heroes.add(new Hero("Ulmer",player,new RaceHuman(),new TypeWarrior()));		
-		heroes.add(new Hero("Ülfi",player,new RaceHalfling(),new TypeWarrior()));
-		player.setHeroes(heroes);
+		game.setPlayer(player);		
+		player.setAvailableHeroes(heroes);
+		player.setGold(200);
+
 		mm=new MainMenu();
 		mm.setGame(game);
 		//StatsWindow gw=new StatsWindow(game);

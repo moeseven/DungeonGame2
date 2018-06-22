@@ -4,6 +4,7 @@ package game.RoomLibrary;
 import game.Game;
 import game.Room;
 import game.RoomInteractionLibrary.Shop;
+import game.RoomInteractionLibrary.Tavern;
 import game.RoomInteractionLibrary.Well;
 
 public class Town extends Room{
@@ -12,6 +13,7 @@ public class Town extends Room{
 		// TODO Auto-generated constructor stub
 		super();
 		getInteractions().add(new Shop());
+		getInteractions().add(new Tavern());
 	}
 
 	@Override

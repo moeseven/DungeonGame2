@@ -2,6 +2,7 @@ package game.RoomInteractionLibrary;
 
 import java.util.LinkedList;
 
+import game.Game;
 import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
@@ -18,7 +19,7 @@ public class StandardCorpse extends RoomInteraction{
 	}
 
 	@Override
-	public void onEnter() {
+	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
 		
 	}

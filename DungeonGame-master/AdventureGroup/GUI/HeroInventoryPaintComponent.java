@@ -16,6 +16,7 @@ import javax.swing.border.LineBorder;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.ItemLibrary.usables.ItemConsumable;
 import tools.ClickableRectangle;
 import tools.RectangleClicker;
 
@@ -71,7 +72,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 					}					
 				}		
 			});
-			//equip/unequip
+			//equip/unequip/use
 			rc.addRect(new ClickableRectangle("equip",210,10,55,20) {
 				@Override
 				public void onClick() {
@@ -83,17 +84,27 @@ public class HeroInventoryPaintComponent extends JComponent{
 							gw.getGame().getPlayer().getSelectedHero().getEquipment().unequipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
 						}				
 					}
+					if(gw.getGame().getPlayer().getInventory().size()>0) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					}
+					
 				}
 				@Override
 				public void updateCaption() {
 					// TODO Auto-generated method stub
-					if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
-						caption.removeFirst();						
-						caption.addFirst(name);
-					}else {
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem() instanceof ItemConsumable) {
 						caption.removeFirst();
-						caption.addFirst("unequip");
-					}					
+						caption.add("use");
+					}else {
+						if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+							caption.removeFirst();						
+							caption.addFirst(name);
+						}else {
+							caption.removeFirst();
+							caption.addFirst("unequip");
+						}
+					}
+										
 				}		
 			});
 			//gold

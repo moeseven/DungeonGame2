@@ -1,8 +1,9 @@
 package gameEncounter;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Deck {
+public class Deck implements Serializable{
 	private LinkedList<Card> cards;
 	public Deck() {
 		// TODO Auto-generated constructor stub

@@ -1,6 +1,8 @@
 package gameEncounter;
 
 public class GameEquations {
+	//all the attribut bonus calculation SUBJECT to CHANGE
+	
 	//speed calculation from dexterity and base speed
 	public static int speedCalc(int baseSpeed, int dexterity) {
 		return (int) (baseSpeed*(1+dexterity/20.0));
@@ -10,19 +12,28 @@ public class GameEquations {
 	public static int maxHealthCalc(int baseHealth, int vitality) {
 		return (int) (baseHealth*(1+vitality/20.0));
 	}
-	//dodge calculation from dexterity
+	//dodge calculation from dexterity (same as accuracy calc)
 	public static int dodgeCalc(int baseDodge, int dexterity) {
 		return (int) (baseDodge*(1+dexterity/20.0));
-	}
-	//accuracy calculation from dexterity
-	public static int accuracyCalc(int baseAccuracy, int dexterity) {
-		return (int) (baseAccuracy*(1+dexterity/20.0));
 	}
 	//blockskill and attackskill calculation from str/dex
 	public static int blockAttackSkillCalc(int baseBlockAttackSkill, int str, int dex) {
 		return (int) (baseBlockAttackSkill*(1+dex/40.0+str/30.0));
 	}
+	//spellpower calculation from intelligence
+	public static int spellPowerCalc(int baseSpellPower, int intelligence) {
+		return (int) (baseSpellPower*(1+intelligence/20));
+	}
 	
+	//spell resist calculation
+	public static boolean resist(Hero caster, Hero target) {
+		if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
+			System.out.println(target.getName()+" resisted a Spell!");
+			return true;			
+		}else {
+			return false;
+		}
+	}
 	
 	//dodge chance calculation
 	public static boolean dodge(Hero attacker, Hero attacked) {
@@ -65,7 +76,7 @@ public class GameEquations {
 		return ""+(int)((1*(1+0.5*strength+0.1*dexterity)))+"-"+(int)(3*(1+0.5*strength+0.1*dexterity));
 	}
 	
-	//requirement penalties
+	//requirement penalties (maybe remove this and just don't allow equipping if requirement is not matched)
 	public static double RequirementsPenaltyWeapon(int strength, int requiredStrength) {
 		double str=strength/(double)requiredStrength;
 		return Math.min(1,str);
