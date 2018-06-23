@@ -83,3 +83,6 @@
 /GuiRoom$TavernInterface$MyMouseListener.class
 /GuiRoom$TavernInterface.class
 /RoomButtonComponent$mouselistenerLeave.class
+/CombatComponent$FightBorder.class
+/GuiFight$LogComponent.class
+/LogComponent.class

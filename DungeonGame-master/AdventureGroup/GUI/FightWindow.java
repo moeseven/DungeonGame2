@@ -34,7 +34,6 @@ public class FightWindow extends JFrame{
 		this.game = game;
 	}
 	public void windowswitch() {		
-		//rw=new RoomWindow(game);
 		rw.getGuiRoom().upadate();
 		rw.setVisible(true);
 		this.setVisible(false);

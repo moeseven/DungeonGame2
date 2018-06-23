@@ -17,12 +17,12 @@ public class Equipment implements Serializable{
 	public boolean equipItem(Item item) {
 		boolean success=true;
 		switch (item.getCategory()) {
-		case 0:  consume(item);
-        case 1:  equipHand1(item);
-        case 2:  equipHand2(item);
-        case 3:  equipBiHand(item);
-        case 4:  equipBody(item);
-        case 5:  equipHead(item);
+		case 0:  consume(item);break;
+        case 1:  equipHand1(item);break;
+        case 2:  equipHand2(item);break;
+        case 3:  equipBiHand(item);break;
+        case 4:  equipBody(item);break;
+        case 5:  equipHead(item);break;
         default: success=false;
 		}
 		return success;
@@ -31,12 +31,12 @@ public class Equipment implements Serializable{
 	public boolean unequipItem(Item item) {
 		boolean success=true;
 		switch (item.getCategory()) {
-        case 1:  unequipHand1();
-        case 2:  unequipHand2();
-        case 3:  unequipBiHand();
-        case 4:  unequipBody();
-        case 5:  unequipHead();
-        default: success=false;
+        case 1:  unequipHand1();break;
+        case 2:  unequipHand2();break;
+        case 3:  unequipBiHand();break;
+        case 4:  unequipBody();break;
+        case 5:  unequipHead();break;
+        default: success=false;break;
 		}
 		return success;
 	}
@@ -116,20 +116,21 @@ public class Equipment implements Serializable{
 	public void unequipHand1() {
 		if(hand1!=null) {
 			hand1.demod(hero);
-			hero.getInventory().add(hand1);
-		}
-		if(hand1==hand2) {//clean biHand removal
+			hero.getInventory().add(hand1);		
+			if(hand1==hand2) {//clean biHand removal
 			hand2=null;
-		}		
+		}	
+		}
+	
 		hand1=null;
 	}
 	public void unequipHand2() {
 		if(hand2!=null) {
 			hand2.demod(hero);
-			hero.getInventory().add(hand2);
-		}
-		if(hand1==hand2) {//clean biHand removal
-			hand1=null;
+			hero.getInventory().add(hand2);		
+			if(hand1==hand2) {//clean biHand removal
+				hand1=null;
+			}
 		}		
 		hand2=null;
 	}

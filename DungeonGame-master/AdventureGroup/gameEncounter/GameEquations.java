@@ -29,6 +29,7 @@ public class GameEquations {
 	public static boolean resist(Hero caster, Hero target) {
 		if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
 			System.out.println(target.getName()+" resisted a Spell!");
+			caster.getPlayer().getGame().log.addLine(target.getName()+" resisted a Spell!");
 			return true;			
 		}else {
 			return false;
@@ -39,6 +40,7 @@ public class GameEquations {
 	public static boolean dodge(Hero attacker, Hero attacked) {
 		if(Math.random()>1/(1.1+(attacked.computeDodge()-attacker.computeAccuracy())*0.05)) {
 			System.out.println(attacked.getName()+" dodged an attack!");
+			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged an attack!");
 			return true;			
 		}else {
 			return false;
@@ -52,6 +54,7 @@ public class GameEquations {
 			blocker.setBlock(block);
 			if(Math.random()<block/(0.0+block+attacker.computeAttackSkill())) {
 				System.out.println(blocker.getName()+" blocked an attack!");
+				attacker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked an Attack!");
 				return true;
 			}else {
 				return false;
@@ -70,10 +73,10 @@ public class GameEquations {
 	
 	//unarmed fist damage
 	public static int FistDamage(int strength) {
-		return (int) ((1+2*Math.random())*(1+0.5*strength));
+		return (int) ((1+2*Math.random())*(1+0.3*strength));
 	}
 	public static String FistDamageToString(int strength, int dexterity) {
-		return ""+(int)((1*(1+0.5*strength+0.1*dexterity)))+"-"+(int)(3*(1+0.5*strength+0.1*dexterity));
+		return ""+(int)((1*(1+0.3*strength)))+"-"+(int)(3*(1+0.3*strength));
 	}
 	
 	//requirement penalties (maybe remove this and just don't allow equipping if requirement is not matched)

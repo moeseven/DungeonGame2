@@ -20,6 +20,7 @@ public class RoomInteractionComponent extends JComponent{
 		for (int i=0;i<rw.getGame().getRoom().getInteractions().size();i++) {
 			add(new Ri(rw.getGame().getRoom().getInteractions().get(i)));
 		}
+		super.setPreferredSize(new Dimension(600,200));
 		this.setVisible(true);
 	}
 	private class Ri extends JComponent{

@@ -5,14 +5,17 @@ import java.util.LinkedList;
 
 import gameEncounter.Fight;
 import gameEncounter.Hero;
+import tools.MyLog;
 
 public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
+public MyLog log;
 private Room room;
 private LinkedList<Room> roomChain;
 public Game(LinkedList<Room> roomChain) {
 	super();
+	log=new MyLog();
 	this.roomChain=roomChain;
 	room=roomChain.getFirst();
 	player=new Player(this);
@@ -20,6 +23,7 @@ public Game(LinkedList<Room> roomChain) {
 }
 public void enterRoom(Room room) {
 	this.room=room;
+	log=new MyLog();
 	room.prepareRoomAndEnter(this);
 }
 //getters and setters

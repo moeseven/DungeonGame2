@@ -25,6 +25,7 @@ public class Tavern extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		// TODO Auto-generated method stub
 		//setup tavern here
+		hero.getPlayer().getGame().log.addLine("entering tavern");
 		hero.getPlayer().getGame().getRoom().setTavern(this);
 		hero.getPlayer().getGame().getRoom().setTavernOpen(true);
 	}

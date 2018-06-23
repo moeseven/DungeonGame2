@@ -10,6 +10,7 @@ import game.RoomInteractionLibrary.StandardCorpse;
 
 public class Fight implements Serializable{
 	private Game game;
+	private int round=0;
 	private LinkedList<Hero> turnOrder;
 	private LinkedList<Hero> monsters;
 	private LinkedList<Hero> heroes;
@@ -31,7 +32,8 @@ public class Fight implements Serializable{
 		this.newRound();
 	}
 	public void newRound() {
-		System.out.println("new round");
+		round+=1;
+		game.log.addLine("########## ROUND "+round+" ##########");
 		LinkedList<Hero> allFightParticipants;
 		allFightParticipants=new LinkedList<Hero>();
 		turnOrder=new LinkedList<Hero>();
@@ -91,7 +93,9 @@ public class Fight implements Serializable{
 			heroes.remove(dead.get(i));	
 		}
 		if (this.isFightOver()){
-			
+			for(int i=0; i<heroes.size();i++) {
+				heroes.get(i).removeBuffs();
+			}
 		}else {
 			turnOrderCounter+=1;
 			if(turnOrderCounter>=turnOrder.size()) {
@@ -99,8 +103,10 @@ public class Fight implements Serializable{
 			}else {
 				if(turnOrder.get(turnOrderCounter).isDead()) {
 					//don't participate in fight
+					nextTurn();
 				}else {
 					System.out.println(turnOrder.get(turnOrderCounter).getName()+"'s turn");
+					this.getHeroes().getFirst().getPlayer().getGame().log.addLine(turnOrder.get(turnOrderCounter).getName()+"'s turn");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
 						//monster chooses random target here TODO make sure it attacks only targets in range!
@@ -186,6 +192,12 @@ public class Fight implements Serializable{
 	}
 	public void setHeroes(LinkedList<Hero> heroes) {
 		this.heroes = heroes;
+	}
+	public int getRound() {
+		return round;
+	}
+	public void setRound(int round) {
+		this.round = round;
 	}
 	
 }

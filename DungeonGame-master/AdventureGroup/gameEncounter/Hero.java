@@ -3,6 +3,7 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import game.CharacterClass;
 import game.CharacterRace;
@@ -11,6 +12,7 @@ import game.Player;
 public class Hero implements Serializable{
 
 	private LinkedList<Item> inventory;
+	private LinkedList<Buff> buffs;
 	private Equipment equipment;
 	protected String name;
 	protected int gold;
@@ -69,6 +71,7 @@ public class Hero implements Serializable{
 		this.player=player;
 		this.charRace=charRace;
 		this.charClass=charClass;
+		buffs= new LinkedList<Buff>();
 		equipment= new Equipment(this);	
 		if(player!=null) {
 			this.inventory=player.getInventory();
@@ -136,6 +139,7 @@ public class Hero implements Serializable{
 		hand.add(drawPile.removeFirst());
 	}
 	public void turnBegin(){
+		this.buffTick();
 		this.discardHand();
 		this.block=0;
 		this.mana=manaPower;
@@ -145,6 +149,7 @@ public class Hero implements Serializable{
 		this.setSelectedCard(hand.getFirst());
 	}
 	public void block(int block) {
+		player.getGame().log.addLine(name+" blocks for "+block);
 		this.block+=block;
 	}
 	//Cast spell
@@ -198,11 +203,14 @@ public class Hero implements Serializable{
 		this.takeUnreflectableArmorDamage(damagingHero, damage);
 	}
 	public void takeDamage(Hero damagingHero, int damage){
-		this.setHp(hp-damage);
-		if(hp<=0) {
-			hp=0;
-			this.die();
-		}
+		if(damage>0) {
+			player.getGame().log.addLine(damagingHero.getName()+" does "+damage+" to "+name);
+			this.setHp(hp-damage);
+			if(hp<=0) {
+				hp=0;
+				this.die();
+			}
+		}		
 	}
 	public void takeUnreflectableArmorDamage(Hero damagingHero,int damage) {//prevent infinite thorn looping
 		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
@@ -210,6 +218,7 @@ public class Hero implements Serializable{
 	}
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
+		player.getGame().log.addLine(name+ "died!");
 		block=0;
 		this.isDead=true;
 	}
@@ -221,6 +230,7 @@ public class Hero implements Serializable{
 		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
 		looter.getInventory().addAll(this.equipment.getAllEquippedItems());
 		System.out.println(name+" got looted");
+		getPlayer().getGame().log.addLine(name+" got looted");
 	}
 	public void discardHand() {
 		while(hand.size()>0) {
@@ -240,11 +250,34 @@ public class Hero implements Serializable{
 				return true;
 				}else {
 					System.out.println("target out of Range");
+					getPlayer().getGame().log.addLine("target out of Range");
 					return false;
 				}			
 		}else {
 			return true;
 		}					
+	}
+	//Buffs
+	public void buffHero(Buff buff) {
+		buffs.add(buff);
+	}
+	public void removeBuffs() {
+		LinkedList<Buff> debuffing=new LinkedList<Buff>();
+		for(int i=0; i<buffs.size();i++) {
+			debuffing.add(buffs.get(i));
+		}
+		for(int i=0; i<debuffing.size();i++) {
+			debuffing.get(i).removeBuff(this);
+		}
+	}
+	public void buffTick() {
+		LinkedList<Buff> tick=new LinkedList<Buff>();
+		for(int i=0; i<buffs.size();i++) {
+			tick.add(buffs.get(i));
+		}
+		for(int i=0; i<tick.size();i++) {
+			tick.get(i).tick(this);
+		}
 	}
 	//compute functions
 	public int computeAccuracy() {
@@ -514,7 +547,13 @@ public class Hero implements Serializable{
 	public void setSpellResist(int spellResist) {
 		this.spellResist = spellResist;
 	}
-
+	public LinkedList<Buff> getBuffs() {
+		return buffs;
+	}
+	public void setBuffs(LinkedList<Buff> buffs) {
+		this.buffs = buffs;
+	}
+	
 
 	
 }

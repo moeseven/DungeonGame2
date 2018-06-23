@@ -26,9 +26,9 @@ public class Well extends RoomInteraction{
 		if(charges>0) {
 			hero.heal(hero.computeMaxHp()/3);
 			charges+=-1;
-			System.out.println(hero.getName()+" receives a refreshment");
-		}else {
-			System.out.println("the well is empty");
+			hero.getPlayer().getGame().log.addLine(hero.getName()+" receives a refreshment");
+		}else {			
+			hero.getPlayer().getGame().log.addLine("the well is empty");
 		}
 		
 	}

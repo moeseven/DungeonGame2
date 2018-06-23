@@ -9,7 +9,7 @@ import gameEncounter.Item;
 
 public class Player implements Serializable{
 	private Hero selectedHero;
-	private LinkedList<Hero> heroes;
+	protected LinkedList<Hero> heroes;
 	private LinkedList<Item> inventory;
 	private LinkedList<Hero> availableHeroes;
 	private Game game;
@@ -23,6 +23,13 @@ public class Player implements Serializable{
 	}
 	public void addHero(Hero hero) {// do not exeed maximum size
 		if(heroes.size()<4) {
+			for(int a=0; a<heroes.size();a++) {// prevent equal names
+				for(int b=0; b<heroes.size();b++) {
+					if(heroes.get(b).getName().equals(hero.getName())) {
+						hero.setName(hero.getName()+" I");
+					}
+				}
+			}
 			heroes.add(hero);
 			hero.setInventory(inventory);
 			hero.setPlayer(this);

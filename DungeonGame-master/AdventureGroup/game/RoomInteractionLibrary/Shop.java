@@ -42,6 +42,7 @@ public class Shop extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		// TODO Auto-generated method stub
 		//setup shop here
+		hero.getPlayer().getGame().log.addLine("entering shop");
 		hero.getPlayer().getGame().getRoom().setShop(this);
 		hero.getPlayer().getGame().getRoom().setShopOpen(true);
 	}

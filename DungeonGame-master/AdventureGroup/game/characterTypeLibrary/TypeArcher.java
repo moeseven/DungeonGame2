@@ -2,6 +2,7 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.RustyBlade;
 import gameEncounter.ItemLibrary.ShortBow;
 
@@ -9,7 +10,7 @@ public class TypeArcher extends CharacterClass{
 
 	public TypeArcher() {
 		name="archer";
-		items.add(new ShortBow());
+		items.add(new GoblinBow());
 	}
 
 	public void modifyHero(Hero hero) {

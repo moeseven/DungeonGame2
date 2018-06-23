@@ -28,29 +28,33 @@ public class GuiRoom extends JPanel{
 	private JPanel jp_north;
 	public GuiRoom(RoomWindow rw) {
 		this.rw=rw;
-		setLayout(new BorderLayout());
-		jp_south= new JPanel();
-		jp_south.setLayout(new BorderLayout());
-		jp_south.add(new RoomHeroesComponent(rw));		
-		add(jp_south,BorderLayout.CENTER);
+		setLayout(new BorderLayout());		
 		jp_buttons=new JPanel();
 		jp_buttons.setLayout(new BorderLayout());
 		jp_buttons.add(new RoomButtonComponent(rw));
 		add(jp_buttons, BorderLayout.PAGE_END);
+		jp_south= new JPanel();
+		jp_south.setLayout(new BorderLayout());
+		jp_south.add(new RoomHeroesComponent(rw));		
+		add(jp_south,BorderLayout.CENTER);		
 		jp_north=new JPanel();
 		jp_north.setLayout(new BorderLayout());
 		jp_north.add(new RoomInteractionComponent(rw));
-		add(jp_north, BorderLayout.NORTH);
+		add(jp_north, BorderLayout.NORTH);	
 		setVisible(true);
 	}
 	public void upadate(){
 		this.remove(jp_north);
-		this.remove(jp_south);
+		this.remove(jp_south);		
 		if(rw.getGame().getRoom().isShopOpen()) {
 			jp_north=new JPanel();
 			jp_north.setLayout(new BorderLayout());
 			jp_north.add(new ShopInterface(rw,rw.getGame().getRoom().getShop()));
 			add(jp_north, BorderLayout.NORTH);
+			jp_south= new JPanel();
+			jp_south.setLayout(new BorderLayout());
+			jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
+			add(jp_south,BorderLayout.CENTER);
 		}else {
 			if(rw.getGame().getRoom().isTavernOpen()) {
 				jp_north=new JPanel();
@@ -59,7 +63,7 @@ public class GuiRoom extends JPanel{
 				add(jp_north, BorderLayout.NORTH);
 				jp_south= new JPanel();
 				jp_south.setLayout(new BorderLayout());
-				jp_south.add(new RoomHeroesComponent(rw));		
+				jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
 				add(jp_south,BorderLayout.CENTER);
 			}else {
 				jp_north=new JPanel();
@@ -68,11 +72,10 @@ public class GuiRoom extends JPanel{
 				add(jp_north, BorderLayout.NORTH);
 				jp_south= new JPanel();
 				jp_south.setLayout(new BorderLayout());
-				jp_south.add(new RoomHeroesComponent(rw));		
+				jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
 				add(jp_south,BorderLayout.CENTER);
 			}			
-		}
-		
+		}		
 		rw.setVisible(true);
 	}
 	private class ShopInterface extends JComponent{

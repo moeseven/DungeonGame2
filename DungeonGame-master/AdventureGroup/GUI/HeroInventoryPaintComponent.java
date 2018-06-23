@@ -79,8 +79,10 @@ public class HeroInventoryPaintComponent extends JComponent{
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+							//equip
 							gw.getGame().getPlayer().getSelectedHero().getEquipment().equipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
 						}else {
+							//unequip
 							gw.getGame().getPlayer().getSelectedHero().getEquipment().unequipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
 						}				
 					}
@@ -216,14 +218,14 @@ public class HeroInventoryPaintComponent extends JComponent{
 //					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
 //				}else {
 //					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(null);
-//				}
-				rc.updateCaptions();
+//				}				
 				gw.repaint();				
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
 				}
 			}
+			rc.updateCaptions();
 		} 
 	}
 	protected void paintComponent(Graphics g){

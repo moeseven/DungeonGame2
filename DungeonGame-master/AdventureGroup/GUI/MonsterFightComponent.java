@@ -44,8 +44,9 @@ public class MonsterFightComponent extends JComponent{
 					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
 				}
 			}
+			fw.getGuiFight().upadate();
 			fw.revalidate();
-				fw.repaint();
+			fw.repaint();
 		} 
 	}
 	protected void paintComponent(Graphics g){

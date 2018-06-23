@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -40,7 +41,7 @@ public class RoomButtonComponent extends JComponent{
 			this.add(buttonMove);
 			this.add(buttonInventory);
 			this.add(buttonLeaveRoom);
-			
+			super.setPreferredSize(new Dimension(300,50));
 			setVisible(true);
 			
 		}

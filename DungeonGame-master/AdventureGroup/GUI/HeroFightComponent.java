@@ -46,6 +46,7 @@ public class HeroFightComponent extends JComponent{
 			}
 			fw.revalidate();
 			fw.repaint();
+			fw.getGuiFight().upadate();
 		} 
 	}
 	protected void paintComponent(Graphics g){
