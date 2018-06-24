@@ -3,16 +3,17 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class Wisdom extends Card{
+public class Wisdom extends SpellnoTarget{
 	public Wisdom() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		
 	}
-	public void applyEffect(Hero self) {
+	public boolean applyEffect(Hero self) {
 		for(int i=0; i<3; i++) {
 			self.drawCard();
-		}		
+		}
+		return true;
 	}
 	@Override
 	public String getName() {

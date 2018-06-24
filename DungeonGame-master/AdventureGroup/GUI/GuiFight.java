@@ -41,7 +41,7 @@ public class GuiFight extends JPanel{
 		}		
 	}
 	private class ml extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			fw.getGame().getRoom().getFight().nextTurn();
 			fw.getGuiFight().upadate();
 			fw.revalidate();

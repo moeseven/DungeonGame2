@@ -16,15 +16,18 @@ public abstract class Card implements Serializable{
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
-			this.applyEffect(self);
+			buildLogEntry(self);
+			applyEffect(self);
+			
 			return true;
 		}else {
 			return false;
 		}
 	}
 	public abstract int rangeOfCard(Hero hero);
-	public abstract void applyEffect(Hero self);// here happens the magic
+	public abstract boolean applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
+	public abstract void buildLogEntry(Hero self);
 	public abstract String getCardText(Hero self);
 	public abstract boolean isFriendly();
 	//getters and setters

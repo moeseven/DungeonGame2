@@ -4,16 +4,20 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class SleepCharm extends Card{
+public class SleepCharm extends Spell{
 	public SleepCharm() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		
 	}
-	public void applyEffect(Hero self) {
+	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {
 				self.getTarget().getDiscardPile().add(new Sleepy());
-			}			
+				self.getPlayer().getGame().log.addLine("casting "+getName()+" on "+self.getTarget().getName());
+				return true;
+			}else {
+				return false;
+			}
 	}
 	@Override
 	public String getName() {
@@ -34,14 +38,15 @@ public class SleepCharm extends Card{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	private class Sleepy extends Card{
+	private class Sleepy extends SpellnoTarget{
 		public Sleepy() {
 			// TODO Auto-generated constructor stub
 			manaCost =2;
 			
 		}
-		public void applyEffect(Hero self) {
+		public boolean applyEffect(Hero self) {
 			self.getDiscardPile().remove(this);
+			return true;
 		}
 		@Override
 		public String getName() {

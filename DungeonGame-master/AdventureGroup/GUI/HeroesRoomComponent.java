@@ -34,7 +34,7 @@ public class HeroesRoomComponent extends JComponent{
 		}
 
 	private class MyMouseListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){	
+		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				int x=e.getX();
 				int y=e.getY();

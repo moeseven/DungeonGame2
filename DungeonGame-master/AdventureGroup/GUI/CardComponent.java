@@ -34,7 +34,7 @@ public class CardComponent extends JComponent{
 	}
 
 	private class MyMouseListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			if(e.getButton()==1){
 				fw.getGame().getPlayer().getSelectedHero().setSelectedCard(card);;	
 				fw.repaint();

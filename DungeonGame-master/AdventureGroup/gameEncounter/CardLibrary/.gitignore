@@ -7,3 +7,8 @@
 /SleepCharm$Sleepy.class
 /DivineGrace.class
 /Wisdom.class
+/Channel.class
+/Channel$ChannelBuff.class
+/Spell$Sleepy.class
+/Spell.class
+/SpellnoTarget.class

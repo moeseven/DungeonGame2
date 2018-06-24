@@ -3,6 +3,7 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.RoomLibrary.Town;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 import tools.MyLog;
@@ -12,12 +13,14 @@ private Player player; //change this for multiplayer
 public Player dungeonMaster;
 public MyLog log;
 private Room room;
+private Room town;
 private LinkedList<Room> roomChain;
 public Game(LinkedList<Room> roomChain) {
 	super();
 	log=new MyLog();
 	this.roomChain=roomChain;
-	room=roomChain.getFirst();
+	town=new Town();
+	room=town;
 	player=new Player(this);
 	dungeonMaster=new DungeonMaster(this);
 }
@@ -40,12 +43,15 @@ public void setPlayer(Player player) {
 	this.player = player;
 }
 public Room getNextRoom() {
-	if(roomChain.size()>roomChain.indexOf(room)+1) {
-		return roomChain.get(roomChain.indexOf(room)+1);
+	if(room!=town) {
+		if(roomChain.size()>roomChain.indexOf(room)+1) {
+			return roomChain.get(roomChain.indexOf(room)+1);
+		}else {
+			return town;
+		}
 	}else {
-		return null;
-	}
-	
+		return roomChain.getFirst();
+	}		
 }
 public void enterNextRoom() {
 	room=getNextRoom();
@@ -58,11 +64,18 @@ public void enterNextRoom() {
 	}
 	if(deadCount==getPlayer().getHeroes().size()) {
 		//TODO return to town here -- Quest over!
+		room=town;
 	}	
 	log.clear();
-	log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+roomChain.indexOf(room)+"°°°°°°°°°°°°°°°||||");
+	if(room!=town) {
+		log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+roomChain.indexOf(room)+"°°°°°°°°°°°°°°°||||");
+	}	
 	room.prepareRoomAndEnter(this);
 	
+}
+public Room getTown() {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 }

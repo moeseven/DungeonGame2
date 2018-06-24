@@ -35,7 +35,7 @@ public class GuiInventory extends JPanel{
 		setVisible(true);
 	}
 	private class ml extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			//done
 			gf.windowswitch();
 			gf.revalidate();

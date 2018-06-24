@@ -9,12 +9,13 @@ public class Cleave extends Card{
 		manaCost =2;
 		
 	}
-	public void applyEffect(Hero self) {
+	public boolean applyEffect(Hero self) {
 		if(self.getFight().getHeroes().contains(self)) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getMonsters().get(i))) {
 						self.dealWeaponDamage(self.getFight().getMonsters().get(i), self.getEquipment().getHand1());
+						return true;
 					}
 				}	
 			}
@@ -23,10 +24,12 @@ public class Cleave extends Card{
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getHeroes().get(i))) {
 						self.dealWeaponDamage(self.getFight().getHeroes().get(i), self.getEquipment().getHand1());
+						return true;
 					}
 				}	
 			}
-		}				
+		}
+		return false;
 	}
 	@Override
 	public String getName() {
@@ -45,6 +48,11 @@ public class Cleave extends Card{
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public void buildLogEntry(Hero self) {
+		// TODO Auto-generated method stub
+		self.getPlayer().getGame().log.addLine(getName());
 	}
 
 }

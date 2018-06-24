@@ -219,7 +219,7 @@ public class GuiRoom extends JPanel{
 	}
 
 private class MyMouseListener extends MouseAdapter{
-	public void mouseClicked(MouseEvent e){	
+	public void mousePressed(MouseEvent e){	
 		if(e.getButton()==1){
 			//get equipment position from click
 			rc.triggerClick(e.getX(), e.getY());
@@ -334,7 +334,7 @@ protected void paintComponent(Graphics g){
 	}
 
 private class MyMouseListener extends MouseAdapter{
-	public void mouseClicked(MouseEvent e){	
+	public void mousePressed(MouseEvent e){	
 		if(e.getButton()==1){
 			//get equipment position from click
 			rc.triggerClick(e.getX(), e.getY());

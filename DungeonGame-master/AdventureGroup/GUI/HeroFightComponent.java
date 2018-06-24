@@ -35,7 +35,7 @@ public class HeroFightComponent extends JComponent{
 	}
 
 	private class MyMouseListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			if(e.getButton()==1){
 				fw.getGame().getPlayer().setSelectedHero(hero);						
 			}else{

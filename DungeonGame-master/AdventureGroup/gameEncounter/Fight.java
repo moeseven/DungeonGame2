@@ -94,8 +94,14 @@ public class Fight implements Serializable{
 		}
 		if (this.isFightOver()){
 			for(int i=0; i<heroes.size();i++) {
-				heroes.get(i).removeBuffs();
+				heroes.get(i).removeBuffs();	
+				
 			}
+			if(heroes.size()>0) {
+				game.log.addLine("§§§§§§§§§§ Fight won! §§§§§§§§§§");
+			}else {
+				game.log.addLine("§§§§§§ Devastating defeat! §§§§§§");
+			}			
 		}else {
 			turnOrderCounter+=1;
 			if(turnOrderCounter>=turnOrder.size()) {

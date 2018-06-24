@@ -46,13 +46,13 @@ public class RoomButtonComponent extends JComponent{
 			
 		}
 		private class mouseListenerInventory extends MouseAdapter{
-			public void mouseClicked(MouseEvent e){
+			public void mousePressed(MouseEvent e){
 				//show inventory
 				rw.windowswitch();
 			}
 		}
 		private class mouselistenerLeave extends MouseAdapter{
-			public void mouseClicked(MouseEvent e){
+			public void mousePressed(MouseEvent e){
 				//leave room
 				if(rw.getGame().getPlayer().getHeroes().size()>0) {
 					if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()) {
@@ -69,12 +69,15 @@ public class RoomButtonComponent extends JComponent{
 						}
 					}
 				}else {
-					System.out.println("you dont have any heroes!");
+					rw.getGame().log.addLine("mission failed!");
+					rw.getGame().enterNextRoom();
+					rw.getGuiRoom().upadate();
+					rw.setVisible(true);
 				}								
 			}
 		}
 		private class mHTF extends MouseAdapter{
-			public void mouseClicked(MouseEvent e){
+			public void mousePressed(MouseEvent e){
 				//move Hero to front
 				Hero hero= rw.getGame().getPlayer().getSelectedHero();
 				rw.getGame().getPlayer().getHeroes().remove(rw.getGame().getPlayer().getSelectedHero());
@@ -83,7 +86,7 @@ public class RoomButtonComponent extends JComponent{
 			}
 		}
 		private class mouseListenerMenu extends MouseAdapter{
-			public void mouseClicked(MouseEvent e){
+			public void mousePressed(MouseEvent e){
 				//open menu 
 				rw.openMenu();
 			}

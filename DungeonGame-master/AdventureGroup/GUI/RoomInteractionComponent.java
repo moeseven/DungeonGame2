@@ -35,7 +35,7 @@ public class RoomInteractionComponent extends JComponent{
 		}
 
 		private class MyMouseListener extends MouseAdapter{
-			public void mouseClicked(MouseEvent e){
+			public void mousePressed(MouseEvent e){
 				if(e.getButton()==1){
 					ri.onInteraction(rw.getGame().getPlayer().getSelectedHero());
 					rw.getGuiRoom().upadate();

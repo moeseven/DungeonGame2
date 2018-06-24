@@ -141,14 +141,14 @@ public class Hero implements Serializable{
 		}
 		hand.add(drawPile.removeFirst());
 	}
-	public void turnBegin(){
-		this.buffTick();
+	public void turnBegin(){		
 		this.discardHand();
 		this.block=0;
 		this.mana=manaPower;
 		for(int i=0; i<draw;i++) {
 			drawCard();
 		}
+		this.buffTick();
 		this.setSelectedCard(hand.getFirst());
 	}
 	public void block(int block) {

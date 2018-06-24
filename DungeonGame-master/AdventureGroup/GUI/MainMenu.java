@@ -54,7 +54,7 @@ public class MainMenu extends JFrame{
 		setVisible(true);
 	}
 	private class ButtonStartListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			if(game.getPlayer().getHeroes().size()>0) {
 				game.getPlayer().setSelectedHero(game.getPlayer().getHeroes().getFirst());
 				game.enterRoom(game.getRoom());			
@@ -67,12 +67,12 @@ public class MainMenu extends JFrame{
 		} 
 	}
 	private class ButtonBuildCharacterListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			new FrameCharacterBuilder(new CharacterBuilder(game),mm);
 		} 
 	}
 	private class ButtonSaveUserListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			//save game;
 			ObjectOutputStream oos=null;
 			try {
@@ -93,7 +93,7 @@ public class MainMenu extends JFrame{
 		} 
 	}
 	private class ButtonLoadUserListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){
+		public void mousePressed(MouseEvent e){
 			//load from file;
 			ObjectInputStream ois=null;
 			try {

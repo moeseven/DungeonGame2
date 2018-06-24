@@ -29,7 +29,7 @@ public class GameEquations {
 	public static boolean resist(Hero caster, Hero target) {
 		if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
 			
-			caster.getPlayer().getGame().log.addLine(target.getName()+" resisted a Spell!");
+			caster.getPlayer().getGame().log.addLine(target.getName()+" resisted!");
 			return true;			
 		}else {
 			return false;
@@ -40,7 +40,7 @@ public class GameEquations {
 	public static boolean dodge(Hero attacker, Hero attacked) {
 		if(Math.random()>1/(1.1+(attacked.computeDodge()-attacker.computeAccuracy())*0.05)) {
 			
-			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged an attack!");
+			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
 			return true;			
 		}else {
 			return false;
@@ -53,7 +53,7 @@ public class GameEquations {
 		if(block>0) {
 			blocker.setBlock(block);
 			if(Math.random()<block/(0.0+block+attacker.computeAttackSkill())) {
-				attacker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked an Attack!");
+				attacker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked!");
 				return true;
 			}else {
 				return false;

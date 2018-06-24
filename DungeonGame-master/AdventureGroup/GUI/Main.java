@@ -27,13 +27,10 @@ public class Main {
 		heroes.add(new Hero("Mandor",null,new RaceHuman(),new TypeWarrior()));		
 		heroes.add(new Hero("Filt",null,new RaceHalfling(),new TypeThief()));
 		roomChain=new LinkedList<Room>();
-		roomChain.add(new Town());
 		roomChain.add(new TrapRoom());
 		roomChain.add(new DummyFightRoom());
-		roomChain.add(new Town());
 		roomChain.add(new TrapRoom());
 		roomChain.add(new GoblinRoom1());
-		roomChain.add(new Town());
 		roomChain.add(new GoblinRoom1());
 		game = new Game(roomChain);
 		player = new Player(game);

@@ -9,8 +9,9 @@ public class Block extends Card{
 		manaCost =1;
 		
 	}
-	public void applyEffect(Hero self) {
+	public boolean applyEffect(Hero self) {
 		self.block(self.computeBlockSkill());
+		return true;
 	}
 	@Override
 	public String getName() {
@@ -30,4 +31,10 @@ public class Block extends Card{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public void buildLogEntry(Hero self) {
+		self.getPlayer().getGame().log.addLine(getName());
+		
+	}
+
 }

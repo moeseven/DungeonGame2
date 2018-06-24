@@ -10,10 +10,13 @@ public class BasicAttack extends Card{
 		manaCost =1;
 		
 	}
-	public void applyEffect(Hero self) {
+	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
 				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1());
-			}			
+				return true;
+			}else {
+				return false;
+			}
 	}
 	@Override
 	public String getName() {
@@ -38,6 +41,11 @@ public class BasicAttack extends Card{
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public void buildLogEntry(Hero self) {
+		self.getPlayer().getGame().log.addLine(getName());
+		
 	}
 
 }
