@@ -23,10 +23,4 @@ public class RaceHalfling extends CharacterRace{
 		
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "halfling";
-	}
-
 }

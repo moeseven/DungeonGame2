@@ -22,10 +22,5 @@ public class RaceDwarf extends CharacterRace{
 		hero.setSpellPower(hero.getSpellPower()-1);
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "dwarf";
-	}
 
 }

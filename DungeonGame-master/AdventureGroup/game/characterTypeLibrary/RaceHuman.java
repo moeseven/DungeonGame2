@@ -19,10 +19,5 @@ public class RaceHuman extends CharacterRace{
 				
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "human";
-	}
 
 }

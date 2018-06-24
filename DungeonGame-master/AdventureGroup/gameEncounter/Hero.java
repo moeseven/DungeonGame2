@@ -81,9 +81,9 @@ public class Hero implements Serializable{
 		}else {
 			inventory=new LinkedList<Item>();
 		}		
-		deck=new Deck();		
+		deck=new Deck();
 		charRace.modifyHero(this);
-		charClass.modifyHero(this);
+		charClass.modifyHero(this);		
 		if(!name.equals("")&&!name.equals("type name here")) {
 			this.name=name;
 		}			

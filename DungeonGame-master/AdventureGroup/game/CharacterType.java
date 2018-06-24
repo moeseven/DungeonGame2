@@ -17,7 +17,7 @@ public abstract class CharacterType implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public abstract void modifyHero(Hero hero);
-	public abstract String getInfo();
+//	public abstract String getInfo();
 	public String getName() {
 		return name;
 	}

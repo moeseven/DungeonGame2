@@ -16,12 +16,6 @@ public class TypeThief extends CharacterClass{
 		super.modifyHero(hero);
 		hero.setDodge(hero.getDodge()+1);
 		hero.setSpeed(hero.getSpeed()+1);
+		hero.setVitality(hero.getVitality()-1);
 	}
-
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "thief";
-	}
-
 }

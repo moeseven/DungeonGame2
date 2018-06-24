@@ -21,10 +21,4 @@ public class TypeCleric extends CharacterClass{
 		hero.setSpellPower(hero.getSpellPower()+1);
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "cleric";
-	}
-
 }

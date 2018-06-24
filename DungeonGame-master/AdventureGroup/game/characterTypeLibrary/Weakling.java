@@ -21,10 +21,4 @@ public class Weakling extends CharacterRace{
 		//deck				
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "goblin";
-	}
-
 }

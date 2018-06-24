@@ -20,10 +20,5 @@ public class RaceElf extends CharacterRace{
 		hero.setDexterity(hero.getDexterity()+3);
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "elf";
-	}
 
 }

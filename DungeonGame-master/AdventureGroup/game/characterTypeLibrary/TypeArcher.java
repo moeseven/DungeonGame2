@@ -17,12 +17,8 @@ public class TypeArcher extends CharacterClass{
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);
 		hero.setAccuracy(hero.getAccuracy()+2);
+		hero.setVitality(hero.getVitality()-2);
 	}
 
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "thief";
-	}
 
 }

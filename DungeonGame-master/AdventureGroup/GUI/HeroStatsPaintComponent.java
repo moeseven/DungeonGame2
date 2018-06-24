@@ -38,7 +38,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		LinkedList<String> lines=new LinkedList<String>();
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
-		lines.add("HP: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp());
+		lines.add("health: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp());
 		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
 			Weapon weapon= (Weapon) player.getSelectedHero().getEquipment().getHand1();
 			lines.add("damage: "+weapon.AttackDamageToString(player.getSelectedHero().getStrength()));
@@ -63,7 +63,9 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("armor: "+player.getSelectedHero().getArmor());
 		lines.add("thorns: "+player.getSelectedHero().getThorns());
 		lines.add("wisdom: "+player.getSelectedHero().getDraw());
-		lines.add("mana: "+player.getSelectedHero().getManaPower());						
+		lines.add("mana: "+player.getSelectedHero().getManaPower());
+		lines.add("");
+		lines.add("experience: "+player.getSelectedHero().getExperience()+"/"+GameEquations.experienceThresholdForLevelUp(player.getSelectedHero().getLevel()));		
 		for(int i=0; i<lines.size();i++) {
 			if(i<=height) {
 				g.drawString(lines.get(i), 10, 10+12*i);

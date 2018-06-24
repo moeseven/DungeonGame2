@@ -15,9 +15,11 @@ public MyLog log;
 private Room room;
 private Room town;
 private LinkedList<Room> roomChain;
+private LinkedList<Quest> availableQuests;
 public Game(LinkedList<Room> roomChain) {
 	super();
 	log=new MyLog();
+	this.availableQuests=new LinkedList<Quest>();
 	this.roomChain=roomChain;
 	town=new Town();
 	room=town;
@@ -76,6 +78,12 @@ public void enterNextRoom() {
 public Room getTown() {
 	// TODO Auto-generated method stub
 	return null;
+}
+public LinkedList<Quest> getAvailableQuests() {
+	return availableQuests;
+}
+public void setAvailableQuests(LinkedList<Quest> availableQuests) {
+	this.availableQuests = availableQuests;
 }
 
 }

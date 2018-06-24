@@ -3,12 +3,14 @@ package game.RoomInteractionLibrary;
 import java.util.LinkedList;
 
 import game.Game;
+import game.Quest;
 import game.RoomInteraction;
 import gameEncounter.Hero;
 
 
 public class Tavern extends RoomInteraction{
 	private LinkedList<Hero> heroes=new LinkedList<Hero>();
+	private LinkedList<Quest> quests = new LinkedList<Quest>();
 	public Tavern() {
 		super();
 		name="tavern";

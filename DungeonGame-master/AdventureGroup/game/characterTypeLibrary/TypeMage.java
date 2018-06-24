@@ -19,12 +19,6 @@ public class TypeMage extends CharacterClass{
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);
 		hero.setSpellPower(hero.getSpellPower()+2);		
+		hero.setVitality(hero.getVitality()-3);
 	}
-
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "mage";
-	}
-
 }

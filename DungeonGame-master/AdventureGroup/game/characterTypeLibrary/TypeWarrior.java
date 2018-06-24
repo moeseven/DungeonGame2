@@ -20,12 +20,6 @@ public class TypeWarrior extends CharacterClass{
 		super.modifyHero(hero);
 		hero.setAttackSkill(hero.getAttackSkill()+1);
 		hero.setBlockSkill(hero.getBlockSkill()+1);
+		hero.setVitality(hero.getVitality()+2);
 	}
-
-	@Override
-	public String getInfo() {
-		// TODO Auto-generated method stub
-		return "warrior";
-	}
-
 }
