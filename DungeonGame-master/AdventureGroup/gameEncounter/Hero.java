@@ -18,6 +18,9 @@ public class Hero implements Serializable{
 	protected int gold;
 	protected int experience;	
 	protected int experienceValue;
+	protected int level=0;
+	protected int skillPoints=0;
+	protected int cardPoints=0;
 	protected Player player;
 	//game
 	private boolean isReady;
@@ -204,7 +207,7 @@ public class Hero implements Serializable{
 	}
 	public void takeDamage(Hero damagingHero, int damage){
 		if(damage>0) {
-			player.getGame().log.addLine(damagingHero.getName()+" does "+damage+" to "+name);
+			player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
 			this.setHp(hp-damage);
 			if(hp<=0) {
 				hp=0;
@@ -218,7 +221,7 @@ public class Hero implements Serializable{
 	}
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
-		player.getGame().log.addLine(name+ "died!");
+		player.getGame().log.addLine(name+ " died!");
 		block=0;
 		this.isDead=true;
 	}
@@ -229,7 +232,6 @@ public class Hero implements Serializable{
 		//this is the loot table of this monster
 		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
 		looter.getInventory().addAll(this.equipment.getAllEquippedItems());
-		System.out.println(name+" got looted");
 		getPlayer().getGame().log.addLine(name+" got looted");
 	}
 	public void discardHand() {
@@ -238,19 +240,17 @@ public class Hero implements Serializable{
 		}		
 	}
 	public void heal(int heal) {//prevent overhealing
-		this.setHp(this.getHp()+heal);
-		if(this.getHp()>computeMaxHp()) {
-			this.setHp(computeMaxHp());
-		}		
+		int healing= Math.min(heal, computeMaxHp()-getHp());
+		this.setHp(this.getHp()+healing);
+		player.getGame().log.addLine(name+" healed for "+healing+" hp");		
 	}
 	public boolean targetInRange(Hero target2, int range) {
 		//this seems to not work for targeting own heroes
 		if(this.getPlayer()!=target2.getPlayer()) {
 			if(player.getHeroes().indexOf(this)+target2.getPlayer().getHeroes().indexOf(target2)<range) {
 				return true;
-				}else {
-					System.out.println("target out of Range");
-					getPlayer().getGame().log.addLine("target out of Range");
+				}else {					
+					getPlayer().getGame().log.addLine("target out of Range!");
 					return false;
 				}			
 		}else {
@@ -278,6 +278,19 @@ public class Hero implements Serializable{
 		for(int i=0; i<tick.size();i++) {
 			tick.get(i).tick(this);
 		}
+	}
+	public void gainExp(int exp) {	
+		int t=GameEquations.experienceThresholdForLevelUp(level);
+		if(experience<t&&experience+exp>=t) {
+			levelUP();
+		}
+		experience+=exp;
+	}
+	public void levelUP() {
+		skillPoints+=1;
+		cardPoints+=1;
+		level+=1;
+		
 	}
 	//compute functions
 	public int computeAccuracy() {
@@ -311,6 +324,9 @@ public class Hero implements Serializable{
 		return currentSpeed;
 	}
 
+	//A all stats to String method might be handy for gui
+
+	//
 	//Getters and Setters
 	
 	public int getGold() {
@@ -552,6 +568,18 @@ public class Hero implements Serializable{
 	}
 	public void setBuffs(LinkedList<Buff> buffs) {
 		this.buffs = buffs;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public int getSkillPoints() {
+		return skillPoints;
+	}
+	public void setSkillPoints(int skillPoints) {
+		this.skillPoints = skillPoints;
 	}
 	
 

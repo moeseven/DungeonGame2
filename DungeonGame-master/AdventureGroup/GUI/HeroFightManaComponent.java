@@ -16,9 +16,9 @@ import javax.swing.JComponent;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class HeroStatsComponent extends JComponent{
+public class HeroFightManaComponent extends JComponent{
 	private FightWindow fw;
-	public HeroStatsComponent(FightWindow fw) {
+	public HeroFightManaComponent(FightWindow fw) {
 		this.fw=fw;
 		super.setPreferredSize(new Dimension(100,80));
 		setLayout(new BorderLayout());

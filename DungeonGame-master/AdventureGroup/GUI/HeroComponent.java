@@ -26,7 +26,7 @@ public class HeroComponent extends JComponent{
 		jp=new JPanel();
 		jp.add(hpc);
 		add(jp,BorderLayout.CENTER);
-		add(new HeroStatsComponent(fw),BorderLayout.WEST);
+		add(new HeroFightManaComponent(fw),BorderLayout.WEST);
 	}
 	public HandComponent getHandComponent() {
 		return handComponent;

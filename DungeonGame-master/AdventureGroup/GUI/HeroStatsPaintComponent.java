@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import game.Player;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
@@ -21,51 +22,57 @@ import gameEncounter.ModableHeroStats;
 import gameEncounter.Weapon;
 
 public class HeroStatsPaintComponent extends JComponent{
-		private StatsWindow gf;
-		public HeroStatsPaintComponent(StatsWindow gf){
-			this.gf=gf;
+		private Player player;
+		protected int height;
+		public HeroStatsPaintComponent(Player player){
+			this.player=player;
+			height=16;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(300,200));
+			super.setPreferredSize(new Dimension(300,height*15));
 			setVisible(true);
 		}
-
-	private class MyMouseListener extends MouseAdapter{
-		public void mouseClicked(MouseEvent e){	
-			if(e.getButton()==1){
-				int x=e.getX();
-				int y=e.getY();
-				//get card position from click
-				int i=Math.round(x/100);
-				//handle clicks in hero info
-			}else{
-				if (e.getButton()==3){
-					//new CardView(card);
-				}
-			}
-		} 
-	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
-		//paint Hero info
-		g.drawString(gf.getGame().getPlayer().getSelectedHero().getName()+" ("+gf.getGame().getPlayer().getSelectedHero().getCharRace().getName()+", "+gf.getGame().getPlayer().getSelectedHero().getCharClass().getName()+")", 10, 10);
-		g.drawString("HP: "+gf.getGame().getPlayer().getSelectedHero().getHp()+"/"+gf.getGame().getPlayer().getSelectedHero().computeMaxHp(), 10, 10+1*11);
-		if(gf.getGame().getPlayer().getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
-			Weapon weapon= (Weapon) gf.getGame().getPlayer().getSelectedHero().getEquipment().getHand1();
-			g.drawString("damage: "+weapon.AttackDamageToString(gf.getGame().getPlayer().getSelectedHero().getStrength()), 10, 10+2*11);
+		//paint Hero info all interesting stats about the hero
+		LinkedList<String> lines=new LinkedList<String>();
+		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
+		lines.add("");
+		lines.add("HP: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp());
+		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
+			Weapon weapon= (Weapon) player.getSelectedHero().getEquipment().getHand1();
+			lines.add("damage: "+weapon.AttackDamageToString(player.getSelectedHero().getStrength()));
 		}else {
-			g.drawString("damage: "+GameEquations.FistDamageToString(gf.getGame().getPlayer().getSelectedHero().getStrength(), gf.getGame().getPlayer().getSelectedHero().getDexterity()), 10, 10+2*11);
+			lines.add("damage: "+GameEquations.FistDamageToString(player.getSelectedHero().getStrength(), player.getSelectedHero().getDexterity()));
 		}
-		g.drawString("block skill: "+gf.getGame().getPlayer().getSelectedHero().getBlockSkill(), 10, 10+3*11);
-		g.drawString("wisdom: "+gf.getGame().getPlayer().getSelectedHero().getDraw(), 10, 10+7*11);
-		g.drawString("mana: "+gf.getGame().getPlayer().getSelectedHero().getManaPower(), 10, 10+5*11);
-		g.drawString("thorns: "+gf.getGame().getPlayer().getSelectedHero().getThorns(), 10, 10+6*11);
-		g.drawString("armor: "+gf.getGame().getPlayer().getSelectedHero().getArmor(), 10, 10+4*11);
-		g.drawString("strength: "+gf.getGame().getPlayer().getSelectedHero().getStrength(), 10, 10+8*11);
-		g.drawString("dexterity: "+gf.getGame().getPlayer().getSelectedHero().getDexterity(), 10, 10+9*11);
-		g.drawString("intelligence: "+gf.getGame().getPlayer().getSelectedHero().getIntelligence(), 10, 10+10*11);
-		g.drawString("vitality: "+gf.getGame().getPlayer().getSelectedHero().getVitality(), 10, 10+11*11);
-		g.drawString("speed: "+gf.getGame().getPlayer().getSelectedHero().getSpeed(), 10, 10+12*11);
+		//main stats
+		lines.add("");
+		lines.add("strength: "+player.getSelectedHero().getStrength());
+		lines.add("dexterity: "+player.getSelectedHero().getDexterity());
+		lines.add("intelligence: "+player.getSelectedHero().getIntelligence());
+		lines.add("vitality: "+player.getSelectedHero().getVitality());		
+		lines.add("");
+		//
+		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+player.getSelectedHero().computeSpeed()+")");
+		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+player.getSelectedHero().computeAttackSkill()+")");
+		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+player.getSelectedHero().computeBlockSkill()+")");
+		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+player.getSelectedHero().computeAccuracy()+")");
+		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+player.getSelectedHero().computeDodge()+")");
+		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+player.getSelectedHero().computeSpellPower()+")");
+		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+" ("+player.getSelectedHero().computeSpellResist()+")");
+		lines.add("armor: "+player.getSelectedHero().getArmor());
+		lines.add("thorns: "+player.getSelectedHero().getThorns());
+		lines.add("wisdom: "+player.getSelectedHero().getDraw());
+		lines.add("mana: "+player.getSelectedHero().getManaPower());						
+		for(int i=0; i<lines.size();i++) {
+			if(i<=height) {
+				g.drawString(lines.get(i), 10, 10+12*i);
+			}else {
+				g.drawString(lines.get(i), 150, 10+12*(i-height+2));
+			}
+			
+		}
+		
 	}
 }
 

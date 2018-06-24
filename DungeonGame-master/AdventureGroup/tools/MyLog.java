@@ -10,6 +10,9 @@ public class MyLog implements Serializable {
 	public void addLine(String line) {
 		log+="\n"+line;
 	}
+	public void clear() {
+		log="";
+	}
 	public String getLog() {
 		return log;
 	}

@@ -74,7 +74,7 @@ public class Fight implements Serializable{
 				game.getRoom().getInteractions().add(new StandardCorpse(monsters.get(i))); //generate corpses
 				dead.add(monsters.get(i));
 				for (Hero h: heroes) {//give experience to heroes
-						h.setExperience(h.getExperience()+(int) (exp/heroes.size()));			
+						h.gainExp((int)(1.0+(exp/heroes.size())));			
 				}
 			}	
 		}
@@ -105,8 +105,7 @@ public class Fight implements Serializable{
 					//don't participate in fight
 					nextTurn();
 				}else {
-					System.out.println(turnOrder.get(turnOrderCounter).getName()+"'s turn");
-					this.getHeroes().getFirst().getPlayer().getGame().log.addLine(turnOrder.get(turnOrderCounter).getName()+"'s turn");
+					this.getHeroes().getFirst().getPlayer().getGame().log.addLine("~~~~~"+turnOrder.get(turnOrderCounter).getName()+"'s turn"+"~~~~~");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
 						//monster chooses random target here TODO make sure it attacks only targets in range!

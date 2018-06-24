@@ -25,6 +25,7 @@ public class CharacterBuilder {
 		charRaces.add(new RaceHalfling());
 		charRaces.add(new RaceElf());
 		updateHero("Öfterus");
+		game.getPlayer().setSelectedHero(hero);
 		// TODO Auto-generated constructor stub
 	}
 	public void scrollThroughCharClasses() {
@@ -35,6 +36,7 @@ public class CharacterBuilder {
 	}
 	public void updateHero(String name) {
 		hero=new Hero(name,game.getPlayer(), charRaces.getFirst(), charClasses.getFirst());
+		game.getPlayer().setSelectedHero(hero);
 	}
 	public void createHero(String name) {
 		hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());

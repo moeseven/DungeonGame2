@@ -28,19 +28,19 @@ public class HeroInfoComponent extends JComponent{
 			this.gf=gf;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(1000,600));
+			super.setPreferredSize(new Dimension(500,500));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
 			jp_Equip= new JPanel();
 			jp_Equip.add(new HeroInventoryPaintComponent(gf));
 			jp_Stats=new JPanel();
-			jp_Stats.add(new HeroStatsPaintComponent(gf));
+			jp_Stats.add(new HeroStatsPaintComponent(gf.getGame().getPlayer()));
 			jp=new JPanel();
-			sp=new JScrollPane();
-			sp.add(new DeckPaintComponent(gf, hero));
-			sp.setVisible(true);
-			this.add(sp, BorderLayout.NORTH); //not visible!
+			sp=new JScrollPane(jp);
+			sp.setPreferredSize(new Dimension(115, 500));
+			jp.add(new DeckPaintComponent(gf, hero));
+			this.add(sp, BorderLayout.EAST); //not visible!
 			this.add(jp_Equip, BorderLayout.CENTER);
 			this.add(jp_Stats, BorderLayout.NORTH);
 			setVisible(true);

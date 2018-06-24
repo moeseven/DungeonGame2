@@ -58,9 +58,11 @@ public void enterNextRoom() {
 	}
 	if(deadCount==getPlayer().getHeroes().size()) {
 		//TODO return to town here -- Quest over!
-	}
+	}	
+	log.clear();
+	log.addLine("||||같같같같같같같�"+"ROOM "+roomChain.indexOf(room)+"같같같같같같같�||||");
 	room.prepareRoomAndEnter(this);
-	System.out.println("roomNr: "+roomChain.indexOf(room));
+	
 }
 
 }

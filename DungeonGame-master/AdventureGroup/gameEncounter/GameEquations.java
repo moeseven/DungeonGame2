@@ -22,13 +22,13 @@ public class GameEquations {
 	}
 	//spellpower calculation from intelligence
 	public static int spellPowerCalc(int baseSpellPower, int intelligence) {
-		return (int) (baseSpellPower*(1+intelligence/20));
+		return (int) (baseSpellPower*(1+intelligence/20.0));
 	}
 	
 	//spell resist calculation
 	public static boolean resist(Hero caster, Hero target) {
 		if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
-			System.out.println(target.getName()+" resisted a Spell!");
+			
 			caster.getPlayer().getGame().log.addLine(target.getName()+" resisted a Spell!");
 			return true;			
 		}else {
@@ -39,7 +39,7 @@ public class GameEquations {
 	//dodge chance calculation
 	public static boolean dodge(Hero attacker, Hero attacked) {
 		if(Math.random()>1/(1.1+(attacked.computeDodge()-attacker.computeAccuracy())*0.05)) {
-			System.out.println(attacked.getName()+" dodged an attack!");
+			
 			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged an attack!");
 			return true;			
 		}else {
@@ -53,7 +53,6 @@ public class GameEquations {
 		if(block>0) {
 			blocker.setBlock(block);
 			if(Math.random()<block/(0.0+block+attacker.computeAttackSkill())) {
-				System.out.println(blocker.getName()+" blocked an attack!");
 				attacker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked an Attack!");
 				return true;
 			}else {
@@ -91,5 +90,8 @@ public class GameEquations {
 	}
 	public static int speedRoll(int speed) {
 		return speed+(int)(Math.random()*15.0);
+	}
+	public static int experienceThresholdForLevelUp(int level) {
+		return level*200+100;
 	}
 }

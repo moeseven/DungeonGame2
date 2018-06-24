@@ -22,14 +22,15 @@ public class DeckPaintComponent extends JComponent{
 		private JPanel jp;
 		private JScrollPane sp;
 		private StatsWindow gw;
+		private int cardHeight=100;
+		private int cardWidth=80;
 		public DeckPaintComponent(StatsWindow gw,Hero hero){
 			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(1000,90));
+			super.setPreferredSize(new Dimension(cardWidth+1,hero.getDeck().getCards().size()*cardHeight+10));
 			MyMouseListener ml = new MyMouseListener();
-			super.addMouseListener(ml);
-			setLayout(new BorderLayout());
+			addMouseListener(ml);
 			setVisible(true);
 		}
 
@@ -39,11 +40,11 @@ public class DeckPaintComponent extends JComponent{
 				int x=e.getX();
 				int y=e.getY();
 				//get card position from click
-				int i=Math.round(x/100);
-				if (i<hero.getHand().size()) {
-					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getHand().get(i));;	
-					gw.repaint();
-				}				
+				int i=Math.round(y/cardHeight);
+				if (i<hero.getDeck().getCards().size()) {
+					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getDeck().getCards().get(i));					
+				}	
+				gw.repaint();			
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -56,11 +57,11 @@ public class DeckPaintComponent extends JComponent{
 		//g.drawImage(image,0,0,null);
 		for (int i=0;i<hero.getDeck().getCards().size();i++){
 			g.setColor(Color.black);
-			g.drawString(hero.getDeck().getCards().get(i).getName(), 20+i*100, 15);
-			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5+i*100, 10);
+			g.drawString(hero.getDeck().getCards().get(i).getName(), 10, 15+i*cardHeight);
+			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5, 10+i*cardHeight);
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){
 				g.setColor(Color.red);
-				g.drawRect(1+i*100, 1, 100, 80);
+				g.drawRect(1, 1+i*cardHeight, cardWidth, cardHeight);
 			}
 		}
 	}

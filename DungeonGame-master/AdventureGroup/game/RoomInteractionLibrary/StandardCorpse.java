@@ -31,6 +31,8 @@ public class StandardCorpse extends RoomInteraction{
 		if(!hasBeenLooted) {
 			hero.loot(corpse);
 			
+		}else {
+			hero.getPlayer().getGame().log.addLine("allready looted!");
 		}
 		hasBeenLooted=true;
 	}
