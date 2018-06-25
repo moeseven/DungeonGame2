@@ -1,9 +1,12 @@
 package game;
 
+import java.util.LinkedList;
+
+import gameEncounter.Card;
 import gameEncounter.Hero;
 
 public abstract class CharacterClass extends CharacterType{
-
+protected LinkedList<Card> cardPool=new LinkedList<Card>();
 	public CharacterClass() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,5 +22,11 @@ public abstract class CharacterClass extends CharacterType{
 		}
 		hero.setName(hero.getName()+" "+name);
 	}
-
+	public LinkedList<Card> getCardPool() {
+		return cardPool;
+	}
+	public void setCardPool(LinkedList<Card> cardPool) {
+		this.cardPool = cardPool;
+	}
+	
 }

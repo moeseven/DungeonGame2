@@ -8,7 +8,7 @@ public class SleepCharm extends Spell{
 	public SleepCharm() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		
+		legalPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {

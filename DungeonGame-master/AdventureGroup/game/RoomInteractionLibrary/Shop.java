@@ -7,6 +7,7 @@ import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ItemLibrary.*;
+import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Shop extends RoomInteraction{
@@ -26,6 +27,7 @@ public class Shop extends RoomInteraction{
 		items.add(new HeavySword());
 		items.add(new PlateArmor());
 		items.add(new ArmorThinLeather());
+		items.add(new ExperienceBook());
 		items.add(new HealingPotion());
 		items.add(new HealingPotion());
 		items.add(new HealingPotion());

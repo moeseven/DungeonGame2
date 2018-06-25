@@ -2,17 +2,26 @@ package gameEncounter;
 
 import java.io.Serializable;
 
-public abstract class Card implements Serializable{
+import gameEncounter.ItemLibrary.usables.HealingPotion;
+
+public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
-	private String type;
+	protected boolean[] legalPositions={true,true,true,true};
 	protected String name;
 	protected int range;
 	public Card() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	public boolean playCard(Hero self){
 		
-		if(self.getMana()>=manaCost&&self.getHand().contains(this)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
+		if(self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
@@ -40,6 +49,14 @@ public abstract class Card implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public boolean checkPositonLegal(Hero hero){
+		if(legalPositions[hero.getPosition()]==false) {
+			hero.getPlayer().getGame().log.addLine("can not be used from this position!");
+			return false;
+		}else {
+			return true;
+		}
+	}
+			
 	
 }

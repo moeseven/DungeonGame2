@@ -2,26 +2,31 @@ package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Weapon;
 
-public class Wisdom extends SpellnoTarget{
-	public Wisdom() {
+public class Magicmissile extends Spell{
+	public Magicmissile() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		legalPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
-		for(int i=0; i<3; i++) {
-			self.drawCard();
-		}
-		return true;
+			if(self.castSpellOnHero(self.getTarget())) {	
+				self.getPlayer().getGame().log.addLine("casting "+getName()+" on "+self.getTarget().getName());
+				self.getTarget().takeDamage(self, (int)(1+self.getSpellPower()/1.5));
+				return true;
+			}else {
+				return false;
+			}
 	}
 	@Override
 	public String getName() {
-		return "wisdom";
+		return "magic missile";
 	}
 	@Override
 	public String getCardText(Hero self) {
-		return "draw 3 cards";
+		//TODO correct number display
+		return "damaging spell";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
@@ -31,6 +36,6 @@ public class Wisdom extends SpellnoTarget{
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 }

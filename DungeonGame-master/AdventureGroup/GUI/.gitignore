@@ -90,3 +90,7 @@
 /HeroInventoryPaintComponent$9.class
 /RoomButtonComponent$mouseListenerRetreat.class
 /GuiFight$mlRetreat.class
+/LvlUpCardRewardPaintComponent$MyMouseListener.class
+/LvlUpCardRewardPaintComponent.class
+/StatsSkillComponent$MyMouseListener.class
+/StatsSkillComponent.class

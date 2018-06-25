@@ -8,7 +8,7 @@ public class BackStab extends Card{
 	public BackStab() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		
+		legalPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		if(self.getEquipment().getHand1() instanceof Weapon) {

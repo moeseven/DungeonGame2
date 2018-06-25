@@ -26,6 +26,7 @@ public class StatsWindow extends JFrame{
 		this.remove(guiInv);
 		guiInv=new GuiInventory(this);
 		this.add(guiInv);
+		this.setVisible(true);
 	}
 	public Game getGame() {
 		return game;

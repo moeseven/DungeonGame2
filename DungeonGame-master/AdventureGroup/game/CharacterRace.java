@@ -14,12 +14,7 @@ public abstract class CharacterRace extends CharacterType{
 	public void modifyHero(Hero hero) {
 		hero.setName(name);
 		//deck
-		for (int i=0; i<5;i++) {
-			hero.getDeck().addCard(new BasicAttack());
-		}
-		for (int i=0; i<3;i++) {
-			hero.getDeck().addCard(new Block());
-		}
+
 	}
 	
 

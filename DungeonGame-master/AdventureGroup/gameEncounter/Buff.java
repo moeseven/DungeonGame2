@@ -1,7 +1,7 @@
 package gameEncounter;
 
 public abstract class Buff {
-protected int duration;
+protected int duration=2;
 public abstract void onTick(Hero hero);
 public abstract void mod(Hero hero);
 public abstract void demod(Hero hero);

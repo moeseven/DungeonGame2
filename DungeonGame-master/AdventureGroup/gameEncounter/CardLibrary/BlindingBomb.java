@@ -1,22 +1,22 @@
 package gameEncounter.CardLibrary;
 
+import gameEncounter.Buff;
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Weapon;
 
-public class Cleave extends Card{
-	public Cleave() {
+public class BlindingBomb extends Spell{
+	public BlindingBomb() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		legalPositions[1]=false;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
+		legalPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		if(self.getFight().getHeroes().contains(self)) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getMonsters().get(i))) {
-						self.dealWeaponDamage(self.getFight().getMonsters().get(i), self.getEquipment().getHand1(),1);
+						self.getTarget().buffHero(new Blinded());
 						return true;
 					}
 				}	
@@ -25,7 +25,7 @@ public class Cleave extends Card{
 			for(int i=0; i<self.getFight().getHeroes().size();i++) {
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getHeroes().get(i))) {
-						self.dealWeaponDamage(self.getFight().getHeroes().get(i), self.getEquipment().getHand1(),1);
+						self.getTarget().buffHero(new Blinded());
 						return true;
 					}
 				}	
@@ -35,26 +35,47 @@ public class Cleave extends Card{
 	}
 	@Override
 	public String getName() {
-		return "cleave";
+		return "blinding bomb";
 	}
 	@Override
 	public String getCardText(Hero self) {
-		return "deal "+ 0+" attack damage to all enemies";
+		//TODO correct number display
+		return "blind all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
 		// TODO Auto-generated method stub
-		return 8;
+		return 10;
 	}
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public void buildLogEntry(Hero self) {
-		// TODO Auto-generated method stub
-		self.getPlayer().getGame().log.addLine(getName());
-	}
+	private class Blinded extends Buff{
 
+		public Blinded() {
+			super();
+			duration=2;
+		}
+
+		@Override
+		public void onTick(Hero hero) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mod(Hero hero) {
+			// TODO Auto-generated method stub
+			hero.setAccuracy(hero.getAccuracy()-10);
+		}
+
+		@Override
+		public void demod(Hero hero) {
+			// TODO Auto-generated method stub
+			hero.setAccuracy(hero.getAccuracy()+10);
+		}
+
+	}
 }

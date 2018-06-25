@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,7 +40,14 @@ public class HeroInfoComponent extends JComponent{
 			jp=new JPanel();
 			sp=new JScrollPane(jp);
 			sp.setPreferredSize(new Dimension(115, 500));
+			jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 			jp.add(new DeckPaintComponent(gf, hero));
+			if(hero.getLvlUpCards().size()>0) {
+				jp.add(new LvlUpCardRewardPaintComponent(gf, hero));
+			}		
+			if(hero.getSkillPoints()>0) {
+				jp.add(new StatsSkillComponent(gf, hero));
+			}
 			this.add(sp, BorderLayout.EAST);
 			this.add(jp_Equip, BorderLayout.CENTER);
 			this.add(jp_Stats, BorderLayout.NORTH);

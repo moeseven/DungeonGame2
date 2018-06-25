@@ -20,6 +20,8 @@ public class RaceDwarf extends CharacterRace{
 		hero.setStrength(hero.getStrength()+1);
 		hero.setDexterity(hero.getDexterity()-1);
 		hero.setSpellPower(hero.getSpellPower()-1);
+		hero.setResistFire(12);
+		hero.setResistCold(12);
 	}
 
 

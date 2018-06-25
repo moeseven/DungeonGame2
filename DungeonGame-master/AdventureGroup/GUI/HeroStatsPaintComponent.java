@@ -60,8 +60,16 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+player.getSelectedHero().computeDodge()+")");
 		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+player.getSelectedHero().computeSpellPower()+")");
 		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+" ("+player.getSelectedHero().computeSpellResist()+")");
+		lines.add("");
 		lines.add("armor: "+player.getSelectedHero().getArmor());
 		lines.add("thorns: "+player.getSelectedHero().getThorns());
+		lines.add("");
+		lines.add("fire resistance: "+player.getSelectedHero().getResistFire());
+		lines.add("cold resistance: "+player.getSelectedHero().getResistCold());
+		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison());
+		lines.add("bleed resistance: "+player.getSelectedHero().getResistBleed());
+		lines.add("stun resistance: "+player.getSelectedHero().getResistStun());
+		lines.add("");		
 		lines.add("wisdom: "+player.getSelectedHero().getDraw());
 		lines.add("mana: "+player.getSelectedHero().getManaPower());
 		lines.add("");

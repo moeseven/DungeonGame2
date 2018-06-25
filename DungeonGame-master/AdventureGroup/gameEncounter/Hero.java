@@ -14,6 +14,7 @@ public class Hero implements Serializable{
 
 	//private LinkedList<Item> inventory;
 	private LinkedList<Buff> buffs;
+	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
 	private Equipment equipment;
 	protected String name;
 	protected int gold;
@@ -220,6 +221,12 @@ public class Hero implements Serializable{
 		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
 		takeDamage(damagingHero, armorDamage);
 	}
+	//elemental damage
+	public void takeFireDamage(Hero damagingHero, int damage) {
+		int fireDamage=(int)(damage*(1-resistFire/100.0));
+		takeDamage(damagingHero,fireDamage);
+	}
+	//
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
 		player.getGame().log.addLine(name+ " died!");
@@ -284,17 +291,38 @@ public class Hero implements Serializable{
 		}
 	}
 	public void gainExp(int exp) {	
-		int t=GameEquations.experienceThresholdForLevelUp(level);
-		if(experience<t&&experience+exp>=t) {
-			levelUP();
+		//int t=GameEquations.experienceThresholdForLevelUp(level);
+		int expToNextLvl=GameEquations.experienceThresholdForLevelUp(level)-experience;
+		if(expToNextLvl<exp) {
+			experience=GameEquations.experienceThresholdForLevelUp(level);
+			levelUP();		
+			gainExp(exp-expToNextLvl);
+		}else {
+			experience+=exp;
 		}
-		experience+=exp;
 	}
 	public void levelUP() {
-		skillPoints+=1;
-		cardPoints+=1;
 		level+=1;
+		strength+=1;dexterity+=1;intelligence+=1;vitality+=1;
+		skillPoints+=1;
+		if(cardPoints==0) {
+			generatelvlUpCards();
+		}
+		cardPoints+=1;
 		
+		
+	}
+	public void generatelvlUpCards() {
+		lvlUpCards=new LinkedList<Card>();
+		for(int i=0; i<3;i++) {//cards should be cloned
+			try {
+				lvlUpCards.add((Card) charClass.getCardPool().get(Math.min(charClass.getCardPool().size()-1,(int)(Math.random()*charClass.getCardPool().size()))).clone());
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	//compute functions
 	public int computeAccuracy() {
@@ -331,8 +359,10 @@ public class Hero implements Serializable{
 	//A all stats to String method might be handy for gui
 
 	//
+	public int getPosition() {
+		return player.getHeroes().indexOf(this);
+	}
 	//Getters and Setters
-	
 	public int getGold() {
 		return gold;
 	}
@@ -584,6 +614,48 @@ public class Hero implements Serializable{
 	}
 	public void setSkillPoints(int skillPoints) {
 		this.skillPoints = skillPoints;
+	}
+	public int getResistFire() {
+		return resistFire;
+	}
+	public void setResistFire(int resistFire) {
+		this.resistFire = resistFire;
+	}
+	public int getResistCold() {
+		return resistCold;
+	}
+	public void setResistCold(int resistCold) {
+		this.resistCold = resistCold;
+	}
+	public int getResistPoison() {
+		return resistPoison;
+	}
+	public void setResistPoison(int resistPoison) {
+		this.resistPoison = resistPoison;
+	}
+	public int getResistBleed() {
+		return resistBleed;
+	}
+	public void setResistBleed(int resistBleed) {
+		this.resistBleed = resistBleed;
+	}
+	public int getResistStun() {
+		return resistStun;
+	}
+	public void setResistStun(int resistStun) {
+		this.resistStun = resistStun;
+	}
+	public LinkedList<Card> getLvlUpCards() {
+		return lvlUpCards;
+	}
+	public void setLvlUpCards(LinkedList<Card> lvlUpCards) {
+		this.lvlUpCards = lvlUpCards;
+	}
+	public int getCardPoints() {
+		return cardPoints;
+	}
+	public void setCardPoints(int cardPoints) {
+		this.cardPoints = cardPoints;
 	}
 	
 

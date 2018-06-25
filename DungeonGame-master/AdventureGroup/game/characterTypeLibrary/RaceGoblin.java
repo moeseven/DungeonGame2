@@ -24,6 +24,7 @@ public class RaceGoblin extends CharacterRace{
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*5.0));
 		hero.setExperienceValue(10);
+		hero.setResistFire(12);
 		//deck				
 	}
 

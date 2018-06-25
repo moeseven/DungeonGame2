@@ -138,7 +138,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//gold
-			rc.addRect(new ClickableRectangle("gold",210,50,55,20) {
+			rc.addRect(new ClickableRectangle("gold",210,70,55,20) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -151,7 +151,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//head
-			rc.addRect(new ClickableRectangle("head",60,10,40,40) {
+			rc.addRect(new ClickableRectangle("head",60,10,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -172,7 +172,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//body
-			rc.addRect(new ClickableRectangle("body",60,60,40,40) {
+			rc.addRect(new ClickableRectangle("body",60,70,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -193,7 +193,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//hand1
-			rc.addRect(new ClickableRectangle("hand1",10,20,40,40) {
+			rc.addRect(new ClickableRectangle("hand1",5,20,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -214,7 +214,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//hand2
-			rc.addRect(new ClickableRectangle("hand2",110,20,40,40) {
+			rc.addRect(new ClickableRectangle("hand2",115,20,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub

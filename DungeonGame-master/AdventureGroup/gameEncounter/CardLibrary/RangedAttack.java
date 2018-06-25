@@ -4,31 +4,30 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class CarefulSlash extends Card{
-	public CarefulSlash() {
+public class RangedAttack extends Card{
+	public RangedAttack() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
+		legalPositions[0]=false;
+		legalPositions[1]=false;
+		
 	}
 	public boolean applyEffect(Hero self) {
-			self.block((int)(self.computeBlockSkill()*0.75));
 			if(self.attackHero(self.getTarget())) {
-				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),0.75);
+				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),1.2);
 				return true;
 			}else {
 				return false;
 			}
-			
 	}
 	@Override
 	public String getName() {
-		return "careful slash";
+		return "ranged attack";
 	}
 	@Override
 	public String getCardText(Hero self) {
 		//TODO correct number display
-		return "75% damage + 75% block";
+		return "a ranged attack with a weapon";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
