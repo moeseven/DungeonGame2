@@ -8,10 +8,11 @@ import java.util.ListIterator;
 import game.CharacterClass;
 import game.CharacterRace;
 import game.Player;
+import game.RoomInteractionLibrary.StandardCorpse;
 
 public class Hero implements Serializable{
 
-	private LinkedList<Item> inventory;
+	//private LinkedList<Item> inventory;
 	private LinkedList<Buff> buffs;
 	private Equipment equipment;
 	protected String name;
@@ -76,11 +77,11 @@ public class Hero implements Serializable{
 		this.charClass=charClass;
 		buffs= new LinkedList<Buff>();
 		equipment= new Equipment(this);	
-		if(player!=null) {
-			this.inventory=player.getInventory();
-		}else {
-			inventory=new LinkedList<Item>();
-		}		
+//		if(player!=null) {
+//			this.inventory=player.getInventory();
+//		}else {
+//			inventory=new LinkedList<Item>();
+//		}		
 		deck=new Deck();
 		charRace.modifyHero(this);
 		charClass.modifyHero(this);		
@@ -184,15 +185,15 @@ public class Hero implements Serializable{
 			return false;
 		}
 	}
-	public boolean dealWeaponDamage(Hero hero, Item item) {//weapon damage str dependant or dexterity dependant
+	public boolean dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
 		boolean success=false;
 		 if(item instanceof Weapon) {
 			 Weapon weapon= (Weapon) item;
-			 int dmg=weapon.computeAttackDamage(strength);
+			 int dmg=(int)(mult*weapon.computeAttackDamage(strength,dexterity));
 			 hero.takeArmorDamage(this, dmg);
 			 success=true;
 		 }else {
-			 int dmg=GameEquations.FistDamage(strength);
+			 int dmg=(int)(mult*GameEquations.FistDamage(strength));
 			 hero.takeArmorDamage(this, dmg);
 			 success=true;
 		 }
@@ -222,6 +223,7 @@ public class Hero implements Serializable{
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
 		player.getGame().log.addLine(name+ " died!");
+		player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
 		block=0;
 		this.isDead=true;
 	}
@@ -231,7 +233,7 @@ public class Hero implements Serializable{
 	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
 		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
-		looter.getInventory().addAll(this.equipment.getAllEquippedItems());
+		gold=0;
 		getPlayer().getGame().log.addLine(name+" got looted");
 	}
 	public void discardHand() {
@@ -257,6 +259,8 @@ public class Hero implements Serializable{
 			return true;
 		}					
 	}
+	//inventory size
+	
 	//Buffs
 	public void buffHero(Buff buff) {
 		buffs.add(buff);
@@ -473,12 +477,12 @@ public class Hero implements Serializable{
 	public void setThorns(int thorns) {
 		this.thorns = thorns;
 	}
-	public LinkedList<Item> getInventory() {
-		return inventory;
-	}
-	public void setInventory(LinkedList<Item> inventory) {
-		this.inventory = inventory;
-	}
+//	public LinkedList<Item> getInventory() {
+//		return inventory;
+//	}
+//	public void setInventory(LinkedList<Item> inventory) {
+//		this.inventory = inventory;
+//	}
 	public int getSpeed() {
 		return speed;
 	}

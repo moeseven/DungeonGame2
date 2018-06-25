@@ -22,10 +22,7 @@ public class Main {
 	public static LinkedList<Room> roomChain;
 	public static Game game;
 	public static void main(String[] args) {
-		heroes= new LinkedList<Hero>();
-		heroes.add(new Hero("Irbal", null,new RaceElf(), new TypeArcher()));
-		heroes.add(new Hero("Mandor",null,new RaceHuman(),new TypeWarrior()));		
-		heroes.add(new Hero("Filt",null,new RaceHalfling(),new TypeThief()));
+		
 		roomChain=new LinkedList<Room>();
 		roomChain.add(new TrapRoom());
 		roomChain.add(new GoblinRoom1());
@@ -33,7 +30,12 @@ public class Main {
 		roomChain.add(new GoblinRoom1());
 		game = new Game(roomChain);
 		player = new Player(game);
-		game.setPlayer(player);		
+		game.setPlayer(player);	
+		heroes= new LinkedList<Hero>();
+		heroes.add(new Hero("Irbal", player,new RaceElf(), new TypeArcher()));
+		heroes.add(new Hero("Mandor",player,new RaceHuman(),new TypeWarrior()));		
+		heroes.add(new Hero("Filt",player,new RaceHalfling(),new TypeThief()));
+			
 		player.setAvailableHeroes(heroes);
 		player.setGold(200);
 

@@ -38,8 +38,9 @@ public class GuiInventory extends JPanel{
 		public void mousePressed(MouseEvent e){
 			//done
 			gf.windowswitch();
-			gf.revalidate();
-			gf.repaint();
+			gf.getRw().getGuiRoom().upadate();
+//			gf.revalidate();
+//			gf.repaint();
 		}
 	}
 	public HeroComponent getHc() {

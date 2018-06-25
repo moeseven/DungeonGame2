@@ -3,6 +3,7 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.RoomInteractionLibrary.ItemOnGround;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Item;
@@ -11,6 +12,7 @@ public class Player implements Serializable{
 	private Hero selectedHero;
 	protected LinkedList<Hero> heroes;
 	private LinkedList<Item> inventory;
+	private int inventoryCapacity;
 	private LinkedList<Hero> availableHeroes;
 	private Game game;
 	private int gold;
@@ -18,6 +20,7 @@ public class Player implements Serializable{
 		this.game=game;
 		heroes=new LinkedList<Hero>();
 		availableHeroes=new LinkedList<Hero>();
+		inventoryCapacity=100;
 		inventory=new LinkedList<Item>();
 		gold=0;
 	}
@@ -31,7 +34,7 @@ public class Player implements Serializable{
 				}
 			}
 			heroes.add(hero);
-			hero.setInventory(inventory);
+//			hero.setInventory(inventory);
 			hero.setPlayer(this);
 			selectedHero=hero;
 		}
@@ -40,7 +43,40 @@ public class Player implements Serializable{
 		if(heroes.size()>=1&&heroes.contains(hero)) {
 			heroes.remove(hero);
 			hero.setPlayer(null);
-			hero.setInventory(new LinkedList<Item>());
+//			hero.setInventory(new LinkedList<Item>());
+		}
+	}
+	public void addMultipleItemsToInventory(LinkedList<Item> items) {
+		//remove items form source and add to player inventory if there is space
+		LinkedList<Item> itemsTaken=new LinkedList<Item>();
+		for(int a=0;a<items.size();a++) {
+			addItemtoInventory(items.get(a));	
+			itemsTaken.add(items.get(a));
+		}
+		for(int a=0;a<itemsTaken.size();a++) {
+			items.remove(itemsTaken.get(a));
+		}
+	}
+	public boolean addItemtoInventory(Item item) {
+		boolean success;
+		int totalWeight=item.getWeight();
+		for(int i=0; i<inventory.size();i++) {
+			totalWeight+=inventory.get(i).getWeight();
+		}
+		if(totalWeight>inventoryCapacity) {
+			game.log.addLine("party is overburdened!");
+			success=false;
+		}else {
+			inventory.add(item);
+			success=true;
+		}
+		return success;
+	}
+	public void dropItemOnFloor(Item item) {
+		if(inventory.contains(item)) {
+			inventory.remove(item);
+			game.getRoom().getInteractions().add(new ItemOnGround(item,game.getRoom()));
+			game.log.addLine(item.getName()+" dropped!");
 		}
 	}
 	public Hero getSelectedHero() {

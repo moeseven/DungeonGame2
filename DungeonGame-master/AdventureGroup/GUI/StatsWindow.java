@@ -22,6 +22,11 @@ public class StatsWindow extends JFrame{
 		this.add(guiInv);
 		setLocation(10, 10);	
 	}
+	public void myUpdate() {
+		this.remove(guiInv);
+		guiInv=new GuiInventory(this);
+		this.add(guiInv);
+	}
 	public Game getGame() {
 		return game;
 	}
@@ -32,4 +37,11 @@ public class StatsWindow extends JFrame{
 		rw.setVisible(true);
 		this.setVisible(false);
 	}
+	public RoomWindow getRw() {
+		return rw;
+	}
+	public void setRw(RoomWindow rw) {
+		this.rw = rw;
+	}
+	
 }

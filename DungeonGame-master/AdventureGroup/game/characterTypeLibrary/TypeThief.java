@@ -2,6 +2,7 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.CardLibrary.BackStab;
 import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeThief extends CharacterClass{
@@ -9,6 +10,7 @@ public class TypeThief extends CharacterClass{
 	public TypeThief() {
 		name="thief";
 		items.add(new RustyBlade());
+		cards.add(new BackStab());
 	}
 
 	public void modifyHero(Hero hero) {

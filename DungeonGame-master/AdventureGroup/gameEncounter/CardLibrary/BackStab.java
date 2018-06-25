@@ -2,24 +2,32 @@ package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Weapon;
 
-public class Block extends Card{
-	public Block() {
+public class BackStab extends Card{
+	public BackStab() {
 		// TODO Auto-generated constructor stub
-		manaCost =1;
+		manaCost =2;
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block(self.computeBlockSkill());
+		if(self.getEquipment().getHand1() instanceof Weapon) {
+			Weapon weapon= (Weapon) self.getEquipment().getHand1();				
+			self.getTarget().takeDamage(self, (int)(1.8*weapon.computeAttackDamage(self.getStrength(),self.getDexterity())));
+			self.getDiscardPile().remove(this);
+		}else {
+			return false;
+		}
 		return true;
 	}
 	@Override
 	public String getName() {
-		return "parry";
+		return "back stab";
 	}
 	@Override
 	public String getCardText(Hero self) {
-		return "increase chnace of blocking";
+		//TODO correct number display
+		return "an unexpected stab in the back that penetrates armor can not be dodged or blocked";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
@@ -29,7 +37,7 @@ public class Block extends Card{
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 	@Override
 	public void buildLogEntry(Hero self) {

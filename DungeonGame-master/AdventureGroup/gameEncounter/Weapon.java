@@ -7,11 +7,11 @@ public abstract class Weapon extends Item{
 	protected  int baseDamage;
 	protected int damageRange;
 	protected int weaponRange;
-	public int computeAttackDamage(int strength) {
-		return Math.max(GameEquations.FistDamage(strength),(int) ((baseDamage+damageRange*Math.random())*(1+facStr*strength)*GameEquations.RequirementsPenaltyWeapon(strength, requiredStrength)));
+	public int computeAttackDamage(int strength, int dexterity) {
+		return (int) ((baseDamage+damageRange*Math.random())*GameEquations.damageBonus(facStr, strength, dexterity));
 	}
-	public String AttackDamageToString(int strength) {
-		return ""+(int) (baseDamage*(1+facStr*strength)*GameEquations.RequirementsPenaltyWeapon(strength, requiredStrength))+"-"+(int)((baseDamage+damageRange)*(1+facStr*strength)*GameEquations.RequirementsPenaltyWeapon(strength, requiredStrength));
+	public String AttackDamageToString(int strength, int dexterity) {
+		return ""+(int)(baseDamage*GameEquations.damageBonus(facStr, strength, dexterity))+"-"+(int)((baseDamage+damageRange)*GameEquations.damageBonus(facStr, strength, dexterity));
 	}
 	public void generateItemDescription() {
 		super.generateItemDescription();

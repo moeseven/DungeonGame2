@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public abstract class Item implements Serializable{
-	private int weight;
+	protected int weight=10;
 	private int goldValue=100;
 	protected int category;
-	protected int requiredStrength=1;
-	protected int requiredDexterity=1;
-	protected int requiredIntelligence=1;
-	protected int requiredVitality=1;
+	protected int requiredStrength=0;
+	protected int requiredDexterity=0;
+	protected int requiredIntelligence=0;
+	protected int requiredVitality=0;
 	protected ModableHeroStats stats;
 	protected LinkedList<String> description;
 	protected String name="";

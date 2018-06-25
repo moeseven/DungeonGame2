@@ -14,7 +14,7 @@ public class Cleave extends Card{
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getMonsters().get(i))) {
-						self.dealWeaponDamage(self.getFight().getMonsters().get(i), self.getEquipment().getHand1());
+						self.dealWeaponDamage(self.getFight().getMonsters().get(i), self.getEquipment().getHand1(),1);
 						return true;
 					}
 				}	
@@ -23,7 +23,7 @@ public class Cleave extends Card{
 			for(int i=0; i<self.getFight().getHeroes().size();i++) {
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
 					if(self.attackHero(self.getFight().getHeroes().get(i))) {
-						self.dealWeaponDamage(self.getFight().getHeroes().get(i), self.getEquipment().getHand1());
+						self.dealWeaponDamage(self.getFight().getHeroes().get(i), self.getEquipment().getHand1(),1);
 						return true;
 					}
 				}	

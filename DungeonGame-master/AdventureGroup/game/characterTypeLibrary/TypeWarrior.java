@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import game.CharacterClass;
 import gameEncounter.Hero;
 import gameEncounter.Item;
+import gameEncounter.CardLibrary.CarefulSlash;
 import gameEncounter.CardLibrary.Cleave;
+import gameEncounter.CardLibrary.Wisdom;
 import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeWarrior extends CharacterClass{
@@ -13,6 +15,7 @@ public class TypeWarrior extends CharacterClass{
 	public TypeWarrior() {
 		name="warrior";
 		items.add(new RustyBlade());
+		cards.add(new CarefulSlash());
 	}
 
 	public void modifyHero(Hero hero) {

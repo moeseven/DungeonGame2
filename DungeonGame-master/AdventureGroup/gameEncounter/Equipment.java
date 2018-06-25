@@ -16,15 +16,20 @@ public class Equipment implements Serializable{
 	}
 	public boolean equipItem(Item item) {
 		boolean success=true;
-		switch (item.getCategory()) {
-		case 0:  consume(item);break;
-        case 1:  equipHand1(item);break;
-        case 2:  equipHand2(item);break;
-        case 3:  equipBiHand(item);break;
-        case 4:  equipBody(item);break;
-        case 5:  equipHead(item);break;
-        default: success=false;
-		}
+		if(item.requiredDexterity<=hero.dexterity&&item.requiredStrength<=hero.strength&&item.requiredIntelligence<=hero.intelligence) {
+			switch (item.getCategory()) {
+			case 0:  consume(item);break;
+	        case 1:  equipHand1(item);break;
+	        case 2:  equipHand2(item);break;
+	        case 3:  equipBiHand(item);break;
+	        case 4:  equipBody(item);break;
+	        case 5:  equipHead(item);break;
+	        default: success=false;
+			}
+		}else {
+			hero.getPlayer().getGame().log.addLine(hero.getName()+" does not fullfill item requirements!");
+			success=false;
+		}		
 		return success;
 	}
 
@@ -57,16 +62,16 @@ public class Equipment implements Serializable{
 		return allItems;
 	}
 	private void consume(Item item) {
-		if(item.getCategory()==0&&hero.getInventory().contains(item)) {
+		if(item.getCategory()==0&&hero.getPlayer().getInventory().contains(item)) {
 			item.mod(hero);
-			hero.getInventory().remove(item);
+			hero.getPlayer().getInventory().remove(item);
 		}	
 		
 	}
 	public void equipHand1(Item item) {
 		if(item.getCategory()==1) {
 			unequipHand1();
-			hero.getInventory().remove(item);			
+			hero.getPlayer().getInventory().remove(item);			
 			hand1=item;					
 			item.mod(hero);
 		}else {
@@ -77,7 +82,7 @@ public class Equipment implements Serializable{
 		if(item.getCategory()==2) {
 			unequipHand2();
 			hand2=item;	
-			hero.getInventory().remove(item);	
+			hero.getPlayer().getInventory().remove(item);	
 			item.mod(hero);	
 		}else {
 			equipBiHand(item);
@@ -90,7 +95,7 @@ public class Equipment implements Serializable{
 			unequipHand2();
 			hand1=item;
 			hand2=item;
-			hero.getInventory().remove(item);	
+			hero.getPlayer().getInventory().remove(item);	
 			item.mod(hero);
 		}
 			
@@ -99,7 +104,7 @@ public class Equipment implements Serializable{
 		if(item.getCategory()==4) {
 			unequipBody();
 			body=item;
-			hero.getInventory().remove(item);	
+			hero.getPlayer().getInventory().remove(item);	
 			item.mod(hero);
 		}
 			
@@ -108,7 +113,7 @@ public class Equipment implements Serializable{
 		if(item.getCategory()==5) {
 			unequipHead();
 			head=item;	
-			hero.getInventory().remove(item);	
+			hero.getPlayer().getInventory().remove(item);	
 			item.mod(hero);
 		}
 			
@@ -116,7 +121,7 @@ public class Equipment implements Serializable{
 	public void unequipHand1() {
 		if(hand1!=null) {
 			hand1.demod(hero);
-			hero.getInventory().add(hand1);		
+			hero.getPlayer().getInventory().add(hand1);		
 			if(hand1==hand2) {//clean biHand removal
 			hand2=null;
 		}	
@@ -127,7 +132,7 @@ public class Equipment implements Serializable{
 	public void unequipHand2() {
 		if(hand2!=null) {
 			hand2.demod(hero);
-			hero.getInventory().add(hand2);		
+			hero.getPlayer().getInventory().add(hand2);		
 			if(hand1==hand2) {//clean biHand removal
 				hand1=null;
 			}
@@ -137,7 +142,7 @@ public class Equipment implements Serializable{
 	public void unequipBiHand() {
 		if(hand2!=null) {
 			hand2.demod(hero);
-			hero.getInventory().add(hand2);
+			hero.getPlayer().getInventory().add(hand2);
 		}
 		hand1=null;		
 		hand2=null;
@@ -145,14 +150,14 @@ public class Equipment implements Serializable{
 	public void unequipBody() {
 		if(body!=null) {
 			body.demod(hero);
-			hero.getInventory().add(body);
+			hero.getPlayer().getInventory().add(body);
 		}		
 		body=null;
 	}
 	public void unequipHead() {
 		if(head!=null) {
 			head.demod(hero);
-			hero.getInventory().add(head);
+			hero.getPlayer().getInventory().add(head);
 		}		
 		head=null;
 	}

@@ -11,9 +11,9 @@ public class RustyBlade extends ItemHand1{
 		super();
 		name="rusty blade";
 		setGoldValue(7);
-		this.baseDamage=3;
-		this.damageRange=10;
-		this.facStr=0.06;
+		this.baseDamage=5;
+		this.damageRange=8;
+		this.facStr=0.85;
 		this.weaponRange=2;
 	}
 

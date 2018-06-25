@@ -19,7 +19,7 @@ public class SpikeTrap extends RoomInteraction{
 		name="spike trap";
 		// TODO Auto-generated constructor stub
 		trapStats=new Hero(name, null, new genericCharacterRace(), new genericCharacterClass());
-		trapStats.setAccuracy(8);
+		trapStats.setAccuracy(9);
 	}
 
 	@Override

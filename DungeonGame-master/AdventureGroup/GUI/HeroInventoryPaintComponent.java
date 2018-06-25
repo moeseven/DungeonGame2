@@ -40,11 +40,11 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
-					if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>0) {
-						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
-						if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>1) {
-							gw.getGame().getPlayer().getSelectedHero().getInventory().addLast(gw.getGame().getPlayer().getSelectedHero().getInventory().removeFirst());
-							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
+					if(gw.getGame().getPlayer().getInventory().size()>0) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+						if(gw.getGame().getPlayer().getInventory().size()>1) {
+							gw.getGame().getPlayer().getInventory().addLast(gw.getGame().getPlayer().getInventory().removeFirst());
+							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 						}
 					}					
 						
@@ -72,13 +72,41 @@ public class HeroInventoryPaintComponent extends JComponent{
 					}					
 				}		
 			});
+			//drop item on floor
+			rc.addRect(new ClickableRectangle("drop",210,35,55,20) {
+
+				@Override
+				public void onClick() {
+					// TODO Auto-generated method stub
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+							//drop item
+							gw.getGame().getPlayer().dropItemOnFloor(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+						}else {
+							//unequip then drop
+							gw.getGame().getPlayer().getSelectedHero().getEquipment().unequipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+							gw.getGame().getPlayer().dropItemOnFloor(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+						}	
+						if(gw.getGame().getPlayer().getInventory().size()>0) {
+							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+						}
+					}
+				}
+
+				@Override
+				public void updateCaption() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 			//equip/unequip/use
 			rc.addRect(new ClickableRectangle("equip",210,10,55,20) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
-						if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 							//equip
 							gw.getGame().getPlayer().getSelectedHero().getEquipment().equipItem(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
 						}else {
@@ -98,7 +126,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 						caption.removeFirst();
 						caption.add("use");
 					}else {
-						if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 							caption.removeFirst();						
 							caption.addFirst(name);
 						}else {

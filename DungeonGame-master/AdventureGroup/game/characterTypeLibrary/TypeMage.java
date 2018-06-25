@@ -2,6 +2,7 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.CardLibrary.Channel;
 import gameEncounter.CardLibrary.SleepCharm;
 import gameEncounter.CardLibrary.Wisdom;
 import gameEncounter.ItemLibrary.RustyBlade;
@@ -13,6 +14,7 @@ public class TypeMage extends CharacterClass{
 		items.add(new RustyBlade());
 		cards.add(new SleepCharm());
 		cards.add(new Wisdom());
+		cards.add(new Channel());
 	}
 
 	public void modifyHero(Hero hero) {

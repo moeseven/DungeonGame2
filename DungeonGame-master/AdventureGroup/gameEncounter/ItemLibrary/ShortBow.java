@@ -13,7 +13,7 @@ public class ShortBow extends ItemBiHand{
 		setGoldValue(190);
 		this.baseDamage=4;
 		this.damageRange=10;
-		this.facStr=0.01;
+		this.facStr=0.1;
 		this.weaponRange=10;
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-4;
 		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-4;

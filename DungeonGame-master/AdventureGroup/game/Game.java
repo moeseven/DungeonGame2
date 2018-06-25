@@ -11,6 +11,7 @@ import tools.MyLog;
 public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
+public int day;
 public MyLog log;
 private Room room;
 private Room town;
@@ -18,6 +19,7 @@ private LinkedList<Room> roomChain;
 private LinkedList<Quest> availableQuests;
 public Game(LinkedList<Room> roomChain) {
 	super();
+	day=1;
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();
 	this.roomChain=roomChain;
@@ -75,9 +77,13 @@ public void enterNextRoom() {
 	room.prepareRoomAndEnter(this);
 	
 }
+public void retreatHeroes() {
+	this.enterRoom(town);
+	day+=1;
+	log.addLine("Day: "+day);
+}
 public Room getTown() {
-	// TODO Auto-generated method stub
-	return null;
+	return town;
 }
 public LinkedList<Quest> getAvailableQuests() {
 	return availableQuests;

@@ -1,7 +1,7 @@
 package gameEncounter;
 
 public class GameEquations {
-	//all the attribut bonus calculation SUBJECT to CHANGE
+	//all the attribute bonus calculation SUBJECT to CHANGE
 	
 	//speed calculation from dexterity and base speed
 	public static int speedCalc(int baseSpeed, int dexterity) {
@@ -15,6 +15,10 @@ public class GameEquations {
 	//dodge calculation from dexterity (same as accuracy calc)
 	public static int dodgeCalc(int baseDodge, int dexterity) {
 		return (int) (baseDodge*(1+dexterity/20.0));
+	}
+	//damage factor from strength and dexterity
+	public static double damageBonus(double strfac,int strength, int dexterity) {
+		return 1+(strfac*strength+(1-strfac)*dexterity)/30;
 	}
 	//blockskill and attackskill calculation from str/dex
 	public static int blockAttackSkillCalc(int baseBlockAttackSkill, int str, int dex) {

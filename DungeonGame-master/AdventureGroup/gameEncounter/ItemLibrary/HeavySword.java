@@ -13,7 +13,7 @@ public class HeavySword extends ItemBiHand{
 		setGoldValue(175);
 		this.baseDamage=12;
 		this.damageRange=15;
-		this.facStr=0.1;
+		this.facStr=0.95;
 		this.weaponRange=3;
 		this.requiredStrength=20;
 		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-4;

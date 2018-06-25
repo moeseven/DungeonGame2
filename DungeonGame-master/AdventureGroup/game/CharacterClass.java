@@ -11,7 +11,7 @@ public abstract class CharacterClass extends CharacterType{
 	public void modifyHero(Hero hero) {
 		// TODO Auto-generated method stub
 		for(int i=0; i<items.size();i++) {
-			hero.getInventory().add(items.get(i));
+			hero.getPlayer().getInventory().add(items.get(i));
 			hero.getEquipment().equipItem(items.get(i));
 		}
 		for(int i=0; i<cards.size();i++) {

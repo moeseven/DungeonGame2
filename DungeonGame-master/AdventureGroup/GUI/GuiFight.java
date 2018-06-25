@@ -3,7 +3,9 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -27,6 +29,7 @@ public class GuiFight extends JPanel{
 	private CombatComponent mc;
 	private LogComponent lc;
 	private JButton b;
+	private JButton buttonRetreat;
 	private JPanel jp_mid_1;
 	private JPanel jp_south;
 	private JTextField tf;
@@ -51,6 +54,12 @@ public class GuiFight extends JPanel{
 			}
 		}
 	}
+	private class mlRetreat extends MouseAdapter{
+		public void mousePressed(MouseEvent e){
+			fw.getGame().retreatHeroes();
+			fw.windowswitch();
+		}
+	}
 	public void myUpdate() {
 		// TODO Auto-generated method stub
 		hc=new HeroComponent(this.fw);
@@ -62,9 +71,15 @@ public class GuiFight extends JPanel{
 		jp_mid_1.add(hc,BorderLayout.CENTER);
 		jp_mid_1.add(lc,BorderLayout.SOUTH);
 		this.add(jp_mid_1,BorderLayout.CENTER);
+		jp_south= new JPanel();
+		jp_south.setLayout(new FlowLayout());
 		b=new JButton("end turn");
 		b.addMouseListener(new ml());
-		this.add(b,BorderLayout.SOUTH);
+		jp_south.add(b);
+		buttonRetreat= new JButton("retreat");
+		buttonRetreat.addMouseListener(new mlRetreat());
+		jp_south.add(buttonRetreat);
+		this.add(jp_south,BorderLayout.SOUTH);
 	}
 	public void upadate(){
 		this.remove(jp_mid_1);

@@ -87,3 +87,6 @@
 /GuiFight$LogComponent.class
 /LogComponent.class
 /HeroFightManaComponent.class
+/HeroInventoryPaintComponent$9.class
+/RoomButtonComponent$mouseListenerRetreat.class
+/GuiFight$mlRetreat.class

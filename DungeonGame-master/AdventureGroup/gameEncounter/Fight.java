@@ -70,8 +70,7 @@ public class Fight implements Serializable{
 		LinkedList<Hero> dead= new LinkedList<Hero>();
 		for(int i=0; i<monsters.size();i++) {
 			if(monsters.get(i).isDead()) {//remove bodies from fight and handle experience
-				exp=monsters.get(i).getExperienceValue();
-				game.getRoom().getInteractions().add(new StandardCorpse(monsters.get(i))); //generate corpses
+				exp=monsters.get(i).getExperienceValue();				
 				dead.add(monsters.get(i));
 				for (Hero h: heroes) {//give experience to heroes
 						h.gainExp((int)(1.0+(exp/heroes.size())));			
@@ -83,9 +82,6 @@ public class Fight implements Serializable{
 		}
 		for(int i=0; i<heroes.size();i++) {
 			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
-				game.getRoom().getInteractions().add(new StandardCorpse(heroes.get(i))); //generate corpses
-				//add items to corpse
-				
 				dead.add(heroes.get(i));
 			}	
 		}

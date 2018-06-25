@@ -12,7 +12,7 @@ public class BasicAttack extends Card{
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
-				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1());
+				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),1);
 				return true;
 			}else {
 				return false;
@@ -25,7 +25,7 @@ public class BasicAttack extends Card{
 	@Override
 	public String getCardText(Hero self) {
 		//TODO correct number display
-		return "deal "+ 0+" physical damage";
+		return "a basic attack with a weapon";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

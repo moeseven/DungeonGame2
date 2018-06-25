@@ -5,16 +5,16 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ModableHeroStats;
 
-public class ShortSword extends ItemHand1{
+public class Dagger extends ItemHand1{
 
-	public ShortSword() {
+	public Dagger() {
 		super();
-		name="short sword";
-		setGoldValue(150);
-		this.baseDamage=9;
+		name="dagger";
+		setGoldValue(110);
+		this.baseDamage=7;
 		this.damageRange=8;
-		this.facStr=0.85;
-		this.weaponRange=2;
+		this.facStr=0.35;
+		this.weaponRange=1;
 	}
 
 }

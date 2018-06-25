@@ -99,10 +99,10 @@ public class GuiRoom extends JPanel{
 			public void onClick() {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
-					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
-					if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>1) {
-						gw.getGame().getPlayer().getSelectedHero().getInventory().addLast(gw.getGame().getPlayer().getSelectedHero().getInventory().removeFirst());
-						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
+					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					if(gw.getGame().getPlayer().getInventory().size()>1) {
+						gw.getGame().getPlayer().getInventory().addLast(gw.getGame().getPlayer().getInventory().removeFirst());
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 					}
 				}					
 					
@@ -156,7 +156,7 @@ public class GuiRoom extends JPanel{
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
-					if(gw.getGame().getPlayer().getSelectedHero().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+					if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 						//sell
 						shop.getItems().add(item);
 						gw.getGame().getPlayer().getInventory().remove(item);
@@ -168,9 +168,10 @@ public class GuiRoom extends JPanel{
 						if(shop.getItems().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 							//buy
 							if(gw.getGame().getPlayer().getGold()>=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue()) {
-								gw.getGame().getPlayer().setGold(gw.getGame().getPlayer().getGold()-gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue());
-								gw.getGame().getPlayer().getInventory().add(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
-								shop.getItems().remove(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+								if(gw.getGame().getPlayer().addItemtoInventory(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+									gw.getGame().getPlayer().setGold(gw.getGame().getPlayer().getGold()-gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue());
+									shop.getItems().remove(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
+								}								
 							}
 							if(shop.getItems().size()>0) {
 								gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());

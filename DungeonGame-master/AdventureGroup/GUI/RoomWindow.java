@@ -39,6 +39,7 @@ public class RoomWindow extends JFrame{
 		if(fw!=null){
 			fw.setVisible(false);
 		}		
+		sw.myUpdate();
 		sw.setVisible(true);
 		this.setVisible(false);
 	}

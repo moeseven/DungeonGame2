@@ -40,7 +40,7 @@ public class HeroInfoComponent extends JComponent{
 			sp=new JScrollPane(jp);
 			sp.setPreferredSize(new Dimension(115, 500));
 			jp.add(new DeckPaintComponent(gf, hero));
-			this.add(sp, BorderLayout.EAST); //not visible!
+			this.add(sp, BorderLayout.EAST);
 			this.add(jp_Equip, BorderLayout.CENTER);
 			this.add(jp_Stats, BorderLayout.NORTH);
 			setVisible(true);
