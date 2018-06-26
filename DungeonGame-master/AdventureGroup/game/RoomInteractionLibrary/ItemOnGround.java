@@ -23,7 +23,7 @@ public class ItemOnGround extends RoomInteraction{
 	@Override
 	public void onInteraction(Hero hero) {
 		// TODO Auto-generated method stub
-		if(item!=null) {
+		if(item!=null&&!hero.isDead()) {
 			hero.getPlayer().addItemtoInventory(item);
 			room.getInteractions().remove(this);
 		}		

@@ -293,8 +293,9 @@ protected void paintComponent(Graphics g){
 					}else {
 						if(tavern.getHeroes().contains(hero)) {
 							//hire
-							gw.getGame().getPlayer().addHero(hero);
-							tavern.getHeroes().remove(hero);
+							if(gw.getGame().getPlayer().addHero(hero)) {
+								tavern.getHeroes().remove(hero);
+							}					
 							if(tavern.getHeroes().size()>0) {
 								gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
 							}

@@ -26,7 +26,7 @@ public class LvlUpCardRewardPaintComponent extends JComponent{
 			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.ORANGE));
-			super.setPreferredSize(new Dimension(cardWidth+1,hero.getLvlUpCards().size()*cardHeight+10));
+			super.setPreferredSize(new Dimension(cardWidth+1,hero.getLvlUpCards().size()*cardHeight+210));
 			MyMouseListener ml = new MyMouseListener();
 			addMouseListener(ml);
 			setVisible(true);
@@ -41,14 +41,14 @@ public class LvlUpCardRewardPaintComponent extends JComponent{
 				int i=Math.round(y/cardHeight);
 				if (i<hero.getCharClass().getCardPool().size()) {					
 					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getLvlUpCards().get(i));
-					gw.getGame().getPlayer().getSelectedHero().getDeck().addCard(gw.getGame().getPlayer().getSelectedHero().getSelectedCard());
-					gw.getGame().getPlayer().getSelectedHero().setCardPoints(gw.getGame().getPlayer().getSelectedHero().getCardPoints()-1);
-					gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());
-					if(gw.getGame().getPlayer().getSelectedHero().getCardPoints()>0) {
-						gw.getGame().getPlayer().getSelectedHero().generatelvlUpCards();
-					}
-					
+					gw.getGame().getPlayer().getSelectedHero().getDeck().getCards().addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedCard());
+										
 				}	
+				gw.getGame().getPlayer().getSelectedHero().setCardPoints(gw.getGame().getPlayer().getSelectedHero().getCardPoints()-1);
+				gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());
+				if(gw.getGame().getPlayer().getSelectedHero().getCardPoints()>0) {
+					gw.getGame().getPlayer().getSelectedHero().generatelvlUpCards();
+				}
 				gw.myUpdate();
 				gw.repaint();			
 			}else{
@@ -70,6 +70,7 @@ public class LvlUpCardRewardPaintComponent extends JComponent{
 				g.drawRect(1, 1+i*cardHeight, cardWidth, cardHeight);
 			}
 		}
+		g.drawString("skip", 10, 15+3*cardHeight);
 	}
 }
 

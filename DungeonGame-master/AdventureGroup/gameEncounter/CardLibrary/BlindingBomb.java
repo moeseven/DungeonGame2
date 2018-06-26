@@ -5,7 +5,7 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class BlindingBomb extends Spell{
+public class BlindingBomb extends SpellnoTarget{
 	public BlindingBomb() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
@@ -38,9 +38,9 @@ public class BlindingBomb extends Spell{
 		return "blinding bomb";
 	}
 	@Override
-	public String getCardText(Hero self) {
+	public String getCardText() {
 		//TODO correct number display
-		return "blind all enemies";
+		return super.getCardText()+"blind all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

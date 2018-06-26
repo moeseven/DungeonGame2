@@ -14,6 +14,6 @@ public class PlateArmor extends ItemBody{
 		requiredStrength=17;
 		setGoldValue(400);
 		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=12;
-		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-2;
+		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-1;
 	}	
 }

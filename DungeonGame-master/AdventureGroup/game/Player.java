@@ -10,6 +10,8 @@ import gameEncounter.Item;
 
 public class Player implements Serializable{
 	private Hero selectedHero;
+	private int points=0;
+	private Quest activeQuest;
 	protected LinkedList<Hero> heroes;
 	private LinkedList<Item> inventory;
 	private int inventoryCapacity;
@@ -23,8 +25,11 @@ public class Player implements Serializable{
 		inventoryCapacity=100;
 		inventory=new LinkedList<Item>();
 		gold=0;
+		getAvailableHeroes().add(game.generator.generateRandomHero(this));
+		getAvailableHeroes().add(game.generator.generateRandomHero(this));
+		getAvailableHeroes().add(game.generator.generateRandomHero(this));
 	}
-	public void addHero(Hero hero) {// do not exeed maximum size
+	public boolean addHero(Hero hero) {// do not exeed maximum size
 		if(heroes.size()<4) {
 			for(int a=0; a<heroes.size();a++) {// prevent equal names
 				for(int b=0; b<heroes.size();b++) {
@@ -37,6 +42,9 @@ public class Player implements Serializable{
 //			hero.setInventory(inventory);
 			hero.setPlayer(this);
 			selectedHero=hero;
+			return true;
+		}else {
+			return false;
 		}
 	}
 	public void removeHero(Hero hero) {
@@ -114,6 +122,18 @@ public class Player implements Serializable{
 	}
 	public void setAvailableHeroes(LinkedList<Hero> availableHeroes) {
 		this.availableHeroes = availableHeroes;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	public Quest getActiveQuest() {
+		return activeQuest;
+	}
+	public void setActiveQuest(Quest activeQuest) {
+		this.activeQuest = activeQuest;
 	}
 	
 }

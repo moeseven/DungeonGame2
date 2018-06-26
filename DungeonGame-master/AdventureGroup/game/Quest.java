@@ -4,9 +4,10 @@ import java.util.LinkedList;
 
 public class Quest {
 private String description;
+private boolean finished;
 private LinkedList<Room> rooms;
 	public Quest() {
-		
+		finished=false;
 	}
 	public String getDescription() {
 		return description;

@@ -18,8 +18,8 @@ public class DivineGrace extends Spell{
 		return "divine grace";
 	}
 	@Override
-	public String getCardText(Hero self) {
-		return "heal target for "+(int)(9+(self.computeSpellPower()/1.5));
+	public String getCardText() {
+		return super.getCardText()+"heals target (single use)";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

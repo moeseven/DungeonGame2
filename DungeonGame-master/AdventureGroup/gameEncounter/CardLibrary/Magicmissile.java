@@ -12,8 +12,7 @@ public class Magicmissile extends Spell{
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getPlayer().getGame().log.addLine("casting "+getName()+" on "+self.getTarget().getName());
-				self.getTarget().takeDamage(self, (int)(1+self.getSpellPower()/1.5));
+				self.getTarget().takeDamage(self, (int)(1+self.getSpellPower()/1.6));
 				return true;
 			}else {
 				return false;
@@ -24,9 +23,9 @@ public class Magicmissile extends Spell{
 		return "magic missile";
 	}
 	@Override
-	public String getCardText(Hero self) {
+	public String getCardText() {
 		//TODO correct number display
-		return "damaging spell";
+		return super.getCardText()+"damage scales with spellpower";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

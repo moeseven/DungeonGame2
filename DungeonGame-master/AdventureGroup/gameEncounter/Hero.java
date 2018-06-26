@@ -61,6 +61,9 @@ public class Hero implements Serializable{
 	protected int vitality;
 	protected int dexterity;
 	protected int intelligence;
+	protected int bleed;
+	protected int poison;
+	protected int cold;
 	//current values
 	private int currentSpeed;
 	private LinkedList<Card> drawPile;
@@ -143,7 +146,28 @@ public class Hero implements Serializable{
 		}
 		hand.add(drawPile.removeFirst());
 	}
-	public void turnBegin(){		
+	public void applyNegativeTurnEffects() {
+		//poison
+		if(poison>0) {			
+			if(Math.random()<resistPoison/100.0) {
+				poison-=(int)Math.max(1, poison/2.0);
+				player.getGame().log.addLine(name+" resisted poison");
+			}
+			takeDamage(this, getPoison());			
+		}		
+		//bleed
+		if(bleed>0) {
+			takeDamage(this, getBleed());
+			bleed-=1;
+		}
+		//cold
+		if(cold>0) {
+			cold-=1;
+		}		
+		//
+	}
+	public void turnBegin(){
+		applyNegativeTurnEffects();
 		this.discardHand();
 		this.block=0;
 		this.mana=manaPower;
@@ -152,6 +176,7 @@ public class Hero implements Serializable{
 		}
 		this.buffTick();
 		this.setSelectedCard(hand.getFirst());
+		
 	}
 	public void block(int block) {
 		player.getGame().log.addLine(name+" blocks for "+block);
@@ -186,19 +211,17 @@ public class Hero implements Serializable{
 			return false;
 		}
 	}
-	public boolean dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
-		boolean success=false;
+	public int dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
+		int dmg;
 		 if(item instanceof Weapon) {
 			 Weapon weapon= (Weapon) item;
-			 int dmg=(int)(mult*weapon.computeAttackDamage(strength,dexterity));
+			 dmg=(int)(mult*weapon.computeAttackDamage(strength,dexterity));
 			 hero.takeArmorDamage(this, dmg);
-			 success=true;
 		 }else {
-			 int dmg=(int)(mult*GameEquations.FistDamage(strength));
+			 dmg=(int)(mult*GameEquations.FistDamage(strength));
 			 hero.takeArmorDamage(this, dmg);
-			 success=true;
 		 }
-		 return success;		
+		 return dmg;		
 	}
 	public void dealDamage(Hero hero,int damage) {
 		hero.takeArmorDamage(this,damage);
@@ -221,18 +244,16 @@ public class Hero implements Serializable{
 		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
 		takeDamage(damagingHero, armorDamage);
 	}
-	//elemental damage
-	public void takeFireDamage(Hero damagingHero, int damage) {
-		int fireDamage=(int)(damage*(1-resistFire/100.0));
-		takeDamage(damagingHero,fireDamage);
-	}
-	//
+
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
-		player.getGame().log.addLine(name+ " died!");
-		player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
-		block=0;
-		this.isDead=true;
+		if(!isDead) {
+			player.getGame().log.addLine(name+ " died!");
+			player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
+			block=0;
+			this.isDead=true;	
+		}
+		player.getGame().log.addLine(name+ " allready dead");
 	}
 	public void loot(Hero looted) {		
 		looted.getLooted(this);
@@ -309,8 +330,7 @@ public class Hero implements Serializable{
 			generatelvlUpCards();
 		}
 		cardPoints+=1;
-		
-		
+		player.getGame().log.addLine(this.getName()+" leveled up to level "+level);		
 	}
 	public void generatelvlUpCards() {
 		lvlUpCards=new LinkedList<Card>();
@@ -324,12 +344,42 @@ public class Hero implements Serializable{
 			
 		}
 	}
-	//compute functions
+	//////
+	//bleed/poison/fire/cold
+	public boolean bleed(int bleedAmount) {
+		if(Math.random()<resistBleed/100.0) {
+			player.getGame().log.addLine(name+" resisted bleeding");
+			return false;
+		}else {
+			bleed+=bleedAmount;
+			player.getGame().log.addLine(name+" bleeds");
+			return true;
+		}
+	}
+	public boolean poison(int poisonAmount) {
+		poison+=poisonAmount;
+		player.getGame().log.addLine(name+" got poisoned");
+		return true;
+	}
+	//elemental damage
+	public void takeFireDamage(Hero damagingHero, int damage) {
+		int fireDamage=(int)(damage*(1-resistFire/100.0));
+		damagingHero.getPlayer().getGame().log.addLine("fire damage:");
+		takeDamage(damagingHero,fireDamage);
+	}
+	public void takeColdDamage(Hero damagingHero, int damage) {
+		int coldDamage=(int)(damage*(1-resistCold/100.0));
+		cold+=coldDamage;
+		damagingHero.getPlayer().getGame().log.addLine("cold damage:");
+		takeDamage(damagingHero,coldDamage);
+	}
+	//
+	//compute functions with cold effect
 	public int computeAccuracy() {
-		return GameEquations.dodgeCalc(accuracy, dexterity);
+		return GameEquations.dodgeCalc(accuracy-cold, dexterity);
 	}
 	public int computeDodge() {
-		return GameEquations.dodgeCalc(dodge, dexterity);
+		return GameEquations.dodgeCalc(dodge-cold, dexterity);
 	}
 	public int computeAttackSkill() {
 		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
@@ -338,16 +388,16 @@ public class Hero implements Serializable{
 		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
 	}
 	public int computeSpellPower() {
-		return GameEquations.spellPowerCalc(spellPower, intelligence);
+		return GameEquations.spellPowerCalc(spellPower-cold, intelligence);
 	}
 	public int computeSpellResist() {
-		return GameEquations.spellPowerCalc(spellResist, intelligence);
+		return GameEquations.spellPowerCalc(spellResist-cold, intelligence);
 	}
 	public int computeMaxHp() {
 		return GameEquations.maxHealthCalc(baseHp, vitality);
 	}
 	public int computeSpeed() {
-		return GameEquations.speedCalc(speed, dexterity);
+		return GameEquations.speedCalc(speed-cold, dexterity);
 	}
 	
 	
@@ -656,6 +706,24 @@ public class Hero implements Serializable{
 	}
 	public void setCardPoints(int cardPoints) {
 		this.cardPoints = cardPoints;
+	}
+	public int getBleed() {
+		return bleed;
+	}
+	public void setBleed(int bleed) {
+		this.bleed = bleed;
+	}
+	public int getPoison() {
+		return poison;
+	}
+	public void setPoison(int poison) {
+		this.poison = poison;
+	}
+	public int getCold() {
+		return cold;
+	}
+	public void setCold(int cold) {
+		this.cold = cold;
 	}
 	
 

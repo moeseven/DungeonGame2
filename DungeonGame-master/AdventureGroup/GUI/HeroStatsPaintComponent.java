@@ -73,6 +73,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("wisdom: "+player.getSelectedHero().getDraw());
 		lines.add("mana: "+player.getSelectedHero().getManaPower());
 		lines.add("");
+		lines.add("Level: "+player.getSelectedHero().getLevel());
 		lines.add("experience: "+player.getSelectedHero().getExperience()+"/"+GameEquations.experienceThresholdForLevelUp(player.getSelectedHero().getLevel()));		
 		for(int i=0; i<lines.size();i++) {
 			if(i<=height) {

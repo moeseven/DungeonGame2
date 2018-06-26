@@ -24,7 +24,7 @@ public class HandPaintComponent extends JComponent{
 		public HandPaintComponent(FightWindow fw){
 			this.fw=fw;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(1000,90));
+			super.setPreferredSize(new Dimension(1000,120));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
@@ -56,9 +56,11 @@ public class HandPaintComponent extends JComponent{
 			g.setColor(Color.black);
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost(), 5+i*100, 10);
+			
 			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1+i*100, 1, 100, 80);
+				g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getCardText(), 100, 90);
 			}
 		}
 	}

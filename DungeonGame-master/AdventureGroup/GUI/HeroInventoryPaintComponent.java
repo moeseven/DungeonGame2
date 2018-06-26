@@ -33,6 +33,9 @@ public class HeroInventoryPaintComponent extends JComponent{
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
 			setVisible(true);
+			if(gw.getGame().getPlayer().getInventory().size()>0) {
+				gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+			}
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
@@ -241,12 +244,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());
-//				if(gw.getGame().getPlayer().getSelectedHero().getInventory().size()>0){
-//					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getInventory().getFirst());
-//				}else {
-//					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(null);
-//				}				
+				rc.triggerClick(e.getX(), e.getY());				
 				gw.repaint();				
 			}else{
 				if (e.getButton()==3){
@@ -263,6 +261,9 @@ public class HeroInventoryPaintComponent extends JComponent{
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
+		}
+		if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
+			g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(), 200, 180);
 		}
 	}
 }

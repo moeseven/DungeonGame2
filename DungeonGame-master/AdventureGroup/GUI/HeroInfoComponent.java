@@ -23,13 +23,14 @@ public class HeroInfoComponent extends JComponent{
 		private JPanel jp;
 		private JPanel jp_Equip;
 		private JPanel jp_Stats;
+		private JPanel jp_Deck;
 		private JScrollPane sp;
 		private StatsWindow gf;
 		public HeroInfoComponent(StatsWindow gf,Hero hero){
 			this.gf=gf;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(500,500));
+			super.setPreferredSize(new Dimension(500,900));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
@@ -37,18 +38,21 @@ public class HeroInfoComponent extends JComponent{
 			jp_Equip.add(new HeroInventoryPaintComponent(gf));
 			jp_Stats=new JPanel();
 			jp_Stats.add(new HeroStatsPaintComponent(gf.getGame().getPlayer()));
+			jp_Deck=new JPanel();
+			jp_Deck.setLayout(new BorderLayout());			
 			jp=new JPanel();
 			sp=new JScrollPane(jp);
-			sp.setPreferredSize(new Dimension(115, 500));
-			jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
+			sp.setPreferredSize(new Dimension(115, 900));
+			//jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 			jp.add(new DeckPaintComponent(gf, hero));
+			jp_Deck.add(sp,BorderLayout.EAST);
 			if(hero.getLvlUpCards().size()>0) {
-				jp.add(new LvlUpCardRewardPaintComponent(gf, hero));
+				jp_Deck.add(new LvlUpCardRewardPaintComponent(gf, hero),BorderLayout.WEST);
 			}		
 			if(hero.getSkillPoints()>0) {
-				jp.add(new StatsSkillComponent(gf, hero));
+				jp_Deck.add(new StatsSkillComponent(gf, hero),BorderLayout.NORTH);
 			}
-			this.add(sp, BorderLayout.EAST);
+			this.add(jp_Deck, BorderLayout.EAST);
 			this.add(jp_Equip, BorderLayout.CENTER);
 			this.add(jp_Stats, BorderLayout.NORTH);
 			setVisible(true);
@@ -70,7 +74,7 @@ public class HeroInfoComponent extends JComponent{
 		} 
 	}
 	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
+		super.paintComponent(g);		
 	}
 }
 

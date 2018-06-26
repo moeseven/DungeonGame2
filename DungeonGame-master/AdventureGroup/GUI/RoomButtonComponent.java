@@ -81,7 +81,7 @@ public class RoomButtonComponent extends JComponent{
 					}
 				}else {
 					rw.getGame().log.addLine("mission failed!");
-					rw.getGame().enterNextRoom();
+					rw.getGame().retreatHeroes();
 					rw.getGuiRoom().upadate();
 					rw.setVisible(true);
 				}								

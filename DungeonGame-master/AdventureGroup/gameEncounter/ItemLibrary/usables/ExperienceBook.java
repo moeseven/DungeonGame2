@@ -14,7 +14,7 @@ public class ExperienceBook extends ItemConsumable{
 
 	@Override
 	public void mod(Hero hero) {
-		hero.gainExp(1000);
+		hero.gainExp(120);
 	}
 	
 }

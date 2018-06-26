@@ -32,7 +32,8 @@ public class StandardCorpse extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		// TODO Auto-generated method stub
 		//loot corpse
-		if(!hasBeenLooted) {
+		if(!hero.isDead()) {
+			if(!hasBeenLooted) {
 			hero.loot(corpse);
 			hero.getPlayer().addMultipleItemsToInventory(items);
 		}else {
@@ -40,7 +41,9 @@ public class StandardCorpse extends RoomInteraction{
 		}
 		if(items.size()==0) {
 			hasBeenLooted=true;
-		}		
+		}
+		}
+				
 	}
 	
 }

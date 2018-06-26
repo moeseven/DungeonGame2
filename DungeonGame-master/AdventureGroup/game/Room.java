@@ -5,21 +5,26 @@ import java.util.LinkedList;
 
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
+import game.characterTypeLibrary.RaceGoblin;
+import game.characterTypeLibrary.TypeArcher;
+import game.characterTypeLibrary.TypeWarrior;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 
 public abstract class Room implements Serializable{
 	protected boolean hasFight;
+	protected LinkedList<Hero> monsters=new LinkedList<Hero>();
 	protected boolean shopOpen;
 	protected boolean tavernOpen;
 	protected Shop shop;
 	protected Tavern tavern;
 	protected Fight fight;
 	protected boolean readyToLeave;
+	protected Game game;
 	protected LinkedList<Hero> heroes;
-	private LinkedList<RoomInteraction> interactions;
-	public Room() {
-		interactions=new LinkedList<RoomInteraction>();
+	private LinkedList<RoomInteraction> interactions=new LinkedList<RoomInteraction>();
+	public Room(Game game) {
+		this.game=game;
 	}
 	public void initialize() {
 		readyToLeave=false;
@@ -29,9 +34,17 @@ public abstract class Room implements Serializable{
 		for(int i=0; i<interactions.size();i++) {
 			interactions.get(i).onEnter(game);
 		}
-		enterRoom(game);
+		enterRoom();
 	}
-	public abstract void enterRoom(Game game);
+	public void enterRoom() {
+		if(hasFight) {
+			game.dungeonMaster.setHeroes(new LinkedList<Hero>());
+			for(int i=0; i<monsters.size();i++) {
+				game.dungeonMaster.addHero(monsters.get(i));
+			}
+			this.fight= new Fight(game,game.dungeonMaster.getHeroes(), game.getPlayer().getHeroes());
+		}
+	}
 	//here the room is set up//food consumption//torch level
 	
 	public Fight getFight() {
@@ -74,6 +87,12 @@ public abstract class Room implements Serializable{
 	}
 	public void setTavern(Tavern tavern) {
 		this.tavern = tavern;
+	}
+	public LinkedList<Hero> getMonsters() {
+		return monsters;
+	}
+	public void setMonsters(LinkedList<Hero> monsters) {
+		this.monsters = monsters;
 	}
 	
 }

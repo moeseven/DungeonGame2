@@ -13,7 +13,6 @@ public class SleepCharm extends Spell{
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {
 				self.getTarget().getDiscardPile().add(new Sleepy());
-				self.getPlayer().getGame().log.addLine("casting "+getName()+" on "+self.getTarget().getName());
 				return true;
 			}else {
 				return false;
@@ -24,7 +23,7 @@ public class SleepCharm extends Spell{
 		return "sleep charm";
 	}
 	@Override
-	public String getCardText(Hero self) {
+	public String getCardText() {
 		//TODO correct number display
 		return "make the target sleepy";
 	}
@@ -53,8 +52,8 @@ public class SleepCharm extends Spell{
 			return "sleepy";
 		}
 		@Override
-		public String getCardText(Hero self) {
-			return "remove this card from pile";
+		public String getCardText() {
+			return super.getCardText()+"casting removes this card from deck";
 		}
 		@Override
 		public int rangeOfCard(Hero hero) {

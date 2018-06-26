@@ -16,9 +16,9 @@ public class HeavySword extends ItemBiHand{
 		this.facStr=0.95;
 		this.weaponRange=3;
 		this.requiredStrength=20;
-		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-4;
-		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-4;
-		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-4;
+		stats.getStats()[ModableHeroStats.nameResolveStat("dodge")]=-1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-1;
 		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=8;
 	}
 }

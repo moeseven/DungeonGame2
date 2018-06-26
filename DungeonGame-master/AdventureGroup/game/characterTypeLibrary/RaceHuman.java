@@ -11,7 +11,25 @@ public class RaceHuman extends CharacterRace{
 
 	public RaceHuman() {
 		name="human";
-		
+		nameList.add("Herbert");
+		nameList.add("Hank");
+		nameList.add("Hans");
+		nameList.add("Argeil");
+		nameList.add("Peter");
+		nameList.add("Adam");
+		nameList.add("Ruben");
+		nameList.add("Walter");
+		nameList.add("Thomas");
+		nameList.add("Tom");		
+		nameList.add("Bill");
+		nameList.add("Josef");
+		nameList.add("Dieter");
+		nameList.add("Ulrich");
+		nameList.add("Mandor");
+		nameList.add("Berethor");
+		nameList.add("Siegfried");
+		nameList.add("Moritz");
+		nameList.add("Emil");
 	}
 
 	public  void modifyHero(Hero hero) {
@@ -20,6 +38,7 @@ public class RaceHuman extends CharacterRace{
 		hero.setResistCold(5);
 		hero.setResistPoison(5);
 		hero.setResistStun(7);
+		hero.setSpellResist(hero.getSpellResist()-1);
 		//deck
 				
 	}

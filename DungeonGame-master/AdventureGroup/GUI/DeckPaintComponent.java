@@ -57,9 +57,11 @@ public class DeckPaintComponent extends JComponent{
 			g.setColor(Color.black);
 			g.drawString(hero.getDeck().getCards().get(i).getName(), 10, 15+i*cardHeight);
 			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5, 10+i*cardHeight);
+			
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1, 1+i*cardHeight, cardWidth, cardHeight);
+				
 			}
 		}
 	}

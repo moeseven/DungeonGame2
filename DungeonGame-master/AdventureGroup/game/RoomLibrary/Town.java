@@ -9,17 +9,11 @@ import game.RoomInteractionLibrary.Well;
 
 public class Town extends Room{
 
-	public Town() {
+	public Town(Game game) {
 		// TODO Auto-generated constructor stub
-		super();
+		super(game);
 		getInteractions().add(new Shop());
 		getInteractions().add(new Tavern());
-	}
-
-	@Override
-	public void enterRoom(Game game) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

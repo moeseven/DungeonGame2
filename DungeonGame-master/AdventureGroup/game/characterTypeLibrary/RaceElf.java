@@ -8,6 +8,29 @@ public class RaceElf extends CharacterRace{
 
 	public RaceElf() {
 		name="elf";
+		nameList.add("Irdal");
+		nameList.add("Auril");
+		nameList.add("Thiril");
+		nameList.add("Banduril");
+		nameList.add("Thranduil");
+		nameList.add("Iril");
+		nameList.add("Mandal");
+		nameList.add("Nogalin");
+		nameList.add("Sondulin");
+		nameList.add("Haldir");
+		nameList.add("Glorfindel");
+		nameList.add("Elor");
+		nameList.add("Fingolfin");
+		nameList.add("Lauriel");
+		nameList.add("Thiril");
+		nameList.add("Caranthir");
+		nameList.add("Beleg");
+		nameList.add("Celebrimbor");
+		nameList.add("Ecthelion");
+		nameList.add("Feanor");
+		nameList.add("Finarfin");
+		nameList.add("Galathil");
+		nameList.add("Ingil");
 	}
 
 	public void modifyHero(Hero hero) {

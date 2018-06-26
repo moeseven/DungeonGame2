@@ -65,8 +65,23 @@ public class MonsterFightComponent extends JComponent{
 		}
 		g.setColor(Color.black);
 		g.drawString(monster.getName(), 10, 15);
-		g.setColor(Color.blue);
-		g.drawString(""+monster.getBlock(), 10, 45);
+		if(monster.getPoison()>0) {
+			g.setColor(Color.GREEN);
+			g.drawString(""+monster.getPoison(), 10, 35);
+		}
+		if(monster.getBleed()>0) {
+			g.setColor(Color.RED);
+			g.drawString(""+monster.getBleed(), 25, 35);
+		}
+		if(monster.getCold()>0) {
+			g.setColor(Color.WHITE);
+			g.drawString(""+monster.getCold(), 40, 35);
+		}
+		if(monster.getBlock()>0) {
+			g.setColor(Color.blue);
+			g.drawString(""+monster.getBlock(), 10, 45);
+		}
+	
 		g.setColor(Color.red);
 		g.drawString(""+monster.getHp(), 10, 65);
 	}

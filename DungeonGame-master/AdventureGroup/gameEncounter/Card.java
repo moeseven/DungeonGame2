@@ -37,7 +37,7 @@ public abstract class Card implements Serializable,Cloneable{
 	public abstract boolean applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract void buildLogEntry(Hero self);
-	public abstract String getCardText(Hero self);
+	public abstract String getCardText();
 	public abstract boolean isFriendly();
 	//getters and setters
 	public int getManaCost() {

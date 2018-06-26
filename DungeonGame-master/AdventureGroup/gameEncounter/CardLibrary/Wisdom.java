@@ -20,8 +20,8 @@ public class Wisdom extends SpellnoTarget{
 		return "wisdom";
 	}
 	@Override
-	public String getCardText(Hero self) {
-		return "draw 3 cards";
+	public String getCardText() {
+		return super.getCardText()+"draw 3 cards";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

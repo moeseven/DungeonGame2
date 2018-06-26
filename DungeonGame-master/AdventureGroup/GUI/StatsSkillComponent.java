@@ -26,7 +26,7 @@ public class StatsSkillComponent extends JComponent{
 			this.gw=gw;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.ORANGE));
-			super.setPreferredSize(new Dimension(cardWidth+1,hero.getLvlUpCards().size()*cardHeight+10));
+			super.setPreferredSize(new Dimension(cardWidth+1,hero.getLvlUpCards().size()*(cardHeight+6)));
 			MyMouseListener ml = new MyMouseListener();
 			addMouseListener(ml);
 			setVisible(true);

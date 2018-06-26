@@ -3,7 +3,7 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class Block extends Card{
+public class Block extends SpellnoTarget{
 	public Block() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
@@ -18,8 +18,8 @@ public class Block extends Card{
 		return "parry";
 	}
 	@Override
-	public String getCardText(Hero self) {
-		return "increase chnace of blocking";
+	public String getCardText() {
+		return super.getCardText()+"100% block";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

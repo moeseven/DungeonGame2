@@ -11,13 +11,13 @@ public class GoblinBow extends ItemBiHand{
 		super();
 		name="goblin bow";
 		setGoldValue(10);
-		this.baseDamage=2;
-		this.damageRange=6;
+		this.baseDamage=4;
+		this.damageRange=8;
 		this.facStr=0.01;
 		this.weaponRange=10;
-		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-5;
-		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-4;
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=5;
+		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-2;
+		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=1;
 	}
 
 }

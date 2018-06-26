@@ -9,16 +9,11 @@ import game.RoomInteractionLibrary.Well;
 
 public class TrapRoom extends Room{
 
-	public TrapRoom() {
+	public TrapRoom(Game game) {
 		// TODO Auto-generated constructor stub
-		super();
+		super(game);
 		getInteractions().add(new SpikeTrap());
 	}
 
-	@Override
-	public void enterRoom(Game game) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

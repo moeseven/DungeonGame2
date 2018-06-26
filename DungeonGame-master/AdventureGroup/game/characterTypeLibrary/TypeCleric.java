@@ -2,9 +2,12 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.CardLibrary.Bash;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.DivineGrace;
+import gameEncounter.CardLibrary.HavenlyShield;
+import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.ItemLibrary.RustyBlade;
 
@@ -12,14 +15,17 @@ import gameEncounter.ItemLibrary.RustyBlade;
 public class TypeCleric extends CharacterClass{
 
 	public TypeCleric() {
-		cardPool.add(new BasicAttack());
+		cardPool.add(new Bash());
+		cardPool.add(new DivineGrace());
+		cardPool.add(new HavenlyShield());
 		name="cleric";
-		items.add(new RustyBlade());
-		cards.add(new DivineGrace());
-		for (int i=0; i<5;i++) {
+		items.add(new RustyBlade());		
+		for (int i=0; i<3;i++) {
 			cards.add(new BasicAttack());
 		}
-		for (int i=0; i<4;i++) {
+		cards.add(new MeeleAttack());
+		cards.add(new MeeleAttack());
+		for (int i=0; i<5;i++) {
 			cards.add(new Block());
 		}
 	}

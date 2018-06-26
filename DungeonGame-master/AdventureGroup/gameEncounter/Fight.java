@@ -1,12 +1,9 @@
 package gameEncounter;
 
 import java.io.Serializable;
-import java.text.Collator;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import game.Game;
-import game.RoomInteractionLibrary.StandardCorpse;
 
 public class Fight implements Serializable{
 	private Game game;
@@ -91,7 +88,7 @@ public class Fight implements Serializable{
 		if (this.isFightOver()){
 			for(int i=0; i<heroes.size();i++) {
 				heroes.get(i).removeBuffs();	
-				
+				heroes.get(i).applyNegativeTurnEffects();
 			}
 			if(heroes.size()>0) {
 				game.log.addLine("§§§§§§§§§§ Fight won! §§§§§§§§§§");

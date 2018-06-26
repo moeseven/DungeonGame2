@@ -14,7 +14,6 @@ public class FireBall extends Spell{
 		int mana=self.getMana();
 		self.setMana(0);
 			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getPlayer().getGame().log.addLine("casting "+getName()+" on "+self.getTarget().getName());
 				self.getTarget().takeFireDamage(self, (int)((Math.pow(mana+1, 1.4))*self.getSpellPower()/2.5));
 				
 				return true;
@@ -27,9 +26,9 @@ public class FireBall extends Spell{
 		return "fire ball";
 	}
 	@Override
-	public String getCardText(Hero self) {
+	public String getCardText() {
 		//TODO correct number display
-		return "consumes all mana and does fire damage";
+		return super.getCardText()+"consumes all mana and does fire damage";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

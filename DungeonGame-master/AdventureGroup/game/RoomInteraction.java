@@ -14,8 +14,7 @@ public abstract class RoomInteraction implements Serializable{
 
 	public abstract void onEnter(Game game);//triggered on entering the room (traps)
 
-	public abstract void onInteraction(Hero hero);//triggered when interacted with
-		
+	public abstract void onInteraction(Hero hero);//triggered when interacted with	
 
 	//getters and setters
 

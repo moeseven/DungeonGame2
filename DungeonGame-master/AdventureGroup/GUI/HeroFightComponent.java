@@ -65,8 +65,23 @@ public class HeroFightComponent extends JComponent{
 		}
 		g.setColor(Color.black);
 		g.drawString(hero.getName(), 10, 15);
-		g.setColor(Color.blue);
-		g.drawString(""+hero.getBlock(), 10, 45);
+		if(hero.getPoison()>0) {
+			g.setColor(Color.GREEN);
+			g.drawString(""+hero.getPoison(), 10, 35);
+		}
+		if(hero.getBleed()>0) {
+			g.setColor(Color.RED);
+			g.drawString(""+hero.getBleed(), 25, 35);
+		}
+		if(hero.getCold()>0) {
+			g.setColor(Color.WHITE);
+			g.drawString(""+hero.getCold(), 40, 35);
+		}
+		if(hero.getBlock()>0) {
+			g.setColor(Color.blue);
+			g.drawString(""+hero.getBlock(), 10, 45);
+		}
+		
 		g.setColor(Color.red);
 		g.drawString(""+hero.getHp(), 10, 65);
 	}

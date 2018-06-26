@@ -6,24 +6,26 @@ import java.util.LinkedList;
 import game.RoomLibrary.Town;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 import tools.MyLog;
 
 public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
+public GeneratorRandom generator=new GeneratorRandom();
 public int day;
 public MyLog log;
 private Room room;
 private Room town;
 private LinkedList<Room> roomChain;
 private LinkedList<Quest> availableQuests;
-public Game(LinkedList<Room> roomChain) {
+public Game() {
 	super();
 	day=1;
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();
-	this.roomChain=roomChain;
-	town=new Town();
+	this.roomChain=new LinkedList<Room>();
+	town=new Town(this);
 	room=town;
 	player=new Player(this);
 	dungeonMaster=new DungeonMaster(this);
@@ -31,6 +33,9 @@ public Game(LinkedList<Room> roomChain) {
 public void enterRoom(Room room) {
 	this.room=room;
 	log=new MyLog();
+	for(int i=0; i<player.getHeroes().size();i++) {
+		player.getHeroes().get(i).applyNegativeTurnEffects();
+	}	
 	room.prepareRoomAndEnter(this);
 }
 //getters and setters
@@ -78,9 +83,17 @@ public void enterNextRoom() {
 	
 }
 public void retreatHeroes() {
+	if(player.getHeroes().size()==0) {
+		player.setInventory(new LinkedList<Item>());
+	}
 	this.enterRoom(town);
 	day+=1;
 	log.addLine("Day: "+day);
+	if(player.getAvailableHeroes().size()<10) {
+		player.getAvailableHeroes().add(generator.generateRandomHero(player));
+		player.getAvailableHeroes().add(generator.generateRandomHero(player));
+	}	
+	
 }
 public Room getTown() {
 	return town;
@@ -90,6 +103,12 @@ public LinkedList<Quest> getAvailableQuests() {
 }
 public void setAvailableQuests(LinkedList<Quest> availableQuests) {
 	this.availableQuests = availableQuests;
+}
+public LinkedList<Room> getRoomChain() {
+	return roomChain;
+}
+public void setRoomChain(LinkedList<Room> roomChain) {
+	this.roomChain = roomChain;
 }
 
 }

@@ -4,15 +4,19 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class BasicAttack extends Card{
+public class BasicAttack extends AttackCard{
 	public BasicAttack() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		
+		damageMult=0.7;
+		legalPositions[0]=true;
+		legalPositions[1]=true;
+		legalPositions[2]=true;
+		legalPositions[3]=true;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
-				self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),1);
+				damageTarget(self);
 				return true;
 			}else {
 				return false;
@@ -23,29 +27,10 @@ public class BasicAttack extends Card{
 		return "basic attack";
 	}
 	@Override
-	public String getCardText(Hero self) {
-		//TODO correct number display
-		return "a basic attack with a weapon";
-	}
-	@Override
 	public int rangeOfCard(Hero hero) {
 		// TODO Auto-generated method stub
-		Weapon w;
-		if(hero.getEquipment().getHand1()!=null) {
-			 w=(Weapon) hero.getEquipment().getHand1();
-			 return w.getWeaponRange();
-		}
-		return 1;
+		return 5;
 	}
-	@Override
-	public boolean isFriendly() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void buildLogEntry(Hero self) {
-		self.getPlayer().getGame().log.addLine(getName());
-		
-	}
+	
 
 }

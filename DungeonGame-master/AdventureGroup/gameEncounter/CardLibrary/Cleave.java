@@ -38,8 +38,8 @@ public class Cleave extends Card{
 		return "cleave";
 	}
 	@Override
-	public String getCardText(Hero self) {
-		return "deal "+ 0+" attack damage to all enemies";
+	public String getCardText() {
+		return "100% damage to all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

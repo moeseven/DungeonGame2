@@ -23,6 +23,7 @@ public class Shop extends RoomInteraction{
 		items.add(new ArmorThinLeather());
 		items.add(new ShortSword());
 		items.add(new Buckler());
+		items.add(new Dagger());
 		items.add(new CrownOfThorns());
 		items.add(new HeavySword());
 		items.add(new PlateArmor());
@@ -44,9 +45,12 @@ public class Shop extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		// TODO Auto-generated method stub
 		//setup shop here
-		hero.getPlayer().getGame().log.addLine("entering shop");
-		hero.getPlayer().getGame().getRoom().setShop(this);
-		hero.getPlayer().getGame().getRoom().setShopOpen(true);
+		if(!hero.isDead()) {
+			hero.getPlayer().getGame().log.addLine("entering shop");
+			hero.getPlayer().getGame().getRoom().setShop(this);
+			hero.getPlayer().getGame().getRoom().setShopOpen(true);
+		}
+		
 	}
 
 	public LinkedList<Item> getItems() {

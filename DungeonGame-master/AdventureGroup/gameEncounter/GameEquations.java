@@ -96,6 +96,10 @@ public class GameEquations {
 		return speed+(int)(Math.random()*15.0);
 	}
 	public static int experienceThresholdForLevelUp(int level) {
-		return level*200+100;
+		if(level==0) {
+			return 100;
+		}else {
+			return experienceThresholdForLevelUp(level-1)+100*level;
+		}		
 	}
 }
