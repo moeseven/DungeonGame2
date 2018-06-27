@@ -15,6 +15,7 @@ public class ShortSword extends ItemHand1{
 		this.damageRange=8;
 		this.facStr=0.85;
 		this.weaponRange=2;
+		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=1;
 	}
 
 }

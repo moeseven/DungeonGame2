@@ -40,7 +40,8 @@ public class RaceHuman extends CharacterRace{
 		hero.setResistCold(7);
 		hero.setResistPoison(9);
 		hero.setResistBleed(9);
-		hero.setResistStun(15);		
+		hero.setResistStun(15);
+		hero.setResistStress(12);
 		hero.setTrapDisarm(12);
 		//deck
 				

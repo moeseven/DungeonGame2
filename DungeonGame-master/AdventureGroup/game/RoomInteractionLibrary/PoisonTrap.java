@@ -11,17 +11,17 @@ import game.characterTypeLibrary.genericCharacterRace;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class SpikeTrap extends Trap{
-	public SpikeTrap() {
+public class PoisonTrap extends Trap{
+	public PoisonTrap() {
 		super();
-		name="spike trap";
-		trapStats.setAccuracy(13);
+		name="poison trap";
+		trapStats.setAccuracy(25);
 	}
 	public void trapHits(Hero hero) {
 		if(trapStats.attackHero(hero)) {
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
-			hero.takeUnreflectableArmorDamage(trapStats, (int)(Math.random()*95));
-			hero.becomeStressed(9);
+			hero.poison((int) (Math.random()*7));
+			hero.becomeStressed(15);
 			
 		}
 	}

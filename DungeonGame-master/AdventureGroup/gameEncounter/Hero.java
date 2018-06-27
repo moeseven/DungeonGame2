@@ -125,7 +125,7 @@ public class Hero implements Serializable{
 		resistCold=5;
 		resistBleed=5;
 		resistStun=5;
-		resistStress=0;
+		resistStress=5;
 		trapDisarm=5;
 		setArmor(0);
 		setManaPower(2);
@@ -160,7 +160,7 @@ public class Hero implements Serializable{
 		//poison
 		if(poison>0) {			
 			if(Math.random()<resistPoison/100.0) {
-				poison-=(int)Math.max(1, poison/2.0);
+				poison-=(int)Math.max(1, poison/2.2);
 				player.getGame().log.addLine(name+" resisted poison");
 			}
 			takeDamage(this, getPoison());			
@@ -768,6 +768,15 @@ public class Hero implements Serializable{
 	}
 	public void setTrapDisarm(int trapDisarm) {
 		this.trapDisarm = trapDisarm;
+	}
+	public int getResistStress() {
+		return resistStress;
+	}
+	public void setResistStress(int resistStress) {
+		this.resistStress = resistStress;
+	}
+	public void setStunned(boolean stunned) {
+		this.stunned = stunned;
 	}	
 	
 }

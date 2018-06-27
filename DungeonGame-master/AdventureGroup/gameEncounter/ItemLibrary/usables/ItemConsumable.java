@@ -11,8 +11,5 @@ public abstract class ItemConsumable extends Item{
 		category=0;
 		weight=1;
 	}
-
-	@Override
-	public abstract void mod(Hero hero);
 	
 }

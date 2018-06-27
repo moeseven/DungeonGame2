@@ -5,15 +5,13 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ModableHeroStats;
 
-public class Buckler extends ItemHand2{
+public class LeatherArmor extends ItemBody{
 
 	
-	public Buckler() {
+	public LeatherArmor() {
 		super();
-		name="buckler";
-		setGoldValue(120);
-		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=8;
-	}
-
-
+		name="thin leather";
+		setGoldValue(255);
+		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=3;
+	}	
 }

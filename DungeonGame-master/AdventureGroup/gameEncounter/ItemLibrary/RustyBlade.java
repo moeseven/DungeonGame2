@@ -15,7 +15,6 @@ public class RustyBlade extends ItemHand1{
 		this.damageRange=8;
 		this.facStr=0.85;
 		this.weaponRange=2;
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=-1;
 	}
 
 }

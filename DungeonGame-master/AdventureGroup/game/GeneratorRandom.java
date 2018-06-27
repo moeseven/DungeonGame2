@@ -5,16 +5,31 @@ import java.util.LinkedList;
 
 import game.QuestLibrary.QuestReturnRelic;
 import game.RoomInteractionLibrary.Chest;
+import game.RoomInteractionLibrary.PoisonTrap;
 import game.RoomInteractionLibrary.SpikeTrap;
-import game.RoomInteractionLibrary.Tavern;
 import game.RoomInteractionLibrary.Well;
 import game.RoomLibrary.EmptyRoom;
-import game.RoomLibrary.GoblinRoom1;
-import game.characterTypeLibrary.*;
+import game.characterTypeLibrary.RaceDwarf;
+import game.characterTypeLibrary.RaceElf;
+import game.characterTypeLibrary.RaceGoblin;
+import game.characterTypeLibrary.RaceHalfling;
+import game.characterTypeLibrary.RaceHuman;
+import game.characterTypeLibrary.TypeArcher;
+import game.characterTypeLibrary.TypeCleric;
+import game.characterTypeLibrary.TypeMage;
+import game.characterTypeLibrary.TypeThief;
+import game.characterTypeLibrary.TypeWarrior;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ItemLibrary.ArmorThinLeather;
+import gameEncounter.ItemLibrary.Buckler;
+import gameEncounter.ItemLibrary.HeavySword;
+import gameEncounter.ItemLibrary.LeatherArmor;
+import gameEncounter.ItemLibrary.PlateArmor;
+import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
+import gameEncounter.ItemLibrary.Speer;
+import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class GeneratorRandom implements Serializable{
 	private LinkedList<CharacterRace> heroRacePool;
@@ -51,11 +66,19 @@ public class GeneratorRandom implements Serializable{
 		interactionPool.add(new Chest());
 		interactionPool.add(new Well());
 		interactionPool.add(new SpikeTrap());
+		interactionPool.add(new PoisonTrap());
 	}
 	public void newItemPool() {
 		itemPool=new LinkedList<Item>();
 		itemPool.add(new ShortSword());
 		itemPool.add(new ArmorThinLeather());
+		itemPool.add(new LeatherArmor());
+		itemPool.add(new ShortBow());
+		itemPool.add(new PlateArmor());
+		itemPool.add(new Speer());
+		itemPool.add(new HeavySword());
+		itemPool.add(new HealingPotion());
+		itemPool.add(new Buckler());
 	}
 	public Hero generateRandomHero(Player player) {
 		CharacterRace cRace=heroRacePool.get((int) Math.min(heroRacePool.size()-1, Math.random()*heroRacePool.size()));

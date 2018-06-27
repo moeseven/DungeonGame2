@@ -15,9 +15,9 @@ public class GoblinBow extends ItemBiHand{
 		this.damageRange=8;
 		this.facStr=0.01;
 		this.weaponRange=10;
-		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-2;
+		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-1;
 		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-1;
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=2;
 	}
 
 }

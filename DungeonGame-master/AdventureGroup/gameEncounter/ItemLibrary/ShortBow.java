@@ -17,7 +17,7 @@ public class ShortBow extends ItemBiHand{
 		this.weaponRange=10;
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-1;
 		stats.getStats()[ModableHeroStats.nameResolveStat("block")]=-1;
-		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=3;
 	}
 
 }
