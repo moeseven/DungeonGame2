@@ -4,8 +4,8 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class RangedPoison extends AttackCard{
-	public RangedPoison() {
+public class PoisonShot extends AttackCard{
+	public PoisonShot() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.7;
@@ -24,7 +24,7 @@ public class RangedPoison extends AttackCard{
 	}
 	@Override
 	public String getName() {
-		return "ranged poison";
+		return "poison shot";
 	}
 	@Override
 	public String getCardText() {

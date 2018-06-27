@@ -13,6 +13,7 @@ public class BackStab extends AttackCard{
 		legalPositions[1]=true;
 		legalPositions[2]=true;
 		legalPositions[3]=true;
+		legalPositions[4]=true;
 	}
 	public boolean applyEffect(Hero self) {
 		damageTarget(self);

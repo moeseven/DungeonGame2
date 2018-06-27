@@ -56,6 +56,7 @@ public class Hero implements Serializable{
 	protected int resistPoison;	
 	protected int resistBleed;
 	protected int resistStun;
+	protected int resistStress;
 	protected int baseHp;
 	protected int strength;
 	protected int vitality;
@@ -70,6 +71,8 @@ public class Hero implements Serializable{
 	private LinkedList<Card> discardPile;
 	private int mana;
 	protected int hp;
+	protected int stress=0;
+	protected int stressCap=100;
 	private int block;
 	private LinkedList<Card> hand;
 	//
@@ -117,6 +120,7 @@ public class Hero implements Serializable{
 		resistCold=0;
 		resistBleed=0;
 		resistStun=0;
+		resistStress=0;
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
@@ -194,33 +198,24 @@ public class Hero implements Serializable{
 	public boolean attackHero(Hero hero) {
 		//TODO check Block and Dodge
 		if(!GameEquations.dodge(this, hero)) {
-			if(breachBlock(hero)) {
-				return true;
-			}else {
-				return false;
-			}
-			
+			return true;			
 		}else {
 			return false;
 		}		
 	}
-	public boolean breachBlock(Hero hero) {
-		if(!GameEquations.block(this, hero)) {
-			return true;
-		}else {
-			return false;
-		}
+	public void breachBlock(Hero hero, int damage) {
+		 hero.takeArmorDamage(this,GameEquations.breachBlock(this, hero, damage));
 	}
 	public int dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
 		int dmg;
 		 if(item instanceof Weapon) {
 			 Weapon weapon= (Weapon) item;
 			 dmg=(int)(mult*weapon.computeAttackDamage(strength,dexterity));
-			 hero.takeArmorDamage(this, dmg);
 		 }else {
 			 dmg=(int)(mult*GameEquations.FistDamage(strength));
-			 hero.takeArmorDamage(this, dmg);
-		 }
+			
+		 } 
+		 breachBlock(hero, dmg);
 		 return dmg;		
 	}
 	public void dealDamage(Hero hero,int damage) {
@@ -251,16 +246,17 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine(name+ " died!");
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
 			block=0;
-			this.isDead=true;	
-		}
-		player.getGame().log.addLine(name+ " allready dead");
+			this.isDead=true;
+		}else {
+			player.getGame().log.addLine(name+ " allready dead");
+		}		
 	}
 	public void loot(Hero looted) {		
 		looted.getLooted(this);
 	}
 	public void getLooted(Hero looter) {
 		//this is the loot table of this monster
-		looter.getPlayer().setGold(looter.getPlayer().getGold()+gold);
+		looter.getPlayer().gainGold(gold);
 		gold=0;
 		getPlayer().getGame().log.addLine(name+" got looted");
 	}
@@ -325,6 +321,7 @@ public class Hero implements Serializable{
 	public void levelUP() {
 		level+=1;
 		strength+=1;dexterity+=1;intelligence+=1;vitality+=1;
+		stressCap+=10;
 		skillPoints+=1;
 		if(cardPoints==0) {
 			generatelvlUpCards();
@@ -343,6 +340,19 @@ public class Hero implements Serializable{
 			}
 			
 		}
+	}
+	//
+	public void becomeStressed(int s) {
+		stress+=(int)(s*(1-resistStress/100));
+		if(stress>stressCap) {
+			stress=stressCap;
+			player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
+		}else {
+			if(stress<0) {
+				stress=0;
+			}
+		}
+		
 	}
 	//////
 	//bleed/poison/fire/cold
@@ -725,7 +735,14 @@ public class Hero implements Serializable{
 	public void setCold(int cold) {
 		this.cold = cold;
 	}
-	
-
+	public int getStress() {
+		return stress;
+	}
+	public int getStressCap() {
+		return stressCap;
+	}
+	public void setStressCap(int stressCap) {
+		this.stressCap = stressCap;
+	}	
 	
 }

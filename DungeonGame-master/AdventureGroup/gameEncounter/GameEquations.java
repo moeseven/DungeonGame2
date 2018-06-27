@@ -42,8 +42,8 @@ public class GameEquations {
 	
 	//dodge chance calculation
 	public static boolean dodge(Hero attacker, Hero attacked) {
-		if(Math.random()>1/(1.1+(attacked.computeDodge()-attacker.computeAccuracy())*0.05)) {
-			
+		double dodgeRoll=Math.random()*100;
+		if(dodgeRoll<(15+attacked.computeDodge()-attacker.computeAccuracy())) {			
 			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
 			return true;			
 		}else {
@@ -51,22 +51,22 @@ public class GameEquations {
 		}
 	}
 	//attack vs block roll
-	public static boolean block(Hero attacker, Hero blocker) {
-		int block;
-		block=(int) (blocker.getBlock()-blocker.getBlock()*(attacker.computeAttackSkill()/(0.0+blocker.computeBlockSkill()+attacker.computeAttackSkill())));
-		if(block>0) {
-			blocker.setBlock(block);
-			if(Math.random()<block/(0.0+block+attacker.computeAttackSkill())) {
-				attacker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked!");
-				return true;
+	public static int breachBlock(Hero attacker, Hero blocker, int damage) {
+		int restDamage=damage;
+		if(blocker.getBlock()>0){
+			int block = blocker.getBlock();
+			int blockValueVSAttack= block*blocker.getBlockSkill()/attacker.getAttackSkill();
+			int blockValueVsAttackAfterDamage= blockValueVSAttack-restDamage;
+			if(blockValueVsAttackAfterDamage>=0) {
+				restDamage=0;
+				blocker.setBlock((int)(1.0*blockValueVsAttackAfterDamage/blockValueVSAttack*block));
 			}else {
-				return false;
+				blocker.setBlock(0);
+				restDamage=-blockValueVsAttackAfterDamage;				
 			}
-		}else {
-			blocker.setBlock(0);
-			return false;
-		}
-		
+			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage-restDamage)+" damage");
+		}	
+		return restDamage;
 	}
 	
 	//damage reduction by armor

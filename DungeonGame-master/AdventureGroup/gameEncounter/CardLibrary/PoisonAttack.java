@@ -9,6 +9,9 @@ public class PoisonAttack extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.3;
+		legalPositions[3]=false;
+		legalPositions[4]=false;
+		
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {

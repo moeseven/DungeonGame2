@@ -3,6 +3,8 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.QuestLibrary.QuestReturnRelic;
+import game.RoomInteractionLibrary.Tavern;
 import game.RoomLibrary.Town;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
@@ -17,18 +19,19 @@ public int day;
 public MyLog log;
 private Room room;
 private Room town;
-private LinkedList<Room> roomChain;
 private LinkedList<Quest> availableQuests;
+private Quest activeQuest;
 public Game() {
 	super();
+	dungeonMaster=new DungeonMaster(this);
 	day=1;
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();
-	this.roomChain=new LinkedList<Room>();
+	newQuest();
 	town=new Town(this);
 	room=town;
 	player=new Player(this);
-	dungeonMaster=new DungeonMaster(this);
+	
 }
 public void enterRoom(Room room) {
 	this.room=room;
@@ -37,6 +40,9 @@ public void enterRoom(Room room) {
 		player.getHeroes().get(i).applyNegativeTurnEffects();
 	}	
 	room.prepareRoomAndEnter(this);
+}
+public void newQuest() {
+	activeQuest=generator.generateRandomQuest(this);
 }
 //getters and setters
 public Room getRoom() {
@@ -53,31 +59,48 @@ public void setPlayer(Player player) {
 }
 public Room getNextRoom() {
 	if(room!=town) {
-		if(roomChain.size()>roomChain.indexOf(room)+1) {
-			return roomChain.get(roomChain.indexOf(room)+1);
+		if(activeQuest.getRooms().size()>activeQuest.getRooms().indexOf(room)+1) {
+			return activeQuest.getRooms().get(activeQuest.getRooms().indexOf(room)+1);
 		}else {
 			return town;
 		}
 	}else {
-		return roomChain.getFirst();
+		return activeQuest.getRooms().getFirst();
 	}		
 }
 public void enterNextRoom() {
 	room=getNextRoom();
 	//check here if all heroes are dead
-	int deadCount=0;
+	LinkedList<Hero> deadHeroes=new LinkedList<Hero>();
+    LinkedList<Hero> stressedOutHeroes= new LinkedList<Hero>();
 	for(int i=0; i<this.getPlayer().getHeroes().size();i++) {
 		if(getPlayer().getHeroes().get(i).isDead()) {
-			deadCount+=1;
-		}
+			deadHeroes.add(getPlayer().getHeroes().get(i));
+		}else {
+			if(getPlayer().getHeroes().get(i).getStress()==player.getHeroes().get(i).getStressCap()) {
+				stressedOutHeroes.add(getPlayer().getHeroes().get(i));
+			}
+		}		
+		player.getHeroes().get(i).becomeStressed(2);
 	}
-	if(deadCount==getPlayer().getHeroes().size()) {
+	
+	for(int i=0; i<deadHeroes.size();i++) {
+		player.getHeroes().remove(deadHeroes.get(i));
+	}
+	for(int i=0; i<stressedOutHeroes.size();i++) {
+		if(!stressedOutHeroes.get(i).isDead()){
+			player.getHeroes().remove(stressedOutHeroes.get(i));
+			player.getAvailableHeroes().add(stressedOutHeroes.get(i));
+		}		
+	}
+	if(deadHeroes.size()==getPlayer().getHeroes().size()) {
 		//TODO return to town here -- Quest over!
 		room=town;
 	}	
 	log.clear();
+	
 	if(room!=town) {
-		log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+roomChain.indexOf(room)+"°°°°°°°°°°°°°°°||||");
+		log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+activeQuest.getRooms().indexOf(room)+"°°°°°°°°°°°°°°°||||");
 	}	
 	room.prepareRoomAndEnter(this);
 	
@@ -104,11 +127,11 @@ public LinkedList<Quest> getAvailableQuests() {
 public void setAvailableQuests(LinkedList<Quest> availableQuests) {
 	this.availableQuests = availableQuests;
 }
-public LinkedList<Room> getRoomChain() {
-	return roomChain;
+public Quest getActiveQuest() {
+	return activeQuest;
 }
-public void setRoomChain(LinkedList<Room> roomChain) {
-	this.roomChain = roomChain;
+public void setActiveQuest(Quest activeQuest) {
+	this.activeQuest = activeQuest;
 }
 
 }

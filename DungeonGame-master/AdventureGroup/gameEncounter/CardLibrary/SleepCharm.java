@@ -13,6 +13,7 @@ public class SleepCharm extends Spell{
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {
 				self.getTarget().getDiscardPile().add(new Sleepy());
+				self.getTarget().getDiscardPile().add(new Sleepy());
 				return true;
 			}else {
 				return false;

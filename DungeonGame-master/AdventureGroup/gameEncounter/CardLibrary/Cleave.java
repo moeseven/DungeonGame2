@@ -10,6 +10,7 @@ public class Cleave extends Card{
 		legalPositions[1]=false;
 		legalPositions[2]=false;
 		legalPositions[3]=false;
+		legalPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		if(self.getFight().getHeroes().contains(self)) {

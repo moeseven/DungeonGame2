@@ -26,9 +26,9 @@ public class HeroStatsPaintComponent extends JComponent{
 		protected int height;
 		public HeroStatsPaintComponent(Player player){
 			this.player=player;
-			height=16;
+			height=20;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(300,height*15));
+			super.setPreferredSize(new Dimension(310,height*15));
 			setVisible(true);
 		}
 	protected void paintComponent(Graphics g){
@@ -38,7 +38,10 @@ public class HeroStatsPaintComponent extends JComponent{
 		LinkedList<String> lines=new LinkedList<String>();
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
+		lines.add("");
 		lines.add("health: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp());
+		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
+		lines.add("");
 		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
 			Weapon weapon= (Weapon) player.getSelectedHero().getEquipment().getHand1();
 			lines.add("damage: "+weapon.AttackDamageToString(player.getSelectedHero().getStrength(),player.getSelectedHero().getDexterity()));
@@ -54,6 +57,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("");
 		//
 		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+player.getSelectedHero().computeSpeed()+")");
+		lines.add("");
 		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+player.getSelectedHero().computeAttackSkill()+")");
 		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+player.getSelectedHero().computeBlockSkill()+")");
 		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+player.getSelectedHero().computeAccuracy()+")");

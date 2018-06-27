@@ -3,10 +3,10 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import com.sun.xml.internal.ws.api.client.ThrowableInPacketCompletionFeature;
-
+import game.QuestLibrary.QuestReturnRelic;
 import game.RoomInteractionLibrary.Chest;
 import game.RoomInteractionLibrary.SpikeTrap;
+import game.RoomInteractionLibrary.Tavern;
 import game.RoomInteractionLibrary.Well;
 import game.RoomLibrary.EmptyRoom;
 import game.RoomLibrary.GoblinRoom1;
@@ -21,7 +21,7 @@ public class GeneratorRandom implements Serializable{
 	private LinkedList<CharacterClass> heroClassPool;
 	private LinkedList<Item> itemPool;
 	private LinkedList<RoomInteraction> interactionPool;
-	private LinkedList<CharacterRace> monsterRacePool;
+	private LinkedList<MonsterRace> monsterRacePool;
 	private LinkedList<CharacterClass> monsterClassPool;
 	public GeneratorRandom(){
 		//the following dont need to be cloned
@@ -36,7 +36,7 @@ public class GeneratorRandom implements Serializable{
 		heroClassPool.add(new TypeArcher());
 		heroClassPool.add(new TypeCleric());
 		heroClassPool.add(new TypeThief());
-		monsterRacePool=new LinkedList<CharacterRace>();
+		monsterRacePool=new LinkedList<MonsterRace>();
 		monsterRacePool.add(new RaceGoblin());
 		monsterClassPool=new LinkedList<CharacterClass>();
 		monsterClassPool.add(new TypeWarrior());
@@ -63,27 +63,45 @@ public class GeneratorRandom implements Serializable{
 		String randomName = cRace.getNameList().get((int) Math.min(cRace.getNameList().size()-1, Math.random()*cRace.getNameList().size()));
 		return new Hero(randomName, player, cRace, cClass);
 	}
-	public Hero generateRandomMonster(Game game) {
-		//adjust this to difficulty and progression day
-		return new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior());
+	public LinkedList<Hero> generateRandomMonsterSet(Game game, int difficultyLevel) {
+		//TODO adjust this to difficulty and progression day
+		MonsterRace monsterRace= monsterRacePool.get((int) Math.min(monsterRacePool.size()-1, Math.random()*monsterRacePool.size()));
+		LinkedList<Hero> monsterSet= new LinkedList<Hero>();
+		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition1Classes().get((int) Math.min(monsterRace.getPosition1Classes().size()-1, Math.random()*monsterRace.getPosition1Classes().size()))));
+		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition2Classes().get((int) Math.min(monsterRace.getPosition2Classes().size()-1, Math.random()*monsterRace.getPosition2Classes().size()))));
+		if(Math.random()<0.7+difficultyLevel/10){
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition3Classes().get((int) Math.min(monsterRace.getPosition3Classes().size()-1, Math.random()*monsterRace.getPosition3Classes().size()))));
+		}
+		if(Math.random()<0.3+difficultyLevel/10){
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition4Classes().get((int) Math.min(monsterRace.getPosition4Classes().size()-1, Math.random()*monsterRace.getPosition4Classes().size()))));
+		}
+		if(Math.random()<0+difficultyLevel/15){
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition5Classes().get((int) Math.min(monsterRace.getPosition5Classes().size()-1, Math.random()*monsterRace.getPosition5Classes().size()))));
+		}
+		return monsterSet;
 	}
-	public Room generateRandomRoom(Game game) {
+	public Room generateRandomRoom(Game game, double fightChance, int difficultyLevel) {
 		//return a randomly generated room here
+		//TODO add difficulty parameter to adjust difficulty of random Room
 		Room room= new EmptyRoom(game);
 		
 		//fill room with random interactions		
-		for(int i=0; i<Math.random()*3; i++) {//random amount of interactions
+		for(int i=0; i<(int)(Math.random()*3); i++) {//random amount of interactions
 			room.getInteractions().add(interactionPool.get((int)(Math.min(interactionPool.size()-1, Math.random()*interactionPool.size()))));
 			newInteractionPool();//so there are no multiple interaction that are actually the same instance
 		}
 		//
-		boolean roomHasFight;
-		if (Math.random()<0.3) {//chance that a room has a fight
-			roomHasFight=true;
-			for(int i=0; i<(int)(2+Math.min(Math.random()*2, 1)); i++) {
-				room.monsters.add(new Hero("", game.dungeonMaster,monsterRacePool.get((int)(Math.min(monsterRacePool.size()-1, Math.random()*monsterRacePool.size()))), monsterClassPool.get((int)(Math.min(monsterClassPool.size()-1, Math.random()*monsterClassPool.size())))));
+		if (Math.random()<fightChance) {//chance that a room has a fight
+			room.hasFight=true;
+			LinkedList<Hero> monsters=generateRandomMonsterSet(game,difficultyLevel);
+			for(int i=0; i<monsters.size(); i++) {
+				room.monsters.add(monsters.get(i));
 			}
 		}
+		
 		return room;
+	}
+	public Quest generateRandomQuest(Game game) {
+		return new QuestReturnRelic(game);
 	}
 }

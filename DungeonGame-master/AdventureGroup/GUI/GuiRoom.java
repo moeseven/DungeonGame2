@@ -160,7 +160,7 @@ public class GuiRoom extends JPanel{
 						//sell
 						shop.getItems().add(item);
 						gw.getGame().getPlayer().getInventory().remove(item);
-						gw.getGame().getPlayer().setGold((int)(gw.getGame().getPlayer().getGold()+item.getGoldValue()/3.5));//maybe Charisma of heroes can improve ratio
+						gw.getGame().getPlayer().gainGold((int) (item.getGoldValue()/3.5));//maybe Charisma of heroes can improve ratio
 						if(gw.getGame().getPlayer().getInventory().size()>0) {
 							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 						}
@@ -169,7 +169,7 @@ public class GuiRoom extends JPanel{
 							//buy
 							if(gw.getGame().getPlayer().getGold()>=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue()) {
 								if(gw.getGame().getPlayer().addItemtoInventory(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
-									gw.getGame().getPlayer().setGold(gw.getGame().getPlayer().getGold()-gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue());
+									gw.getGame().getPlayer().gainGold(-gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue());
 									shop.getItems().remove(gw.getGame().getPlayer().getSelectedHero().getSelectedItem());
 								}								
 							}
@@ -276,15 +276,15 @@ protected void paintComponent(Graphics g){
 				// TODO Auto-generated method stub					
 			}		
 		});
-		//hire/dismiss
-		rc.addRect(new ClickableRectangle("dismiss",545,90,145,20) {
+		//hire/release to tavern
+		rc.addRect(new ClickableRectangle("release to tavern",545,90,145,20) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
 					if(gw.getGame().getPlayer().getHeroes().contains(hero)) {
-						//dismiss
+						//release to tavern
 						tavern.getHeroes().add(hero);
 						gw.getGame().getPlayer().removeHero(hero);
 						if(gw.getGame().getPlayer().getHeroes().size()>0) {
@@ -302,6 +302,7 @@ protected void paintComponent(Graphics g){
 						}
 					}				
 				}
+				
 				gw.getGuiRoom().upadate();
 			}
 			@Override
@@ -314,6 +315,46 @@ protected void paintComponent(Graphics g){
 					if(tavern.getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
 						caption.removeFirst();
 						caption.addFirst("hire");
+					}			
+				}					
+			}		
+		});
+		//dismiss hero
+		rc.addRect(new ClickableRectangle("dismiss hero",545,110,145,20) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
+					Hero hero=gw.getGame().getPlayer().getSelectedHero();
+					if(gw.getGame().getPlayer().getHeroes().contains(hero)) {
+						//dismiss from roster
+						gw.getGame().getPlayer().removeHero(hero);
+						if(gw.getGame().getPlayer().getHeroes().size()>0) {
+							gw.getGame().getPlayer().setSelectedHero(gw.getGame().getPlayer().getHeroes().getFirst());
+						}
+					}else {
+						if(tavern.getHeroes().contains(hero)) {
+							//dismiss from tavern
+							tavern.getHeroes().remove(hero);				
+							if(tavern.getHeroes().size()>0) {
+								gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
+							}
+						}
+					}				
+				}
+				
+				gw.getGuiRoom().upadate();
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
+					caption.removeFirst();						
+					caption.addFirst(name);
+				}else {
+					if(tavern.getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
+						caption.removeFirst();
+						caption.addFirst(name);
 					}			
 				}					
 			}		

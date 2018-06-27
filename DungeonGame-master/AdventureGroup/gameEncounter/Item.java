@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public abstract class Item implements Serializable{
 	protected int weight=10;
 	private int goldValue=100;
-	protected int category;
+	protected int category=10;
 	protected int requiredStrength=0;
 	protected int requiredDexterity=0;
 	protected int requiredIntelligence=0;
@@ -53,6 +53,7 @@ public abstract class Item implements Serializable{
         case 3:  return "two handed";
         case 4:  return "body";
         case 5:  return "head";
+        case 10: return "relic";
         default: return "there is no such category!";
 		}
 	}

@@ -14,8 +14,9 @@ public class Player implements Serializable{
 	private Quest activeQuest;
 	protected LinkedList<Hero> heroes;
 	private LinkedList<Item> inventory;
-	private int inventoryCapacity;
+	protected int inventoryCapacity;
 	private LinkedList<Hero> availableHeroes;
+	protected int groupSize;
 	private Game game;
 	private int gold;
 	public Player(Game game) {
@@ -24,13 +25,23 @@ public class Player implements Serializable{
 		availableHeroes=new LinkedList<Hero>();
 		inventoryCapacity=100;
 		inventory=new LinkedList<Item>();
-		gold=0;
-		getAvailableHeroes().add(game.generator.generateRandomHero(this));
+		gold=200;
+		groupSize=4;
+		//getAvailableHeroes().add(game.generator.generateRandomHero(this));
 		getAvailableHeroes().add(game.generator.generateRandomHero(this));
 		getAvailableHeroes().add(game.generator.generateRandomHero(this));
 	}
+	public void gainGold(int g) {
+		gold+=g;
+		if(g>0) {
+			game.log.addLine("gained "+g+" gold.");
+		}else {
+			game.log.addLine("lost "+(-g)+" gold.");
+		}
+		
+	}
 	public boolean addHero(Hero hero) {// do not exeed maximum size
-		if(heroes.size()<4) {
+		if(heroes.size()<groupSize) {
 			for(int a=0; a<heroes.size();a++) {// prevent equal names
 				for(int b=0; b<heroes.size();b++) {
 					if(heroes.get(b).getName().equals(hero.getName())) {
@@ -45,6 +56,12 @@ public class Player implements Serializable{
 			return true;
 		}else {
 			return false;
+		}
+	}
+	public void removeHeroFromTavern(Hero hero) {
+		if(availableHeroes.size()>=1&&availableHeroes.contains(hero)) {
+			availableHeroes.remove(hero);
+			hero.setPlayer(null);
 		}
 	}
 	public void removeHero(Hero hero) {
@@ -73,8 +90,10 @@ public class Player implements Serializable{
 		}
 		if(totalWeight>inventoryCapacity) {
 			game.log.addLine("party is overburdened!");
+			game.getRoom().getInteractions().add(new ItemOnGround(item, game.getRoom()));
 			success=false;
 		}else {
+			game.log.addLine(item.getName()+" added to inventory.");
 			inventory.add(item);
 			success=true;
 		}
@@ -108,9 +127,7 @@ public class Player implements Serializable{
 	public int getGold() {
 		return gold;
 	}
-	public void setGold(int gold) {
-		this.gold = gold;
-	}
+
 	public Game getGame() {
 		return game;
 	}

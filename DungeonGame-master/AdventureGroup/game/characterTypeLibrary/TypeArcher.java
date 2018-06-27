@@ -10,7 +10,7 @@ import gameEncounter.CardLibrary.FireArrow;
 import gameEncounter.CardLibrary.FrostArrow;
 import gameEncounter.CardLibrary.HeadShot;
 import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.RangedPoison;
+import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.RustyBlade;
 import gameEncounter.ItemLibrary.ShortBow;
@@ -18,7 +18,7 @@ import gameEncounter.ItemLibrary.ShortBow;
 public class TypeArcher extends CharacterClass{
 
 	public TypeArcher() {
-		cardPool.add(new RangedPoison());
+		cardPool.add(new PoisonShot());
 		cardPool.add(new HeadShot());
 		cardPool.add(new Concentrate());
 		cardPool.add(new FireArrow());

@@ -60,6 +60,8 @@ public class HeroRoomComponent extends JComponent{
 		g.setColor(Color.blue);
 		g.drawString(""+hero.getBlock(), 10, 45);
 		g.setColor(Color.red);
-		g.drawString(""+hero.getHp(), 10, 65);
+		g.drawString(""+hero.getHp()+"/"+hero.computeMaxHp(), 10, 65);
+		g.setColor(Color.GRAY);
+		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 10, 80);
 	}
 }

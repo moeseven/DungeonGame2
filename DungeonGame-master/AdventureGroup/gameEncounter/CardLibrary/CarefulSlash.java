@@ -11,6 +11,7 @@ public class CarefulSlash extends AttackCard{
 		damageMult=0.75;
 		legalPositions[2]=false;
 		legalPositions[3]=false;
+		legalPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			self.block((int)(self.computeBlockSkill()*0.75));

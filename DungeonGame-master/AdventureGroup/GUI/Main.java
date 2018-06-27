@@ -24,13 +24,14 @@ public class Main {
 		game = new Game();
 		player = new Player(game);
 		game.setPlayer(player);	
-		player.setGold(200);
-		game.getRoomChain().add(new TrapRoom(game));
-		game.getRoomChain().add(game.generator.generateRandomRoom(game));
-		game.getRoomChain().add(new GoblinRoom1(game));
-		game.getRoomChain().add(game.generator.generateRandomRoom(game));	
-		game.getRoomChain().add(new GoblinRoom1(game));
-		
+//		game.getRoomChain().add(new TrapRoom(game));
+//		game.getRoomChain().add(game.generator.generateRandomRoom(game));
+//		game.getRoomChain().add(game.generator.generateRandomRoom(game));
+//		game.getRoomChain().add(game.generator.generateRandomRoom(game));
+//		game.getRoomChain().add(game.generator.generateRandomRoom(game));
+//		game.getRoomChain().add(game.generator.generateRandomRoom(game));	
+//		game.getRoomChain().add(new GoblinRoom1(game));
+//		game.getRoomChain().add(new GoblinRoom1(game));
 		mm=new MainMenu();
 		mm.setGame(game);
 		//StatsWindow gw=new StatsWindow(game);

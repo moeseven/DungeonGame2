@@ -10,6 +10,7 @@ import gameEncounter.Item;
 public class Chest extends RoomInteraction{
 	private int charges=1;
 	private int gold=100;
+	private LinkedList<Item> items= new LinkedList<Item>();
 	public Chest() {
 		super();
 		name="chest";
@@ -27,12 +28,22 @@ public class Chest extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		if(charges>0) {
 			charges+=-1;
-			hero.getPlayer().setGold(hero.getPlayer().getGold()+gold);
-			hero.getPlayer().getGame().log.addLine(hero.getName()+" finds "+gold+" gold");
+			hero.getPlayer().gainGold(gold);
+			for(int i=0; i<items.size();i++) {
+				hero.getPlayer().addItemtoInventory(items.get(i));
+			}			
 		}else {			
 			hero.getPlayer().getGame().log.addLine("the chest is empty");
 		}
 		
+	}
+
+	public LinkedList<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(LinkedList<Item> items) {
+		this.items = items;
 	}
 	
 }

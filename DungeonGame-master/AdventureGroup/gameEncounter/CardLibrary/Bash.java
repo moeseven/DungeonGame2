@@ -14,6 +14,7 @@ public class Bash extends AttackCard{
 		legalPositions[1]=true;
 		legalPositions[2]=false;
 		legalPositions[3]=false;
+		legalPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {

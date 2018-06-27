@@ -28,6 +28,7 @@ public class SpikeTrap extends RoomInteraction{
 		game.log.addLine(game.getPlayer().getSelectedHero().getName()+" triggered a "+getName());
 		if(trapStats.attackHero(game.getPlayer().getSelectedHero())) {
 			game.getPlayer().getSelectedHero().takeUnreflectableArmorDamage(trapStats, (int)(Math.random()*45));
+			game.getPlayer().getSelectedHero().becomeStressed(9);
 		}
 	}
 

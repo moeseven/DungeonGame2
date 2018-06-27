@@ -6,7 +6,7 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
-	protected boolean[] legalPositions={true,true,true,true};
+	protected boolean[] legalPositions={true,true,true,true,true};
 	protected String name;
 	protected int range;
 	public Card() {

@@ -13,11 +13,12 @@ public class BleedingSlice extends AttackCard{
 		legalPositions[1]=true;
 		legalPositions[2]=false;
 		legalPositions[3]=false;
+		legalPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
 				damageTarget(self);
-				self.getTarget().bleed(8);
+				self.getTarget().bleed(6);
 				return true;
 			}else {
 				return false;
@@ -30,7 +31,7 @@ public class BleedingSlice extends AttackCard{
 	@Override
 	public String getCardText() {
 		//TODO correct number display
-		return super.getCardText()+" 8 bleed";
+		return super.getCardText()+" 6 bleed";
 	}
 
 }
