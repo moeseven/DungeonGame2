@@ -8,7 +8,7 @@ public class BleedingSlice extends AttackCard{
 	public BleedingSlice() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		damageMult=0.9;
+		damageMult=2;
 		legalPositions[0]=true;
 		legalPositions[1]=true;
 		legalPositions[2]=false;
@@ -18,7 +18,7 @@ public class BleedingSlice extends AttackCard{
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
 				damageTarget(self);
-				self.getTarget().bleed(6);
+				self.getTarget().bleed(4);
 				return true;
 			}else {
 				return false;
@@ -31,7 +31,7 @@ public class BleedingSlice extends AttackCard{
 	@Override
 	public String getCardText() {
 		//TODO correct number display
-		return super.getCardText()+" 6 bleed";
+		return super.getCardText()+" 4 bleed";
 	}
 
 }

@@ -3,36 +3,31 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class Cleave extends Card{
+public class Cleave extends AttackCard{
 	public Cleave() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
+		damageMult=1.8;
 		legalPositions[1]=false;
 		legalPositions[2]=false;
 		legalPositions[3]=false;
 		legalPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
-		if(self.getFight().getHeroes().contains(self)) {
-			for(int i=0; i<self.getFight().getMonsters().size();i++) {
-				if(self.getFight().getMonsters().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getMonsters().get(i))) {
-						self.dealWeaponDamage(self.getFight().getMonsters().get(i), self.getEquipment().getHand1(),1);
-						return true;
-					}
-				}	
-			}
-		}else {
-			for(int i=0; i<self.getFight().getHeroes().size();i++) {
-				if(self.getFight().getHeroes().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getHeroes().get(i))) {
-						self.dealWeaponDamage(self.getFight().getHeroes().get(i), self.getEquipment().getHand1(),1);
-						return true;
-					}
-				}	
+		boolean success=false;
+		if(self.attackHero(self.getTarget())) {
+			damageTarget(self);
+			success=true;
+		}
+		if(self.getTarget().getPlayer().getHeroes().size()>self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1) {
+			Hero secondTarget=self.getTarget().getPlayer().getHeroes().get(self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1);
+			self.setTarget(secondTarget);
+			if(self.attackHero(self.getTarget())) {				
+				damageTarget(self);
+				success=true;
 			}
 		}
-		return false;
+		return success;
 	}
 	@Override
 	public String getName() {
@@ -40,12 +35,12 @@ public class Cleave extends Card{
 	}
 	@Override
 	public String getCardText() {
-		return "100% damage to all enemies";
+		return super.getCardText()+"(hits the target behind as well)";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
 		// TODO Auto-generated method stub
-		return 8;
+		return 1;
 	}
 	@Override
 	public boolean isFriendly() {

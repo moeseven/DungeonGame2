@@ -18,7 +18,9 @@ public class RoomInteractionComponent extends JComponent{
 		this.rw=rw;
 		this.setLayout(new FlowLayout());
 		for (int i=0;i<rw.getGame().getRoom().getInteractions().size();i++) {
-			add(new Ri(rw.getGame().getRoom().getInteractions().get(i)));
+			if(!rw.getGame().getRoom().getInteractions().get(i).isHidden()){			
+				add(new Ri(rw.getGame().getRoom().getInteractions().get(i)));
+			}			
 		}
 		super.setPreferredSize(new Dimension(600,200));
 		this.setVisible(true);
@@ -51,12 +53,10 @@ public class RoomInteractionComponent extends JComponent{
 		protected void paintComponent(Graphics g){
 			super.paintComponent(g);
 			//g.drawImage(image,0,0,null);
-			if(rw!=null){			
-				
-			}
 			g.setColor(Color.black);
 			g.drawString(ri.getName(), 10, 15);
 			g.drawRect(5, 5, 110, 140);
+			
 		}
 	}
 }

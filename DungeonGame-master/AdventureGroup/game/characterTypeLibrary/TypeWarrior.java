@@ -22,6 +22,7 @@ public class TypeWarrior extends CharacterClass{
 	public TypeWarrior() {
 		cardPool.add(new CarefulSlash());
 		cardPool.add(new BleedingSlice());
+		cardPool.add(new Cleave());
 		cardPool.add(new Bash());
 		cardPool.add(new Bullwork());
 		name="warrior";

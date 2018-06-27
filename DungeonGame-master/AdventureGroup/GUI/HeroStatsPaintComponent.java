@@ -73,6 +73,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison());
 		lines.add("bleed resistance: "+player.getSelectedHero().getResistBleed());
 		lines.add("stun resistance: "+player.getSelectedHero().getResistStun());
+		lines.add("trap disarm: "+player.getSelectedHero().getTrapDisarm());
 		lines.add("");		
 		lines.add("wisdom: "+player.getSelectedHero().getDraw());
 		lines.add("mana: "+player.getSelectedHero().getManaPower());

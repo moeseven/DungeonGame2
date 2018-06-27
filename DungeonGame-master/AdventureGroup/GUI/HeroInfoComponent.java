@@ -43,7 +43,6 @@ public class HeroInfoComponent extends JComponent{
 			jp=new JPanel();
 			sp=new JScrollPane(jp);
 			sp.setPreferredSize(new Dimension(115, 900));
-			//jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 			jp.add(new DeckPaintComponent(gf, hero));
 			jp_Deck.add(sp,BorderLayout.EAST);
 			if(hero.getLvlUpCards().size()>0) {

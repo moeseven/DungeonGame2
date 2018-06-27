@@ -10,7 +10,7 @@ public class Bullwork extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block(self.computeBlockSkill()*4);
+		self.block(self.computeBlockSkill()*3);
 		return true;
 	}
 	@Override

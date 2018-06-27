@@ -71,29 +71,23 @@ public Room getNextRoom() {
 public void enterNextRoom() {
 	room=getNextRoom();
 	//check here if all heroes are dead
-	LinkedList<Hero> deadHeroes=new LinkedList<Hero>();
     LinkedList<Hero> stressedOutHeroes= new LinkedList<Hero>();
 	for(int i=0; i<this.getPlayer().getHeroes().size();i++) {
-		if(getPlayer().getHeroes().get(i).isDead()) {
-			deadHeroes.add(getPlayer().getHeroes().get(i));
-		}else {
-			if(getPlayer().getHeroes().get(i).getStress()==player.getHeroes().get(i).getStressCap()) {
+		if(!getPlayer().getHeroes().get(i).isDead()) {
+			if(player.getHeroes().get(i).getStress()==player.getHeroes().get(i).getStressCap()) {
 				stressedOutHeroes.add(getPlayer().getHeroes().get(i));
 			}
 		}		
 		player.getHeroes().get(i).becomeStressed(2);
 	}
-	
-	for(int i=0; i<deadHeroes.size();i++) {
-		player.getHeroes().remove(deadHeroes.get(i));
-	}
+	player.removeDeadHeroesFromRoster();
 	for(int i=0; i<stressedOutHeroes.size();i++) {
 		if(!stressedOutHeroes.get(i).isDead()){
 			player.getHeroes().remove(stressedOutHeroes.get(i));
 			player.getAvailableHeroes().add(stressedOutHeroes.get(i));
 		}		
 	}
-	if(deadHeroes.size()==getPlayer().getHeroes().size()) {
+	if(player.getHeroes().size()==0) {
 		//TODO return to town here -- Quest over!
 		room=town;
 	}	
@@ -106,6 +100,7 @@ public void enterNextRoom() {
 	
 }
 public void retreatHeroes() {
+	player.removeDeadHeroesFromRoster();
 	if(player.getHeroes().size()==0) {
 		player.setInventory(new LinkedList<Item>());
 	}

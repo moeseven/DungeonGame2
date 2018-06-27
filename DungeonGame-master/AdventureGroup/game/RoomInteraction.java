@@ -6,6 +6,7 @@ import gameEncounter.Hero;
 
 public abstract class RoomInteraction implements Serializable{
 	protected String name;
+	protected boolean hidden;
 	public RoomInteraction() {
 		super();
 		name="room interaction";
@@ -24,6 +25,14 @@ public abstract class RoomInteraction implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 	
 }

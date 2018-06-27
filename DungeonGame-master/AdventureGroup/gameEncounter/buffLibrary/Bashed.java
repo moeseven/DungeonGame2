@@ -14,13 +14,13 @@ public class Bashed extends Buff{
 	@Override
 	public void mod(Hero hero) {
 		// TODO Auto-generated method stub
-		hero.setManaPower(hero.getManaPower()-1);
+		hero.setResistStun(hero.getResistStun()+50);
 	}
 
 	@Override
 	public void demod(Hero hero) {
 		// TODO Auto-generated method stub
-		hero.setManaPower(hero.getManaPower()+1);
+		hero.setResistStun(hero.getResistStun()-50);
 	}
 
 }

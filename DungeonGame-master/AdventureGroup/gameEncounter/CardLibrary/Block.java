@@ -10,7 +10,7 @@ public class Block extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block(self.computeBlockSkill());
+		self.block((int) (self.computeBlockSkill()*0.8));
 		return true;
 	}
 	@Override
@@ -19,7 +19,7 @@ public class Block extends SpellnoTarget{
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"100% block";
+		return super.getCardText()+"80% block";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

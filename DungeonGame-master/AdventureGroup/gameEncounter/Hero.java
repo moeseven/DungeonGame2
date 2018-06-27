@@ -9,6 +9,7 @@ import game.CharacterClass;
 import game.CharacterRace;
 import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
+import gameEncounter.CardLibrary.BleedingSlice;
 
 public class Hero implements Serializable{
 
@@ -57,11 +58,15 @@ public class Hero implements Serializable{
 	protected int resistBleed;
 	protected int resistStun;
 	protected int resistStress;
+	protected int trapDisarm;
+	//
 	protected int baseHp;
 	protected int strength;
 	protected int vitality;
 	protected int dexterity;
 	protected int intelligence;
+	//status
+	protected boolean stunned;
 	protected int bleed;
 	protected int poison;
 	protected int cold;
@@ -115,12 +120,13 @@ public class Hero implements Serializable{
 		setBaseHp(100);
 		setSpeed(10);
 		//other
-		resistFire=0;
-		resistPoison=0;
-		resistCold=0;
-		resistBleed=0;
-		resistStun=0;
+		resistFire=5;
+		resistPoison=5;
+		resistCold=5;
+		resistBleed=5;
+		resistStun=5;
 		resistStress=0;
+		trapDisarm=5;
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
@@ -179,8 +185,15 @@ public class Hero implements Serializable{
 			drawCard();
 		}
 		this.buffTick();
-		this.setSelectedCard(hand.getFirst());
-		
+		if(stunned) {
+			mana=0;
+			this.discardHand();
+			player.getGame().log.addLine(name+" is stunned!");
+			stunned=false;
+		}		
+		if(hand.size()!=0) {
+			setSelectedCard(hand.getFirst());	
+		}									
 	}
 	public void block(int block) {
 		player.getGame().log.addLine(name+" blocks for "+block);
@@ -355,7 +368,7 @@ public class Hero implements Serializable{
 		
 	}
 	//////
-	//bleed/poison/fire/cold
+	//bleed/poison/fire/cold/stun
 	public boolean bleed(int bleedAmount) {
 		if(Math.random()<resistBleed/100.0) {
 			player.getGame().log.addLine(name+" resisted bleeding");
@@ -383,6 +396,12 @@ public class Hero implements Serializable{
 		damagingHero.getPlayer().getGame().log.addLine("cold damage:");
 		takeDamage(damagingHero,coldDamage);
 	}
+	//stun
+	public void getStunned() {
+		if(Math.random()>resistStun/100.0) {
+			stunned=true;
+		}
+	};
 	//
 	//compute functions with cold effect
 	public int computeAccuracy() {
@@ -743,6 +762,12 @@ public class Hero implements Serializable{
 	}
 	public void setStressCap(int stressCap) {
 		this.stressCap = stressCap;
+	}
+	public int getTrapDisarm() {
+		return trapDisarm;
+	}
+	public void setTrapDisarm(int trapDisarm) {
+		this.trapDisarm = trapDisarm;
 	}	
 	
 }

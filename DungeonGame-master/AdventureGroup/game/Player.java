@@ -64,6 +64,17 @@ public class Player implements Serializable{
 			hero.setPlayer(null);
 		}
 	}
+	public void removeDeadHeroesFromRoster() {
+		LinkedList<Hero> deadHeroes=new LinkedList<Hero>();
+		for(int i=0; i<heroes.size();i++) {
+			if(heroes.get(i).isDead()) {
+				deadHeroes.add(heroes.get(i));
+			}
+		}
+		for(int i=0; i<deadHeroes.size();i++) {
+			heroes.remove(deadHeroes.get(i));
+		}
+	}
 	public void removeHero(Hero hero) {
 		if(heroes.size()>=1&&heroes.contains(hero)) {
 			heroes.remove(hero);

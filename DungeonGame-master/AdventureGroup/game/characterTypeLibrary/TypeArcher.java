@@ -43,6 +43,7 @@ public class TypeArcher extends CharacterClass{
 		hero.setVitality(hero.getVitality()+2);
 		//
 		hero.setAccuracy(hero.getAccuracy()+2);
+		hero.setTrapDisarm(hero.getTrapDisarm()+5);
 	}
 
 
