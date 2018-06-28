@@ -24,7 +24,12 @@ public class Town extends Room{
 		super.enterRoom();
 		for(int i=0; i<game.getPlayer().getAvailableHeroes().size();i++) {
 			game.getPlayer().getAvailableHeroes().get(i).becomeStressed(-idleStressRelief);
-		}		
+			game.getPlayer().getAvailableHeroes().get(i).heal(game.getPlayer().getAvailableHeroes().get(i).getVitality());
+		}	
+		if(game.getPlayer().getAvailableHeroes().size()<10) {
+			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
+			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
+		}
 		game.getActiveQuest().onReturnToTown(game.getPlayer());
 		game.newQuest();
 	}

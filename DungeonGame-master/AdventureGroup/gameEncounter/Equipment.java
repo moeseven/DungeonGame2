@@ -47,16 +47,17 @@ public class Equipment implements Serializable{
 	}
 	public LinkedList<Item> getAllEquippedItems(){
 		LinkedList<Item> allItems=new LinkedList<Item>();
-		if(hand1!=null) {
+		//only return items that are equipable to heroes dont return "teeth,claws" for example
+		if(hand1!=null&&hand1.droppable) {
 			allItems.add(hand1);
 		}		
-		if(hand1!=hand2&&hand2!=null) {
+		if(hand1!=hand2&&hand2!=null&&hand2.droppable) {
 			allItems.add(hand2);
 		}
-		if(head!=null) {
+		if(head!=null&&head.droppable) {
 			allItems.add(head);
 		}
-		if(body!=null) {
+		if(body!=null&&body.droppable) {
 			allItems.add(body);
 		}		
 		return allItems;

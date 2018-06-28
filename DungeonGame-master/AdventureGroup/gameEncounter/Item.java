@@ -7,6 +7,7 @@ public abstract class Item implements Serializable{
 	protected int weight=10;
 	private int goldValue=100;
 	protected int category=10;
+	protected boolean droppable=true;
 	protected int requiredStrength=0;
 	protected int requiredDexterity=0;
 	protected int requiredIntelligence=0;
@@ -34,13 +35,23 @@ public abstract class Item implements Serializable{
 	public void generateItemDescription() {
 		description=new LinkedList<String>();
 		description.add("category: "+ getItemCategoryName(category));
-		description.add("requirements: "+requiredStrength+"str, "+requiredDexterity+"dex, "+requiredIntelligence+"int");
+		String requirements="requirements: ";
+		if(requiredStrength>0) {
+			requirements+= requiredStrength+"str ";
+		}
+		if(requiredDexterity>0) {
+			requirements+= requiredDexterity+"dex ";
+		}
+		if(requiredIntelligence>0) {
+			requirements+= requiredIntelligence+"int ";
+		}
+		description.add(requirements);
 		for(int i=0; i<stats.getStats().length;i++) {
 			if(stats.getStats()[i]!=0) {
 				if(stats.getStats()[i]>0) {
-					description.add(ModableHeroStats.getDescriptionStringForItemStat(i)+": +"+stats.getStats()[i]);
+					description.add("+"+stats.getStats()[i]+" "+ModableHeroStats.getDescriptionStringForItemStat(i));
 				}else {
-					description.add(ModableHeroStats.getDescriptionStringForItemStat(i)+": "+stats.getStats()[i]);
+					description.add(stats.getStats()[i]+" "+ModableHeroStats.getDescriptionStringForItemStat(i));
 				}				
 			}
 		}
@@ -92,6 +103,12 @@ public abstract class Item implements Serializable{
 	}
 	public void setStats(ModableHeroStats stats) {
 		this.stats = stats;
+	}
+	public boolean isDroppable() {
+		return droppable;
+	}
+	public void setDroppable(boolean droppable) {
+		this.droppable = droppable;
 	}
 
 	

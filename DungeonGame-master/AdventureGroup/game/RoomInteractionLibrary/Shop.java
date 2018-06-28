@@ -16,21 +16,6 @@ public class Shop extends RoomInteraction{
 		super();
 		name="merchant";
 		items=new LinkedList<Item>();
-		items.add(new ShortSword());
-		items.add(new Buckler());
-		items.add(new Speer());
-		items.add(new ShortBow());
-		items.add(new ArmorThinLeather());
-		items.add(new ShortSword());
-		items.add(new Buckler());
-		items.add(new Dagger());
-		items.add(new CrownOfThorns());
-		items.add(new HeavySword());
-		items.add(new PlateArmor());
-		items.add(new ArmorThinLeather());
-		items.add(new ExperienceBook());
-		items.add(new HealingPotion());
-		items.add(new HealingPotion());
 		items.add(new HealingPotion());
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +23,14 @@ public class Shop extends RoomInteraction{
 	@Override
 	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
-		
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem());
 	}
 
 	@Override

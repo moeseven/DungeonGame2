@@ -5,35 +5,13 @@ import java.io.Serializable;
 public class ModableHeroStats implements Serializable{
 	private int totalStats;
 	private Integer[] stats;
-	public static final String[] STATNAMES= {"not a stat!","armor","block","attack","thorns","draw","strength","dexterity","intelligence","vitality","spell","dodge","accuracy","resist"};
+	public static final String[] STATNAMES= {"not a stat!","health","armor","block","attack","thorns","draw","strength","dexterity","intelligence","vitality","spell","dodge","accuracy","resistSpell","resistFire","resistCold","resistBleed","resistPoison","resistStun","resistStress","speed"};
 	public ModableHeroStats(){
 		stats= new Integer[STATNAMES.length];
 		for(int i=0; i<stats.length;i++) {
 			stats[i]=0;
 		}
 		
-	}
-	public static final Integer getHeroStat(Hero hero, int statNumber) {//is this necessary?
-		for(int i=0;i<STATNAMES.length;i++) {
-			switch (i) {
-	        case 1:  return hero.getArmor();
-	        case 2:  return hero.getBlockSkill();
-	        case 3:  return hero.getAttackSkill();
-	        case 4:  return hero.getThorns();
-	        case 5:  return hero.getDraw();
-	        case 6:  return hero.getStrength();
-	        case 7:  return hero.getDexterity();
-	        case 8:  return hero.getIntelligence();
-	        case 9:  return hero.getVitality();
-	        case 10: return hero.getSpellPower();
-	        case 11:  return hero.getDodge();
-	        case 12:  return hero.getAccuracy();
-	        case 13: return hero.getSpellResist();
-	        default: return 0;
-	        //TODO the ModableHeroStat class should be integrated to the Hero class!
-			}
-		}	
-		return 0;
 	}
 	public static final void modStats(Hero hero, Integer[] stats) { //stats belong to array positions
 		hero.setArmor(hero.getArmor()+stats[nameResolveStat("armor")]);
@@ -48,7 +26,16 @@ public class ModableHeroStats implements Serializable{
 	    hero.setSpellPower(hero.getSpellPower()+stats[nameResolveStat("spell")]);
 	    hero.setDodge(hero.getDodge()+stats[nameResolveStat("dodge")]);
 	    hero.setAccuracy(hero.getAccuracy()+stats[nameResolveStat("accuracy")]);
-	    hero.setSpellResist(hero.getSpellResist()+stats[nameResolveStat("resist")]);
+	    hero.setSpellResist(hero.getSpellResist()+stats[nameResolveStat("resistSpell")]);
+	    hero.setResistFire(hero.getResistFire()+stats[nameResolveStat("resistFire")]);
+	    hero.setResistCold(hero.getResistCold()+stats[nameResolveStat("resistCold")]);
+	    hero.setResistBleed(hero.getResistBleed()+stats[nameResolveStat("resistBleed")]);
+	    hero.setResistPoison(hero.getResistPoison()+stats[nameResolveStat("resistPoison")]);
+	    hero.setResistStun(hero.getResistStun()+stats[nameResolveStat("resistStun")]);
+	    hero.setResistStress(hero.getResistStress()+stats[nameResolveStat("resistStress")]);
+	    hero.setBaseHp(hero.getBaseHp()+stats[nameResolveStat("health")]);
+	    hero.setSpeed(hero.getSpeed()+stats[nameResolveStat("speed")]);
+	
 	}
 	public static final Integer nameResolveStat(String n) {
 		for(int i=0;i<STATNAMES.length;i++) {
@@ -56,6 +43,7 @@ public class ModableHeroStats implements Serializable{
 				return i;
 			}
 		}
+		System.out.println("nameResolveStat error! (not a stat)");
 		return 0;
 	}
 	public static final  String getDescriptionStringForItemStat(int i) {// assert a number to every possible item bonus

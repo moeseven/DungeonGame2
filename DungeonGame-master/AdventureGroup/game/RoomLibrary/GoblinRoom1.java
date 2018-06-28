@@ -4,9 +4,9 @@ import java.util.LinkedList;
 
 import game.Game;
 import game.Room;
-import game.characterTypeLibrary.RaceGoblin;
 import game.characterTypeLibrary.TypeArcher;
 import game.characterTypeLibrary.TypeWarrior;
+import game.monsters.RaceGoblin;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 

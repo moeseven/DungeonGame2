@@ -81,6 +81,21 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("");
 		lines.add("Level: "+player.getSelectedHero().getLevel());
 		lines.add("experience: "+player.getSelectedHero().getExperience()+"/"+GameEquations.experienceThresholdForLevelUp(player.getSelectedHero().getLevel()));		
+		//Quirks
+		lines.add("");
+		if(player.getSelectedHero().getQuirks().size()>0) {
+			lines.add("Quirks:");
+			for(int a=0; a<player.getSelectedHero().getQuirks().size();a++) {
+				String quirkString=player.getSelectedHero().getQuirks().get(a).getName()+"(";
+				for(int b=0; b<player.getSelectedHero().getQuirks().get(a).getDescription().size();b++) {
+					quirkString+=player.getSelectedHero().getQuirks().get(a).getDescription().get(b);
+				}
+				quirkString+=")";
+				lines.add(quirkString);
+			}
+			lines.add("");
+		}		
+		//
 		for(int i=0; i<lines.size();i++) {
 			if(i<=height) {
 				g.drawString(lines.get(i), 10, 10+12*i);

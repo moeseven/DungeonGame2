@@ -27,9 +27,6 @@ public class Player implements Serializable{
 		inventory=new LinkedList<Item>();
 		gold=200;
 		groupSize=4;
-		//getAvailableHeroes().add(game.generator.generateRandomHero(this));
-		getAvailableHeroes().add(game.generator.generateRandomHero(this));
-		getAvailableHeroes().add(game.generator.generateRandomHero(this));
 	}
 	public void gainGold(int g) {
 		gold+=g;

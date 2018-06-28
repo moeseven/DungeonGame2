@@ -11,7 +11,7 @@ public class ShortBow extends ItemBiHand{
 		super();
 		name="short bow";
 		setGoldValue(190);
-		this.baseDamage=6;
+		this.baseDamage=10;
 		this.damageRange=10;
 		this.facStr=0.1;
 		this.weaponRange=10;

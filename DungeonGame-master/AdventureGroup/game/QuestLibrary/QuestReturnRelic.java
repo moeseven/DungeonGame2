@@ -1,5 +1,7 @@
 package game.QuestLibrary;
 
+import java.util.LinkedList;
+
 import game.Game;
 import game.Player;
 import game.Quest;
@@ -22,7 +24,7 @@ public class QuestReturnRelic extends Quest{
 		questInteraction.getItems().add(questItem);
 		questRoom.getInteractions().add(questInteraction);
 		rooms.add(questRoom);
-		description="find the "+questItem.getName()+" and return it to the town.";
+		description="find the -"+questItem.getName()+"- and return it to the town.";
 		goldReward=500;
 		experienceReward=700;
 	}
@@ -41,7 +43,17 @@ public class QuestReturnRelic extends Quest{
 		public QuestRelic() {
 			super();
 			// TODO Auto-generated constructor stub
-			name="mandral star";
+			LinkedList<String> relicNames= new LinkedList<String>();
+			relicNames.add("mandral star");
+			relicNames.add("kefnut");
+			relicNames.add("antsy stone");
+			relicNames.add("flattened shard");
+			relicNames.add("small claw");
+			relicNames.add("disturbing coin");
+			relicNames.add("filthy orb");
+			relicNames.add("evil top");
+			relicNames.add("silent bowl");
+			name=relicNames.get((int) Math.min(relicNames.size()-1,(Math.random()*relicNames.size())));
 			
 		}
 

@@ -15,6 +15,7 @@ public class Hero implements Serializable{
 
 	//private LinkedList<Item> inventory;
 	private LinkedList<Buff> buffs;
+	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();;
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
 	private Equipment equipment;
 	protected String name;
@@ -88,12 +89,7 @@ public class Hero implements Serializable{
 		this.charRace=charRace;
 		this.charClass=charClass;
 		buffs= new LinkedList<Buff>();
-		equipment= new Equipment(this);	
-//		if(player!=null) {
-//			this.inventory=player.getInventory();
-//		}else {
-//			inventory=new LinkedList<Item>();
-//		}		
+		equipment= new Equipment(this);			
 		deck=new Deck();
 		charRace.modifyHero(this);
 		charClass.modifyHero(this);		
@@ -163,11 +159,11 @@ public class Hero implements Serializable{
 				poison-=(int)Math.max(1, poison/2.2);
 				player.getGame().log.addLine(name+" resisted poison");
 			}
-			takeDamage(this, getPoison());			
+			takePoisonDamage(getPoison());			
 		}		
 		//bleed
 		if(bleed>0) {
-			takeDamage(this, getBleed());
+			takeBleedDamage(getBleed());
 			bleed-=1;
 		}
 		//cold
@@ -248,6 +244,26 @@ public class Hero implements Serializable{
 			}
 		}		
 	}
+	public void takeBleedDamage(int damage) {
+		if(damage>0) {
+			player.getGame().log.addLine(name+" bleeds for "+damage+" hp.");
+			this.setHp(hp-damage);
+			if(hp<=0) {
+				hp=0;
+				this.die();
+			}
+		}
+	}
+	public void takePoisonDamage(int damage) {
+		if(damage>0) {
+			player.getGame().log.addLine(name+" suffers poison damage of "+damage+".");
+			this.setHp(hp-damage);
+			if(hp<=0) {
+				hp=0;
+				this.die();
+			}
+		}
+	}
 	public void takeUnreflectableArmorDamage(Hero damagingHero,int damage) {//prevent infinite thorn looping
 		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
 		takeDamage(damagingHero, armorDamage);
@@ -275,7 +291,7 @@ public class Hero implements Serializable{
 	}
 	public void discardHand() {
 		while(hand.size()>0) {
-			drawPile.add(hand.removeFirst());
+			discardPile.add(hand.removeFirst());
 		}		
 	}
 	public void heal(int heal) {//prevent overhealing
@@ -777,6 +793,12 @@ public class Hero implements Serializable{
 	}
 	public void setStunned(boolean stunned) {
 		this.stunned = stunned;
+	}
+	public LinkedList<HeroQuirk> getQuirks() {
+		return quirks;
+	}
+	public void setQuirks(LinkedList<HeroQuirk> quirks) {
+		this.quirks = quirks;
 	}	
 	
 }

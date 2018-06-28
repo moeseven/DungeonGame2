@@ -24,7 +24,6 @@ protected Game game;
 	}
 	public void onReturnToTown(Player player) {		
 		if(checkIfQuestFullfilled(player)&&finished==false) {
-			giveReward(player);
 			finished=true;
 		}		
 	}

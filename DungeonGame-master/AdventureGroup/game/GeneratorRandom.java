@@ -11,7 +11,6 @@ import game.RoomInteractionLibrary.Well;
 import game.RoomLibrary.EmptyRoom;
 import game.characterTypeLibrary.RaceDwarf;
 import game.characterTypeLibrary.RaceElf;
-import game.characterTypeLibrary.RaceGoblin;
 import game.characterTypeLibrary.RaceHalfling;
 import game.characterTypeLibrary.RaceHuman;
 import game.characterTypeLibrary.TypeArcher;
@@ -19,8 +18,22 @@ import game.characterTypeLibrary.TypeCleric;
 import game.characterTypeLibrary.TypeMage;
 import game.characterTypeLibrary.TypeThief;
 import game.characterTypeLibrary.TypeWarrior;
+import game.monsters.RaceGoblin;
+import game.monsters.RaceZombie;
 import gameEncounter.Hero;
+import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
+import gameEncounter.HeroQuirkLibrary.Aggressive;
+import gameEncounter.HeroQuirkLibrary.Bleeder;
+import gameEncounter.HeroQuirkLibrary.Defensive;
+import gameEncounter.HeroQuirkLibrary.Hairy;
+import gameEncounter.HeroQuirkLibrary.OneEyed;
+import gameEncounter.HeroQuirkLibrary.SlugBrained;
+import gameEncounter.HeroQuirkLibrary.Stresser;
+import gameEncounter.HeroQuirkLibrary.Strong;
+import gameEncounter.HeroQuirkLibrary.Tender;
+import gameEncounter.HeroQuirkLibrary.Tough;
+import gameEncounter.HeroQuirkLibrary.Weak;
 import gameEncounter.ItemLibrary.ArmorThinLeather;
 import gameEncounter.ItemLibrary.Buckler;
 import gameEncounter.ItemLibrary.HeavySword;
@@ -34,12 +47,25 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 public class GeneratorRandom implements Serializable{
 	private LinkedList<CharacterRace> heroRacePool;
 	private LinkedList<CharacterClass> heroClassPool;
+	private LinkedList<HeroQuirk> heroQuirkPool;
 	private LinkedList<Item> itemPool;
 	private LinkedList<RoomInteraction> interactionPool;
 	private LinkedList<MonsterRace> monsterRacePool;
 	private LinkedList<CharacterClass> monsterClassPool;
 	public GeneratorRandom(){
 		//the following dont need to be cloned
+		heroQuirkPool=new LinkedList<HeroQuirk>();
+		heroQuirkPool.add(new Strong());
+		heroQuirkPool.add(new Weak());
+		heroQuirkPool.add(new Bleeder());
+		heroQuirkPool.add(new Tough());
+		heroQuirkPool.add(new OneEyed());
+		heroQuirkPool.add(new Tender());
+		heroQuirkPool.add(new Stresser());
+		heroQuirkPool.add(new SlugBrained());
+		heroQuirkPool.add(new Hairy());
+		heroQuirkPool.add(new Defensive());
+		heroQuirkPool.add(new Aggressive());
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman());
 		heroRacePool.add(new RaceDwarf());
@@ -53,6 +79,7 @@ public class GeneratorRandom implements Serializable{
 		heroClassPool.add(new TypeThief());
 		monsterRacePool=new LinkedList<MonsterRace>();
 		monsterRacePool.add(new RaceGoblin());
+		monsterRacePool.add(new RaceZombie());
 		monsterClassPool=new LinkedList<CharacterClass>();
 		monsterClassPool.add(new TypeWarrior());
 		monsterClassPool.add(new TypeArcher());
@@ -61,6 +88,7 @@ public class GeneratorRandom implements Serializable{
 		newItemPool();
 		newInteractionPool();
 	}
+	//put up new Pools to prevent same instances of different stuff
 	public void newInteractionPool() {
 		interactionPool= new LinkedList<RoomInteraction>();
 		interactionPool.add(new Chest());
@@ -80,11 +108,14 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new HealingPotion());
 		itemPool.add(new Buckler());
 	}
+	///
 	public Hero generateRandomHero(Player player) {
 		CharacterRace cRace=heroRacePool.get((int) Math.min(heroRacePool.size()-1, Math.random()*heroRacePool.size()));
 		CharacterClass cClass=heroClassPool.get((int) Math.min(heroClassPool.size()-1, Math.random()*heroClassPool.size()));
 		String randomName = cRace.getNameList().get((int) Math.min(cRace.getNameList().size()-1, Math.random()*cRace.getNameList().size()));
-		return new Hero(randomName, player, cRace, cClass);
+		Hero randomHero=new Hero(randomName, player, cRace, cClass);
+		generateRandomHeroQuirk().gainQuirk(randomHero);
+		return randomHero;
 	}
 	public LinkedList<Hero> generateRandomMonsterSet(Game game, int difficultyLevel) {
 		//TODO adjust this to difficulty and progression day
@@ -123,6 +154,13 @@ public class GeneratorRandom implements Serializable{
 		}
 		
 		return room;
+	}
+	public Item generateRandomItem() {
+		newItemPool();
+		return itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
+	}
+	public HeroQuirk generateRandomHeroQuirk(){
+		return heroQuirkPool.get((int) Math.min(heroQuirkPool.size()-1, Math.random()*heroQuirkPool.size()));
 	}
 	public Quest generateRandomQuest(Game game) {
 		return new QuestReturnRelic(game);

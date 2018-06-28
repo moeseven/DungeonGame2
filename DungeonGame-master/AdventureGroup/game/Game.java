@@ -103,15 +103,15 @@ public void retreatHeroes() {
 	player.removeDeadHeroesFromRoster();
 	if(player.getHeroes().size()==0) {
 		player.setInventory(new LinkedList<Item>());
+	}else {
+		for(int i=0; i<player.getHeroes().size();i++) {
+			player.getHeroes().get(i).turnBegin();
+		}
 	}
+	
 	this.enterRoom(town);
 	day+=1;
-	log.addLine("Day: "+day);
-	if(player.getAvailableHeroes().size()<10) {
-		player.getAvailableHeroes().add(generator.generateRandomHero(player));
-		player.getAvailableHeroes().add(generator.generateRandomHero(player));
-	}	
-	
+	log.addLine("Day: "+day);		
 }
 public Room getTown() {
 	return town;

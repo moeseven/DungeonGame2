@@ -14,7 +14,7 @@ public class FireBall extends Spell{
 		int mana=self.getMana();
 		self.setMana(0);
 			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getTarget().takeFireDamage(self, (int)((Math.pow(mana+1, 1.4))*self.getSpellPower()/2.5));
+				self.getTarget().takeFireDamage(self, (int)((Math.pow(mana+1, 1.4))*self.getSpellPower()/1.5));
 				
 				return true;
 			}else {

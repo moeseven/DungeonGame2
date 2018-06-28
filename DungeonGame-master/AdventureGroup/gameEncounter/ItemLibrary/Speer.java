@@ -11,7 +11,7 @@ public class Speer extends ItemBiHand{
 		super();
 		name="speer";
 		setGoldValue(300);
-		this.baseDamage=8;
+		this.baseDamage=10;
 		this.damageRange=12;
 		this.facStr=0.75;
 		this.weaponRange=4;

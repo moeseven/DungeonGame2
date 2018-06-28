@@ -1,4 +1,4 @@
-package game.characterTypeLibrary;
+package game.monsters;
 
 import java.util.LinkedList;
 
@@ -38,7 +38,7 @@ public class RaceGoblin extends MonsterRace{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		hero.setSpeed(11);
-		hero.setBaseHp(70);		
+		hero.setBaseHp(60);		
 		//stats
 		hero.setStrength(7);
 		hero.setDexterity(9);
@@ -92,6 +92,7 @@ public class RaceGoblin extends MonsterRace{
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+6);
 			//
+			hero.setArmor(hero.getArmor()+1);
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}

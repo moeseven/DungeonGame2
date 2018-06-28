@@ -12,7 +12,7 @@ public class Magicmissile extends Spell{
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getTarget().takeDamage(self, (int)(1+self.getSpellPower()/1.6));
+				self.getTarget().takeDamage(self, (int)(1+self.getSpellPower()));
 				return true;
 			}else {
 				return false;

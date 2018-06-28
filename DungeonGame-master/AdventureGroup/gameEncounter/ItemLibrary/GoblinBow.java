@@ -11,8 +11,8 @@ public class GoblinBow extends ItemBiHand{
 		super();
 		name="goblin bow";
 		setGoldValue(10);
-		this.baseDamage=4;
-		this.damageRange=8;
+		this.baseDamage=10;
+		this.damageRange=10;
 		this.facStr=0.01;
 		this.weaponRange=10;
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-1;

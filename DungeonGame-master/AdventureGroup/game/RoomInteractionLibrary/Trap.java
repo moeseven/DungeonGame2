@@ -26,7 +26,7 @@ public abstract class Trap extends RoomInteraction{
 	@Override
 	public void onEnter(Game game) {
 		//give heros trap detection capabilities
-		if(Math.random()>game.getPlayer().getSelectedHero().getTrapDisarm()) {
+		if(Math.random()>(game.getPlayer().getSelectedHero().getTrapDisarm()/100.0)) {
 			trapHits(game.getPlayer().getSelectedHero());
 		}else {
 			hidden=false;
@@ -41,7 +41,7 @@ public abstract class Trap extends RoomInteraction{
 		if(disarmed) {
 			hero.getPlayer().getGame().log.addLine("nothing more to see");
 		}else {
-			if(Math.random()>hero.getTrapDisarm()+10) {
+			if(Math.random()>(hero.getTrapDisarm()/100.0)+10) {
 				hero.getPlayer().getGame().log.addLine(hero.getName()+" disarms a "+getName()+" and gains "+exp+" experience");
 				hero.gainExp(exp);				
 			}else {
