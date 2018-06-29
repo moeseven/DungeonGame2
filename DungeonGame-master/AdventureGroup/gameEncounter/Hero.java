@@ -312,8 +312,25 @@ public class Hero implements Serializable{
 			return true;
 		}					
 	}
-	//inventory size
-	
+	//move
+	public void moveForward() {
+		int startPosition = getPosition();
+		player.getHeroes().remove(this);
+		player.getHeroes().addFirst(this);
+		for(int i=startPosition-1; i>0;i--){
+			Hero removedHero=player.getHeroes().remove(startPosition-1);
+			player.getHeroes().addFirst(removedHero);
+		}
+	}
+	public void moveBack() {
+		int startPosition = getPosition();
+		player.getHeroes().remove(this);
+		player.getHeroes().addLast(this);
+		for(int i=startPosition; i<player.getGroupSize()-2;i++){
+			Hero removedHero=player.getHeroes().remove(startPosition+1);
+			player.getHeroes().addLast(removedHero);
+		}
+	}
 	//Buffs
 	public void buffHero(Buff buff) {
 		buffs.add(buff);
