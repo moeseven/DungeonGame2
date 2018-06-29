@@ -219,29 +219,29 @@ public class GuiRoom extends JPanel{
 		rc.updateCaptions();
 	}
 
-private class MyMouseListener extends MouseAdapter{
-	public void mousePressed(MouseEvent e){	
-		if(e.getButton()==1){
-			//get equipment position from click
-			rc.triggerClick(e.getX(), e.getY());
-			rc.updateCaptions();
-			gw.repaint();				
-		}else{
-			if (e.getButton()==3){
-				//new CardView(card);
+	private class MyMouseListener extends MouseAdapter{
+		public void mousePressed(MouseEvent e){	
+			if(e.getButton()==1){
+				//get equipment position from click
+				rc.triggerClick(e.getX(), e.getY());
+				rc.updateCaptions();
+				gw.repaint();				
+			}else{
+				if (e.getButton()==3){
+					//new CardView(card);
+				}
+			}
+		} 
+	}
+	protected void paintComponent(Graphics g){
+		super.paintComponent(g);
+		for(int i=0; i<rc.rectAngles.size();i++) {
+			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
 		}
-	} 
-}
-protected void paintComponent(Graphics g){
-	super.paintComponent(g);
-	for(int i=0; i<rc.rectAngles.size();i++) {
-		g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
-		for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
-			g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
-		}
 	}
-}
 	}
 	private class TavernInterface extends JComponent{
 		private RectangleClicker rc;

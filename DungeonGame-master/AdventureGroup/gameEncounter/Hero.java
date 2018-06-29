@@ -326,7 +326,7 @@ public class Hero implements Serializable{
 		int startPosition = getPosition();
 		player.getHeroes().remove(this);
 		player.getHeroes().addLast(this);
-		for(int i=startPosition; i<player.getGroupSize()-2;i++){
+		for(int i=startPosition; i<player.getGroupSize()-3;i++){
 			Hero removedHero=player.getHeroes().remove(startPosition+1);
 			player.getHeroes().addLast(removedHero);
 		}

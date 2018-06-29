@@ -24,7 +24,8 @@ public class RoomButtonComponent extends JComponent{
 		private RoomWindow rw;
 		private JButton buttonLeaveRoom;
 		private JButton buttonInventory;
-		private JButton buttonMove;
+		private JButton buttonMoveForward;
+		private JButton buttonMoveBack;
 		private JButton buttonRetreat;
 		private JButton buttonMenu;
 		public RoomButtonComponent(RoomWindow rw){
@@ -34,15 +35,18 @@ public class RoomButtonComponent extends JComponent{
 			buttonLeaveRoom.addMouseListener(new mouselistenerLeave());
 			buttonInventory=new JButton("inventory");
 			buttonInventory.addMouseListener(new mouseListenerInventory());
-			buttonMove=new JButton("move hero to front");
-			buttonMove.addMouseListener(new mHTF());
+			buttonMoveForward=new JButton("move hero forward");
+			buttonMoveForward.addMouseListener(new mouselistenerMoveForward());
+			buttonMoveBack=new JButton("move hero back");
+			buttonMoveBack.addMouseListener(new mouselistenerMoveBack());
 			buttonRetreat=new JButton("retreat");
 			buttonRetreat.addMouseListener(new mouseListenerRetreat());
 			buttonMenu=new JButton("menu");
 			buttonMenu.addMouseListener(new mouseListenerMenu());
 			this.add(buttonMenu);
-			this.add(buttonRetreat);
-			this.add(buttonMove);
+			this.add(buttonRetreat);		
+			this.add(buttonMoveBack);
+			this.add(buttonMoveForward);
 			this.add(buttonInventory);
 			this.add(buttonLeaveRoom);
 			super.setPreferredSize(new Dimension(300,50));
@@ -87,12 +91,17 @@ public class RoomButtonComponent extends JComponent{
 				}								
 			}
 		}
-		private class mHTF extends MouseAdapter{
+		private class mouselistenerMoveForward extends MouseAdapter{
 			public void mousePressed(MouseEvent e){
-				//move Hero to front
-				Hero hero= rw.getGame().getPlayer().getSelectedHero();
-				rw.getGame().getPlayer().getHeroes().remove(rw.getGame().getPlayer().getSelectedHero());
-				rw.getGame().getPlayer().getHeroes().addFirst(hero);
+				//move Hero forward
+				rw.getGame().getPlayer().getSelectedHero().moveForward();
+				rw.getGuiRoom().upadate();
+			}
+		}
+		private class mouselistenerMoveBack extends MouseAdapter{
+			public void mousePressed(MouseEvent e){
+				//move Hero forward
+				rw.getGame().getPlayer().getSelectedHero().moveBack();
 				rw.getGuiRoom().upadate();
 			}
 		}
