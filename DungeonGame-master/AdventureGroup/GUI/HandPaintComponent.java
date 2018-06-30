@@ -56,6 +56,15 @@ public class HandPaintComponent extends JComponent{
 			g.setColor(Color.black);
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost(), 5+i*100, 10);
+			for(int b=fw.getGame().getPlayer().getGroupSize()-1;b>=0;b--) {
+				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalPositions()[b]) {
+					g.setColor(Color.WHITE);
+				}else {
+					g.setColor(Color.DARK_GRAY);
+				}
+				g.fillOval(5+15*(fw.getGame().getPlayer().getGroupSize()-1)-b*15+i*100, 25, 12, 12);
+			}
+			
 			
 			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
 				g.setColor(Color.red);

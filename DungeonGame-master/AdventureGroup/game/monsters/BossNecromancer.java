@@ -11,13 +11,16 @@ import gameEncounter.Weapon;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Bullwork;
 import gameEncounter.CardLibrary.CarefulSlash;
+import gameEncounter.CardLibrary.Channel;
 import gameEncounter.CardLibrary.Concentrate;
 import gameEncounter.CardLibrary.FireArrow;
 import gameEncounter.CardLibrary.FrostArrow;
 import gameEncounter.CardLibrary.HeadShot;
+import gameEncounter.CardLibrary.Magicmissile;
 import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.Spell;
+import gameEncounter.CardLibrary.SpellnoTarget;
 import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.RustyBlade;
@@ -27,64 +30,77 @@ import gameEncounter.CardLibrary.Bash;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.BleedingSlice;
 
-public class RaceZombie extends MonsterRace{
+public class BossNecromancer extends MonsterRace{
 
-	public RaceZombie() {
-		name="zombie";
+	public BossNecromancer() {
+		name="necromancer";
 		//set Position classes
-		position1Classes.add(new ZombieWarrior());
-		position2Classes.add(new ZombieWarrior());
-		position3Classes.add(new ZombieWarrior());
-		position4Classes.add(new ZombieWarrior());
-		position5Classes.add(new ZombieWarrior());
+		position1Classes.add(new NecromancerAspirant());
+		position2Classes.add(null);
+		position3Classes.add(null);
+		position4Classes.add(null);
+		position5Classes.add(null);
 	}
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setSpeed(4);
-		hero.setBaseHp(180);		
+		hero.setSpeed(12);
+		hero.setBaseHp(340);		
 		//stats
 		hero.setStrength(12);
-		hero.setDexterity(3);
-		hero.setIntelligence(1);
-		hero.setVitality(6);
+		hero.setDexterity(14);
+		hero.setIntelligence(34);
+		hero.setVitality(15);
 		//
 		//attack/defence
-		hero.setAttackSkill(6);
-		hero.setBlockSkill(3);
-		hero.setAccuracy(8);
-		hero.setDodge(1);
-		hero.setSpellPower(8);
-		hero.setSpellResist(20);
+		hero.setAttackSkill(12);
+		hero.setBlockSkill(10);
+		hero.setAccuracy(14);
+		hero.setDodge(13);
+		hero.setSpellPower(35);
+		hero.setSpellResist(14);
 		//
 		//resistances
-		hero.setResistFire(0);
-		hero.setResistCold(40);
-		hero.setResistBleed(60);
-		hero.setResistPoison(80);
-		hero.setResistStun(60);
+		hero.setResistFire(4);
+		hero.setResistCold(10);
+		hero.setResistBleed(10);
+		hero.setResistPoison(30);
+		hero.setResistStun(30);
 		//
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*5.0));
-		hero.setExperienceValue(20);
-		//zombieslow
-		hero.setManaPower(1);
+		hero.setGold((int)(Math.random()*45.0));
+		hero.setExperienceValue(130);
+		//boss
+		hero.setManaPower(3);
+		hero.setDraw(5);
 		//deck		
 		
 	}
-	private class ZombieWarrior extends CharacterClass{
+	private class NecromancerAspirant extends CharacterClass{
 
-		public ZombieWarrior() {			
+		public NecromancerAspirant() {			
 			name="";
 			items.add(new ZombieClaw());				
-			for (int i=0; i<4;i++) {
-				cards.add(new BasicAttack());
+			for (int i=0; i<4;i++) {				
+				cards.add(new Block());
 			}
+			//attacks
+			cards.add(new BasicAttack());
+			cards.add(new BasicAttack());
+			cards.add(new BasicAttack());
+			cards.add(new MeeleAttack());
+			cards.add(new MeeleAttack());
+			//spells
+			cards.add(new Magicmissile());
+			cards.add(new Magicmissile());
+			cards.add(new Magicmissile());
+			cards.add(new SummonZombie());
+			cards.add(new SummonZombie());
+			cards.add(new Channel());
+			
 			for (int i=0; i<6;i++) {
-				cards.add(new MeeleAttack());
+				
 			}
-			cards.add(new Moaning());
-			cards.add(new Grab());
 		}
 
 		public void modifyHero(Hero hero) {
@@ -96,7 +112,7 @@ public class RaceZombie extends MonsterRace{
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+6);
 			//
-			hero.setArmor(hero.getArmor()+1);
+			hero.setArmor(hero.getArmor()+3);
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
@@ -115,11 +131,11 @@ public class RaceZombie extends MonsterRace{
 		
 
 	}
-	private class Moaning extends Spell{
+	private class SummonZombie extends SpellnoTarget{
 
-		public Moaning() {
+		public SummonZombie() {
 			super();
-			manaCost=1;
+			manaCost=3;
 		}
 
 		@Override
@@ -127,17 +143,27 @@ public class RaceZombie extends MonsterRace{
 			// TODO Auto-generated method stub
 			return 10;
 		}
+		@Override
+		public boolean extraCastConditions(Hero hero) {
+			boolean isThereSpace=false;
+			if(hero.getPlayer().getGroupSize()-1-hero.getPlayer().getHeroes().size()>0) {
+				isThereSpace=true;
+			}
+			return isThereSpace;
+		}
 
 		@Override
 		public boolean applyEffect(Hero self) {
-			self.getTarget().becomeStressed(6);
+			MonsterRace monster= new RaceZombie();
+			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPosition1Classes().getFirst()));
+			self.getPlayer().getHeroes().getFirst().setUpHandPile();
 			return true;
 		}
 
 		@Override
 		public String getName() {
 			// TODO Auto-generated method stub
-			return "horrible moaning";
+			return "summon Zombie";
 		}
 
 		@Override

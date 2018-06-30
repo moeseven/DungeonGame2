@@ -14,7 +14,7 @@ import tools.MyLog;
 public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
-public GeneratorRandom generator=new GeneratorRandom();
+public GeneratorRandom generator;
 public int day;
 public MyLog log;
 private Room room;
@@ -23,7 +23,9 @@ private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
 public Game() {
 	super();
+	
 	dungeonMaster=new DungeonMaster(this);
+	generator=new GeneratorRandom(this);
 	day=1;
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();

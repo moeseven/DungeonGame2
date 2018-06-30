@@ -92,7 +92,10 @@ public class Hero implements Serializable{
 		equipment= new Equipment(this);			
 		deck=new Deck();
 		charRace.modifyHero(this);
-		charClass.modifyHero(this);		
+		if(charClass!=null) {
+			charClass.modifyHero(this);	
+		}
+	
 		if(!name.equals("")&&!name.equals("type name here")) {
 			this.name=name;
 		}			
@@ -150,7 +153,11 @@ public class Hero implements Serializable{
 			Collections.shuffle(this.getDrawPile());
 			discardPile=new LinkedList<Card>();
 		}
-		hand.add(drawPile.removeFirst());
+		if(drawPile.size()>0) {
+			hand.add(drawPile.removeFirst());
+		}else {
+			player.getGame().log.addLine("no more cards in draw Pile!");
+		}
 	}
 	public void applyNegativeTurnEffects() {
 		//poison

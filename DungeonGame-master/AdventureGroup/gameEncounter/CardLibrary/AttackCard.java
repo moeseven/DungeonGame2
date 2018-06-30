@@ -45,13 +45,12 @@ public abstract class AttackCard extends Card{
 	public String getCardText() {
 		//TODO correct number display
 		//generate legeal positions text
-		String legalPos="positions(";
-		for(int i=0;i<legalPositions.length;i++) {
-			if(legalPositions[i]) {
-				legalPos+=(i+1)+" ";
-			}
-		}
-		legalPos+=")";
-		return legalPos+damageMult*100+"% damage ";
+		return damageMult*100+"% damage ";
 	}
+	@Override
+	public boolean extraCastConditions(Hero hero) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
 }

@@ -8,3 +8,16 @@
 /RaceZombie$ZombieWarrior.class
 /RaceZombie$Moaning.class
 /RaceZombie$ZombieClaw.class
+/RaceZombie$Grab.class
+/Necromancer$Grab.class
+/Necromancer$Moaning.class
+/Necromancer$ZombieClaw.class
+/Necromancer$ZombieWarrior.class
+/Necromancer.class
+/BossNecromancer$Grab.class
+/BossNecromancer$Moaning.class
+/BossNecromancer$ZombieClaw.class
+/BossNecromancer$ZombieWarrior.class
+/BossNecromancer.class
+/BossNecromancer$NecromancerAspirant.class
+/BossNecromancer$SummonZombie.class

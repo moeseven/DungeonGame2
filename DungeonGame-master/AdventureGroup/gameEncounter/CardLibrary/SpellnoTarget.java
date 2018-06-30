@@ -13,15 +13,12 @@ public abstract class SpellnoTarget extends Card{
 	@Override
 	public String getCardText() {
 		//TODO correct number display
-		//generate legeal positions text
-		String legalPos="positions(";
-		for(int i=0;i<legalPositions.length;i++) {
-			if(legalPositions[i]) {
-				legalPos+=(i+1)+" ";
-			}
-		}
-		legalPos+=")";
-		return legalPos;
+		return "";
+	}
+	@Override
+	public boolean extraCastConditions(Hero hero) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

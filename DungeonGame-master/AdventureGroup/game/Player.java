@@ -46,7 +46,7 @@ public class Player implements Serializable{
 					}
 				}
 			}
-			heroes.add(hero);
+			heroes.addFirst(hero);
 //			hero.setInventory(inventory);
 			hero.setPlayer(this);
 			selectedHero=hero;

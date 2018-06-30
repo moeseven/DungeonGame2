@@ -3,7 +3,9 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.QuestLibrary.KillANecromancer;
 import game.QuestLibrary.QuestReturnRelic;
+import game.QuestLibrary.TestQuest;
 import game.RoomInteractionLibrary.Chest;
 import game.RoomInteractionLibrary.PoisonTrap;
 import game.RoomInteractionLibrary.SpikeTrap;
@@ -49,10 +51,13 @@ public class GeneratorRandom implements Serializable{
 	private LinkedList<CharacterClass> heroClassPool;
 	private LinkedList<HeroQuirk> heroQuirkPool;
 	private LinkedList<Item> itemPool;
+	private LinkedList<Quest> questPool;
 	private LinkedList<RoomInteraction> interactionPool;
 	private LinkedList<MonsterRace> monsterRacePool;
 	private LinkedList<CharacterClass> monsterClassPool;
-	public GeneratorRandom(){
+	private Game game;
+	public GeneratorRandom(Game game){
+		this.game=game;
 		//the following dont need to be cloned
 		heroQuirkPool=new LinkedList<HeroQuirk>();
 		heroQuirkPool.add(new Strong());
@@ -107,6 +112,11 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new HeavySword());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new Buckler());
+	}
+	public void newQuestPool() {
+		questPool=new LinkedList<Quest>();
+		questPool.add(new KillANecromancer(game));
+		questPool.add(new QuestReturnRelic(game));
 	}
 	///
 	public Hero generateRandomHero(Player player) {
@@ -163,6 +173,8 @@ public class GeneratorRandom implements Serializable{
 		return heroQuirkPool.get((int) Math.min(heroQuirkPool.size()-1, Math.random()*heroQuirkPool.size()));
 	}
 	public Quest generateRandomQuest(Game game) {
-		return new QuestReturnRelic(game);
+		newQuestPool();
+		//return new TestQuest(game);
+		return questPool.get((int) Math.min(questPool.size()-1, Math.random()*questPool.size()));
 	}
 }
