@@ -7,7 +7,10 @@ import game.QuestLibrary.KillANecromancer;
 import game.QuestLibrary.QuestReturnRelic;
 import game.QuestLibrary.TestQuest;
 import game.RoomInteractionLibrary.Chest;
+import game.RoomInteractionLibrary.EvilStatue;
 import game.RoomInteractionLibrary.PoisonTrap;
+import game.RoomInteractionLibrary.Sack;
+import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.SpikeTrap;
 import game.RoomInteractionLibrary.Well;
 import game.RoomLibrary.EmptyRoom;
@@ -97,6 +100,9 @@ public class GeneratorRandom implements Serializable{
 	public void newInteractionPool() {
 		interactionPool= new LinkedList<RoomInteraction>();
 		interactionPool.add(new Chest());
+		interactionPool.add(new EvilStatue());
+		interactionPool.add(new Shop());
+		interactionPool.add(new Sack());
 		interactionPool.add(new Well());
 		interactionPool.add(new SpikeTrap());
 		interactionPool.add(new PoisonTrap());

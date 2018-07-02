@@ -21,8 +21,8 @@ import tools.RectangleClicker;
 public class HeroFightManaComponent extends JComponent{
 	private FightWindow fw;
 	private RectangleClicker rc;
-	public HeroFightManaComponent(FightWindow fw) {
-		this.fw=fw;
+	public HeroFightManaComponent(FightWindow fwindow) {
+		this.fw=fwindow;
 		rc=new RectangleClicker();
 		super.setPreferredSize(new Dimension(200,180));
 		setLayout(new BorderLayout());

@@ -161,12 +161,9 @@ public class Hero implements Serializable{
 	}
 	public void applyNegativeTurnEffects() {
 		//poison
-		if(poison>0) {			
-			if(Math.random()<resistPoison/100.0) {
-				poison-=(int)Math.max(1, poison/2.2);
-				player.getGame().log.addLine(name+" resisted poison");
-			}
-			takePoisonDamage(getPoison());			
+		if(poison>0) {	
+			poison-=1;		
+			takePoisonDamage(hp/20+2);			
 		}		
 		//bleed
 		if(bleed>0) {
@@ -262,9 +259,11 @@ public class Hero implements Serializable{
 		}
 	}
 	public void takePoisonDamage(int damage) {
+	
 		if(damage>0) {
-			player.getGame().log.addLine(name+" suffers poison damage of "+damage+".");
-			this.setHp(hp-damage);
+			int poisondamage=(int) Math.max(1, damage*(resistPoison/100.0));
+			player.getGame().log.addLine(name+" suffers poison damage of "+poisondamage+".");
+			this.setHp(hp-poisondamage);
 			if(hp<=0) {
 				hp=0;
 				this.die();
@@ -420,9 +419,14 @@ public class Hero implements Serializable{
 		}
 	}
 	public boolean poison(int poisonAmount) {
-		poison+=poisonAmount;
-		player.getGame().log.addLine(name+" got poisoned");
-		return true;
+		if(Math.random()<resistPoison/100.0) {
+			player.getGame().log.addLine(name+" resisted poison");
+			return false;
+		}else {
+			poison+=poisonAmount;
+			player.getGame().log.addLine(name+" got poisoned");
+			return true;
+		}		
 	}
 	//elemental damage
 	public void takeFireDamage(Hero damagingHero, int damage) {
