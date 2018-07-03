@@ -406,18 +406,19 @@ public class Hero implements Serializable{
 	}
 	//
 	public void becomeStressed(int s) {
-		int sDamage=(int)(s*(1-resistStress/100));
-		stress+=sDamage;
-		player.getGame().log.addLine(name+" gets stressed for "+sDamage+" stress!");
-		if(stress>stressCap) {
-			stress=stressCap;
-			player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
-		}else {
-			if(stress<0) {
-				stress=0;
+		if(!isDead) {
+			int sDamage=(int)(s*(1-resistStress/100));
+			stress+=sDamage;
+			player.getGame().log.addLine(name+" gets stressed for "+sDamage+" stress!");
+			if(stress>stressCap) {
+				stress=stressCap;
+				player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
+			}else {
+				if(stress<0) {
+					stress=0;
+				}
 			}
-		}
-		
+		}				
 	}
 	//////
 	//bleed/poison/fire/cold/stun
