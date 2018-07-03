@@ -11,8 +11,8 @@ public class ShortBow extends ItemBiHand{
 		super();
 		name="short bow";
 		setGoldValue(190);
-		this.baseDamage=10;
-		this.damageRange=10;
+		this.baseDamage=12;
+		this.damageRange=18;
 		this.facStr=0.1;
 		this.weaponRange=10;
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-1;

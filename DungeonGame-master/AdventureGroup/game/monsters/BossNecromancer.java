@@ -51,7 +51,7 @@ public class BossNecromancer extends MonsterRace{
 		hero.setStrength(12);
 		hero.setDexterity(14);
 		hero.setIntelligence(34);
-		hero.setVitality(15);
+		hero.setVitality(12);
 		//
 		//attack/defence
 		hero.setAttackSkill(12);
@@ -82,14 +82,13 @@ public class BossNecromancer extends MonsterRace{
 		public NecromancerAspirant() {			
 			name="";
 			items.add(new ZombieClaw());				
-			for (int i=0; i<4;i++) {				
+			for (int i=0; i<5;i++) {				
 				cards.add(new Block());
 			}
 			//attacks
 			cards.add(new BasicAttack());
 			cards.add(new BasicAttack());
 			cards.add(new BasicAttack());
-			cards.add(new MeeleAttack());
 			cards.add(new MeeleAttack());
 			//spells
 			cards.add(new Magicmissile());

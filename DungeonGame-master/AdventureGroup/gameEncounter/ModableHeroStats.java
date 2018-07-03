@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ModableHeroStats implements Serializable{
 	private int totalStats;
 	private Integer[] stats;
-	public static final String[] STATNAMES= {"not a stat!","health","armor","block","attack","thorns","draw","strength","dexterity","intelligence","vitality","spell","dodge","accuracy","resistSpell","resistFire","resistCold","resistBleed","resistPoison","resistStun","resistStress","speed"};
+	public static final String[] STATNAMES= {"not a stat!","health","armor","block","attack","thorns","draw","strength","dexterity","intelligence","vitality","spell","dodge","accuracy","resistSpell","resistFire","resistCold","resistBleed","resistPoison","resistStun","resistStress","speed","mana"};
 	public ModableHeroStats(){
 		stats= new Integer[STATNAMES.length];
 		for(int i=0; i<stats.length;i++) {
@@ -35,7 +35,7 @@ public class ModableHeroStats implements Serializable{
 	    hero.setResistStress(hero.getResistStress()+stats[nameResolveStat("resistStress")]);
 	    hero.setBaseHp(hero.getBaseHp()+stats[nameResolveStat("health")]);
 	    hero.setSpeed(hero.getSpeed()+stats[nameResolveStat("speed")]);
-	
+	    hero.setManaPower(hero.getManaPower()+stats[nameResolveStat("mana")]);
 	}
 	public static final Integer nameResolveStat(String n) {
 		for(int i=0;i<STATNAMES.length;i++) {

@@ -12,6 +12,7 @@ import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
 import gameEncounter.CardLibrary.BleedingSlice;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
+import gameEncounter.buffLibrary.Bashed;
 
 public class Hero implements Serializable{
 
@@ -383,7 +384,7 @@ public class Hero implements Serializable{
 	public void levelUP() {
 		level+=1;
 		strength+=1;dexterity+=1;intelligence+=1;vitality+=1;
-		stressCap+=10;
+		stressCap+=5;
 		skillPoints+=1;
 		if(cardPoints==0) {
 			generatelvlUpCards();
@@ -407,7 +408,7 @@ public class Hero implements Serializable{
 	public void becomeStressed(int s) {
 		int sDamage=(int)(s*(1-resistStress/100));
 		stress+=sDamage;
-		player.getGame().log.addLine(name+"gets stressed for "+sDamage+" stress!");
+		player.getGame().log.addLine(name+" gets stressed for "+sDamage+" stress!");
 		if(stress>stressCap) {
 			stress=stressCap;
 			player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
@@ -453,9 +454,13 @@ public class Hero implements Serializable{
 		takeDamage(damagingHero,coldDamage);
 	}
 	//stun
-	public void getStunned() {
+	public boolean takeStun() {
 		if(Math.random()>resistStun/100.0) {
 			stunned=true;
+			buffHero(new Bashed());
+			return true;
+		}else {
+			return false;
 		}
 	};
 	//

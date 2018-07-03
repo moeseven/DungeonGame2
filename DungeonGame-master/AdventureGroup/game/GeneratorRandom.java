@@ -30,6 +30,7 @@ import game.monsters.RaceZombie;
 import gameEncounter.Hero;
 import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
+import gameEncounter.ModableHeroStats;
 import gameEncounter.HeroQuirkLibrary.Aggressive;
 import gameEncounter.HeroQuirkLibrary.Bleeder;
 import gameEncounter.HeroQuirkLibrary.Defensive;
@@ -45,10 +46,12 @@ import gameEncounter.ItemLibrary.ArmorThinLeather;
 import gameEncounter.ItemLibrary.Buckler;
 import gameEncounter.ItemLibrary.HeavySword;
 import gameEncounter.ItemLibrary.LeatherArmor;
+import gameEncounter.ItemLibrary.MagicStaff;
 import gameEncounter.ItemLibrary.PlateArmor;
 import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
+import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class GeneratorRandom implements Serializable{
@@ -60,6 +63,7 @@ public class GeneratorRandom implements Serializable{
 	private LinkedList<RoomInteraction> interactionPool;
 	private LinkedList<MonsterRace> monsterRacePool;
 	private LinkedList<CharacterClass> monsterClassPool;
+	LinkedList<NameValuePair> enchantments;
 	private Game game;
 	public GeneratorRandom(Game game){
 		this.game=game;
@@ -93,10 +97,37 @@ public class GeneratorRandom implements Serializable{
 		monsterClassPool=new LinkedList<CharacterClass>();
 		monsterClassPool.add(new TypeWarrior());
 		monsterClassPool.add(new TypeArcher());
+		//item enchantments
+		enchantments= new LinkedList<NameValuePair>();
+		enchantments.add(new NameValuePair(3, "spell"));
+		enchantments.add(new NameValuePair(3, "speed"));
+		enchantments.add(new NameValuePair(3, "resistSpell"));
+		enchantments.add(new NameValuePair(3, "accuracy"));
+		enchantments.add(new NameValuePair(3, "dodge"));
+		enchantments.add(new NameValuePair(1, "draw"));
+		enchantments.add(new NameValuePair(3, "block"));
+		enchantments.add(new NameValuePair(3, "attack"));
+		enchantments.add(new NameValuePair(3, "speed"));
+		enchantments.add(new NameValuePair(10, "health"));
+		enchantments.add(new NameValuePair(10, "resistBleed"));
+		enchantments.add(new NameValuePair(10, "resistPoison"));
+		enchantments.add(new NameValuePair(10, "resistCold"));
+		enchantments.add(new NameValuePair(10, "resistFire"));
+		enchantments.add(new NameValuePair(10, "resistStress"));
+		enchantments.add(new NameValuePair(10, "resistStun"));
 		//
 		//the following objects have to be cloned
 		newItemPool();
 		newInteractionPool();
+	}
+	//
+	private class NameValuePair{
+		public int bonus;
+		public String name;
+		public NameValuePair(int bonus, String name) {
+			this.bonus=bonus;
+			this.name=name;
+		}
 	}
 	//put up new Pools to prevent same instances of different stuff
 	public void newInteractionPool() {
@@ -123,6 +154,8 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new Buckler());
+		itemPool.add(new MagicStaff());
+		itemPool.add(new ExperienceBook());
 	}
 	public void newQuestPool() {
 		questPool=new LinkedList<Quest>();
@@ -176,9 +209,21 @@ public class GeneratorRandom implements Serializable{
 		
 		return room;
 	}
-	public Item generateRandomItem() {
+	//item enchantments that increase price and give random stuff to item
+	public void enchant(Item item, int level) {
+		//TODO
+		NameValuePair pair = enchantments.get((int) Math.min(enchantments.size()-1, Math.random()*enchantments.size()));
+		int randomizedValue = (int) Math.max(1, pair.bonus*Math.random());
+		item.setGoldValue((int) (item.getGoldValue()*(1.2+randomizedValue/pair.bonus)));
+		item.getStats().getStats()[ModableHeroStats.nameResolveStat(pair.name)]+=randomizedValue;
+	}	
+	public Item generateRandomItem(int level) {
 		newItemPool();
-		return itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
+		Item item = itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
+		if(Math.random()<0.1*level) {
+			enchant(item, level);
+		}
+		return item;
 	}
 	public HeroQuirk generateRandomHeroQuirk(){
 		return heroQuirkPool.get((int) Math.min(heroQuirkPool.size()-1, Math.random()*heroQuirkPool.size()));

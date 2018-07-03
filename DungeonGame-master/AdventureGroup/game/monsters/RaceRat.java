@@ -43,7 +43,7 @@ public class RaceRat extends MonsterRace{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		hero.setSpeed(17);
-		hero.setBaseHp(35);		
+		hero.setBaseHp(45);		
 		//stats
 		hero.setStrength(10);
 		hero.setDexterity(23);

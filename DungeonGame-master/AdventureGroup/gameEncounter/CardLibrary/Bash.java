@@ -19,7 +19,7 @@ public class Bash extends AttackCard{
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
 				damageTarget(self);
-				self.getTarget().buffHero(new Bashed());
+				self.getTarget().takeStun();
 				return true;
 			}else {
 				return false;

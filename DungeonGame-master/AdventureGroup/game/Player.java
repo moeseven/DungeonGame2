@@ -26,7 +26,7 @@ public class Player implements Serializable{
 		inventoryCapacity=100;
 		inventory=new LinkedList<Item>();
 		gold=200;
-		groupSize=4;
+		groupSize=3;
 	}
 	public void gainGold(int g) {
 		gold+=g;

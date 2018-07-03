@@ -11,9 +11,9 @@ public class ShortSword extends ItemHand1{
 		super();
 		name="short sword";
 		setGoldValue(150);
-		this.baseDamage=10;
-		this.damageRange=10;
-		this.facStr=0.85;
+		this.baseDamage=14;
+		this.damageRange=14;
+		this.facStr=0.75;
 		this.weaponRange=2;
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=1;
 	}

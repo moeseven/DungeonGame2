@@ -23,14 +23,14 @@ public class Shop extends RoomInteraction{
 	@Override
 	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
-		items.add(game.generator.generateRandomItem());
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(1));
 	}
 
 	@Override
