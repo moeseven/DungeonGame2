@@ -41,6 +41,10 @@ public class RoomInteractionComponent extends JComponent{
 				if(e.getButton()==1){
 					ri.onInteraction(rw.getGame().getPlayer().getSelectedHero());
 					rw.getGuiRoom().upadate();
+					if(rw.getGame().getRoom().isHasFight()){
+						rw.setUpFightWindow();
+						rw.setVisible(false);
+					}
 				}else{
 					if (e.getButton()==3){
 						

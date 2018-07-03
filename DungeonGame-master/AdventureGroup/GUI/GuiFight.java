@@ -50,6 +50,7 @@ public class GuiFight extends JPanel{
 			fw.revalidate();
 			fw.repaint();
 			if(fw.getGame().getRoom().getFight().isFightOver()) {
+				fw.getGame().getRoom().setHasFight(false);
 				fw.windowswitch();
 			}
 		}

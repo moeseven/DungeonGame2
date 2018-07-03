@@ -23,6 +23,7 @@ import gameEncounter.CardLibrary.Spell;
 import gameEncounter.CardLibrary.SpellnoTarget;
 import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
+import gameEncounter.ItemLibrary.ItemHand1;
 import gameEncounter.ItemLibrary.RustyBlade;
 import gameEncounter.buffLibrary.Bashed;
 import gameEncounter.CardLibrary.AttackCard;
@@ -69,7 +70,7 @@ public class BossNecromancer extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*45.0));
-		hero.setExperienceValue(130);
+		hero.setExperienceValue(195);
 		//boss
 		hero.setManaPower(3);
 		hero.setDraw(5);
@@ -117,7 +118,8 @@ public class BossNecromancer extends MonsterRace{
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
 	}
-	private class ZombieClaw extends Weapon{
+	private class ZombieClaw extends ItemHand1{
+
 		public ZombieClaw(){
 			super();
 			droppable=false;

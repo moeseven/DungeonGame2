@@ -11,6 +11,7 @@ import game.RoomInteractionLibrary.EvilStatue;
 import game.RoomInteractionLibrary.PoisonTrap;
 import game.RoomInteractionLibrary.Sack;
 import game.RoomInteractionLibrary.Shop;
+import game.RoomInteractionLibrary.SleepingOgre;
 import game.RoomInteractionLibrary.SpikeTrap;
 import game.RoomInteractionLibrary.Well;
 import game.RoomLibrary.EmptyRoom;
@@ -106,6 +107,7 @@ public class GeneratorRandom implements Serializable{
 		interactionPool.add(new Well());
 		interactionPool.add(new SpikeTrap());
 		interactionPool.add(new PoisonTrap());
+		interactionPool.add(new SleepingOgre());
 	}
 	public void newItemPool() {
 		itemPool=new LinkedList<Item>();
@@ -164,7 +166,7 @@ public class GeneratorRandom implements Serializable{
 		if (Math.random()<fightChance) {//chance that a room has a fight
 			room.hasFight=true;
 			LinkedList<Hero> monsters=generateRandomMonsterSet(game,difficultyLevel);
-			for(int i=0; i<monsters.size(); i++) {
+			for(int i=monsters.size()-1; i>=0; i--) {
 				room.monsters.add(monsters.get(i));
 			}
 		}

@@ -20,6 +20,7 @@ import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.Spell;
 import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
+import gameEncounter.ItemLibrary.ItemHand1;
 import gameEncounter.ItemLibrary.RustyBlade;
 import gameEncounter.buffLibrary.Bashed;
 import gameEncounter.CardLibrary.AttackCard;
@@ -101,7 +102,7 @@ public class RaceZombie extends MonsterRace{
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
 	}
-	private class ZombieClaw extends Weapon{
+	private class ZombieClaw extends ItemHand1{
 		public ZombieClaw(){
 			super();
 			droppable=false;

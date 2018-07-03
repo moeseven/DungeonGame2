@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.DungeonMaster;
 import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
 import gameEncounter.CardLibrary.BleedingSlice;
@@ -163,7 +164,7 @@ public class Hero implements Serializable{
 		//poison
 		if(poison>0) {	
 			poison-=1;		
-			takePoisonDamage(hp/20+2);			
+			takePoisonDamage((int) (hp/computeMaxHp()*10.0+1));			
 		}		
 		//bleed
 		if(bleed>0) {
@@ -226,7 +227,7 @@ public class Hero implements Serializable{
 			 dmg=(int)(mult*weapon.computeAttackDamage(strength,dexterity));
 		 }else {
 			 dmg=(int)(mult*GameEquations.FistDamage(strength));
-			
+			 getPlayer().getGame().log.addLine("fistpunch");
 		 } 
 		 breachBlock(hero, dmg);
 		 return dmg;		
@@ -261,7 +262,7 @@ public class Hero implements Serializable{
 	public void takePoisonDamage(int damage) {
 	
 		if(damage>0) {
-			int poisondamage=(int) Math.max(1, damage*(resistPoison/100.0));
+			int poisondamage=(int) Math.max(1, damage*(1-resistPoison/100.0));
 			player.getGame().log.addLine(name+" suffers poison damage of "+poisondamage+".");
 			this.setHp(hp-poisondamage);
 			if(hp<=0) {
@@ -310,8 +311,11 @@ public class Hero implements Serializable{
 		if(this.getPlayer()!=target2.getPlayer()) {
 			if(player.getHeroes().indexOf(this)+target2.getPlayer().getHeroes().indexOf(target2)<range) {
 				return true;
-				}else {					
-					getPlayer().getGame().log.addLine("target out of Range!");
+				}else {
+					if(getPlayer() instanceof DungeonMaster) {						
+					}else {
+						getPlayer().getGame().log.addLine("target out of Range!");	
+					}
 					return false;
 				}			
 		}else {
