@@ -6,6 +6,8 @@ import gameEncounter.CardLibrary.BackStab;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.BlindingBomb;
 import gameEncounter.CardLibrary.Block;
+import gameEncounter.CardLibrary.DaggerThrow;
+import gameEncounter.CardLibrary.Feint;
 import gameEncounter.CardLibrary.PoisonAttack;
 import gameEncounter.CardLibrary.PoisonBomb;
 import gameEncounter.CardLibrary.RangedAttack;
@@ -18,6 +20,8 @@ public class TypeThief extends CharacterClass{
 		cardPool.add(new PoisonBomb());
 		cardPool.add(new PoisonAttack());
 		cardPool.add(new BackStab());
+		cardPool.add(new DaggerThrow());
+		cardPool.add(new Feint());
 		name="thief";
 		items.add(new RustyBlade());
 		for (int i=0; i<8;i++) {

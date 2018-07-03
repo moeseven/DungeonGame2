@@ -8,7 +8,7 @@ public class DaggerThrow extends AttackCard{
 	public DaggerThrow() {
 		// TODO Auto-generated constructor stub
 		manaCost =0;
-		damageMult=0.6;
+		damageMult=0.5;
 		legalPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {

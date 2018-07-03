@@ -51,7 +51,7 @@ public class SleepingOgre extends RoomInteraction{
 	}
 	private void ogreAwakens(Game game) {
 		for (int i=0; i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).becomeStressed((int) (Math.random()*12));
+			game.getPlayer().getHeroes().get(i).becomeStressed((int) (Math.random()*22));
 		}		
 		game.getRoom().getMonsters().add(ogre);
 		game.getRoom().setHasFight(true);		

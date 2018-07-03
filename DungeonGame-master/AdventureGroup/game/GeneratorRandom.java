@@ -8,6 +8,7 @@ import game.QuestLibrary.QuestReturnRelic;
 import game.QuestLibrary.TestQuest;
 import game.RoomInteractionLibrary.Chest;
 import game.RoomInteractionLibrary.EvilStatue;
+import game.RoomInteractionLibrary.HayHeap;
 import game.RoomInteractionLibrary.PoisonTrap;
 import game.RoomInteractionLibrary.Sack;
 import game.RoomInteractionLibrary.Shop;
@@ -108,6 +109,7 @@ public class GeneratorRandom implements Serializable{
 		interactionPool.add(new SpikeTrap());
 		interactionPool.add(new PoisonTrap());
 		interactionPool.add(new SleepingOgre());
+		interactionPool.add(new HayHeap());
 	}
 	public void newItemPool() {
 		itemPool=new LinkedList<Item>();
@@ -118,6 +120,7 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new PlateArmor());
 		itemPool.add(new Speer());
 		itemPool.add(new HeavySword());
+		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new Buckler());
 	}

@@ -3,6 +3,7 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.DungeonMaster;
 import game.Game;
 
 public class Fight implements Serializable{
@@ -35,14 +36,23 @@ public class Fight implements Serializable{
 		allFightParticipants=new LinkedList<Hero>();
 		turnOrder=new LinkedList<Hero>();
 		turnOrderCounter=-1;
+//		//stess
+//		if(stress>=stressCap) {
+//			player.getHeroes().remove(this);
+//			if(player instanceof DungeonMaster) {
+//				
+//			}else {
+//				player.getAvailableHeroes().add(this);
+//			}
+//		}
 		for (Hero h : heroes) {		
-			if(!h.isDead()) {
+			if(!h.isDead()&&h.getStress()<h.getStressCap()) {
 				h.setCurrentSpeed(h.rollSpeed());
 				allFightParticipants.add(h);
 			}			
 		}
 		for (Hero m : monsters) {
-			if(!m.isDead()) {
+			if(!m.isDead()&&m.getStress()<m.getStressCap()) {
 				m.setCurrentSpeed(m.rollSpeed());
 				allFightParticipants.add(m);
 			}
@@ -65,6 +75,7 @@ public class Fight implements Serializable{
 	public void nextTurn() {
 		int exp; 
 		LinkedList<Hero> dead= new LinkedList<Hero>();
+		LinkedList<Hero> stressed= new LinkedList<Hero>();
 		for(int i=0; i<monsters.size();i++) {
 			if(monsters.get(i).isDead()) {//remove bodies from fight and handle experience
 				exp=monsters.get(i).getExperienceValue();				
@@ -72,18 +83,33 @@ public class Fight implements Serializable{
 				for (Hero h: heroes) {//give experience to heroes
 						h.gainExp((int)(1.0+(exp/heroes.size())));			
 				}
-			}	
+			}else {
+				if(monsters.get(i).getStress()>=monsters.get(i).getStressCap()) {
+					stressed.add(monsters.get(i));
+				}
+			}
 		}
 		for(int i=0; i<dead.size();i++) {
 			monsters.remove(dead.get(i));	
 		}
+		for(int i=0; i<stressed.size();i++) {
+			monsters.remove(stressed.get(i));	
+		}
 		for(int i=0; i<heroes.size();i++) {
 			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
 				dead.add(heroes.get(i));
-			}	
+			}else {
+				if(heroes.get(i).getStress()>=heroes.get(i).getStressCap()) {
+					stressed.add(heroes.get(i));
+				}
+			}
 		}
-		for(int i=0; i<dead.size();i++) {
+		for(int i=0; i<dead.size();i++) {//remove dead heroes
 			heroes.remove(dead.get(i));	
+		}
+		for(int i=0; i<stressed.size();i++) {//remove stressed heroes
+			heroes.remove(stressed.get(i));	
+			heroes.get(i).getPlayer().getAvailableHeroes().add(stressed.get(i));//flee to tavern
 		}
 		if (this.isFightOver()){
 			for(int i=0; i<heroes.size();i++) {

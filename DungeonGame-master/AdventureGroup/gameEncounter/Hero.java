@@ -11,6 +11,7 @@ import game.DungeonMaster;
 import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
 import gameEncounter.CardLibrary.BleedingSlice;
+import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Hero implements Serializable{
 
@@ -164,7 +165,7 @@ public class Hero implements Serializable{
 		//poison
 		if(poison>0) {	
 			poison-=1;		
-			takePoisonDamage((int) (hp/computeMaxHp()*10.0+1));			
+			takePoisonDamage((int)((hp+0.0)/(computeMaxHp()*10.0)+1));			
 		}		
 		//bleed
 		if(bleed>0) {
@@ -175,26 +176,28 @@ public class Hero implements Serializable{
 		if(cold>0) {
 			cold-=1;
 		}		
-		//
+
 	}
 	public void turnBegin(){
-		applyNegativeTurnEffects();
-		this.discardHand();
-		this.block=0;
-		this.mana=manaPower;
-		for(int i=0; i<draw;i++) {
-			drawCard();
-		}
-		this.buffTick();
-		if(stunned) {
-			mana=0;
+		if(!isDead) {
+			applyNegativeTurnEffects();
 			this.discardHand();
-			player.getGame().log.addLine(name+" is stunned!");
-			stunned=false;
-		}		
-		if(hand.size()!=0) {
-			setSelectedCard(hand.getFirst());	
-		}									
+			this.block=0;
+			this.mana=manaPower;
+			for(int i=0; i<draw;i++) {
+				drawCard();
+			}
+			this.buffTick();
+			if(stunned) {
+				mana=0;
+				this.discardHand();
+				player.getGame().log.addLine(name+" is stunned!");
+				stunned=false;
+			}		
+			if(hand.size()!=0) {
+				setSelectedCard(hand.getFirst());	
+			}							
+		}				
 	}
 	public void block(int block) {
 		player.getGame().log.addLine(name+" blocks for "+block);
@@ -282,6 +285,9 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine(name+ " died!");
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
 			block=0;
+			for(int i=0;i<player.getHeroes().size();i++) {
+				player.getHeroes().get(i).becomeStressed(35);
+			}
 			this.isDead=true;
 		}else {
 			player.getGame().log.addLine(name+ " allready dead");
@@ -399,7 +405,9 @@ public class Hero implements Serializable{
 	}
 	//
 	public void becomeStressed(int s) {
-		stress+=(int)(s*(1-resistStress/100));
+		int sDamage=(int)(s*(1-resistStress/100));
+		stress+=sDamage;
+		player.getGame().log.addLine(name+"gets stressed for "+sDamage+" stress!");
 		if(stress>stressCap) {
 			stress=stressCap;
 			player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");

@@ -22,7 +22,7 @@ public class EvilStatue extends RoomInteraction{
 	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
 		for(int i=0;i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).becomeStressed(5);
+			game.getPlayer().getHeroes().get(i).becomeStressed(15);
 		}		
 	}
 

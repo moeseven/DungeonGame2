@@ -23,6 +23,7 @@ public class TypeMage extends CharacterClass{
 		cardPool.add(new Channel());
 		cardPool.add(new RosesAndThorns());
 		name="mage";		
+		items.add(new RustyBlade());
 		for (int i=0; i<3;i++) {
 			
 			cards.add(new Block());

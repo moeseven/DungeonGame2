@@ -80,7 +80,7 @@ public void enterNextRoom() {
 				stressedOutHeroes.add(getPlayer().getHeroes().get(i));
 			}
 		}		
-		player.getHeroes().get(i).becomeStressed(2);
+		//player.getHeroes().get(i).becomeStressed(2); find other ways to stress
 	}
 	player.removeDeadHeroesFromRoster();
 	for(int i=0; i<stressedOutHeroes.size();i++) {
@@ -108,6 +108,7 @@ public void retreatHeroes() {
 	}else {
 		for(int i=0; i<player.getHeroes().size();i++) {
 			player.getHeroes().get(i).turnBegin();
+			player.getHeroes().get(i).becomeStressed(7);
 		}
 	}
 	

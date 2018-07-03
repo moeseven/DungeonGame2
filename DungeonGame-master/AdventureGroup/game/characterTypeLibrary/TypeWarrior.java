@@ -13,6 +13,7 @@ import gameEncounter.CardLibrary.Bullwork;
 import gameEncounter.CardLibrary.CarefulSlash;
 import gameEncounter.CardLibrary.Cleave;
 import gameEncounter.CardLibrary.MeeleAttack;
+import gameEncounter.CardLibrary.Ram;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.Wisdom;
 import gameEncounter.ItemLibrary.RustyBlade;
@@ -25,6 +26,7 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add(new Cleave());
 		cardPool.add(new Bash());
 		cardPool.add(new Bullwork());
+		cardPool.add(new Ram());
 		name="warrior";
 		items.add(new RustyBlade());				
 		for (int i=0; i<4;i++) {

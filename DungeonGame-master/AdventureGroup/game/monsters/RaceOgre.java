@@ -19,6 +19,7 @@ import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.Spell;
 import gameEncounter.CardLibrary.PoisonShot;
+import gameEncounter.CardLibrary.Ram;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.ItemBiHand;
 import gameEncounter.ItemLibrary.RustyBlade;
@@ -80,6 +81,7 @@ public class RaceOgre extends MonsterRace{
 			items.add(new OgreClub());	
 			cards.add(new Bash());
 			cards.add(new Bash());
+			cards.add(new Ram());
 			for (int i=0; i<3;i++) {
 				cards.add(new BasicAttack());
 			}

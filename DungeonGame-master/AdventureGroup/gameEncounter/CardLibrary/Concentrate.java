@@ -10,7 +10,8 @@ public class Concentrate extends SpellnoTarget{
 		manaCost =2;
 	}
 	public boolean applyEffect(Hero self) {
-		
+		self.moveBack();
+		self.buffHero(new Concentrated(self));
 		return true;
 	}
 	@Override
@@ -19,7 +20,7 @@ public class Concentrate extends SpellnoTarget{
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"double dexterity";
+		return super.getCardText()+"move back and double dexterity for 2 turns";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
