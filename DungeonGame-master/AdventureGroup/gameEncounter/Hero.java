@@ -348,6 +348,14 @@ public class Hero implements Serializable{
 			player.getHeroes().addLast(removedHero);
 		}
 	}
+	//cleansing
+	public void cleanseHero() {
+		removeBuffs();
+		bleed=0;
+		poison=0;
+		cold=0;
+		
+	}
 	//Buffs
 	public void buffHero(Buff buff) {
 		buffs.add(buff);
