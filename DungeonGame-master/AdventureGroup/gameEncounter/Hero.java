@@ -475,10 +475,10 @@ public class Hero implements Serializable{
 	//
 	//compute functions with cold effect
 	public int computeAccuracy() {
-		return GameEquations.dodgeCalc(accuracy-cold, dexterity);
+		return GameEquations.dodgeCalc(accuracy-cold/2, dexterity);
 	}
 	public int computeDodge() {
-		return GameEquations.dodgeCalc(dodge-cold, dexterity);
+		return GameEquations.dodgeCalc(dodge-cold/2, dexterity);
 	}
 	public int computeAttackSkill() {
 		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
@@ -487,16 +487,16 @@ public class Hero implements Serializable{
 		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
 	}
 	public int computeSpellPower() {
-		return GameEquations.spellPowerCalc(spellPower-cold, intelligence);
+		return GameEquations.spellPowerCalc(spellPower-cold/2, intelligence);
 	}
 	public int computeSpellResist() {
-		return GameEquations.spellPowerCalc(spellResist-cold, intelligence);
+		return GameEquations.spellPowerCalc(spellResist-cold/2, intelligence);
 	}
 	public int computeMaxHp() {
 		return GameEquations.maxHealthCalc(baseHp, vitality);
 	}
 	public int computeSpeed() {
-		return GameEquations.speedCalc(speed-cold, dexterity);
+		return GameEquations.speedCalc(speed-cold/2, dexterity);
 	}
 	
 	

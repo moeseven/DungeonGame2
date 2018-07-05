@@ -26,6 +26,7 @@ import game.characterTypeLibrary.TypeMage;
 import game.characterTypeLibrary.TypeThief;
 import game.characterTypeLibrary.TypeWarrior;
 import game.monsters.RaceGoblin;
+import game.monsters.RaceSkeletton;
 import game.monsters.RaceZombie;
 import gameEncounter.Hero;
 import gameEncounter.HeroQuirk;
@@ -62,7 +63,6 @@ public class GeneratorRandom implements Serializable{
 	private LinkedList<Quest> questPool;
 	private LinkedList<RoomInteraction> interactionPool;
 	private LinkedList<MonsterRace> monsterRacePool;
-	private LinkedList<CharacterClass> monsterClassPool;
 	LinkedList<NameValuePair> enchantments;
 	private Game game;
 	public GeneratorRandom(Game game){
@@ -94,9 +94,7 @@ public class GeneratorRandom implements Serializable{
 		monsterRacePool=new LinkedList<MonsterRace>();
 		monsterRacePool.add(new RaceGoblin());
 		monsterRacePool.add(new RaceZombie());
-		monsterClassPool=new LinkedList<CharacterClass>();
-		monsterClassPool.add(new TypeWarrior());
-		monsterClassPool.add(new TypeArcher());
+		monsterRacePool.add(new RaceSkeletton());
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));
