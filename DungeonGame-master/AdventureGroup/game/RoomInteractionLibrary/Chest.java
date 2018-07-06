@@ -15,13 +15,16 @@ public class Chest extends RoomInteraction{
 		super();
 		name="chest";
 		gold=(int) (Math.random()*120);
+		
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
-		
+		if(Math.random()<0.18) {
+			items.add(game.generator.generateRandomItem(0));
+		}
 	}
 
 	@Override

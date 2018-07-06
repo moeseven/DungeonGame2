@@ -51,11 +51,13 @@ import gameEncounter.ItemLibrary.HeavySword;
 import gameEncounter.ItemLibrary.Helmet;
 import gameEncounter.ItemLibrary.LeatherArmor;
 import gameEncounter.ItemLibrary.MagicStaff;
+import gameEncounter.ItemLibrary.MorningStar;
 import gameEncounter.ItemLibrary.PlateArmor;
 import gameEncounter.ItemLibrary.SanguineBloodletter;
 import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
+import gameEncounter.ItemLibrary.Spellbook;
 import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
@@ -163,6 +165,8 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new Dagger());
 		itemPool.add(new Helmet());
 		itemPool.add(new CrownOfThorns());
+		itemPool.add(new MorningStar());
+		itemPool.add(new Spellbook());
 	}
 	public void newQuestPool() {
 		questPool=new LinkedList<Quest>();

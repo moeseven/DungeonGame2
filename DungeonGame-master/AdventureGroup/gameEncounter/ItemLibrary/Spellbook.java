@@ -6,15 +6,17 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ModableHeroStats;
 import gameEncounter.CardLibrary.DaggerThrow;
+import gameEncounter.CardLibrary.Magicmissile;
 
-public class Dagger extends ItemHand2{
+public class Spellbook extends ItemHand2{
 private Card extraCard;
-	public Dagger() {
+	public Spellbook() {
 		super();
-		name="dagger";
-		setGoldValue(110);
-		extraCard= new DaggerThrow();
+		name="spell book";
+		setGoldValue(170);
+		extraCard= new Magicmissile();
 		stats.getStats()[ModableHeroStats.nameResolveStat("draw")]=1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("spell")]=3;
 	}
 
 	@Override

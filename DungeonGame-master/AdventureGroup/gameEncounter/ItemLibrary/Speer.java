@@ -11,10 +11,11 @@ public class Speer extends ItemBiHand{
 		super();
 		name="speer";
 		setGoldValue(300);
-		this.baseDamage=15;
+		this.baseDamage=25;
 		this.damageRange=19;
 		this.facStr=0.55;
 		this.weaponRange=3;
+		stats.getStats()[ModableHeroStats.nameResolveStat("attack")]=-6;
 	}
 
 }

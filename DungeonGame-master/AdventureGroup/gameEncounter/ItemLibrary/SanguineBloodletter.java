@@ -15,7 +15,6 @@ private Card extraCard;
 		name="sanguine bloodletter";
 		setGoldValue(440);
 		extraCard= new SanguineStrike();
-		stats.getStats()[ModableHeroStats.nameResolveStat("dexterity")]=1;
 	}
 
 	@Override
