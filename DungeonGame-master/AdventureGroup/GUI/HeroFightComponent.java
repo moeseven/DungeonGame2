@@ -63,6 +63,10 @@ public class HeroFightComponent extends JComponent{
 				g.fillRect(35, 45, 40, 10);
 			}
 		}
+		for(int i=0; i<hero.getBuffs().size();i++) {
+			g.setColor(Color.YELLOW);
+			g.fillOval(10+i*6,95, 6, 6);
+		}
 		g.setColor(Color.black);
 		g.drawString(hero.getName(), 10, 15);
 		if(hero.getPoison()>0) {

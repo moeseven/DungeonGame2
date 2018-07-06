@@ -36,15 +36,6 @@ public class Fight implements Serializable{
 		allFightParticipants=new LinkedList<Hero>();
 		turnOrder=new LinkedList<Hero>();
 		turnOrderCounter=-1;
-//		//stess
-//		if(stress>=stressCap) {
-//			player.getHeroes().remove(this);
-//			if(player instanceof DungeonMaster) {
-//				
-//			}else {
-//				player.getAvailableHeroes().add(this);
-//			}
-//		}
 		for (Hero h : heroes) {		
 			if(!h.isDead()&&h.getStress()<h.getStressCap()) {
 				h.setCurrentSpeed(h.rollSpeed());

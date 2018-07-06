@@ -20,7 +20,23 @@ public abstract class Card implements Serializable,Cloneable{
 	}
 
 	public boolean playCard(Hero self){
-		
+		//
+		if(isFriendly()) {
+			if(self.getTarget().getPlayer()==self.getPlayer()) {
+				return castable(self);
+			}else {
+				self.getPlayer().getGame().log.addLine("not a possible target!");
+			}
+		}else {
+			if(self.getTarget().getPlayer()!=self.getPlayer()) {
+				return castable(self);
+			}else {
+				self.getPlayer().getGame().log.addLine("not a possible target!");
+			}
+		}
+		return false;
+	}
+	public boolean castable(Hero self) {
 		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);

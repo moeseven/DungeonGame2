@@ -12,8 +12,8 @@ public class CrownOfThorns extends ItemHead{
 		super();
 		name="crown of thorns";
 		setGoldValue(300);
-		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=2;
-		stats.getStats()[ModableHeroStats.nameResolveStat("thorns")]=5;
+		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("thorns")]=10;
 	}
 
 }

@@ -4,22 +4,22 @@ import gameEncounter.Buff;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class HavenlyShield extends Spell{
-	public HavenlyShield() {
+public class HeavenlyStrength extends Spell{
+	public HeavenlyStrength() {
 		// TODO Auto-generated constructor stub
-		manaCost =1;		
+		manaCost =2;		
 	}
 	public boolean applyEffect(Hero self) {
-		self.getTarget().buffHero(new HavenlyShieldBuff((int)(2+(self.computeSpellPower()/1.1))));
+		self.getTarget().buffHero(new HeavenlyStregnthened(self));
 		return true;
 	}
 	@Override
 	public String getName() {
-		return "havenly shield";
+		return "heavenly strength";
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"armor bonus to target";
+		return super.getCardText()+"gives great strength";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
@@ -31,11 +31,11 @@ public class HavenlyShield extends Spell{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	private class HavenlyShieldBuff extends Buff{
-		private int armor;
-		public HavenlyShieldBuff(int armor) {
-			this.armor=armor;
-			duration=3;
+	private class HeavenlyStregnthened extends Buff{
+		private int bonus=0;
+		public HeavenlyStregnthened(Hero hero) {
+			bonus=hero.getSpellPower()/2;
+			duration=6;
 		}
 		@Override
 		public void onTick(Hero hero) {
@@ -46,13 +46,13 @@ public class HavenlyShield extends Spell{
 		@Override
 		public void mod(Hero hero) {
 			// TODO Auto-generated method stub
-			hero.setArmor(hero.getArmor()+armor);
+			hero.setStrength(hero.getStrength()+bonus);
 		}
 
 		@Override
 		public void demod(Hero hero) {
 			// TODO Auto-generated method stub
-			hero.setArmor(hero.getArmor()-armor);
+			hero.setStrength(hero.getStrength()-bonus);
 		}
 		
 	}

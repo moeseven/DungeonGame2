@@ -163,10 +163,10 @@ public class Hero implements Serializable{
 		}
 	}
 	public void applyNegativeTurnEffects() {
-		//poison
+		//poison TODO not working properly
 		if(poison>0) {	
 			poison-=1;		
-			takePoisonDamage((int)((hp+0.0)/(computeMaxHp()*10.0)+1));			
+			takePoisonDamage(5);			
 		}		
 		//bleed
 		if(bleed>0) {
@@ -475,10 +475,10 @@ public class Hero implements Serializable{
 	//
 	//compute functions with cold effect
 	public int computeAccuracy() {
-		return GameEquations.dodgeCalc(accuracy-cold/2, dexterity);
+		return GameEquations.dodgeCalc(accuracy, dexterity)-cold/2;
 	}
 	public int computeDodge() {
-		return GameEquations.dodgeCalc(dodge-cold/2, dexterity);
+		return GameEquations.dodgeCalc(dodge, dexterity)-cold/2;
 	}
 	public int computeAttackSkill() {
 		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
@@ -487,16 +487,16 @@ public class Hero implements Serializable{
 		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
 	}
 	public int computeSpellPower() {
-		return GameEquations.spellPowerCalc(spellPower-cold/2, intelligence);
+		return GameEquations.spellPowerCalc(spellPower, intelligence)-cold/2;
 	}
 	public int computeSpellResist() {
-		return GameEquations.spellPowerCalc(spellResist-cold/2, intelligence);
+		return GameEquations.spellPowerCalc(spellResist, intelligence)-cold/2;
 	}
 	public int computeMaxHp() {
 		return GameEquations.maxHealthCalc(baseHp, vitality);
 	}
 	public int computeSpeed() {
-		return GameEquations.speedCalc(speed-cold/2, dexterity);
+		return GameEquations.speedCalc(speed, dexterity)-cold/2;
 	}
 	
 	

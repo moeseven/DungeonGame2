@@ -45,10 +45,14 @@ import gameEncounter.HeroQuirkLibrary.Tough;
 import gameEncounter.HeroQuirkLibrary.Weak;
 import gameEncounter.ItemLibrary.ArmorThinLeather;
 import gameEncounter.ItemLibrary.Buckler;
+import gameEncounter.ItemLibrary.CrownOfThorns;
+import gameEncounter.ItemLibrary.Dagger;
 import gameEncounter.ItemLibrary.HeavySword;
+import gameEncounter.ItemLibrary.Helmet;
 import gameEncounter.ItemLibrary.LeatherArmor;
 import gameEncounter.ItemLibrary.MagicStaff;
 import gameEncounter.ItemLibrary.PlateArmor;
+import gameEncounter.ItemLibrary.SanguineBloodletter;
 import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
@@ -107,6 +111,7 @@ public class GeneratorRandom implements Serializable{
 		enchantments.add(new NameValuePair(3, "attack"));
 		enchantments.add(new NameValuePair(3, "speed"));
 		enchantments.add(new NameValuePair(10, "health"));
+		enchantments.add(new NameValuePair(15, "throns"));
 		enchantments.add(new NameValuePair(10, "resistBleed"));
 		enchantments.add(new NameValuePair(10, "resistPoison"));
 		enchantments.add(new NameValuePair(10, "resistCold"));
@@ -154,6 +159,10 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new Buckler());
 		itemPool.add(new MagicStaff());
 		itemPool.add(new ExperienceBook());
+		itemPool.add(new SanguineBloodletter());
+		itemPool.add(new Dagger());
+		itemPool.add(new Helmet());
+		itemPool.add(new CrownOfThorns());
 	}
 	public void newQuestPool() {
 		questPool=new LinkedList<Quest>();

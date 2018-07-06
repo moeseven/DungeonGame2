@@ -6,7 +6,9 @@ import gameEncounter.CardLibrary.Bash;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.DivineGrace;
-import gameEncounter.CardLibrary.HavenlyShield;
+import gameEncounter.CardLibrary.Harden;
+import gameEncounter.CardLibrary.HeavenlyShield;
+import gameEncounter.CardLibrary.HeavenlyStrength;
 import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.ItemLibrary.RustyBlade;
@@ -17,7 +19,10 @@ public class TypeCleric extends CharacterClass{
 	public TypeCleric() {
 		cardPool.add(new Bash());
 		cardPool.add(new DivineGrace());
-		cardPool.add(new HavenlyShield());
+		cardPool.add(new HeavenlyShield());
+		cardPool.add(new HeavenlyStrength());
+		cardPool.add(new Harden());
+		
 		name="cleric";
 		items.add(new RustyBlade());		
 		for (int i=0; i<3;i++) {

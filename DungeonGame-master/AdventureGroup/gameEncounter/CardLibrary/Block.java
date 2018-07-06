@@ -15,7 +15,7 @@ public class Block extends SpellnoTarget{
 	}
 	@Override
 	public String getName() {
-		return "parry";
+		return "block";
 	}
 	@Override
 	public String getCardText() {

@@ -8,7 +8,7 @@ public class HeadShot extends AttackCard{
 	public HeadShot() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		damageMult=3;
+		damageMult=3.6;
 		legalPositions[0]=false;
 		legalPositions[1]=false;
 		

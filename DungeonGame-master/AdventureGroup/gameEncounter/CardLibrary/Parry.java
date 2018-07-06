@@ -3,23 +3,23 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class DivineGrace extends Spell{
-	public DivineGrace() {
+public class Parry extends SpellnoTarget{
+	public Parry() {
 		// TODO Auto-generated constructor stub
-		manaCost =2;		
+		manaCost =0;
+		
 	}
 	public boolean applyEffect(Hero self) {
-		self.getTarget().heal((int)(5+(self.computeSpellPower()/1.1)));
-		self.getDiscardPile().remove(this);
+		self.block((int) (self.computeBlockSkill()*0.6));
 		return true;
 	}
 	@Override
 	public String getName() {
-		return "divine grace";
+		return "parry";
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"heals target (single use)";
+		return super.getCardText()+"60% block";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
@@ -31,4 +31,10 @@ public class DivineGrace extends Spell{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public void buildLogEntry(Hero self) {
+		self.getPlayer().getGame().log.addLine(getName());
+		
+	}
+
 }

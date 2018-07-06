@@ -5,16 +5,14 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ModableHeroStats;
 
-public class Speer extends ItemBiHand{
+public class Helmet extends ItemHead{
 
-	public Speer() {
+	
+	public Helmet() {
 		super();
-		name="speer";
-		setGoldValue(300);
-		this.baseDamage=15;
-		this.damageRange=19;
-		this.facStr=0.55;
-		this.weaponRange=3;
+		name="helmet";
+		setGoldValue(230);
+		stats.getStats()[ModableHeroStats.nameResolveStat("armor")]=2;
 	}
 
 }

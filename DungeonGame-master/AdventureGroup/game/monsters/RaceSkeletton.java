@@ -15,8 +15,10 @@ import gameEncounter.CardLibrary.Concentrate;
 import gameEncounter.CardLibrary.FireArrow;
 import gameEncounter.CardLibrary.FrostArrow;
 import gameEncounter.CardLibrary.HeadShot;
+import gameEncounter.CardLibrary.Magicmissile;
 import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
+import gameEncounter.CardLibrary.SleepCharm;
 import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.HeavySword;
@@ -34,7 +36,10 @@ public class RaceSkeletton extends MonsterRace{
 		position1Classes.add(new SkelettonWarrior());
 		position1Classes.add(new SkelettonHulk());
 		position2Classes.add(new SkelettonWarrior());
+		//3
 		position3Classes.add(new SkelettonArcher());
+		position3Classes.add(new SkelettonMage());
+		//4
 		position4Classes.add(new SkelettonArcher());
 		position5Classes.add(new SkelettonArcher());
 	}
@@ -124,7 +129,7 @@ public class RaceSkeletton extends MonsterRace{
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
 			//mainstats
-			hero.setStrength(hero.getStrength()+18);
+			hero.setStrength(hero.getStrength()+14);
 			hero.setDexterity(hero.getDexterity()+2);
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+29);
@@ -132,6 +137,7 @@ public class RaceSkeletton extends MonsterRace{
 			hero.setArmor(hero.getArmor()+7);
 			hero.setAttackSkill(hero.getAttackSkill()+5);
 			hero.setBlockSkill(hero.getBlockSkill()+5);
+			hero.setSpeed(hero.getSpeed()-4);
 		}
 	}
 	private class SkelettonArcher extends CharacterClass{
@@ -163,6 +169,37 @@ public class RaceSkeletton extends MonsterRace{
 		}
 
 
+	}
+	private class SkelettonMage extends CharacterClass{
+
+		public SkelettonMage() {			
+			name="mage";
+			items.add(new RustyBlade());				
+			for (int i=0; i<4;i++) {
+				cards.add(new BasicAttack());
+			}
+			cards.add(new BasicAttack());
+			for (int i=0; i<2;i++) {
+				cards.add(new Block());
+			}
+			cards.add(new SleepCharm());
+			cards.add(new Magicmissile());
+
+		}
+
+		public void modifyHero(Hero hero) {
+			// TODO Auto-generated method stub
+			super.modifyHero(hero);
+			//mainstats
+			hero.setStrength(hero.getStrength()-3);
+			hero.setDexterity(hero.getDexterity()-2);
+			hero.setIntelligence(hero.getIntelligence()+9);
+			hero.setVitality(hero.getVitality()+0);
+			//
+			hero.setArmor(hero.getArmor()+0);
+			hero.setAttackSkill(hero.getAttackSkill()-1);
+			hero.setBlockSkill(hero.getBlockSkill()-1);
+		}
 	}
 
 

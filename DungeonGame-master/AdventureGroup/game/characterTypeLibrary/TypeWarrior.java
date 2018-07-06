@@ -12,7 +12,10 @@ import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Bullwork;
 import gameEncounter.CardLibrary.CarefulSlash;
 import gameEncounter.CardLibrary.Cleave;
+import gameEncounter.CardLibrary.IntimidatingCry;
 import gameEncounter.CardLibrary.MeeleAttack;
+import gameEncounter.CardLibrary.MightyBlow;
+import gameEncounter.CardLibrary.Parry;
 import gameEncounter.CardLibrary.Ram;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.Wisdom;
@@ -27,6 +30,9 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add(new Bash());
 		cardPool.add(new Bullwork());
 		cardPool.add(new Ram());
+		cardPool.add(new MightyBlow());
+		cardPool.add(new Parry());
+		cardPool.add(new IntimidatingCry());
 		name="warrior";
 		items.add(new RustyBlade());				
 		for (int i=0; i<4;i++) {
