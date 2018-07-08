@@ -286,10 +286,10 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine(name+ " died!");
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
 			block=0;
+			this.isDead=true;
 			for(int i=0;i<player.getHeroes().size();i++) {
 				player.getHeroes().get(i).becomeStressed(35);
-			}
-			this.isDead=true;
+			}			
 		}else {
 			player.getGame().log.addLine(name+ " allready dead");
 		}		
