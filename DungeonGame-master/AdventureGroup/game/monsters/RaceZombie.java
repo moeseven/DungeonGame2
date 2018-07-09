@@ -163,7 +163,7 @@ public class RaceZombie extends MonsterRace{
 		public boolean applyEffect(Hero self) {
 				if(self.attackHero(self.getTarget())) {
 					damageTarget(self);
-					self.getTarget().buffHero(new Bashed());
+					self.getTarget().takeStun();
 					self.getTarget().becomeStressed(6);
 					return true;
 				}else {

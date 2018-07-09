@@ -4,18 +4,17 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class FrostArrow extends AttackCard{
-	public FrostArrow() {
+public class FireFist extends AttackCard{
+	public FireFist() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		damageMult=1;
-		legalPositions[0]=false;
-		legalPositions[1]=false;
-		
+		damageMult=0.5;
+		legalPositions[4]=false;
+		legalPositions[3]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
-				self.getTarget().takeColdDamage(self,(int)(0.25*self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),damageMult)));		
+				self.getTarget().takeFireDamage(self,(int)(1*self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),damageMult)));		
 				return true;
 			}else {
 				return false;
@@ -25,10 +24,10 @@ public class FrostArrow extends AttackCard{
 	@Override
 	public String getCardText() {
 		// TODO Auto-generated method stub
-		return super.getCardText()+"/25% cold damage";
+		return super.getCardText()+"/25% fire damage";
 	}
 	@Override
 	public String getName() {
-		return "frost arrow";
+		return "fire fist";
 	}
 }

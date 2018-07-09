@@ -15,15 +15,11 @@ public class FireArrow extends AttackCard{
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
-				damageTarget(self);
-				
+				self.getTarget().takeFireDamage(self,(int)(0.25*self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),damageMult)));		
 				return true;
 			}else {
 				return false;
 			}
-	}
-	protected void damageTarget(Hero self) {
-		self.getTarget().takeFireDamage(self,(int)(0.25*self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),damageMult)));		
 	}
 	
 	@Override

@@ -420,7 +420,11 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine(name+" gets stressed for "+sDamage+" stress!");
 			if(stress>stressCap) {
 				stress=stressCap;
-				player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
+				if(player instanceof DungeonMaster) {
+					player.getGame().log.addLine(getName()+" flees in fear!");
+				}else {
+					player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
+				}			
 			}else {
 				if(stress<0) {
 					stress=0;
@@ -853,6 +857,9 @@ public class Hero implements Serializable{
 	}
 	public void setQuirks(LinkedList<HeroQuirk> quirks) {
 		this.quirks = quirks;
+	}
+	public void setStress(int stress) {
+		this.stress = stress;
 	}	
 	
 }

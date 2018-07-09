@@ -23,8 +23,11 @@ public class Town extends Room{
 		// TODO Auto-generated method stub
 		super.enterRoom();
 		for(int i=0; i<game.getPlayer().getAvailableHeroes().size();i++) {
-			game.getPlayer().getAvailableHeroes().get(i).becomeStressed(-idleStressRelief);
-			game.getPlayer().getAvailableHeroes().get(i).heal(game.getPlayer().getAvailableHeroes().get(i).getVitality());
+			game.getPlayer().getAvailableHeroes().get(i).setStress(game.getPlayer().getAvailableHeroes().get(i).getStress()-idleStressRelief);
+			if (game.getPlayer().getAvailableHeroes().get(i).getStress()<0) {
+				game.getPlayer().getAvailableHeroes().get(i).setStress(0);
+			}
+			game.getPlayer().getAvailableHeroes().get(i).setHp(game.getPlayer().getAvailableHeroes().get(i).computeMaxHp());
 		}	
 		if(game.getPlayer().getAvailableHeroes().size()<10) {
 			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));

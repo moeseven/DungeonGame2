@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import game.QuestLibrary.KillANecromancer;
+import game.QuestLibrary.QuestLongReturnRelic;
 import game.QuestLibrary.QuestReturnRelic;
 import game.QuestLibrary.TestQuest;
 import game.RoomInteractionLibrary.Chest;
@@ -25,7 +26,9 @@ import game.characterTypeLibrary.TypeCleric;
 import game.characterTypeLibrary.TypeMage;
 import game.characterTypeLibrary.TypeThief;
 import game.characterTypeLibrary.TypeWarrior;
+import game.monsters.FireSpirit;
 import game.monsters.RaceGoblin;
+import game.monsters.RaceRat;
 import game.monsters.RaceSkeletton;
 import game.monsters.RaceZombie;
 import gameEncounter.Hero;
@@ -60,6 +63,11 @@ import gameEncounter.ItemLibrary.Speer;
 import gameEncounter.ItemLibrary.Spellbook;
 import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
+import gameEncounter.ItemLibrary.usables.ItemConsumable;
+import gameEncounter.ItemLibrary.usables.PotionOfDexterity;
+import gameEncounter.ItemLibrary.usables.PotionOfIntelligence;
+import gameEncounter.ItemLibrary.usables.PotionOfStrength;
+import gameEncounter.ItemLibrary.usables.PotionOfVitality;
 
 public class GeneratorRandom implements Serializable{
 	private LinkedList<CharacterRace> heroRacePool;
@@ -101,6 +109,8 @@ public class GeneratorRandom implements Serializable{
 		monsterRacePool.add(new RaceGoblin());
 		monsterRacePool.add(new RaceZombie());
 		monsterRacePool.add(new RaceSkeletton());
+		monsterRacePool.add(new FireSpirit());
+		monsterRacePool.add(new RaceRat());
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));
@@ -155,23 +165,31 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new ShortBow());
 		itemPool.add(new PlateArmor());
 		itemPool.add(new Speer());
-		itemPool.add(new HeavySword());
-		itemPool.add(new HealingPotion());
-		itemPool.add(new HealingPotion());
+		itemPool.add(new HeavySword());		
 		itemPool.add(new Buckler());
-		itemPool.add(new MagicStaff());
-		itemPool.add(new ExperienceBook());
+		itemPool.add(new MagicStaff());		
 		itemPool.add(new SanguineBloodletter());
 		itemPool.add(new Dagger());
 		itemPool.add(new Helmet());
 		itemPool.add(new CrownOfThorns());
 		itemPool.add(new MorningStar());
 		itemPool.add(new Spellbook());
+		//consumables
+		itemPool.add(new HealingPotion());
+		itemPool.add(new HealingPotion());
+		itemPool.add(new HealingPotion());
+		itemPool.add(new HealingPotion());
+		itemPool.add(new ExperienceBook());
+		itemPool.add(new PotionOfDexterity());
+		itemPool.add(new PotionOfIntelligence());
+		itemPool.add(new PotionOfStrength());
+		itemPool.add(new PotionOfVitality());
 	}
 	public void newQuestPool() {
 		questPool=new LinkedList<Quest>();
 		questPool.add(new KillANecromancer(game));
 		questPool.add(new QuestReturnRelic(game));
+		questPool.add(new QuestLongReturnRelic(game));
 	}
 	///
 	public Hero generateRandomHero(Player player) {
@@ -223,15 +241,23 @@ public class GeneratorRandom implements Serializable{
 	//item enchantments that increase price and give random stuff to item
 	public void enchant(Item item, int level) {
 		//TODO
-		NameValuePair pair = enchantments.get((int) Math.min(enchantments.size()-1, Math.random()*enchantments.size()));
-		int randomizedValue = (int) Math.max(1, pair.bonus*Math.random());
-		item.setGoldValue((int) (item.getGoldValue()*(1.2+randomizedValue/pair.bonus)));
-		item.getStats().getStats()[ModableHeroStats.nameResolveStat(pair.name)]+=randomizedValue;
+		if(item instanceof ItemConsumable) {
+			
+		}else {
+			NameValuePair pair = enchantments.get((int) Math.min(enchantments.size()-1, Math.random()*enchantments.size()));
+			int randomizedValue = (int) Math.max(1, pair.bonus*Math.random());
+			item.setGoldValue((int) (item.getGoldValue()*(1.2+randomizedValue/pair.bonus)));
+			item.getStats().getStats()[ModableHeroStats.nameResolveStat(pair.name)]+=randomizedValue;
+		}
+		
 	}	
 	public Item generateRandomItem(int level) {
 		newItemPool();
 		Item item = itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
 		if(Math.random()<0.1*level) {
+			enchant(item, level);
+		}
+		if(Math.random()<0.01*level) {
 			enchant(item, level);
 		}
 		return item;
