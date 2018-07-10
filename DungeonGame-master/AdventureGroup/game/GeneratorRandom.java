@@ -209,8 +209,10 @@ public class GeneratorRandom implements Serializable{
 		MonsterRace monsterRace= monsterRacePool.get((int) Math.min(monsterRacePool.size()-1, Math.random()*monsterRacePool.size()));
 		LinkedList<Hero> monsterSet= new LinkedList<Hero>();
 		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition1Classes().get((int) Math.min(monsterRace.getPosition1Classes().size()-1, Math.random()*monsterRace.getPosition1Classes().size()))));
-		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition2Classes().get((int) Math.min(monsterRace.getPosition2Classes().size()-1, Math.random()*monsterRace.getPosition2Classes().size()))));
-		if(Math.random()<0.7+difficultyLevel/10){
+		if(Math.random()<0.8+difficultyLevel/8){
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition2Classes().get((int) Math.min(monsterRace.getPosition2Classes().size()-1, Math.random()*monsterRace.getPosition2Classes().size()))));
+		}		
+		if(Math.random()<0.7+difficultyLevel/9){
 			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition3Classes().get((int) Math.min(monsterRace.getPosition3Classes().size()-1, Math.random()*monsterRace.getPosition3Classes().size()))));
 		}
 		if(Math.random()<0.3+difficultyLevel/10){

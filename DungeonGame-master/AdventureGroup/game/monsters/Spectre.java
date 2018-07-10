@@ -17,6 +17,7 @@ import gameEncounter.CardLibrary.FrostArrow;
 import gameEncounter.CardLibrary.HeadShot;
 import gameEncounter.CardLibrary.MeeleAttack;
 import gameEncounter.CardLibrary.RangedAttack;
+import gameEncounter.CardLibrary.Spell;
 import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.ItemHand1;
@@ -46,7 +47,7 @@ public class Spectre extends MonsterRace{
 		//stats
 		hero.setStrength(7);
 		hero.setDexterity(8);
-		hero.setIntelligence(9);
+		hero.setIntelligence(19);
 		hero.setVitality(6);
 		//
 		//attack/defence
@@ -116,43 +117,38 @@ public class Spectre extends MonsterRace{
 		
 
 	}
-	private class Breeze extends AttackCard{
-
+	private class Breeze extends Spell{
 		public Breeze() {
-			super();
-			manaCost=2;
+			// TODO Auto-generated constructor stub
+			manaCost =1;
 		}
-
+		public boolean applyEffect(Hero self) {
+				if(self.castSpellOnHero(self.getTarget())) {	
+					self.getTarget().takeColdDamage(self, self.computeSpellPower());
+					return true;
+				}else {
+					return false;
+				}
+		}
+		@Override
+		public String getName() {
+			return "breeze";
+		}
+		@Override
+		public String getCardText() {
+			//TODO correct number display
+			return super.getCardText()+"cold damage";
+		}
 		@Override
 		public int rangeOfCard(Hero hero) {
 			// TODO Auto-generated method stub
-			return 3;
+			return 10;
 		}
-
-		@Override
-		public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
-				damageTarget(self);
-				self.getTarget().takeColdDamage(self, self.computeSpellPower());
-
-				return true;
-			}else {
-				return false;
-			}
-		}
-
-		@Override
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "breeze";
-		}
-
 		@Override
 		public boolean isFriendly() {
 			// TODO Auto-generated method stub
 			return false;
 		}
-		
 	}
 
 }

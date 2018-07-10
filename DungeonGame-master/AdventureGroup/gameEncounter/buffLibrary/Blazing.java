@@ -4,7 +4,7 @@ import gameEncounter.Buff;
 import gameEncounter.Hero;
 
 public class Blazing extends Buff{
-	int burnDamage;
+	int burnDamage=3;
 	@Override
 	public void onTick(Hero hero) {
 		// TODO Auto-generated method stub

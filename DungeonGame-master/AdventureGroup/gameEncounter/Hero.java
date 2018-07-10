@@ -234,14 +234,11 @@ public class Hero implements Serializable{
 			 getPlayer().getGame().log.addLine("fistpunch");
 		 } 
 		 breachBlock(hero, dmg);
+		 hero.breachBlock(this, hero.getThorns());//thorn damage
 		 return dmg;		
 	}
 	public void dealDamage(Hero hero,int damage) {
 		hero.takeArmorDamage(this,damage);
-	}
-	public void takeArmorDamage(Hero damagingHero,int damage) {
-		damagingHero.takeUnreflectableArmorDamage(this, thorns);//thorns
-		this.takeUnreflectableArmorDamage(damagingHero, damage);
 	}
 	public void takeDamage(Hero damagingHero, int damage){
 		if(damage>0) {
@@ -275,7 +272,7 @@ public class Hero implements Serializable{
 			}
 		}
 	}
-	public void takeUnreflectableArmorDamage(Hero damagingHero,int damage) {//prevent infinite thorn looping
+	public void takeArmorDamage(Hero damagingHero,int damage) {
 		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
 		takeDamage(damagingHero, armorDamage);
 	}
@@ -343,7 +340,7 @@ public class Hero implements Serializable{
 		int startPosition = getPosition();
 		player.getHeroes().remove(this);
 		player.getHeroes().addLast(this);
-		for(int i=startPosition; i<player.getGroupSize()-3;i++){
+		for(int i=startPosition; i<player.getHeroes().size()-2;i++){
 			Hero removedHero=player.getHeroes().remove(startPosition+1);
 			player.getHeroes().addLast(removedHero);
 		}
@@ -359,6 +356,7 @@ public class Hero implements Serializable{
 	//Buffs
 	public void buffHero(Buff buff) {
 		buffs.add(buff);
+		buff.mod(this);
 	}
 	public void removeBuffs() {
 		LinkedList<Buff> debuffing=new LinkedList<Buff>();
@@ -456,7 +454,7 @@ public class Hero implements Serializable{
 	}
 	//elemental damage
 	public void takeFireDamage(Hero damagingHero, int damage) {
-		int fireDamage=(int)(damage*(1-resistFire/100.0));
+		int fireDamage=(int)(damage*(1.0-resistFire/100.0));
 		damagingHero.getPlayer().getGame().log.addLine("fire damage:");
 		takeDamage(damagingHero,fireDamage);
 	}

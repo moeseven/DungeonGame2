@@ -20,7 +20,7 @@ public class SpikeTrap extends Trap{
 	public void trapHits(Hero hero) {
 		if(trapStats.attackHero(hero)) {
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
-			hero.takeUnreflectableArmorDamage(trapStats, (int)(Math.random()*95));
+			hero.takeArmorDamage(trapStats, (int)(Math.random()*95));
 			hero.becomeStressed(13);
 			
 		}
