@@ -8,9 +8,11 @@ import gameEncounter.CardLibrary.BlindingBomb;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.DaggerThrow;
 import gameEncounter.CardLibrary.Feint;
+import gameEncounter.CardLibrary.Parry;
 import gameEncounter.CardLibrary.PoisonAttack;
 import gameEncounter.CardLibrary.PoisonBomb;
 import gameEncounter.CardLibrary.RangedAttack;
+import gameEncounter.CardLibrary.Sidestep;
 import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeThief extends CharacterClass{
@@ -22,6 +24,7 @@ public class TypeThief extends CharacterClass{
 		cardPool.add(new BackStab());
 		cardPool.add(new DaggerThrow());
 		cardPool.add(new Feint());
+		cardPool.add(new Sidestep());
 		name="thief";
 		items.add(new RustyBlade());
 		for (int i=0; i<8;i++) {

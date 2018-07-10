@@ -10,7 +10,7 @@ public class Parry extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block((int) (self.computeBlockSkill()*0.6));
+		self.block((int) (self.computeBlockSkill()*0.7));
 		return true;
 	}
 	@Override
@@ -19,7 +19,7 @@ public class Parry extends SpellnoTarget{
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"60% block";
+		return super.getCardText()+"70% block";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

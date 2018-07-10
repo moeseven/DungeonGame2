@@ -31,6 +31,8 @@ import game.monsters.RaceGoblin;
 import game.monsters.RaceRat;
 import game.monsters.RaceSkeletton;
 import game.monsters.RaceZombie;
+import game.monsters.Spectre;
+import game.monsters.Thornback;
 import gameEncounter.Hero;
 import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
@@ -111,6 +113,8 @@ public class GeneratorRandom implements Serializable{
 		monsterRacePool.add(new RaceSkeletton());
 		monsterRacePool.add(new FireSpirit());
 		monsterRacePool.add(new RaceRat());
+		monsterRacePool.add(new Spectre());
+		monsterRacePool.add(new Thornback());
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));

@@ -3,25 +3,24 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class Wisdom extends SpellnoTarget{
-	public Wisdom() {
+public class Sidestep extends SpellnoTarget{
+	public Sidestep() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[0]=false;
+		
 	}
 	public boolean applyEffect(Hero self) {
-		for(int i=0; i<4; i++) {
-			self.drawCard();
-		}
+		self.block((int) (self.computeBlockSkill()*0.9));
+		self.drawCard();
 		return true;
 	}
 	@Override
 	public String getName() {
-		return "wisdom";
+		return "sidestep";
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"draw 4 cards";
+		return super.getCardText()+"90% block, draw 1";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
@@ -33,4 +32,10 @@ public class Wisdom extends SpellnoTarget{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public void buildLogEntry(Hero self) {
+		self.getPlayer().getGame().log.addLine(getName());
+		
+	}
+
 }

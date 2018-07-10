@@ -9,7 +9,7 @@ public class Bash extends AttackCard{
 	public Bash() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		damageMult=1.5;
+		damageMult=1.6;
 		legalPositions[0]=true;
 		legalPositions[1]=true;
 		legalPositions[2]=false;

@@ -3,25 +3,24 @@ package gameEncounter.CardLibrary;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
-public class Wisdom extends SpellnoTarget{
-	public Wisdom() {
+public class Bandage extends Spell{
+	public Bandage() {
 		// TODO Auto-generated constructor stub
-		manaCost =1;
-		legalPositions[0]=false;
+		manaCost =1;		
 	}
 	public boolean applyEffect(Hero self) {
-		for(int i=0; i<4; i++) {
-			self.drawCard();
-		}
+		self.getTarget().heal((int)(1+(self.computeSpellPower()/2.2)));
+		self.getTarget().setBleed(0);
+		self.getDiscardPile().remove(this);
 		return true;
 	}
 	@Override
 	public String getName() {
-		return "wisdom";
+		return "bandage";
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"draw 4 cards";
+		return super.getCardText()+"heals and removes bleed (single use)";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

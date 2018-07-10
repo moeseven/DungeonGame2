@@ -166,7 +166,7 @@ public class Hero implements Serializable{
 		//poison TODO not working properly
 		if(poison>0) {	
 			poison-=1;		
-			takePoisonDamage(5);			
+			takePoisonDamage((int) (2+hp/30.0));			
 		}		
 		//bleed
 		if(bleed>0) {

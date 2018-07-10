@@ -7,7 +7,7 @@ public class Cleave extends AttackCard{
 	public Cleave() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		damageMult=1.8;
+		damageMult=1.9;
 		legalPositions[1]=false;
 		legalPositions[2]=false;
 		legalPositions[3]=false;

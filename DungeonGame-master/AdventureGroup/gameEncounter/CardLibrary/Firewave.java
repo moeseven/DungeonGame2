@@ -4,18 +4,16 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
-public class FireBall extends Spell{
-	public FireBall() {
+public class Firewave extends Spell{
+	public Firewave() {
 		// TODO Auto-generated constructor stub
-		manaCost =1;
-		legalPositions[0]=false;
+		manaCost =2;
 	}
 	public boolean applyEffect(Hero self) {
-		int mana=self.getMana();
-		self.setMana(0);
 			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getTarget().takeFireDamage(self, (int)((Math.pow(mana+1, 1.4))*self.computeSpellPower()/1.5));
-				
+				for(int i=0; i<self.getTarget().getPlayer().getHeroes().size();i++) {
+					self.getTarget().getPlayer().getHeroes().get(i).takeFireDamage(self, self.computeSpellPower()+5);
+				}
 				return true;
 			}else {
 				return false;
@@ -23,12 +21,12 @@ public class FireBall extends Spell{
 	}
 	@Override
 	public String getName() {
-		return "fire ball";
+		return "fire wave";
 	}
 	@Override
 	public String getCardText() {
 		//TODO correct number display
-		return super.getCardText()+"consumes all mana and does fire damage";
+		return super.getCardText()+"fire damage to all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

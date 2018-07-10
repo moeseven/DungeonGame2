@@ -6,6 +6,7 @@ import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Channel;
 import gameEncounter.CardLibrary.FireBall;
+import gameEncounter.CardLibrary.Firewave;
 import gameEncounter.CardLibrary.Magicmissile;
 import gameEncounter.CardLibrary.RangedAttack;
 import gameEncounter.CardLibrary.RosesAndThorns;
@@ -16,7 +17,7 @@ import gameEncounter.ItemLibrary.RustyBlade;
 public class TypeMage extends CharacterClass{
 
 	public TypeMage() {
-		cardPool.add(new Magicmissile());
+		cardPool.add(new Firewave());
 		cardPool.add(new FireBall());
 		cardPool.add(new SleepCharm());
 		cardPool.add(new Wisdom());

@@ -9,8 +9,7 @@ public class DivineGrace extends Spell{
 		manaCost =2;		
 	}
 	public boolean applyEffect(Hero self) {
-		self.getTarget().heal((int)(5+(self.computeSpellPower()/1.1)));
-		self.getDiscardPile().remove(this);
+		self.getTarget().heal((int)(4+(self.computeSpellPower()/1.4)));
 		return true;
 	}
 	@Override
@@ -19,7 +18,7 @@ public class DivineGrace extends Spell{
 	}
 	@Override
 	public String getCardText() {
-		return super.getCardText()+"heals target (single use)";
+		return super.getCardText()+"heals target";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

@@ -2,6 +2,7 @@ package game.characterTypeLibrary;
 
 import game.CharacterClass;
 import gameEncounter.Hero;
+import gameEncounter.CardLibrary.Bandage;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Concentrate;
@@ -23,6 +24,7 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add(new Concentrate());
 		cardPool.add(new FireArrow());
 		cardPool.add(new FrostArrow());
+		cardPool.add(new Bandage());
 		name="archer";
 		items.add(new GoblinBow());		
 		for (int i=0; i<7;i++) {
