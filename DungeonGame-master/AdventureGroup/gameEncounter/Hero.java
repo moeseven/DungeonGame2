@@ -10,8 +10,6 @@ import game.CharacterRace;
 import game.DungeonMaster;
 import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
-import gameEncounter.CardLibrary.BleedingSlice;
-import gameEncounter.ItemLibrary.usables.HealingPotion;
 import gameEncounter.buffLibrary.Bashed;
 
 public class Hero implements Serializable{
@@ -94,13 +92,12 @@ public class Hero implements Serializable{
 		buffs= new LinkedList<Buff>();
 		equipment= new Equipment(this);			
 		deck=new Deck();
-		charRace.modifyHero(this);
-		if(charClass!=null) {
-			charClass.modifyHero(this);	
-		}
-	
+		charRace.modifyHero(this);			
 		if(!name.equals("")&&!name.equals("type name here")) {
 			this.name=name;
+		}
+		if(charClass!=null) {
+			charClass.modifyHero(this);	
 		}			
 		stats=new ModableHeroStats();
 		this.initialize();

@@ -20,7 +20,7 @@ protected LinkedList<Card> cardPool=new LinkedList<Card>();
 		for(int i=0; i<cards.size();i++) {
 			hero.getDeck().addCard(cards.get(i));
 		}
-		hero.setName(hero.getName()+" "+name);
+		hero.setName(hero.getName()+" ("+name+")");
 	}
 	public LinkedList<Card> getCardPool() {
 		return cardPool;
