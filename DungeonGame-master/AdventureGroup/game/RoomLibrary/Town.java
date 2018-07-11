@@ -3,18 +3,20 @@ package game.RoomLibrary;
 
 import game.Game;
 import game.Room;
+import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.QuestBoard;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
 import game.RoomInteractionLibrary.Well;
 
 public class Town extends Room{
-	private int idleStressRelief=5;
+	private int idleStressRelief=3;
 	public Town(Game game) {
 		// TODO Auto-generated constructor stub
 		super(game);
 		getInteractions().add(new Shop());
 		getInteractions().add(new Tavern());
+		getInteractions().add(new MedicineMan());
 		getInteractions().add(new QuestBoard());
 	}
 

@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
 import gameEncounter.Hero;
@@ -66,14 +67,25 @@ public class GuiRoom extends JPanel{
 				jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
 				add(jp_south,BorderLayout.CENTER);
 			}else {
-				jp_north=new JPanel();
-				jp_north.setLayout(new BorderLayout());
-				jp_north.add(new RoomInteractionComponent(rw));
-				add(jp_north, BorderLayout.NORTH);
-				jp_south= new JPanel();
-				jp_south.setLayout(new BorderLayout());
-				jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
-				add(jp_south,BorderLayout.CENTER);
+				if(rw.getGame().getRoom().isMedicineOpen()) {
+					jp_north=new JPanel();
+					jp_north.setLayout(new BorderLayout());
+					jp_north.add(new MedicineInterface(rw,rw.getGame().getRoom().getMedicine()));
+					add(jp_north, BorderLayout.NORTH);
+					jp_south= new JPanel();
+					jp_south.setLayout(new BorderLayout());
+					jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
+					add(jp_south,BorderLayout.CENTER);
+				}else {
+					jp_north=new JPanel();
+					jp_north.setLayout(new BorderLayout());
+					jp_north.add(new RoomInteractionComponent(rw));
+					add(jp_north, BorderLayout.NORTH);
+					jp_south= new JPanel();
+					jp_south.setLayout(new BorderLayout());
+					jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
+					add(jp_south,BorderLayout.CENTER);
+				}
 			}			
 		}		
 		rw.setVisible(true);
@@ -283,7 +295,7 @@ public class GuiRoom extends JPanel{
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
-					if(gw.getGame().getPlayer().getHeroes().contains(hero)) {
+					if(gw.getGame().getPlayer().getHeroes().contains(hero)&&gw.getGame().getPlayer().getHeroes().size()>1) {
 						//release to tavern
 						tavern.getHeroes().add(hero);
 						gw.getGame().getPlayer().removeHero(hero);
@@ -326,7 +338,7 @@ public class GuiRoom extends JPanel{
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
-					if(gw.getGame().getPlayer().getHeroes().contains(hero)) {
+					if(gw.getGame().getPlayer().getHeroes().contains(hero)&&gw.getGame().getPlayer().getHeroes().size()>1) {
 						//dismiss from roster
 						gw.getGame().getPlayer().removeHero(hero);
 						if(gw.getGame().getPlayer().getHeroes().size()>0) {
@@ -400,5 +412,114 @@ protected void paintComponent(Graphics g){
 	}
 }
 	}
+	private class MedicineInterface extends JComponent{
+		private RectangleClicker rc;
+		private RoomWindow gw;
+		private MedicineMan mm;
+		private int woundhealfee=110;
+		private int stresshealfee=30;
+		private MedicineInterface(RoomWindow roomWindow, MedicineMan s) {
+		this.gw=roomWindow;
+		this.mm=s;
+		
+		setBorder(new LineBorder(Color.WHITE));
+		super.setPreferredSize(new Dimension(600,200));
+		MyMouseListener ml = new MyMouseListener();
+		super.addMouseListener(ml);
+		setLayout(new BorderLayout());
+		setVisible(true);
+		//rectangles
+		rc=new RectangleClicker();
+		//wound heal
+		rc.addRect(new ClickableRectangle("woundheal hero",405,40,220,40) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
+					if(gw.getGame().getPlayer().getGold()>=woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
+						if(gw.getGame().getPlayer().getHeroes().size()>1) {
+							Hero selectedHero=gw.getGame().getPlayer().getSelectedHero();
+							gw.getGame().getPlayer().getHeroes().remove(selectedHero);
+							mm.getHeroeswound().add(selectedHero);
+							gw.getGame().getPlayer().gainGold(-woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
+						}else {
+							gw.getGame().log.addLine("you have to keep at least one hero in your adventure Group!");
+						}						
+					}
+				}										
+			}
+			@Override
+			public void updateCaption() {
+				caption=new LinkedList<String>();
+				caption.add("treat "+gw.getGame().getPlayer().getSelectedHero().getName()+" for wound healing.");
+				caption.add("("+gw.getGame().getPlayer().getSelectedHero().getWounds()+" wounds)");
+				caption.add("cost: "+woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+			}		
+		});
+		//stress heal
+		rc.addRect(new ClickableRectangle("stressheal hero",405,80,220,40) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {			
+					if(gw.getGame().getPlayer().getHeroes().size()>1) {
+						if(gw.getGame().getPlayer().getGold()>=stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
+							Hero selectedHero=gw.getGame().getPlayer().getSelectedHero();
+							gw.getGame().getPlayer().getHeroes().remove(selectedHero);
+							mm.getHeroestress().add(selectedHero);
+							gw.getGame().getPlayer().gainGold(-stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
+						}
+					}else {
+						gw.getGame().log.addLine("you have to keep at least one hero in your adventure Group!");
+					}	
+				}										
+			}
+			@Override
+			public void updateCaption() {
+				caption=new LinkedList<String>();
+				caption.add("treat "+gw.getGame().getPlayer().getSelectedHero().getName()+" for stress healing.");
+				caption.add("("+gw.getGame().getPlayer().getSelectedHero().getStress()+" stress)");
+				caption.add("cost: "+stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+			}		
+		});
+		//gold
+		rc.addRect(new ClickableRectangle("gold",405,120,220,20) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub	
+				caption.removeFirst();
+				caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());							
+			}		
+		});
+		rc.updateCaptions();
+	}
 
+	private class MyMouseListener extends MouseAdapter{
+		public void mousePressed(MouseEvent e){	
+			if(e.getButton()==1){
+				//get equipment position from click
+				rc.triggerClick(e.getX(), e.getY());
+				rc.updateCaptions();
+				gw.repaint();				
+			}else{
+				if (e.getButton()==3){
+					//new CardView(card);
+				}
+			}
+		} 
+	}
+	protected void paintComponent(Graphics g){
+		super.paintComponent(g);
+		for(int i=0; i<rc.rectAngles.size();i++) {
+			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+			}
+		}
+	}
+	}
 }

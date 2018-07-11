@@ -59,7 +59,7 @@ public class Fight implements Serializable{
 				}
 			}
 			turnOrder.add(allFightParticipants.remove(fastestHeroIndex));
-			highestSpeed=0;
+			highestSpeed=Integer.MIN_VALUE;
 		}
 		nextTurn();
 	}

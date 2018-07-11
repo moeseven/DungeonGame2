@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import game.RoomLibrary.Town;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
@@ -69,12 +70,14 @@ public class RoomButtonComponent extends JComponent{
 		private class mouselistenerLeave extends MouseAdapter{
 			public void mousePressed(MouseEvent e){
 				//leave room
-				if(rw.getGame().getPlayer().getHeroes().size()>0) {
-					if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()) {
-						rw.getGame().getRoom().setShopOpen(false);
-						rw.getGame().getRoom().setTavernOpen(false);
-						rw.getGuiRoom().upadate();
-					}else {
+				if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()||rw.getGame().getRoom().isMedicineOpen()) {
+					rw.getGame().getRoom().setShopOpen(false);
+					rw.getGame().getRoom().setTavernOpen(false);
+					rw.getGame().getRoom().setMedicineOpen(false);
+					rw.getGame().getPlayer().setSelectedHero(rw.getGame().getPlayer().getHeroes().getFirst());
+					rw.getGuiRoom().upadate();
+				}else {
+					if(rw.getGame().getPlayer().getHeroes().size()>0) {
 						rw.getGame().enterNextRoom();
 						rw.getGuiRoom().upadate();
 						rw.setVisible(true);
@@ -82,13 +85,13 @@ public class RoomButtonComponent extends JComponent{
 							rw.setUpFightWindow();
 							rw.setVisible(false);
 						}
-					}
-				}else {
-					rw.getGame().log.addLine("mission failed!");
-					rw.getGame().retreatHeroes();
-					rw.getGuiRoom().upadate();
-					rw.setVisible(true);
-				}								
+					}else {
+						rw.getGame().log.addLine("mission failed!");
+						rw.getGame().retreatHeroes();
+						rw.getGuiRoom().upadate();
+						rw.setVisible(true);
+					}								
+				}
 			}
 		}
 		private class mouselistenerMoveForward extends MouseAdapter{

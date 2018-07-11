@@ -107,6 +107,7 @@ public void retreatHeroes() {
 		player.setInventory(new LinkedList<Item>());
 	}else {
 		for(int i=0; i<player.getHeroes().size();i++) {
+			player.getHeroes().get(i).setUpHandPile();
 			player.getHeroes().get(i).turnBegin();
 			player.getHeroes().get(i).becomeStressed(7);
 		}
