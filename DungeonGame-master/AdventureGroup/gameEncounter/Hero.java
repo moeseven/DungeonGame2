@@ -248,8 +248,8 @@ public class Hero implements Serializable{
 				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
 				finalDamage(damage);
 			}else {
-				if(damage>hp/2.5) {	//wounds
-					if(Math.random()>wounds/deck.getCards().size()) {
+				if(damage>hp/1.6) {	//wounds
+					if(Math.random()>wounds/(deck.getCards().size()*1.8)) {
 						player.getGame().log.addLine(name+"suffered a wound");
 						wounds+=1;
 						discardPile.add(new Wound());

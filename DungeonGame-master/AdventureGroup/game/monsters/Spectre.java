@@ -124,7 +124,7 @@ public class Spectre extends MonsterRace{
 		}
 		public boolean applyEffect(Hero self) {
 				if(self.castSpellOnHero(self.getTarget())) {	
-					self.getTarget().takeColdDamage(self, self.computeSpellPower());
+					self.getTarget().takeColdDamage(self, (int) (self.computeSpellPower()/2.3));
 					return true;
 				}else {
 					return false;

@@ -61,9 +61,9 @@ public class Thornback extends MonsterRace{
 		//resistances
 		hero.setArmor(40);
 		hero.setThorns(10);
-		hero.setResistFire(30);
+		hero.setResistFire(5);
 		hero.setResistCold(30);
-		hero.setResistBleed(10);
+		hero.setResistBleed(6);
 		hero.setResistPoison(2);
 		hero.setResistStun(25);
 		//

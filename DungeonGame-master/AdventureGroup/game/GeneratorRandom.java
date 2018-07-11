@@ -45,6 +45,7 @@ import gameEncounter.HeroQuirkLibrary.OneEyed;
 import gameEncounter.HeroQuirkLibrary.SlugBrained;
 import gameEncounter.HeroQuirkLibrary.Stresser;
 import gameEncounter.HeroQuirkLibrary.Strong;
+import gameEncounter.HeroQuirkLibrary.SubstanceAbuser;
 import gameEncounter.HeroQuirkLibrary.Tender;
 import gameEncounter.HeroQuirkLibrary.Tough;
 import gameEncounter.HeroQuirkLibrary.Weak;
@@ -96,6 +97,7 @@ public class GeneratorRandom implements Serializable{
 		heroQuirkPool.add(new Hairy());
 		heroQuirkPool.add(new Defensive());
 		heroQuirkPool.add(new Aggressive());
+		heroQuirkPool.add(new SubstanceAbuser());
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman());
 		heroRacePool.add(new RaceDwarf());
@@ -127,7 +129,7 @@ public class GeneratorRandom implements Serializable{
 		enchantments.add(new NameValuePair(3, "attack"));
 		enchantments.add(new NameValuePair(3, "speed"));
 		enchantments.add(new NameValuePair(10, "health"));
-		enchantments.add(new NameValuePair(15, "throns"));
+		enchantments.add(new NameValuePair(15, "thorns"));
 		enchantments.add(new NameValuePair(10, "resistBleed"));
 		enchantments.add(new NameValuePair(10, "resistPoison"));
 		enchantments.add(new NameValuePair(10, "resistCold"));

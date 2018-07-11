@@ -39,7 +39,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
 		lines.add("");
-		lines.add("health: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp());
+		lines.add("health: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp()+" ("+player.getSelectedHero().getWounds()+")");
 		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
 		lines.add("");
 		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {

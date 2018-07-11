@@ -117,7 +117,7 @@ public class RaceOgre extends MonsterRace{
 			this.baseDamage=15;
 			this.damageRange=20;
 			this.facStr=0.95;
-			this.weaponRange=3;
+			this.weaponRange=2;
 		}
 		
 
