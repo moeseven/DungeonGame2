@@ -70,10 +70,11 @@ public class RoomButtonComponent extends JComponent{
 		private class mouselistenerLeave extends MouseAdapter{
 			public void mousePressed(MouseEvent e){
 				//leave room
-				if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()||rw.getGame().getRoom().isMedicineOpen()) {
+				if(rw.getGame().getRoom().isShopOpen()||rw.getGame().getRoom().isTavernOpen()||rw.getGame().getRoom().isMedicineOpen()||rw.getGame().getRoom().isAltarOpen()) {
 					rw.getGame().getRoom().setShopOpen(false);
 					rw.getGame().getRoom().setTavernOpen(false);
 					rw.getGame().getRoom().setMedicineOpen(false);
+					rw.getGame().getRoom().setAltarOpen(false);
 					rw.getGame().getPlayer().setSelectedHero(rw.getGame().getPlayer().getHeroes().getFirst());
 					rw.getGuiRoom().upadate();
 				}else {

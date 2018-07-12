@@ -22,7 +22,7 @@ public class GameEquations {
 	}
 	//blockskill and attackskill calculation from str/dex
 	public static int blockAttackSkillCalc(int baseBlockAttackSkill, int str, int dex) {
-		return (int) (baseBlockAttackSkill*(1+dex/40.0+str/30.0));
+		return (int) (baseBlockAttackSkill*(1+str/20.0));
 	}
 	//spellpower calculation from intelligence
 	public static int spellPowerCalc(int baseSpellPower, int intelligence) {

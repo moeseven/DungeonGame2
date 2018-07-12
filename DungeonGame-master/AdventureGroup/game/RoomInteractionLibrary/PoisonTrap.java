@@ -20,7 +20,7 @@ public class PoisonTrap extends Trap{
 	public void trapHits(Hero hero) {
 		if(trapStats.attackHero(hero)) {
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
-			hero.poison((int) (Math.random()*7));
+			hero.poison((int) (Math.random()*5)+3);
 			hero.becomeStressed(19);
 			
 		}

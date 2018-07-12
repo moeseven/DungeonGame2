@@ -7,6 +7,7 @@ import game.QuestLibrary.KillANecromancer;
 import game.QuestLibrary.QuestLongReturnRelic;
 import game.QuestLibrary.QuestReturnRelic;
 import game.QuestLibrary.TestQuest;
+import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.Chest;
 import game.RoomInteractionLibrary.EvilStatue;
 import game.RoomInteractionLibrary.HayHeap;
@@ -41,12 +42,15 @@ import gameEncounter.HeroQuirkLibrary.Aggressive;
 import gameEncounter.HeroQuirkLibrary.Bleeder;
 import gameEncounter.HeroQuirkLibrary.Defensive;
 import gameEncounter.HeroQuirkLibrary.Hairy;
+import gameEncounter.HeroQuirkLibrary.Hasty;
 import gameEncounter.HeroQuirkLibrary.OneEyed;
+import gameEncounter.HeroQuirkLibrary.SimpleMinded;
 import gameEncounter.HeroQuirkLibrary.SlugBrained;
 import gameEncounter.HeroQuirkLibrary.Stresser;
 import gameEncounter.HeroQuirkLibrary.Strong;
 import gameEncounter.HeroQuirkLibrary.SubstanceAbuser;
 import gameEncounter.HeroQuirkLibrary.Tender;
+import gameEncounter.HeroQuirkLibrary.Thoughtfull;
 import gameEncounter.HeroQuirkLibrary.Tough;
 import gameEncounter.HeroQuirkLibrary.Weak;
 import gameEncounter.ItemLibrary.ArmorThinLeather;
@@ -98,11 +102,16 @@ public class GeneratorRandom implements Serializable{
 		heroQuirkPool.add(new Defensive());
 		heroQuirkPool.add(new Aggressive());
 		heroQuirkPool.add(new SubstanceAbuser());
+		heroQuirkPool.add(new Thoughtfull());
+		heroQuirkPool.add(new Hasty());
+		heroQuirkPool.add(new SimpleMinded());
+		////
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman());
 		heroRacePool.add(new RaceDwarf());
 		heroRacePool.add(new RaceElf());
 		heroRacePool.add(new RaceHalfling());
+		////
 		heroClassPool=new LinkedList<CharacterClass>();
 		heroClassPool.add(new TypeWarrior());
 		heroClassPool.add(new TypeMage());
@@ -162,6 +171,7 @@ public class GeneratorRandom implements Serializable{
 		interactionPool.add(new PoisonTrap());
 		interactionPool.add(new SleepingOgre());
 		interactionPool.add(new HayHeap());
+		interactionPool.add(new Altar());
 	}
 	public void newItemPool() {
 		itemPool=new LinkedList<Item>();

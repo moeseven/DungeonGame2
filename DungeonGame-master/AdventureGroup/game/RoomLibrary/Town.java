@@ -3,6 +3,7 @@ package game.RoomLibrary;
 
 import game.Game;
 import game.Room;
+import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.QuestBoard;
 import game.RoomInteractionLibrary.Shop;

@@ -324,6 +324,12 @@ public class Hero implements Serializable{
 			discardPile.add(hand.removeFirst());
 		}		
 	}
+	public void healStress(int heal) {
+		stress-=heal;
+		if (stress<0) {
+			stress=0;
+		}
+	}
 	public void heal(int heal) {//prevent overhealing
 		int healing= Math.min(heal, computeMaxHp()-getHp());
 		this.setHp(this.getHp()+healing);

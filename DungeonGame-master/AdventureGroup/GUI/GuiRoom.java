@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
@@ -77,14 +78,25 @@ public class GuiRoom extends JPanel{
 					jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
 					add(jp_south,BorderLayout.CENTER);
 				}else {
-					jp_north=new JPanel();
-					jp_north.setLayout(new BorderLayout());
-					jp_north.add(new RoomInteractionComponent(rw));
-					add(jp_north, BorderLayout.NORTH);
-					jp_south= new JPanel();
-					jp_south.setLayout(new BorderLayout());
-					jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
-					add(jp_south,BorderLayout.CENTER);
+					if(rw.getGame().getRoom().isAltarOpen()) {
+						jp_north=new JPanel();
+						jp_north.setLayout(new BorderLayout());
+						jp_north.add(new AltarInterface(rw,rw.getGame().getRoom().getAltar()));
+						add(jp_north, BorderLayout.NORTH);
+						jp_south= new JPanel();
+						jp_south.setLayout(new BorderLayout());
+						jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
+						add(jp_south,BorderLayout.CENTER);
+					}else {
+						jp_north=new JPanel();
+						jp_north.setLayout(new BorderLayout());
+						jp_north.add(new RoomInteractionComponent(rw));
+						add(jp_north, BorderLayout.NORTH);
+						jp_south= new JPanel();
+						jp_south.setLayout(new BorderLayout());
+						jp_south.add(new RoomHeroesComponent(rw),BorderLayout.CENTER);		
+						add(jp_south,BorderLayout.CENTER);
+					}
 				}
 			}			
 		}		
@@ -496,6 +508,144 @@ protected void paintComponent(Graphics g){
 			}		
 		});
 		rc.updateCaptions();
+	}
+
+	private class MyMouseListener extends MouseAdapter{
+		public void mousePressed(MouseEvent e){	
+			if(e.getButton()==1){
+				//get equipment position from click
+				rc.triggerClick(e.getX(), e.getY());
+				rc.updateCaptions();
+				gw.repaint();				
+			}else{
+				if (e.getButton()==3){
+					//new CardView(card);
+				}
+			}
+		} 
+	}
+	protected void paintComponent(Graphics g){
+		super.paintComponent(g);
+		for(int i=0; i<rc.rectAngles.size();i++) {
+			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+			}
+		}
+	}
+	}
+	private class AltarInterface extends JComponent{
+		private RectangleClicker rc;
+		private RoomWindow gw;
+		private Altar altar;
+		private AltarInterface(RoomWindow roomWindow, Altar s) {
+		this.gw=roomWindow;
+		this.altar=s;
+		setBorder(new LineBorder(Color.WHITE));
+		super.setPreferredSize(new Dimension(600,200));
+		MyMouseListener ml = new MyMouseListener();
+		super.addMouseListener(ml);
+		setLayout(new BorderLayout());
+		setVisible(true);
+		//rectangles
+		rc=new RectangleClicker();
+		//Inventory player
+		rc.addRect(new ClickableRectangle("search inventory",455,10,90,40) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getInventory().size()>0) {
+					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					if(gw.getGame().getPlayer().getInventory().size()>1) {
+						gw.getGame().getPlayer().getInventory().addLast(gw.getGame().getPlayer().getInventory().removeFirst());
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					}
+				}					
+					
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub					
+			}		
+		});
+		//pray
+		rc.addRect(new ClickableRectangle("pray",455,50,90,40) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method st
+				if (altar.prayers>0) {
+					altar.prayers-=1;
+					gw.getGame().getPlayer().getSelectedHero().healStress(8);
+					gw.getGame().getPlayer().getSelectedHero().heal(1);
+				}else {
+					
+				}
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub					
+			}		
+		});
+
+		//item description
+		rc.addRect(new ClickableRectangle("description",305,10,150,110) {
+			@Override
+			public void onClick() {
+
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+					gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
+					caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
+					caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
+				}else {
+					caption=new LinkedList<String>();
+				}					
+			}		
+		});
+		//sacrifice
+		rc.addRect(new ClickableRectangle("sacrifice",455,100,90,20) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null&&altar.sacrefices>0) {
+					Hero hero=gw.getGame().getPlayer().getSelectedHero();
+					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
+					if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						//sacrifice
+						gw.getGame().getPlayer().getInventory().remove(item);
+						altar.sacrefices-=1;
+						int altarRoll= (int) (Math.random()*1000)+item.getGoldValue();
+						if(altarRoll>920) {
+							gw.getGame().log.addLine("the gods gift you power and insight!");
+							hero.gainExp(300);
+							hero.setVitality(hero.getVitality()+1);							
+						}else {
+							if(altarRoll>470) {
+								gw.getGame().log.addLine("the god's are content");
+								hero.gainExp(15);
+							}else {
+								gw.getGame().log.addLine("the god's are angered");
+								hero.takeFireDamage(hero, 25);
+								hero.becomeStressed(30);
+							}
+						}
+						rc.rectAngles.remove(this);
+						if(gw.getGame().getPlayer().getInventory().size()>0) {
+							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+						}
+					}else {
+					}				
+				}
+
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub				
+			}		
+		});
 	}
 
 	private class MyMouseListener extends MouseAdapter{

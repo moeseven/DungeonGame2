@@ -3,6 +3,7 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
@@ -18,6 +19,8 @@ public abstract class Room implements Serializable{
 	protected boolean shopOpen;
 	protected boolean tavernOpen;
 	protected boolean medicineOpen;
+	protected boolean altarOpen;
+	protected Altar altar;
 	protected MedicineMan medicine;
 	protected Shop shop;
 	protected Tavern tavern;
@@ -108,6 +111,18 @@ public abstract class Room implements Serializable{
 	}
 	public void setMedicine(MedicineMan medicine) {
 		this.medicine = medicine;
+	}
+	public boolean isAltarOpen() {
+		return altarOpen;
+	}
+	public void setAltarOpen(boolean altarOpen) {
+		this.altarOpen = altarOpen;
+	}
+	public Altar getAltar() {
+		return altar;
+	}
+	public void setAltar(Altar altar) {
+		this.altar = altar;
 	}
 	
 }
