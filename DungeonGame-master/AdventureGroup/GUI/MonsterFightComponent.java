@@ -21,10 +21,6 @@ public class MonsterFightComponent extends JComponent{
 	private Image image;
 	private FightWindow fw;
 	public MonsterFightComponent(FightWindow fw, Hero monster) {
-//		try {
-//		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
-//		} catch (IOException e) {
-//		}
 		this.monster=monster;
 		this.fw=fw;
 		super.setPreferredSize(new Dimension(120,150));
@@ -51,7 +47,7 @@ public class MonsterFightComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);
+		g.drawImage(monster.getImage().getScaledInstance(180, 153, 3),-40,0,null);	//scaled Instance has bad performance!	
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero().getTarget()==monster){
 				g.setColor(Color.red);

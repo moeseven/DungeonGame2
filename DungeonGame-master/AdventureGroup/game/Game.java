@@ -3,6 +3,7 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import GUI.grafics.MyImageLoader;
 import game.QuestLibrary.QuestReturnRelic;
 import game.RoomInteractionLibrary.Tavern;
 import game.RoomLibrary.Town;
@@ -15,6 +16,7 @@ public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
 public GeneratorRandom generator;
+public MyImageLoader imageLoader;
 public int day;
 public MyLog log;
 private Room room;
@@ -23,7 +25,7 @@ private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
 public Game() {
 	super();
-	
+	imageLoader= new MyImageLoader();
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);
 	day=1;

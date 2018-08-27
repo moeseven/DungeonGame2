@@ -47,14 +47,15 @@ public class HeroRoomComponent extends JComponent{
 		} 
 	}
 	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);
-		if(rw!=null){			
+		super.paintComponent(g);		
+		if(rw!=null){
+			g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
 			if(rw.getGame().getPlayer().getSelectedHero()==hero){
 				g.setColor(Color.green);
 				g.drawRect(1, 1, 98, 148);
 			}
 		}
+		
 		g.setColor(Color.black);
 		g.drawString(hero.getName(), 10, 15);
 		g.setColor(Color.blue);
@@ -63,5 +64,6 @@ public class HeroRoomComponent extends JComponent{
 		g.drawString(""+hero.getHp()+"/"+hero.computeMaxHp(), 10, 65);
 		g.setColor(Color.GRAY);
 		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 10, 80);
+		
 	}
 }

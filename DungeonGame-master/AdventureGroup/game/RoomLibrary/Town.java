@@ -17,7 +17,7 @@ public class Town extends Room{
 		super(game);
 		getInteractions().add(new Shop());
 		getInteractions().add(new Tavern());
-		getInteractions().add(new MedicineMan());
+		getInteractions().add(new MedicineMan()); 
 		getInteractions().add(new QuestBoard());
 	}
 

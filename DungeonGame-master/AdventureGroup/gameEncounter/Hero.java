@@ -1,5 +1,6 @@
 package gameEncounter;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ public class Hero implements Serializable{
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
 	private Equipment equipment;
 	protected String name;
+	protected BufferedImage image;
 	protected int gold;
 	protected int experience;	
 	protected int experienceValue;
@@ -86,9 +88,9 @@ public class Hero implements Serializable{
 	private LinkedList<Card> hand;
 	//
 	public Hero(String name,Player player, CharacterRace charRace,CharacterClass charClass){		
-		//order is important here
-		basicStats();
+		//order is important here		
 		this.player=player;
+		basicStats();
 		this.charRace=charRace;
 		this.charClass=charClass;
 		buffs= new LinkedList<Buff>();
@@ -106,6 +108,11 @@ public class Hero implements Serializable{
 	}
 	private void basicStats() {
 		//set here basic values for stats
+		if(player!=null) {//basic image
+			image = player.getGame().imageLoader.getImage(121);
+		}else {
+			image = null;
+		}
 		//attributes		
 		setStrength(10);
 		setDexterity(10);
@@ -133,13 +140,15 @@ public class Hero implements Serializable{
 		setDraw(3);		
 		setExperienceValue(10);
 	}
-	public void initialize() {		
+	public void initialize() {			
 		isDead=false;
 		isReady=false;	
 		hp=computeMaxHp();
 	}
 	//functions
 	public void setUpHandPile() {
+		
+		image = player.getGame().imageLoader.getImage(121);//image should not be set here!!!!
 		//shuffle
 		hand=new LinkedList<Card>();
 		drawPile=new LinkedList<Card>();
@@ -889,6 +898,12 @@ public class Hero implements Serializable{
 	}
 	public void setWounds(int wounds) {
 		this.wounds = wounds;
+	}
+	public BufferedImage getImage() {
+		return image;
+	}
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}	
 	
 }

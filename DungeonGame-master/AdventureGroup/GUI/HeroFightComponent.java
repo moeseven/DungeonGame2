@@ -18,7 +18,6 @@ import gameEncounter.Hero;
 //!! heroes and monsters should be drawn not be components
 public class HeroFightComponent extends JComponent{
 	private Hero hero;
-	private Image image;
 	private FightWindow fw;
 	public HeroFightComponent(FightWindow fw, Hero hero) {
 //		try {
@@ -51,7 +50,7 @@ public class HeroFightComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);
+		g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero()==hero){
 				g.setColor(Color.green);
