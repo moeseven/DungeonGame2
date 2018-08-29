@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 import gameEncounter.Hero;
@@ -7,6 +8,7 @@ import gameEncounter.Hero;
 public abstract class RoomInteraction implements Serializable{
 	protected String name;
 	protected boolean hidden;
+	protected BufferedImage image;
 	public RoomInteraction() {
 		super();
 		name="room interaction";

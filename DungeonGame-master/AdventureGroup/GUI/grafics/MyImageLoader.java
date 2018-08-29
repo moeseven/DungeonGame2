@@ -34,4 +34,7 @@ public class MyImageLoader {
 	public BufferedImage getImage(int a){
 		return sprites[a];
 	}
+	public BufferedImage getScaledImage(int a,int s){
+		return (BufferedImage) sprites[a].getScaledInstance(60*s, 51*s, s);
+	}
 }
