@@ -14,8 +14,8 @@ public class HayHeap extends RoomInteraction{
 	private int charges=3;
 	private int gold=20;
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public HayHeap() {
-		super();
+	public HayHeap(Game game) {
+		super(game);
 		name="hay heap";
 		gold=(int) (Math.random()*5);
 		// TODO Auto-generated constructor stub

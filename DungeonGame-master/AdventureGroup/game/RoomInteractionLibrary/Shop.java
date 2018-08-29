@@ -12,8 +12,8 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Shop extends RoomInteraction{
 	private LinkedList<Item> items;
-	public Shop() {
-		super();
+	public Shop(Game game) {
+		super(game);
 		name="merchant";
 		items=new LinkedList<Item>();
 		items.add(new HealingPotion());

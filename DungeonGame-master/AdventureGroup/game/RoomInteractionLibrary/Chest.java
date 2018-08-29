@@ -11,8 +11,9 @@ public class Chest extends RoomInteraction{
 	private int charges=1;
 	private int gold=100;
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public Chest() {
-		super();
+	public Chest(Game game) {
+		super(game);
+		image=game.imageLoader.getImage(82);
 		name="chest";
 		gold=(int) (Math.random()*120);
 		

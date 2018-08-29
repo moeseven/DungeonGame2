@@ -147,8 +147,6 @@ public class Hero implements Serializable{
 	}
 	//functions
 	public void setUpHandPile() {
-		
-		image = player.getGame().imageLoader.getImage(121);//image should not be set here!!!!
 		//shuffle
 		hand=new LinkedList<Card>();
 		drawPile=new LinkedList<Card>();
@@ -309,7 +307,7 @@ public class Hero implements Serializable{
 		//handle death //toughness rolls/receiving wounds?
 		if(!isDead) {
 			player.getGame().log.addLine(name+ " died!");
-			player.getGame().getRoom().getInteractions().add(new StandardCorpse(this)); //generate corpses
+			player.getGame().getRoom().getInteractions().add(new StandardCorpse(player.getGame(),this)); //generate corpses
 			block=0;
 			this.isDead=true;
 			for(int i=0;i<player.getHeroes().size();i++) {

@@ -162,16 +162,16 @@ public class GeneratorRandom implements Serializable{
 	//put up new Pools to prevent same instances of different stuff
 	public void newInteractionPool() {
 		interactionPool= new LinkedList<RoomInteraction>();
-		interactionPool.add(new Chest());
-		interactionPool.add(new EvilStatue());
-		interactionPool.add(new Shop());
-		interactionPool.add(new Sack());
-		interactionPool.add(new Well());
-		interactionPool.add(new SpikeTrap());
-		interactionPool.add(new PoisonTrap());
-		interactionPool.add(new SleepingOgre());
-		interactionPool.add(new HayHeap());
-		interactionPool.add(new Altar());
+		interactionPool.add(new Chest(game));
+		interactionPool.add(new EvilStatue(game));
+		interactionPool.add(new Shop(game));
+		interactionPool.add(new Sack(game));
+		interactionPool.add(new Well(game));
+		interactionPool.add(new SpikeTrap(game));
+		interactionPool.add(new PoisonTrap(game));
+		interactionPool.add(new SleepingOgre(game));
+		interactionPool.add(new HayHeap(game));
+		interactionPool.add(new Altar(game));
 	}
 	public void newItemPool() {
 		itemPool=new LinkedList<Item>();

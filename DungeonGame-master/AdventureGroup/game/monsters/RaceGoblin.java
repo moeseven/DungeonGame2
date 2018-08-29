@@ -37,6 +37,7 @@ public class RaceGoblin extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(40));
 		hero.setSpeed(11);
 		hero.setBaseHp(60);		
 		//stats
@@ -114,6 +115,7 @@ public class RaceGoblin extends MonsterRace{
 		public void modifyHero(Hero hero) {
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(41));
 			//mainstats
 			hero.setStrength(hero.getStrength()+1);
 			hero.setDexterity(hero.getDexterity()+2);

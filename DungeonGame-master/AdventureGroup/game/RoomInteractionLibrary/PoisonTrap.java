@@ -12,8 +12,8 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 
 public class PoisonTrap extends Trap{
-	public PoisonTrap() {
-		super();
+	public PoisonTrap(Game game) {
+		super(game);
 		name="poison trap";
 		trapStats.setAccuracy(25);
 	}

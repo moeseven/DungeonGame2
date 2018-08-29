@@ -98,7 +98,7 @@ public class Player implements Serializable{
 		}
 		if(totalWeight>inventoryCapacity) {
 			game.log.addLine("party is overburdened!");
-			game.getRoom().getInteractions().add(new ItemOnGround(item, game.getRoom()));
+			game.getRoom().getInteractions().add(new ItemOnGround(game,item, game.getRoom()));
 			success=false;
 		}else {
 			game.log.addLine(item.getName()+" added to inventory.");
@@ -110,7 +110,7 @@ public class Player implements Serializable{
 	public void dropItemOnFloor(Item item) {
 		if(inventory.contains(item)) {
 			inventory.remove(item);
-			game.getRoom().getInteractions().add(new ItemOnGround(item,game.getRoom()));
+			game.getRoom().getInteractions().add(new ItemOnGround(game,item,game.getRoom()));
 			game.log.addLine(item.getName()+" dropped!");
 		}
 	}

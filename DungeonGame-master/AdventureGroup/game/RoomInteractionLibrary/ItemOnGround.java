@@ -9,7 +9,8 @@ import gameEncounter.Item;
 public class ItemOnGround extends RoomInteraction{
 	private Item item;
 	private Room room;
-	public ItemOnGround(Item item, Room room) {
+	public ItemOnGround(Game game,Item item, Room room) {
+		super(game);
 		this.item=item;
 		this.room=room;
 		name=item.getName();

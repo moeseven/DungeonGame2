@@ -35,6 +35,7 @@ public class RaceDwarf extends CharacterRace{
 	public void modifyHero(Hero hero) {
 		// TODO Auto-generated method stub
 		super.modifyHero(hero);	
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(28));
 		hero.setBaseHp(hero.getBaseHp()+10);
 		hero.setAttackSkill(hero.getAttackSkill()+1);
 		hero.setSpellResist(hero.getSpellResist()+1);

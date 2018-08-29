@@ -12,7 +12,7 @@ public class TrapRoom extends Room{
 	public TrapRoom(Game game) {
 		// TODO Auto-generated constructor stub
 		super(game);
-		getInteractions().add(new SpikeTrap());
+		getInteractions().add(new SpikeTrap(game));
 	}
 
 

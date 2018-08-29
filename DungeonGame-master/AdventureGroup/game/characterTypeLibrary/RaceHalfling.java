@@ -28,6 +28,7 @@ public class RaceHalfling extends CharacterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(31));
 		hero.setStrength(hero.getStrength()-3);
 		hero.setDexterity(hero.getDexterity()+1);
 		hero.setSpellResist(hero.getSpellResist()+4);

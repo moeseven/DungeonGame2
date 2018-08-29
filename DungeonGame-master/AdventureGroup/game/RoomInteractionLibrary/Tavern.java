@@ -11,8 +11,8 @@ import gameEncounter.Hero;
 public class Tavern extends RoomInteraction{
 	private LinkedList<Hero> heroes=new LinkedList<Hero>();
 	private LinkedList<Quest> quests = new LinkedList<Quest>();
-	public Tavern() {
-		super();
+	public Tavern(Game game) {
+		super(game);
 		name="tavern";
 
 	}

@@ -11,8 +11,9 @@ public class Sack extends RoomInteraction{
 	private int charges=1;
 	private int gold=20;
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public Sack() {
-		super();
+	public Sack(Game game) {
+		super(game);
+		image=game.imageLoader.getImage(83);
 		name="sack";
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub

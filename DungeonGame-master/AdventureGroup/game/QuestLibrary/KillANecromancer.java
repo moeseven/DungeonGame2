@@ -24,7 +24,7 @@ public class KillANecromancer extends Quest{
 		}
 		rooms.add(game.generator.generateRandomRoom(game,0,0));
 		Room questRoom=new EmptyRoom(game);
-		Chest questInteraction = new Chest();
+		Chest questInteraction = new Chest(game);
 		questInteraction.getItems().add(questItem);
 		questRoom.getInteractions().add(questInteraction);
 		questRoom.setHasFight(true);

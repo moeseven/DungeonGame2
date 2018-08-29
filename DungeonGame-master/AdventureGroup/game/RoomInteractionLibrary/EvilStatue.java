@@ -11,8 +11,8 @@ public class EvilStatue extends RoomInteraction{
 	private int charges=1;
 	private int gold=20;
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public EvilStatue() {
-		super();
+	public EvilStatue(Game game) {
+		super(game);
 		name="evil statue";
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub

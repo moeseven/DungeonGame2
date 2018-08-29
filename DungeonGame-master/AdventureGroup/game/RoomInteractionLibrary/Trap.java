@@ -14,8 +14,8 @@ import gameEncounter.Item;
 public abstract class Trap extends RoomInteraction{
 	protected boolean disarmed;
 	protected Hero trapStats;
-	public Trap() {
-		super();
+	public Trap(Game game) {
+		super(game);
 		name="trap";
 		// TODO Auto-generated constructor stub
 		hidden=true;

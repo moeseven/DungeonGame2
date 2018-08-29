@@ -9,8 +9,10 @@ public abstract class RoomInteraction implements Serializable{
 	protected String name;
 	protected boolean hidden;
 	protected BufferedImage image;
-	public RoomInteraction() {
+	protected Game game;
+	public RoomInteraction(Game game) {
 		super();
+		this.game=game;
 		name="room interaction";
 		// TODO Auto-generated constructor stub
 	}
@@ -36,5 +38,15 @@ public abstract class RoomInteraction implements Serializable{
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+
+
 	
 }

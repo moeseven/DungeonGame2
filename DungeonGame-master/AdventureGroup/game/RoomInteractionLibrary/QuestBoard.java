@@ -9,8 +9,8 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 
 public class QuestBoard extends RoomInteraction{
-	public QuestBoard() {
-		super();
+	public QuestBoard(Game game) {
+		super(game);
 		name="quest board";
 		// TODO Auto-generated constructor stub
 	}

@@ -17,8 +17,8 @@ public class SleepingOgre extends RoomInteraction{
 	private MonsterRace monsterRace= new RaceOgre();
 	LinkedList<Hero> monsterSet= new LinkedList<Hero>();
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public SleepingOgre() {
-		super();
+	public SleepingOgre(Game game) {
+		super(game);
 		name="sleeping ogre";		 
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub

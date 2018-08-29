@@ -11,8 +11,8 @@ public class StandardCorpse extends RoomInteraction{
 	private Hero corpse;
 	private boolean hasBeenLooted;
 	private LinkedList<Item> items;
-	public StandardCorpse(Hero corpse) {
-		super();
+	public StandardCorpse(Game game,Hero corpse) {
+		super(game);
 		hasBeenLooted=false;
 		this.corpse=corpse;
 		items= new LinkedList<Item>();

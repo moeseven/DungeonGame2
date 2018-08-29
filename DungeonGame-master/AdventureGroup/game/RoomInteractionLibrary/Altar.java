@@ -13,8 +13,8 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 public class Altar extends RoomInteraction{
 	public int prayers=3;
 	public int sacrefices=2;
-	public Altar() {
-		super();
+	public Altar(Game game) {
+		super(game);
 		name="altar";
 		// TODO Auto-generated constructor stub
 	}

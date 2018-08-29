@@ -11,8 +11,8 @@ import gameEncounter.Hero;
 public class MedicineMan extends RoomInteraction{
 	private LinkedList<Hero> heroestress=new LinkedList<Hero>();
 	private LinkedList<Hero> heroeswound=new LinkedList<Hero>();
-	public MedicineMan() {
-		super();
+	public MedicineMan(Game game) {
+		super(game);
 		name="medicine man";
 
 	}

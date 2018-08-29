@@ -24,7 +24,7 @@ public class QuestLongReturnRelic extends Quest{
 		}
 		rooms.add(game.generator.generateRandomRoom(game,1,0));
 		Room questRoom=new EmptyRoom(game);
-		Chest questInteraction = new Chest();
+		Chest questInteraction = new Chest(game);
 		questInteraction.getItems().add(questItem);
 		questRoom.getInteractions().add(questInteraction);
 		rooms.add(questRoom);

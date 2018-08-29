@@ -9,8 +9,8 @@ import gameEncounter.Item;
 
 public class Well extends RoomInteraction{
 	private int charges=2;
-	public Well() {
-		super();
+	public Well(Game game) {
+		super(game);
 		name="well";
 		// TODO Auto-generated constructor stub
 	}

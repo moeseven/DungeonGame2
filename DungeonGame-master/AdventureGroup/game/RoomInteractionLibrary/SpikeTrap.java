@@ -12,8 +12,8 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 
 public class SpikeTrap extends Trap{
-	public SpikeTrap() {
-		super();
+	public SpikeTrap(Game game) {
+		super(game);
 		name="spike trap";
 		trapStats.setAccuracy(13);
 	}

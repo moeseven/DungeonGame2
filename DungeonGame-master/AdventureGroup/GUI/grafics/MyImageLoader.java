@@ -1,6 +1,7 @@
 package GUI.grafics;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class MyImageLoader {
 	public BufferedImage getImage(int a){
 		return sprites[a];
 	}
-	public BufferedImage getScaledImage(int a,int s){
-		return (BufferedImage) sprites[a].getScaledInstance(60*s, 51*s, s);
+	public Image getScaledImage(int a,int s){
+		return  sprites[a].getScaledInstance(60*s, 51*s, s);
 	}
 }
