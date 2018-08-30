@@ -42,6 +42,7 @@ public class Spectre extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(51));
 		hero.setSpeed(8);
 		hero.setBaseHp(62);		
 		//stats

@@ -42,6 +42,7 @@ public class RaceRat extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(54));
 		hero.setSpeed(17);
 		hero.setBaseHp(43);		
 		//stats

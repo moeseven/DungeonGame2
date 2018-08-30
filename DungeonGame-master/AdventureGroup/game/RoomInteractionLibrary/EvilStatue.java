@@ -13,6 +13,7 @@ public class EvilStatue extends RoomInteraction{
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public EvilStatue(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(85);
 		name="evil statue";
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub

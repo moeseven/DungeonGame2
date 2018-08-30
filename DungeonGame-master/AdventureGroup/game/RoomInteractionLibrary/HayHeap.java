@@ -16,6 +16,7 @@ public class HayHeap extends RoomInteraction{
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public HayHeap(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(84);
 		name="hay heap";
 		gold=(int) (Math.random()*5);
 		// TODO Auto-generated constructor stub

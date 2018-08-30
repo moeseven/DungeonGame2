@@ -13,6 +13,7 @@ public class Tavern extends RoomInteraction{
 	private LinkedList<Quest> quests = new LinkedList<Quest>();
 	public Tavern(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(105);
 		name="tavern";
 
 	}

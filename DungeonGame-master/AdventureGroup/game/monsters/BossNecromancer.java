@@ -45,6 +45,7 @@ public class BossNecromancer extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(66));
 		hero.setSpeed(12);
 		hero.setBaseHp(220);		
 		//stats

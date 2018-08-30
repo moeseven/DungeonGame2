@@ -46,6 +46,7 @@ public class RaceSkeletton extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
+		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(49));
 		hero.setSpeed(11);
 		hero.setBaseHp(90);		
 		//stats
@@ -159,6 +160,7 @@ public class RaceSkeletton extends MonsterRace{
 		public void modifyHero(Hero hero) {
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(50));
 			//mainstats
 			hero.setStrength(hero.getStrength()+1);
 			hero.setDexterity(hero.getDexterity()+2);
@@ -190,6 +192,7 @@ public class RaceSkeletton extends MonsterRace{
 		public void modifyHero(Hero hero) {
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(70));
 			//mainstats
 			hero.setStrength(hero.getStrength()-3);
 			hero.setDexterity(hero.getDexterity()-2);
