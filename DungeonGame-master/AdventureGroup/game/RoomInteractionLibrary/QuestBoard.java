@@ -11,6 +11,7 @@ import gameEncounter.Item;
 public class QuestBoard extends RoomInteraction{
 	public QuestBoard(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(106);
 		name="quest board";
 		// TODO Auto-generated constructor stub
 	}

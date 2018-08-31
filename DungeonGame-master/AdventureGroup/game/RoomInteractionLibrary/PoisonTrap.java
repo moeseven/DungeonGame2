@@ -14,6 +14,7 @@ import gameEncounter.Item;
 public class PoisonTrap extends Trap{
 	public PoisonTrap(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(88);
 		name="poison trap";
 		trapStats.setAccuracy(25);
 	}

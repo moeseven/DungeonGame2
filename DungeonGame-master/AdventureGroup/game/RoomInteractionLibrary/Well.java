@@ -11,6 +11,7 @@ public class Well extends RoomInteraction{
 	private int charges=2;
 	public Well(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(89);
 		name="well";
 		// TODO Auto-generated constructor stub
 	}

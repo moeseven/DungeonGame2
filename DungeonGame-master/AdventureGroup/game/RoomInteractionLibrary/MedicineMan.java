@@ -13,6 +13,7 @@ public class MedicineMan extends RoomInteraction{
 	private LinkedList<Hero> heroeswound=new LinkedList<Hero>();
 	public MedicineMan(Game game) {
 		super(game);
+		image=game.imageLoader.getImage(107);
 		name="medicine man";
 
 	}
