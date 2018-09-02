@@ -25,11 +25,6 @@ public class Wound extends SpellnoTarget{
 		return super.getCardText(hero)+" wound";
 	}
 	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
 		return false;

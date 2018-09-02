@@ -28,11 +28,7 @@ public class Feint extends AttackCard{
 	public String getName() {
 		return "feint";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 5;
-	}
+
 	@Override
 	public String getCardText(Hero hero) {
 		// TODO Auto-generated method stub

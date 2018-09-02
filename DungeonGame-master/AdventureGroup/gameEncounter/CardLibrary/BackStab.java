@@ -29,10 +29,5 @@ public class BackStab extends AttackCard{
 		//TODO correct number display
 		return super.getCardText(hero)+", penetrates armor, can not be dodged or blocked";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
 
 }

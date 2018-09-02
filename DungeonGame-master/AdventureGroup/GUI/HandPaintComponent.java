@@ -62,15 +62,15 @@ public class HandPaintComponent extends JComponent{
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
-				g.fillOval(5+15*(fw.getGame().getPlayer().getGroupSize()-1)-b*15+i*100, 25, 12, 12);
+				g.fillOval(5+10*(fw.getGame().getPlayer().getGroupSize()-1)-b*10+i*100, 25, 8, 8);
 			}
-			for(int b=fw.getGame().dungeonMaster.getGroupSize()-1;b>=0;b--) {
+			for(int b=0;b<fw.getGame().dungeonMaster.getGroupSize();b++) {
 				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalTargetPositions()[b]) {
 					g.setColor(Color.ORANGE);
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
-				g.fillOval(5+15*(fw.getGame().getPlayer().getGroupSize()-1)-b*15+i*100, 42, 12, 12);
+				g.fillOval(42+b*10+i*100, 25, 8, 8);
 			}
 			
 			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){

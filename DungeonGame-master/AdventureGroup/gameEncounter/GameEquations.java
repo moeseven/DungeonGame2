@@ -71,7 +71,9 @@ public class GameEquations {
 			restDamage=0;
 		}
 		blocker.setBlock(blocker.getBlock()-(damage-restDamage));
-		blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage-restDamage)+" damage");			
+		if (restDamage<damage) {
+			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage-restDamage)+" damage");			
+		}		
 		return restDamage;
 	}
 	//attack vs block roll old

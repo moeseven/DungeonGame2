@@ -64,16 +64,16 @@ public class DeckPaintComponent extends JComponent{
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
-				g.fillOval(10+15*(hero.getPlayer().getGroupSize()-1)-b*15, 25+i*cardHeight, 12, 12);
+				g.fillOval(10+10*(hero.getPlayer().getGroupSize()-1)-b*10, 25+i*cardHeight, 8, 8);
 			}
 			//target positions
-			for(int b=hero.getPlayer().getGame().dungeonMaster.getGroupSize()-1;b>=0;b--) {
+			for(int b=0;b<hero.getPlayer().getGame().dungeonMaster.getGroupSize();b++) {
 				if(hero.getPlayer().getSelectedHero().getDeck().getCards().get(i).getLegalTargetPositions()[b]) {
 					g.setColor(Color.ORANGE);
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
-				g.fillOval(10+15*(hero.getPlayer().getGroupSize()-1)-b*15, 42+i*cardHeight, 12, 12);
+				g.fillOval(42+b*10, 25+i*cardHeight, 8, 8);
 			}
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){
 				g.setColor(Color.red);

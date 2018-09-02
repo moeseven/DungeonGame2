@@ -24,11 +24,7 @@ public class RosesAndThorns extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"gain thorns and heal";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

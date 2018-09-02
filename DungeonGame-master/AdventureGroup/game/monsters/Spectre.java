@@ -140,11 +140,7 @@ public class Spectre extends MonsterRace{
 			//TODO correct number display
 			return super.getCardText(hero)+"cold damage";
 		}
-		@Override
-		public int rangeOfCard(Hero hero) {
-			// TODO Auto-generated method stub
-			return 10;
-		}
+
 		@Override
 		public boolean isFriendly() {
 			// TODO Auto-generated method stub

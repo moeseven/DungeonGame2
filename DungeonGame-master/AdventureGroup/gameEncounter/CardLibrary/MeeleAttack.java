@@ -12,6 +12,9 @@ public class MeeleAttack extends AttackCard{
 		legalCastPositions[2]=false;
 		legalCastPositions[3]=false;
 		legalCastPositions[4]=false;
+		legalTargetPositions[2]=false;
+		legalTargetPositions[3]=false;
+		legalTargetPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {

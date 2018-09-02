@@ -21,16 +21,7 @@ public abstract class AttackCard extends Card{
 	protected void damageTarget(Hero self) {
 		self.dealWeaponDamage(self.getTarget(), self.getEquipment().getHand1(),damageMult);
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		Weapon w;
-		if(hero.getEquipment().getHand1()!=null) {
-			 w=(Weapon) hero.getEquipment().getHand1();
-			 return w.getWeaponRange();
-		}
-		return 1;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

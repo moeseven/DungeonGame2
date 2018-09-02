@@ -44,10 +44,5 @@ public class Ram extends AttackCard{
 		//TODO correct number display
 		return super.getCardText(hero)+" pushes target back depending on strength difference";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return hero.getPosition()+2;
-	}
 	
 }

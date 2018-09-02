@@ -30,11 +30,7 @@ public class FireBall extends Spell{
 		//TODO correct number display
 		return super.getCardText(hero)+"consumes all mana and does fire damage";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

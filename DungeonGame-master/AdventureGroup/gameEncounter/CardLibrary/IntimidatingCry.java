@@ -25,11 +25,7 @@ public class IntimidatingCry extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"stresses enemies and reduces their strength";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

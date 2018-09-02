@@ -89,7 +89,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		return false;
 	}
 	public boolean castable(Hero self) {
-		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
+		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)) {
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
@@ -107,10 +107,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	}
 	public String getName() {
 		return name;
-	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		return 0;
 	}
 	@Override
 	public boolean isFriendly() {

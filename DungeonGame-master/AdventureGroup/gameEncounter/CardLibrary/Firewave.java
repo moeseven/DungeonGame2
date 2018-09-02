@@ -28,11 +28,7 @@ public class Firewave extends Spell{
 		//TODO correct number display
 		return super.getCardText(hero)+"fire damage to all enemies";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

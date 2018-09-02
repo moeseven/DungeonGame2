@@ -23,11 +23,7 @@ public class Harden extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"gives block to everybody";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

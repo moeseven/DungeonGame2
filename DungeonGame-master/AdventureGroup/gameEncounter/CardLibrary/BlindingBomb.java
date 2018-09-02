@@ -42,11 +42,7 @@ public class BlindingBomb extends SpellnoTarget{
 		//TODO correct number display
 		return super.getCardText(hero)+"blind all enemies";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

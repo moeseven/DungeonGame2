@@ -125,11 +125,6 @@ public class RaceZombie extends MonsterRace{
 			manaCost=1;
 		}
 
-		@Override
-		public int rangeOfCard(Hero hero) {
-			// TODO Auto-generated method stub
-			return 10;
-		}
 
 		@Override
 		public boolean applyEffect(Hero self) {

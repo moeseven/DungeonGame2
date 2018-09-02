@@ -22,11 +22,7 @@ public class Sidestep extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"90% block, draw 1";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

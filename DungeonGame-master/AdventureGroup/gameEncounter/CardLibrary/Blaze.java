@@ -22,11 +22,7 @@ public class Blaze extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"deals fire damage every round to everybody";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

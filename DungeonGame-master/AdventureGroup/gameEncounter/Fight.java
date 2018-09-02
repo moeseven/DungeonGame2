@@ -130,16 +130,23 @@ public class Fight implements Serializable{
 						//monster chooses random target here TODO make sure it attacks only targets in range!
 						
 					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
-					    	int range=turnOrder.get(turnOrderCounter).getHand().get(i).rangeOfCard(turnOrder.get(turnOrderCounter));
-					    	int eligibleTargets=Math.min(range-monsters.indexOf(turnOrder.get(turnOrderCounter)),heroes.size());
+					    	//int range=turnOrder.get(turnOrderCounter).getHand().get(i).rangeOfCard(turnOrder.get(turnOrderCounter));
+					    	//int eligibleTargets=0;//Math.min(range-monsters.indexOf(turnOrder.get(turnOrderCounter)),heroes.size());
+					    	LinkedList<Hero> targets = new LinkedList<Hero>();
+					    	for(int h=0;h<heroes.size();h++) {
+					    		if (turnOrder.get(turnOrderCounter).getHand().get(i).legalTargetPositions[heroes.get(h).getPosition()]) {
+									targets.add(heroes.get(h));
+								}
+					    	}
+					    		
 					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).isFriendly()) {
 					    		turnOrder.get(turnOrderCounter).setTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
 					    		if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
 						    		i=i-1;
 						    	}
 					    	}else {
-					    		if(eligibleTargets>=0) {
-						    		turnOrder.get(turnOrderCounter).setTarget(heroes.get(Math.min((int) (Math.random()*(eligibleTargets+0.0)),heroes.size()-1)));//choose target for attacks
+					    		if(targets.size()>0) {
+						    		turnOrder.get(turnOrderCounter).setTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
 							    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
 							    		i=i-1;
 							    	}

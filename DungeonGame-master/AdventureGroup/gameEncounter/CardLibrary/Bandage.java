@@ -23,11 +23,6 @@ public class Bandage extends Spell{
 		return super.getCardText(hero)+"heals and removes bleed (single use)";
 	}
 	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
-	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
 		return true;

@@ -23,9 +23,5 @@ public class DaggerThrow extends AttackCard{
 	public String getName() {
 		return "dagger throw";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		return 8;
-	}
 
 }

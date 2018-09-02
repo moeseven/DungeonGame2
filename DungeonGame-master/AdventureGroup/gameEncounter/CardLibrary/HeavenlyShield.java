@@ -21,11 +21,7 @@ public class HeavenlyShield extends Spell{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"armor bonus to target";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

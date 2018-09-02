@@ -22,11 +22,7 @@ public class Concentrate extends SpellnoTarget{
 	public String getCardText(Hero hero) {
 		return super.getCardText(hero)+"move back and double dexterity for 2 turns";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub

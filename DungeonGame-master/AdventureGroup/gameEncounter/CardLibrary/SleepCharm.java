@@ -28,11 +28,7 @@ public class SleepCharm extends Spell{
 		//TODO correct number display
 		return "make the target sleepy";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 10;
-	}
+
 	@Override
 	public boolean isFriendly() {
 		// TODO Auto-generated method stub
@@ -55,11 +51,6 @@ public class SleepCharm extends Spell{
 		@Override
 		public String getCardText(Hero  hero) {
 			return super.getCardText(hero)+"casting removes this card from deck";
-		}
-		@Override
-		public int rangeOfCard(Hero hero) {
-			// TODO Auto-generated method stub
-			return 10;
 		}
 		@Override
 		public boolean isFriendly() {

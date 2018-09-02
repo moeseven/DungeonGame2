@@ -27,11 +27,6 @@ public class BasicAttack extends AttackCard{
 	public String getName() {
 		return "basic attack";
 	}
-	@Override
-	public int rangeOfCard(Hero hero) {
-		// TODO Auto-generated method stub
-		return 5;
-	}
 	
 
 }

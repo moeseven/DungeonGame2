@@ -37,7 +37,7 @@ public abstract class Card implements Serializable,Cloneable{
 		return false;
 	}
 	public boolean castable(Hero self) {
-		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
+		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)) {
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
@@ -50,7 +50,6 @@ public abstract class Card implements Serializable,Cloneable{
 		}
 	}
 	public abstract boolean extraCastConditions(Hero hero);
-	public abstract int rangeOfCard(Hero hero);
 	public abstract boolean applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract void buildLogEntry(Hero self);
@@ -67,7 +66,7 @@ public abstract class Card implements Serializable,Cloneable{
 		this.name = name;
 	}
 	public boolean checkPositonsLegal(Hero hero){
-		if(legalCastPositions[hero.getPosition()]==false&&legalTargetPositions[hero.getTarget().getPosition()]) {
+		if(legalCastPositions[hero.getPosition()]==false||legalTargetPositions[hero.getTarget().getPosition()]==false) {
 			if(hero.getPlayer()!=hero.getPlayer().getGame().dungeonMaster) {
 				if (legalCastPositions[hero.getPosition()]) {
 					hero.getPlayer().getGame().log.addLine("can not target this position!");

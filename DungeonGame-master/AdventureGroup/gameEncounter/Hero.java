@@ -231,7 +231,7 @@ public class Hero implements Serializable{
 		}		
 	}
 	public void breachBlock(Hero hero, int damage) {
-		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, this.target, damage));
+		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, hero, damage));
 	}
 	public int dealAttackDamage (Hero hero,int dmg) {
 		dmg=GameEquations.calculateAttackDamage(dmg, this);

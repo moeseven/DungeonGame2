@@ -48,11 +48,7 @@ public class MightyBlow extends AttackCard{
 		public String getCardText(Hero hero) {
 			return super.getCardText(hero)+"exhausted from a previous attack";
 		}
-		@Override
-		public int rangeOfCard(Hero hero) {
-			// TODO Auto-generated method stub
-			return 1;
-		}
+
 		@Override
 		public boolean isFriendly() {
 			// TODO Auto-generated method stub

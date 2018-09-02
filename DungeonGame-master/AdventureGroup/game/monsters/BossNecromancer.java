@@ -141,11 +141,6 @@ public class BossNecromancer extends MonsterRace{
 		}
 
 		@Override
-		public int rangeOfCard(Hero hero) {
-			// TODO Auto-generated method stub
-			return 10;
-		}
-		@Override
 		public boolean extraCastConditions(Hero hero) {
 			boolean isThereSpace=false;
 			if(hero.getPlayer().getGroupSize()-1-hero.getPlayer().getHeroes().size()>0) {
