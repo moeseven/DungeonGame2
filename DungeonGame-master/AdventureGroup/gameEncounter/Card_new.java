@@ -139,7 +139,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		this.name = name;
 	}
 	public boolean checkPositonsLegal(Hero hero){
-		if(legalCastPositions[hero.getPosition()]==false&&legalTargetPositions[hero.getTarget().getPosition()]) {
+		if(legalCastPositions[hero.getPosition()]==false||legalTargetPositions[hero.getTarget().getPosition()]) {
 			if(hero.getPlayer()!=hero.getPlayer().getGame().dungeonMaster) {
 				if (legalCastPositions[hero.getPosition()]) {
 					hero.getPlayer().getGame().log.addLine("can not target this position!");
