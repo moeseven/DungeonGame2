@@ -8,7 +8,7 @@ public class Magicmissile extends Spell{
 	public Magicmissile() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {	
@@ -23,9 +23,9 @@ public class Magicmissile extends Spell{
 		return "magic missile";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"damage scales with spellpower";
+		return super.getCardText(hero)+"damage scales with spellpower";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

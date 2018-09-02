@@ -18,8 +18,8 @@ public class HeavenlyStrength extends Spell{
 		return "heavenly strength";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"gives great strength";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"gives great strength";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

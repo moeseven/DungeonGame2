@@ -9,8 +9,8 @@ public class FireFist extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=0.5;
-		legalPositions[4]=false;
-		legalPositions[3]=false;
+		legalCastPositions[4]=false;
+		legalCastPositions[3]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
@@ -22,9 +22,9 @@ public class FireFist extends AttackCard{
 	}
 	
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		// TODO Auto-generated method stub
-		return super.getCardText()+"/25% fire damage";
+		return super.getCardText(hero)+"/25% fire damage";
 	}
 	@Override
 	public String getName() {

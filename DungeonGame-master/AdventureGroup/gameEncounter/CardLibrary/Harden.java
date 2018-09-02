@@ -20,8 +20,8 @@ public class Harden extends SpellnoTarget{
 		return "harden";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"gives block to everybody";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"gives block to everybody";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

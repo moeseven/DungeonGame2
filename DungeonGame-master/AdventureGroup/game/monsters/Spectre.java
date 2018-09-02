@@ -136,9 +136,9 @@ public class Spectre extends MonsterRace{
 			return "breeze";
 		}
 		@Override
-		public String getCardText() {
+		public String getCardText(Hero hero) {
 			//TODO correct number display
-			return super.getCardText()+"cold damage";
+			return super.getCardText(hero)+"cold damage";
 		}
 		@Override
 		public int rangeOfCard(Hero hero) {

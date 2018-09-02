@@ -7,7 +7,7 @@ public class Wisdom extends SpellnoTarget{
 	public Wisdom() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		for(int i=0; i<4; i++) {
@@ -20,8 +20,8 @@ public class Wisdom extends SpellnoTarget{
 		return "wisdom";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"draw 4 cards";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"draw 4 cards";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

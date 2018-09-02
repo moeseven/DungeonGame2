@@ -9,8 +9,8 @@ public class HeadShot extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=3.6;
-		legalPositions[0]=false;
-		legalPositions[1]=false;
+		legalCastPositions[0]=false;
+		legalCastPositions[1]=false;
 		
 	}
 	public boolean applyEffect(Hero self) {
@@ -26,9 +26,9 @@ public class HeadShot extends AttackCard{
 		return "head shot";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"";
+		return super.getCardText(hero)+"";
 	}
 
 }

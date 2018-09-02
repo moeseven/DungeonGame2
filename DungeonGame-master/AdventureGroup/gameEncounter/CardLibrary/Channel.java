@@ -19,8 +19,8 @@ public class Channel extends SpellnoTarget{
 		return "channel";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"channel 2 mana";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"channel 2 mana";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

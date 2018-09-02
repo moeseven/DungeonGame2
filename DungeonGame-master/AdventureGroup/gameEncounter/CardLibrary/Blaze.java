@@ -8,7 +8,7 @@ public class Blaze extends SpellnoTarget{
 	public Blaze() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		legalPositions[0]=true;
+		legalCastPositions[0]=true;
 	}
 	public boolean applyEffect(Hero self) {
 		self.buffHero(new Blazing());
@@ -19,8 +19,8 @@ public class Blaze extends SpellnoTarget{
 		return "blaze";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"deals fire damage every round to everybody";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"deals fire damage every round to everybody";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

@@ -19,8 +19,8 @@ public class Sidestep extends SpellnoTarget{
 		return "sidestep";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"90% block, draw 1";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"90% block, draw 1";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

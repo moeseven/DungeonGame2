@@ -24,9 +24,9 @@ public class Firewave extends Spell{
 		return "fire wave";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"fire damage to all enemies";
+		return super.getCardText(hero)+"fire damage to all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

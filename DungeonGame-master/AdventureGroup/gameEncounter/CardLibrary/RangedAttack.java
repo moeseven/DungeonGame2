@@ -9,8 +9,8 @@ public class RangedAttack extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=1.2;
-		legalPositions[0]=false;
-		legalPositions[1]=false;
+		legalCastPositions[0]=false;
+		legalCastPositions[1]=false;
 		
 	}
 	public boolean applyEffect(Hero self) {

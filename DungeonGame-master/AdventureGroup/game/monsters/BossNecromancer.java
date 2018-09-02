@@ -180,11 +180,11 @@ public class BossNecromancer extends MonsterRace{
 			// TODO Auto-generated constructor stub
 			manaCost =1;
 			damageMult=0.3;
-			legalPositions[0]=true;
-			legalPositions[1]=false;
-			legalPositions[2]=false;
-			legalPositions[3]=false;
-			legalPositions[4]=false;
+			legalCastPositions[0]=true;
+			legalCastPositions[1]=false;
+			legalCastPositions[2]=false;
+			legalCastPositions[3]=false;
+			legalCastPositions[4]=false;
 		}
 		public boolean applyEffect(Hero self) {
 				if(self.attackHero(self.getTarget())) {
@@ -201,9 +201,9 @@ public class BossNecromancer extends MonsterRace{
 			return "Grab";
 		}
 		@Override
-		public String getCardText() {
+		public String getCardText(Hero hero) {
 			//TODO correct number display
-			return super.getCardText()+" bash";
+			return super.getCardText(hero)+" bash";
 		}
 	}
 

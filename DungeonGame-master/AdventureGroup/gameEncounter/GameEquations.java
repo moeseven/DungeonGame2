@@ -3,54 +3,78 @@ package gameEncounter;
 public class GameEquations {
 	//all the attribute bonus calculation SUBJECT to CHANGE
 	
+	//////////////////////Stats//////////////////////
+	
 	//speed calculation from dexterity and base speed
 	public static int speedCalc(int baseSpeed, int dexterity) {
 		return (int) (baseSpeed*(1+dexterity/20.0));
-	}
-	
+	}	
 	//health calculation from vitality and base health
 	public static int maxHealthCalc(int baseHealth, int vitality) {
 		return (int) (baseHealth*(1+vitality/20.0));
 	}
 	//dodge calculation from dexterity (same as accuracy calc)
-	public static int dodgeCalc(int baseDodge, int dexterity) {
-		return (int) (baseDodge*(1+dexterity/20.0));
+	public static int dodgeCalc(Hero hero) {
+		return (int) (hero.getDodge()*(1+hero.getDexterity()/20.0));
 	}
-	//damage factor from strength and dexterity
-	public static double damageBonus(double strfac,int strength, int dexterity) {
-		return 1+(strfac*strength+(1-strfac)*dexterity)/30;
+	public static int accuracyCalc(Hero hero) {
+		return (int) (hero.getAccuracy()*(1+hero.getDexterity()/20.0));
 	}
-	//blockskill and attackskill calculation from str/dex
+	//blockskill and attackskill calculation from str
 	public static int blockAttackSkillCalc(int baseBlockAttackSkill, int str, int dex) {
 		return (int) (baseBlockAttackSkill*(1+str/20.0));
 	}
 	//spellpower calculation from intelligence
 	public static int spellPowerCalc(int baseSpellPower, int intelligence) {
 		return (int) (baseSpellPower*(1+intelligence/20.0));
-	}
+	}		
+	
+	////////////////////////////////////////////////////////////////////
 	
 	//spell resist calculation
-	public static boolean resist(Hero caster, Hero target) {
-		if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
-			
-			caster.getPlayer().getGame().log.addLine(target.getName()+" resisted!");
-			return true;			
-		}else {
-			return false;
+		public static boolean resist(Hero caster, Hero target) {
+			if(Math.random()>1/(1.1+(target.computeSpellResist()-caster.computeSpellPower())*0.05)) {
+				
+				caster.getPlayer().getGame().log.addLine(target.getName()+" resisted!");
+				return true;			
+			}else {
+				return false;
+			}
 		}
-	}
+		
+		//dodge chance calculation
+		public static boolean dodge(Hero attacker, Hero attacked) {
+			double dodgeRoll=Math.random()*100;
+			if(dodgeRoll<(15+attacked.computeDodge()-attacker.computeAccuracy())) {			
+				attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
+				return true;			
+			}else {
+				return false;
+			}
+		}
 	
-	//dodge chance calculation
-	public static boolean dodge(Hero attacker, Hero attacked) {
-		double dodgeRoll=Math.random()*100;
-		if(dodgeRoll<(15+attacked.computeDodge()-attacker.computeAccuracy())) {			
-			attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
-			return true;			
-		}else {
-			return false;
-		}
+	//damage factor for attacks
+	public static int calculateAttackDamage(int dmg,Hero hero) {
+		return (int) (dmg*(1+(hero.computeAttackSkill())/100.0));
 	}
-	//attack vs block roll
+	//damage factor from strength and dexterity old!
+	public static double damageBonus(double strfac,int strength, int dexterity) {
+		return 1+(strfac*strength+(1-strfac)*dexterity)/30;
+	}
+
+	public static int attackIntoBlock(Hero attacker, Hero blocker, int damage) {
+		int restDamage=damage;
+		if(blocker.getBlock()>0){
+			restDamage=restDamage-blocker.getBlock();
+		}
+		if(restDamage<0) {
+			restDamage=0;
+		}
+		blocker.setBlock(blocker.getBlock()-(damage-restDamage));
+		blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage-restDamage)+" damage");			
+		return restDamage;
+	}
+	//attack vs block roll old
 	public static int breachBlock(Hero attacker, Hero blocker, int damage) {
 		int restDamage=damage;
 		if(blocker.getBlock()>0){

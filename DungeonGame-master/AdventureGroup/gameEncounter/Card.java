@@ -6,9 +6,9 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
-	protected boolean[] legalPositions={true,true,true,true,true};
+	protected boolean[] legalCastPositions={true,true,true,true,true};
+	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
-	protected int range;
 	public Card() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,7 +37,7 @@ public abstract class Card implements Serializable,Cloneable{
 		return false;
 	}
 	public boolean castable(Hero self) {
-		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
+		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)&&self.targetInRange(self.getTarget(),rangeOfCard(self))) {
 			self.setMana(self.getMana()-manaCost);			
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
@@ -54,7 +54,7 @@ public abstract class Card implements Serializable,Cloneable{
 	public abstract boolean applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract void buildLogEntry(Hero self);
-	public abstract String getCardText();
+	public abstract String getCardText(Hero hero);
 	public abstract boolean isFriendly();
 	//getters and setters
 	public int getManaCost() {
@@ -66,10 +66,15 @@ public abstract class Card implements Serializable,Cloneable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean checkPositonLegal(Hero hero){
-		if(legalPositions[hero.getPosition()]==false) {
+	public boolean checkPositonsLegal(Hero hero){
+		if(legalCastPositions[hero.getPosition()]==false&&legalTargetPositions[hero.getTarget().getPosition()]) {
 			if(hero.getPlayer()!=hero.getPlayer().getGame().dungeonMaster) {
-				hero.getPlayer().getGame().log.addLine("can not be used from this position!");
+				if (legalCastPositions[hero.getPosition()]) {
+					hero.getPlayer().getGame().log.addLine("can not target this position!");
+				}else {
+					hero.getPlayer().getGame().log.addLine("can not be used from this position!");
+				}
+				
 			}		
 			return false;
 		}else {
@@ -77,12 +82,20 @@ public abstract class Card implements Serializable,Cloneable{
 		}
 	}
 
-	public boolean[] getLegalPositions() {
-		return legalPositions;
+	public boolean[] getLegalCastPositions() {
+		return legalCastPositions;
 	}
 
-	public void setLegalPositions(boolean[] legalPositions) {
-		this.legalPositions = legalPositions;
+	public void setLegalCastPositions(boolean[] legalPositions) {
+		this.legalCastPositions = legalPositions;
+	}
+
+	public boolean[] getLegalTargetPositions() {
+		return legalTargetPositions;
+	}
+
+	public void setLegalTargetPositions(boolean[] legalTargetPositions) {
+		this.legalTargetPositions = legalTargetPositions;
 	}
 			
 	

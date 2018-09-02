@@ -10,6 +10,7 @@ import game.RoomLibrary.Town;
 import gameEncounter.Fight;
 import gameEncounter.Hero;
 import gameEncounter.Item;
+import gameEncounter.CardLibrary.CardBuilder;
 import tools.MyLog;
 
 public class Game implements Serializable{
@@ -17,6 +18,7 @@ private Player player; //change this for multiplayer
 public Player dungeonMaster;
 public GeneratorRandom generator;
 public MyImageLoader imageLoader;
+public CardBuilder cardBuilder;
 public int day;
 public MyLog log;
 private Room room;
@@ -25,6 +27,7 @@ private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
 public Game() {
 	super();
+	cardBuilder = new CardBuilder();
 	imageLoader= new MyImageLoader();
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);
@@ -35,7 +38,7 @@ public Game() {
 	town=new Town(this);
 	room=town;
 	player=new Player(this);
-	
+	//cardBuilder.printMap();
 }
 public void enterRoom(Room room) {
 	this.room=room;

@@ -19,8 +19,8 @@ public class Bandage extends Spell{
 		return "bandage";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"heals and removes bleed (single use)";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"heals and removes bleed (single use)";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

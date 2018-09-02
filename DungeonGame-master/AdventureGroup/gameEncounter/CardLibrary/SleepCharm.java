@@ -8,7 +8,7 @@ public class SleepCharm extends Spell{
 	public SleepCharm() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {
@@ -24,7 +24,7 @@ public class SleepCharm extends Spell{
 		return "sleep charm";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
 		return "make the target sleepy";
 	}
@@ -53,8 +53,8 @@ public class SleepCharm extends Spell{
 			return "sleepy";
 		}
 		@Override
-		public String getCardText() {
-			return super.getCardText()+"casting removes this card from deck";
+		public String getCardText(Hero  hero) {
+			return super.getCardText(hero)+"casting removes this card from deck";
 		}
 		@Override
 		public int rangeOfCard(Hero hero) {

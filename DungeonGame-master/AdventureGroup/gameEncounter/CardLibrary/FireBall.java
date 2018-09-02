@@ -8,7 +8,7 @@ public class FireBall extends Spell{
 	public FireBall() {
 		// TODO Auto-generated constructor stub
 		manaCost =1;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		int mana=self.getMana();
@@ -26,9 +26,9 @@ public class FireBall extends Spell{
 		return "fire ball";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"consumes all mana and does fire damage";
+		return super.getCardText(hero)+"consumes all mana and does fire damage";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

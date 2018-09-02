@@ -8,10 +8,10 @@ public class Cleave extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.9;
-		legalPositions[1]=false;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[1]=false;
+		legalCastPositions[2]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		boolean success=false;
@@ -34,8 +34,8 @@ public class Cleave extends AttackCard{
 		return "cleave";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"(hits the target behind as well)";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"(hits the target behind as well)";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

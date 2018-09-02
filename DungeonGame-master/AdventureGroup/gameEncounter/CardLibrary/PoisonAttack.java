@@ -9,8 +9,8 @@ public class PoisonAttack extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.3;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 		
 	}
 	public boolean applyEffect(Hero self) {
@@ -27,9 +27,9 @@ public class PoisonAttack extends AttackCard{
 		return "poison attack";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+" 5 poison";
+		return super.getCardText(hero)+" 5 poison";
 	}
 
 }

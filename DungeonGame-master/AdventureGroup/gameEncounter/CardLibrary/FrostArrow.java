@@ -9,8 +9,8 @@ public class FrostArrow extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=1;
-		legalPositions[0]=false;
-		legalPositions[1]=false;
+		legalCastPositions[0]=false;
+		legalCastPositions[1]=false;
 		
 	}
 	public boolean applyEffect(Hero self) {
@@ -23,9 +23,9 @@ public class FrostArrow extends AttackCard{
 	}
 	
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		// TODO Auto-generated method stub
-		return super.getCardText()+"/25% cold damage";
+		return super.getCardText(hero)+"/25% cold damage";
 	}
 	@Override
 	public String getName() {

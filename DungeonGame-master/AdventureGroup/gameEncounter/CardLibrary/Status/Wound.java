@@ -7,11 +7,11 @@ public class Wound extends SpellnoTarget{
 	public Wound() {
 		// TODO Auto-generated constructor stub
 		manaCost =0;
-		legalPositions[0]=false;
-		legalPositions[1]=false;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[0]=false;
+		legalCastPositions[1]=false;
+		legalCastPositions[2]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		return true;
@@ -21,8 +21,8 @@ public class Wound extends SpellnoTarget{
 		return "wound";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+" wound";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+" wound";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

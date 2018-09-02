@@ -18,8 +18,8 @@ public class HeavenlyShield extends Spell{
 		return "heavenly shield";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"armor bonus to target";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"armor bonus to target";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

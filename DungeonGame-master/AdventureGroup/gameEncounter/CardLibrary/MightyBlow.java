@@ -9,11 +9,11 @@ public class MightyBlow extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=6.25;
-		legalPositions[0]=true;
-		legalPositions[1]=true;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[0]=true;
+		legalCastPositions[1]=true;
+		legalCastPositions[2]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
@@ -32,10 +32,10 @@ public class MightyBlow extends AttackCard{
 		public Exhausted() {
 			// TODO Auto-generated constructor stub
 			manaCost =0;
-			legalPositions[0]=false;
-			legalPositions[1]=false;
-			legalPositions[2]=false;
-			legalPositions[3]=false;
+			legalCastPositions[0]=false;
+			legalCastPositions[1]=false;
+			legalCastPositions[2]=false;
+			legalCastPositions[3]=false;
 		}
 		public boolean applyEffect(Hero self) {
 			return true;
@@ -45,8 +45,8 @@ public class MightyBlow extends AttackCard{
 			return "exhausted";
 		}
 		@Override
-		public String getCardText() {
-			return super.getCardText()+"exhausted from a previous attack";
+		public String getCardText(Hero hero) {
+			return super.getCardText(hero)+"exhausted from a previous attack";
 		}
 		@Override
 		public int rangeOfCard(Hero hero) {

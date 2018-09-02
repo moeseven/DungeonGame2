@@ -17,8 +17,8 @@ public class DivineGrace extends Spell{
 		return "divine grace";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"heals target";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"heals target";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

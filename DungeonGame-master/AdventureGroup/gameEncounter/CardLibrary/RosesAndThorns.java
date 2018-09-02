@@ -21,8 +21,8 @@ public class RosesAndThorns extends SpellnoTarget{
 		return "roses and thorns";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"gain thorns and heal";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"gain thorns and heal";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

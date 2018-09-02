@@ -9,11 +9,11 @@ public class BackStab extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.8;
-		legalPositions[0]=false;
-		legalPositions[1]=true;
-		legalPositions[2]=true;
-		legalPositions[3]=true;
-		legalPositions[4]=true;
+		legalCastPositions[0]=false;
+		legalCastPositions[1]=true;
+		legalCastPositions[2]=true;
+		legalCastPositions[3]=true;
+		legalCastPositions[4]=true;
 	}
 	public boolean applyEffect(Hero self) {
 		damageTarget(self);
@@ -25,9 +25,9 @@ public class BackStab extends AttackCard{
 		return "back stab";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+", penetrates armor, can not be dodged or blocked";
+		return super.getCardText(hero)+", penetrates armor, can not be dodged or blocked";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

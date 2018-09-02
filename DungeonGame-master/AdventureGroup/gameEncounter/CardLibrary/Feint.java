@@ -9,11 +9,11 @@ public class Feint extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=1;
-		legalPositions[0]=true;
-		legalPositions[1]=true;
-		legalPositions[2]=true;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[0]=true;
+		legalCastPositions[1]=true;
+		legalCastPositions[2]=true;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
@@ -34,9 +34,9 @@ public class Feint extends AttackCard{
 		return 5;
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		// TODO Auto-generated method stub
-		return super.getCardText()+"draw a card";
+		return super.getCardText(hero)+"draw a card";
 	}
 	
 

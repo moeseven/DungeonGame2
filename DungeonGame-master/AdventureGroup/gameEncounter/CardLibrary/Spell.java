@@ -11,7 +11,7 @@ public abstract class Spell extends Card{
 		hero.getPlayer().getGame().log.addLine("casts "+getName()+" on "+hero.getTarget().getName());		
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
 		return "";
 	}

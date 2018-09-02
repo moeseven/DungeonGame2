@@ -263,7 +263,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			}
 		}
 		if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
-			g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(), 200, 180);
+			g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()), 200, 180);
 		}
 	}
 }

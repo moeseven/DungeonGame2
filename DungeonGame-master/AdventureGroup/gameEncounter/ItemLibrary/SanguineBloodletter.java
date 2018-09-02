@@ -42,9 +42,9 @@ private Card extraCard;
 			// TODO Auto-generated constructor stub
 			manaCost =1;
 			damageMult=1.8;
-			legalPositions[2]=false;
-			legalPositions[3]=false;
-			legalPositions[4]=false;
+			legalCastPositions[2]=false;
+			legalCastPositions[3]=false;
+			legalCastPositions[4]=false;
 		}
 		public boolean applyEffect(Hero self) {
 				if(self.attackHero(self.getTarget())) {
@@ -65,9 +65,9 @@ private Card extraCard;
 			return "sanguine strike";
 		}
 		@Override
-		public String getCardText() {
+		public String getCardText(Hero hero) {
 			//TODO correct number display
-			return super.getCardText()+" bonus to vitality on kill";
+			return super.getCardText(hero)+" bonus to vitality on kill";
 		}
 	}
 }

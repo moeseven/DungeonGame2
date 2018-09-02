@@ -18,8 +18,8 @@ public class Block extends SpellnoTarget{
 		return "block";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"80% block";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"80% block";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

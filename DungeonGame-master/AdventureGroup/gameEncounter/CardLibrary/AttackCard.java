@@ -42,7 +42,7 @@ public abstract class AttackCard extends Card{
 		
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
 		//generate legeal positions text
 		return damageMult*100+"% damage ";

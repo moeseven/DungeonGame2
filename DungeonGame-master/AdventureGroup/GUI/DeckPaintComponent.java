@@ -57,13 +57,23 @@ public class DeckPaintComponent extends JComponent{
 			g.setColor(Color.black);
 			g.drawString(hero.getDeck().getCards().get(i).getName(), 10, 15+i*cardHeight);
 			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5, 10+i*cardHeight);
+			//cast positions
 			for(int b=hero.getPlayer().getGroupSize()-1;b>=0;b--) {
-				if(hero.getPlayer().getSelectedHero().getDeck().getCards().get(i).getLegalPositions()[b]) {
+				if(hero.getPlayer().getSelectedHero().getDeck().getCards().get(i).getLegalCastPositions()[b]) {
 					g.setColor(Color.WHITE);
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
 				g.fillOval(10+15*(hero.getPlayer().getGroupSize()-1)-b*15, 25+i*cardHeight, 12, 12);
+			}
+			//target positions
+			for(int b=hero.getPlayer().getGame().dungeonMaster.getGroupSize()-1;b>=0;b--) {
+				if(hero.getPlayer().getSelectedHero().getDeck().getCards().get(i).getLegalTargetPositions()[b]) {
+					g.setColor(Color.ORANGE);
+				}else {
+					g.setColor(Color.DARK_GRAY);
+				}
+				g.fillOval(10+15*(hero.getPlayer().getGroupSize()-1)-b*15, 42+i*cardHeight, 12, 12);
 			}
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){
 				g.setColor(Color.red);

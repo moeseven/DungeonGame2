@@ -9,9 +9,9 @@ public class MeeleAttack extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=1;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[2]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
@@ -27,8 +27,8 @@ public class MeeleAttack extends AttackCard{
 		return "meele attack";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText();
+		return super.getCardText(hero);
 	}
 }

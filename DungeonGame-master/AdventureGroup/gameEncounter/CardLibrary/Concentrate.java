@@ -19,8 +19,8 @@ public class Concentrate extends SpellnoTarget{
 		return "concentrate";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"move back and double dexterity for 2 turns";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"move back and double dexterity for 2 turns";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

@@ -9,9 +9,9 @@ public class CarefulSlash extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=0.8;
-		legalPositions[2]=false;
-		legalPositions[3]=false;
-		legalPositions[4]=false;
+		legalCastPositions[2]=false;
+		legalCastPositions[3]=false;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			self.block((int)(self.computeBlockSkill()*0.8));
@@ -28,8 +28,8 @@ public class CarefulSlash extends AttackCard{
 		return "careful slash";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"/80% block";
+		return super.getCardText(hero)+"/80% block";
 	}
 }

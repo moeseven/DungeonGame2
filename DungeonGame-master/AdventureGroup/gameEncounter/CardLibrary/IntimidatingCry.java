@@ -22,8 +22,8 @@ public class IntimidatingCry extends SpellnoTarget{
 		return "intimidating cry";
 	}
 	@Override
-	public String getCardText() {
-		return super.getCardText()+"stresses enemies and reduces their strength";
+	public String getCardText(Hero hero) {
+		return super.getCardText(hero)+"stresses enemies and reduces their strength";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

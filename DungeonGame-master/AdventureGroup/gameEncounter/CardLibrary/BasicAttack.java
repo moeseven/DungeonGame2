@@ -9,11 +9,11 @@ public class BasicAttack extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =1;
 		damageMult=0.7;
-		legalPositions[0]=true;
-		legalPositions[1]=true;
-		legalPositions[2]=true;
-		legalPositions[3]=true;
-		legalPositions[4]=true;
+		legalCastPositions[0]=true;
+		legalCastPositions[1]=true;
+		legalCastPositions[2]=true;
+		legalCastPositions[3]=true;
+		legalCastPositions[4]=true;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {

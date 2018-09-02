@@ -9,7 +9,7 @@ public class BlindingBomb extends SpellnoTarget{
 	public BlindingBomb() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		if(self.getFight().getHeroes().contains(self)) {
@@ -38,9 +38,9 @@ public class BlindingBomb extends SpellnoTarget{
 		return "blinding bomb";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"blind all enemies";
+		return super.getCardText(hero)+"blind all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

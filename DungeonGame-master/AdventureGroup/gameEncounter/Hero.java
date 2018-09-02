@@ -231,7 +231,13 @@ public class Hero implements Serializable{
 		}		
 	}
 	public void breachBlock(Hero hero, int damage) {
-		 hero.takeArmorDamage(this,GameEquations.breachBlock(this, hero, damage));
+		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, this.target, damage));
+	}
+	public int dealAttackDamage (Hero hero,int dmg) {
+		dmg=GameEquations.calculateAttackDamage(dmg, this);
+		breachBlock(hero, dmg);
+		hero.breachBlock(this, hero.getThorns());//thorn damage
+		return dmg;
 	}
 	public int dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
 		int dmg;
@@ -509,10 +515,10 @@ public class Hero implements Serializable{
 	//
 	//compute functions with cold effect
 	public int computeAccuracy() {
-		return GameEquations.dodgeCalc(accuracy, dexterity)-cold/4;
+		return GameEquations.accuracyCalc(this)-cold/4;
 	}
 	public int computeDodge() {
-		return GameEquations.dodgeCalc(dodge, dexterity)-cold/4;
+		return GameEquations.dodgeCalc(this)-cold/4;
 	}
 	public int computeAttackSkill() {
 		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);

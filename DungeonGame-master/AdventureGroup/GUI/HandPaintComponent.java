@@ -57,19 +57,26 @@ public class HandPaintComponent extends JComponent{
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost(), 5+i*100, 10);
 			for(int b=fw.getGame().getPlayer().getGroupSize()-1;b>=0;b--) {
-				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalPositions()[b]) {
+				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalCastPositions()[b]) {
 					g.setColor(Color.WHITE);
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
 				g.fillOval(5+15*(fw.getGame().getPlayer().getGroupSize()-1)-b*15+i*100, 25, 12, 12);
 			}
-			
+			for(int b=fw.getGame().dungeonMaster.getGroupSize()-1;b>=0;b--) {
+				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalTargetPositions()[b]) {
+					g.setColor(Color.ORANGE);
+				}else {
+					g.setColor(Color.DARK_GRAY);
+				}
+				g.fillOval(5+15*(fw.getGame().getPlayer().getGroupSize()-1)-b*15+i*100, 42, 12, 12);
+			}
 			
 			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1+i*100, 1, 100, 80);
-				g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getCardText(), 100, 90);
+				g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getCardText(fw.getGame().getPlayer().getSelectedHero()), 100, 90);
 			}
 		}
 	}

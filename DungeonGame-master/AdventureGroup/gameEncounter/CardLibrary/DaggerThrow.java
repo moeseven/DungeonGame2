@@ -9,7 +9,7 @@ public class DaggerThrow extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =0;
 		damageMult=0.5;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {

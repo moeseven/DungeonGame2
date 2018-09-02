@@ -10,11 +10,11 @@ public class Ram extends AttackCard{
 		// TODO Auto-generated constructor stub
 		manaCost =2;
 		damageMult=1.5;
-		legalPositions[0]=true;
-		legalPositions[1]=true;
-		legalPositions[2]=true;
-		legalPositions[3]=true;
-		legalPositions[4]=false;
+		legalCastPositions[0]=true;
+		legalCastPositions[1]=true;
+		legalCastPositions[2]=true;
+		legalCastPositions[3]=true;
+		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
 			if(self.attackHero(self.getTarget())) {
@@ -40,9 +40,9 @@ public class Ram extends AttackCard{
 		return "ram";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+" pushes target back depending on strength difference";
+		return super.getCardText(hero)+" pushes target back depending on strength difference";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {

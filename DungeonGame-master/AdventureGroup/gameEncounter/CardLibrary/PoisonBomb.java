@@ -9,7 +9,7 @@ public class PoisonBomb extends Spell{
 	public PoisonBomb() {
 		// TODO Auto-generated constructor stub
 		manaCost =2;
-		legalPositions[0]=false;
+		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
 		if(self.getFight().getHeroes().contains(self)) {
@@ -38,9 +38,9 @@ public class PoisonBomb extends Spell{
 		return "poison bomb";
 	}
 	@Override
-	public String getCardText() {
+	public String getCardText(Hero hero) {
 		//TODO correct number display
-		return super.getCardText()+"poison all enemies";
+		return super.getCardText(hero)+"poison all enemies";
 	}
 	@Override
 	public int rangeOfCard(Hero hero) {
