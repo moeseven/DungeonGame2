@@ -39,11 +39,11 @@ public class RaceHalfling extends CharacterRace{
 		hero.setBaseHp(hero.getBaseHp()-10);
 		//resistances
 		hero.setResistFire(6);
-		hero.setResistCold(18);
+		hero.setResistCold(12);
 		hero.setResistPoison(9);
 		hero.setResistBleed(8);
 		hero.setResistStun(5);	
-		hero.setResistStress(22);
+		hero.setResistStress(26);
 		hero.setTrapDisarm(30);
 		//deck
 		

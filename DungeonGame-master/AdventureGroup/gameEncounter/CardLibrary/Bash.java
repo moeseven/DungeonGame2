@@ -1,5 +1,7 @@
 package gameEncounter.CardLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
@@ -30,8 +32,9 @@ public class Bash extends AttackCard{
 		return "Bash";
 	}
 	@Override
-	public String getCardText(Hero hero) {
-		//TODO correct number display
-		return super.getCardText(hero)+" bash";
+	public LinkedList<String> getCardText(Hero hero) {
+		LinkedList<String> textList= super.getCardText(hero);
+		textList.add(" bash");
+		return textList;
 	}
 }

@@ -36,6 +36,13 @@ public class GameEquations {
 	public static int spellResistCalc(Hero hero) {
 		return (int) (hero.getSpellResist()*(1+hero.getIntelligence()/20.0));
 	}
+	//crit calculations
+	public static int critDamageCalc(Hero hero) {
+		return (int) (hero.getCritDamage()+hero.getDexterity());
+	}
+	public static int critChanceCalc(Hero hero, Card_new card) {
+		return (int) (hero.getCritChance()+card.getCritChance());
+	}
 	
 	////////////////////////////////////////////////////////////////////
 		
@@ -49,11 +56,19 @@ public class GameEquations {
 				return false;
 			}
 		}
+	//crit combat calculation
+	public static int rollForCrit(Hero hero, Card_new card, int damage) {
+		if (Math.random()*100<critChanceCalc(hero, card)) {
+			hero.getPlayer().getGame().log.addLine("critical!");
+			damage=(int)(damage*(1+critDamageCalc(hero)/100.0));
+		}
+		return damage;
+	}
 		
 	//dodge chance calculation
 	public static boolean dodge(Hero attacker, Hero attacked, Card card) {
 	double dodgeRoll=Math.random()*100;
-		if(dodgeRoll<(dodgeCalc(attacked)-accuracyCalc(attacker)-card.getAccuracy())) {			
+		if(dodgeRoll>(-dodgeCalc(attacked)+accuracyCalc(attacker)+card.getAccuracy())) {			
 		attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
 		return true;			
 		}else {

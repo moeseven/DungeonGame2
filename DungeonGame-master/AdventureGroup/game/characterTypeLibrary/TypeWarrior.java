@@ -37,7 +37,7 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add(new Parry());
 		cardPool.add(new IntimidatingCry());
 		name="warrior";
-		items.add(new RustyBlade());				
+		items.add(game.itemBuilder.buildItem("rustyBlade"));				
 		for (int i=0; i<4;i++) {
 			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 		}
@@ -54,10 +54,10 @@ public class TypeWarrior extends CharacterClass{
 		hero.setStrength(hero.getStrength()+3);
 		hero.setDexterity(hero.getDexterity()+2);
 		hero.setIntelligence(hero.getIntelligence()+0);
-		hero.setVitality(hero.getVitality()+6);
+		hero.setVitality(hero.getVitality()+5);
 		//
 		hero.setAttackSkill(hero.getAttackSkill()+1);
-		hero.setBlockSkill(hero.getBlockSkill()+1);
+		hero.setBlockSkill(hero.getBlockSkill()+3);
 		hero.setResistStress(hero.getResistStress()+1);
 	}
 }

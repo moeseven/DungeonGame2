@@ -11,6 +11,7 @@ import gameEncounter.Fight;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.CardLibrary.CardBuilder;
+import gameEncounter.ItemLibrary.ItemBuilder;
 import tools.MyLog;
 
 public class Game implements Serializable{
@@ -19,6 +20,7 @@ public Player dungeonMaster;
 public GeneratorRandom generator;
 public MyImageLoader imageLoader;
 public CardBuilder cardBuilder;
+public ItemBuilder itemBuilder;
 public int day;
 public MyLog log;
 private Room room;
@@ -28,6 +30,7 @@ private Quest activeQuest;
 public Game() {
 	super();
 	cardBuilder = new CardBuilder();
+	itemBuilder = new ItemBuilder();
 	imageLoader= new MyImageLoader();
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);

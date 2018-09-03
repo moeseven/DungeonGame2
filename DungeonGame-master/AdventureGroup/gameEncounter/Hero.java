@@ -52,6 +52,8 @@ public class Hero implements Serializable{
 	public int armor;
 	public int accuracy;//vs dodge
 	public int dodge;
+	protected int critChance;
+	protected int critDamage;
 	protected int attackSkill;// vs block skill
 	protected int blockSkill;
 	protected int spellPower;//vs spell resist
@@ -114,26 +116,28 @@ public class Hero implements Serializable{
 			image = null;
 		}
 		//attributes		
-		setStrength(10);
-		setDexterity(10);
-		setIntelligence(10);
-		setVitality(10);
+		setStrength(9);
+		setDexterity(9);
+		setIntelligence(9);
+		setVitality(9);
 		//base stats	
-		setAttackSkill(10);
-		setBlockSkill(10);
-		setAccuracy(10);
-		setDodge(10);
-		setSpellPower(10);
-		setSpellResist(10);
+		setAttackSkill(8);
+		setBlockSkill(8);
+		setAccuracy(8);
+		setDodge(8);
+		setSpellPower(8);
+		setSpellResist(8);
 		setBaseHp(100);
 		setSpeed(10);
+		setCritChance(0);
+		setCritDamage(20);
 		//other
-		resistFire=5;
-		resistPoison=5;
-		resistCold=5;
-		resistBleed=5;
-		resistStun=5;
-		resistStress=5;
+		resistFire=3;
+		resistPoison=3;
+		resistCold=3;
+		resistBleed=3;
+		resistStun=3;
+		resistStress=3;
 		trapDisarm=5;
 		setArmor(0);
 		setManaPower(2);
@@ -260,14 +264,14 @@ public class Hero implements Serializable{
 	}
 	//no direct call of Step 2 the card determines what is done with the hit
 	//Step 2: calculate damage and forward to breach Block
-	public int dealAttackDamage (Hero hero, Card_new card) {
-		int dmg=GameEquations.calculateAttackDamage(card.attackDamage, this);
-		breachBlock(hero, dmg,false);
-		return dmg;
+	public void dealAttackDamage (Hero hero, int damage) {
+		breachBlock(hero, damage,false);
 	}
-	//Step 3: first break block to free the way for health damage
+	//Step 3: first break block then roll crit
+	//crits apply only after block
 	public void breachBlock(Hero hero, int damage, boolean thornFlag) {
-		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, hero, damage),thornFlag);
+		int dmg=GameEquations.attackIntoBlock(this, hero, damage);
+		hero.takeArmorDamage(this,dmg,thornFlag);
 	}
 	//Step 4: now reduce Damage by Armor
 	public void takeArmorDamage(Hero damagingHero,int damage, boolean thornFlag) {
@@ -285,17 +289,19 @@ public class Hero implements Serializable{
 				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
 				finalDamage(damage);
 			}else {
-				if(damage>hp/1.6) {	//wounds
-					if(Math.random()>wounds/(deck.getCards().size()*1.8)) {
-						player.getGame().log.addLine(name+"suffered a wound");
-						wounds+=1;
-						discardPile.add(new Wound());
-					}else {
-						finalDamage(damage);
-					}					
-				}else {
-					finalDamage(damage);
-				}
+				finalDamage(damage);
+				//option for wounds instead of death
+//				if(damage>hp/1.6) {	//wounds
+//					if(Math.random()>wounds/(deck.getCards().size()*1.8)) {
+//						player.getGame().log.addLine(name+"suffered a wound");
+//						wounds+=1;
+//						discardPile.add(new Wound());
+//					}else {
+//						finalDamage(damage);
+//					}					
+//				}else {
+//					finalDamage(damage);
+//				}
 			}			
 		}		
 	}
@@ -532,32 +538,6 @@ public class Hero implements Serializable{
 			return false;
 		}
 	};
-	//
-	//compute functions with cold effect
-//	public int computeAccuracy() {
-//		return GameEquations.accuracyCalc(this)-cold/4;
-//	}
-//	public int computeDodge() {
-//		return GameEquations.dodgeCalc(this)-cold/4;
-//	}
-//	public int computeAttackSkill() {
-//		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
-//	}
-//	public int computeBlockSkill() {
-//		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
-//	}
-//	public int computeSpellPower() {
-//		return GameEquations.spellPowerCalc(spellPower, intelligence)-cold/4;
-//	}
-//	public int computeSpellResist() {
-//		return GameEquations.spellPowerCalc(spellResist, intelligence)-cold/4;
-//	}
-//	public int computeMaxHp() {
-//		return GameEquations.maxHealthCalc(baseHp, vitality);
-//	}
-//	public int computeSpeed() {
-//		return GameEquations.speedCalc(speed, dexterity)-cold/4;
-//	}
 	
 	
 	public int rollSpeed() {
@@ -928,6 +908,18 @@ public class Hero implements Serializable{
 	}
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+	public int getCritChance() {
+		return critChance;
+	}
+	public void setCritChance(int critChance) {
+		this.critChance = critChance;
+	}
+	public int getCritDamage() {
+		return critDamage;
+	}
+	public void setCritDamage(int critDamage) {
+		this.critDamage = critDamage;
 	}	
 	
 }

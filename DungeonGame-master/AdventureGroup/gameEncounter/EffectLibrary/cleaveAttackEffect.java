@@ -25,7 +25,7 @@ public class cleaveAttackEffect extends CardEffect{
 		return success;
 	}
 	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		self.dealAttackDamage(self.getTarget(),card);
+		self.dealAttackDamage(target,GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card.getAttackDamage(), self)));
 	}
 
 	@Override

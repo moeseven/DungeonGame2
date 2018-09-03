@@ -59,9 +59,9 @@ public abstract class Item implements Serializable{
 	public final  String getItemCategoryName(int i) {
 		switch (i) { //1: Hand1  //2: Hand2  //3: BiHand //4: Body //5: Head
 		case 0:	 return "consumable";
-		case 1:  return"main hand";
-        case 2:  return "off hand";
-        case 3:  return "two handed";
+		case 1:  return"mainHand";
+        case 2:  return "offHand";
+        case 3:  return "twoHanded";
         case 4:  return "body";
         case 5:  return "head";
         case 10: return "relic";

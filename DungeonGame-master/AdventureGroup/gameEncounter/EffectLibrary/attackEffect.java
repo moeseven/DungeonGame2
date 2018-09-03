@@ -16,8 +16,8 @@ public class attackEffect extends CardEffect{
 			return false;
 		}
 	}
-	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		self.dealAttackDamage(self.getTarget(),card);
+	protected void damageTarget(Hero self, Hero target, Card_new card) {	
+		self.dealAttackDamage(target,GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card.getAttackDamage(), self)));
 	}
 
 	@Override

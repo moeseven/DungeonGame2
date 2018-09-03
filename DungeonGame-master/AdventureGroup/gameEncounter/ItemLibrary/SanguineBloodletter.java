@@ -1,5 +1,7 @@
 package gameEncounter.ItemLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.Card;
 import gameEncounter.Equipment;
 import gameEncounter.Hero;
@@ -65,9 +67,10 @@ private Card extraCard;
 			return "sanguine strike";
 		}
 		@Override
-		public String getCardText(Hero hero) {
-			//TODO correct number display
-			return super.getCardText(hero)+" bonus to vitality on kill";
+		public LinkedList<String> getCardText(Hero hero) {
+			LinkedList<String> textList= super.getCardText(hero);
+			textList.add(" bonus to vitality on kill");
+			return textList;
 		}
 	}
 }

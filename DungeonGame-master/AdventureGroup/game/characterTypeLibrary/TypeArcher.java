@@ -46,6 +46,7 @@ public class TypeArcher extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+2);
 		hero.setVitality(hero.getVitality()+2);
 		//
+		hero.setAttackSkill(hero.getAttackSkill()+2);
 		hero.setAccuracy(hero.getAccuracy()+2);
 		hero.setTrapDisarm(hero.getTrapDisarm()+5);
 		hero.setResistStress(hero.getResistStress()-1);

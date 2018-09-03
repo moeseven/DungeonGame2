@@ -23,7 +23,7 @@ public class MonsterFightComponent extends JComponent{
 	public MonsterFightComponent(FightWindow fw, Hero monster) {
 		this.monster=monster;
 		this.fw=fw;
-		super.setPreferredSize(new Dimension(120,150));
+		super.setPreferredSize(new Dimension(120,170));
 		MyMouseListener ml = new MyMouseListener();
 		super.addMouseListener(ml);
 		setLayout(new BorderLayout());
@@ -51,7 +51,11 @@ public class MonsterFightComponent extends JComponent{
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero().getTarget()==monster){
 				g.setColor(Color.red);
-				g.drawRect(1, 1, 98, 148);
+				int posX=30; int posY=20;
+				g.drawOval(posX, posY, 20, 20);
+				g.drawOval(posX+3, posY+3, 14, 14);
+				g.fillOval(posX+7, posY+7, 6, 6);
+				//g.drawRect(1, 1, 98, 148);
 			}
 			if(monster.isDead()){
 				g.setColor(Color.BLACK);

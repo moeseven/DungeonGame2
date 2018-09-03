@@ -45,10 +45,10 @@ public class RaceElf extends CharacterRace{
 		hero.setStrength(hero.getStrength()-1);
 		hero.setDexterity(hero.getDexterity()+3);
 		//resistances
-		hero.setResistFire(4);
+		hero.setResistFire(3);
 		hero.setResistCold(16);
 		hero.setResistPoison(19);
-		hero.setResistBleed(6);
+		hero.setResistBleed(2);
 		hero.setResistStun(8);
 		hero.setResistStress(12);
 		hero.setTrapDisarm(16);

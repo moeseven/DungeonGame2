@@ -8,7 +8,7 @@ import gameEncounter.Hero;
 public class penetrateBlockAttackEffect extends attackEffect{
 
 	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		target.takeArmorDamage(self,GameEquations.calculateAttackDamage(card.getAttackDamage(), self),false);
+		target.takeArmorDamage(self,GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card.getAttackDamage(), self)),false);
 	}
 
 	@Override

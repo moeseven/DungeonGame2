@@ -44,7 +44,7 @@ public class CombatComponent extends JComponent{
 		private FightWindow fw;
 		public FightBorder(FightWindow fw) {
 			this.fw=fw;
-			super.setPreferredSize(new Dimension(40,150));
+			super.setPreferredSize(new Dimension(40,180));
 			setLayout(new BorderLayout());
 			setVisible(true);
 		}

@@ -1,25 +1,27 @@
-package gameEncounter.CardLibrary;
+package gameEncounter.ItemLibrary;
 
-import java.io.Serializable;
-
-import gameEncounter.Card;
-import gameEncounter.Card_new;
-import gameEncounter.Hero;
-import gameEncounter.Weapon;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
-public class CardBuilder implements Serializable{
-	private HashMap<String, String> map;
-	public CardBuilder() {
+
+import gameEncounter.Equipment;
+import gameEncounter.Hero;
+import gameEncounter.Item;
+import gameEncounter.Item_new;
+import gameEncounter.ModableHeroStats;
+
+public class ItemBuilder extends Item{
+	HashMap<String,String> map;
+	public ItemBuilder() {
+		super();
 		//put all card data into hashmap
 		map = new HashMap<String,String>();
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			String filename = "res/cards.properties";
+			String filename = "res/items.properties";
 			input = getClass().getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
 				System.out.println("Sorry, unable to find " + filename);
@@ -45,9 +47,9 @@ public class CardBuilder implements Serializable{
 				}
 			}
 		}
-	}
-	public Card buildCard(String name) {
-		return new Card_new(map.get(name+".manaCost"), map.get(name+".legalCastPositions"), map.get(name+".legalTargetPositions"), name, map.get(name+".accuracy"), map.get(name+".critChance"), map.get(name+".block"), map.get(name+".attackDamage"), map.get(name+".spellDamage"), map.get(name+".effect"), map.get(name+".effect2"), map.get(name+".effect3"),map.get(name+".isFriendly"), map.get(name+".text"));
+	}	
+	public Item buildItem(String name) {
+		return new Item_new(map.get(name+".weight"), map.get(name+".goldValue"), map.get(name+".category"), map.get(name+".droppable"), map.get(name+".critChance"), map.get(name+".attack"), map.get(name+".block"), map.get(name+".spell"), map.get(name+".accuracy"), map.get(name+".dodge"), map.get(name+".speed"), map.get(name+".draw"), map.get(name+".mana"), map.get(name+".thorns"),map.get(name+".armor"), map.get(name+".health"), map.get(name+".resistSpell"), map.get(name+".resistFire"), map.get(name+".resistCold"), map.get(name+".resistPoison"), map.get(name+".resistBleed"), map.get(name+".resistStun"), map.get(name+".resistStress"),name);
 	}
 	public HashMap<String, String> getMap() {
 		return map;
@@ -55,8 +57,5 @@ public class CardBuilder implements Serializable{
 	public void setMap(HashMap<String, String> map) {
 		this.map = map;
 	}
-	public void printMap() {
-		System.out.println(map.toString());
-	}
-
+	
 }
