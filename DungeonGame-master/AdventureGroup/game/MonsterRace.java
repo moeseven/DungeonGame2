@@ -13,9 +13,8 @@ public abstract class MonsterRace extends CharacterRace{
 	protected LinkedList<CharacterClass> position3Classes=new LinkedList<CharacterClass>();
 	protected LinkedList<CharacterClass> position4Classes=new LinkedList<CharacterClass>();
 	protected LinkedList<CharacterClass> position5Classes=new LinkedList<CharacterClass>();
-	public MonsterRace() {
-		
-		// TODO Auto-generated constructor stub
+	public MonsterRace(Game game) {
+		super(game);
 	}
 
 	@Override

@@ -1,11 +1,13 @@
 package gameEncounter;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
+	protected int accuracy=100;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
@@ -53,7 +55,7 @@ public abstract class Card implements Serializable,Cloneable{
 	public abstract boolean applyEffect(Hero self);// here happens the magic
 	public abstract String getName();
 	public abstract void buildLogEntry(Hero self);
-	public abstract String getCardText(Hero hero);
+	public abstract LinkedList<String> getCardText(Hero hero);
 	public abstract boolean isFriendly();
 	//getters and setters
 	public int getManaCost() {
@@ -95,6 +97,14 @@ public abstract class Card implements Serializable,Cloneable{
 
 	public void setLegalTargetPositions(boolean[] legalTargetPositions) {
 		this.legalTargetPositions = legalTargetPositions;
+	}
+
+	public int getAccuracy() {
+		return accuracy;
+	}
+
+	public void setAccuracy(int accuracy) {
+		this.accuracy = accuracy;
 	}
 			
 	

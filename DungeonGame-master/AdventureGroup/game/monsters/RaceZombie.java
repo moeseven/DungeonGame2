@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -30,14 +31,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceZombie extends MonsterRace{
 
-	public RaceZombie() {
+	public RaceZombie(Game game) {
+		super(game);
 		name="zombie";
 		//set Position classes
-		position1Classes.add(new ZombieWarrior());
-		position2Classes.add(new ZombieWarrior());
-		position3Classes.add(new ZombieWarrior());
-		position4Classes.add(new ZombieWarrior());
-		position5Classes.add(new ZombieWarrior());
+		position1Classes.add(new ZombieWarrior(game));
+		position2Classes.add(new ZombieWarrior(game));
+		position3Classes.add(new ZombieWarrior(game));
+		position4Classes.add(new ZombieWarrior(game));
+		position5Classes.add(new ZombieWarrior(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -76,7 +78,8 @@ public class RaceZombie extends MonsterRace{
 	}
 	private class ZombieWarrior extends CharacterClass{
 
-		public ZombieWarrior() {			
+		public ZombieWarrior(Game game) {	
+			super(game);
 			name="";
 			items.add(new ZombieClaw());				
 			for (int i=0; i<4;i++) {
@@ -157,7 +160,7 @@ public class RaceZombie extends MonsterRace{
 			legalCastPositions[4]=false;
 		}
 		public boolean applyEffect(Hero self) {
-				if(self.attackHero(self.getTarget())) {
+				if(self.attackHero(self.getTarget(),this)) {
 					damageTarget(self);
 					self.getTarget().takeStun();
 					self.getTarget().becomeStressed(6);

@@ -1,5 +1,7 @@
 package gameEncounter.CardLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
@@ -11,7 +13,7 @@ public abstract class AttackCard extends Card{
 		
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				return true;
 			}else {
@@ -33,11 +35,12 @@ public abstract class AttackCard extends Card{
 		
 	}
 	@Override
-	public String getCardText(Hero hero) {
-		//TODO correct number display
-		//generate legeal positions text
-		return damageMult*100+"% damage ";
+	public LinkedList<String> getCardText(Hero hero) {
+		LinkedList<String> textList= new LinkedList<String>();
+		textList.add(damageMult*100+"% damage ");
+		return textList;
 	}
+
 	@Override
 	public boolean extraCastConditions(Hero hero) {
 		// TODO Auto-generated method stub

@@ -39,7 +39,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
 		lines.add("");
-		lines.add("health: "+player.getSelectedHero().getHp()+"/"+player.getSelectedHero().computeMaxHp()+" ("+player.getSelectedHero().getWounds()+")");
+		lines.add("health: "+player.getSelectedHero().getHp()+"/"+GameEquations.maxHealthCalc(player.getSelectedHero())+" ("+player.getSelectedHero().getWounds()+")");
 		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
 		lines.add("");
 		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
@@ -56,14 +56,14 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("vitality: "+player.getSelectedHero().getVitality());		
 		lines.add("");
 		//
-		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+player.getSelectedHero().computeSpeed()+")");
+		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+GameEquations.speedCalc(player.getSelectedHero())+")");
 		lines.add("");
-		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+player.getSelectedHero().computeAttackSkill()+")");
-		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+player.getSelectedHero().computeBlockSkill()+")");
-		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+player.getSelectedHero().computeAccuracy()+")");
-		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+player.getSelectedHero().computeDodge()+")");
-		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+player.getSelectedHero().computeSpellPower()+")");
-		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+" ("+player.getSelectedHero().computeSpellResist()+")");
+		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+")");
+		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+")");
+		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero())+")");
+		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+GameEquations.dodgeCalc(player.getSelectedHero())+")");
+		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+")");
+		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+" ("+GameEquations.spellResistCalc(player.getSelectedHero())+")");
 		lines.add("");
 		lines.add("armor: "+player.getSelectedHero().getArmor());
 		lines.add("thorns: "+player.getSelectedHero().getThorns());

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JComponent;
@@ -263,7 +264,10 @@ public class HeroInventoryPaintComponent extends JComponent{
 			}
 		}
 		if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
-			g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()), 200, 180);
+			for (int l=0; l<gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).size();l++) {
+				g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l), 200, 180);				
+			}
+			
 		}
 	}
 }

@@ -15,14 +15,14 @@ public class Cleave extends AttackCard{
 	}
 	public boolean applyEffect(Hero self) {
 		boolean success=false;
-		if(self.attackHero(self.getTarget())) {
+		if(self.attackHero(self.getTarget(),this)) {
 			damageTarget(self);
 			success=true;
 		}
 		if(self.getTarget().getPlayer().getHeroes().size()>self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1) {
 			Hero secondTarget=self.getTarget().getPlayer().getHeroes().get(self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1);
 			self.setTarget(secondTarget);
-			if(self.attackHero(self.getTarget())) {				
+			if(self.attackHero(self.getTarget(),this)) {				
 				damageTarget(self);
 				success=true;
 			}

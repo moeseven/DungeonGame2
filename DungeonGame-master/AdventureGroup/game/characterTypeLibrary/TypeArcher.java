@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterClass;
+import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Bandage;
 import gameEncounter.CardLibrary.BasicAttack;
@@ -18,7 +19,8 @@ import gameEncounter.ItemLibrary.ShortBow;
 
 public class TypeArcher extends CharacterClass{
 
-	public TypeArcher() {
+	public TypeArcher(Game game) {
+		super(game);
 		cardPool.add(new PoisonShot());
 		cardPool.add(new HeadShot());
 		cardPool.add(new Concentrate());
@@ -28,11 +30,11 @@ public class TypeArcher extends CharacterClass{
 		name="archer";
 		items.add(new GoblinBow());		
 		for (int i=0; i<7;i++) {
-			cards.add(new RangedAttack());
+			cards.add(game.cardBuilder.buildCard("rangedAttack"));
 		}
-		cards.add(new BasicAttack());
-		cards.add(new Block());
-		cards.add(new Block());
+		cards.add(game.cardBuilder.buildCard("basicAttack"));
+		cards.add(game.cardBuilder.buildCard("basicBlock"));
+		cards.add(game.cardBuilder.buildCard("basicBlock"));
 	}
 
 	public void modifyHero(Hero hero) {

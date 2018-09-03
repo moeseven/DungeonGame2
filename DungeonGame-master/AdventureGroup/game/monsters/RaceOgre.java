@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -31,14 +32,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceOgre extends MonsterRace{
 
-	public RaceOgre() {
+	public RaceOgre(Game game) {
+		super(game);
 		name="ogre";
 		//set Position classes
-		position1Classes.add(new OgreWarrior());
-		position2Classes.add(new OgreWarrior());
-		position3Classes.add(new OgreWarrior());
-		position4Classes.add(new OgreWarrior());
-		position5Classes.add(new OgreWarrior());
+		position1Classes.add(new OgreWarrior(game));
+		position2Classes.add(new OgreWarrior(game));
+		position3Classes.add(new OgreWarrior(game));
+		position4Classes.add(new OgreWarrior(game));
+		position5Classes.add(new OgreWarrior(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -77,7 +79,8 @@ public class RaceOgre extends MonsterRace{
 	}
 	private class OgreWarrior extends CharacterClass{
 
-		public OgreWarrior() {			
+		public OgreWarrior(Game game) {	
+			super(game);
 			name="";
 			items.add(new OgreClub());	
 			cards.add(new Bash());

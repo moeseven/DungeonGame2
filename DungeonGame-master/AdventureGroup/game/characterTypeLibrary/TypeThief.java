@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterClass;
+import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.BackStab;
 import gameEncounter.CardLibrary.BasicAttack;
@@ -17,21 +18,22 @@ import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeThief extends CharacterClass{
 
-	public TypeThief() {
+	public TypeThief(Game game) {
+		super(game);
 		cardPool.add(new BlindingBomb());
 		cardPool.add(new PoisonBomb());
 		cardPool.add(new PoisonAttack());
-		cardPool.add(new BackStab());
+		cardPool.add(game.cardBuilder.buildCard("backStab"));
 		cardPool.add(new DaggerThrow());
 		cardPool.add(new Feint());
 		cardPool.add(new Sidestep());
 		name="thief";
 		items.add(new RustyBlade());
 		for (int i=0; i<8;i++) {
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
 		for (int i=0; i<2;i++) {
-			cards.add(new Block());
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -25,14 +26,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceGoblin extends MonsterRace{
 
-	public RaceGoblin() {
+	public RaceGoblin(Game game) {
+		super(game);
 		name="goblin";
 		//set Position classes
-		position1Classes.add(new GoblinWarrior());
-		position2Classes.add(new GoblinWarrior());
-		position3Classes.add(new GoblinArcher());
-		position4Classes.add(new GoblinArcher());
-		position5Classes.add(new GoblinArcher());
+		position1Classes.add(new GoblinWarrior(game));
+		position2Classes.add(new GoblinWarrior(game));
+		position3Classes.add(new GoblinArcher(game));
+		position4Classes.add(new GoblinArcher(game));
+		position5Classes.add(new GoblinArcher(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -70,7 +72,8 @@ public class RaceGoblin extends MonsterRace{
 	}
 	private class GoblinWarrior extends CharacterClass{
 
-		public GoblinWarrior() {			
+		public GoblinWarrior(Game game) {	
+			super(game);
 			name="warrior";
 			items.add(new RustyBlade());				
 			for (int i=0; i<4;i++) {
@@ -100,7 +103,8 @@ public class RaceGoblin extends MonsterRace{
 	}
 	private class GoblinArcher extends CharacterClass{
 
-		public GoblinArcher() {
+		public GoblinArcher(Game game) {
+			super(game);
 			name="archer";
 			items.add(new GoblinBow());		
 			for (int i=0; i<7;i++) {

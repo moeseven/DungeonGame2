@@ -1,5 +1,7 @@
 package gameEncounter.CardLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
@@ -11,9 +13,10 @@ public abstract class SpellnoTarget extends Card{
 		hero.getPlayer().getGame().log.addLine("casts "+getName());		
 	}
 	@Override
-	public String getCardText(Hero hero) {
+	public LinkedList<String> getCardText(Hero hero) {
 		//TODO correct number display
-		return "";
+		LinkedList<String> retVal= new LinkedList<String>();
+		return retVal;
 	}
 	@Override
 	public boolean extraCastConditions(Hero hero) {

@@ -8,8 +8,9 @@ import gameEncounter.CardLibrary.Block;
 
 public abstract class CharacterRace extends CharacterType{
 	protected LinkedList<String> nameList = new LinkedList<String>();
-	public CharacterRace() {
-		// TODO Auto-generated constructor stub
+	protected Game game;
+	public CharacterRace(Game game) {
+		this.game=game;
 	}
 
 	@Override

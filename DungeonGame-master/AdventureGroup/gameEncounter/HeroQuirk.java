@@ -15,15 +15,15 @@ public abstract class HeroQuirk implements Serializable{
 	public void gainQuirk(Hero hero) {
 		hero.getQuirks().add(this);
 		mod(hero);
-		if(hero.getHp()>hero.computeMaxHp()) {
-			hero.setHp(hero.computeMaxHp());
+		if(hero.getHp()>GameEquations.maxHealthCalc(hero)) {
+			hero.setHp(GameEquations.maxHealthCalc(hero));
 		}
 	}
 	public void looseQuirk(Hero hero) {
 		hero.getQuirks().remove(this);
 		demod(hero);
-		if(hero.getHp()>hero.computeMaxHp()) {
-			hero.setHp(hero.computeMaxHp());
+		if(hero.getHp()>GameEquations.maxHealthCalc(hero)) {
+			hero.setHp(GameEquations.maxHealthCalc(hero));
 		}
 	}
 	public void mod(Hero hero) {

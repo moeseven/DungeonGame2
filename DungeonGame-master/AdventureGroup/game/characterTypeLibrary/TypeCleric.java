@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterClass;
+import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Bash;
 import gameEncounter.CardLibrary.BasicAttack;
@@ -16,7 +17,8 @@ import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeCleric extends CharacterClass{
 
-	public TypeCleric() {
+	public TypeCleric(Game game) {
+		super(game);
 		cardPool.add(new Bash());
 		cardPool.add(new DivineGrace());
 		cardPool.add(new HeavenlyShield());
@@ -26,12 +28,12 @@ public class TypeCleric extends CharacterClass{
 		name="cleric";
 		items.add(new RustyBlade());		
 		for (int i=0; i<3;i++) {
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
-		cards.add(new MeeleAttack());
-		cards.add(new MeeleAttack());
+		cards.add(game.cardBuilder.buildCard("meeleAttack"));
+		cards.add(game.cardBuilder.buildCard("meeleAttack"));
 		for (int i=0; i<5;i++) {
-			cards.add(new Block());
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 	}
 

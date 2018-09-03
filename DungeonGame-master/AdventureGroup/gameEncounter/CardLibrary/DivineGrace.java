@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class DivineGrace extends Spell{
@@ -9,7 +10,7 @@ public class DivineGrace extends Spell{
 		manaCost =2;		
 	}
 	public boolean applyEffect(Hero self) {
-		self.getTarget().heal((int)(4+(self.computeSpellPower()/1.4)));
+		self.getTarget().heal((int)(4+(GameEquations.spellPowerCalc(self)/1.4)));
 		return true;
 	}
 	@Override

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -30,18 +31,19 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceSkeletton extends MonsterRace{
 
-	public RaceSkeletton() {
+	public RaceSkeletton(Game game) {
+		super(game);
 		name="skeletton";
 		//set Position classes
-		position1Classes.add(new SkelettonWarrior());
-		position1Classes.add(new SkelettonHulk());
-		position2Classes.add(new SkelettonWarrior());
+		position1Classes.add(new SkelettonWarrior(game));
+		position1Classes.add(new SkelettonHulk(game));
+		position2Classes.add(new SkelettonWarrior(game));
 		//3
-		position3Classes.add(new SkelettonArcher());
-		position3Classes.add(new SkelettonMage());
+		position3Classes.add(new SkelettonArcher(game));
+		position3Classes.add(new SkelettonMage(game));
 		//4
-		position4Classes.add(new SkelettonArcher());
-		position5Classes.add(new SkelettonArcher());
+		position4Classes.add(new SkelettonArcher(game));
+		position5Classes.add(new SkelettonArcher(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -80,7 +82,8 @@ public class RaceSkeletton extends MonsterRace{
 	}
 	private class SkelettonWarrior extends CharacterClass{
 
-		public SkelettonWarrior() {			
+		public SkelettonWarrior(Game game) {	
+			super(game);
 			name="warrior";
 			items.add(new RustyBlade());				
 			for (int i=0; i<4;i++) {
@@ -110,7 +113,8 @@ public class RaceSkeletton extends MonsterRace{
 	}
 	private class SkelettonHulk extends CharacterClass{
 
-		public SkelettonHulk() {			
+		public SkelettonHulk(Game game) {	
+			super(game);
 			name="hulk";
 			items.add(new HeavySword());				
 			for (int i=0; i<4;i++) {
@@ -143,7 +147,8 @@ public class RaceSkeletton extends MonsterRace{
 	}
 	private class SkelettonArcher extends CharacterClass{
 
-		public SkelettonArcher() {
+		public SkelettonArcher(Game game) {
+			super(game);
 			name="archer";
 			items.add(new ShortBow());		
 			for (int i=0; i<7;i++) {
@@ -174,7 +179,8 @@ public class RaceSkeletton extends MonsterRace{
 	}
 	private class SkelettonMage extends CharacterClass{
 
-		public SkelettonMage() {			
+		public SkelettonMage(Game game) {
+			super(game);
 			name="mage";
 			items.add(new RustyBlade());				
 			for (int i=0; i<4;i++) {

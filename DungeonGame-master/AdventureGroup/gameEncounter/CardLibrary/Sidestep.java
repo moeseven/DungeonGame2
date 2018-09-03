@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class Sidestep extends SpellnoTarget{
@@ -10,7 +11,7 @@ public class Sidestep extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block((int) (self.computeBlockSkill()*0.9));
+		self.block((int) (GameEquations.blockSkillCalc(self)*0.9));
 		self.drawCard();
 		return true;
 	}

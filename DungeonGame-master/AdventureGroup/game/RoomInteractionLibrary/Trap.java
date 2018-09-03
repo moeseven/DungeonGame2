@@ -8,18 +8,22 @@ import game.Game;
 import game.RoomInteraction;
 import game.characterTypeLibrary.genericCharacterClass;
 import game.characterTypeLibrary.genericCharacterRace;
+import gameEncounter.Card;
+import gameEncounter.Card_new;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
 public abstract class Trap extends RoomInteraction{
 	protected boolean disarmed;
 	protected Hero trapStats;
+	protected Card card;
 	public Trap(Game game) {
 		super(game);
 		name="trap";
 		// TODO Auto-generated constructor stub
 		hidden=true;
-		trapStats=new Hero(name, null, new genericCharacterRace(), new genericCharacterClass());
+		card = new Card_new("0", null, null, "trap", "120", null, null, null, null, null, null, null, null, null);
+		trapStats=new Hero(name, null, new genericCharacterRace(game), new genericCharacterClass(game));
 		trapStats.setAccuracy(14);
 	}
 	public abstract void trapHits(Hero hero);

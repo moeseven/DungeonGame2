@@ -1,6 +1,7 @@
 package gameEncounter.buffLibrary;
 
 import gameEncounter.Buff;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class Blazing extends Buff{
@@ -23,7 +24,7 @@ public class Blazing extends Buff{
 	public void mod(Hero hero) {
 		// TODO Auto-generated method stub
 		duration=5;
-		burnDamage=(int) (hero.computeSpellPower()/3.0)+3;
+		burnDamage=(int) (GameEquations.spellPowerCalc(hero)/3.0)+3;
 		hero.setResistFire(hero.getResistFire()+50);
 	}
 

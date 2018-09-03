@@ -1,6 +1,8 @@
 package gameEncounter;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import gameEncounter.EffectLibrary.EffectBuilder;
 import gameEncounter.EffectLibrary.attackEffect;
@@ -12,29 +14,35 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
-	protected int accuracy=100;
+	protected int accuracy=0;
 	protected int critChance=0;
 	protected int block=0;
 	protected int attackDamage=0;
 	protected int spellDamage=0;
-	protected CardEffect effect= new blockEffect();
+//	protected CardEffect effect= null;
+//	protected CardEffect effect2= null;
+//	protected CardEffect effect3= null;
 	protected boolean isFriendly =false;
 	protected String text="no data";
-
+	protected LinkedList<CardEffect> allEffects= new LinkedList<CardEffect>();
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String isFriendly, String text) {
+			String effect2, String effect3,String isFriendly, String text) {
 		super();
 		if (manaCost!=null) {
 			this.manaCost = Integer.parseInt(manaCost);
-		}		
-		for(int i=0; i<5;i++) {
-			if (Integer.parseInt(legalCastPositions.valueOf(i))!=0) {
-				this.legalCastPositions[i] = true;
-			}
-			if (Integer.parseInt(legalTargetPositions.valueOf(i))!=0) {
-				this.legalTargetPositions[i] = true;
+		}	
+		if (legalCastPositions!=null&&legalTargetPositions!=null) {
+			int[] lcP= toArray(legalCastPositions);
+			int[] ltP=toArray(legalTargetPositions);
+			for(int i=0; i<5;i++) {
+				if (lcP[i]==0) {
+					this.legalCastPositions[i] = false;
+				}
+				if (ltP[i]==0){
+					this.legalTargetPositions[i] = false;
+				}
 			}
 		}		
 		this.name = name;
@@ -54,17 +62,35 @@ public class Card_new extends Card implements Serializable,Cloneable{
 			this.spellDamage = Integer.parseInt(spellDamage);
 		}
 		if (effect!=null) {
-			this.effect = EffectBuilder.buildEffect(effect);
+			allEffects.add(EffectBuilder.buildEffect(effect));
+		}
+		if (effect2!=null) {
+			allEffects.add(EffectBuilder.buildEffect(effect2));
+		}
+		if (effect3!=null) {
+			allEffects.add(EffectBuilder.buildEffect(effect3));
+		}
+		if (isFriendly!=null) {
+			if (Integer.parseInt(isFriendly)!=0) {
+				this.isFriendly = true;
+			}
 		}
 		
-		if (Integer.parseInt(isFriendly)!=0) {
-			this.isFriendly = true;
-		}
 		if (text!=null) {
 			this.text=text;
 		}		
 	}
-
+	public int[] toArray( String s ) {
+	   if ( s == null ) {
+	     return null;
+	   }
+	   int len = s.length();
+	   int[] array = new int[len];
+	   for (int i = 0; i < len ; i++) {
+	      array[i] = Integer.parseInt(""+s.charAt(i));
+	   }
+	   return array;
+	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
@@ -102,7 +128,13 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		}
 	}
 	public boolean applyEffect(Hero self) {
-		effect.applyEffect(self,this);
+		//keep going through effects until fail
+		boolean previousSuccess=true;
+		for (int i=0; i<allEffects.size();i++) {
+			if (previousSuccess) {
+				previousSuccess=allEffects.get(i).applyEffect(self,this);				
+			}			
+		}
 		return true;
 	}
 	public String getName() {
@@ -119,9 +151,20 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		
 	}
 	@Override
-	public String getCardText(Hero hero) {
-		//TODO correct number display
-		return effect.generateCardText(hero, this);
+	public LinkedList<String> getCardText(Hero hero) {
+		LinkedList<String> cardText = new LinkedList<String>();
+		for (Iterator iterator = allEffects.iterator(); iterator.hasNext();) {
+			CardEffect cardEffect = (CardEffect) iterator.next();
+			cardText.add(cardEffect.generateCardText(hero, this));
+		}
+		if (critChance>0) {
+			cardText.add("crit chance: "+critChance);
+		}
+		if (accuracy>0) {
+			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero)));
+		}
+		
+		return cardText;
 	}
 	@Override
 	public boolean extraCastConditions(Hero hero) {
@@ -139,7 +182,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		this.name = name;
 	}
 	public boolean checkPositonsLegal(Hero hero){
-		if(legalCastPositions[hero.getPosition()]==false||legalTargetPositions[hero.getTarget().getPosition()]) {
+		if(legalCastPositions[hero.getPosition()]==false||legalTargetPositions[hero.getTarget().getPosition()]==false) {
 			if(hero.getPlayer()!=hero.getPlayer().getGame().dungeonMaster) {
 				if (legalCastPositions[hero.getPosition()]) {
 					hero.getPlayer().getGame().log.addLine("can not target this position!");
@@ -210,14 +253,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		this.spellDamage = spellDamage;
 	}
 
-	public CardEffect getEffect() {
-		return effect;
-	}
-
-	public void setEffect(CardEffect effect) {
-		this.effect = effect;
-	}
-
 	public String getText() {
 		return text;
 	}
@@ -228,6 +263,14 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public void setFriendly(boolean isFriendly) {
 		this.isFriendly = isFriendly;
+	}
+
+	public LinkedList<CardEffect> getAllEffects() {
+		return allEffects;
+	}
+
+	public void setAllEffects(LinkedList<CardEffect> allEffects) {
+		this.allEffects = allEffects;
 	}
 			
 	

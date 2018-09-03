@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class Parry extends SpellnoTarget{
@@ -10,7 +11,7 @@ public class Parry extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block((int) (self.computeBlockSkill()*0.7));
+		self.block((int) (GameEquations.blockSkillCalc(self)*0.7));
 		return true;
 	}
 	@Override

@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
@@ -14,8 +15,8 @@ public class CarefulSlash extends AttackCard{
 		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
-			self.block((int)(self.computeBlockSkill()*0.8));
-			if(self.attackHero(self.getTarget())) {
+			self.block((int)(GameEquations.blockSkillCalc(self)*0.8));
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				return true;
 			}else {

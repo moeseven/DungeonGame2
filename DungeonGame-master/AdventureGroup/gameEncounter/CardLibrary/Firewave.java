@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
@@ -12,7 +13,7 @@ public class Firewave extends Spell{
 	public boolean applyEffect(Hero self) {
 			if(self.castSpellOnHero(self.getTarget())) {	
 				for(int i=0; i<self.getTarget().getPlayer().getHeroes().size();i++) {
-					self.getTarget().getPlayer().getHeroes().get(i).takeFireDamage(self, self.computeSpellPower()+5);
+					self.getTarget().getPlayer().getHeroes().get(i).takeFireDamage(self, GameEquations.spellPowerCalc(self)+5);
 				}
 				return true;
 			}else {

@@ -16,7 +16,7 @@ public class BasicAttack extends AttackCard{
 		legalCastPositions[4]=true;
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(), this)) {
 				damageTarget(self);
 				return true;
 			}else {

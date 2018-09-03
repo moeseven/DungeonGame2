@@ -4,8 +4,10 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Bullwork;
@@ -30,14 +32,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class Spectre extends MonsterRace{
 
-	public Spectre() {
+	public Spectre(Game game) {
+		super(game);
 		name="spectre";
 		//set Position classes
-		position1Classes.add(new SpectreNormal());
-		position2Classes.add(new SpectreNormal());
-		position3Classes.add(new SpectreNormal());
-		position4Classes.add(new SpectreNormal());
-		position5Classes.add(new SpectreNormal());
+		position1Classes.add(new SpectreNormal(game));
+		position2Classes.add(new SpectreNormal(game));
+		position3Classes.add(new SpectreNormal(game));
+		position4Classes.add(new SpectreNormal(game));
+		position5Classes.add(new SpectreNormal(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -75,7 +78,8 @@ public class Spectre extends MonsterRace{
 	}
 	private class SpectreNormal extends CharacterClass{
 
-		public SpectreNormal() {			
+		public SpectreNormal(Game game) {
+			super(game);
 			name="";
 			items.add(new SpectreClaw());				
 			for (int i=0; i<3;i++) {			
@@ -125,7 +129,7 @@ public class Spectre extends MonsterRace{
 		}
 		public boolean applyEffect(Hero self) {
 				if(self.castSpellOnHero(self.getTarget())) {	
-					self.getTarget().takeColdDamage(self, (int) (self.computeSpellPower()/2.3));
+					self.getTarget().takeColdDamage(self, (int) (GameEquations.spellPowerCalc(self)/2.3));
 					return true;
 				}else {
 					return false;

@@ -5,11 +5,11 @@ import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
-public class attackEffect extends CardEffect{
+public class fireSpellEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		if(self.attackHero(self.getTarget(),card)) {
+		if(self.castMissileSpellOnHero(self.getTarget(),card)) {	
 			damageTarget(self, self.getTarget(), card);
 			return true;
 		}else {
@@ -17,13 +17,13 @@ public class attackEffect extends CardEffect{
 		}
 	}
 	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		self.dealAttackDamage(self.getTarget(),card);
+		self.getTarget().takeFireDamage(self, GameEquations.calculateSpellDamage(card.getSpellDamage(), self));
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return GameEquations.calculateAttackDamage(card.getAttackDamage(), self)+" attack damage";
+		return GameEquations.calculateSpellDamage(card.getSpellDamage(), self)+" fire damage";
 	}
 
 }

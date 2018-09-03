@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -30,14 +31,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceRat extends MonsterRace{
 
-	public RaceRat() {
+	public RaceRat(Game game) {
+		super(game);
 		name="rat";
 		//set Position classes
-		position1Classes.add(new RatWarrior());
-		position2Classes.add(new RatWarrior());
-		position3Classes.add(new RatWarrior());
-		position4Classes.add(new RatWarrior());
-		position5Classes.add(new RatWarrior());
+		position1Classes.add(new RatWarrior(game));
+		position2Classes.add(new RatWarrior(game));
+		position3Classes.add(new RatWarrior(game));
+		position4Classes.add(new RatWarrior(game));
+		position5Classes.add(new RatWarrior(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -76,7 +78,8 @@ public class RaceRat extends MonsterRace{
 	}
 	private class RatWarrior extends CharacterClass{
 
-		public RatWarrior() {			
+		public RatWarrior(Game game) {	
+			super(game);
 			name="";
 			items.add(new RatClaw());				
 			for (int i=0; i<7;i++) {
@@ -126,7 +129,7 @@ public class RaceRat extends MonsterRace{
 
 		@Override
 		public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				self.getTarget().bleed(1);
 				self.getTarget().becomeStressed((int) (3*Math.random()));

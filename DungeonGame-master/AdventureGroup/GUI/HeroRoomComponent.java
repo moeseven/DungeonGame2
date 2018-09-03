@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class HeroRoomComponent extends JComponent{
@@ -61,7 +62,7 @@ public class HeroRoomComponent extends JComponent{
 		g.setColor(Color.blue);
 		g.drawString(""+hero.getBlock(), 10, 45);
 		g.setColor(Color.red);
-		g.drawString(""+hero.getHp()+"/"+hero.computeMaxHp(), 10, 65);
+		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 10, 65);
 		g.setColor(Color.GRAY);
 		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 10, 80);
 		

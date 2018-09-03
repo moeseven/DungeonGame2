@@ -1,11 +1,13 @@
 package game.characterTypeLibrary;
 
 import game.CharacterRace;
+import game.Game;
 import gameEncounter.Hero;
 
 public class RaceDwarf extends CharacterRace{
 
-	public RaceDwarf() {
+	public RaceDwarf(Game game) {
+		super(game);
 		name="dwarf";
 		nameList.add("Bimbur");
 		nameList.add("Turi");

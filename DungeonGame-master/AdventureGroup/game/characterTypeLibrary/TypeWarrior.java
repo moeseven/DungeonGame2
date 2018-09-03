@@ -3,6 +3,7 @@ package game.characterTypeLibrary;
 import java.util.LinkedList;
 
 import game.CharacterClass;
+import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.CardLibrary.Bash;
@@ -10,6 +11,7 @@ import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.BleedingSlice;
 import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.Bullwork;
+import gameEncounter.CardLibrary.CardBuilder;
 import gameEncounter.CardLibrary.CarefulSlash;
 import gameEncounter.CardLibrary.Cleave;
 import gameEncounter.CardLibrary.IntimidatingCry;
@@ -23,7 +25,8 @@ import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeWarrior extends CharacterClass{
 
-	public TypeWarrior() {
+	public TypeWarrior(Game game) {
+		super(game);
 		cardPool.add(new CarefulSlash());
 		cardPool.add(new BleedingSlice());
 		cardPool.add(new Cleave());
@@ -36,11 +39,11 @@ public class TypeWarrior extends CharacterClass{
 		name="warrior";
 		items.add(new RustyBlade());				
 		for (int i=0; i<4;i++) {
-			cards.add(new MeeleAttack());
+			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 		}
-		cards.add(new BasicAttack());
+		cards.add(game.cardBuilder.buildCard("basicAttack"));
 		for (int i=0; i<5;i++) {
-			cards.add(new Block());
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 	}
 

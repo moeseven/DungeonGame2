@@ -15,15 +15,15 @@ public class CharacterBuilder {
 		this.game=game;
 		charClasses=new LinkedList<CharacterClass>();
 		charRaces=new LinkedList<CharacterRace>();
-		charClasses.add(new TypeWarrior());
-		charClasses.add(new TypeThief());
-		charClasses.add(new TypeMage());
-		charClasses.add(new TypeCleric());
-		charClasses.add(new TypeArcher());
-		charRaces.add(new RaceHuman());
-		charRaces.add(new RaceDwarf());
-		charRaces.add(new RaceHalfling());
-		charRaces.add(new RaceElf());
+		charClasses.add(new TypeWarrior(game));
+		charClasses.add(new TypeThief(game));
+		charClasses.add(new TypeMage(game));
+		charClasses.add(new TypeCleric(game));
+		charClasses.add(new TypeArcher(game));
+		charRaces.add(new RaceHuman(game));
+		charRaces.add(new RaceDwarf(game));
+		charRaces.add(new RaceHalfling(game));
+		charRaces.add(new RaceElf(game));
 		updateHero("Öfterus");
 		game.getPlayer().setSelectedHero(hero);
 		// TODO Auto-generated constructor stub

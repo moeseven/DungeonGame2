@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -30,14 +31,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class Thornback extends MonsterRace{
 
-	public Thornback() {
+	public Thornback(Game game) {
+		super(game);
 		name="thorn back";
 		//set Position classes
-		position1Classes.add(new NormalThornback());
-		position2Classes.add(new NormalThornback());
-		position3Classes.add(new NormalThornback());
-		position4Classes.add(new NormalThornback());
-		position5Classes.add(new NormalThornback());
+		position1Classes.add(new NormalThornback(game));
+		position2Classes.add(new NormalThornback(game));
+		position3Classes.add(new NormalThornback(game));
+		position4Classes.add(new NormalThornback(game));
+		position5Classes.add(new NormalThornback(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -79,7 +81,8 @@ public class Thornback extends MonsterRace{
 	}
 	private class NormalThornback extends CharacterClass{
 
-		public NormalThornback() {			
+		public NormalThornback(Game game) {		
+			super(game);
 			name="";
 			items.add(new ThornbackClaw());				
 			for (int i=0; i<4;i++) {
@@ -130,7 +133,7 @@ public class Thornback extends MonsterRace{
 
 		@Override
 		public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				return true;
 			}else {

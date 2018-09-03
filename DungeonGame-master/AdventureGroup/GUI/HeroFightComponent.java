@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 //!! heroes and monsters should be drawn not be components
 public class HeroFightComponent extends JComponent{
@@ -86,7 +87,7 @@ public class HeroFightComponent extends JComponent{
 		}
 		
 		g.setColor(Color.red);
-		g.drawString(""+hero.getHp()+"/"+hero.computeMaxHp(), 10, 65);
+		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 10, 65);
 		g.setColor(Color.GRAY);
 		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 10, 80);
 	}

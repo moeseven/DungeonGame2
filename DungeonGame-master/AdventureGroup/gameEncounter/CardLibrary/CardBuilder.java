@@ -48,7 +48,7 @@ public class CardBuilder implements Serializable{
 		}
 	}
 	public Card buildCard(String name) {
-		return new Card_new(map.get(name+".manaCost"), map.get(name+".legalCastPositions"), map.get(name+".legalTargetPositions"), name, map.get(name+".accuracy"), map.get(name+".critChance"), map.get(name+".block"), map.get(name+".attackDamage"), map.get(name+".spellDamage"), map.get(name+".effect"), map.get(name+".isFriendly"), map.get(name+".text"));
+		return new Card_new(map.get(name+".manaCost"), map.get(name+".legalCastPositions"), map.get(name+".legalTargetPositions"), name, map.get(name+".accuracy"), map.get(name+".critChance"), map.get(name+".block"), map.get(name+".attackDamage"), map.get(name+".spellDamage"), map.get(name+".effect"), map.get(name+".effect2"), map.get(name+".effect3"),map.get(name+".isFriendly"), map.get(name+".text"));
 		//return new Card_new(0, null, null, name, 0, 0, 0, 0, 0, null, false);
 	}
 	public HashMap<String, String> getMap() {

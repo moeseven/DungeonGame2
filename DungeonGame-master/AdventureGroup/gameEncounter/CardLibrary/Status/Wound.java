@@ -1,5 +1,7 @@
 package gameEncounter.CardLibrary.Status;
 
+import java.util.LinkedList;
+
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.SpellnoTarget;
 
@@ -21,8 +23,10 @@ public class Wound extends SpellnoTarget{
 		return "wound";
 	}
 	@Override
-	public String getCardText(Hero hero) {
-		return super.getCardText(hero)+" wound";
+	public LinkedList<String> getCardText(Hero hero) {
+		LinkedList<String> textList= super.getCardText(hero);
+		textList.add(" wound");
+		return textList;
 	}
 	@Override
 	public boolean isFriendly() {

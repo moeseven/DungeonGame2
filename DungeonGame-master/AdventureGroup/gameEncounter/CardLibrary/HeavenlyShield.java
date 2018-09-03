@@ -2,6 +2,7 @@ package gameEncounter.CardLibrary;
 
 import gameEncounter.Buff;
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class HeavenlyShield extends Spell{
@@ -10,7 +11,7 @@ public class HeavenlyShield extends Spell{
 		manaCost =1;		
 	}
 	public boolean applyEffect(Hero self) {
-		self.getTarget().buffHero(new HavenlyShieldBuff((int)(2+(self.computeSpellPower()/1.1))));
+		self.getTarget().buffHero(new HavenlyShieldBuff((int)(2+(GameEquations.spellPowerCalc(self)/1.1))));
 		return true;
 	}
 	@Override

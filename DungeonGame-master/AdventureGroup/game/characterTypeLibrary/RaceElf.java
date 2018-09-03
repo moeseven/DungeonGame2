@@ -1,12 +1,14 @@
 package game.characterTypeLibrary;
 
 import game.CharacterRace;
+import game.Game;
 import gameEncounter.Hero;
 
 
 public class RaceElf extends CharacterRace{
 
-	public RaceElf() {
+	public RaceElf(Game game) {
+		super(game);
 		name="elf";
 		nameList.add("Irdal");
 		nameList.add("Auril");

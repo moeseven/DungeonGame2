@@ -14,7 +14,7 @@ public class PoisonAttack extends AttackCard{
 		
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				self.getTarget().poison(5);
 				return true;

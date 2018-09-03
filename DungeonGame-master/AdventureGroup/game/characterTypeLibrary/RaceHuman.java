@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterRace;
+import game.Game;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
@@ -9,7 +10,8 @@ import gameEncounter.CardLibrary.BasicAttack;
 
 public class RaceHuman extends CharacterRace{
 
-	public RaceHuman() {
+	public RaceHuman(Game game) {
+		super(game);
 		name="human";
 		nameList.add("Herbert");
 		nameList.add("Hank");

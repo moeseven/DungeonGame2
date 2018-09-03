@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -33,10 +34,11 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class BossNecromancer extends MonsterRace{
 
-	public BossNecromancer() {
+	public BossNecromancer(Game game) {
+		super(game);
 		name="necromancer";
 		//set Position classes
-		position1Classes.add(new NecromancerAspirant());
+		position1Classes.add(new NecromancerAspirant(game));
 		position2Classes.add(null);
 		position3Classes.add(null);
 		position4Classes.add(null);
@@ -80,7 +82,8 @@ public class BossNecromancer extends MonsterRace{
 	}
 	private class NecromancerAspirant extends CharacterClass{
 
-		public NecromancerAspirant() {			
+		public NecromancerAspirant(Game game) {	
+			super(game);
 			name="";
 			items.add(new ZombieClaw());				
 			for (int i=0; i<5;i++) {				
@@ -151,7 +154,7 @@ public class BossNecromancer extends MonsterRace{
 
 		@Override
 		public boolean applyEffect(Hero self) {
-			MonsterRace monster= new RaceZombie();
+			MonsterRace monster= new RaceZombie(game);
 			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPosition1Classes().getFirst()));
 			self.getPlayer().getHeroes().getFirst().setUpHandPile();
 			return true;
@@ -182,7 +185,7 @@ public class BossNecromancer extends MonsterRace{
 			legalCastPositions[4]=false;
 		}
 		public boolean applyEffect(Hero self) {
-				if(self.attackHero(self.getTarget())) {
+				if(self.attackHero(self.getTarget(),this)) {
 					damageTarget(self);
 					self.getTarget().buffHero(new Bashed());
 					self.getTarget().becomeStressed(6);
@@ -195,10 +198,12 @@ public class BossNecromancer extends MonsterRace{
 		public String getName() {
 			return "Grab";
 		}
+		
 		@Override
-		public String getCardText(Hero hero) {
-			//TODO correct number display
-			return super.getCardText(hero)+" bash";
+		public LinkedList<String> getCardText(Hero hero) {
+			LinkedList<String> textList= new LinkedList<String>();
+			textList.add(" bash");
+			return textList;
 		}
 	}
 

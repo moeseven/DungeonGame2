@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterRace;
+import game.Game;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Block;
@@ -8,7 +9,8 @@ import gameEncounter.CardLibrary.BasicAttack;
 
 public class Weakling extends CharacterRace{
 
-	public Weakling() {
+	public Weakling(Game game) {
+		super(game);
 		name="weakling";
 	}
 

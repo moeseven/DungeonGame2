@@ -143,7 +143,7 @@ public class Hero implements Serializable{
 	public void initialize() {			
 		isDead=false;
 		isReady=false;	
-		hp=computeMaxHp();
+		hp=GameEquations.maxHealthCalc(this);
 	}
 	//functions
 	public void setUpHandPile() {
@@ -213,30 +213,28 @@ public class Hero implements Serializable{
 		player.getGame().log.addLine(name+" blocks for "+block);
 		this.block+=block;
 	}
-	//Cast spell
-	public boolean castSpellOnHero(Hero hero) {
+	//Cast resistable spell
+	public boolean castResistableSpellOnHero(Hero hero) {
 		if(GameEquations.resist(this, hero)) {
 			return false;
 		}else {
 			return true;
 		}
 	}
-	//Attack stages dodge-block-armor-hp
-	public boolean attackHero(Hero hero) {
-		//TODO check Block and Dodge
-		if(!GameEquations.dodge(this, hero)) {
+	//Cast missile spell
+	public boolean castMissileSpellOnHero(Hero hero, Card card) {
+		if(!GameEquations.dodge(this, hero,card)) {
 			return true;			
 		}else {
 			return false;
-		}		
+		}
 	}
-	public void breachBlock(Hero hero, int damage) {
-		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, hero, damage));
-	}
-	public int dealAttackDamage (Hero hero,int dmg) {
+	//Attack stages dodge-block-armor-hp
+	
+	
+	public int dealAttackDamagePenetratingBlock(Hero hero,int dmg) {
 		dmg=GameEquations.calculateAttackDamage(dmg, this);
-		breachBlock(hero, dmg);
-		hero.breachBlock(this, hero.getThorns());//thorn damage
+		hero.takeArmorDamage(this,dmg,false);
 		return dmg;
 	}
 	public int dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
@@ -248,14 +246,40 @@ public class Hero implements Serializable{
 			 dmg=(int)(mult*GameEquations.FistDamage(strength));
 			 getPlayer().getGame().log.addLine("fistpunch");
 		 } 
-		 breachBlock(hero, dmg);
-		 hero.breachBlock(this, hero.getThorns());//thorn damage
+		 breachBlock(hero, dmg,false);
 		 return dmg;		
 	}
-	public void dealDamage(Hero hero,int damage) {
-		hero.takeArmorDamage(this,damage);
+	//Attacking
+	//Step 1: check if attack hits
+	public boolean attackHero(Hero hero, Card card) {
+		if(!GameEquations.dodge(this, hero,card)) {
+			return true;			
+		}else {
+			return false;
+		}		
 	}
-	public void takeDamage(Hero damagingHero, int damage){
+	//no direct call of Step 2 the card determines what is done with the hit
+	//Step 2: calculate damage and forward to breach Block
+	public int dealAttackDamage (Hero hero, Card_new card) {
+		int dmg=GameEquations.calculateAttackDamage(card.attackDamage, this);
+		breachBlock(hero, dmg,false);
+		return dmg;
+	}
+	//Step 3: first break block to free the way for health damage
+	public void breachBlock(Hero hero, int damage, boolean thornFlag) {
+		 hero.takeArmorDamage(this,GameEquations.attackIntoBlock(this, hero, damage),thornFlag);
+	}
+	//Step 4: now reduce Damage by Armor
+	public void takeArmorDamage(Hero damagingHero,int damage, boolean thornFlag) {
+		int afterArmorDamage=GameEquations.damageReducedByArmor(damage, armor);
+		takeDamage(damagingHero, afterArmorDamage, thornFlag);
+	}
+	//Step 5: finally do health damage and check if thorns are triggered
+	public void takeDamage(Hero damagingHero, int damage, boolean thornFlag){
+		if (!thornFlag&&thorns>0) {//this is thorns
+			//go directly to Step 3 with thorns (thorns can't miss)
+			breachBlock(damagingHero, thorns, true);
+		}
 		if(damage>0) {
 			if(player instanceof DungeonMaster) {
 				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
@@ -304,10 +328,6 @@ public class Hero implements Serializable{
 			}
 		}
 	}
-	public void takeArmorDamage(Hero damagingHero,int damage) {
-		int armorDamage=GameEquations.damageReducedByArmor(damage, armor);
-		takeDamage(damagingHero, armorDamage);
-	}
 
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
@@ -344,7 +364,7 @@ public class Hero implements Serializable{
 		}
 	}
 	public void heal(int heal) {//prevent overhealing
-		int healing= Math.min(heal, computeMaxHp()-getHp());
+		int healing= Math.min(heal, GameEquations.maxHealthCalc(this)-getHp());
 		this.setHp(this.getHp()+healing);
 		player.getGame().log.addLine(name+" healed for "+healing+" hp");		
 	}
@@ -494,13 +514,13 @@ public class Hero implements Serializable{
 	public void takeFireDamage(Hero damagingHero, int damage) {
 		int fireDamage=(int)(damage*(1.0-resistFire/100.0));
 		damagingHero.getPlayer().getGame().log.addLine("fire damage:");
-		takeDamage(damagingHero,fireDamage);
+		takeDamage(damagingHero,fireDamage,false);
 	}
 	public void takeColdDamage(Hero damagingHero, int damage) {
 		int coldDamage=(int)(damage*(1-resistCold/100.0));
 		cold+=coldDamage;
 		damagingHero.getPlayer().getGame().log.addLine("cold damage:");
-		takeDamage(damagingHero,coldDamage);
+		takeDamage(damagingHero,coldDamage,false);
 	}
 	//stun
 	public boolean takeStun() {
@@ -514,34 +534,34 @@ public class Hero implements Serializable{
 	};
 	//
 	//compute functions with cold effect
-	public int computeAccuracy() {
-		return GameEquations.accuracyCalc(this)-cold/4;
-	}
-	public int computeDodge() {
-		return GameEquations.dodgeCalc(this)-cold/4;
-	}
-	public int computeAttackSkill() {
-		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
-	}
-	public int computeBlockSkill() {
-		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
-	}
-	public int computeSpellPower() {
-		return GameEquations.spellPowerCalc(spellPower, intelligence)-cold/4;
-	}
-	public int computeSpellResist() {
-		return GameEquations.spellPowerCalc(spellResist, intelligence)-cold/4;
-	}
-	public int computeMaxHp() {
-		return GameEquations.maxHealthCalc(baseHp, vitality);
-	}
-	public int computeSpeed() {
-		return GameEquations.speedCalc(speed, dexterity)-cold/4;
-	}
+//	public int computeAccuracy() {
+//		return GameEquations.accuracyCalc(this)-cold/4;
+//	}
+//	public int computeDodge() {
+//		return GameEquations.dodgeCalc(this)-cold/4;
+//	}
+//	public int computeAttackSkill() {
+//		return GameEquations.blockAttackSkillCalc(attackSkill, strength, dexterity);
+//	}
+//	public int computeBlockSkill() {
+//		return GameEquations.blockAttackSkillCalc(blockSkill, strength, dexterity);
+//	}
+//	public int computeSpellPower() {
+//		return GameEquations.spellPowerCalc(spellPower, intelligence)-cold/4;
+//	}
+//	public int computeSpellResist() {
+//		return GameEquations.spellPowerCalc(spellResist, intelligence)-cold/4;
+//	}
+//	public int computeMaxHp() {
+//		return GameEquations.maxHealthCalc(baseHp, vitality);
+//	}
+//	public int computeSpeed() {
+//		return GameEquations.speedCalc(speed, dexterity)-cold/4;
+//	}
 	
 	
 	public int rollSpeed() {
-		currentSpeed=GameEquations.speedRoll(computeSpeed());
+		currentSpeed=GameEquations.speedRoll(this);
 		return currentSpeed;
 	}
 

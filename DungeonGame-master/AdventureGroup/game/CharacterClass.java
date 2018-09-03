@@ -7,8 +7,9 @@ import gameEncounter.Hero;
 
 public abstract class CharacterClass extends CharacterType{
 protected LinkedList<Card> cardPool=new LinkedList<Card>();
-	public CharacterClass() {
-		// TODO Auto-generated constructor stub
+protected Game game;
+	public CharacterClass(Game game) {
+		this.game=game;
 	}
 	@Override
 	public void modifyHero(Hero hero) {

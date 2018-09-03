@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.Game;
 import game.RoomInteraction;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
@@ -25,7 +26,7 @@ public class Well extends RoomInteraction{
 	@Override
 	public void onInteraction(Hero hero) {
 		if(charges>0) {
-			hero.heal(hero.computeMaxHp()/3);
+			hero.heal(GameEquations.maxHealthCalc(hero)/3);
 			hero.becomeStressed(-3);
 			charges+=-1;
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" receives a refreshment and looses 3 stress");

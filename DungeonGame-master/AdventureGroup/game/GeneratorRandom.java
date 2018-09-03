@@ -107,25 +107,25 @@ public class GeneratorRandom implements Serializable{
 		heroQuirkPool.add(new SimpleMinded());
 		////
 		heroRacePool=new LinkedList<CharacterRace>();
-		heroRacePool.add(new RaceHuman());
-		heroRacePool.add(new RaceDwarf());
-		heroRacePool.add(new RaceElf());
-		heroRacePool.add(new RaceHalfling());
+		heroRacePool.add(new RaceHuman(game));
+		heroRacePool.add(new RaceDwarf(game));
+		heroRacePool.add(new RaceElf(game));
+		heroRacePool.add(new RaceHalfling(game));
 		////
 		heroClassPool=new LinkedList<CharacterClass>();
-		heroClassPool.add(new TypeWarrior());
-		heroClassPool.add(new TypeMage());
-		heroClassPool.add(new TypeArcher());
-		heroClassPool.add(new TypeCleric());
-		heroClassPool.add(new TypeThief());
+		heroClassPool.add(new TypeWarrior(game));
+		heroClassPool.add(new TypeMage(game));
+		heroClassPool.add(new TypeArcher(game));
+		heroClassPool.add(new TypeCleric(game));
+		heroClassPool.add(new TypeThief(game));
 		monsterRacePool=new LinkedList<MonsterRace>();
-		monsterRacePool.add(new RaceGoblin());
-		monsterRacePool.add(new RaceZombie());
-		monsterRacePool.add(new RaceSkeletton());
-		monsterRacePool.add(new FireSpirit());
-		monsterRacePool.add(new RaceRat());
-		monsterRacePool.add(new Spectre());
-		monsterRacePool.add(new Thornback());
+		monsterRacePool.add(new RaceGoblin(game));
+		monsterRacePool.add(new RaceZombie(game));
+		monsterRacePool.add(new RaceSkeletton(game));
+		monsterRacePool.add(new FireSpirit(game));
+		monsterRacePool.add(new RaceRat(game));
+		monsterRacePool.add(new Spectre(game));
+		monsterRacePool.add(new Thornback(game));
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));

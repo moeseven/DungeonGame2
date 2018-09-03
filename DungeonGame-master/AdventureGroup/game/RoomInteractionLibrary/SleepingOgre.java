@@ -14,7 +14,7 @@ public class SleepingOgre extends RoomInteraction{
 	private int charges=1;
 	private int gold=20;
 	private Hero ogre;
-	private MonsterRace monsterRace= new RaceOgre();
+	private MonsterRace monsterRace= new RaceOgre(game);
 	LinkedList<Hero> monsterSet= new LinkedList<Hero>();
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public SleepingOgre(Game game) {

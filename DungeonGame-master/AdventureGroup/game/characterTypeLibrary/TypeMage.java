@@ -1,6 +1,7 @@
 package game.characterTypeLibrary;
 
 import game.CharacterClass;
+import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.BasicAttack;
 import gameEncounter.CardLibrary.Block;
@@ -16,7 +17,8 @@ import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeMage extends CharacterClass{
 
-	public TypeMage() {
+	public TypeMage(Game game) {
+		super(game);
 		cardPool.add(new Firewave());
 		cardPool.add(new FireBall());
 		cardPool.add(new SleepCharm());
@@ -26,13 +28,12 @@ public class TypeMage extends CharacterClass{
 		name="mage";		
 		items.add(new RustyBlade());
 		for (int i=0; i<3;i++) {
-			
-			cards.add(new Block());
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
-		cards.add(new Magicmissile());	
-		cards.add(new Magicmissile());	
+		cards.add(game.cardBuilder.buildCard("magicMissile"));
+		cards.add(game.cardBuilder.buildCard("magicMissile"));
 		for (int i=0; i<5;i++) {
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
 		
 	}

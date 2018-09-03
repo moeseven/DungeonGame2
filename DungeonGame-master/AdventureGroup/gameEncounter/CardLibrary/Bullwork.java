@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class Bullwork extends SpellnoTarget{
@@ -10,7 +11,7 @@ public class Bullwork extends SpellnoTarget{
 		
 	}
 	public boolean applyEffect(Hero self) {
-		self.block(self.computeBlockSkill()*3);
+		self.block(GameEquations.blockSkillCalc(self)*3);
 		return true;
 	}
 	@Override

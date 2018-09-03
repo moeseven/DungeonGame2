@@ -15,7 +15,7 @@ public class BlindingBomb extends SpellnoTarget{
 		if(self.getFight().getHeroes().contains(self)) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getMonsters().get(i))) {
+					if(self.attackHero(self.getFight().getMonsters().get(i),this)) {
 						self.getTarget().buffHero(new Blinded());
 						return true;
 					}
@@ -24,7 +24,7 @@ public class BlindingBomb extends SpellnoTarget{
 		}else {
 			for(int i=0; i<self.getFight().getHeroes().size();i++) {
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getHeroes().get(i))) {
+					if(self.attackHero(self.getFight().getHeroes().get(i),this)) {
 						self.getTarget().buffHero(new Blinded());
 						return true;
 					}

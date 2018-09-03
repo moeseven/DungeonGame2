@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Buff;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class IntimidatingCry extends SpellnoTarget{
@@ -14,7 +15,7 @@ public class IntimidatingCry extends SpellnoTarget{
 			self.getTarget().getPlayer().getHeroes().get(i).becomeStressed(10);
 			self.getTarget().getPlayer().getHeroes().get(i).buffHero(new Intimidated(self.getTarget().getPlayer().getHeroes().get(i)));
 		}
-		self.block((int) (self.computeBlockSkill()*0.6));
+		self.block((int) (GameEquations.blockSkillCalc(self)*0.6));
 		return true;
 	}
 	@Override

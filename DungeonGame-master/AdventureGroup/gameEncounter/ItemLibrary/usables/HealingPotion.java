@@ -1,5 +1,6 @@
 package gameEncounter.ItemLibrary.usables;
 
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
@@ -14,7 +15,7 @@ public class HealingPotion extends ItemConsumable{
 
 	@Override
 	public void mod(Hero hero) {
-		hero.heal((int)(hero.computeMaxHp()/4.0));		
+		hero.heal((int)(GameEquations.maxHealthCalc(hero)/4.0));		
 	}
 	
 }

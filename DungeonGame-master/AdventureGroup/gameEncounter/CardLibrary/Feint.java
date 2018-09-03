@@ -16,7 +16,7 @@ public class Feint extends AttackCard{
 		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				self.drawCard();
 				return true;

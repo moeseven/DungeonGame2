@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.CharacterClass;
 import game.CharacterRace;
+import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
@@ -28,14 +29,15 @@ import gameEncounter.CardLibrary.BleedingSlice;
 
 public class FireSpirit extends MonsterRace{
 
-	public FireSpirit() {
+	public FireSpirit(Game game) {
+		super(game);
 		name="fire spirit";
 		//set Position classes
-		position1Classes.add(new FireSpiritNormal());
-		position2Classes.add(new FireSpiritNormal());
-		position3Classes.add(new FireSpiritNormal());
-		position4Classes.add(new FireSpiritNormal());
-		position5Classes.add(new FireSpiritNormal());
+		position1Classes.add(new FireSpiritNormal(game));
+		position2Classes.add(new FireSpiritNormal(game));
+		position3Classes.add(new FireSpiritNormal(game));
+		position4Classes.add(new FireSpiritNormal(game));
+		position5Classes.add(new FireSpiritNormal(game));
 	}
 
 	public void modifyHero(Hero hero) {
@@ -73,7 +75,8 @@ public class FireSpirit extends MonsterRace{
 	}
 	private class FireSpiritNormal extends CharacterClass{
 
-		public FireSpiritNormal() {			
+		public FireSpiritNormal(Game game) {
+			super(game);
 			name="";
 			items.add(new FireClaw());				
 			for (int i=0; i<3;i++) {

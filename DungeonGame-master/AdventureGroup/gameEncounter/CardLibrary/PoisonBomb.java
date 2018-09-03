@@ -15,7 +15,7 @@ public class PoisonBomb extends Spell{
 		if(self.getFight().getHeroes().contains(self)) {
 			for(int i=0; i<self.getFight().getMonsters().size();i++) {
 				if(self.getFight().getMonsters().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getMonsters().get(i))) {
+					if(self.attackHero(self.getFight().getMonsters().get(i),this)) {
 						self.getTarget().poison(2);
 						return true;
 					}
@@ -24,7 +24,7 @@ public class PoisonBomb extends Spell{
 		}else {
 			for(int i=0; i<self.getFight().getHeroes().size();i++) {
 				if(self.getFight().getHeroes().get(i).isDead()==false) {
-					if(self.attackHero(self.getFight().getHeroes().get(i))) {
+					if(self.attackHero(self.getFight().getHeroes().get(i),this)) {
 						self.getTarget().poison(2);
 						return true;
 					}

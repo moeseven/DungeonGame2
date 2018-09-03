@@ -1,5 +1,7 @@
 package gameEncounter.CardLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
@@ -25,9 +27,10 @@ public class BackStab extends AttackCard{
 		return "back stab";
 	}
 	@Override
-	public String getCardText(Hero hero) {
-		//TODO correct number display
-		return super.getCardText(hero)+", penetrates armor, can not be dodged or blocked";
+	public LinkedList<String> getCardText(Hero hero) {
+		LinkedList<String> textList= new LinkedList<String>();
+		textList.add("penetrates armor, can not be dodged or blocked");
+		return textList;
 	}
 
 }

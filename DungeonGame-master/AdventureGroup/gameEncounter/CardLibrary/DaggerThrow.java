@@ -12,7 +12,7 @@ public class DaggerThrow extends AttackCard{
 		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				damageTarget(self);
 				return true;
 			}else {

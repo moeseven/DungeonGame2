@@ -17,7 +17,7 @@ public class Ram extends AttackCard{
 		legalCastPositions[4]=false;
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget())) {
+			if(self.attackHero(self.getTarget(),this)) {
 				self.moveForward();
 				self.moveForward();
 				damageTarget(self);

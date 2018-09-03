@@ -1,3 +1,10 @@
 /EffectBuilder.class
 /attackEffect.class
 /blockEffect.class
+/penetratingAttackEffect.class
+/penetrateBlockAttackEffect.class
+/useupEffect.class
+/bashEffect.class
+/minusArmorEffect.class
+/cleaveAttackEffect.class
+/fireSpellEffect.class

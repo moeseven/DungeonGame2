@@ -15,8 +15,8 @@ public class GoblinRoom1 extends Room{
 	public GoblinRoom1(Game game) {
 		super(game);
 		this.hasFight=true;
-		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior()));
-		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeWarrior()));
-		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(), new TypeArcher()));
+		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(game), new TypeWarrior(game)));
+		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(game), new TypeWarrior(game)));
+		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(game), new TypeArcher(game)));
 	}
 }

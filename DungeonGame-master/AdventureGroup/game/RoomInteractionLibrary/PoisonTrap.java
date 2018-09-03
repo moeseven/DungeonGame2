@@ -17,9 +17,10 @@ public class PoisonTrap extends Trap{
 		image=game.imageLoader.getImage(88);
 		name="poison trap";
 		trapStats.setAccuracy(25);
+		
 	}
 	public void trapHits(Hero hero) {
-		if(trapStats.attackHero(hero)) {
+		if(trapStats.attackHero(hero,card)) {
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
 			hero.poison((int) (Math.random()*5)+3);
 			hero.becomeStressed(19);

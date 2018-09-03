@@ -9,6 +9,7 @@ import game.RoomInteractionLibrary.QuestBoard;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
 import game.RoomInteractionLibrary.Well;
+import gameEncounter.GameEquations;
 
 public class Town extends Room{
 	private int idleStressRelief=3;
@@ -30,7 +31,7 @@ public class Town extends Room{
 			if (game.getPlayer().getAvailableHeroes().get(i).getStress()<0) {
 				game.getPlayer().getAvailableHeroes().get(i).setStress(0);
 			}
-			game.getPlayer().getAvailableHeroes().get(i).setHp(game.getPlayer().getAvailableHeroes().get(i).computeMaxHp());
+			game.getPlayer().getAvailableHeroes().get(i).setHp(GameEquations.maxHealthCalc(game.getPlayer().getAvailableHeroes().get(i)));
 		}	
 		if(game.getPlayer().getAvailableHeroes().size()<10) {
 			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));

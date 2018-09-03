@@ -1,6 +1,7 @@
 package gameEncounter.CardLibrary;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
 
@@ -11,8 +12,8 @@ public class Magicmissile extends Spell{
 		legalCastPositions[0]=false;
 	}
 	public boolean applyEffect(Hero self) {
-			if(self.castSpellOnHero(self.getTarget())) {	
-				self.getTarget().takeDamage(self, (int)(1+self.computeSpellPower()));
+			if(self.castMissileSpellOnHero(self.getTarget())) {	
+				self.getTarget().takeDamage(self, (int)(1+GameEquations.spellPowerCalc(self)),false);
 				return true;
 			}else {
 				return false;

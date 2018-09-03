@@ -56,6 +56,11 @@ public class HandPaintComponent extends JComponent{
 			g.setColor(Color.black);
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost(), 5+i*100, 10);
+			//mana bubbles
+			for(int m = 0;m<fw.getGame().getPlayer().getSelectedHero().getDeck().getCards().get(i).getManaCost();m++) {			
+				g.setColor(Color.BLUE);				
+				g.fillOval(5+m*10+i*100, 15, 8, 8);
+			}
 			for(int b=fw.getGame().getPlayer().getGroupSize()-1;b>=0;b--) {
 				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalCastPositions()[b]) {
 					g.setColor(Color.WHITE);
@@ -64,15 +69,16 @@ public class HandPaintComponent extends JComponent{
 				}
 				g.fillOval(5+10*(fw.getGame().getPlayer().getGroupSize()-1)-b*10+i*100, 25, 8, 8);
 			}
-			for(int b=0;b<fw.getGame().dungeonMaster.getGroupSize();b++) {
-				if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalTargetPositions()[b]) {
-					g.setColor(Color.ORANGE);
-				}else {
-					g.setColor(Color.DARK_GRAY);
+			if (!fw.getGame().getPlayer().getSelectedHero().getHand().get(i).isFriendly()) {
+				for(int b=0;b<fw.getGame().dungeonMaster.getGroupSize();b++) {
+					if(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getLegalTargetPositions()[b]) {
+						g.setColor(Color.ORANGE);
+					}else {
+						g.setColor(Color.DARK_GRAY);
+					}
+					g.fillOval(42+b*10+i*100, 25, 8, 8);
 				}
-				g.fillOval(42+b*10+i*100, 25, 8, 8);
-			}
-			
+			}			
 			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1+i*100, 1, 100, 80);
