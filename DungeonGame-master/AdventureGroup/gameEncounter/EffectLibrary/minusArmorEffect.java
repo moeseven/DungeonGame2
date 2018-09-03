@@ -10,14 +10,14 @@ public class minusArmorEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		self.getTarget().buffHero(new minusArmor());
+		self.getTarget().buffHero(new minusArmor(5));
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return "bash";
+		return "-5 armor";
 	}
 
 }
