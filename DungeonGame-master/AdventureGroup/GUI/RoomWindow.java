@@ -17,7 +17,7 @@ public class RoomWindow extends JFrame{
 		this.mm=mm;
 		setTitle("room");
 		this.game=game;		
-		this.setSize(1300, 650);
+		this.setSize(1300, 680);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setLocation(10, 10);

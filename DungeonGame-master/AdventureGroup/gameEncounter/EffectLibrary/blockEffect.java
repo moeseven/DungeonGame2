@@ -9,7 +9,9 @@ public class blockEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		self.block(card.getBlock());
+		for (int i = 0; i < self.getTargets().size(); i++) {
+			self.getTargets().get(i).block(GameEquations.calculateBlockAmount(card.getBlock(), self));
+		}		
 		return true;
 	}
 

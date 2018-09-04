@@ -1,5 +1,7 @@
 package gameEncounter.EffectLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -9,21 +11,28 @@ public class attackEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		if(self.attackHero(self.getTarget(),card)) {
-			damageTarget(self, self.getTarget(), card);
+		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
+		for (int i = 0; i < self.getTargets().size(); i++) {
+			if(self.attackHero(self.getTargets().get(i),card)) {
+				nextTargets.add(self.getTargets().get(i));
+				damageTarget(self, self.getTargets().get(i), card);
+			}
+		}
+		self.setTargets(nextTargets);
+		if(nextTargets.size()>0) {
 			return true;
 		}else {
 			return false;
 		}
 	}
 	protected void damageTarget(Hero self, Hero target, Card_new card) {	
-		self.dealAttackDamage(target,GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card.getAttackDamage(), self)));
+		self.dealAttackDamage(target, card, false);
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return GameEquations.calculateAttackDamage(card.getAttackDamage(), self)+" attack damage";
+		return GameEquations.calculateAttackDamage(card, self)+" attack damage";
 	}
 
 }

@@ -1,5 +1,7 @@
 package gameEncounter.EffectLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -9,15 +11,18 @@ public class fireSpellEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		if(self.castMissileSpellOnHero(self.getTarget(),card)) {	
-			damageTarget(self, self.getTarget(), card);
+		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
+		for (int i = 0; i < self.getTargets().size(); i++) {
+			nextTargets.add(self.getTargets().get(i));
+			//roll cirts for every target
+			self.getTargets().get(i).takeFireDamage(self, GameEquations.rollForCrit(self, card, GameEquations.calculateSpellDamage(card.getSpellDamage(), self)));
+		}
+		self.setTargets(nextTargets);
+		if(nextTargets.size()>0) {
 			return true;
 		}else {
 			return false;
 		}
-	}
-	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		self.getTarget().takeFireDamage(self, GameEquations.calculateSpellDamage(card.getSpellDamage(), self));
 	}
 
 	@Override

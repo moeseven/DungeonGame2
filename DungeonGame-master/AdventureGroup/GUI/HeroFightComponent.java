@@ -40,7 +40,7 @@ public class HeroFightComponent extends JComponent{
 				fw.getGame().getPlayer().setSelectedHero(hero);						
 			}else{
 				if (e.getButton()==3){
-					fw.getGame().getPlayer().getSelectedHero().setTarget(hero);
+					fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
 					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
 				}
 			}

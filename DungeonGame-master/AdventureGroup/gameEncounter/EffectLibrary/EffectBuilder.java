@@ -5,34 +5,94 @@ import gameEncounter.CardEffect;
 public class EffectBuilder {
 
 	public static CardEffect buildEffect(String name) {
-		CardEffect retVal=null;
+		if (name.equals("addCardToTargetDeck")) {
+			return new addCardToTargetDeckEffect();
+		}
+		if (name.equals("allResistSpell")) {
+			return new allResistSpellEffect();
+		}
+		if (name.equals("armorSpell")) {
+			return new armorSpellEffect();
+		}
 		if (name.equals("attack")) {
-			retVal = new attackEffect();
+			return new attackEffect();
 		}
 		if (name.equals("bash")) {
-			retVal = new bashEffect();
+			return new bashEffect();
+		}
+		if (name.equals("blockableBleed")) {
+			return new blockableBleedEffect();
+		}
+		if (name.equals("blockablePoison")) {
+			return new blockablePoisonEffect();
 		}
 		if (name.equals("block")) {
-			retVal = new blockEffect();
+			return new blockEffect();
+		}
+		if (name.equals("cardDraw")) {
+			return new cardDrawEffect();
 		}
 		if (name.equals("cleaveAttack")) {
-			retVal = new cleaveAttackEffect();
+			return new cleaveAttackEffect();
+		}
+		if (name.equals("coldSpell")) {
+			return new coldSpellEffect();
+		}
+		if (name.equals("compositeCold")) {
+			return new compositeColdEffect();
+		}
+		if (name.equals("compositeFire")) {
+			return new compositeFireEffect();
+		}
+		if (name.equals("concentrate")) {
+			return new concentrateEffect();
+		}
+		if (name.equals("cureBleed")) {
+			return new cureBleedEffect();
+		}
+		if (name.equals("fireBall")) {
+			return new fireBallEffect();
 		}
 		if (name.equals("fireSpell")) {
-			retVal = new fireSpellEffect();
+			return new fireSpellEffect();
 		}
-		if (name.equals("minusArmor")) {
-			retVal = new minusArmorEffect();
+		if (name.equals("heal")) {
+			return new healEffect();
+		}
+		if (name.equals("lightningSpell")) {
+			return new lightningSpellEffect();
+		}
+		if (name.equals("manaBuff")) {
+			return new manaBuffEffect();
+		}
+		if (name.equals("missileSpell")) {
+			return new missileSpellEffect();
+		}
+		if (name.equals("penetrateArmorAttack")) {
+			return new penetrateArmorAttackEffect();
 		}
 		if (name.equals("penetrateBlockAttack")) {
-			retVal = new penetrateBlockAttackEffect();
+			return new penetrateBlockAttackEffect();
+		}
+		if (name.equals("regenerationSpell")) {
+			return new regenerationSpellEffect();
+		}
+		if (name.equals("resistableSpell")) {
+			return new resistableSpellEffect();
+		}
+		if (name.equals("strengthSpell")) {
+			return new strengthSpellEffect();
+		}
+		if (name.equals("targetAllAlliesOfTarget")) {
+			return new targetAllAlliesOfTargetEffect();
+		}
+		if (name.equals("thornSpell")) {
+			return new thornSpellEffect();
 		}
 		if (name.equals("useup")) {
-			retVal = new useupEffect();
+			return new useupEffect();
 		}
-		if (retVal==null) {
-			System.out.println("Effectbuilder failed to resolve effect name!!!");
-		}
-		return retVal;
+		System.out.println("Effectbuilder failed to resolve effect name!!!");
+		return null;
 	}
 }

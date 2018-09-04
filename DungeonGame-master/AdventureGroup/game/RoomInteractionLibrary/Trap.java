@@ -22,7 +22,7 @@ public abstract class Trap extends RoomInteraction{
 		name="trap";
 		// TODO Auto-generated constructor stub
 		hidden=true;
-		card = new Card_new("0", null, null, "trap", "120", null, null, null, null, null, null, null, null, null);
+		card = new Card_new("0", null, null, "trap", "120", null, null, null, null, null, null, null, null,null,null, null);
 		trapStats=new Hero(name, null, new genericCharacterRace(game), new genericCharacterClass(game));
 		trapStats.setAccuracy(14);
 	}

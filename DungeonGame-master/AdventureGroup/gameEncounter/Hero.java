@@ -35,6 +35,7 @@ public class Hero implements Serializable{
 	//Fight
 	private Fight fight;
 	private Hero target;
+	private LinkedList<Hero> targets;
 	private Card selectedCard;
 	private Item selectedItem;
 	private boolean isDead;
@@ -60,6 +61,7 @@ public class Hero implements Serializable{
 	protected int spellResist;
 	//resistance
 	protected int resistFire;
+	protected int resistLightning;
 	protected int resistCold;
 	protected int resistPoison;	
 	protected int resistBleed;
@@ -77,6 +79,7 @@ public class Hero implements Serializable{
 	protected int bleed;
 	protected int poison;
 	protected int cold;
+	protected int shock;
 	protected int wounds=0;
 	//current values
 	private int currentSpeed;
@@ -133,6 +136,7 @@ public class Hero implements Serializable{
 		setCritDamage(20);
 		//other
 		resistFire=3;
+		resistLightning=3;
 		resistPoison=3;
 		resistCold=3;
 		resistBleed=3;
@@ -183,24 +187,35 @@ public class Hero implements Serializable{
 		}		
 		//bleed
 		if(bleed>0) {
-			takeBleedDamage(getBleed());
+			takeBleedDamage(bleed);
 			bleed-=1;
 		}
 		//cold
 		if(cold>0) {
+			if (Math.random()>resistCold/100.0) {
+				player.getGame().log.addLine(name+" is undercooled");
+				mana-=1;
+			}
 			cold-=1;
-		}		
-
+		}
+		//lightning
+		if(shock>0) {
+			if (Math.random()>0.55) {
+				player.getGame().log.addLine(name+" is shocked");
+				mana=0;
+			}
+			shock=0;
+		}	
 	}
 	public void turnBegin(){
-		if(!isDead) {
-			applyNegativeTurnEffects();
+		if(!isDead) {			
 			this.discardHand();
 			this.block=0;
 			this.mana=manaPower;
 			for(int i=0; i<draw;i++) {
 				drawCard();
 			}
+			applyNegativeTurnEffects();
 			this.buffTick();
 			if(stunned) {
 				mana=0;
@@ -234,13 +249,6 @@ public class Hero implements Serializable{
 		}
 	}
 	//Attack stages dodge-block-armor-hp
-	
-	
-	public int dealAttackDamagePenetratingBlock(Hero hero,int dmg) {
-		dmg=GameEquations.calculateAttackDamage(dmg, this);
-		hero.takeArmorDamage(this,dmg,false);
-		return dmg;
-	}
 	public int dealWeaponDamage(Hero hero, Item item, double mult) {//weapon damage str dependant or dexterity dependant
 		int dmg;
 		 if(item instanceof Weapon) {
@@ -250,7 +258,6 @@ public class Hero implements Serializable{
 			 dmg=(int)(mult*GameEquations.FistDamage(strength));
 			 getPlayer().getGame().log.addLine("fistpunch");
 		 } 
-		 breachBlock(hero, dmg,false);
 		 return dmg;		
 	}
 	//Attacking
@@ -264,25 +271,27 @@ public class Hero implements Serializable{
 	}
 	//no direct call of Step 2 the card determines what is done with the hit
 	//Step 2: calculate damage and forward to breach Block
-	public void dealAttackDamage (Hero hero, int damage) {
-		breachBlock(hero, damage,false);
+	public void dealAttackDamage (Hero attackedHero, Card_new card, boolean thornFlag) {
+		int damage;
+		if (thornFlag) {
+			damage=thorns;
+		}else {
+			damage= GameEquations.calculateAttackDamage(card, this);
+		}
+		int afterBlockDamage = GameEquations.attackIntoBlock(this, attackedHero, damage);		
+		//crit after block
+		if (!thornFlag&&afterBlockDamage>0) {
+			afterBlockDamage = GameEquations.rollForCrit(this, card, afterBlockDamage);
+		}
+		int afterArmorDamage = GameEquations.damageReducedByArmor(afterBlockDamage, attackedHero.armor);
+		attackedHero.takeDamage(this, afterArmorDamage, thornFlag);
 	}
-	//Step 3: first break block then roll crit
-	//crits apply only after block
-	public void breachBlock(Hero hero, int damage, boolean thornFlag) {
-		int dmg=GameEquations.attackIntoBlock(this, hero, damage);
-		hero.takeArmorDamage(this,dmg,thornFlag);
-	}
-	//Step 4: now reduce Damage by Armor
-	public void takeArmorDamage(Hero damagingHero,int damage, boolean thornFlag) {
-		int afterArmorDamage=GameEquations.damageReducedByArmor(damage, armor);
-		takeDamage(damagingHero, afterArmorDamage, thornFlag);
-	}
-	//Step 5: finally do health damage and check if thorns are triggered
+	//Step 3: finally do health damage and check if thorns are triggered
 	public void takeDamage(Hero damagingHero, int damage, boolean thornFlag){
 		if (!thornFlag&&thorns>0) {//this is thorns
-			//go directly to Step 3 with thorns (thorns can't miss)
-			breachBlock(damagingHero, thorns, true);
+			//go directly to Step 2 with thorns (thorns can't miss)
+			player.getGame().log.addLine("(thorns)");
+			dealAttackDamage(damagingHero, null, true);
 		}
 		if(damage>0) {
 			if(player instanceof DungeonMaster) {
@@ -307,7 +316,7 @@ public class Hero implements Serializable{
 	}
 	public void finalDamage(int damage) {
 		this.setHp(hp-damage);
-		player.getGame().log.addLine(name+" took "+damage+" damage");
+		//player.getGame().log.addLine(name+" took "+damage+" damage");
 		if(hp<=0) {
 			hp=0;
 			this.die();
@@ -315,7 +324,7 @@ public class Hero implements Serializable{
 	}
 	public void takeBleedDamage(int damage) {
 		if(damage>0) {
-			player.getGame().log.addLine(name+" bleeds for "+damage+" hp.");
+			player.getGame().log.addLine(name+" bleeds for "+damage+" damage.");
 			this.setHp(hp-damage);
 			if(hp<=0) {
 				hp=0;
@@ -464,14 +473,9 @@ public class Hero implements Serializable{
 	}
 	public void generatelvlUpCards() {
 		lvlUpCards=new LinkedList<Card>();
+		lvlUpCards.add(player.getGame().generator.generateRandomCard(level));
 		for(int i=0; i<3;i++) {//cards should be cloned
-			try {
-				lvlUpCards.add((Card) charClass.getCardPool().get(Math.min(charClass.getCardPool().size()-1,(int)(Math.random()*charClass.getCardPool().size()))).clone());
-			} catch (CloneNotSupportedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			lvlUpCards.add(player.getGame().cardBuilder.buildCard(charClass.getCardPool().get(Math.min(charClass.getCardPool().size()-1,(int)(Math.random()*charClass.getCardPool().size())))));	
 		}
 	}
 	//
@@ -495,7 +499,7 @@ public class Hero implements Serializable{
 		}				
 	}
 	//////
-	//bleed/poison/fire/cold/stun
+	//bleed/poison/fire/lightning/cold/stun
 	public boolean bleed(int bleedAmount) {
 		if(Math.random()<resistBleed/100.0) {
 			player.getGame().log.addLine(name+" resisted bleeding");
@@ -519,14 +523,30 @@ public class Hero implements Serializable{
 	//elemental damage
 	public void takeFireDamage(Hero damagingHero, int damage) {
 		int fireDamage=(int)(damage*(1.0-resistFire/100.0));
-		damagingHero.getPlayer().getGame().log.addLine("fire damage:");
-		takeDamage(damagingHero,fireDamage,false);
+		if (Math.random()>0.5) {
+			fireDamage=(int) (fireDamage*1.6);
+			damagingHero.getPlayer().getGame().log.addLine("blazing fire:");
+		}else {
+			damagingHero.getPlayer().getGame().log.addLine("fire:");
+		}
+		int afterBlockDamage = GameEquations.elementalIntoBlock(damagingHero, this, fireDamage);		
+		takeDamage(damagingHero,afterBlockDamage,false);
+	}
+	public void takeLightningDamage(Hero damagingHero, int damage) {
+		int lightningDamage=(int)(damage*(1.0-resistLightning/100.0));
+		damagingHero.getPlayer().getGame().log.addLine("lightning damage:");
+		if (Math.random()>resistLightning/100.0) {
+			shock+=1;
+			player.getGame().log.addLine(name+" got shocked");
+		}	
+		takeDamage(damagingHero,lightningDamage,false);
 	}
 	public void takeColdDamage(Hero damagingHero, int damage) {
 		int coldDamage=(int)(damage*(1-resistCold/100.0));
-		cold+=coldDamage;
+		cold=3;
 		damagingHero.getPlayer().getGame().log.addLine("cold damage:");
-		takeDamage(damagingHero,coldDamage,false);
+		int afterBlockDamage = GameEquations.elementalIntoBlock(damagingHero, this, coldDamage);		
+		takeDamage(damagingHero,afterBlockDamage,false);
 	}
 	//stun
 	public boolean takeStun() {
@@ -585,8 +605,13 @@ public class Hero implements Serializable{
 	public Hero getTarget() {
 		return target;
 	}
-	public void setTarget(Hero target) {
+	public void setNewTarget(Hero target) {
 		this.target = target;
+		targets=new LinkedList<Hero>();
+		addTarget(target);
+	}
+	public void addTarget(Hero target) {
+		targets.add(target);
 	}
 	public Equipment getEquipment() {
 		return equipment;
@@ -822,6 +847,13 @@ public class Hero implements Serializable{
 	public void setResistPoison(int resistPoison) {
 		this.resistPoison = resistPoison;
 	}
+	
+	public int getResistLightning() {
+		return resistLightning;
+	}
+	public void setResistLightning(int resistLightning) {
+		this.resistLightning = resistLightning;
+	}
 	public int getResistBleed() {
 		return resistBleed;
 	}
@@ -920,6 +952,12 @@ public class Hero implements Serializable{
 	}
 	public void setCritDamage(int critDamage) {
 		this.critDamage = critDamage;
+	}
+	public LinkedList<Hero> getTargets() {
+		return targets;
+	}
+	public void setTargets(LinkedList<Hero> targets) {
+		this.targets = targets;
 	}	
 	
 }

@@ -19,12 +19,12 @@ public class TypeMage extends CharacterClass{
 
 	public TypeMage(Game game) {
 		super(game);
-		cardPool.add(new Firewave());
-		cardPool.add(new FireBall());
-		cardPool.add(new SleepCharm());
-		cardPool.add(new Wisdom());
-		cardPool.add(new Channel());
-		cardPool.add(new RosesAndThorns());
+		cardPool.add("fireWave");
+		cardPool.add("wisdom");
+		cardPool.add("channel");
+		cardPool.add("fireBall");
+		cardPool.add("sleepCharm");		
+		cardPool.add("rosesAndThorns");
 		name="mage";		
 		items.add(new RustyBlade());
 		for (int i=0; i<3;i++) {

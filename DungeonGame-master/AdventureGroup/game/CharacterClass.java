@@ -6,7 +6,7 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 
 public abstract class CharacterClass extends CharacterType{
-protected LinkedList<Card> cardPool=new LinkedList<Card>();
+protected LinkedList<String> cardPool=new LinkedList<String>();
 protected Game game;
 	public CharacterClass(Game game) {
 		this.game=game;
@@ -23,10 +23,10 @@ protected Game game;
 		}
 		hero.setName(hero.getName()+" ("+name+")");
 	}
-	public LinkedList<Card> getCardPool() {
+	public LinkedList<String> getCardPool() {
 		return cardPool;
 	}
-	public void setCardPool(LinkedList<Card> cardPool) {
+	public void setCardPool(LinkedList<String> cardPool) {
 		this.cardPool = cardPool;
 	}
 	

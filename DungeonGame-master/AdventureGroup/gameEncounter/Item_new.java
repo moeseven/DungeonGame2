@@ -26,6 +26,7 @@ public class Item_new extends Item implements Serializable{
 	protected int armor=0;
 	protected int health=0;
 	protected int resistSpell=0;
+	protected int resistLightning = 0;
 	protected int resistFire=0;
 	protected int resistCold=0;
 	protected int resistPoison=0;
@@ -39,7 +40,7 @@ public class Item_new extends Item implements Serializable{
 	
 	public Item_new(String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
-			String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,
+			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,
 			String name) {
 		super();
 		//
@@ -95,6 +96,9 @@ public class Item_new extends Item implements Serializable{
 		}
 		if (resistSpell!=null) {
 			this.resistSpell = Integer.parseInt(resistSpell);
+		}
+		if (resistLightning!=null) {
+			this.resistLightning = Integer.parseInt(resistLightning);
 		}
 		if (resistFire!=null) {
 			this.resistFire = Integer.parseInt(resistFire);

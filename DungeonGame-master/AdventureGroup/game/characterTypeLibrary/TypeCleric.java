@@ -19,11 +19,11 @@ public class TypeCleric extends CharacterClass{
 
 	public TypeCleric(Game game) {
 		super(game);
-		cardPool.add(new Bash());
-		cardPool.add(new DivineGrace());
-		cardPool.add(new HeavenlyShield());
-		cardPool.add(new HeavenlyStrength());
-		cardPool.add(new Harden());
+		cardPool.add("bash");
+		cardPool.add("divineGrace");
+		cardPool.add("heavenlyShield");
+		cardPool.add("heavenlyStrength");
+		cardPool.add("harden");
 		
 		name="cleric";
 		items.add(new RustyBlade());		
@@ -38,14 +38,26 @@ public class TypeCleric extends CharacterClass{
 	}
 
 	public void modifyHero(Hero hero) {
-		// TODO Auto-generated method stub
 		super.modifyHero(hero);
+		if (hero.getCharRace().getName().equals("human")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(39));
+		}
+		if (hero.getCharRace().getName().equals("dwarf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(38));
+		}
+		if (hero.getCharRace().getName().equals("elf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(122));
+		}
+		if (hero.getCharRace().getName().equals("halfling")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(123));
+		}
 		//mainstats
 		hero.setStrength(hero.getStrength()+3);
 		hero.setDexterity(hero.getDexterity()+0);
 		hero.setIntelligence(hero.getIntelligence()+4);
 		hero.setVitality(hero.getVitality()+5);
 		//
+		hero.setCritChance(hero.getCritChance()+1);
 		hero.setSpellResist(hero.getSpellResist()+1);
 		hero.setSpellPower(hero.getSpellPower()+1);
 		hero.setResistStress(hero.getResistStress()+8);

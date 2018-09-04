@@ -1,0 +1,23 @@
+package gameEncounter.EffectLibrary;
+
+import gameEncounter.CardEffect;
+import gameEncounter.Card_new;
+import gameEncounter.GameEquations;
+import gameEncounter.Hero;
+
+public class penetrateArmorAttackEffect extends attackEffect{
+
+	protected void damageTarget(Hero self, Hero target, Card_new card) {
+		int damage=GameEquations.calculateAttackDamage(card, self);		
+		int afterBlock = GameEquations.attackIntoBlock(self, target, damage);
+		int afterCrit = GameEquations.rollForCrit(self, card, afterBlock);
+		target.takeDamage(self, afterCrit, false);
+	}
+
+	@Override
+	public String generateCardText(Hero self, Card_new card) {
+		// TODO Auto-generated method stub
+		return GameEquations.calculateAttackDamage(card, self)+" armor penetrating attack damage";
+	}
+
+}

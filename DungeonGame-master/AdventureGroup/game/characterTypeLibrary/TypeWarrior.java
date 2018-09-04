@@ -27,15 +27,15 @@ public class TypeWarrior extends CharacterClass{
 
 	public TypeWarrior(Game game) {
 		super(game);
-		cardPool.add(new CarefulSlash());
-		cardPool.add(new BleedingSlice());
-		cardPool.add(new Cleave());
-		cardPool.add(new Bash());
-		cardPool.add(new Bullwork());
-		cardPool.add(new Ram());
-		cardPool.add(new MightyBlow());
-		cardPool.add(new Parry());
-		cardPool.add(new IntimidatingCry());
+//		cardPool.add(new CarefulSlash());
+//		cardPool.add(new BleedingSlice());
+//		cardPool.add(new Cleave());
+//		cardPool.add(new Bash());
+//		cardPool.add(new Bullwork());
+//		cardPool.add(new Ram());
+//		cardPool.add(new MightyBlow());
+//		cardPool.add(new Parry());
+//		cardPool.add(new IntimidatingCry());
 		name="warrior";
 		items.add(game.itemBuilder.buildItem("rustyBlade"));				
 		for (int i=0; i<4;i++) {
@@ -56,6 +56,7 @@ public class TypeWarrior extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+0);
 		hero.setVitality(hero.getVitality()+5);
 		//
+		hero.setCritChance(hero.getCritChance()+3);
 		hero.setAttackSkill(hero.getAttackSkill()+1);
 		hero.setBlockSkill(hero.getBlockSkill()+3);
 		hero.setResistStress(hero.getResistStress()+1);

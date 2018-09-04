@@ -20,13 +20,13 @@ public class TypeThief extends CharacterClass{
 
 	public TypeThief(Game game) {
 		super(game);
-		cardPool.add(new BlindingBomb());
-		cardPool.add(new PoisonBomb());
-		cardPool.add(new PoisonAttack());
-		cardPool.add(game.cardBuilder.buildCard("backStab"));
-		cardPool.add(new DaggerThrow());
-		cardPool.add(new Feint());
-		cardPool.add(new Sidestep());
+		cardPool.add("backStab");
+//		cardPool.add(new BlindingBomb());
+//		cardPool.add(new PoisonBomb());
+//		cardPool.add(new PoisonAttack());		
+//		cardPool.add(new DaggerThrow());
+//		cardPool.add(new Feint());
+//		cardPool.add(new Sidestep());
 		name="thief";
 		items.add(new RustyBlade());
 		for (int i=0; i<8;i++) {
@@ -38,14 +38,26 @@ public class TypeThief extends CharacterClass{
 	}
 
 	public void modifyHero(Hero hero) {
-		// TODO Auto-generated method stub
 		super.modifyHero(hero);
+		if (hero.getCharRace().getName().equals("human")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(25));
+		}
+		if (hero.getCharRace().getName().equals("dwarf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(35));
+		}
+		if (hero.getCharRace().getName().equals("elf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(36));
+		}
+		if (hero.getCharRace().getName().equals("halfling")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(37));
+		}
 		//mainstats
 		hero.setStrength(hero.getStrength()+2);
 		hero.setDexterity(hero.getDexterity()+4);
 		hero.setIntelligence(hero.getIntelligence()+2);
 		hero.setVitality(hero.getVitality()+1);
 		//
+		hero.setCritChance(hero.getCritChance()+8);
 		hero.setDodge(hero.getDodge()+1);
 		hero.setSpeed(hero.getSpeed()+1);
 		hero.setTrapDisarm(hero.getTrapDisarm()+40);

@@ -107,6 +107,7 @@ public class Fight implements Serializable{
 		}
 		if (this.isFightOver()){
 			for(int i=0; i<heroes.size();i++) {
+				heroes.get(i).setBlock(0);
 				heroes.get(i).removeBuffs();	
 				heroes.get(i).applyNegativeTurnEffects();
 			}
@@ -140,13 +141,13 @@ public class Fight implements Serializable{
 					    	}
 					    		
 					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).isFriendly()) {
-					    		turnOrder.get(turnOrderCounter).setTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
+					    		turnOrder.get(turnOrderCounter).setNewTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
 					    		if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
 						    		i=i-1;
 						    	}
 					    	}else {
 					    		if(targets.size()>0) {
-						    		turnOrder.get(turnOrderCounter).setTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
+						    		turnOrder.get(turnOrderCounter).setNewTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
 							    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
 							    		i=i-1;
 							    	}

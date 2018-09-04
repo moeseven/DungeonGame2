@@ -1,12 +1,13 @@
 package gameEncounter.HeroQuirkLibrary;
 
+import game.Game;
 import gameEncounter.HeroQuirk;
 import gameEncounter.ModableHeroStats;
 
 public class Hasty extends HeroQuirk{
 
-	public Hasty() {
-		super();
+	public Hasty(Game game) {
+		super(game);
 		// TODO Auto-generated constructor stub
 		name="hasty";
 		stats.getStats()[ModableHeroStats.nameResolveStat("accuracy")]=-3;

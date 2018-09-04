@@ -61,8 +61,8 @@ public class RoomInteractionComponent extends JComponent{
 				g.drawImage(ri.getImage().getScaledInstance(180, 153, 3),-40,0,null);
 			}			
 			g.setColor(Color.black);
-			g.drawString(ri.getName(), 10, 15);
-			g.drawRect(5, 5, 110, 140);
+			g.drawString(ri.getName(), 15, 75);
+			//g.drawRect(5, 5, 110, 140);
 			
 		}
 	}

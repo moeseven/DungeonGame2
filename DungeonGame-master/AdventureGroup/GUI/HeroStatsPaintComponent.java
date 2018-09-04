@@ -28,7 +28,7 @@ public class HeroStatsPaintComponent extends JComponent{
 			this.player=player;
 			height=20;
 			setBorder(new LineBorder(Color.GREEN));
-			super.setPreferredSize(new Dimension(310,height*15));
+			super.setPreferredSize(new Dimension(440,height*15));
 			setVisible(true);
 		}
 	protected void paintComponent(Graphics g){
@@ -56,9 +56,9 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("vitality: "+player.getSelectedHero().getVitality());		
 		lines.add("");
 		//
+		lines.add("crit chance: "+ player.getSelectedHero().getCritChance());
+		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero())+100)+"%");		
 		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+GameEquations.speedCalc(player.getSelectedHero())+")");
-		lines.add("");
-		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero())+100)+"%");
 		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+")");
 		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+")");
 		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero())+")");
@@ -94,7 +94,8 @@ public class HeroStatsPaintComponent extends JComponent{
 				lines.add(quirkString);
 			}
 			lines.add("");
-		}		
+		}
+		g.drawImage(player.getSelectedHero().getImage().getScaledInstance(300, 255, 5),200,0,null);	
 		//
 		for(int i=0; i<lines.size();i++) {
 			if(i<=height) {

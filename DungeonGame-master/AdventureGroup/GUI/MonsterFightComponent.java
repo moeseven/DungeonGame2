@@ -36,7 +36,7 @@ public class MonsterFightComponent extends JComponent{
 				//show more details
 			}else{
 				if (e.getButton()==3){
-					fw.getGame().getPlayer().getSelectedHero().setTarget(monster);
+					fw.getGame().getPlayer().getSelectedHero().setNewTarget(monster);
 					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
 				}
 			}
@@ -87,6 +87,6 @@ public class MonsterFightComponent extends JComponent{
 		}
 	
 		g.setColor(Color.red);
-		g.drawString(""+monster.getHp(), 10, 65);
+		g.drawString(""+monster.getHp(), 38, 155);
 	}
 }

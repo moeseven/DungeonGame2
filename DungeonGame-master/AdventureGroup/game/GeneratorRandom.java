@@ -1,6 +1,8 @@
 package game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import game.QuestLibrary.KillANecromancer;
@@ -34,6 +36,7 @@ import game.monsters.RaceSkeletton;
 import game.monsters.RaceZombie;
 import game.monsters.Spectre;
 import game.monsters.Thornback;
+import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
@@ -45,6 +48,7 @@ import gameEncounter.HeroQuirkLibrary.Hairy;
 import gameEncounter.HeroQuirkLibrary.Hasty;
 import gameEncounter.HeroQuirkLibrary.OneEyed;
 import gameEncounter.HeroQuirkLibrary.SimpleMinded;
+import gameEncounter.HeroQuirkLibrary.Sleeper;
 import gameEncounter.HeroQuirkLibrary.SlugBrained;
 import gameEncounter.HeroQuirkLibrary.Stresser;
 import gameEncounter.HeroQuirkLibrary.Strong;
@@ -77,6 +81,7 @@ import gameEncounter.ItemLibrary.usables.PotionOfStrength;
 import gameEncounter.ItemLibrary.usables.PotionOfVitality;
 
 public class GeneratorRandom implements Serializable{
+	private LinkedList<String> allCards;
 	private LinkedList<CharacterRace> heroRacePool;
 	private LinkedList<CharacterClass> heroClassPool;
 	private LinkedList<HeroQuirk> heroQuirkPool;
@@ -90,21 +95,22 @@ public class GeneratorRandom implements Serializable{
 		this.game=game;
 		//the following dont need to be cloned
 		heroQuirkPool=new LinkedList<HeroQuirk>();
-		heroQuirkPool.add(new Strong());
-		heroQuirkPool.add(new Weak());
-		heroQuirkPool.add(new Bleeder());
-		heroQuirkPool.add(new Tough());
-		heroQuirkPool.add(new OneEyed());
-		heroQuirkPool.add(new Tender());
-		heroQuirkPool.add(new Stresser());
-		heroQuirkPool.add(new SlugBrained());
-		heroQuirkPool.add(new Hairy());
-		heroQuirkPool.add(new Defensive());
-		heroQuirkPool.add(new Aggressive());
-		heroQuirkPool.add(new SubstanceAbuser());
-		heroQuirkPool.add(new Thoughtfull());
-		heroQuirkPool.add(new Hasty());
-		heroQuirkPool.add(new SimpleMinded());
+		heroQuirkPool.add(new Strong(game));
+		heroQuirkPool.add(new Weak(game));
+		heroQuirkPool.add(new Bleeder(game));
+		heroQuirkPool.add(new Tough(game));
+		heroQuirkPool.add(new OneEyed(game));
+		heroQuirkPool.add(new Tender(game));
+		heroQuirkPool.add(new Stresser(game));
+		heroQuirkPool.add(new SlugBrained(game));
+		heroQuirkPool.add(new Hairy(game));
+		heroQuirkPool.add(new Defensive(game));
+		heroQuirkPool.add(new Aggressive(game));
+		heroQuirkPool.add(new SubstanceAbuser(game));
+		heroQuirkPool.add(new Thoughtfull(game));
+		heroQuirkPool.add(new Hasty(game));
+		heroQuirkPool.add(new SimpleMinded(game));
+		heroQuirkPool.add(new Sleeper(game));
 		////
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman(game));
@@ -126,6 +132,13 @@ public class GeneratorRandom implements Serializable{
 		monsterRacePool.add(new RaceRat(game));
 		monsterRacePool.add(new Spectre(game));
 		monsterRacePool.add(new Thornback(game));
+		//cards
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		LinkedList<String> list= new LinkedList<String>(game.cardBuilder.getMap().keySet());
+		for(int i=0; i<game.cardBuilder.getMap().size();i++) {
+			map.put(list.get(i).substring(0, list.get(i).indexOf('.')), 1);
+		}
+		allCards=new LinkedList<String>(map.keySet());
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));
@@ -279,6 +292,10 @@ public class GeneratorRandom implements Serializable{
 			enchant(item, level);
 		}
 		return item;
+	}
+	public Card generateRandomCard(int level) {
+		Card card = game.cardBuilder.buildCard(allCards.get((int) Math.min(allCards.size()-1, Math.random()*allCards.size())));
+		return card;
 	}
 	public HeroQuirk generateRandomHeroQuirk(){
 		return heroQuirkPool.get((int) Math.min(heroQuirkPool.size()-1, Math.random()*heroQuirkPool.size()));

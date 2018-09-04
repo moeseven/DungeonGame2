@@ -19,6 +19,8 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	protected int block=0;
 	protected int attackDamage=0;
 	protected int spellDamage=0;
+	protected String extra;
+	protected String extra2;
 //	protected CardEffect effect= null;
 //	protected CardEffect effect2= null;
 //	protected CardEffect effect3= null;
@@ -28,7 +30,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String effect2, String effect3,String isFriendly, String text) {
+			String effect2, String effect3,String isFriendly, String text, String extra, String extra2) {
 		super();
 		if (manaCost!=null) {
 			this.manaCost = Integer.parseInt(manaCost);
@@ -78,7 +80,13 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		
 		if (text!=null) {
 			this.text=text;
-		}		
+		}
+		if (extra!=null) {
+			this.extra = extra;
+		}
+		if (extra2!=null) {
+			this.extra2 = extra2;
+		}
 	}
 	public int[] toArray( String s ) {
 	   if ( s == null ) {
@@ -158,12 +166,14 @@ public class Card_new extends Card implements Serializable,Cloneable{
 			cardText.add(cardEffect.generateCardText(hero, this));
 		}
 		if (critChance>0) {
-			cardText.add("crit chance: "+critChance);
+			cardText.add("crit chance: "+GameEquations.critChanceCalc(hero, this));
 		}
 		if (accuracy>0) {
 			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero)));
 		}
-		
+		if (cardText.size()==0) {
+			System.out.println("empty card has been built!!!");
+		}
 		return cardText;
 	}
 	@Override
@@ -271,6 +281,18 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public void setAllEffects(LinkedList<CardEffect> allEffects) {
 		this.allEffects = allEffects;
+	}
+	public String getExtra() {
+		return extra;
+	}
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
+	public String getExtra2() {
+		return extra2;
+	}
+	public void setExtra2(String extra2) {
+		this.extra2 = extra2;
 	}
 			
 	

@@ -49,7 +49,7 @@ public class ItemBuilder extends Item{
 		}
 	}	
 	public Item buildItem(String name) {
-		return new Item_new(map.get(name+".weight"), map.get(name+".goldValue"), map.get(name+".category"), map.get(name+".droppable"), map.get(name+".critChance"), map.get(name+".attack"), map.get(name+".block"), map.get(name+".spell"), map.get(name+".accuracy"), map.get(name+".dodge"), map.get(name+".speed"), map.get(name+".draw"), map.get(name+".mana"), map.get(name+".thorns"),map.get(name+".armor"), map.get(name+".health"), map.get(name+".resistSpell"), map.get(name+".resistFire"), map.get(name+".resistCold"), map.get(name+".resistPoison"), map.get(name+".resistBleed"), map.get(name+".resistStun"), map.get(name+".resistStress"),name);
+		return new Item_new(map.get(name+".weight"), map.get(name+".goldValue"), map.get(name+".category"), map.get(name+".droppable"), map.get(name+".critChance"), map.get(name+".attack"), map.get(name+".block"), map.get(name+".spell"), map.get(name+".accuracy"), map.get(name+".dodge"), map.get(name+".speed"), map.get(name+".draw"), map.get(name+".mana"), map.get(name+".thorns"),map.get(name+".armor"), map.get(name+".health"), map.get(name+".resistSpell"),map.get(name+".resistLightning"), map.get(name+".resistFire"), map.get(name+".resistCold"), map.get(name+".resistPoison"), map.get(name+".resistBleed"), map.get(name+".resistStun"), map.get(name+".resistStress"),name);
 	}
 	public HashMap<String, String> getMap() {
 		return map;

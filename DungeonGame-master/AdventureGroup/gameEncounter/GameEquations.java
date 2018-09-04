@@ -82,8 +82,8 @@ public class GameEquations {
 	}
 	
 	//damage for attacks
-	public static int calculateAttackDamage(int dmg,Hero hero) {
-		return (int) (dmg*(1+(attackSkillCalc(hero))/100.0));
+	public static int calculateAttackDamage(Card_new card,Hero hero) {
+		return (int) (card.getAttackDamage()*(1+(attackSkillCalc(hero))/100.0));
 	}
 	//block amount calculation
 	public static int calculateBlockAmount(int block,Hero hero) {
@@ -107,6 +107,22 @@ public class GameEquations {
 			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage-restDamage)+" damage");			
 		}		
 		return restDamage;
+	}
+	public static int elementalIntoBlock(Hero attacker, Hero blocker, int damage) {
+		//half block for elementals
+		int blockableDamage= damage/2;
+		int restDamage=damage-blockableDamage;
+		if(blocker.getBlock()>0){
+			blockableDamage=blockableDamage-blocker.getBlock();
+		}
+		if(blockableDamage<0) {
+			blockableDamage=0;
+		}
+		blocker.setBlock(blocker.getBlock()-(damage/2-blockableDamage));
+		if (blockableDamage<damage/2) {
+			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage/2-blockableDamage)+" damage");			
+		}		
+		return restDamage+blockableDamage;
 	}
 	//attack vs block roll old
 	public static int breachBlock(Hero attacker, Hero blocker, int damage) {

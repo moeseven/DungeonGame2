@@ -21,7 +21,7 @@ public class Cleave extends AttackCard{
 		}
 		if(self.getTarget().getPlayer().getHeroes().size()>self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1) {
 			Hero secondTarget=self.getTarget().getPlayer().getHeroes().get(self.getTarget().getPlayer().getHeroes().indexOf(self.getTarget())+1);
-			self.setTarget(secondTarget);
+			self.setNewTarget(secondTarget);
 			if(self.attackHero(self.getTarget(),this)) {				
 				damageTarget(self);
 				success=true;

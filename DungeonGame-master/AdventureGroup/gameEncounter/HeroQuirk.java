@@ -3,12 +3,16 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import game.Game;
+
 public abstract class HeroQuirk implements Serializable{
 	protected ModableHeroStats stats;
 	protected LinkedList<String> description;
 	protected String name="";	
-	public HeroQuirk() {
+	protected Game game;
+	public HeroQuirk(Game game) {
 		super();
+		this.game=game;
 		description=new LinkedList<String>();
 		stats=new ModableHeroStats();
 	}

@@ -28,7 +28,7 @@ public class HeroRoomComponent extends JComponent{
 //		}
 		this.hero=hero;
 		this.rw=rw;
-		super.setPreferredSize(new Dimension(120,150));
+		super.setPreferredSize(new Dimension(120,170));
 		MyMouseListener ml = new MyMouseListener();
 		super.addMouseListener(ml);
 		setLayout(new BorderLayout());
@@ -62,9 +62,9 @@ public class HeroRoomComponent extends JComponent{
 		g.setColor(Color.blue);
 		g.drawString(""+hero.getBlock(), 10, 45);
 		g.setColor(Color.red);
-		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 10, 65);
+		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 30, 155);
 		g.setColor(Color.GRAY);
-		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 10, 80);
+		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
 		
 	}
 }
