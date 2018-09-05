@@ -28,7 +28,7 @@ public class cleaveAttackEffect extends attackEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return GameEquations.calculateAttackDamage(card, self)+" attack damage";
+		return GameEquations.calculateAttackDamage(card, self)+" attack damage on target and behind";
 	}
 
 }

@@ -63,7 +63,7 @@ public class RaceZombie extends MonsterRace{
 		//resistances
 		hero.setResistFire(0);
 		hero.setResistCold(40);
-		hero.setResistBleed(60);
+		hero.setResistBleed(10);
 		hero.setResistPoison(80);
 		hero.setResistStun(60);
 		//

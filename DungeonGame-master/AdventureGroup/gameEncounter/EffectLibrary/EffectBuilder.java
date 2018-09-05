@@ -5,6 +5,9 @@ import gameEncounter.CardEffect;
 public class EffectBuilder {
 
 	public static CardEffect buildEffect(String name) {
+		if (name.equals("accuracy")) {
+			return new accuracyEffect();
+		}
 		if (name.equals("addCardToTargetDeck")) {
 			return new addCardToTargetDeckEffect();
 		}
@@ -74,6 +77,12 @@ public class EffectBuilder {
 		if (name.equals("penetrateBlockAttack")) {
 			return new penetrateBlockAttackEffect();
 		}
+		if (name.equals("poison")) {
+			return new poisonEffect();
+		}
+		if (name.equals("ram")) {
+			return new ramEffect();
+		}
 		if (name.equals("regenerationSpell")) {
 			return new regenerationSpellEffect();
 		}
@@ -85,6 +94,9 @@ public class EffectBuilder {
 		}
 		if (name.equals("targetAllAlliesOfTarget")) {
 			return new targetAllAlliesOfTargetEffect();
+		}
+		if (name.equals("targetSelf")) {
+			return new targetSelfEffect();
 		}
 		if (name.equals("thornSpell")) {
 			return new thornSpellEffect();

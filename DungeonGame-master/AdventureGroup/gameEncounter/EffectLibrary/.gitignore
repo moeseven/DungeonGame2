@@ -38,3 +38,6 @@
 /regenerationSpellEffect.class
 /targetAllAlliesEffect.class
 /targetAllAlliesOfTargetEffect.class
+/accuracyEffect.class
+/targetSelfEffect.class
+/ramEffect.class

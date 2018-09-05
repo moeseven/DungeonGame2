@@ -5,9 +5,9 @@ import gameEncounter.Hero;
 
 public class ArmorBuff extends Buff{
 	private int armor;
-	private int duration=5;
 	public ArmorBuff(Hero hero, int armor) {
 		this.armor=armor;
+		duration=5;
 	}
 	@Override
 	public void onTick(Hero hero) {

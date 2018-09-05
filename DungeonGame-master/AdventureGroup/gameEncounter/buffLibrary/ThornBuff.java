@@ -5,9 +5,9 @@ import gameEncounter.Hero;
 
 public class ThornBuff extends Buff{
 	private int thorns;
-	private int duration=5;
 	public ThornBuff(Hero hero, int thorns) {
 		this.thorns=thorns;
+		duration=5;
 	}
 	@Override
 	public void onTick(Hero hero) {

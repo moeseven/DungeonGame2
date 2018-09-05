@@ -5,9 +5,9 @@ import gameEncounter.Hero;
 
 public class StrengthBuff extends Buff{
 	private int strength;
-	private int duration=5;
 	public StrengthBuff(Hero hero, int strength) {
 		this.strength=strength;
+		duration=5;
 	}
 	@Override
 	public void onTick(Hero hero) {

@@ -21,12 +21,12 @@ public class TypeThief extends CharacterClass{
 	public TypeThief(Game game) {
 		super(game);
 		cardPool.add("backStab");
-//		cardPool.add(new BlindingBomb());
-//		cardPool.add(new PoisonBomb());
-//		cardPool.add(new PoisonAttack());		
-//		cardPool.add(new DaggerThrow());
-//		cardPool.add(new Feint());
-//		cardPool.add(new Sidestep());
+		cardPool.add("blindingBomb");
+		cardPool.add("poisonBomb");
+		cardPool.add("poisonousSlice()");		
+		cardPool.add("daggerThrow");
+		cardPool.add("feint");
+		cardPool.add("sideStep");
 		name="thief";
 		items.add(new RustyBlade());
 		for (int i=0; i<8;i++) {
@@ -35,6 +35,13 @@ public class TypeThief extends CharacterClass{
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
+//		cards.add(game.cardBuilder.buildCard("backStab"));
+//		cards.add(game.cardBuilder.buildCard("blindingBomb"));
+//		cards.add(game.cardBuilder.buildCard("poisonBomb"));
+//		cards.add(game.cardBuilder.buildCard("poisonousSlice"));
+//		cards.add(game.cardBuilder.buildCard("daggerThrow"));
+//		cards.add(game.cardBuilder.buildCard("feint"));
+//		cards.add(game.cardBuilder.buildCard("sideStep"));
 	}
 
 	public void modifyHero(Hero hero) {

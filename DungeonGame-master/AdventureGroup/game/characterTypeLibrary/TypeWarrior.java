@@ -27,15 +27,15 @@ public class TypeWarrior extends CharacterClass{
 
 	public TypeWarrior(Game game) {
 		super(game);
-//		cardPool.add(new CarefulSlash());
-//		cardPool.add(new BleedingSlice());
-//		cardPool.add(new Cleave());
-//		cardPool.add(new Bash());
-//		cardPool.add(new Bullwork());
-//		cardPool.add(new Ram());
-//		cardPool.add(new MightyBlow());
-//		cardPool.add(new Parry());
-//		cardPool.add(new IntimidatingCry());
+		cardPool.add("carefulSlash");
+		cardPool.add("bleedingSlice");
+		cardPool.add("cleave");
+		cardPool.add("bash");
+		cardPool.add("bullWork");
+		cardPool.add("ram");
+		cardPool.add("mightyBlow");
+		cardPool.add("parry");
+		cardPool.add("intimidatingCry");
 		name="warrior";
 		items.add(game.itemBuilder.buildItem("rustyBlade"));				
 		for (int i=0; i<4;i++) {
@@ -45,6 +45,14 @@ public class TypeWarrior extends CharacterClass{
 		for (int i=0; i<5;i++) {
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
+//		cards.add(game.cardBuilder.buildCard("carefulSlash"));
+//		cards.add(game.cardBuilder.buildCard("bleedingSlice"));
+//		cards.add(game.cardBuilder.buildCard("cleave"));
+//		cards.add(game.cardBuilder.buildCard("bash"));
+//		cards.add(game.cardBuilder.buildCard("ram"));
+//		cards.add(game.cardBuilder.buildCard("mightyBlow"));
+//		cards.add(game.cardBuilder.buildCard("parry"));
+//		cards.add(game.cardBuilder.buildCard("intimidatingCry"));
 	}
 
 	public void modifyHero(Hero hero) {
