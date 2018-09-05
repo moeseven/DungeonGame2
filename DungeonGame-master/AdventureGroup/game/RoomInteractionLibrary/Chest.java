@@ -30,13 +30,15 @@ public class Chest extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
+		image=game.imageLoader.getImage(90);
 		if(charges>0) {
 			charges+=-1;
 			hero.getPlayer().gainGold(gold);
 			for(int i=0; i<items.size();i++) {
 				hero.getPlayer().addItemtoInventory(items.get(i));
 			}			
-		}else {			
+		}else {		
+			
 			hero.getPlayer().getGame().log.addLine("the chest is empty");
 		}
 		

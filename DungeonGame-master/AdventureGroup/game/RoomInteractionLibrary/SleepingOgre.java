@@ -20,6 +20,7 @@ public class SleepingOgre extends RoomInteraction{
 	public SleepingOgre(Game game) {
 		super(game);
 		name="sleeping ogre";		 
+		image=game.imageLoader.getImage(96);
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub
 	}

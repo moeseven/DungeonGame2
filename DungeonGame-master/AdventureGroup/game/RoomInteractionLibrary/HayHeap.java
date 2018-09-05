@@ -30,6 +30,7 @@ public class HayHeap extends RoomInteraction{
 	@Override
 	public void onInteraction(Hero hero) {
 		hero.becomeStressed((int) (Math.random()*6));
+		image=game.imageLoader.getImage(95-Math.max(1, charges));
 		if(charges>0) {
 			charges+=-1;
 			if(Math.random()>0.2) {

@@ -27,6 +27,7 @@ public class Sack extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
+		image=game.imageLoader.getImage(91);
 		if(charges>0) {
 			charges+=-1;
 			if(Math.random()>0.4) {

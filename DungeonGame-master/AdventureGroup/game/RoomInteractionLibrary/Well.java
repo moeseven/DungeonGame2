@@ -30,7 +30,8 @@ public class Well extends RoomInteraction{
 			hero.becomeStressed(-3);
 			charges+=-1;
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" receives a refreshment and looses 3 stress");
-		}else {			
+		}else {		
+			image=game.imageLoader.getImage(97);
 			hero.getPlayer().getGame().log.addLine("the well is empty");
 		}
 		

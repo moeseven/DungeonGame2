@@ -39,8 +39,19 @@ public class TypeMage extends CharacterClass{
 	}
 
 	public void modifyHero(Hero hero) {
-		// TODO Auto-generated method stub
 		super.modifyHero(hero);
+		if (hero.getCharRace().getName().equals("human")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(124));
+		}
+		if (hero.getCharRace().getName().equals("dwarf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(127));
+		}
+		if (hero.getCharRace().getName().equals("elf")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(125));
+		}
+		if (hero.getCharRace().getName().equals("halfling")) {
+			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(126));
+		}
 		//mainstats
 		hero.setStrength(hero.getStrength()+0);
 		hero.setDexterity(hero.getDexterity()+1);

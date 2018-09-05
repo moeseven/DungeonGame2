@@ -290,7 +290,7 @@ public class Hero implements Serializable{
 	public void takeDamage(Hero damagingHero, int damage, boolean thornFlag){
 		if (!thornFlag&&thorns>0) {//this is thorns
 			//go directly to Step 2 with thorns (thorns can't miss)
-			player.getGame().log.addLine("(thorns)");
+			player.getGame().log.addLine("thorns: "+thorns);
 			dealAttackDamage(damagingHero, null, true);
 		}
 		if(damage>0) {
