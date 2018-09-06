@@ -5,17 +5,11 @@ import gameEncounter.CardEffect;
 public class EffectBuilder {
 
 	public static CardEffect buildEffect(String name) {
-		if (name.equals("accuracy")) {
-			return new accuracyEffect();
-		}
 		if (name.equals("addCardToTargetDeck")) {
 			return new addCardToTargetDeckEffect();
 		}
 		if (name.equals("allResistSpell")) {
 			return new allResistSpellEffect();
-		}
-		if (name.equals("armorSpell")) {
-			return new armorSpellEffect();
 		}
 		if (name.equals("attack")) {
 			return new attackEffect();
@@ -71,6 +65,12 @@ public class EffectBuilder {
 		if (name.equals("missileSpell")) {
 			return new missileSpellEffect();
 		}
+		if (name.equals("modifyStat")) {
+			return new modifyStatEffect();
+		}
+		if (name.equals("modifyStatSpell")) {
+			return new modifyStatSpellEffect();
+		}
 		if (name.equals("penetrateArmorAttack")) {
 			return new penetrateArmorAttackEffect();
 		}
@@ -89,17 +89,11 @@ public class EffectBuilder {
 		if (name.equals("resistableSpell")) {
 			return new resistableSpellEffect();
 		}
-		if (name.equals("strengthSpell")) {
-			return new strengthSpellEffect();
-		}
 		if (name.equals("targetAllAlliesOfTarget")) {
 			return new targetAllAlliesOfTargetEffect();
 		}
 		if (name.equals("targetSelf")) {
 			return new targetSelfEffect();
-		}
-		if (name.equals("thornSpell")) {
-			return new thornSpellEffect();
 		}
 		if (name.equals("useup")) {
 			return new useupEffect();

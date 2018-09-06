@@ -41,3 +41,5 @@
 /accuracyEffect.class
 /targetSelfEffect.class
 /ramEffect.class
+/modifyStatEffect.class
+/modifyStatSpellEffect.class

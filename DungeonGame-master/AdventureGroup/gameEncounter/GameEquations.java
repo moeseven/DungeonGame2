@@ -34,7 +34,7 @@ public class GameEquations {
 	}	
 	//spellresist calculation from intelligence
 	public static int spellResistCalc(Hero hero) {
-		return (int) (hero.getSpellResist()*(1+hero.getIntelligence()/20.0));
+		return hero.getSpellResist();
 	}
 	//crit calculations
 	public static int critDamageCalc(Hero hero) {

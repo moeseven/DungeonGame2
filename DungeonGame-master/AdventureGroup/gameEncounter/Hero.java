@@ -43,7 +43,7 @@ public class Hero implements Serializable{
 	//type
 	protected CharacterClass charClass;
 	protected CharacterRace charRace;
-	//stats
+	/////stats//////
 	protected int speed;
 	protected ModableHeroStats stats;			
 	protected Deck deck;	
@@ -58,7 +58,7 @@ public class Hero implements Serializable{
 	protected int attackSkill;// vs block skill
 	protected int blockSkill;
 	protected int spellPower;//vs spell resist
-	protected int spellResist;
+	protected int resistSpell;
 	//resistance
 	protected int resistFire;
 	protected int resistLightning;
@@ -74,6 +74,7 @@ public class Hero implements Serializable{
 	protected int vitality;
 	protected int dexterity;
 	protected int intelligence;
+	////
 	//status
 	protected boolean stunned;
 	protected int bleed;
@@ -129,12 +130,12 @@ public class Hero implements Serializable{
 		setAccuracy(8);
 		setDodge(8);
 		setSpellPower(8);
-		setSpellResist(8);
 		setBaseHp(100);
 		setSpeed(10);
 		setCritChance(0);
 		setCritDamage(20);
 		//other
+		resistSpell =4;
 		resistFire=3;
 		resistLightning=3;
 		resistPoison=3;
@@ -234,7 +235,7 @@ public class Hero implements Serializable{
 	}
 	//Cast resistable spell
 	public boolean castResistableSpellOnHero(Hero hero) {
-		if(GameEquations.resist(this, hero)) {
+		if(Math.random()<hero.getSpellResist()/100.0) {
 			return false;
 		}else {
 			return true;
@@ -566,7 +567,118 @@ public class Hero implements Serializable{
 	}
 
 	//A all stats to String method might be handy for gui
-
+	//
+	//modify stats method for items and buffs...
+	public boolean modifyStat(String stat, int value) {
+	/////stats//////
+		if (stat.equals("speed")) {
+			speed+=value;
+			return true;
+		}	
+		if (stat.equals("thorns")) {
+			thorns+=value;
+			return true;
+		}	
+		if (stat.equals("draw")) {
+			draw+=value;
+			return true;
+		}	
+		if (stat.equals("manaPower")) {
+			manaPower+=value;
+			return true;
+		}
+		if (stat.equals("armor")) {
+			armor+=value;
+			return true;
+		}
+		if (stat.equals("accuracy")) {
+			accuracy+=value;
+			return true;
+		}
+		if (stat.equals("dodge")) {
+			dodge+=value;
+			return true;
+		}
+		if (stat.equals("critChance")) {
+			critChance+=value;
+			return true;
+		}
+		if (stat.equals("critDamage")) {
+			critDamage+=value;
+			return true;
+		}
+		if (stat.equals("attackSkill")) {
+			attackSkill+=value;
+			return true;
+		}
+		if (stat.equals("blockSkill")) {
+			blockSkill+=value;
+			return true;
+		}
+		if (stat.equals("spellPower")) {
+			spellPower+=value;
+			return true;
+		}
+		//resistance
+		if (stat.equals("resistSpell")) {
+			resistSpell+=value;
+			return true;
+		}		
+		if (stat.equals("resistFire")) {
+			resistFire+=value;
+			return true;
+		}
+		if (stat.equals("resistLightning")) {
+			resistLightning+=value;
+			return true;
+		}
+		if (stat.equals("resistCold")) {
+			resistCold+=value;
+			return true;
+		}
+		if (stat.equals("resistPoison")) {
+			resistPoison+=value;
+			return true;
+		}
+		if (stat.equals("resistBleed")) {
+			resistBleed+=value;
+			return true;
+		}
+		if (stat.equals("resistStun")) {
+			resistStun+=value;
+			return true;
+		}
+		if (stat.equals("resistStress")) {
+			resistStress+=value;
+			return true;
+		}
+		if (stat.equals("trapDisarm")) {
+			trapDisarm+=value;
+			return true;
+		}
+		if (stat.equals("baseHp")) {
+			baseHp+=value;
+			return true;
+		}
+		if (stat.equals("strength")) {
+			strength+=value;
+			return true;
+		}
+		if (stat.equals("vitality")) {
+			vitality+=value;
+			return true;
+		}
+		if (stat.equals("dexterity")) {
+			dexterity+=value;
+			return true;
+		}
+		if (stat.equals("intelligence")) {
+			intelligence+=value;
+			return true;
+		}
+		System.out.println("stat resolve error!");
+		return false;
+	}
 	//
 	public int getPosition() {
 		return player.getHeroes().indexOf(this);
@@ -806,10 +918,10 @@ public class Hero implements Serializable{
 		this.spellPower = spellPower;
 	}
 	public int getSpellResist() {
-		return spellResist;
+		return resistSpell;
 	}
 	public void setSpellResist(int spellResist) {
-		this.spellResist = spellResist;
+		this.resistSpell = spellResist;
 	}
 	public LinkedList<Buff> getBuffs() {
 		return buffs;

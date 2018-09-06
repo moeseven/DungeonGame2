@@ -4,9 +4,7 @@ import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
-import gameEncounter.buffLibrary.ArmorBuff;
 import gameEncounter.buffLibrary.ManaBonusBuff;
-import gameEncounter.buffLibrary.StrengthBuff;
 
 public class manaBuffEffect extends CardEffect{
 
