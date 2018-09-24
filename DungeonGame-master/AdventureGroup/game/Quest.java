@@ -1,9 +1,10 @@
 package game;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 
-public abstract class Quest {
+public abstract class Quest implements Serializable{
 protected String description;
 protected boolean finished;
 protected int experienceReward;

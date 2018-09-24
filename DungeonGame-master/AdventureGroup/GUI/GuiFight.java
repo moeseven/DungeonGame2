@@ -45,24 +45,36 @@ public class GuiFight extends JPanel{
 	}
 	private class ml extends MouseAdapter{
 		public void mousePressed(MouseEvent e){
-			fw.getGame().getRoom().getFight().nextTurn();
-			fw.getGuiFight().upadate();
-			fw.revalidate();
-			fw.repaint();
-			if(fw.getGame().getRoom().getFight().isFightOver()) {
-				fw.getGame().getRoom().setHasFight(false);
-				fw.windowswitch();
-			}
+			endTurn();
 		}
 	}
-	private class mlRetreat extends MouseAdapter{
-		public void mousePressed(MouseEvent e){
-			fw.getGame().retreatHeroes();
+	private void endTurn() {
+		fw.getGame().getRoom().getFight().nextTurn();
+		upadate();
+		fw.revalidate();
+		fw.repaint();
+		if(fw.getGame().getRoom().getFight().isFightOver()) {
+			fw.getGame().getRoom().setHasFight(false);
 			fw.windowswitch();
 		}
 	}
+	
+	private class mlRetreat extends MouseAdapter{
+		public void mousePressed(MouseEvent e){
+			//try to retreat
+			fw.getGame().getRoom().getFight().retreatWish+=fw.getGame().getPlayer().getSelectedHero().getMana()/fw.getGame().getPlayer().getSelectedHero().getManaPower();			
+			if (Math.random()*3<fw.getGame().getRoom().getFight().retreatWish&&fw.getGame().getPlayer().getSelectedHero().getMana()>0) {
+				fw.getGame().getRoom().getFight().retreatWish=0;
+				fw.getGame().retreatHeroes();
+				fw.windowswitch();
+			}else{
+				fw.getGame().log.addLine("retreat failed!");
+				fw.getGame().getPlayer().getSelectedHero().setMana(0); 
+				endTurn();
+			}
+		}
+	}
 	public void myUpdate() {
-		// TODO Auto-generated method stub
 		hc=new HeroComponent(this.fw);
 		mc=new CombatComponent(this.fw);
 		lc=new LogComponent(fw.getGame().log);

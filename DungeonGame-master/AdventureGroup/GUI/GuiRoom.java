@@ -17,6 +17,7 @@ import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import tools.ClickableRectangle;
@@ -249,7 +250,9 @@ public class GuiRoom extends JPanel{
 				//get equipment position from click
 				rc.triggerClick(e.getX(), e.getY());
 				rc.updateCaptions();
-				gw.repaint();				
+				upadate();
+				revalidate();
+				repaint();			
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -258,7 +261,8 @@ public class GuiRoom extends JPanel{
 		} 
 	}
 	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
+		super.paintComponent(g);				
+		g.drawImage(shop.getImage().getScaledInstance(180, 153, 3),-40,0,null);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -406,7 +410,9 @@ private class MyMouseListener extends MouseAdapter{
 			//get equipment position from click
 			rc.triggerClick(e.getX(), e.getY());
 			rc.updateCaptions();
-			gw.repaint();				
+			upadate();
+			revalidate();
+			repaint();			
 		}else{
 			if (e.getButton()==3){
 				//new CardView(card);
@@ -416,6 +422,7 @@ private class MyMouseListener extends MouseAdapter{
 }
 protected void paintComponent(Graphics g){
 	super.paintComponent(g);
+	g.drawImage(tavern.getImage().getScaledInstance(180, 153, 3),-40,0,null);
 	for(int i=0; i<rc.rectAngles.size();i++) {
 		g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 		for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -430,6 +437,7 @@ protected void paintComponent(Graphics g){
 		private MedicineMan mm;
 		private int woundhealfee=110;
 		private int stresshealfee=30;
+		private int healfee=5;
 		private MedicineInterface(RoomWindow roomWindow, MedicineMan s) {
 		this.gw=roomWindow;
 		this.mm=s;
@@ -442,6 +450,25 @@ protected void paintComponent(Graphics g){
 		setVisible(true);
 		//rectangles
 		rc=new RectangleClicker();
+		//health heal
+				rc.addRect(new ClickableRectangle("heal hero",405,120,220,30) {
+					@Override
+					public void onClick() {
+						// TODO Auto-generated method stub
+						if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
+							if(gw.getGame().getPlayer().getGold()>=healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
+									gw.getGame().getPlayer().gainGold(-healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
+									gw.getGame().getPlayer().getSelectedHero().heal(GameEquations.maxHealthCalc(gw.getGame().getPlayer().getSelectedHero()));
+							}
+						}										
+					}
+					@Override
+					public void updateCaption() {
+						caption=new LinkedList<String>();
+						caption.add("heal "+gw.getGame().getPlayer().getSelectedHero().getName()+".");
+						caption.add("cost: "+healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+					}		
+				});
 		//wound heal
 		rc.addRect(new ClickableRectangle("woundheal hero",405,40,220,40) {
 			@Override
@@ -495,7 +522,7 @@ protected void paintComponent(Graphics g){
 			}		
 		});
 		//gold
-		rc.addRect(new ClickableRectangle("gold",405,120,220,20) {
+		rc.addRect(new ClickableRectangle("gold",405,150,220,20) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -516,7 +543,9 @@ protected void paintComponent(Graphics g){
 				//get equipment position from click
 				rc.triggerClick(e.getX(), e.getY());
 				rc.updateCaptions();
-				gw.repaint();				
+				upadate();
+				revalidate();
+				repaint();			
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -526,6 +555,7 @@ protected void paintComponent(Graphics g){
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.drawImage(mm.getImage().getScaledInstance(180, 153, 3),-40,0,null);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -620,15 +650,14 @@ protected void paintComponent(Graphics g){
 						int altarRoll= (int) (Math.random()*1000)+item.getGoldValue();
 						if(altarRoll>920) {
 							gw.getGame().log.addLine("the gods gift you power and insight!");
-							hero.gainExp(300);
-							hero.setVitality(hero.getVitality()+1);							
+							hero.gainExp(300);						
 						}else {
 							if(altarRoll>470) {
 								gw.getGame().log.addLine("the god's are content");
 								hero.gainExp(15);
 							}else {
 								gw.getGame().log.addLine("the god's are angered");
-								hero.takeFireDamage(hero, 25);
+								hero.takeFireDamage(hero, 45,-1*hero.getResistFire());
 								hero.becomeStressed(30);
 							}
 						}
@@ -654,7 +683,9 @@ protected void paintComponent(Graphics g){
 				//get equipment position from click
 				rc.triggerClick(e.getX(), e.getY());
 				rc.updateCaptions();
-				gw.repaint();				
+				upadate();
+				revalidate();
+				repaint();				
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
@@ -664,6 +695,7 @@ protected void paintComponent(Graphics g){
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.drawImage(altar.getImage().getScaledInstance(180, 153, 3),-40,0,null);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {

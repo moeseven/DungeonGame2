@@ -108,24 +108,24 @@ public class GameEquations {
 		}		
 		return restDamage;
 	}
-	public static int elementalIntoBlock(Hero attacker, Hero blocker, int damage) {
-		//half block for elementals
-		int blockableDamage= damage/2;
-		int restDamage=damage-blockableDamage;
-		if(blocker.getBlock()>0){
-			blockableDamage=blockableDamage-blocker.getBlock();
-		}
-		if(blockableDamage<0) {
-			blockableDamage=0;
-		}
-		blocker.setBlock(blocker.getBlock()-(damage/2-blockableDamage));
-		if (blockableDamage<damage/2) {
-			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage/2-blockableDamage)+" damage");			
-		}		
-		return restDamage+blockableDamage;
-	}
+//	public static int elementalIntoBlock(Hero attacker, Hero blocker, int damage) {
+//		//half block for elementals
+//		int blockableDamage= damage/2;
+//		int restDamage=damage-blockableDamage;
+//		if(blocker.getBlock()>0){
+//			blockableDamage=blockableDamage-blocker.getBlock();
+//		}
+//		if(blockableDamage<0) {
+//			blockableDamage=0;
+//		}
+//		blocker.setBlock(blocker.getBlock()-(damage/2-blockableDamage));
+//		if (blockableDamage<damage/2) {
+//			blocker.getPlayer().getGame().log.addLine(blocker.getName()+" blocked "+(damage/2-blockableDamage)+" damage");			
+//		}		
+//		return restDamage+blockableDamage;
+//	}
 	//attack vs block roll old
-	public static int breachBlock(Hero attacker, Hero blocker, int damage) {
+	public static int breachBlock(Hero attacker, Hero blocker, int damage) {//old
 		int restDamage=damage;
 		if(blocker.getBlock()>0){
 			int block = blocker.getBlock();
@@ -145,8 +145,7 @@ public class GameEquations {
 	
 	//damage reduction by armor
 	public static int damageReducedByArmor(int damage, int armor) {
-		//negative armor does not amplify damage
-		return (int) (damage/(1+Math.max(0, armor)/100.0));
+		return (int) (damage/(1+armor/100.0));
 	}
 	
 	//unarmed fist damage

@@ -35,10 +35,7 @@ public abstract class Room implements Serializable{
 	public void initialize() {
 		readyToLeave=false;
 	}
-	public void prepareRoomAndEnter(Game game) {
-		for(int i=0; i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).applyNegativeTurnEffects();
-		}		
+	public void prepareRoomAndEnter(Game game) {	
 		for(int i=0; i<interactions.size();i++) {
 			interactions.get(i).onEnter(game);
 		}

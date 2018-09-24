@@ -12,6 +12,7 @@ import game.DungeonMaster;
 import game.Player;
 import game.RoomInteractionLibrary.StandardCorpse;
 import gameEncounter.CardLibrary.Status.Wound;
+import gameEncounter.HeroQuirkLibrary.Bleeder;
 import gameEncounter.buffLibrary.Bashed;
 
 public class Hero implements Serializable{
@@ -55,20 +56,28 @@ public class Hero implements Serializable{
 	public int dodge;
 	protected int critChance;
 	protected int critDamage;
-	protected int attackSkill;// vs block skill
+	protected int attackSkill;
 	protected int blockSkill;
-	protected int spellPower;//vs spell resist
-	protected int resistSpell;
+	protected int spellPower;
+	protected int spellDuration;
+	//elemental bonus
+	protected int fireDmg;
+	protected int coldDmg;
+	protected int lightningDmg;
+	protected int poisonDmg;
+	protected int bleedDmg;
+	protected int magicDmg;
 	//resistance
+	protected int resistSpell; // for magic dmg and curse mitigation
 	protected int resistFire;
 	protected int resistLightning;
 	protected int resistCold;
 	protected int resistPoison;	
 	protected int resistBleed;
 	protected int resistStun;
-	protected int resistStress;
-	protected int trapDisarm;
+	protected int resistStress;	
 	//
+	protected int trapDisarm;
 	protected int baseHp;
 	protected int strength;
 	protected int vitality;
@@ -80,6 +89,7 @@ public class Hero implements Serializable{
 	protected int bleed;
 	protected int poison;
 	protected int cold;
+	protected int fire;
 	protected int shock;
 	protected int wounds=0;
 	//current values
@@ -147,6 +157,7 @@ public class Hero implements Serializable{
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
+		spellDuration=2;
 		setExperienceValue(10);
 	}
 	public void initialize() {			
@@ -181,29 +192,49 @@ public class Hero implements Serializable{
 		}
 	}
 	public void applyNegativeTurnEffects() {
-		//poison TODO not working properly
-		if(poison>0) {	
+		//poison
+		if(poison>0) {		//poison increases when using mana		
+			sufferPoison();	
 			poison-=1;		
-			takePoisonDamage((int) (2+hp/30.0));			
 		}		
 		//bleed
 		if(bleed>0) {
-			takeBleedDamage(bleed);
+			if(Math.random()<resistBleed/100) {
+				bleed-=1;
+			}
+			sufferBleeding();
 			bleed-=1;
+		}
+		//fire
+		if (fire>5) {
+			fire=(int) (fire*0.25);
+			player.getGame().log.addLine("burning: ");
+			takeDamage(this, fire, true);
+		}else {
+			fire=0;
 		}
 		//cold
 		if(cold>0) {
-			if (Math.random()>resistCold/100.0) {
-				player.getGame().log.addLine(name+" is undercooled");
+			double r=Math.random()*100*(1+resistCold/100);
+			if (r<cold/GameEquations.maxHealthCalc(this)+0.3) {
+				player.getGame().log.addLine(name+" is chilled");
 				mana-=1;
+			}else {
+				if(r<cold/GameEquations.maxHealthCalc(this)) {
+					player.getGame().log.addLine(name+" is frozen");
+					stunned=true;
+					this.block(GameEquations.calculateBlockAmount(10, this));
+				}
 			}
-			cold-=1;
+			cold=(int) Math.max(0, cold-GameEquations.maxHealthCalc(this)*0.05*(1+resistCold));
 		}
 		//lightning
 		if(shock>0) {
-			if (Math.random()>0.55) {
-				player.getGame().log.addLine(name+" is shocked");
-				mana=0;
+			if (Math.random()<shock/GameEquations.maxHealthCalc(this)) {
+				if(Math.random()*100>resistLightning) {
+					player.getGame().log.addLine(name+" is shocked");
+					stunned=true;
+				}			
 			}
 			shock=0;
 		}	
@@ -289,7 +320,7 @@ public class Hero implements Serializable{
 	}
 	//Step 3: finally do health damage and check if thorns are triggered
 	public void takeDamage(Hero damagingHero, int damage, boolean thornFlag){
-		if (!thornFlag&&thorns>0) {//this is thorns
+		if (!thornFlag&&thorns>0&&damagingHero!=this) {//this is thorns
 			//go directly to Step 2 with thorns (thorns can't miss)
 			player.getGame().log.addLine("thorns: "+thorns);
 			dealAttackDamage(damagingHero, null, true);
@@ -323,27 +354,7 @@ public class Hero implements Serializable{
 			this.die();
 		}
 	}
-	public void takeBleedDamage(int damage) {
-		if(damage>0) {
-			player.getGame().log.addLine(name+" bleeds for "+damage+" damage.");
-			this.setHp(hp-damage);
-			if(hp<=0) {
-				hp=0;
-				this.die();
-			}
-		}
-	}
-	public void takePoisonDamage(int damage) {	
-		if(damage>0) {
-			int poisondamage=(int) Math.max(1, damage*(1-resistPoison/100.0));
-			player.getGame().log.addLine(name+" suffers poison damage of "+poisondamage+".");
-			this.setHp(hp-poisondamage);
-			if(hp<=0) {
-				hp=0;
-				this.die();
-			}
-		}
-	}
+
 
 	public void die() {
 		//handle death //toughness rolls/receiving wounds?
@@ -501,52 +512,121 @@ public class Hero implements Serializable{
 	}
 	//////
 	//bleed/poison/fire/lightning/cold/stun
-	public boolean bleed(int bleedAmount) {
-		if(Math.random()<resistBleed/100.0) {
-			player.getGame().log.addLine(name+" resisted bleeding");
-			return false;
-		}else {
-			bleed+=bleedAmount;
-			player.getGame().log.addLine(name+" bleeds");
-			return true;
+	public void sufferBleeding() {
+		player.getGame().log.addLine(name+" bleeds for "+bleed+" damage.");
+		this.setHp(hp-bleed);
+		if(hp<=0) {
+			hp=0;
+			this.die();
 		}
 	}
-	public boolean poison(int poisonAmount) {
-		if(Math.random()<resistPoison/100.0) {
-			player.getGame().log.addLine(name+" resisted poison");
-			return false;
-		}else {
-			poison+=poisonAmount;
-			player.getGame().log.addLine(name+" got poisoned");
-			return true;
-		}		
+	public void sufferPoison() {	
+		player.getGame().log.addLine(name+" suffers poison damage of "+poison+".");
+		this.setHp(hp-poison);
+		if(hp<=0) {
+			hp=0;
+			this.die();
+		}
 	}
 	//elemental damage
-	public void takeFireDamage(Hero damagingHero, int damage) {
-		int fireDamage=(int)(damage*(1.0-resistFire/100.0));
-		if (Math.random()>0.5) {
-			fireDamage=(int) (fireDamage*1.6);
-			damagingHero.getPlayer().getGame().log.addLine("blazing fire:");
+	
+	//apply
+	public void doBleedDamage(int damage, Hero target) {
+		int bonus=this.getBleedDmg()-target.resistBleed;
+		target.takeBleedDamage(damage,bonus);
+	}
+	public void doPoisonDamage(int damage,Hero target) {
+		int bonus = this.getPoisonDmg()-target.resistPoison;
+		target.takePoisonDamage(damage,bonus);
+	}
+	public void doFireDamage(int damage,Hero target) {
+		int bonus = this.getFireDmg()-target.resistFire;
+		target.takeFireDamage(this,damage,bonus);
+	}
+	public void doColdDamage(int damage,Hero target) {
+		int bonus = this.getColdDmg()-target.resistCold;
+		target.takeColdDamage(this,damage,bonus);
+	}
+	public void doLightningDamage(int damage,Hero target) {
+		int bonus = this.getLightningDmg()-target.resistLightning;
+		target.takeLightningDamage(this,damage,bonus);
+	}
+	public void doMagicDamage(int damage,Hero target) {
+		int bonus = this.getMagicDmg()-target.resistSpell;
+		target.takeMagicDamage(this,damage,bonus);
+	}
+	//receive		
+	public boolean takeBleedDamage(int bleedAmount, int bonus) {
+		if (bonus>0) {
+			bleed+=bleedAmount*(1+bonus/100);
 		}else {
-			damagingHero.getPlayer().getGame().log.addLine("fire:");
+			if(Math.random()<-bonus/100.0) {
+				player.getGame().log.addLine(name+" resisted bleeding");
+				return false;
+			}else {
+				bleed+=bleedAmount;
+				player.getGame().log.addLine(name+" bleeds");
+				return true;
+			}
 		}
-		int afterBlockDamage = GameEquations.elementalIntoBlock(damagingHero, this, fireDamage);		
+		return true;
+	}
+	public boolean takePoisonDamage(int poisonAmount, int bonus) {
+		if (bonus>0) {
+			bleed+=poisonAmount*(1+bonus/100);
+		}else {
+			if(Math.random()<-bonus/100.0) {
+				player.getGame().log.addLine(name+" resisted poison");
+				return false;
+			}else {
+				bleed+=poisonAmount;
+				player.getGame().log.addLine(name+" got poisoned");
+				return true;
+			}
+		}
+		return true;
+	}
+	public void takeFireDamage(Hero damagingHero, int damage, int bonus) {
+		int fireDamage=(int)(damage*(1.0-bonus/100.0));
+		damagingHero.getPlayer().getGame().log.addLine("fire:");
+		fire+=fireDamage;
+		int afterBlockDamage = GameEquations.attackIntoBlock(damagingHero, this, fireDamage);		
+		takeDamage(damagingHero,afterBlockDamage,false);
+		int fireCold =fire-cold;
+		if (fireCold<0) {
+			cold=-fireCold;
+			fire=0;
+		}else {
+			cold=0;
+			fire=fireCold;
+		}
+	}
+	public void takeLightningDamage(Hero damagingHero, int damage, int bonus) {
+		int lightningDamage=(int)(damage*(1.0-bonus/100.0));
+		damagingHero.getPlayer().getGame().log.addLine("lightning damage:");
+		shock+=lightningDamage;
+		int afterBlockDamage = GameEquations.attackIntoBlock(damagingHero, this, lightningDamage);	
 		takeDamage(damagingHero,afterBlockDamage,false);
 	}
-	public void takeLightningDamage(Hero damagingHero, int damage) {
-		int lightningDamage=(int)(damage*(1.0-resistLightning/100.0));
-		damagingHero.getPlayer().getGame().log.addLine("lightning damage:");
-		if (Math.random()>resistLightning/100.0) {
-			shock+=1;
-			player.getGame().log.addLine(name+" got shocked");
-		}	
-		takeDamage(damagingHero,lightningDamage,false);
-	}
-	public void takeColdDamage(Hero damagingHero, int damage) {
-		int coldDamage=(int)(damage*(1-resistCold/100.0));
-		cold=3;
+	public void takeColdDamage(Hero damagingHero, int damage, int bonus) {
+		int coldDamage=(int)(damage*(1-bonus/100.0));
 		damagingHero.getPlayer().getGame().log.addLine("cold damage:");
-		int afterBlockDamage = GameEquations.elementalIntoBlock(damagingHero, this, coldDamage);		
+		cold+=coldDamage;		
+		int afterBlockDamage = GameEquations.attackIntoBlock(damagingHero, this, coldDamage);		
+		takeDamage(damagingHero,afterBlockDamage,false);
+		int fireCold =fire-cold;
+		if (fireCold<0) {
+			cold=-fireCold;
+			fire=0;
+		}else {
+			cold=0;
+			fire=fireCold;
+		}
+	}
+	public void takeMagicDamage(Hero damagingHero, int damage, int bonus) {
+		int magicDamage=(int)(damage*(1-bonus/100.0));
+		damagingHero.getPlayer().getGame().log.addLine("magic damage:");		
+		int afterBlockDamage = GameEquations.attackIntoBlock(damagingHero, this, magicDamage);		
 		takeDamage(damagingHero,afterBlockDamage,false);
 	}
 	//stun
@@ -1070,6 +1150,54 @@ public class Hero implements Serializable{
 	}
 	public void setTargets(LinkedList<Hero> targets) {
 		this.targets = targets;
+	}
+	public int getSpellDuration() {
+		return spellDuration;
+	}
+	public void setSpellDuration(int spellDuration) {
+		this.spellDuration = spellDuration;
+	}
+	public int getFireDmg() {
+		return fireDmg;
+	}
+	public void setFireDmg(int fireDmg) {
+		this.fireDmg = fireDmg;
+	}
+	public int getColdDmg() {
+		return coldDmg;
+	}
+	public void setColdDmg(int coldDmg) {
+		this.coldDmg = coldDmg;
+	}
+	public int getLightningDmg() {
+		return lightningDmg;
+	}
+	public void setLightningDmg(int lightningDmg) {
+		this.lightningDmg = lightningDmg;
+	}
+	public int getPoisonDmg() {
+		return poisonDmg;
+	}
+	public void setPoisonDmg(int poisonDmg) {
+		this.poisonDmg = poisonDmg;
+	}
+	public int getBleedDmg() {
+		return bleedDmg;
+	}
+	public void setBleedDmg(int bleedDmg) {
+		this.bleedDmg = bleedDmg;
+	}
+	public int getMagicDmg() {
+		return magicDmg;
+	}
+	public void setMagicDmg(int magicDmg) {
+		this.magicDmg = magicDmg;
+	}
+	public int getResistSpell() {
+		return resistSpell;
+	}
+	public void setResistSpell(int resistSpell) {
+		this.resistSpell = resistSpell;
 	}	
 	
 }

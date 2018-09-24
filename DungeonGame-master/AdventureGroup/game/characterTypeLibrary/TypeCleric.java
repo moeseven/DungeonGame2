@@ -52,13 +52,14 @@ public class TypeCleric extends CharacterClass{
 			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(123));
 		}
 		//mainstats
+		
 		hero.setStrength(hero.getStrength()+3);
 		hero.setDexterity(hero.getDexterity()+0);
 		hero.setIntelligence(hero.getIntelligence()+4);
 		hero.setVitality(hero.getVitality()+5);
 		//
-		hero.setCritChance(hero.getCritChance()+1);
-		hero.setSpellResist(hero.getSpellResist()+1);
+		hero.setSpellDuration(hero.getSpellDuration()+1);
+		hero.setSpellResist(hero.getSpellResist()+5);
 		hero.setSpellPower(hero.getSpellPower()+1);
 		hero.setResistStress(hero.getResistStress()+8);
 	}

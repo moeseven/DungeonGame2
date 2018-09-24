@@ -28,6 +28,7 @@ public class RoomButtonComponent extends JComponent{
 		private JButton buttonMoveForward;
 		private JButton buttonMoveBack;
 		private JButton buttonRetreat;
+		private JButton buttonTownPortal;
 		private JButton buttonMenu;
 		public RoomButtonComponent(RoomWindow rw){
 			this.rw=rw;
@@ -40,12 +41,17 @@ public class RoomButtonComponent extends JComponent{
 			buttonMoveForward.addMouseListener(new mouselistenerMoveForward());
 			buttonMoveBack=new JButton("move hero back");
 			buttonMoveBack.addMouseListener(new mouselistenerMoveBack());
-			buttonRetreat=new JButton("retreat");
-			buttonRetreat.addMouseListener(new mouseListenerRetreat());
+			//retreat option maybe not needed here
+//			buttonRetreat=new JButton("retreat");
+//			buttonRetreat.addMouseListener(new mouseListenerRetreat());
+//			this.add(buttonRetreat);
+			buttonTownPortal=new JButton("town portal");
+			buttonTownPortal.addMouseListener(new mouseListenerTp());
 			buttonMenu=new JButton("menu");
 			buttonMenu.addMouseListener(new mouseListenerMenu());
 			this.add(buttonMenu);
-			this.add(buttonRetreat);		
+				
+			this.add(buttonTownPortal);
 			this.add(buttonMoveBack);
 			this.add(buttonMoveForward);
 			this.add(buttonInventory);
@@ -62,8 +68,15 @@ public class RoomButtonComponent extends JComponent{
 		}
 		private class mouseListenerRetreat extends MouseAdapter{
 			public void mousePressed(MouseEvent e){
-				//back to town
+				//back to previous room
 				rw.getGame().retreatHeroes();
+				rw.getGuiRoom().upadate();
+			}
+		}
+		private class mouseListenerTp extends MouseAdapter{
+			public void mousePressed(MouseEvent e){
+				//back to town
+				rw.getGame().tpHeroes();
 				rw.getGuiRoom().upadate();
 			}
 		}

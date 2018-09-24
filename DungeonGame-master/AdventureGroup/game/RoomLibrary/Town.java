@@ -8,6 +8,7 @@ import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.QuestBoard;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
+import game.RoomInteractionLibrary.TeleportStone;
 import game.RoomInteractionLibrary.Well;
 import gameEncounter.GameEquations;
 
@@ -20,6 +21,7 @@ public class Town extends Room{
 		getInteractions().add(new Tavern(game));
 		getInteractions().add(new MedicineMan(game)); 
 		getInteractions().add(new QuestBoard(game));
+		getInteractions().add(new TeleportStone(game));
 	}
 
 	@Override
@@ -38,7 +40,6 @@ public class Town extends Room{
 			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
 		}
 		game.getActiveQuest().onReturnToTown(game.getPlayer());
-		game.newQuest();
 	}
 	
 

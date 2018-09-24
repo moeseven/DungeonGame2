@@ -37,15 +37,14 @@ public class RaceHuman extends CharacterRace{
 	public  void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(29));
-		hero.setSpellResist(hero.getSpellResist()-1);
 		//resistances
-		hero.setSpellResist(2);
-		hero.setResistFire(6);
-		hero.setResistCold(6);
-		hero.setResistPoison(9);
-		hero.setResistBleed(9);
-		hero.setResistStun(15);
-		hero.setResistStress(12);
+		hero.setSpellResist(0);
+		hero.setResistFire(0);
+		hero.setResistCold(0);
+		hero.setResistPoison(0);
+		hero.setResistBleed(0);
+		hero.setResistStun(0);
+		hero.setResistStress(10);
 		hero.setTrapDisarm(12);
 		//deck
 				

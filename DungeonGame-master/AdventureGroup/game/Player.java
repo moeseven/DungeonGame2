@@ -9,6 +9,7 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 
 public class Player implements Serializable{
+	private Room tpLocation;
 	private Hero selectedHero;
 	private int points=0;
 	private Quest activeQuest;
@@ -21,6 +22,7 @@ public class Player implements Serializable{
 	private int gold;
 	public Player(Game game) {
 		this.game=game;
+		tpLocation=game.getTown();
 		heroes=new LinkedList<Hero>();
 		availableHeroes=new LinkedList<Hero>();
 		inventoryCapacity=100;
@@ -165,6 +167,12 @@ public class Player implements Serializable{
 	}
 	public void setGroupSize(int groupSize) {
 		this.groupSize = groupSize;
+	}
+	public Room getTpLocation() {
+		return tpLocation;
+	}
+	public void setTpLocation(Room tpLocation) {
+		this.tpLocation = tpLocation;
 	}
 	
 }

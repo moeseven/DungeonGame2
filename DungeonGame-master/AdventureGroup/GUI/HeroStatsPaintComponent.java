@@ -26,7 +26,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		protected int height;
 		public HeroStatsPaintComponent(Player player){
 			this.player=player;
-			height=20;
+			height=24;
 			setBorder(new LineBorder(Color.GREEN));
 			super.setPreferredSize(new Dimension(440,height*15));
 			setVisible(true);
@@ -38,7 +38,6 @@ public class HeroStatsPaintComponent extends JComponent{
 		LinkedList<String> lines=new LinkedList<String>();
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
-		lines.add("");
 		lines.add("health: "+player.getSelectedHero().getHp()+"/"+GameEquations.maxHealthCalc(player.getSelectedHero())+" ("+player.getSelectedHero().getWounds()+")");
 		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
 		lines.add("");
@@ -49,25 +48,34 @@ public class HeroStatsPaintComponent extends JComponent{
 //			lines.add("damage: "+GameEquations.FistDamageToString(player.getSelectedHero().getStrength(), player.getSelectedHero().getDexterity()));
 //		}
 		//main stats
-		lines.add("");
 		lines.add("strength: "+player.getSelectedHero().getStrength());
 		lines.add("dexterity: "+player.getSelectedHero().getDexterity());
 		lines.add("intelligence: "+player.getSelectedHero().getIntelligence());
 		lines.add("vitality: "+player.getSelectedHero().getVitality());		
 		lines.add("");
-		//
-		lines.add("crit chance: "+ player.getSelectedHero().getCritChance());
-		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero())+100)+"%");		
+		//			
 		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+GameEquations.speedCalc(player.getSelectedHero())+")");
 		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+")");
 		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+")");
 		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero())+")");
 		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+GameEquations.dodgeCalc(player.getSelectedHero())+")");
-		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+")");
-		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+" ("+GameEquations.spellResistCalc(player.getSelectedHero())+")");
-		lines.add("armor: "+player.getSelectedHero().getArmor());
+		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+")");		
+		
 		lines.add("thorns: "+player.getSelectedHero().getThorns());
 		lines.add("");
+		//offensive
+		lines.add("crit chance: "+ player.getSelectedHero().getCritChance());
+		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero())+100)+"%");	
+		lines.add("magic damage: "+player.getSelectedHero().getMagicDmg());
+		lines.add("fire damage: "+player.getSelectedHero().getFireDmg());
+		lines.add("cold damage: "+player.getSelectedHero().getColdDmg());
+		lines.add("lightning damage: "+player.getSelectedHero().getLightningDmg());
+		lines.add("poison damage: "+player.getSelectedHero().getPoisonDmg());
+		lines.add("bleed damage: "+player.getSelectedHero().getBleedDmg());
+		lines.add("");
+		//defensive
+		lines.add("armor: "+player.getSelectedHero().getArmor()+"("+(100-GameEquations.damageReducedByArmor(100, player.getSelectedHero().getArmor()))+"%)");
+		lines.add("spell resist: "+player.getSelectedHero().getSpellResist());
 		lines.add("fire resistance: "+player.getSelectedHero().getResistFire());
 		lines.add("cold resistance: "+player.getSelectedHero().getResistCold());
 		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison());
@@ -98,7 +106,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		g.drawImage(player.getSelectedHero().getImage().getScaledInstance(300, 255, 5),200,0,null);	
 		//
 		for(int i=0; i<lines.size();i++) {
-			if(i<=height) {
+			if(i<=height+1) {
 				g.drawString(lines.get(i), 10, 10+12*i);
 			}else {
 				g.drawString(lines.get(i), 150, 10+12*(i-height+2));

@@ -137,10 +137,17 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	}
 	public boolean applyEffect(Hero self) {
 		//keep going through effects until fail
+		
 		boolean previousSuccess=true;
 		for (int i=0; i<allEffects.size();i++) {
 			if (previousSuccess) {
 				previousSuccess=allEffects.get(i).applyEffect(self,this);				
+			}			
+		}
+		//poison
+		if(self.poison>0) {
+			if(Math.random()>self.resistPoison/100.0) {
+				self.poison+=manaCost;
 			}			
 		}
 		return true;

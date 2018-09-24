@@ -4,18 +4,18 @@ import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class HealingPotion extends ItemConsumable{
+public class Bandages extends ItemConsumable{
 
 
-	public HealingPotion() {
+	public Bandages() {
 		super();
-		name="healing potion";
+		name="bandages";
 		setGoldValue(20);
 	}
 
 	@Override
 	public void mod(Hero hero) {
-		hero.heal((50));		
+		hero.setBleed(0);	
 	}
 	
 }

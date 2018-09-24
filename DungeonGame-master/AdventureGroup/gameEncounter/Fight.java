@@ -7,6 +7,7 @@ import game.DungeonMaster;
 import game.Game;
 
 public class Fight implements Serializable{
+	public int retreatWish=0;
 	private Game game;
 	private int round=0;
 	private LinkedList<Hero> turnOrder;

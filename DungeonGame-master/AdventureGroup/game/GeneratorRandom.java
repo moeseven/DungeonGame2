@@ -72,6 +72,8 @@ import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
 import gameEncounter.ItemLibrary.Spellbook;
+import gameEncounter.ItemLibrary.usables.AntiVenom;
+import gameEncounter.ItemLibrary.usables.Bandages;
 import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 import gameEncounter.ItemLibrary.usables.ItemConsumable;
@@ -204,15 +206,17 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new MorningStar());
 		itemPool.add(new Spellbook());
 		//consumables
+		itemPool.add(new AntiVenom());
+		itemPool.add(new Bandages());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new ExperienceBook());
-		itemPool.add(new PotionOfDexterity());
-		itemPool.add(new PotionOfIntelligence());
-		itemPool.add(new PotionOfStrength());
-		itemPool.add(new PotionOfVitality());
+//		itemPool.add(new PotionOfDexterity());
+//		itemPool.add(new PotionOfIntelligence());
+//		itemPool.add(new PotionOfStrength());
+//		itemPool.add(new PotionOfVitality());
 	}
 	public void newQuestPool() {
 		questPool=new LinkedList<Quest>();
