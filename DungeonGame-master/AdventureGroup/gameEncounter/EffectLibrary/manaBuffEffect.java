@@ -1,5 +1,7 @@
 package gameEncounter.EffectLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -8,16 +10,21 @@ import gameEncounter.buffLibrary.ManaBonusBuff;
 
 public class manaBuffEffect extends CardEffect{
 
+	public manaBuffEffect(LinkedList<String> pars) {
+		super(pars);
+		assert pars.size()>2;
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		self.buffHero(new ManaBonusBuff(card.getSpellDamage(), Integer.parseInt(card.getExtra())));
+		self.buffHero(new ManaBonusBuff(Integer.parseInt(pars.get(1)), Integer.parseInt(pars.get(2))));
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return  card.getSpellDamage()+" mana for"+card.getExtra()+"turns";
+		return  pars.get(1)+" mana for"+pars.get(2)+"turns";
 	}
 
 }

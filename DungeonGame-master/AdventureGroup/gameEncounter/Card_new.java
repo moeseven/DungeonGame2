@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import gameEncounter.CardLibrary.EffectParameters;
 import gameEncounter.EffectLibrary.EffectBuilder;
 import gameEncounter.EffectLibrary.attackEffect;
 import gameEncounter.EffectLibrary.blockEffect;
@@ -19,18 +20,15 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	protected int block=0;
 	protected int attackDamage=0;
 	protected int spellDamage=0;
-	protected String extra;
-	protected String extra2;
-//	protected CardEffect effect= null;
-//	protected CardEffect effect2= null;
-//	protected CardEffect effect3= null;
+
 	protected boolean isFriendly =false;
 	protected String text="no data";
 	protected LinkedList<CardEffect> allEffects= new LinkedList<CardEffect>();
+	//protected LinkedList<EffectParameters> allEffectsParameter= new LinkedList<EffectParameters>();
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String effect2, String effect3,String isFriendly, String text, String extra, String extra2) {
+			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5) {
 		super();
 		if (manaCost!=null) {
 			this.manaCost = Integer.parseInt(manaCost);
@@ -63,15 +61,23 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		if (spellDamage!=null) {
 			this.spellDamage = Integer.parseInt(spellDamage);
 		}
+		//
 		if (effect!=null) {
-			allEffects.add(EffectBuilder.buildEffect(effect));
+			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect)));
 		}
 		if (effect2!=null) {
-			allEffects.add(EffectBuilder.buildEffect(effect2));
+			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect2)));
 		}
 		if (effect3!=null) {
-			allEffects.add(EffectBuilder.buildEffect(effect3));
+			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect3)));
 		}
+		if (effect4!=null) {
+			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect4)));
+		}
+		if (effect5!=null) {
+			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect5)));
+		}
+		//
 		if (isFriendly!=null) {
 			if (Integer.parseInt(isFriendly)!=0) {
 				this.isFriendly = true;
@@ -80,12 +86,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		
 		if (text!=null) {
 			this.text=text;
-		}
-		if (extra!=null) {
-			this.extra = extra;
-		}
-		if (extra2!=null) {
-			this.extra2 = extra2;
 		}
 	}
 	public int[] toArray( String s ) {
@@ -288,18 +288,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public void setAllEffects(LinkedList<CardEffect> allEffects) {
 		this.allEffects = allEffects;
-	}
-	public String getExtra() {
-		return extra;
-	}
-	public void setExtra(String extra) {
-		this.extra = extra;
-	}
-	public String getExtra2() {
-		return extra2;
-	}
-	public void setExtra2(String extra2) {
-		this.extra2 = extra2;
 	}
 			
 	

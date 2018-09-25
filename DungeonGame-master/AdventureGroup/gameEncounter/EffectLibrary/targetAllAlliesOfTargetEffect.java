@@ -9,6 +9,11 @@ import gameEncounter.Hero;
 
 public class targetAllAlliesOfTargetEffect extends CardEffect{
 
+	public targetAllAlliesOfTargetEffect(LinkedList<String> pars) {
+		super(pars);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();

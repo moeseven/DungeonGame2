@@ -7,19 +7,20 @@ import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
-public class attackEffect extends CardEffect{
+public class magicSpellEffect extends CardEffect{
 
-	public attackEffect(LinkedList<String> pars) {
+	public magicSpellEffect(LinkedList<String> pars) {
 		super(pars);
+		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			if(self.attackHero(self.getTargets().get(i),card)) {
-				nextTargets.add(self.getTargets().get(i));
-				damageTarget(self, self.getTargets().get(i), card);
-			}
+			nextTargets.add(self.getTargets().get(i));
+			//roll cirts for every target
+			self.doMagicDamage(GameEquations.rollForCrit(self, card, GameEquations.calculateSpellDamage(card.getSpellDamage(), self)), self.getTargets().get(i));
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
@@ -28,13 +29,10 @@ public class attackEffect extends CardEffect{
 			return false;
 		}
 	}
-	protected void damageTarget(Hero self, Hero target, Card_new card) {	
-		self.dealAttackDamage(target, card, false);
-	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return GameEquations.calculateAttackDamage(card, self)+" attack damage";
+		return GameEquations.calculateSpellDamage(card.getSpellDamage(), self)+" magic damage";
 	}
 
 }

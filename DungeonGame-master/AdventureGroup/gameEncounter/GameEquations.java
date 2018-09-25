@@ -1,5 +1,7 @@
 package gameEncounter;
 
+import java.util.LinkedList;
+
 public class GameEquations {
 	//all the attribute bonus calculation SUBJECT to CHANGE
 	
@@ -175,5 +177,23 @@ public class GameEquations {
 		}else {
 			return experienceThresholdForLevelUp(level-1)+100*level;
 		}		
+	}
+	///Items
+	
+	public static int RandomizeItemStat(String itemString) {
+		LinkedList<String>	parameters= new LinkedList<String>();
+		int value=0;
+		String[] splitted =itemString.split("\\,");
+		for (int i = 0; i < splitted.length; i++) {
+			parameters.add(splitted[i]);
+			System.out.println(splitted[i]);
+		}
+		if (splitted.length>1) {
+			value=(int) (Integer.parseInt(splitted[0])+Math.random()*(1+Integer.parseInt(splitted[1])-Integer.parseInt(splitted[0])));
+		}else {
+			value=Integer.parseInt(splitted[0]);
+		}
+		return value;
+				
 	}
 }

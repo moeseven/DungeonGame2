@@ -9,13 +9,17 @@ import gameEncounter.Hero;
 
 public class poisonEffect extends CardEffect{
 	
+	public poisonEffect(LinkedList<String> pars) {
+		super(pars);
+		assert pars.size()>1;
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {	
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			if (self.getTargets().get(i).poison(card.getSpellDamage())) {
-				nextTargets.add(self.getTargets().get(i));
-			}	
+			self.doPoisonDamage(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
+			nextTargets.add(self.getTargets().get(i));	
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
@@ -27,7 +31,7 @@ public class poisonEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return card.getSpellDamage()+" poison";
+		return pars.get(1)+" poison";
 	}
 
 }

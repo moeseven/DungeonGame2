@@ -1,11 +1,18 @@
 package gameEncounter.EffectLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class penetrateBlockAttackEffect extends attackEffect{
+
+	public penetrateBlockAttackEffect(LinkedList<String> pars) {
+		super(pars);
+		// TODO Auto-generated constructor stub
+	}
 
 	protected void damageTarget(Hero self, Hero target, Card_new card) {
 		int damage=GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card, self));			

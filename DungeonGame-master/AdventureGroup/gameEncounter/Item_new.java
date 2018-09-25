@@ -17,6 +17,7 @@ public class Item_new extends Item implements Serializable{
 	protected int attack=0;
 	protected int block=0;
 	protected int spell=0;
+	
 	protected int accuracy=0;
 	protected int dodge=0;
 	protected int speed=0;
@@ -33,16 +34,29 @@ public class Item_new extends Item implements Serializable{
 	protected int resistBleed=0;
 	protected int resistStun=0;
 	protected int resistStress=0;
+
 	protected int critChance=0;
+	//	not in yet
+	protected int duration=0;
+	protected int fireDmg=0;
+	protected int coldDmg=0;
+	protected int lightningDmg=0;
+	protected int bleedDmg=0;
+	protected int poisonDmg=0;
+	protected int magicDmg=0;
+	
+	
 	//
 	protected LinkedList<String> description;
 	protected String name="";
 	
 	public Item_new(String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
-			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,
-			String name) {
+			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,String duration,
+			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String name) {
 		super();
+		this.name = name;
+		//random attributes here
 		//
 		if (weight!=null) {
 			this.weight = Integer.parseInt(weight);
@@ -58,68 +72,89 @@ public class Item_new extends Item implements Serializable{
 		}	
 		//
 		//modifiers
-		if (critChance!=null) {
-			this.critChance = Integer.parseInt(critChance);
+		if (critChance!=null) {			
+			this.critChance = GameEquations.RandomizeItemStat(critChance);
 		}
 		if (attack!=null) {
-			this.attack = Integer.parseInt(attack);
+			this.attack = GameEquations.RandomizeItemStat(attack);
 		}
 		if (block!=null) {
-			this.block = Integer.parseInt(block);
+			this.block = GameEquations.RandomizeItemStat(block);;
 		}
 		if (spell!=null) {
-			this.spell = Integer.parseInt(spell);
+			this.spell = GameEquations.RandomizeItemStat(spell);;
 		}
 		if (accuracy!=null) {
-			this.accuracy = Integer.parseInt(accuracy);
+			this.accuracy = GameEquations.RandomizeItemStat(accuracy);;
 		}
 		if (dodge!=null) {
-			this.dodge = Integer.parseInt(dodge);
+			this.dodge = GameEquations.RandomizeItemStat(dodge);
 		}
 		if (speed!=null) {
-			this.speed = Integer.parseInt(speed);
+			this.speed = GameEquations.RandomizeItemStat(speed);
 		}
 		if (draw!=null) {
-			this.draw = Integer.parseInt(draw);
+			this.draw = GameEquations.RandomizeItemStat(draw);
 		}
 		if (mana!=null) {
-			this.mana = Integer.parseInt(mana);
+			this.mana = GameEquations.RandomizeItemStat(mana);
 		}
 		if (thorns!=null) {
-			this.thorns = Integer.parseInt(thorns);
+			this.thorns = GameEquations.RandomizeItemStat(thorns);
 		}
 		if (armor!=null) {
-			this.armor = Integer.parseInt(armor);
+			this.armor = GameEquations.RandomizeItemStat(armor);
 		}
 		if (health!=null) {
-			this.health = Integer.parseInt(health);
+			this.health = GameEquations.RandomizeItemStat(health);
 		}
 		if (resistSpell!=null) {
-			this.resistSpell = Integer.parseInt(resistSpell);
+			this.resistSpell = GameEquations.RandomizeItemStat(resistSpell);
 		}
 		if (resistLightning!=null) {
-			this.resistLightning = Integer.parseInt(resistLightning);
+			this.resistLightning = GameEquations.RandomizeItemStat(resistLightning);
 		}
 		if (resistFire!=null) {
-			this.resistFire = Integer.parseInt(resistFire);
+			this.resistFire = GameEquations.RandomizeItemStat(resistFire);
 		}
 		if (resistCold!=null) {
-			this.resistCold = Integer.parseInt(resistCold);
+			this.resistCold = GameEquations.RandomizeItemStat(resistCold);
 		}
 		if (resistPoison!=null) {
-			this.resistPoison = Integer.parseInt(resistPoison);
+			this.resistPoison = GameEquations.RandomizeItemStat(resistPoison);
 		}
 		if (resistBleed!=null) {
-			this.resistBleed = Integer.parseInt(resistBleed);
+			this.resistBleed = GameEquations.RandomizeItemStat(resistBleed);
 		}
 		if (resistStun!=null) {
-			this.resistStun = Integer.parseInt(resistStun);
+			this.resistStun = GameEquations.RandomizeItemStat(resistStun);
 		}
 		if (resistStress!=null) {
-			this.resistStress = Integer.parseInt(resistStress);
+			this.resistStress = GameEquations.RandomizeItemStat(resistStress);
+		}
+		if (duration!=null) {
+			this.duration= GameEquations.RandomizeItemStat(duration);
+		}
+		if(fireDmg!=null) {
+			this.fireDmg=GameEquations.RandomizeItemStat(fireDmg);
+		}
+		if (coldDmg!=null) {
+			this.coldDmg= GameEquations.RandomizeItemStat(coldDmg);
+		}
+		if (lightningDmg!=null) {
+			this.lightningDmg=GameEquations.RandomizeItemStat(lightningDmg);
+		}
+		if (bleedDmg!=null) {
+			this.bleedDmg= GameEquations.RandomizeItemStat(bleedDmg);
+		}
+		if (poisonDmg!=null) {
+			this.poisonDmg=GameEquations.RandomizeItemStat(poisonDmg);
+		}
+		if (magicDmg!=null) {
+			this.magicDmg= GameEquations.RandomizeItemStat(magicDmg);
 		}
 		//
-		this.name = name;
+		
 	}
 	public void modification(Hero hero,int fac) {
 		hero.setArmor(hero.getArmor()+armor*fac);
@@ -140,7 +175,13 @@ public class Item_new extends Item implements Serializable{
 	    hero.setBaseHp(hero.getBaseHp()+health*fac);
 	    hero.setSpeed(hero.getSpeed()+speed*fac);
 	    hero.setManaPower(hero.getManaPower()+mana*fac);
-	    //hero.setManaPower(hero.getManaPower()+mana*fac);
+	    hero.setSpellDuration(hero.getSpellDuration()+duration*fac);
+	    hero.setFireDmg(hero.getFireDmg()+fireDmg*fac);
+	    hero.setColdDmg(hero.getColdDmg()+coldDmg*fac);
+	    hero.setLightningDmg(hero.getLightningDmg()+lightningDmg*fac);
+	    hero.setBleedDmg(hero.getBleedDmg()+bleedDmg*fac);
+	    hero.setPoisonDmg(hero.getPoisonDmg()+poisonDmg*fac);
+	    hero.setMagicDmg(hero.getMagicDmg()+magicDmg*fac);
 	}
 	public void mod(Hero hero) {
 		modification(hero, 1);
@@ -201,25 +242,46 @@ public class Item_new extends Item implements Serializable{
 			description.add("health: "+health);
 		}
 		if (resistSpell!=0) {
-			description.add("spell resistance: "+resistSpell);
+			description.add("spell resistance: "+resistSpell+"%");
 		}
 		if (resistFire!=0) {
-			description.add("fire resistance: "+resistFire);
+			description.add("fire resistance: "+resistFire+"%");
 		}
 		if (resistCold!=0) {
-			description.add("cold resistance: "+resistCold);
+			description.add("cold resistance: "+resistCold+"%");
 		}
 		if (resistPoison!=0) {
-			description.add("poison resistance: "+resistPoison);
+			description.add("poison resistance: "+resistPoison+"%");
 		}
 		if (resistBleed!=0) {
-			description.add("bleed resistance: "+resistBleed);
+			description.add("bleed resistance: "+resistBleed+"%");
 		}
 		if (resistStun!=0) {
-			description.add("stun resistance: "+resistStun);
+			description.add("stun resistance: "+resistStun+"%");
 		}
 		if (resistStress!=0) {
-			description.add("stress resistance: "+resistStress);
+			description.add("stress resistance: "+resistStress+"%");
+		}
+		if (duration!=0) {
+			description.add("spell duration: "+duration);
+		}
+		if (fireDmg!=0) {
+			description.add("fire damage: "+fireDmg+"%");
+		}
+		if (coldDmg!=0) {
+			description.add("cold damage: "+coldDmg+"%");
+		}
+		if (lightningDmg!=0) {
+			description.add("lightning damage: "+lightningDmg+"%");
+		}
+		if (bleedDmg!=0) {
+			description.add("bleed damage: "+bleedDmg+"%");
+		}
+		if (poisonDmg!=0) {
+			description.add("poison damage: "+poisonDmg+"%");
+		}
+		if (magicDmg!=0) {
+			description.add("magic damage: "+magicDmg+"%");
 		}
 		//
 	} 

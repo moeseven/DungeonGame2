@@ -9,6 +9,11 @@ import gameEncounter.Hero;
 
 public class resistableSpellEffect extends CardEffect{
 
+	public resistableSpellEffect(LinkedList<String> pars) {
+		super(pars);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
@@ -28,7 +33,7 @@ public class resistableSpellEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return "missile spell";
+		return "enchanting spell";
 	}
 
 }

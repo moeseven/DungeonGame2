@@ -266,7 +266,7 @@ public class Hero implements Serializable{
 	}
 	//Cast resistable spell
 	public boolean castResistableSpellOnHero(Hero hero) {
-		if(Math.random()<hero.getSpellResist()/100.0) {
+		if(Math.random()<(hero.getSpellResist()-magicDmg)/100.0) {
 			return false;
 		}else {
 			return true;
@@ -573,13 +573,13 @@ public class Hero implements Serializable{
 	}
 	public boolean takePoisonDamage(int poisonAmount, int bonus) {
 		if (bonus>0) {
-			bleed+=poisonAmount*(1+bonus/100);
+			poison+=poisonAmount*(1+bonus/100);
 		}else {
 			if(Math.random()<-bonus/100.0) {
 				player.getGame().log.addLine(name+" resisted poison");
 				return false;
 			}else {
-				bleed+=poisonAmount;
+				poison+=poisonAmount;
 				player.getGame().log.addLine(name+" got poisoned");
 				return true;
 			}

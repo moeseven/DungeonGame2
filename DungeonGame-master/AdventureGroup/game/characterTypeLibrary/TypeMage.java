@@ -26,7 +26,7 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("sleepCharm");		
 		cardPool.add("rosesAndThorns");
 		name="mage";		
-		items.add(new RustyBlade());
+		items.add(game.itemBuilder.buildItem("rustyBlade"));
 		for (int i=0; i<3;i++) {
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}

@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 
@@ -38,4 +40,22 @@ public class MyImageLoader {
 	public Image getScaledImage(int a,int s){
 		return  sprites[a].getScaledInstance(60*s, 51*s, s);
 	}
+	
+	//
+	private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeInt(sprites.length); // how many images are serialized?
+        for (BufferedImage eachImage : sprites) {
+            ImageIO.write(eachImage, "png", out); // png is lossless
+        }
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        final int imageCount = in.readInt();
+        sprites=new BufferedImage[20*20];        
+        for (int i=0; i<imageCount; i++) {
+        	sprites[imageCount]=ImageIO.read(in);
+        }
+    }
 }

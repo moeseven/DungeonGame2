@@ -26,7 +26,7 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("harden");
 		
 		name="cleric";
-		items.add(new RustyBlade());		
+		items.add(game.itemBuilder.buildItem("rustyBlade"));		
 		for (int i=0; i<3;i++) {
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
@@ -59,6 +59,8 @@ public class TypeCleric extends CharacterClass{
 		hero.setVitality(hero.getVitality()+5);
 		//
 		hero.setSpellDuration(hero.getSpellDuration()+1);
+		hero.setBlockSkill(hero.getBlockSkill()+1);
+		hero.setAttackSkill(hero.getAttackSkill()-1);
 		hero.setSpellResist(hero.getSpellResist()+5);
 		hero.setSpellPower(hero.getSpellPower()+1);
 		hero.setResistStress(hero.getResistStress()+8);

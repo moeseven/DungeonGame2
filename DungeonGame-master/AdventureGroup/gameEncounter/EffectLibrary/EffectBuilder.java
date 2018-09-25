@@ -1,102 +1,110 @@
 package gameEncounter.EffectLibrary;
 
+import java.util.LinkedList;
+
 import gameEncounter.CardEffect;
+import gameEncounter.CardLibrary.EffectParameters;
 
 public class EffectBuilder {
 
-	public static CardEffect buildEffect(String name) {
+	public static CardEffect buildEffect(EffectParameters pars) {
+		String name = pars.parameters.get(0);
+		LinkedList<String> p = pars.parameters;
 		if (name.equals("addCardToTargetDeck")) {
-			return new addCardToTargetDeckEffect();
+			return new addCardToTargetDeckEffect(p);
 		}
 		if (name.equals("allResistSpell")) {
-			return new allResistSpellEffect();
+			return new allResistSpellEffect(p);
 		}
 		if (name.equals("attack")) {
-			return new attackEffect();
+			return new attackEffect(p);
 		}
 		if (name.equals("bash")) {
-			return new bashEffect();
+			return new bashEffect(p);
 		}
 		if (name.equals("blockableBleed")) {
-			return new blockableBleedEffect();
+			return new blockableBleedEffect(p);
 		}
 		if (name.equals("blockablePoison")) {
-			return new blockablePoisonEffect();
+			return new blockablePoisonEffect(p);
 		}
 		if (name.equals("block")) {
-			return new blockEffect();
+			return new blockEffect(p);
 		}
 		if (name.equals("cardDraw")) {
-			return new cardDrawEffect();
+			return new cardDrawEffect(p);
 		}
 		if (name.equals("cleaveAttack")) {
-			return new cleaveAttackEffect();
+			return new cleaveAttackEffect(p);
 		}
 		if (name.equals("coldSpell")) {
-			return new coldSpellEffect();
+			return new coldSpellEffect(p);
 		}
 		if (name.equals("compositeCold")) {
-			return new compositeColdEffect();
+			return new compositeColdEffect(p);
 		}
 		if (name.equals("compositeFire")) {
-			return new compositeFireEffect();
+			return new compositeFireEffect(p);
 		}
 		if (name.equals("concentrate")) {
-			return new concentrateEffect();
+			return new concentrateEffect(p);
 		}
 		if (name.equals("cureBleed")) {
-			return new cureBleedEffect();
+			return new cureBleedEffect(p);
 		}
 		if (name.equals("fireBall")) {
-			return new fireBallEffect();
+			return new fireBallEffect(p);
 		}
 		if (name.equals("fireSpell")) {
-			return new fireSpellEffect();
+			return new fireSpellEffect(p);
 		}
 		if (name.equals("heal")) {
-			return new healEffect();
+			return new healEffect(p);
 		}
 		if (name.equals("lightningSpell")) {
-			return new lightningSpellEffect();
+			return new lightningSpellEffect(p);
+		}
+		if (name.equals("magicSpell")) {
+			return new magicSpellEffect(p);
 		}
 		if (name.equals("manaBuff")) {
-			return new manaBuffEffect();
+			return new manaBuffEffect(p);
 		}
 		if (name.equals("missileSpell")) {
-			return new missileSpellEffect();
+			return new missileSpellEffect(p);
 		}
 		if (name.equals("modifyStat")) {
-			return new modifyStatEffect();
+			return new modifyStatEffect(p);
 		}
 		if (name.equals("modifyStatSpell")) {
-			return new modifyStatSpellEffect();
+			return new modifyStatSpellEffect(p);
 		}
 		if (name.equals("penetrateArmorAttack")) {
-			return new penetrateArmorAttackEffect();
+			return new penetrateArmorAttackEffect(p);
 		}
 		if (name.equals("penetrateBlockAttack")) {
-			return new penetrateBlockAttackEffect();
+			return new penetrateBlockAttackEffect(p);
 		}
 		if (name.equals("poison")) {
-			return new poisonEffect();
+			return new poisonEffect(p);
 		}
 		if (name.equals("ram")) {
-			return new ramEffect();
+			return new ramEffect(p);
 		}
 		if (name.equals("regenerationSpell")) {
-			return new regenerationSpellEffect();
+			return new regenerationSpellEffect(p);
 		}
 		if (name.equals("resistableSpell")) {
-			return new resistableSpellEffect();
+			return new resistableSpellEffect(p);
 		}
 		if (name.equals("targetAllAlliesOfTarget")) {
-			return new targetAllAlliesOfTargetEffect();
+			return new targetAllAlliesOfTargetEffect(p);
 		}
 		if (name.equals("targetSelf")) {
-			return new targetSelfEffect();
+			return new targetSelfEffect(p);
 		}
 		if (name.equals("useup")) {
-			return new useupEffect();
+			return new useupEffect(p);
 		}
 		System.out.println("Effectbuilder failed to resolve effect name!!!");
 		return null;

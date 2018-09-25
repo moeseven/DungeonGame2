@@ -9,13 +9,18 @@ import gameEncounter.Hero;
 
 public class blockableBleedEffect extends CardEffect{
 	
+	public blockableBleedEffect(LinkedList<String> pars) {
+		super(pars);
+		assert pars.size()>1;
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {	
-		//attacks only apply poison if block is down!
+		//attacks only apply bleed if block is down!
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if (self.getTargets().get(i).getBlock()<=0) {
-				self.getTargets().get(i).bleed(card.getSpellDamage());
+				self.doBleedDamage(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
 			}
 		}
 		self.setTargets(nextTargets);
@@ -29,7 +34,7 @@ public class blockableBleedEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return card.getSpellDamage()+" bleed";
+		return pars.get(1)+" bleed";
 	}
 
 }

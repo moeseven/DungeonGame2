@@ -40,6 +40,7 @@ import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
+import gameEncounter.Item_new;
 import gameEncounter.ModableHeroStats;
 import gameEncounter.HeroQuirkLibrary.Aggressive;
 import gameEncounter.HeroQuirkLibrary.Bleeder;
@@ -84,6 +85,7 @@ import gameEncounter.ItemLibrary.usables.PotionOfVitality;
 
 public class GeneratorRandom implements Serializable{
 	private LinkedList<String> allCards;
+	private LinkedList<String> allItems;
 	private LinkedList<CharacterRace> heroRacePool;
 	private LinkedList<CharacterClass> heroClassPool;
 	private LinkedList<HeroQuirk> heroQuirkPool;
@@ -141,6 +143,13 @@ public class GeneratorRandom implements Serializable{
 			map.put(list.get(i).substring(0, list.get(i).indexOf('.')), 1);
 		}
 		allCards=new LinkedList<String>(map.keySet());
+		//items
+		HashMap<String, Integer> mapItems = new HashMap<String, Integer>();
+		LinkedList<String> listItems= new LinkedList<String>(game.itemBuilder.getMap().keySet());
+		for(int i=0; i<game.itemBuilder.getMap().size();i++) {
+			mapItems.put(listItems.get(i).substring(0, listItems.get(i).indexOf('.')), 1);
+		}
+		allItems=new LinkedList<String>(mapItems.keySet());
 		//item enchantments
 		enchantments= new LinkedList<NameValuePair>();
 		enchantments.add(new NameValuePair(3, "spell"));
@@ -287,14 +296,15 @@ public class GeneratorRandom implements Serializable{
 		
 	}	
 	public Item generateRandomItem(int level) {
-		newItemPool();
-		Item item = itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
-		if(Math.random()<0.1*level) {
-			enchant(item, level);
-		}
-		if(Math.random()<0.01*level) {
-			enchant(item, level);
-		}
+//		newItemPool();
+//		//Item item = itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
+		Item_new item = (Item_new) game.itemBuilder.buildItem(allItems.get((int) Math.min(allItems.size()-1, Math.random()*allItems.size())));
+//		if(Math.random()<0.1*level) {
+//			enchant(item, level);
+//		}
+//		if(Math.random()<0.01*level) {
+//			enchant(item, level);
+//		}
 		return item;
 	}
 	public Card generateRandomCard(int level) {

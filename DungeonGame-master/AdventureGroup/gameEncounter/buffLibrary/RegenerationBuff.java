@@ -5,9 +5,9 @@ import gameEncounter.Hero;
 
 public class RegenerationBuff extends Buff{
 	private int regen;
-	public RegenerationBuff(int regen) {
+	public RegenerationBuff(int regen, int duration) {
 		this.regen=regen;
-		duration=5;
+		this.duration=duration;
 	}
 	@Override
 	public void mod(Hero hero) {

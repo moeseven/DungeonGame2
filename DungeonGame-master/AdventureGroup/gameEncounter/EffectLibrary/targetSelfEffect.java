@@ -9,6 +9,11 @@ import gameEncounter.Hero;
 
 public class targetSelfEffect extends CardEffect{
 
+	public targetSelfEffect(LinkedList<String> pars) {
+		super(pars);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		//switches target to self

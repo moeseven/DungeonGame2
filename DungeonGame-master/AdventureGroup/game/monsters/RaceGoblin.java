@@ -77,14 +77,14 @@ public class RaceGoblin extends MonsterRace{
 			name="warrior";
 			items.add(new RustyBlade());				
 			for (int i=0; i<4;i++) {
-				cards.add(new MeeleAttack());
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<6;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new CarefulSlash());
-			cards.add(new BleedingSlice());
+			cards.add(game.cardBuilder.buildCard("carefulSlash"));
+			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
 		}
 
 		public void modifyHero(Hero hero) {

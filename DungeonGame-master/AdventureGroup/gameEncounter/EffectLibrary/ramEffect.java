@@ -9,6 +9,11 @@ import gameEncounter.Hero;
 
 public class ramEffect extends CardEffect{
 
+	public ramEffect(LinkedList<String> pars) {
+		super(pars);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 			self.moveForward();
@@ -28,7 +33,7 @@ public class ramEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return " knocks back weaker targets";
+		return " knocks back weaker targets, moves forward";
 	}
 
 }

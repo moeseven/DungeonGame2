@@ -28,7 +28,7 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("frostArrow");
 		cardPool.add("bandage");
 		name="archer";
-		items.add(new GoblinBow());		
+		items.add(game.itemBuilder.buildItem("rustyBlade"));	
 		for (int i=0; i<7;i++) {
 			cards.add(game.cardBuilder.buildCard("rangedAttack"));
 		}
