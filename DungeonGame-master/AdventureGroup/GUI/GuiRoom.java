@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import GUI.grafics.StaticImageLoader;
 import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
 import game.RoomInteractionLibrary.Shop;
@@ -262,7 +263,7 @@ public class GuiRoom extends JPanel{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);				
-		g.drawImage(shop.getImage().getScaledInstance(180, 153, 3),-40,0,null);
+		g.drawImage(StaticImageLoader.getImage(shop.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -422,7 +423,7 @@ private class MyMouseListener extends MouseAdapter{
 }
 protected void paintComponent(Graphics g){
 	super.paintComponent(g);
-	g.drawImage(tavern.getImage().getScaledInstance(180, 153, 3),-40,0,null);
+	g.drawImage(StaticImageLoader.getImage(tavern.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
 	for(int i=0; i<rc.rectAngles.size();i++) {
 		g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 		for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -555,7 +556,7 @@ protected void paintComponent(Graphics g){
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(mm.getImage().getScaledInstance(180, 153, 3),-40,0,null);
+		g.drawImage(StaticImageLoader.getImage(mm.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
@@ -695,7 +696,8 @@ protected void paintComponent(Graphics g){
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(altar.getImage().getScaledInstance(180, 153, 3),-40,0,null);
+		g.drawImage(StaticImageLoader.getImage(altar.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+		
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {

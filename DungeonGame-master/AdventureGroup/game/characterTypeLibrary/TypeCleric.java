@@ -40,16 +40,20 @@ public class TypeCleric extends CharacterClass{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		if (hero.getCharRace().getName().equals("human")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(39));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(39));
+			hero.setImageNumber(39);
 		}
 		if (hero.getCharRace().getName().equals("dwarf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(38));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(38));
+			hero.setImageNumber(38);
 		}
 		if (hero.getCharRace().getName().equals("elf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(122));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(122));
+			hero.setImageNumber(122);
 		}
 		if (hero.getCharRace().getName().equals("halfling")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(123));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(123));
+			hero.setImageNumber(123);
 		}
 		//mainstats
 		

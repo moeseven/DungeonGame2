@@ -8,7 +8,8 @@ import gameEncounter.Hero;
 public abstract class RoomInteraction implements Serializable{
 	protected String name;
 	protected boolean hidden;
-	protected BufferedImage image;
+	//protected BufferedImage image;
+	protected int imageNumber;
 	protected Game game;
 	public RoomInteraction(Game game) {
 		super();
@@ -39,13 +40,21 @@ public abstract class RoomInteraction implements Serializable{
 		this.hidden = hidden;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public int getImageNumber() {
+		return imageNumber;
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setImageNumber(int imageNumber) {
+		this.imageNumber = imageNumber;
 	}
+
+//	public BufferedImage getImage() {
+//		return image;
+//	}
+//
+//	public void setImage(BufferedImage image) {
+//		this.image = image;
+//	}
 
 
 	

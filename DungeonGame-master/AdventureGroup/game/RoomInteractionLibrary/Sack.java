@@ -13,7 +13,8 @@ public class Sack extends RoomInteraction{
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public Sack(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(83);
+		//image=game.imageLoader.getImage(83);
+		setImageNumber(83);
 		name="sack";
 		gold=(int) (Math.random()*15);
 		// TODO Auto-generated constructor stub
@@ -27,7 +28,8 @@ public class Sack extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		image=game.imageLoader.getImage(91);
+		//image=game.imageLoader.getImage(91);
+		setImageNumber(91);
 		if(charges>0) {
 			charges+=-1;
 			if(Math.random()>0.4) {

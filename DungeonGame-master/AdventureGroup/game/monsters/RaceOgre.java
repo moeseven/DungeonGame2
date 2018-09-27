@@ -45,7 +45,8 @@ public class RaceOgre extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(42));
+		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(42));
+		hero.setImageNumber(42);
 		hero.setSpeed(7);
 		hero.setBaseHp(400);		
 		//stats

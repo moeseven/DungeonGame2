@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
 
+import GUI.grafics.StaticImageLoader;
 import game.RoomInteraction;
 
 public class RoomInteractionComponent extends JComponent{
@@ -57,9 +58,7 @@ public class RoomInteractionComponent extends JComponent{
 		protected void paintComponent(Graphics g){
 			super.paintComponent(g);
 			//g.drawImage(image,0,0,null);
-			if(ri.getImage()!=null) {
-				g.drawImage(ri.getImage().getScaledInstance(180, 153, 3),-40,0,null);
-			}			
+			g.drawImage(StaticImageLoader.getImage(ri.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);		
 			g.setColor(Color.black);
 			g.drawString(ri.getName(), 15, 75);
 			//g.drawRect(5, 5, 110, 140);

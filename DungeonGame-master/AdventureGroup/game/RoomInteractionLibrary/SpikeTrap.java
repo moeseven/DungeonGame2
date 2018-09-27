@@ -14,7 +14,8 @@ import gameEncounter.Item;
 public class SpikeTrap extends Trap{
 	public SpikeTrap(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(87);
+		//image=game.imageLoader.getImage(87);
+		setImageNumber(87);
 		name="spike trap";
 		trapStats.setAccuracy(13);
 	}

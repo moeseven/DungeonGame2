@@ -42,7 +42,8 @@ public class FireSpirit extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(52));
+//		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(52));
+		hero.setImageNumber(52);
 		hero.setSpeed(19);
 		hero.setBaseHp(52);		
 		//stats

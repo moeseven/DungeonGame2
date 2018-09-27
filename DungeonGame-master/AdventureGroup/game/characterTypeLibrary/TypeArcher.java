@@ -40,16 +40,20 @@ public class TypeArcher extends CharacterClass{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		if (hero.getCharRace().getName().equals("human")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(22));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(22));
+			hero.setImageNumber(22);
 		}
 		if (hero.getCharRace().getName().equals("dwarf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(33));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(33));
+			hero.setImageNumber(33);
 		}
 		if (hero.getCharRace().getName().equals("elf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(26));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(26));
+			hero.setImageNumber(26);
 		}
 		if (hero.getCharRace().getName().equals("halfling")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(34));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(34));
+			hero.setImageNumber(34);
 		}
 		//mainstats
 		hero.setStrength(hero.getStrength()+1);

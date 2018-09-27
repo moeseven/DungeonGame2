@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import GUI.grafics.StaticImageLoader;
 import game.Player;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
@@ -103,7 +104,8 @@ public class HeroStatsPaintComponent extends JComponent{
 			}
 			lines.add("");
 		}
-		g.drawImage(player.getSelectedHero().getImage().getScaledInstance(300, 255, 5),200,0,null);	
+		g.drawImage(StaticImageLoader.getImage(player.getSelectedHero().getImageNumber()).getScaledInstance(300, 255, 5),200,0,null);	
+//		g.drawImage(player.getSelectedHero().getImage().getScaledInstance(300, 255, 5),200,0,null);	
 		//
 		for(int i=0; i<lines.size();i++) {
 			if(i<=height+1) {

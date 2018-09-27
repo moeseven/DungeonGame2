@@ -95,7 +95,8 @@ public class RaceZombie extends MonsterRace{
 		public void modifyHero(Hero hero) {
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(65));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(65));
+			hero.setImageNumber(65);
 			//mainstats
 			hero.setStrength(hero.getStrength()+3);
 			hero.setDexterity(hero.getDexterity()+2);

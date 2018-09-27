@@ -18,7 +18,7 @@ public class Game implements Serializable{
 private Player player; //change this for multiplayer
 public Player dungeonMaster;
 public GeneratorRandom generator;
-public MyImageLoader imageLoader;
+//public MyImageLoader imageLoader;
 public CardBuilder cardBuilder;
 public ItemBuilder itemBuilder;
 public int day;
@@ -31,7 +31,7 @@ public Game() {
 	super();
 	cardBuilder = new CardBuilder();
 	itemBuilder = new ItemBuilder();
-	imageLoader= new MyImageLoader();
+	//imageLoader= new MyImageLoader();
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);
 	day=1;

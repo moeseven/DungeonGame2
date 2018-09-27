@@ -14,7 +14,8 @@ public class Shop extends RoomInteraction{
 	private LinkedList<Item> items;
 	public Shop(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(108);
+		//image=game.imageLoader.getImage(108);
+		setImageNumber(108);
 		name="merchant";
 		items=new LinkedList<Item>();
 		items.add(new HealingPotion());

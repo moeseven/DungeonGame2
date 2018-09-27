@@ -44,7 +44,8 @@ public class Thornback extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(53));
+		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(53));
+		hero.setImageNumber(53);
 		hero.setSpeed(7);
 		hero.setBaseHp(65);		
 		//stats

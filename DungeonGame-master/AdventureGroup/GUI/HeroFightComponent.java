@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
@@ -51,7 +52,8 @@ public class HeroFightComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
+		g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+		//g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero()==hero){
 				g.setColor(Color.green);

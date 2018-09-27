@@ -23,7 +23,8 @@ public class Hero implements Serializable{
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
 	private Equipment equipment;
 	protected String name;
-	protected BufferedImage image;
+	//protected BufferedImage image;
+	protected int imageNumber;
 	protected int gold;
 	protected int experience;	
 	protected int experienceValue;
@@ -124,11 +125,12 @@ public class Hero implements Serializable{
 	}
 	private void basicStats() {
 		//set here basic values for stats
-		if(player!=null) {//basic image
-			image = player.getGame().imageLoader.getImage(121);
-		}else {
-			image = null;
-		}
+//		if(player!=null) {//basic image
+//			image = player.getGame().imageLoader.getImage(121);
+//		}else {
+//			image = null;
+//		}
+		imageNumber=1;
 		//attributes		
 		setStrength(9);
 		setDexterity(9);
@@ -1127,12 +1129,12 @@ public class Hero implements Serializable{
 	public void setWounds(int wounds) {
 		this.wounds = wounds;
 	}
-	public BufferedImage getImage() {
-		return image;
-	}
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
+//	public BufferedImage getImage() {
+//		return image;
+//	}
+//	public void setImage(BufferedImage image) {
+//		this.image = image;
+//	}
 	public int getCritChance() {
 		return critChance;
 	}
@@ -1198,6 +1200,18 @@ public class Hero implements Serializable{
 	}
 	public void setResistSpell(int resistSpell) {
 		this.resistSpell = resistSpell;
+	}
+	public int getImageNumber() {
+		return imageNumber;
+	}
+	public void setImageNumber(int imageNumber) {
+		this.imageNumber = imageNumber;
+	}
+	public int getFire() {
+		return fire;
+	}
+	public void setFire(int fire) {
+		this.fire = fire;
 	}	
 	
 }

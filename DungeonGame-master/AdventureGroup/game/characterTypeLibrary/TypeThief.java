@@ -46,16 +46,20 @@ public class TypeThief extends CharacterClass{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		if (hero.getCharRace().getName().equals("human")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(25));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(25));
+			hero.setImageNumber(25);
 		}
 		if (hero.getCharRace().getName().equals("dwarf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(35));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(35));
+			hero.setImageNumber(35);
 		}
 		if (hero.getCharRace().getName().equals("elf")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(36));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(36));
+			hero.setImageNumber(36);
 		}
 		if (hero.getCharRace().getName().equals("halfling")) {
-			hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(37));
+			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(37));
+			hero.setImageNumber(37);
 		}
 		//mainstats
 		hero.setStrength(hero.getStrength()+2);

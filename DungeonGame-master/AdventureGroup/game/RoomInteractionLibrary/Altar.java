@@ -15,7 +15,8 @@ public class Altar extends RoomInteraction{
 	public int sacrefices=2;
 	public Altar(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(86);
+		//image=game.imageLoader.getImage(86);
+		setImageNumber(86);
 		name="altar";
 		// TODO Auto-generated constructor stub
 	}

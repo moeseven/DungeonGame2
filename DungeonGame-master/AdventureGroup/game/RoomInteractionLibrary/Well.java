@@ -12,7 +12,8 @@ public class Well extends RoomInteraction{
 	private int charges=2;
 	public Well(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(89);
+		//image=game.imageLoader.getImage(89);
+		setImageNumber(89);
 		name="well";
 		// TODO Auto-generated constructor stub
 	}
@@ -31,7 +32,8 @@ public class Well extends RoomInteraction{
 			charges+=-1;
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" receives a refreshment and looses 3 stress");
 		}else {		
-			image=game.imageLoader.getImage(97);
+			//image=game.imageLoader.getImage(97);
+			setImageNumber(97);
 			hero.getPlayer().getGame().log.addLine("the well is empty");
 		}
 		

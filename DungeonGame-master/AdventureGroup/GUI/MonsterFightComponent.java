@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
@@ -47,7 +48,8 @@ public class MonsterFightComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(monster.getImage().getScaledInstance(180, 153, 3),-40,0,null);	//scaled Instance has bad performance!	
+		g.drawImage(StaticImageLoader.getImage(monster.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+		//g.drawImage(monster.getImage().getScaledInstance(180, 153, 3),-40,0,null);	//scaled Instance has bad performance!	
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero().getTarget()==monster){
 				g.setColor(Color.red);

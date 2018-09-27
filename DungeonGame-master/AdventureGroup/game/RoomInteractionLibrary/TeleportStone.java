@@ -13,7 +13,8 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 public class TeleportStone extends RoomInteraction{
 	public TeleportStone(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(109);
+		//image=game.imageLoader.getImage(109);
+		setImageNumber(109);
 		name="teleport stone";
 
 	}

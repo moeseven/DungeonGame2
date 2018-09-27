@@ -175,7 +175,7 @@ public class GeneratorRandom implements Serializable{
 		newInteractionPool();
 	}
 	//
-	private class NameValuePair{
+	private class NameValuePair implements Serializable{
 		public int bonus;
 		public String name;
 		public NameValuePair(int bonus, String name) {

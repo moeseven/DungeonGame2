@@ -13,7 +13,8 @@ public class Chest extends RoomInteraction{
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public Chest(Game game) {
 		super(game);
-		image=game.imageLoader.getImage(82);
+		//image=game.imageLoader.getImage(82);
+		setImageNumber(82);
 		name="chest";
 		gold=(int) (Math.random()*120);
 		
@@ -30,7 +31,8 @@ public class Chest extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		image=game.imageLoader.getImage(90);
+		//image=game.imageLoader.getImage(90);
+		setImageNumber(90);
 		if(charges>0) {
 			charges+=-1;
 			hero.getPlayer().gainGold(gold);
