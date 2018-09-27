@@ -11,9 +11,17 @@ import java.io.ObjectOutputStream;
 import javax.imageio.ImageIO;
 
 public class StaticImageLoader {
-	public static BufferedImage getImage(int i){
+	static BufferedImage[] sprites= new BufferedImage[20*20];
+	
+	public StaticImageLoader() {
+		super();
+		
+	}
+	
+	public static void prepareImage(){
+		//save a sprite version
+		
 		BufferedImage image = new BufferedImage(1, 1, 1);
-		BufferedImage[] sprites= new BufferedImage[20*20];
 		try {
 			 image= ImageIO.read(new File("./res/SpriteSheetBig.png"));
 		} catch (IOException e) {
@@ -31,8 +39,24 @@ public class StaticImageLoader {
 		for(int a=0; a<20; a++){
 			for(int b=0; b<20; b++){
 				sprites[a*20+b]=image.getSubimage(b*60, a*51, 60, 51);
+				try {
+					ImageIO.write(sprites[a*20+b], "png", new File("./res/Sprite_"+(a*20+b)+".png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
-		return sprites[i];
+		
+	}
+	public static BufferedImage getImage(int i){
+		// this has to be made way more efficient: check!
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		try {
+			 image= ImageIO.read(new File("./res/Sprite_"+i+".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return image;
 	}
 }

@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.LinkedList;
 
+import GUI.grafics.StaticImageLoader;
 import game.Game;
 import game.Player;
 import gameEncounter.Hero;
@@ -14,6 +15,7 @@ public class Main {
 	public static Player player;
 	public static Game game;
 	public static void main(String[] args) {
+		StaticImageLoader.prepareImage();
 		game = new Game();
 		player = new Player(game);
 		game.setPlayer(player);	
