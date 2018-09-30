@@ -40,9 +40,9 @@ public class RaceHalfling extends CharacterRace{
 		//resistances
 		hero.setSpellResist(30);
 		hero.setResistFire(0);
-		hero.setResistCold(0);
-		hero.setResistPoison(0);
-		hero.setResistBleed(0);
+		hero.setResistCold(5);
+		hero.setResistPoison(10);
+		hero.setResistBleed(5);
 		hero.setResistStun(0);	
 		hero.setResistStress(26);
 		hero.setTrapDisarm(30);
