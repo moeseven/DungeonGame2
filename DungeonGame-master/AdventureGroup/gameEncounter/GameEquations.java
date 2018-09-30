@@ -180,19 +180,24 @@ public class GameEquations {
 	}
 	///Items
 	
-	public static int RandomizeItemStat(String itemString) {
+	public static int RandomizeItemStat(String itemString,Item item, double power) {
 		LinkedList<String>	parameters= new LinkedList<String>();
 		int value=0;
+		double r=0;
 		String[] splitted =itemString.split("\\,");
 		for (int i = 0; i < splitted.length; i++) {
 			parameters.add(splitted[i]);
 			System.out.println(splitted[i]);
 		}
 		if (splitted.length>1) {
-			value=(int) (Integer.parseInt(splitted[0])+Math.random()*(1+Integer.parseInt(splitted[1])-Integer.parseInt(splitted[0])));
+			r=Math.pow(Math.random(), power);
+			value=(int) (Integer.parseInt(splitted[0])+r*(1+Integer.parseInt(splitted[1])-Integer.parseInt(splitted[0])));
 		}else {
 			value=Integer.parseInt(splitted[0]);
 		}
+		//modify gold value
+		item.setNumberOfModifications(item.getNumberOfModifications()+1);
+		item.setGoldValue(item.getGoldValue()+(int) (item.getBaseGoldValue()*r));
 		return value;
 				
 	}

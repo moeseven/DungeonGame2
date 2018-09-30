@@ -62,6 +62,7 @@ public class Hero implements Serializable{
 	protected int spellPower;
 	protected int spellDuration;
 	//elemental bonus
+	protected int stunChance;
 	protected int fireDmg;
 	protected int coldDmg;
 	protected int lightningDmg;
@@ -350,7 +351,7 @@ public class Hero implements Serializable{
 	}
 	public void finalDamage(int damage) {
 		this.setHp(hp-damage);
-		//player.getGame().log.addLine(name+" took "+damage+" damage");
+		player.getGame().log.addLine(name+" took "+damage+" damage");
 		if(hp<=0) {
 			hp=0;
 			this.die();
@@ -557,6 +558,10 @@ public class Hero implements Serializable{
 		int bonus = this.getMagicDmg()-target.resistSpell;
 		target.takeMagicDamage(this,damage,bonus);
 	}
+	public void doStun(int stunChance,Hero target) {
+		int bonus= stunChance-target.resistStun;
+		target.takeStun(bonus);
+	}
 	//receive		
 	public boolean takeBleedDamage(int bleedAmount, int bonus) {
 		if (bonus>0) {
@@ -632,8 +637,8 @@ public class Hero implements Serializable{
 		takeDamage(damagingHero,afterBlockDamage,false);
 	}
 	//stun
-	public boolean takeStun() {
-		if(Math.random()>resistStun/100.0) {
+	public boolean takeStun(int bonus) {
+		if(Math.random()<bonus/100.0) {
 			stunned=true;
 			buffHero(new Bashed());
 			return true;
@@ -1212,6 +1217,12 @@ public class Hero implements Serializable{
 	}
 	public void setFire(int fire) {
 		this.fire = fire;
+	}
+	public int getStunChance() {
+		return stunChance;
+	}
+	public void setStunChance(int stunChance) {
+		this.stunChance = stunChance;
 	}	
 	
 }

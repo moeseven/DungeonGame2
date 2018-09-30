@@ -49,15 +49,15 @@ public class RaceRat extends MonsterRace{
 		hero.setSpeed(17);
 		hero.setBaseHp(43);		
 		//stats
-		hero.setStrength(10);
+		hero.setStrength(8);
 		hero.setDexterity(23);
 		hero.setIntelligence(11);
 		hero.setVitality(7);
 		//
 		//attack/defence
-		hero.setAttackSkill(6);
+		hero.setAttackSkill(9);
 		hero.setBlockSkill(3);
-		hero.setAccuracy(12);
+		hero.setAccuracy(22);
 		hero.setDodge(16);
 		hero.setSpellPower(8);
 		hero.setSpellResist(5);
@@ -73,7 +73,7 @@ public class RaceRat extends MonsterRace{
 		hero.setGold(0);
 		hero.setExperienceValue(8);
 		//zombieslow
-		hero.setManaPower(2);
+		hero.setManaPower(1);
 		//deck		
 		
 	}
@@ -81,13 +81,12 @@ public class RaceRat extends MonsterRace{
 
 		public RatWarrior(Game game) {	
 			super(game);
-			name="";
-			items.add(new RatClaw());				
-			for (int i=0; i<7;i++) {
-				cards.add(new Bite());
+			name="";			
+			for (int i=0; i<6;i++) {
+				cards.add(game.cardBuilder.buildCard("bite"));
 			}
 			for (int i=0; i<1;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			
 		}

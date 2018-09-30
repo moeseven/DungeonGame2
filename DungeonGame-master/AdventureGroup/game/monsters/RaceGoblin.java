@@ -65,7 +65,7 @@ public class RaceGoblin extends MonsterRace{
 		hero.setResistStun(5);
 		//
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*5.0));
+		hero.setGold((int)(Math.random()*9.0));
 		hero.setExperienceValue(10);
 		hero.setStressCap(71);
 		//deck		
@@ -75,8 +75,8 @@ public class RaceGoblin extends MonsterRace{
 
 		public GoblinWarrior(Game game) {	
 			super(game);
-			name="warrior";
-			items.add(new RustyBlade());				
+			name="warrior";		
+			items.add(game.itemBuilder.buildItem("rustyBlade",4));	
 			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
@@ -98,23 +98,25 @@ public class RaceGoblin extends MonsterRace{
 			hero.setVitality(hero.getVitality()+6);
 			//
 			hero.setArmor(hero.getArmor()+3);
-			hero.setAttackSkill(hero.getAttackSkill()+1);
-			hero.setBlockSkill(hero.getBlockSkill()+1);
+			
+			hero.setBlockSkill(hero.getBlockSkill()+8);
 		}
 	}
 	private class GoblinArcher extends CharacterClass{
 
 		public GoblinArcher(Game game) {
 			super(game);
-			name="archer";
-			items.add(new GoblinBow());		
-			for (int i=0; i<7;i++) {
-				cards.add(new RangedAttack());
+			name="archer";	
+			items.add(game.itemBuilder.buildItem("shortBow",4));	
+			for (int i=0; i<5;i++) {
+				cards.add(game.cardBuilder.buildCard("rangedAttack"));
 			}
-			cards.add(new BasicAttack());
-			cards.add(new Block());
-			cards.add(new Block());
-			cards.add(new PoisonShot());
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
+			cards.add(game.cardBuilder.buildCard("poisonShot"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -129,6 +131,7 @@ public class RaceGoblin extends MonsterRace{
 			hero.setVitality(hero.getVitality()+1);
 			//
 			hero.setAccuracy(hero.getAccuracy()+2);
+			hero.setAttackSkill(hero.getAttackSkill()+7);
 		}
 
 

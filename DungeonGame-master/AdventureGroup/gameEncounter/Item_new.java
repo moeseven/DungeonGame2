@@ -7,6 +7,7 @@ public class Item_new extends Item implements Serializable{
 	protected int weight=10;
 	private int goldValue=100;
 	protected int category=10;
+	protected String itemClass="bow";
 	protected boolean droppable=true;
 	protected int requiredStrength=0;
 	protected int requiredDexterity=0;
@@ -44,16 +45,16 @@ public class Item_new extends Item implements Serializable{
 	protected int bleedDmg=0;
 	protected int poisonDmg=0;
 	protected int magicDmg=0;
-	
+	protected int stunChance=0;
 	
 	//
 	protected LinkedList<String> description;
 	protected String name="";
 	
-	public Item_new(String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
+	public Item_new(double power,String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
 			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,String duration,
-			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String name) {
+			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass, String name) {
 		super();
 		this.name = name;
 		//random attributes here
@@ -62,7 +63,8 @@ public class Item_new extends Item implements Serializable{
 			this.weight = Integer.parseInt(weight);
 		}
 		if (goldValue!=null) {
-			this.goldValue = Integer.parseInt(goldValue);
+			this.baseGoldValue= Integer.parseInt(goldValue);
+			this.goldValue=baseGoldValue;
 		}
 		if (category!=null) {
 			this.category = getItemCategoryInteger(category);
@@ -73,88 +75,106 @@ public class Item_new extends Item implements Serializable{
 		//
 		//modifiers
 		if (critChance!=null) {			
-			this.critChance = GameEquations.RandomizeItemStat(critChance);
+			this.critChance = GameEquations.RandomizeItemStat(critChance,this,power);
 		}
 		if (attack!=null) {
-			this.attack = GameEquations.RandomizeItemStat(attack);
+			this.attack = GameEquations.RandomizeItemStat(attack,this,power);
 		}
 		if (block!=null) {
-			this.block = GameEquations.RandomizeItemStat(block);;
+			this.block = GameEquations.RandomizeItemStat(block,this,power);
 		}
 		if (spell!=null) {
-			this.spell = GameEquations.RandomizeItemStat(spell);;
+			this.spell = GameEquations.RandomizeItemStat(spell,this,power);
 		}
 		if (accuracy!=null) {
-			this.accuracy = GameEquations.RandomizeItemStat(accuracy);;
+			this.accuracy = GameEquations.RandomizeItemStat(accuracy,this,power);
 		}
 		if (dodge!=null) {
-			this.dodge = GameEquations.RandomizeItemStat(dodge);
+			this.dodge = GameEquations.RandomizeItemStat(dodge,this,power);
 		}
 		if (speed!=null) {
-			this.speed = GameEquations.RandomizeItemStat(speed);
+			this.speed = GameEquations.RandomizeItemStat(speed,this,power);
 		}
 		if (draw!=null) {
-			this.draw = GameEquations.RandomizeItemStat(draw);
+			this.draw = GameEquations.RandomizeItemStat(draw,this,power);
 		}
 		if (mana!=null) {
-			this.mana = GameEquations.RandomizeItemStat(mana);
+			this.mana = GameEquations.RandomizeItemStat(mana,this,power);
 		}
 		if (thorns!=null) {
-			this.thorns = GameEquations.RandomizeItemStat(thorns);
+			this.thorns = GameEquations.RandomizeItemStat(thorns,this,power);
 		}
 		if (armor!=null) {
-			this.armor = GameEquations.RandomizeItemStat(armor);
+			this.armor = GameEquations.RandomizeItemStat(armor,this,power);
 		}
 		if (health!=null) {
-			this.health = GameEquations.RandomizeItemStat(health);
+			this.health = GameEquations.RandomizeItemStat(health,this,power);
 		}
 		if (resistSpell!=null) {
-			this.resistSpell = GameEquations.RandomizeItemStat(resistSpell);
+			this.resistSpell = GameEquations.RandomizeItemStat(resistSpell,this,power);
 		}
 		if (resistLightning!=null) {
-			this.resistLightning = GameEquations.RandomizeItemStat(resistLightning);
+			this.resistLightning = GameEquations.RandomizeItemStat(resistLightning,this,power);
 		}
 		if (resistFire!=null) {
-			this.resistFire = GameEquations.RandomizeItemStat(resistFire);
+			this.resistFire = GameEquations.RandomizeItemStat(resistFire,this,power);
 		}
 		if (resistCold!=null) {
-			this.resistCold = GameEquations.RandomizeItemStat(resistCold);
+			this.resistCold = GameEquations.RandomizeItemStat(resistCold,this,power);
 		}
 		if (resistPoison!=null) {
-			this.resistPoison = GameEquations.RandomizeItemStat(resistPoison);
+			this.resistPoison = GameEquations.RandomizeItemStat(resistPoison,this,power);
 		}
 		if (resistBleed!=null) {
-			this.resistBleed = GameEquations.RandomizeItemStat(resistBleed);
+			this.resistBleed = GameEquations.RandomizeItemStat(resistBleed,this,power);
 		}
 		if (resistStun!=null) {
-			this.resistStun = GameEquations.RandomizeItemStat(resistStun);
+			this.resistStun = GameEquations.RandomizeItemStat(resistStun,this,power);
 		}
 		if (resistStress!=null) {
-			this.resistStress = GameEquations.RandomizeItemStat(resistStress);
+			this.resistStress = GameEquations.RandomizeItemStat(resistStress,this,power);
 		}
 		if (duration!=null) {
-			this.duration= GameEquations.RandomizeItemStat(duration);
+			this.duration= GameEquations.RandomizeItemStat(duration,this,power);
 		}
 		if(fireDmg!=null) {
-			this.fireDmg=GameEquations.RandomizeItemStat(fireDmg);
+			this.fireDmg=GameEquations.RandomizeItemStat(fireDmg,this,power);
 		}
 		if (coldDmg!=null) {
-			this.coldDmg= GameEquations.RandomizeItemStat(coldDmg);
+			this.coldDmg= GameEquations.RandomizeItemStat(coldDmg,this,power);
 		}
 		if (lightningDmg!=null) {
-			this.lightningDmg=GameEquations.RandomizeItemStat(lightningDmg);
+			this.lightningDmg=GameEquations.RandomizeItemStat(lightningDmg,this,power);
 		}
 		if (bleedDmg!=null) {
-			this.bleedDmg= GameEquations.RandomizeItemStat(bleedDmg);
+			this.bleedDmg= GameEquations.RandomizeItemStat(bleedDmg,this,power);
 		}
 		if (poisonDmg!=null) {
-			this.poisonDmg=GameEquations.RandomizeItemStat(poisonDmg);
+			this.poisonDmg=GameEquations.RandomizeItemStat(poisonDmg,this,power);
 		}
 		if (magicDmg!=null) {
-			this.magicDmg= GameEquations.RandomizeItemStat(magicDmg);
+			this.magicDmg= GameEquations.RandomizeItemStat(magicDmg,this,power);
 		}
-		//
-		
+		if (stunChance!=null) {
+			this.stunChance= GameEquations.RandomizeItemStat(stunChance,this,power);
+		}
+		if (itemClass!=null) {
+			this.itemClass= itemClass;
+		}
+		// adjust name
+		double itemQuality=0;
+		itemQuality=(this.goldValue-baseGoldValue)/numberOfModifications;
+		this.goldValue=(int) (baseGoldValue+itemQuality);
+		itemQuality=itemQuality/baseGoldValue;		
+		if (itemQuality>0.9) {
+			setName("perfect "+getName());
+		}else if (itemQuality>0.7) {
+			setName("good "+getName());
+		}else if (itemQuality<0.2) {
+			setName("low quality "+getName());
+		}else {
+			setName("normal "+getName());
+		}
 	}
 	public void modification(Hero hero,int fac) {
 		hero.setArmor(hero.getArmor()+armor*fac);
@@ -182,6 +202,7 @@ public class Item_new extends Item implements Serializable{
 	    hero.setBleedDmg(hero.getBleedDmg()+bleedDmg*fac);
 	    hero.setPoisonDmg(hero.getPoisonDmg()+poisonDmg*fac);
 	    hero.setMagicDmg(hero.getMagicDmg()+magicDmg*fac);
+	    hero.setStunChance(hero.getStunChance()+stunChance*fac);
 	}
 	public void mod(Hero hero) {
 		modification(hero, 1);
@@ -283,6 +304,9 @@ public class Item_new extends Item implements Serializable{
 		if (magicDmg!=0) {
 			description.add("magic damage: "+magicDmg+"%");
 		}
+		if (stunChance!=0) {
+			description.add("stun chance: +"+stunChance+"%");
+		}
 		//
 	} 
 	public final  int getItemCategoryInteger(String s) {
@@ -352,6 +376,12 @@ public class Item_new extends Item implements Serializable{
 	}
 	public void setDroppable(boolean droppable) {
 		this.droppable = droppable;
+	}
+	public String getItemClass() {
+		return itemClass;
+	}
+	public void setItemClass(String itemClass) {
+		this.itemClass = itemClass;
 	}
 
 	

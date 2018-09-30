@@ -63,3 +63,6 @@
 /CardBuilder.class
 /EffectParameters.class
 /ItemParameters.class
+/CastCondition.class
+/requiresBow.class
+/CastConditionBuilder.class

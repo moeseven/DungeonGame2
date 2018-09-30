@@ -295,10 +295,10 @@ public class GeneratorRandom implements Serializable{
 		}
 		
 	}	
-	public Item generateRandomItem(int level) {
+	public Item generateRandomItem(double power) {//high power is bad item 
 //		newItemPool();
 //		//Item item = itemPool.get((int) Math.min(itemPool.size()-1, Math.random()*itemPool.size()));
-		Item_new item = (Item_new) game.itemBuilder.buildItem(allItems.get((int) Math.min(allItems.size()-1, Math.random()*allItems.size())));
+		Item_new item = (Item_new) game.itemBuilder.buildItem(allItems.get((int) Math.min(allItems.size()-1, Math.random()*allItems.size())),power);
 //		if(Math.random()<0.1*level) {
 //			enchant(item, level);
 //		}

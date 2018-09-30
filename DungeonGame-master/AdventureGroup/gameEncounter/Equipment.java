@@ -171,25 +171,25 @@ public class Equipment implements Serializable{
 	public Item getHand1() {
 		return hand1;
 	}
-	public void setHand1(Item hand1) {
+	public void setHand1(Item_new hand1) {
 		this.hand1 = hand1;
 	}
 	public Item getHand2() {
 		return hand2;
 	}
-	public void setHand2(Item hand2) {
+	public void setHand2(Item_new hand2) {
 		this.hand2 = hand2;
 	}
 	public Item getBody() {
 		return body;
 	}
-	public void setBody(Item body) {
+	public void setBody(Item_new body) {
 		this.body = body;
 	}
 	public Item getHead() {
 		return head;
 	}
-	public void setHead(Item head) {
+	public void setHead(Item_new head) {
 		this.head = head;
 	}
 	

@@ -26,7 +26,7 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("sleepCharm");		
 		cardPool.add("rosesAndThorns");
 		name="mage";		
-		items.add(game.itemBuilder.buildItem("rustyBlade"));
+		items.add(game.itemBuilder.buildItem("rustyBlade",6));
 		for (int i=0; i<3;i++) {
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
@@ -57,12 +57,10 @@ public class TypeMage extends CharacterClass{
 			hero.setImageNumber(126);
 		}
 		//mainstats
-		hero.setStrength(hero.getStrength()+0);
-		hero.setDexterity(hero.getDexterity()+1);
 		hero.setIntelligence(hero.getIntelligence()+6);
 		hero.setVitality(hero.getVitality()+1);
 		//
-		hero.setSpellPower(hero.getSpellPower()+2);	
+		hero.setSpellPower(hero.getSpellPower()+8);	
 		hero.setResistStress(hero.getResistStress()-3);
 	}
 }

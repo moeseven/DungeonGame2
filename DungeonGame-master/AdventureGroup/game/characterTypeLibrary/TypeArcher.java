@@ -28,7 +28,7 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("frostArrow");
 		cardPool.add("bandage");
 		name="archer";
-		items.add(game.itemBuilder.buildItem("rustyBlade"));	
+		items.add(game.itemBuilder.buildItem("shortBow",5));	
 		for (int i=0; i<7;i++) {
 			cards.add(game.cardBuilder.buildCard("rangedAttack"));
 		}
@@ -62,7 +62,7 @@ public class TypeArcher extends CharacterClass{
 		hero.setVitality(hero.getVitality()+2);
 		//
 		hero.setCritChance(hero.getCritChance()+4);
-		hero.setAttackSkill(hero.getAttackSkill()+2);
+		hero.setAttackSkill(hero.getAttackSkill()+6);
 		hero.setAccuracy(hero.getAccuracy()+2);
 		hero.setTrapDisarm(hero.getTrapDisarm()+5);
 		hero.setResistStress(hero.getResistStress()-1);

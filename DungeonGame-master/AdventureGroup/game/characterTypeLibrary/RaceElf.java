@@ -41,9 +41,9 @@ public class RaceElf extends CharacterRace{
 		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(27));
 		hero.setImageNumber(27);
 		hero.setSpeed(hero.getSpeed()+2);
-		hero.setAccuracy(hero.getAccuracy()+3);
+		hero.setAccuracy(hero.getAccuracy()+6);
 		hero.setBaseHp(hero.getBaseHp()-5);
-		hero.setStrength(hero.getStrength()-1);
+		hero.setStrength(hero.getStrength()-2);
 		hero.setDexterity(hero.getDexterity()+3);
 		//resistances
 		hero.setSpellResist(0);

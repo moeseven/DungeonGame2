@@ -20,6 +20,7 @@ public class TypeThief extends CharacterClass{
 
 	public TypeThief(Game game) {
 		super(game);
+		name="thief";
 		cardPool.add("backStab");
 		cardPool.add("blindingBomb");
 		cardPool.add("poisonBomb");
@@ -27,7 +28,7 @@ public class TypeThief extends CharacterClass{
 		cardPool.add("daggerThrow");
 		cardPool.add("feint");
 		cardPool.add("sideStep");
-		items.add(game.itemBuilder.buildItem("rustyBlade"));
+		items.add(game.itemBuilder.buildItem("rustyBlade",2));
 		for (int i=0; i<8;i++) {
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
@@ -68,7 +69,7 @@ public class TypeThief extends CharacterClass{
 		hero.setVitality(hero.getVitality()+1);
 		//
 		hero.setCritChance(hero.getCritChance()+8);
-		hero.setDodge(hero.getDodge()+1);
+		hero.setDodge(hero.getDodge()+4);
 		hero.setSpeed(hero.getSpeed()+1);
 		hero.setTrapDisarm(hero.getTrapDisarm()+40);
 		hero.setResistStress(hero.getResistStress()-4);

@@ -14,25 +14,24 @@ public class Shop extends RoomInteraction{
 	private LinkedList<Item> items;
 	public Shop(Game game) {
 		super(game);
-		//image=game.imageLoader.getImage(108);
 		setImageNumber(108);
 		name="merchant";
 		items=new LinkedList<Item>();
 		items.add(new HealingPotion());
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void onEnter(Game game) {
-		// TODO Auto-generated method stub
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
-		items.add(game.generator.generateRandomItem(1));
+		items.add(game.generator.generateRandomItem(3.6));
+		items.add(game.generator.generateRandomItem(3.5));
+		items.add(game.generator.generateRandomItem(3.4));
+		items.add(game.generator.generateRandomItem(3));
+		items.add(game.generator.generateRandomItem(2.4));
+		items.add(game.generator.generateRandomItem(2.3));
+		items.add(game.generator.generateRandomItem(2.2));
+		items.add(game.generator.generateRandomItem(2.1));
+		items.add(game.generator.generateRandomItem(2));
+		items.add(game.generator.generateRandomItem(1.6));
 	}
 
 	@Override

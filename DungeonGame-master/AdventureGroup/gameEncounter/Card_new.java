@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import gameEncounter.CardLibrary.CastCondition;
+import gameEncounter.CardLibrary.CastConditionBuilder;
 import gameEncounter.CardLibrary.EffectParameters;
 import gameEncounter.EffectLibrary.EffectBuilder;
 import gameEncounter.EffectLibrary.attackEffect;
@@ -12,6 +14,7 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Card_new extends Card implements Serializable,Cloneable{
 	protected int manaCost=1;
+	protected LinkedList<CastCondition> castConditions =new LinkedList<CastCondition>();
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
@@ -28,7 +31,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5) {
+			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5, String castConditions) {
 		super();
 		if (manaCost!=null) {
 			this.manaCost = Integer.parseInt(manaCost);
@@ -76,6 +79,9 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		}
 		if (effect5!=null) {
 			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect5)));
+		}
+		if (castConditions!=null) {
+			this.castConditions.add(CastConditionBuilder.buildCastCondition(castConditions));
 		}
 		//
 		if (isFriendly!=null) {
@@ -185,7 +191,12 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	}
 	@Override
 	public boolean extraCastConditions(Hero hero) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < castConditions.size(); i++) {
+			if (!castConditions.get(i).checkCondition(hero)) {
+				hero.getPlayer().getGame().log.addLine(castConditions.get(i).explanation);
+				return false;
+			}
+		}
 		return true;
 	}
 	//getters and setters

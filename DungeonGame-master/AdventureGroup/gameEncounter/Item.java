@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public abstract class Item implements Serializable{
+	protected String itemClass="bow";
 	protected int weight=10;
 	private int goldValue=100;
+	protected int baseGoldValue=10;
+	protected int numberOfModifications=0;
 	protected int category=10;
 	protected boolean droppable=true;
 	protected int requiredStrength=0;
@@ -110,6 +113,23 @@ public abstract class Item implements Serializable{
 	public void setDroppable(boolean droppable) {
 		this.droppable = droppable;
 	}
-
+	public String getItemClass() {
+		return itemClass;
+	}
+	public void setItemClass(String itemClass) {
+		this.itemClass = itemClass;
+	}
+	public int getBaseGoldValue() {
+		return baseGoldValue;
+	}
+	public void setBaseGoldValue(int baseGoldValue) {
+		this.baseGoldValue = baseGoldValue;
+	}
+	public int getNumberOfModifications() {
+		return numberOfModifications;
+	}
+	public void setNumberOfModifications(int numberOfModifications) {
+		this.numberOfModifications = numberOfModifications;
+	}
 	
 }

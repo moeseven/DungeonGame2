@@ -13,7 +13,6 @@ protected Game game;
 	}
 	@Override
 	public void modifyHero(Hero hero) {
-		// TODO Auto-generated method stub
 		for(int i=0; i<items.size();i++) {
 			hero.getPlayer().getInventory().add(items.get(i));
 			hero.getEquipment().equipItem(items.get(i));

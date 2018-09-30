@@ -52,7 +52,9 @@ public class CombatComponent extends JComponent{
 			super.paintComponent(g);
 			g.setColor(Color.black);
 			g.drawString("round", 5, 120);
-			g.drawString(""+fw.getGame().getRoom().getFight().getRound(), 15, 135);
+			if (fw.getGame().getRoom().getFight()!=null) {
+				g.drawString(""+fw.getGame().getRoom().getFight().getRound(), 15, 135);
+			}
 		}
 	}
 }

@@ -430,6 +430,9 @@ protected void paintComponent(Graphics g){
 			g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 		}
 	}
+	for (int i = 0; i < this.gw.getGame().getPlayer().getAvailableHeroes().size(); i++) {
+		g.drawImage(StaticImageLoader.getImage(gw.getGame().getPlayer().getAvailableHeroes().get(i).getImageNumber()),80+25*i,53,null);
+	}
 }
 	}
 	private class MedicineInterface extends JComponent{

@@ -15,13 +15,25 @@ public class bashEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		self.getTarget().takeStun();
-		return true;
+		
+		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
+		for (int i = 0; i < self.getTargets().size(); i++) {
+			if(self.attackHero(self.getTargets().get(i),card)) {
+				nextTargets.add(self.getTargets().get(i));
+				self.doStun(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
+			}
+		}
+		self.setTargets(nextTargets);
+		if(nextTargets.size()>0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return "bash";
+		return pars.get(1)+"% bash";
 	}
 
 }
