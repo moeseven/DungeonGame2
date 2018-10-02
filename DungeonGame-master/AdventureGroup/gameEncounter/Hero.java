@@ -329,12 +329,9 @@ public class Hero implements Serializable{
 			dealAttackDamage(damagingHero, null, true);
 		}
 		if(damage>0) {
-			if(player instanceof DungeonMaster) {
-				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
-				finalDamage(damage);
-			}else {
-				finalDamage(damage);
-				//option for wounds instead of death
+			player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
+			finalDamage(damage);	
+			//option for wounds instead of death
 //				if(damage>hp/1.6) {	//wounds
 //					if(Math.random()>wounds/(deck.getCards().size()*1.8)) {
 //						player.getGame().log.addLine(name+"suffered a wound");
@@ -346,12 +343,12 @@ public class Hero implements Serializable{
 //				}else {
 //					finalDamage(damage);
 //				}
-			}			
+//			}			
 		}		
 	}
 	public void finalDamage(int damage) {
 		this.setHp(hp-damage);
-		player.getGame().log.addLine(name+" took "+damage+" damage");
+		//player.getGame().log.addLine(name+" took "+damage+" damage");
 		if(hp<=0) {
 			hp=0;
 			this.die();

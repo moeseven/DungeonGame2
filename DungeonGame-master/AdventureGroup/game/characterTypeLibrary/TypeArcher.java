@@ -29,12 +29,13 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("bandage");
 		name="archer";
 		items.add(game.itemBuilder.buildItem("shortBow",5));	
-		for (int i=0; i<7;i++) {
+		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("rangedAttack"));
 		}
-		cards.add(game.cardBuilder.buildCard("basicAttack"));
-		cards.add(game.cardBuilder.buildCard("basicBlock"));
-		cards.add(game.cardBuilder.buildCard("basicBlock"));
+		for (int i=0; i<5;i++) {
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
+		}
 	}
 
 	public void modifyHero(Hero hero) {

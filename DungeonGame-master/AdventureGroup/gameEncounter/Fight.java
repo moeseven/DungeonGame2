@@ -16,7 +16,6 @@ public class Fight implements Serializable{
 	private int turnOrderCounter;
 	private LinkedList<LinkedList<Hero>> meele;
 	public Fight(Game game,LinkedList<Hero> monsters, LinkedList<Hero> heroes) {
-		// TODO Auto-generated constructor stub
 		this.game=game;
 		this.monsters=monsters;
 		this.heroes=heroes;
@@ -225,6 +224,18 @@ public class Fight implements Serializable{
 	}
 	public void setRound(int round) {
 		this.round = round;
+	}
+	public LinkedList<Hero> getTurnOrder() {
+		return turnOrder;
+	}
+	public void setTurnOrder(LinkedList<Hero> turnOrder) {
+		this.turnOrder = turnOrder;
+	}
+	public int getTurnOrderCounter() {
+		return turnOrderCounter;
+	}
+	public void setTurnOrderCounter(int turnOrderCounter) {
+		this.turnOrderCounter = turnOrderCounter;
 	}
 	
 }

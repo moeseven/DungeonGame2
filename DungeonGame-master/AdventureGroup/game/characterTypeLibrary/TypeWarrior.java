@@ -37,12 +37,12 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add("parry");
 		cardPool.add("intimidatingCry");
 		name="warrior";
-		items.add(game.itemBuilder.buildItem("rustyBlade",3));				
-		for (int i=0; i<4;i++) {
-			cards.add(game.cardBuilder.buildCard("meeleAttack"));
-		}
-		cards.add(game.cardBuilder.buildCard("basicAttack"));
+		items.add(game.itemBuilder.buildItem("rustyBlade",3));			
+		for (int i=0; i<2;i++) {
+			cards.add(game.cardBuilder.buildCard("carefulSlash"));
+		}		
 		for (int i=0; i<5;i++) {
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 //		cards.add(game.cardBuilder.buildCard("carefulSlash"));

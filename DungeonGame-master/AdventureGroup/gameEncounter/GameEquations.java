@@ -169,7 +169,7 @@ public class GameEquations {
 		return (int)(dexterity*Math.min(1,str));
 	}
 	public static int speedRoll(Hero hero) {
-		return speedCalc(hero)+(int)(Math.random()*15.0);
+		return (int)(speedCalc(hero)/4+speedCalc(hero)*(Math.random()));
 	}
 	public static int experienceThresholdForLevelUp(int level) {
 		if(level==0) {

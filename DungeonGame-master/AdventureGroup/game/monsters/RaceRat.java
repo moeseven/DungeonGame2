@@ -50,15 +50,15 @@ public class RaceRat extends MonsterRace{
 		hero.setBaseHp(43);		
 		//stats
 		hero.setStrength(8);
-		hero.setDexterity(23);
+		hero.setDexterity(20);
 		hero.setIntelligence(11);
 		hero.setVitality(7);
 		//
 		//attack/defence
 		hero.setAttackSkill(9);
 		hero.setBlockSkill(3);
-		hero.setAccuracy(22);
-		hero.setDodge(16);
+		hero.setAccuracy(21);
+		hero.setDodge(13);
 		hero.setSpellPower(8);
 		hero.setSpellResist(5);
 		//
@@ -85,7 +85,7 @@ public class RaceRat extends MonsterRace{
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("bite"));
 			}
-			for (int i=0; i<1;i++) {
+			for (int i=0; i<3;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			
@@ -105,52 +105,4 @@ public class RaceRat extends MonsterRace{
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
 	}
-	private class RatClaw extends ItemHand1{
-		public RatClaw(){
-			super();
-			droppable=false;
-			name="rat";
-			setGoldValue(1);
-			this.baseDamage=12;
-			this.damageRange=4;
-			this.facStr=0.45;
-			this.weaponRange=2;
-		}
-		
-
-	}
-	private class Bite extends AttackCard{
-
-		public Bite() {
-			super();
-			manaCost=1;
-		}
-
-
-		@Override
-		public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget(),this)) {
-				damageTarget(self);
-				self.getTarget().bleed(1);
-				self.getTarget().becomeStressed((int) (3*Math.random()));
-				return true;
-			}else {
-				return false;
-			}
-		}
-
-		@Override
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "bite";
-		}
-
-		@Override
-		public boolean isFriendly() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
-	}
-
 }

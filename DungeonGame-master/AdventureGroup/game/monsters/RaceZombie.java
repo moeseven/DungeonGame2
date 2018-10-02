@@ -83,17 +83,16 @@ public class RaceZombie extends MonsterRace{
 			name="";
 			items.add(new ZombieClaw());				
 			for (int i=0; i<4;i++) {
-				cards.add(new BasicAttack());
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
 			for (int i=0; i<6;i++) {
-				cards.add(new MeeleAttack());
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
 			cards.add(new Moaning());
 			cards.add(new Grab());
 		}
 
 		public void modifyHero(Hero hero) {
-			// TODO Auto-generated method stub
 			super.modifyHero(hero);
 			//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(65));
 			hero.setImageNumber(65);
@@ -107,20 +106,6 @@ public class RaceZombie extends MonsterRace{
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
-	}
-	private class ZombieClaw extends ItemHand1{
-		public ZombieClaw(){
-			super();
-			droppable=false;
-			name="zombie claw";
-			setGoldValue(1);
-			this.baseDamage=20;
-			this.damageRange=4;
-			this.facStr=0.95;
-			this.weaponRange=2;
-		}
-		
-
 	}
 	private class Moaning extends Spell{
 

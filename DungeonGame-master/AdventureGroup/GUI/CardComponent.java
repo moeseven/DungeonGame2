@@ -20,10 +20,6 @@ public class CardComponent extends JComponent{
 	private Image image;
 	private FightWindow fw;
 	public CardComponent(FightWindow fw, Card card) {
-//		try {
-//		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
-//		} catch (IOException e) {
-//		}
 		this.fw=fw;
 		this.card=card;
 		super.setPreferredSize(new Dimension(100,80));

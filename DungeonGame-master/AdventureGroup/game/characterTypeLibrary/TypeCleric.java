@@ -27,12 +27,10 @@ public class TypeCleric extends CharacterClass{
 		
 		name="cleric";
 		items.add(game.itemBuilder.buildItem("rustyBlade",4));		
-		for (int i=0; i<3;i++) {
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
-		}
-		cards.add(game.cardBuilder.buildCard("meeleAttack"));
-		cards.add(game.cardBuilder.buildCard("meeleAttack"));
+		cards.add(game.cardBuilder.buildCard("bash"));
+		cards.add(game.cardBuilder.buildCard("divineGrace"));
 		for (int i=0; i<5;i++) {
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 	}

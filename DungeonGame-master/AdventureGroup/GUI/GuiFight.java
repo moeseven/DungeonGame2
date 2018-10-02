@@ -125,5 +125,11 @@ public class GuiFight extends JPanel{
 	public void setLc(LogComponent lc) {
 		this.lc = lc;
 	}
+	public Fight getFight() {
+		return fight;
+	}
+	public void setFight(Fight fight) {
+		this.fight = fight;
+	}
 	
 }

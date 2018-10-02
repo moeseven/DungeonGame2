@@ -14,22 +14,20 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import GUI.grafics.StaticImageLoader;
+import game.DungeonMaster;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 //!! heroes and monsters should be drawn not be components
 public class HeroFightComponent extends JComponent{
-	private Hero hero;
-	private FightWindow fw;
+	protected Hero hero;
+	protected FightWindow fw;
+	protected MyMouseListener ml;
 	public HeroFightComponent(FightWindow fw, Hero hero) {
-//		try {
-//		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
-//		} catch (IOException e) {
-//		}
 		this.hero=hero;
 		this.fw=fw;
 		super.setPreferredSize(new Dimension(120,170));
-		MyMouseListener ml = new MyMouseListener();
+		ml = new MyMouseListener();
 		super.addMouseListener(ml);
 		setLayout(new BorderLayout());
 		setVisible(true);
@@ -38,7 +36,9 @@ public class HeroFightComponent extends JComponent{
 	private class MyMouseListener extends MouseAdapter{
 		public void mousePressed(MouseEvent e){
 			if(e.getButton()==1){
-				fw.getGame().getPlayer().setSelectedHero(hero);						
+				if (!(hero.getPlayer() instanceof DungeonMaster)) {
+					fw.getGame().getPlayer().setSelectedHero(hero);		
+				}								
 			}else{
 				if (e.getButton()==3){
 					fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
@@ -53,7 +53,8 @@ public class HeroFightComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
-		//g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
+		int number=fw.getGuiFight().getFight().getTurnOrder().indexOf(hero)-fw.getGuiFight().getFight().getTurnOrderCounter();
+		g.drawString("moves in "+number+" turns", 8, 25);
 		if(fw!=null){			
 			if(fw.getGame().getPlayer().getSelectedHero()==hero){
 				g.setColor(Color.green);
@@ -70,7 +71,7 @@ public class HeroFightComponent extends JComponent{
 			g.fillOval(10+i*6,95, 6, 6);
 		}
 		g.setColor(Color.black);
-		g.drawString(hero.getName(), 10, 15);
+		g.drawString(hero.getName(), 8, 15);
 		if(hero.getPoison()>0) {
 			g.setColor(Color.GREEN);
 			g.drawString(""+hero.getPoison(), 10, 35);
@@ -90,6 +91,9 @@ public class HeroFightComponent extends JComponent{
 		g.setColor(Color.red);
 		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 30, 155);
 		g.setColor(Color.GRAY);
-		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
+		if (!(hero.getPlayer() instanceof DungeonMaster)) {
+			g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
+		}
+		
 	}
 }

@@ -27,13 +27,12 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("rosesAndThorns");
 		name="mage";		
 		items.add(game.itemBuilder.buildItem("rustyBlade",6));
-		for (int i=0; i<3;i++) {
-			cards.add(game.cardBuilder.buildCard("basicBlock"));
-		}
-		cards.add(game.cardBuilder.buildCard("magicMissile"));
-		cards.add(game.cardBuilder.buildCard("magicMissile"));
+		for (int i=0; i<2;i++) {
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+		}		
 		for (int i=0; i<5;i++) {
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
 		}
 		
 	}

@@ -57,7 +57,7 @@ public class HandPaintComponent extends JComponent{
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost(), 5+i*100, 10);
 			//mana bubbles
-			for(int m = 0;m<fw.getGame().getPlayer().getSelectedHero().getDeck().getCards().get(i).getManaCost();m++) {			
+			for(int m = 0;m<fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getManaCost();m++) {			
 				g.setColor(Color.BLUE);				
 				g.fillOval(5+m*10+i*100, 15, 8, 8);
 			}
