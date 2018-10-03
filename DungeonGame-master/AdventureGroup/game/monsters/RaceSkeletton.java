@@ -113,8 +113,9 @@ public class RaceSkeletton extends MonsterRace{
 		public void modifyHero(Hero hero) {
 			// TODO Auto-generated method stub
 			super.modifyHero(hero);
+			hero.setImageScale(4);
 			//mainstats
-			hero.setStrength(hero.getStrength()+14);
+			hero.setStrength(hero.getStrength()+34);
 			hero.setDexterity(hero.getDexterity()+2);
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+29);

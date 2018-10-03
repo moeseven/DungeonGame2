@@ -9,7 +9,7 @@ public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
 	protected boolean xCostCard=false;
 	protected int x;
-	protected int accuracy=100;
+	protected int accuracy=0;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;

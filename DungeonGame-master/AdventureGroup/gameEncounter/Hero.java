@@ -18,6 +18,7 @@ import gameEncounter.buffLibrary.Bashed;
 public class Hero implements Serializable{
 
 	//private LinkedList<Item> inventory;
+	private int imageScale=3;
 	private LinkedList<Buff> buffs;
 	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();;
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
@@ -1220,6 +1221,17 @@ public class Hero implements Serializable{
 	}
 	public void setStunChance(int stunChance) {
 		this.stunChance = stunChance;
-	}	
+	}
+	public int getImageScale() {
+		return imageScale;
+	}
+	public void setImageScale(int imageScale) {
+		this.imageScale = imageScale;
+	}
+	public boolean isStunned() {
+		return stunned;
+	}
+
+	
 	
 }

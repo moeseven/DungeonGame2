@@ -82,14 +82,14 @@ public class CombatComponent extends JComponent{
 			    while (it.hasNext()) {
 			        Map.Entry pair = (Map.Entry)it.next();
 			        //
-			        int start_x=(HeroComponent.WIDTH*(heroes.size()+monsters.indexOf(pair.getKey()))+FightBorder.WIDTH);//calculate starting x position
+			        int start_x=(HeroFightExtraComponent.WIDTH*(heroes.size()+monsters.indexOf(pair.getKey()))+FightBorder.WIDTH);//calculate starting x position
 			        int y= 13;
 			        HashMap<Card, Hero> map2=(HashMap<Card, Hero>) pair.getValue();
 			        Iterator it2 = map2.entrySet().iterator();
 				    while (it2.hasNext()) {
 				        Map.Entry pair2 = (Map.Entry)it2.next();
 				        //
-				        int end_x=HeroComponent.WIDTH*(heroes.size()-heroes.indexOf(pair2.getValue()));
+				        int end_x=HeroFightExtraComponent.WIDTH*(heroes.size()-heroes.indexOf(pair2.getValue()));
 				        Card_new card= (Card_new) pair2.getKey();
 				        if (card.getSpellDamage()>0||card.getAttackDamage()>0&&heroes.contains(pair2.getValue())){
 							g.setColor(Color.RED);

@@ -23,10 +23,6 @@ public class HeroRoomComponent extends JComponent{
 	private Image image;
 	private RoomWindow rw;
 	public HeroRoomComponent(RoomWindow rw, Hero hero) {
-//		try {
-//		    image=ImageIO.read(new File(card.getImage())).getScaledInstance(100, 150, image.SCALE_SMOOTH);
-//		} catch (IOException e) {
-//		}
 		this.hero=hero;
 		this.rw=rw;
 		super.setPreferredSize(new Dimension(120,170));

@@ -16,7 +16,7 @@ import gameEncounter.Fight;
 
 public class GuiInventory extends JPanel{
 	private StatsWindow gf;
-	private HeroComponent hc;
+	private HeroFightExtraComponent hc;
 	private CombatComponent mc;
 	private JButton b;
 	private JPanel jp_center;
@@ -43,10 +43,10 @@ public class GuiInventory extends JPanel{
 //			gf.repaint();
 		}
 	}
-	public HeroComponent getHc() {
+	public HeroFightExtraComponent getHc() {
 		return hc;
 	}
-	public void setHc(HeroComponent hc) {
+	public void setHc(HeroFightExtraComponent hc) {
 		this.hc = hc;
 	}
 	public CombatComponent getMc() {

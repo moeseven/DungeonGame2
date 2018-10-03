@@ -18,7 +18,7 @@ import game.DungeonMaster;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
-//!! heroes and monsters should be drawn not be components
+
 public class HeroFightComponent extends JComponent{
 	protected Hero hero;
 	protected FightWindow fw;
@@ -37,6 +37,10 @@ public class HeroFightComponent extends JComponent{
 	private class MyMouseListener extends MouseAdapter{
 		public void mouseEntered(MouseEvent e) {
 			fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
+			fw.repaint();
+		}
+		public void mouseExited(MouseEvent e) {
+			fw.getGame().getPlayer().getSelectedHero().setNewTarget(null);
 			fw.repaint();
 		}
 		public void mousePressed(MouseEvent e){
@@ -59,7 +63,7 @@ public class HeroFightComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+		g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(60*hero.getImageScale(), 51*hero.getImageScale(), hero.getImageScale()),-40,0,null);
 		int number=fw.getGuiFight().getFight().getTurnOrder().indexOf(hero)-fw.getGuiFight().getFight().getTurnOrderCounter();
 		g.drawString("moves in "+number+" turns", 8, 25);
 		if(fw!=null){			
@@ -100,6 +104,20 @@ public class HeroFightComponent extends JComponent{
 		g.setColor(Color.GRAY);
 		if (!(hero.getPlayer() instanceof DungeonMaster)) {
 			g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
+			if (fw.getGame().getPlayer().getSelectedHero().getTarget()!=null&&fw.getGame().getRoom().getFight().getTargetMap().containsKey(fw.getGame().getPlayer().getSelectedHero().getTarget())) {
+				if (fw.getGame().getRoom().getFight().getTargetMap().get(fw.getGame().getPlayer().getSelectedHero().getTarget()).containsValue(hero)) {
+					g.setColor(Color.RED);
+					g.drawOval(35, 35, 40, 40);
+					g.drawOval(40, 40, 30, 30);
+					g.drawOval(47, 47, 15, 15);
+				}
+			}
+		}
+		if (hero.isStunned()) {
+			g.setColor(Color.WHITE);
+			g.drawOval(35, 35, 50, 40);
+			g.drawOval(40, 40, 40, 30);
+			g.drawOval(47, 47, 20, 15);
 		}
 		
 	}

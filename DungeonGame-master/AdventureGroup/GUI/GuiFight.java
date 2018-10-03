@@ -25,7 +25,7 @@ import tools.MyLog;
 public class GuiFight extends JPanel{
 	private Fight fight;
 	private FightWindow fw;
-	private HeroComponent hc;
+	private HeroFightExtraComponent hc;
 	private CombatComponent mc;
 	private LogComponent lc;
 	private JButton b;
@@ -75,7 +75,7 @@ public class GuiFight extends JPanel{
 		}
 	}
 	public void myUpdate() {
-		hc=new HeroComponent(this.fw);
+		hc=new HeroFightExtraComponent(this.fw);
 		mc=new CombatComponent(this.fw);
 		lc=new LogComponent(fw.getGame().log);
 		jp_mid_1= new JPanel();
@@ -96,7 +96,7 @@ public class GuiFight extends JPanel{
 	}
 	public void upadate(){
 		this.remove(jp_mid_1);
-		hc=new HeroComponent(this.fw);
+		hc=new HeroFightExtraComponent(this.fw);
 		mc=new CombatComponent(this.fw);
 		lc=new LogComponent(fw.getGame().log);
 		jp_mid_1= new JPanel();
@@ -107,10 +107,10 @@ public class GuiFight extends JPanel{
 		this.add(jp_mid_1,BorderLayout.CENTER);
 		fw.setVisible(true);
 	}
-	public HeroComponent getHc() {
+	public HeroFightExtraComponent getHc() {
 		return hc;
 	}
-	public void setHc(HeroComponent hc) {
+	public void setHc(HeroFightExtraComponent hc) {
 		this.hc = hc;
 	}
 	public CombatComponent getMc() {

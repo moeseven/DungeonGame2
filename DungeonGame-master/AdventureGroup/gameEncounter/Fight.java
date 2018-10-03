@@ -30,12 +30,13 @@ public class Fight implements Serializable{
 		for (Hero m : monsters) {	
 		    m.setUpDrawPile();	 
 		    m.setFight(this);
+		    precalculateMonsterTurn(m);
 		}
 		this.newRound();
 	}
 	public void newRound() {
 		for (Hero m : monsters) {	
-		    precalculateMonsterTurn(m);
+		    
 		}
 		round+=1;
 		game.log.addLine("########## ROUND "+round+" ##########");		

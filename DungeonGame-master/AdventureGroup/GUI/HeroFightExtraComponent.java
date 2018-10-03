@@ -12,13 +12,13 @@ import javax.swing.border.LineBorder;
 
 import gameEncounter.Hero;
 
-public class HeroComponent extends JComponent{
+public class HeroFightExtraComponent extends JComponent{
 	private HandComponent handComponent;
 	private HandPaintComponent hpc;
 	private JPanel jp;
 	private JScrollPane sp;
 	private FightWindow fw;
-	public HeroComponent(FightWindow fw) {
+	public HeroFightExtraComponent(FightWindow fw) {
 		this.fw=fw;
 		handComponent=new HandComponent(fw);
 		hpc=new HandPaintComponent(fw);
