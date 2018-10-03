@@ -72,7 +72,7 @@ public class CombatComponent extends JComponent{
 			}			
 		}
 	}
-	private class AttackIndication extends JComponent{
+	private class AttackIndication extends JComponent{//didn't work found a better solution
 		protected void paintComponent(Graphics g){
 			//draw attack arrows here
 			super.setPreferredSize(new Dimension(600,50));
