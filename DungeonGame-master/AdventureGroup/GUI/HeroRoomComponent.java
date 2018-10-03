@@ -18,12 +18,10 @@ import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
-public class HeroRoomComponent extends JComponent{
-	private Hero hero;
-	private Image image;
+public class HeroRoomComponent extends HeroComponent{
 	private RoomWindow rw;
 	public HeroRoomComponent(RoomWindow rw, Hero hero) {
-		this.hero=hero;
+		super(hero,rw.getGame());
 		this.rw=rw;
 		super.setPreferredSize(new Dimension(120,170));
 		MyMouseListener ml = new MyMouseListener();
@@ -46,23 +44,22 @@ public class HeroRoomComponent extends JComponent{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);		
-		if(rw!=null){
-			g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);	
-//			g.drawImage(hero.getImage().getScaledInstance(180, 153, 3),-40,0,null);			
-			if(rw.getGame().getPlayer().getSelectedHero()==hero){
-				g.setColor(Color.green);
-				g.drawRect(1, 1, 98, 148);
-			}
-		}
+//		if(rw!=null){
+//			g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);	
+//			if(rw.getGame().getPlayer().getSelectedHero()==hero){
+//				g.setColor(Color.green);
+//				g.drawRect(1, 1, 98, 148);
+//			}
+//		}
 		
-		g.setColor(Color.black);
-		g.drawString(hero.getName(), 10, 15);
-		g.setColor(Color.blue);
-		g.drawString(""+hero.getBlock(), 10, 45);
-		g.setColor(Color.red);
-		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 30, 155);
-		g.setColor(Color.GRAY);
-		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
+//		g.setColor(Color.black);
+//		g.drawString(hero.getName(), 10, 15);
+//		g.setColor(Color.blue);
+//		g.drawString(""+hero.getBlock(), 10, 45);
+//		g.setColor(Color.red);
+//		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 30, 155);
+//		g.setColor(Color.GRAY);
+//		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
 		
 	}
 }

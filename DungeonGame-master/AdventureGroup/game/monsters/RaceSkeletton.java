@@ -54,7 +54,7 @@ public class RaceSkeletton extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*15.0));
-		hero.setExperienceValue(20);
+		hero.setExperienceValue(40);
 		hero.setResistStress(20);
 		hero.setDraw(4);
 		//deck		

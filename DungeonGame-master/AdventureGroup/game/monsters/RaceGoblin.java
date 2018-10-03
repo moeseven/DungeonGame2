@@ -51,7 +51,7 @@ public class RaceGoblin extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*9.0));
-		hero.setExperienceValue(10);
+		hero.setExperienceValue(20);
 		hero.setStressCap(71);
 		//deck		
 		
