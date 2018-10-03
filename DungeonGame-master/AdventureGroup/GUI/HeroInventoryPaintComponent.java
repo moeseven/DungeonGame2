@@ -29,7 +29,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 		public HeroInventoryPaintComponent(StatsWindow sw){
 			this.gw=sw;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(600,300));
+			super.setPreferredSize(new Dimension(800,340));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
@@ -263,9 +263,14 @@ public class HeroInventoryPaintComponent extends JComponent{
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
 		}
+		//omit lines with no entry
+		int omitted=0;
 		if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
 			for (int l=0; l<gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).size();l++) {
-				g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l), 200, 180+20*l);				
+				g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l), 580, 20+16*(l-omitted));
+				if ("".equals(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l))) {
+					omitted++;
+				}
 			}
 			
 		}

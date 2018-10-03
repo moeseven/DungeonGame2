@@ -9,25 +9,6 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemHand1;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.buffLibrary.Bashed;
-import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceRat extends MonsterRace{
 
@@ -50,7 +31,7 @@ public class RaceRat extends MonsterRace{
 		hero.setBaseHp(43);		
 		//stats
 		hero.setStrength(8);
-		hero.setDexterity(20);
+		hero.setDexterity(19);
 		hero.setIntelligence(11);
 		hero.setVitality(7);
 		//

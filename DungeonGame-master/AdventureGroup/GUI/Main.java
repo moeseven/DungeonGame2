@@ -15,7 +15,7 @@ public class Main {
 	public static Player player;
 	public static Game game;
 	public static void main(String[] args) {
-		StaticImageLoader.prepareImage();
+		//StaticImageLoader.prepareImage(); //do this when there are new images to load
 		game = new Game();
 		player = new Player(game);
 		game.setPlayer(player);	

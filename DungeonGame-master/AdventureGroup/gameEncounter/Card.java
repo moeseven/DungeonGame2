@@ -7,6 +7,8 @@ import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
+	protected boolean xCostCard=false;
+	protected int x;
 	protected int accuracy=100;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
@@ -21,7 +23,7 @@ public abstract class Card implements Serializable,Cloneable{
 		return super.clone();
 	}
 
-	public boolean playCard(Hero self){
+	public boolean playable(Hero self){
 		//poison here
 		if(isFriendly()) {
 			if(self.getTarget().getPlayer()==self.getPlayer()) {
@@ -39,17 +41,22 @@ public abstract class Card implements Serializable,Cloneable{
 		return false;
 	}
 	public boolean castable(Hero self) {
-		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)) {
-			self.setMana(self.getMana()-manaCost);			
-			self.getHand().remove(this);
-			self.getDiscardPile().add(this);
-			buildLogEntry(self);
-			applyEffect(self);
-			
+		if(extraCastConditions(self)&&self.getMana()>=computeManaCost(self)&&self.getHand().contains(this)&&checkPositonsLegal(self)) {						
 			return true;
 		}else {
 			return false;
 		}
+	}
+	public void handleManaCost(Hero self) {
+		x=computeManaCost(self);
+		self.setMana(self.getMana()-computeManaCost(self));		
+	}
+	public void cast(Hero self) {
+		handleManaCost(self);		
+		self.getHand().remove(this);
+		self.getDiscardPile().add(this);
+		buildLogEntry(self);
+		applyEffect(self);
 	}
 	public abstract boolean extraCastConditions(Hero hero);
 	public abstract boolean applyEffect(Hero self);// here happens the magic
@@ -57,10 +64,17 @@ public abstract class Card implements Serializable,Cloneable{
 	public abstract void buildLogEntry(Hero self);
 	public abstract LinkedList<String> getCardText(Hero hero);
 	public abstract boolean isFriendly();
-	//getters and setters
-	public int getManaCost() {
-		return manaCost;
+	public int computeManaCost(Hero self) {
+		if (xCostCard) {
+			return self.getMana();
+		}else {
+			return manaCost;
+		}
 	}
+	//getters and setters
+//	public int getManaCost() {
+//		return manaCost;
+//	}
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
 	}
@@ -105,6 +119,14 @@ public abstract class Card implements Serializable,Cloneable{
 
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
 	}
 			
 	

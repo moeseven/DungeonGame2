@@ -8,24 +8,6 @@ import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FireFist;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemHand1;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Blaze;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class FireSpirit extends MonsterRace{
 
@@ -53,8 +35,8 @@ public class FireSpirit extends MonsterRace{
 		hero.setVitality(6);
 		//
 		//attack/defence
-		hero.setAttackSkill(8);
-		hero.setBlockSkill(15);
+		hero.setAttackSkill(88);
+		hero.setBlockSkill(25);
 		hero.setAccuracy(9);
 		hero.setDodge(9);
 		hero.setSpellPower(9);
@@ -69,7 +51,7 @@ public class FireSpirit extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*5.0));
-		hero.setExperienceValue(20);
+		hero.setExperienceValue(60);
 		hero.setStressCap(61);
 		//deck		
 		
@@ -78,19 +60,18 @@ public class FireSpirit extends MonsterRace{
 
 		public FireSpiritNormal(Game game) {
 			super(game);
-			name="";
-			items.add(new FireClaw());				
+			name="";				
 			for (int i=0; i<3;i++) {
-				cards.add(new BasicAttack());
+				cards.add(game.cardBuilder.buildCard("fireFist"));
 			}
-			cards.add(new FireFist());
-			cards.add(new FireFist());
-			cards.add(new FireFist());
-			cards.add(new FireFist());
+//			cards.add(new FireFist());
+//			cards.add(new FireFist());
+//			cards.add(new FireFist());
+//			cards.add(new FireFist());
 			for (int i=0; i<7;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new Blaze());
+//			cards.add(new Blaze());
 		}
 
 		public void modifyHero(Hero hero) {
@@ -107,19 +88,4 @@ public class FireSpirit extends MonsterRace{
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
 	}
-	private class FireClaw extends ItemHand1{
-		public FireClaw(){
-			super();
-			droppable=false;
-			name="fire claw";
-			setGoldValue(1);
-			this.baseDamage=15;
-			this.damageRange=14;
-			this.facStr=0.5;
-			this.weaponRange=2;
-		}
-		
-
-	}
-
 }

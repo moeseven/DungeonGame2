@@ -52,7 +52,7 @@ public class CardComponent extends JComponent{
 		}
 		g.setColor(Color.black);
 		g.drawString(card.getName(), 20, 15);
-		g.drawString(""+card.getManaCost(), 5, 10);
+		g.drawString(""+card.computeManaCost(fw.getGame().getPlayer().getSelectedHero()), 5, 10);
 		g.drawString(""+card.getCardText(fw.getGame().getPlayer().getSelectedHero()), 35, 5);
 	}
 }

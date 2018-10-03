@@ -9,25 +9,6 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemHand1;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.buffLibrary.Bashed;
-import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class Thornback extends MonsterRace{
 
@@ -44,7 +25,6 @@ public class Thornback extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(53));
 		hero.setImageNumber(53);
 		hero.setSpeed(7);
 		hero.setBaseHp(65);		
@@ -56,7 +36,7 @@ public class Thornback extends MonsterRace{
 		//
 		//attack/defence
 		hero.setAttackSkill(15);
-		hero.setBlockSkill(22);
+		hero.setBlockSkill(30);
 		hero.setAccuracy(11);
 		hero.setDodge(7);
 		hero.setSpellPower(8);
@@ -73,7 +53,7 @@ public class Thornback extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold(0);
-		hero.setExperienceValue(18);
+		hero.setExperienceValue(25);
 		
 		//
 		hero.setManaPower(2);
@@ -84,15 +64,14 @@ public class Thornback extends MonsterRace{
 
 		public NormalThornback(Game game) {		
 			super(game);
-			name="";
-			items.add(new ThornbackClaw());				
-			for (int i=0; i<4;i++) {
-				cards.add(new MeeleAttack());
+			name="";			
+			for (int i=0; i<3;i++) {
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new BasicAttack());
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<5;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			
 		}
@@ -110,50 +89,5 @@ public class Thornback extends MonsterRace{
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
-	}
-	private class ThornbackClaw extends ItemHand1{
-		public ThornbackClaw(){
-			super();
-			droppable=false;
-			name="claw";
-			setGoldValue(1);
-			this.baseDamage=12;
-			this.damageRange=21;
-			this.facStr=0.65;
-			this.weaponRange=2;
-		}
-		
-
-	}
-	private class Snap extends AttackCard{
-
-		public Snap() {
-			super();
-			manaCost=1;
-		}
-
-		@Override
-		public boolean applyEffect(Hero self) {
-			if(self.attackHero(self.getTarget(),this)) {
-				damageTarget(self);
-				return true;
-			}else {
-				return false;
-			}
-		}
-
-		@Override
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "snap";
-		}
-
-		@Override
-		public boolean isFriendly() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
-	}
-
+	}		
 }

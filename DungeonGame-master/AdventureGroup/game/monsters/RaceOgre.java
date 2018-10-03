@@ -9,26 +9,8 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.CardLibrary.Ram;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemBiHand;
-import gameEncounter.ItemLibrary.RustyBlade;
+
 import gameEncounter.buffLibrary.Bashed;
-import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceOgre extends MonsterRace{
 
@@ -82,19 +64,15 @@ public class RaceOgre extends MonsterRace{
 
 		public OgreWarrior(Game game) {	
 			super(game);
-			name="";
-			items.add(new OgreClub());	
-			cards.add(new Bash());
-			cards.add(new Bash());
-			cards.add(new Ram());
-			for (int i=0; i<3;i++) {
-				cards.add(new BasicAttack());
+			name="";	
+			cards.add(game.cardBuilder.buildCard("bash"));
+			cards.add(game.cardBuilder.buildCard("ram"));
+			for (int i=0; i<4;i++) {				
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			for (int i=0; i<4;i++) {
-				cards.add(new MeeleAttack());
-			}
-			for (int i=0; i<4;i++) {
-				cards.add(new Block());
+			for (int i=0; i<2;i++) {
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
 		}
 
@@ -111,20 +89,5 @@ public class RaceOgre extends MonsterRace{
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
-	}
-	private class OgreClub extends ItemBiHand{
-		public OgreClub(){
-			super();
-			droppable=false;
-			name="ogre club";
-			setGoldValue(1);
-			requiredStrength=45;
-			this.baseDamage=15;
-			this.damageRange=20;
-			this.facStr=0.95;
-			this.weaponRange=2;
-		}
-		
-
 	}
 }

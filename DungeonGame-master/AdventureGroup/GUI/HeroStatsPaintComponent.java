@@ -58,7 +58,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+GameEquations.speedCalc(player.getSelectedHero())+")");
 		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+")");
 		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+")");
-		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero())+")");
+		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero(),null)+")");
 		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+GameEquations.dodgeCalc(player.getSelectedHero())+")");
 		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+")");		
 		

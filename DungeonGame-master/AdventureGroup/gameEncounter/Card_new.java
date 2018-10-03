@@ -13,12 +13,10 @@ import gameEncounter.EffectLibrary.blockEffect;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Card_new extends Card implements Serializable,Cloneable{
-	protected int manaCost=1;
 	protected LinkedList<CastCondition> castConditions =new LinkedList<CastCondition>();
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
-	protected int accuracy=0;
 	protected int critChance=0;
 	protected int block=0;
 	protected int attackDamage=0;
@@ -31,11 +29,13 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5, String castConditions) {
+			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5, String castConditions, String xCostCard) {
 		super();
+		assert manaCost!=null;
 		if (manaCost!=null) {
 			this.manaCost = Integer.parseInt(manaCost);
-		}	
+		}
+			
 		if (legalCastPositions!=null&&legalTargetPositions!=null) {
 			int[] lcP= toArray(legalCastPositions);
 			int[] ltP=toArray(legalTargetPositions);
@@ -83,6 +83,9 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		if (castConditions!=null) {
 			this.castConditions.add(CastConditionBuilder.buildCastCondition(castConditions));
 		}
+		if (xCostCard!=null) {
+			this.xCostCard=true;
+		}
 		//
 		if (isFriendly!=null) {
 			if (Integer.parseInt(isFriendly)!=0) {
@@ -109,37 +112,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
-	}
-
-	public boolean playCard(Hero self){
-		//
-		if(isFriendly()) {
-			if(self.getTarget().getPlayer()==self.getPlayer()) {
-				return castable(self);
-			}else {
-				self.getPlayer().getGame().log.addLine("not a possible target!");
-			}
-		}else {
-			if(self.getTarget().getPlayer()!=self.getPlayer()) {
-				return castable(self);
-			}else {
-				self.getPlayer().getGame().log.addLine("not a possible target!");
-			}
-		}
-		return false;
-	}
-	public boolean castable(Hero self) {
-		if(extraCastConditions(self)&&self.getMana()>=manaCost&&self.getHand().contains(this)&&checkPositonsLegal(self)) {
-			self.setMana(self.getMana()-manaCost);			
-			self.getHand().remove(this);
-			self.getDiscardPile().add(this);
-			buildLogEntry(self);
-			applyEffect(self);
-			
-			return true;
-		}else {
-			return false;
-		}
 	}
 	public boolean applyEffect(Hero self) {
 		//keep going through effects until fail
@@ -182,7 +154,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 			cardText.add("crit chance: "+GameEquations.critChanceCalc(hero, this));
 		}
 		if (accuracy>0) {
-			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero)));
+			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero,hero.getTarget())));
 		}
 		if (cardText.size()==0) {
 			System.out.println("empty card has been built!!!");

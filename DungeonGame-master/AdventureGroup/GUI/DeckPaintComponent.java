@@ -55,11 +55,11 @@ public class DeckPaintComponent extends JComponent{
 		//g.drawImage(image,0,0,null);
 		for (int i=0;i<hero.getDeck().getCards().size();i++){
 			g.setColor(Color.WHITE);
-			g.drawString(""+hero.getDeck().getCards().get(i).getManaCost(), 5, 10+i*cardHeight);
+			g.drawString(""+hero.getDeck().getCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);
 			g.setColor(Color.black);
 			g.drawString(hero.getDeck().getCards().get(i).getName(), 10, 15+i*cardHeight);
 			//mana bubbles
-			for(int m = 0;m<hero.getDeck().getCards().get(i).getManaCost();m++) {			
+			for(int m = 0;m<hero.getDeck().getCards().get(i).computeManaCost(hero);m++) {			
 				g.setColor(Color.BLUE);				
 				g.fillOval(10+m*10, 15+i*cardHeight, 8, 8);
 			}

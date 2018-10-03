@@ -9,26 +9,6 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FireFist;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemHand1;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Blaze;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class Spectre extends MonsterRace{
 
@@ -56,7 +36,7 @@ public class Spectre extends MonsterRace{
 		hero.setVitality(6);
 		//
 		//attack/defence
-		hero.setAttackSkill(8);
+		hero.setAttackSkill(45);
 		hero.setBlockSkill(8);
 		hero.setAccuracy(9);
 		hero.setDodge(29);
@@ -81,17 +61,14 @@ public class Spectre extends MonsterRace{
 
 		public SpectreNormal(Game game) {
 			super(game);
-			name="";
-			items.add(new SpectreClaw());				
+			name="";				
 			for (int i=0; i<3;i++) {			
-				cards.add(new MeeleAttack());
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new Breeze());
-			cards.add(new Breeze());
-			cards.add(new RangedAttack());
-			cards.add(new BasicAttack());
+			//aoe cold spell			
 			for (int i=0; i<4;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 		}
 
@@ -107,49 +84,6 @@ public class Spectre extends MonsterRace{
 			hero.setArmor(hero.getArmor()+1);
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
-		}
-	}
-	private class SpectreClaw extends ItemHand1{
-		public SpectreClaw(){
-			super();
-			droppable=false;
-			name="spectre claw";
-			setGoldValue(1);
-			this.baseDamage=17;
-			this.damageRange=14;
-			this.facStr=0.6;
-			this.weaponRange=2;
-		}
-		
-
-	}
-	private class Breeze extends Spell{
-		public Breeze() {
-			// TODO Auto-generated constructor stub
-			manaCost =1;
-		}
-		public boolean applyEffect(Hero self) {
-				if(self.castSpellOnHero(self.getTarget())) {	
-					self.getTarget().takeColdDamage(self, (int) (GameEquations.spellPowerCalc(self)/2.3));
-					return true;
-				}else {
-					return false;
-				}
-		}
-		@Override
-		public String getName() {
-			return "breeze";
-		}
-		@Override
-		public String getCardText(Hero hero) {
-			//TODO correct number display
-			return super.getCardText(hero)+"cold damage";
-		}
-
-		@Override
-		public boolean isFriendly() {
-			// TODO Auto-generated method stub
-			return false;
 		}
 	}
 

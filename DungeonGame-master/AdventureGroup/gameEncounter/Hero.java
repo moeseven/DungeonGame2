@@ -169,7 +169,7 @@ public class Hero implements Serializable{
 		hp=GameEquations.maxHealthCalc(this);
 	}
 	//functions
-	public void setUpHandPile() {
+	public void setUpDrawPile() {
 		//shuffle
 		hand=new LinkedList<Card>();
 		drawPile=new LinkedList<Card>();

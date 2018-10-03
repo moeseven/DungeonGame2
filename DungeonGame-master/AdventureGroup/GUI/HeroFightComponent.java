@@ -23,10 +23,11 @@ public class HeroFightComponent extends JComponent{
 	protected Hero hero;
 	protected FightWindow fw;
 	protected MyMouseListener ml;
+	public static final int width=120;
 	public HeroFightComponent(FightWindow fw, Hero hero) {
 		this.hero=hero;
 		this.fw=fw;
-		super.setPreferredSize(new Dimension(120,170));
+		super.setPreferredSize(new Dimension(width,170));
 		ml = new MyMouseListener();
 		super.addMouseListener(ml);
 		setLayout(new BorderLayout());
@@ -34,6 +35,10 @@ public class HeroFightComponent extends JComponent{
 	}
 
 	private class MyMouseListener extends MouseAdapter{
+		public void mouseEntered(MouseEvent e) {
+			fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
+			fw.repaint();
+		}
 		public void mousePressed(MouseEvent e){
 			if(e.getButton()==1){
 				if (!(hero.getPlayer() instanceof DungeonMaster)) {
@@ -42,7 +47,9 @@ public class HeroFightComponent extends JComponent{
 			}else{
 				if (e.getButton()==3){
 					fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
-					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playCard(fw.getGame().getPlayer().getSelectedHero());
+					if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playable(fw.getGame().getPlayer().getSelectedHero())) {
+						fw.getGame().getPlayer().getSelectedHero().getSelectedCard().cast(fw.getGame().getPlayer().getSelectedHero());
+					}
 				}
 			}
 			fw.revalidate();

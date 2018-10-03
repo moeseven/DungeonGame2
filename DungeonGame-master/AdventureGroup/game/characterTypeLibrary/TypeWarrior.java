@@ -6,21 +6,6 @@ import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.Item;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CardBuilder;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Cleave;
-import gameEncounter.CardLibrary.IntimidatingCry;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.MightyBlow;
-import gameEncounter.CardLibrary.Parry;
-import gameEncounter.CardLibrary.Ram;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Wisdom;
 import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeWarrior extends CharacterClass{

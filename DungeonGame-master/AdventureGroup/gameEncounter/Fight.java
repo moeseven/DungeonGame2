@@ -1,7 +1,9 @@
 package gameEncounter;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import game.DungeonMaster;
 import game.Game;
@@ -10,9 +12,11 @@ public class Fight implements Serializable{
 	public int retreatWish=0;
 	private Game game;
 	private int round=0;
+	private LinkedList<Hero> allFightParticipants;
 	private LinkedList<Hero> turnOrder;
 	private LinkedList<Hero> monsters;
 	private LinkedList<Hero> heroes;
+	private Map<Hero, HashMap<Card, Hero>> targetMap= new HashMap<Hero,HashMap<Card,Hero>>();
 	private int turnOrderCounter;
 	private LinkedList<LinkedList<Hero>> meele;
 	public Fight(Game game,LinkedList<Hero> monsters, LinkedList<Hero> heroes) {
@@ -20,19 +24,21 @@ public class Fight implements Serializable{
 		this.monsters=monsters;
 		this.heroes=heroes;
 		for (Hero h : heroes) {		
-		    h.setUpHandPile();
+		    h.setUpDrawPile();
 		    h.setFight(this);
 		}
 		for (Hero m : monsters) {	
-		    m.setUpHandPile();	 
+		    m.setUpDrawPile();	 
 		    m.setFight(this);
 		}
 		this.newRound();
 	}
 	public void newRound() {
+		for (Hero m : monsters) {	
+		    precalculateMonsterTurn(m);
+		}
 		round+=1;
-		game.log.addLine("########## ROUND "+round+" ##########");
-		LinkedList<Hero> allFightParticipants;
+		game.log.addLine("########## ROUND "+round+" ##########");		
 		allFightParticipants=new LinkedList<Hero>();
 		turnOrder=new LinkedList<Hero>();
 		turnOrderCounter=-1;
@@ -128,33 +134,54 @@ public class Fight implements Serializable{
 					this.getHeroes().getFirst().getPlayer().getGame().log.addLine("~~~~~"+turnOrder.get(turnOrderCounter).getName()+"'s turn"+"~~~~~");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
-						//monster chooses random target here TODO make sure it attacks only targets in range!
-						
-					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
-					    	//int range=turnOrder.get(turnOrderCounter).getHand().get(i).rangeOfCard(turnOrder.get(turnOrderCounter));
-					    	//int eligibleTargets=0;//Math.min(range-monsters.indexOf(turnOrder.get(turnOrderCounter)),heroes.size());
-					    	LinkedList<Hero> targets = new LinkedList<Hero>();
-					    	for(int h=0;h<heroes.size();h++) {
-					    		if (turnOrder.get(turnOrderCounter).getHand().get(i).legalTargetPositions[heroes.get(h).getPosition()]) {
-									targets.add(heroes.get(h));
+						//monster chooses random target here make sure it attacks only targets in range!	
+						Hero monster=turnOrder.get(turnOrderCounter);
+						HashMap<Card, Hero> mapTest = targetMap.get(monster);
+						for(int i=0; i<monster.getHand().size(); i++){
+							//what if target is dead
+							Card cardTest=monster.getHand().get(i);			
+							boolean containsTest = mapTest.containsKey(cardTest);
+							if (targetMap.get(monster).containsKey(monster.getHand().get(i))) {
+								if (!targetMap.get(monster).get(monster.getHand().get(i)).isDead()) {
+									monster.setNewTarget(targetMap.get(monster).get(monster.getHand().get(i)));					
+									monster.getHand().get(i).cast(monster);
+									i=i-1;
 								}
-					    	}
-					    		
-					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).isFriendly()) {
-					    		turnOrder.get(turnOrderCounter).setNewTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
-					    		if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
-						    		i=i-1;
-						    	}
-					    	}else {
-					    		if(targets.size()>0) {
-						    		turnOrder.get(turnOrderCounter).setNewTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
-							    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playCard(turnOrder.get(turnOrderCounter))) {
-							    		i=i-1;
-							    	}
-						    	}
-					    	}					    					    	
-					    }
+							}
+						}														
+//					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
+//					   
+//					    	LinkedList<Hero> targets = new LinkedList<Hero>();
+//					    	for(int h=0;h<heroes.size();h++) {
+//					    		if (turnOrder.get(turnOrderCounter).getHand().get(i).legalTargetPositions[heroes.get(h).getPosition()]) {
+//									targets.add(heroes.get(h));
+//								}
+//					    	}
+//					    		
+//					    	if(turnOrder.get(turnOrderCounter).getHand().get(i).isFriendly()) {
+//					    		turnOrder.get(turnOrderCounter).setNewTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
+//					    		if(turnOrder.get(turnOrderCounter).getHand().get(i).playable(turnOrder.get(turnOrderCounter))) {
+//					    			turnOrder.get(turnOrderCounter).getHand().get(i).cast(turnOrder.get(turnOrderCounter));
+//					    			i=i-1;
+//						    	}
+//					    	}else {
+//					    		if(targets.size()>0) {
+//						    		turnOrder.get(turnOrderCounter).setNewTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
+//							    	if(turnOrder.get(turnOrderCounter).getHand().get(i).playable(turnOrder.get(turnOrderCounter))) {
+//							    		turnOrder.get(turnOrderCounter).getHand().get(i).cast(turnOrder.get(turnOrderCounter));
+//							    		i=i-1;
+//							    	}
+//						    	}
+//					    	}					    					    	
+//					    }
 					    //
+//						try {
+//							Thread.sleep(1000);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+						precalculateMonsterTurn(monster);
 					    nextTurn();
 					}else {
 						this.game.getPlayer().setSelectedHero(turnOrder.get(turnOrderCounter));
@@ -162,6 +189,42 @@ public class Fight implements Serializable{
 				}
 			}						
 		}		
+	}
+	//attack indication 
+	public void precalculateMonsterTurn(Hero monster) {
+		targetMap.put(monster,new HashMap<Card,Hero>());
+		for (int i = 0; i < monster.draw; i++) {
+			monster.drawCard();
+		}		
+		monster.setMana(monster.getManaPower());
+	    for(int i=0; i<monster.getHand().size(); i++){
+	    	LinkedList<Hero> targets = new LinkedList<Hero>();
+	    	for(int h=0;h<heroes.size();h++) {
+	    		if (monster.getHand().get(i).legalTargetPositions[heroes.get(h).getPosition()]) {
+					targets.add(heroes.get(h));
+				}
+	    	}		    		
+	    	if(monster.getHand().get(i).isFriendly()) {
+	    		monster.setNewTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
+	    		if(monster.getHand().get(i).playable(monster)) {
+	    			targetMap.get(monster).put(monster.getHand().get(i),monster.getTarget());
+	    			monster.getHand().get(i).handleManaCost(monster);
+		    	}
+	    	}else {
+	    		if(targets.size()>0) {
+		    		monster.setNewTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
+			    	if(monster.getHand().get(i).playable(monster)) {
+			    		targetMap.get(monster).put(monster.getHand().get(i),monster.getTarget());
+			    		monster.getHand().get(i).handleManaCost(monster);
+			    	}
+		    	}
+	    	}					    					    	
+	    }	
+	    int handSize = monster.getHand().size();
+		for (int i=0; i<handSize;i++) {
+			monster.getDrawPile().addFirst(monster.getHand().removeLast());			
+		}
+		monster.setMana(0);
 	}
 	public void handleFightisOver() {
 		//TODO
@@ -236,6 +299,12 @@ public class Fight implements Serializable{
 	}
 	public void setTurnOrderCounter(int turnOrderCounter) {
 		this.turnOrderCounter = turnOrderCounter;
+	}
+	public Map<Hero, HashMap<Card, Hero>> getTargetMap() {
+		return targetMap;
+	}
+	public void setTargetMap(Map<Hero, HashMap<Card, Hero>> targetMap) {
+		this.targetMap = targetMap;
 	}
 	
 }

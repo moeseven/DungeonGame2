@@ -9,28 +9,11 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Channel;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.Magicmissile;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
 import gameEncounter.CardLibrary.SpellnoTarget;
-import gameEncounter.CardLibrary.PoisonShot;
 import gameEncounter.ItemLibrary.GoblinBow;
 import gameEncounter.ItemLibrary.ItemHand1;
 import gameEncounter.ItemLibrary.RustyBlade;
 import gameEncounter.buffLibrary.Bashed;
-import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class BossNecromancer extends MonsterRace{
 
@@ -87,25 +70,19 @@ public class BossNecromancer extends MonsterRace{
 			super(game);
 			name="";
 			items.add(new ZombieClaw());				
-			for (int i=0; i<5;i++) {				
-				cards.add(new Block());
+			for (int i=0; i<5;i++) {	
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
 			//attacks
-			cards.add(new BasicAttack());
-			cards.add(new BasicAttack());
-			cards.add(new BasicAttack());
-			cards.add(new MeeleAttack());
+			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			//spells
-			cards.add(new Magicmissile());
-			cards.add(new Magicmissile());
-			cards.add(new Magicmissile());
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+			cards.add(game.cardBuilder.buildCard("channel"));
 			cards.add(new SummonZombie());
 			cards.add(new SummonZombie());
-			cards.add(new Channel());
-			
-			for (int i=0; i<6;i++) {
-				
-			}
 		}
 
 		public void modifyHero(Hero hero) {
@@ -157,7 +134,7 @@ public class BossNecromancer extends MonsterRace{
 		public boolean applyEffect(Hero self) {
 			MonsterRace monster= new RaceZombie(game);
 			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPosition1Classes().getFirst()));
-			self.getPlayer().getHeroes().getFirst().setUpHandPile();
+			self.getPlayer().getHeroes().getFirst().setUpDrawPile();
 			return true;
 		}
 
@@ -173,39 +150,6 @@ public class BossNecromancer extends MonsterRace{
 			return false;
 		}
 		
-	}
-	public class Grab extends AttackCard{
-		public Grab() {
-			// TODO Auto-generated constructor stub
-			manaCost =1;
-			damageMult=0.3;
-			legalCastPositions[0]=true;
-			legalCastPositions[1]=false;
-			legalCastPositions[2]=false;
-			legalCastPositions[3]=false;
-			legalCastPositions[4]=false;
-		}
-		public boolean applyEffect(Hero self) {
-				if(self.attackHero(self.getTarget(),this)) {
-					damageTarget(self);
-					self.getTarget().buffHero(new Bashed());
-					self.getTarget().becomeStressed(6);
-					return true;
-				}else {
-					return false;
-				}
-		}
-		@Override
-		public String getName() {
-			return "Grab";
-		}
-		
-		@Override
-		public LinkedList<String> getCardText(Hero hero) {
-			LinkedList<String> textList= new LinkedList<String>();
-			textList.add(" bash");
-			return textList;
-		}
 	}
 
 }

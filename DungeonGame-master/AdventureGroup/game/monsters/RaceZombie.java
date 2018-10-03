@@ -9,25 +9,8 @@ import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
 import gameEncounter.Weapon;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Spell;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.ItemHand1;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.buffLibrary.Bashed;
 import gameEncounter.CardLibrary.AttackCard;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
+import gameEncounter.CardLibrary.Spell;
 
 public class RaceZombie extends MonsterRace{
 
@@ -80,16 +63,15 @@ public class RaceZombie extends MonsterRace{
 
 		public ZombieWarrior(Game game) {	
 			super(game);
-			name="";
-			items.add(new ZombieClaw());				
+			name="";				
 			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new Moaning());
-			cards.add(new Grab());
+//			cards.add(new Moaning());
+//			cards.add(new Grab());
 		}
 
 		public void modifyHero(Hero hero) {
@@ -148,7 +130,7 @@ public class RaceZombie extends MonsterRace{
 		public boolean applyEffect(Hero self) {
 				if(self.attackHero(self.getTarget(),this)) {
 					damageTarget(self);
-					self.getTarget().takeStun();
+					//stun
 					self.getTarget().becomeStressed(6);
 					return true;
 				}else {
@@ -158,11 +140,6 @@ public class RaceZombie extends MonsterRace{
 		@Override
 		public String getName() {
 			return "Grab";
-		}
-		@Override
-		public String getCardText(Hero hero) {
-			//TODO correct number display
-			return super.getCardText(hero)+" bash";
 		}
 	}
 

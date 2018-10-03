@@ -20,8 +20,13 @@ public class GameEquations {
 		return (int) (hero.getDodge()*(1+hero.getDexterity()/20.0));
 	}
 	//accuracy calculation
-	public static int accuracyCalc(Hero hero) {
-		return (int) (hero.getAccuracy()*(1+hero.getDexterity()/20.0));
+	public static int accuracyCalc(Hero hero, Hero target) {
+		if (target==null) {
+			return (int) (hero.getAccuracy()*(1+hero.getDexterity()/20.0));
+		}else {
+			return (int) (hero.getAccuracy()*(1+hero.getDexterity()/20.0))-dodgeCalc(target);
+		}
+		
 	}
 	//blockskill and attackskill calculation from str
 	public static int attackSkillCalc(Hero hero) {//effected by cold
@@ -70,7 +75,7 @@ public class GameEquations {
 	//dodge chance calculation
 	public static boolean dodge(Hero attacker, Hero attacked, Card card) {
 	double dodgeRoll=Math.random()*100;
-		if(dodgeRoll>(-dodgeCalc(attacked)+accuracyCalc(attacker)+card.getAccuracy())) {			
+		if(dodgeRoll>(accuracyCalc(attacker,attacked)+card.getAccuracy())) {			
 		attacked.getPlayer().getGame().log.addLine(attacked.getName()+" dodged!");
 		return true;			
 		}else {

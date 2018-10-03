@@ -55,8 +55,9 @@ public class HayHeap extends RoomInteraction{
 		}
 		game.getRoom().setHasFight(true);		
 		game.getRoom().getInteractions().remove(this);
+		game.log.addLine("rats emerge from under the hay!");
 		game.enterRoom(game.getRoom());
-		game.log.addLine("rats emerge from under the hay!");		
+				
 	}
 
 	public LinkedList<Item> getItems() {

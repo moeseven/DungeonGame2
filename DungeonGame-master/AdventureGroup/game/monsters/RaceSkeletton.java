@@ -8,26 +8,6 @@ import game.Game;
 import game.MonsterRace;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Bullwork;
-import gameEncounter.CardLibrary.CarefulSlash;
-import gameEncounter.CardLibrary.Cleave;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.Magicmissile;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.SleepCharm;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.HeavySword;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.ItemLibrary.ShortBow;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BleedingSlice;
 
 public class RaceSkeletton extends MonsterRace{
 
@@ -48,7 +28,6 @@ public class RaceSkeletton extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(49));
 		hero.setImageNumber(49);
 		hero.setSpeed(11);
 		hero.setBaseHp(90);		
@@ -63,7 +42,7 @@ public class RaceSkeletton extends MonsterRace{
 		hero.setBlockSkill(11);
 		hero.setAccuracy(12);
 		hero.setDodge(11);
-		hero.setSpellPower(11);
+		hero.setSpellPower(19);
 		hero.setSpellResist(11);
 		//
 		//resistances
@@ -74,7 +53,7 @@ public class RaceSkeletton extends MonsterRace{
 		hero.setResistStun(15);
 		//
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*10.0));
+		hero.setGold((int)(Math.random()*15.0));
 		hero.setExperienceValue(20);
 		hero.setResistStress(20);
 		hero.setDraw(4);
@@ -86,16 +65,16 @@ public class RaceSkeletton extends MonsterRace{
 		public SkelettonWarrior(Game game) {	
 			super(game);
 			name="warrior";
-			items.add(new RustyBlade());				
+			items.add(game.itemBuilder.buildItem("shortSword",3));				
 			for (int i=0; i<4;i++) {
-				cards.add(new MeeleAttack());
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<6;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new CarefulSlash());
-			cards.add(new BleedingSlice());
+			cards.add(game.cardBuilder.buildCard("carefulSlash"));
+			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -117,18 +96,18 @@ public class RaceSkeletton extends MonsterRace{
 		public SkelettonHulk(Game game) {	
 			super(game);
 			name="hulk";
-			items.add(new HeavySword());				
+			items.add(game.itemBuilder.buildItem("shortSword",3));				
 			for (int i=0; i<4;i++) {
-				cards.add(new MeeleAttack());
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-			cards.add(new BasicAttack());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<6;i++) {
-				cards.add(new Block());
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new CarefulSlash());
-			cards.add(new Bash());
-			cards.add(new BleedingSlice());
-			cards.add(new Cleave());
+			cards.add(game.cardBuilder.buildCard("carefulSlash"));
+			cards.add(game.cardBuilder.buildCard("bleedingSlice"));				
+			cards.add(game.cardBuilder.buildCard("bash"));
+			cards.add(game.cardBuilder.buildCard("cleave"));	
 		}
 
 		public void modifyHero(Hero hero) {
@@ -151,16 +130,18 @@ public class RaceSkeletton extends MonsterRace{
 		public SkelettonArcher(Game game) {
 			super(game);
 			name="archer";
-			items.add(new ShortBow());		
-			for (int i=0; i<7;i++) {
-				cards.add(new RangedAttack());
+			items.add(game.itemBuilder.buildItem("longBow",5));			
+			for (int i=0; i<4;i++) {									
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new BasicAttack());
-			cards.add(new Block());
-			cards.add(new Block());
-			cards.add(new FrostArrow());
-			cards.add(new FrostArrow());
-			cards.add(new HeadShot());
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("rangedAttack"));
+			cards.add(game.cardBuilder.buildCard("rangedAttack"));
+			cards.add(game.cardBuilder.buildCard("frostArrow"));
+			cards.add(game.cardBuilder.buildCard("frostArrow"));
+			cards.add(game.cardBuilder.buildCard("headShot"));	
 		}
 
 		public void modifyHero(Hero hero) {
@@ -184,17 +165,14 @@ public class RaceSkeletton extends MonsterRace{
 		public SkelettonMage(Game game) {
 			super(game);
 			name="mage";
-			items.add(new RustyBlade());				
+			items.add(game.itemBuilder.buildItem("rustyBlade",5));					
 			for (int i=0; i<4;i++) {
-				cards.add(new BasicAttack());
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
+				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(new BasicAttack());
-			for (int i=0; i<2;i++) {
-				cards.add(new Block());
-			}
-			cards.add(new SleepCharm());
-			cards.add(new Magicmissile());
-
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+			cards.add(game.cardBuilder.buildCard("magicMissile"));
+			cards.add(game.cardBuilder.buildCard("sleepCharm"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -205,7 +183,7 @@ public class RaceSkeletton extends MonsterRace{
 			//mainstats
 			hero.setStrength(hero.getStrength()-3);
 			hero.setDexterity(hero.getDexterity()-2);
-			hero.setIntelligence(hero.getIntelligence()+9);
+			hero.setIntelligence(hero.getIntelligence()+19);
 			hero.setVitality(hero.getVitality()+0);
 			//
 			hero.setArmor(hero.getArmor()+0);

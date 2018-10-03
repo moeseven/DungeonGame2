@@ -64,7 +64,7 @@ public class LvlUpCardRewardPaintComponent extends JComponent{
 		for (int i=0;i<hero.getLvlUpCards().size();i++){
 			g.setColor(Color.black);
 			g.drawString(hero.getLvlUpCards().get(i).getName(), 10, 15+i*cardHeight);
-			g.drawString(""+hero.getLvlUpCards().get(i).getManaCost(), 5, 10+i*cardHeight);
+			g.drawString(""+hero.getLvlUpCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getLvlUpCards().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1, 1+i*cardHeight, cardWidth, cardHeight);
