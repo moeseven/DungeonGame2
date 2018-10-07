@@ -45,7 +45,7 @@ public class GameEquations {
 	}
 	//crit calculations
 	public static int critDamageCalc(Hero hero) {
-		return (int) (hero.getCritDamage()+hero.getDexterity());
+		return (int) (hero.getCritDamage()*hero.getDexterity()/20);
 	}
 	public static int critChanceCalc(Hero hero, Card_new card) {
 		return (int) (hero.getCritChance()+card.getCritChance());

@@ -56,8 +56,8 @@ public class Hero implements Serializable{
 	public int armor;
 	public int accuracy;//vs dodge
 	public int dodge;
-	protected int critChance;
-	protected int critDamage;
+	protected int critChance=4;
+	protected int critDamage=10;
 	protected int attackSkill;
 	protected int blockSkill;
 	protected int spellPower;

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 
 public abstract class Quest implements Serializable{
+protected Room[][] roomLayout;//work on this
 protected String description;
 protected boolean finished;
 protected int experienceReward;

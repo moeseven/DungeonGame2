@@ -118,7 +118,6 @@ public void tpHeroes() {
 		for(int i=0; i<player.getHeroes().size();i++) {
 			player.getHeroes().get(i).setUpDrawPile();
 			player.getHeroes().get(i).turnBegin();
-			player.getHeroes().get(i).becomeStressed(7);
 		}
 	}	
 	player.setTpLocation(room);
@@ -134,7 +133,7 @@ public void retreatHeroes() {
 		for(int i=0; i<player.getHeroes().size();i++) {
 			player.getHeroes().get(i).setUpDrawPile();
 			player.getHeroes().get(i).turnBegin();
-			player.getHeroes().get(i).becomeStressed(7);
+			player.getHeroes().get(i).becomeStressed(12);
 		}
 	}
 	Room previousRoom=town;

@@ -49,7 +49,8 @@ public class TypeWarrior extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+0);
 		hero.setVitality(hero.getVitality()+5);
 		//
-		hero.setCritChance(hero.getCritChance()+3);
+		hero.setCritChance(hero.getCritChance()+1);
+		hero.setCritDamage(hero.getCritDamage()+6);
 		hero.setAttackSkill(hero.getAttackSkill()+1);
 		hero.setBlockSkill(hero.getBlockSkill()+6);
 		hero.setResistStress(hero.getResistStress()+1);

@@ -58,6 +58,8 @@ public class TypeMage extends CharacterClass{
 		//mainstats
 		hero.setIntelligence(hero.getIntelligence()+6);
 		hero.setVitality(hero.getVitality()+1);
+		hero.setCritChance(hero.getCritChance()+2);
+		hero.setCritDamage(hero.getCritDamage()+5);
 		//
 		hero.setSpellPower(hero.getSpellPower()+8);	
 		hero.setResistStress(hero.getResistStress()-3);
