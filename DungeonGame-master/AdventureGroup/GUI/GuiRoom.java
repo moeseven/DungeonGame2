@@ -123,7 +123,6 @@ public class GuiRoom extends JPanel{
 		rc.addRect(new ClickableRectangle("search inventory",455,10,90,40) {
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 					if(gw.getGame().getPlayer().getInventory().size()>1) {
@@ -134,8 +133,7 @@ public class GuiRoom extends JPanel{
 					
 			}
 			@Override
-			public void updateCaption() {
-				// TODO Auto-generated method stub					
+			public void updateCaption() {					
 			}		
 		});
 		//Inventory shop
@@ -264,8 +262,12 @@ public class GuiRoom extends JPanel{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);				
 		g.drawImage(StaticImageLoader.getImage(shop.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+		if (gw.getGame().getPlayer().getSelectedHero()!=null&&gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+				g.drawImage(StaticImageLoader.getImage(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getImageNumber()).getScaledInstance(180,153, 3),150,10,null);				
+		}
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
@@ -705,6 +707,7 @@ protected void paintComponent(Graphics g){
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+				
 			}
 		}
 	}

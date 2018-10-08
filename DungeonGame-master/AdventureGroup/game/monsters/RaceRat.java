@@ -56,7 +56,7 @@ public class RaceRat extends MonsterRace{
 		//zombieslow
 		hero.setManaPower(1);
 		//deck		
-		hero.setImageScale(2);
+		hero.setImageScale(3);
 	}
 	private class RatWarrior extends CharacterClass{
 
