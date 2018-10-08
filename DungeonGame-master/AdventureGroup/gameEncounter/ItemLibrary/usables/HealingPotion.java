@@ -10,6 +10,7 @@ public class HealingPotion extends ItemConsumable{
 	public HealingPotion() {
 		super();
 		name="healing potion";
+		this.setImageNumber(220);
 		setGoldValue(20);
 	}
 

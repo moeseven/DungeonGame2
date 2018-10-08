@@ -10,6 +10,7 @@ public class Bandages extends ItemConsumable{
 	public Bandages() {
 		super();
 		name="bandages";
+		this.setImageNumber(221);
 		setGoldValue(20);
 	}
 
