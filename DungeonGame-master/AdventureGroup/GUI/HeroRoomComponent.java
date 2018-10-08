@@ -45,7 +45,7 @@ public class HeroRoomComponent extends HeroComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);		
 //		if(rw!=null){
-//			g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);	
+//			g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(180, 153, 3),10,0,null);	
 //			if(rw.getGame().getPlayer().getSelectedHero()==hero){
 //				g.setColor(Color.green);
 //				g.drawRect(1, 1, 98, 148);

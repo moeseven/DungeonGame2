@@ -3,6 +3,7 @@ package tools;
 import java.util.LinkedList;
 
 public abstract class ClickableRectangle {
+	private int imageNumber=1;
 	private int x;
 	private int y;
 	private int height;
@@ -64,6 +65,12 @@ public abstract class ClickableRectangle {
 	}
 	public void setCaption(LinkedList<String> caption) {
 		this.caption = caption;
+	}
+	public int getImageNumber() {
+		return imageNumber;
+	}
+	public void setImageNumber(int imageNumber) {
+		this.imageNumber = imageNumber;
 	}
 
 	

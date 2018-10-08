@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import gameEncounter.ItemLibrary.usables.ItemConsumable;
@@ -71,8 +72,22 @@ public class HeroInventoryPaintComponent extends JComponent{
 						gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
 						caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
 						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
+						
 					}else {
 						caption=new LinkedList<String>();
+					}					
+				}		
+			});
+			//item picture
+			rc.addRect(new ClickableRectangle("",435,50,90,70) {
+				@Override
+				public void onClick() {
+
+				}
+				@Override
+				public void updateCaption() {
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getImageNumber());
 					}					
 				}		
 			});
@@ -167,9 +182,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
-						caption.removeFirst();						
-						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead().getName());
+						caption.removeFirst();
+						caption.addFirst("");
+						//caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead().getName());
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead().getImageNumber());
 					}else {
+						this.setImageNumber(1);
 						caption.removeFirst();
 						caption.addFirst(name);
 					}					
@@ -188,16 +206,19 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
-						caption.removeFirst();						
-						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody().getName());
+						caption.removeFirst();	
+						caption.addFirst("");
+						//caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody().getName());
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody().getImageNumber());
 					}else {
+						this.setImageNumber(1);
 						caption.removeFirst();
 						caption.addFirst(name);
 					}
 				}		
 			});
 			//hand1
-			rc.addRect(new ClickableRectangle("hand1",5,20,50,50) {
+			rc.addRect(new ClickableRectangle("hand1",5,70,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -209,16 +230,19 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
-						caption.removeFirst();						
-						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1().getName());
+						caption.removeFirst();	
+						caption.addFirst("");
+						//caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1().getName());
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1().getImageNumber());
 					}else {
+						this.setImageNumber(1);
 						caption.removeFirst();
 						caption.addFirst(name);
 					}
 				}		
 			});
 			//hand2
-			rc.addRect(new ClickableRectangle("hand2",115,20,50,50) {
+			rc.addRect(new ClickableRectangle("hand2",115,70,50,50) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -230,9 +254,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 				public void updateCaption() {
 					// TODO Auto-generated method stub					
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
-						caption.removeFirst();						
-						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2().getName());
+						caption.removeFirst();	
+						caption.addFirst("");
+						//caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2().getName());
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2().getImageNumber());
 					}else {
+						this.setImageNumber(1);
 						caption.removeFirst();
 						caption.addFirst(name);
 					}
@@ -260,6 +287,9 @@ public class HeroInventoryPaintComponent extends JComponent{
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				if (rc.rectAngles.get(i).getImageNumber()!=1) {
+					g.drawImage(StaticImageLoader.getImage(rc.rectAngles.get(i).getImageNumber()).getScaledInstance(120,102, 2),rc.rectAngles.get(i).getX()-35,rc.rectAngles.get(i).getY()-20,null);
+				}
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
 		}
@@ -271,8 +301,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				if ("".equals(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l))) {
 					omitted++;
 				}
-			}
-			
+			}			
 		}
 	}
 }

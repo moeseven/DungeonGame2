@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public class Item_new extends Item implements Serializable{
+	
 	protected int weight=10;
 	private int goldValue=100;
 	protected int category=10;
@@ -54,7 +55,7 @@ public class Item_new extends Item implements Serializable{
 	public Item_new(double power,String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
 			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,String duration,
-			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass, String name) {
+			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass,String imageNumber, String name) {
 		super();
 		this.name = name;
 		//random attributes here
@@ -160,6 +161,9 @@ public class Item_new extends Item implements Serializable{
 		}
 		if (itemClass!=null) {
 			this.itemClass= itemClass;
+		}
+		if (imageNumber!=null) {
+			this.imageNumber= Integer.parseInt(imageNumber);
 		}
 		// adjust name
 		double itemQuality=0;
