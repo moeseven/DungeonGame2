@@ -24,7 +24,7 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("heavenlyShield");
 		cardPool.add("heavenlyStrength");
 		cardPool.add("harden");
-		
+		cardPool.add("growth");
 		name="cleric";
 		items.add(game.itemBuilder.buildItem("rustyBlade",4));		
 		cards.add(game.cardBuilder.buildCard("bash"));

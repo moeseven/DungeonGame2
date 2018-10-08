@@ -44,3 +44,7 @@
 /modifyStatEffect.class
 /modifyStatSpellEffect.class
 /magicSpellEffect.class
+/moveEffect.class
+/chargeAttackEffect.class
+/growingStatEffect.class
+/growingStatSpellEffect.class

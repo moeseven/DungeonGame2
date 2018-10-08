@@ -49,7 +49,7 @@ public class RaceOgre extends MonsterRace{
 		hero.setResistFire(0);
 		hero.setResistCold(10);
 		hero.setResistBleed(10);
-		hero.setResistPoison(15);
+		hero.setResistPoison(35);
 		hero.setResistStun(65);
 		//
 		hero.setGood(false);

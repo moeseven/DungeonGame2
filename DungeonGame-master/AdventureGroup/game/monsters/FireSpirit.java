@@ -44,9 +44,9 @@ public class FireSpirit extends MonsterRace{
 		//
 		//resistances
 		hero.setResistFire(95);
-		hero.setResistCold(0);
+		hero.setResistCold(-50);
 		hero.setResistBleed(95);
-		hero.setResistPoison(15);
+		hero.setResistPoison(55);
 		hero.setResistStun(5);
 		//
 		hero.setGood(false);

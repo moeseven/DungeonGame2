@@ -17,7 +17,7 @@ public class compositeFireEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {	
 		for (int i = 0; i < self.getTargets().size(); i++) {	
-				self.doFireDamage(GameEquations.rollForCrit(self, card, card.getAttackDamage()*Integer.parseInt(pars.get(1))/100), self.getTargets().get(i));
+				self.doFireDamage(card.getAttackDamage()*Integer.parseInt(pars.get(1))/100, self.getTargets().get(i));
 		}
 		return true;
 	}

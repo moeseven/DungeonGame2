@@ -19,7 +19,7 @@ public class fireBallEffect extends CardEffect{
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			nextTargets.add(self.getTargets().get(i));
 			//roll cirts for every target
-			self.doFireDamage(GameEquations.rollForCrit(self, card, GameEquations.calculateSpellDamage((int)(card.getSpellDamage()*((card.getX())*(card.getX()/4.0))),self)), self.getTargets().get(i));
+			self.doFireDamage(GameEquations.calculateSpellDamage((int)(card.getSpellDamage()*((card.getX())*(card.getX()/4.0))),self), self.getTargets().get(i));
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {

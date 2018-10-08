@@ -40,19 +40,20 @@ public class Spectre extends MonsterRace{
 		hero.setBlockSkill(8);
 		hero.setAccuracy(9);
 		hero.setDodge(29);
-		hero.setSpellPower(11);
+		hero.setSpellPower(21);
 		hero.setSpellResist(7);
 		//
 		//resistances
-		hero.setResistFire(0);
-		hero.setResistCold(15);
-		hero.setResistBleed(5);
-		hero.setResistPoison(5);
-		hero.setResistStun(5);
+		hero.setResistFire(12);
+		hero.setResistCold(24);
+		hero.setResistBleed(15);
+		hero.setResistPoison(15);
+		hero.setResistStun(25);
 		//
+		hero.setSpellDuration(hero.getSpellDuration()+4);
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*5.0));
-		hero.setExperienceValue(30);
+		hero.setGold((int)(Math.random()*15.0));
+		hero.setExperienceValue(65);
 		hero.setStressCap(81);
 		//deck		
 		
@@ -62,18 +63,19 @@ public class Spectre extends MonsterRace{
 		public SpectreNormal(Game game) {
 			super(game);
 			name="";				
-			for (int i=0; i<3;i++) {			
-				cards.add(game.cardBuilder.buildCard("meeleAttack"));
-			}
+			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			//aoe cold spell			
-			for (int i=0; i<4;i++) {
+			for (int i=0; i<3;i++) {
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
+			cards.add(game.cardBuilder.buildCard("breeze"));
+			cards.add(game.cardBuilder.buildCard("breeze"));
+			cards.add(game.cardBuilder.buildCard("glacierNeedle"));
+			cards.add(game.cardBuilder.buildCard("glacierNeedle"));
 		}
 
 		public void modifyHero(Hero hero) {
-			// TODO Auto-generated method stub
 			super.modifyHero(hero);
 			//mainstats
 			hero.setStrength(hero.getStrength()+3);

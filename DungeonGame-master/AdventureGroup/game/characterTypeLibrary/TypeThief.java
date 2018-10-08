@@ -27,10 +27,12 @@ public class TypeThief extends CharacterClass{
 		cardPool.add("poisonousSlice");		
 		cardPool.add("daggerThrow");
 		cardPool.add("feint");
-		cardPool.add("sideStep");
+		cardPool.add("carefulSlash");
+		cardPool.add("hook");
 		items.add(game.itemBuilder.buildItem("rustyBlade",2));
 		cards.add(game.cardBuilder.buildCard("feint"));
-		cards.add(game.cardBuilder.buildCard("daggerThrow"));		
+		cards.add(game.cardBuilder.buildCard("daggerThrow"));	
+		cards.add(game.cardBuilder.buildCard("poisonDagger"));	
 		for (int i=0; i<5;i++) {
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("basicBlock"));

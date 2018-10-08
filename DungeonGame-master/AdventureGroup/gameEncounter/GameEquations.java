@@ -47,8 +47,8 @@ public class GameEquations {
 	public static int critDamageCalc(Hero hero) {
 		return (int) (hero.getCritDamage()*hero.getDexterity()/20);
 	}
-	public static int critChanceCalc(Hero hero, Card_new card) {
-		return (int) (hero.getCritChance()+card.getCritChance());
+	public static int critChanceCalc(Hero hero) {
+		return (int) (hero.getCritChance());
 	}
 	
 	////////////////////////////////////////////////////////////////////
@@ -64,8 +64,8 @@ public class GameEquations {
 			}
 		}
 	//crit combat calculation
-	public static int rollForCrit(Hero hero, Card_new card, int damage) {
-		if (Math.random()*100<critChanceCalc(hero, card)) {
+	public static int rollForCrit(Hero hero, int damage) {
+		if (Math.random()*100<critChanceCalc(hero)) {
 			hero.getPlayer().getGame().log.addLine("critical!");
 			damage=(int)(damage*(1+critDamageCalc(hero)/100.0));
 		}

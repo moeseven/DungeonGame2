@@ -18,7 +18,7 @@ public class compositeColdEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {	
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.doColdDamage(GameEquations.rollForCrit(self, card, card.getAttackDamage()*Integer.parseInt(pars.get(1))/100), self.getTargets().get(i));
+			self.doColdDamage(card.getAttackDamage()*Integer.parseInt(pars.get(1))/100, self.getTargets().get(i));
 		}
 		return true;
 	}

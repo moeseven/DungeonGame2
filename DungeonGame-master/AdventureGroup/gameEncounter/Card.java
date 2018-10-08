@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
+	protected int critChance=0;
 	protected int manaCost;
 	protected boolean xCostCard=false;
 	protected int x;

@@ -28,12 +28,12 @@ public class RaceRat extends MonsterRace{
 //		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(54));
 		hero.setImageNumber(54);
 		hero.setSpeed(17);
-		hero.setBaseHp(43);		
+		hero.setBaseHp(40);		
 		//stats
 		hero.setStrength(8);
 		hero.setDexterity(19);
 		hero.setIntelligence(11);
-		hero.setVitality(7);
+		hero.setVitality(6);
 		//
 		//attack/defence
 		hero.setAttackSkill(9);
@@ -46,7 +46,7 @@ public class RaceRat extends MonsterRace{
 		//resistances
 		hero.setResistFire(10);
 		hero.setResistCold(10);
-		hero.setResistBleed(6);
+		hero.setResistBleed(16);
 		hero.setResistPoison(45);
 		hero.setResistStun(5);
 		//

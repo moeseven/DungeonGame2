@@ -34,6 +34,9 @@ public class EffectBuilder {
 		if (name.equals("cardDraw")) {
 			return new cardDrawEffect(p);
 		}
+		if (name.equals("chargeAttack")) {
+			return new chargeAttackEffect(p);
+		}
 		if (name.equals("cleaveAttack")) {
 			return new cleaveAttackEffect(p);
 		}
@@ -58,6 +61,9 @@ public class EffectBuilder {
 		if (name.equals("fireSpell")) {
 			return new fireSpellEffect(p);
 		}
+		if (name.equals("growingStatSpell")) {
+			return new growingStatSpellEffect(p);
+		}
 		if (name.equals("heal")) {
 			return new healEffect(p);
 		}
@@ -78,6 +84,9 @@ public class EffectBuilder {
 		}
 		if (name.equals("modifyStatSpell")) {
 			return new modifyStatSpellEffect(p);
+		}
+		if (name.equals("move")) {
+			return new moveEffect(p);
 		}
 		if (name.equals("penetrateArmorAttack")) {
 			return new penetrateArmorAttackEffect(p);

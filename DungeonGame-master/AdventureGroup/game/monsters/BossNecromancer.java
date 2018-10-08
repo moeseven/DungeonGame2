@@ -57,7 +57,7 @@ public class BossNecromancer extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*45.0));
-		hero.setExperienceValue(195);
+		hero.setExperienceValue(200);
 		//boss
 		hero.setManaPower(3);
 		hero.setDraw(5);
@@ -68,8 +68,7 @@ public class BossNecromancer extends MonsterRace{
 
 		public NecromancerAspirant(Game game) {	
 			super(game);
-			name="";
-			items.add(new ZombieClaw());				
+			name="";				
 			for (int i=0; i<5;i++) {	
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
@@ -77,6 +76,7 @@ public class BossNecromancer extends MonsterRace{
 			//attacks
 			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			//spells
+			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
@@ -98,21 +98,6 @@ public class BossNecromancer extends MonsterRace{
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
-	}
-	private class ZombieClaw extends ItemHand1{
-
-		public ZombieClaw(){
-			super();
-			droppable=false;
-			name="zombie claw";
-			setGoldValue(1);
-			this.baseDamage=20;
-			this.damageRange=4;
-			this.facStr=0.95;
-			this.weaponRange=2;
-		}
-		
-
 	}
 	private class SummonZombie extends SpellnoTarget{
 

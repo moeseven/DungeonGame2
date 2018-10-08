@@ -17,7 +17,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
-	protected int critChance=0;
 	protected int block=0;
 	protected int attackDamage=0;
 	protected int spellDamage=0;
@@ -52,7 +51,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		if (accuracy!=null) {
 			this.accuracy = Integer.parseInt(accuracy);
 		}
-		if (critChance!=null) {
+		if (critChance!=null) {//unused
 			this.critChance = Integer.parseInt(critChance);
 		}
 		if (block!=null) {
@@ -151,7 +150,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 			cardText.add(cardEffect.generateCardText(hero, this));
 		}
 		if (critChance>0) {
-			cardText.add("crit chance: "+GameEquations.critChanceCalc(hero, this));
+			cardText.add("crit chance: +"+critChance);
 		}
 		if (accuracy>0) {
 			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero,hero.getTarget())));

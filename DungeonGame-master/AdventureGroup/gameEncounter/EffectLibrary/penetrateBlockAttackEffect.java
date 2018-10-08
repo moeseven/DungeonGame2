@@ -15,7 +15,7 @@ public class penetrateBlockAttackEffect extends attackEffect{
 	}
 
 	protected void damageTarget(Hero self, Hero target, Card_new card) {
-		int damage=GameEquations.rollForCrit(self, card, GameEquations.calculateAttackDamage(card, self));			
+		int damage=GameEquations.calculateAttackDamage(card, self);			
 		int afterArmor = GameEquations.damageReducedByArmor(damage, target.armor);
 		target.takeDamage(self, afterArmor, false);
 	}

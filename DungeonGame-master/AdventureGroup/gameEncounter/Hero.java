@@ -134,19 +134,19 @@ public class Hero implements Serializable{
 //		}
 		imageNumber=1;
 		//attributes		
-		setStrength(9);
-		setDexterity(9);
-		setIntelligence(9);
-		setVitality(9);
+		setStrength(6);
+		setDexterity(6);
+		setIntelligence(6);
+		setVitality(6);
 		//base stats	
-		setAttackSkill(8);
-		setBlockSkill(8);
-		setAccuracy(8);
-		setDodge(8);
-		setSpellPower(8);
-		setBaseHp(100);
-		setSpeed(10);
-		setCritChance(0);
+		setAttackSkill(6);
+		setBlockSkill(6);
+		setAccuracy(6);
+		setDodge(6);
+		setSpellPower(6);
+		setBaseHp(80);
+		setSpeed(7);
+		setCritChance(3);
 		setCritDamage(20);
 		//other
 		resistSpell =4;
@@ -315,10 +315,6 @@ public class Hero implements Serializable{
 			damage= GameEquations.calculateAttackDamage(card, this);
 		}
 		int afterBlockDamage = GameEquations.attackIntoBlock(this, attackedHero, damage);		
-		//crit after block
-		if (!thornFlag&&afterBlockDamage>0) {
-			afterBlockDamage = GameEquations.rollForCrit(this, card, afterBlockDamage);
-		}
 		int afterArmorDamage = GameEquations.damageReducedByArmor(afterBlockDamage, attackedHero.armor);
 		attackedHero.takeDamage(this, afterArmorDamage, thornFlag);
 	}
@@ -329,7 +325,9 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine("thorns: "+thorns);
 			dealAttackDamage(damagingHero, null, true);
 		}
-		if(damage>0) {
+		if(damage>0) {			
+			//crit roll here, make sure to not use this for poison/bleed/burn
+			damage=GameEquations.rollForCrit(damagingHero, damage);
 			player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
 			finalDamage(damage);	
 			//option for wounds instead of death
@@ -348,6 +346,7 @@ public class Hero implements Serializable{
 		}		
 	}
 	public void finalDamage(int damage) {
+		
 		this.setHp(hp-damage);
 		//player.getGame().log.addLine(name+" took "+damage+" damage");
 		if(hp<=0) {
@@ -413,23 +412,34 @@ public class Hero implements Serializable{
 		}					
 	}
 	//move
-	public void moveForward() {
-		int startPosition = getPosition();
-		player.getHeroes().remove(this);
-		player.getHeroes().addFirst(this);
-		for(int i=startPosition-1; i>0;i--){
-			Hero removedHero=player.getHeroes().remove(startPosition-1);
-			player.getHeroes().addFirst(removedHero);
+	public boolean moveForward() {		
+		if (player.getHeroes().indexOf(this)!=0) {
+			int startPosition = getPosition();
+			player.getHeroes().remove(this);
+			player.getHeroes().addFirst(this);
+			for(int i=startPosition-1; i>0;i--){
+				Hero removedHero=player.getHeroes().remove(startPosition-1);
+				player.getHeroes().addFirst(removedHero);
+			}
+			return true;
+		}else {
+			return false;
 		}
 	}
-	public void moveBack() {
-		int startPosition = getPosition();
-		player.getHeroes().remove(this);
-		player.getHeroes().addLast(this);
-		for(int i=startPosition; i<player.getHeroes().size()-2;i++){
-			Hero removedHero=player.getHeroes().remove(startPosition+1);
-			player.getHeroes().addLast(removedHero);
+	public boolean moveBack() {
+		if (player.getHeroes().indexOf(this)==player.getHeroes().size()-1) {
+			return false;
+		}else {
+			int startPosition = getPosition();
+			player.getHeroes().remove(this);
+			player.getHeroes().addLast(this);
+			for(int i=startPosition; i<player.getHeroes().size()-2;i++){
+				Hero removedHero=player.getHeroes().remove(startPosition+1);
+				player.getHeroes().addLast(removedHero);
+			}
+			return true;
 		}
+		
 	}
 	//cleansing
 	public void cleanseHero() {

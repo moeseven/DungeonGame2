@@ -46,7 +46,7 @@ public class RaceSkeletton extends MonsterRace{
 		hero.setSpellResist(11);
 		//
 		//resistances
-		hero.setResistFire(12);
+		hero.setResistFire(5);
 		hero.setResistCold(33);
 		hero.setResistBleed(100);
 		hero.setResistPoison(15);
@@ -171,6 +171,7 @@ public class RaceSkeletton extends MonsterRace{
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
+			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("sleepCharm"));
@@ -187,6 +188,7 @@ public class RaceSkeletton extends MonsterRace{
 			hero.setIntelligence(hero.getIntelligence()+19);
 			hero.setVitality(hero.getVitality()+0);
 			//
+			hero.setSpellDuration(hero.getSpellDuration()+4);
 			hero.setArmor(hero.getArmor()+0);
 			hero.setAttackSkill(hero.getAttackSkill()-1);
 			hero.setBlockSkill(hero.getBlockSkill()-1);

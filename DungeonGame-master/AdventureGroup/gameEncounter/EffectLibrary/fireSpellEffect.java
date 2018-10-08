@@ -20,7 +20,7 @@ public class fireSpellEffect extends CardEffect{
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			nextTargets.add(self.getTargets().get(i));
 			//roll cirts for every target
-			self.doFireDamage(GameEquations.rollForCrit(self, card, GameEquations.calculateSpellDamage(card.getSpellDamage(), self)), self.getTargets().get(i));
+			self.doFireDamage(GameEquations.calculateSpellDamage(card.getSpellDamage(), self), self.getTargets().get(i));
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
