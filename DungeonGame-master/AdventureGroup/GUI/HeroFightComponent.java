@@ -67,7 +67,6 @@ public class HeroFightComponent extends HeroComponent{
 		int number=fw.getGuiFight().getFight().getTurnOrder().indexOf(hero)-fw.getGuiFight().getFight().getTurnOrderCounter();
 		g.drawString("moves in "+number+" turns", 8, 25);
 		if (!(hero.getPlayer() instanceof DungeonMaster)) {
-			g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
 			if (fw.getGame().getPlayer().getSelectedHero().getTarget()!=null&&fw.getGame().getRoom().getFight().getTargetMap().containsKey(fw.getGame().getPlayer().getSelectedHero().getTarget())) {
 				if (fw.getGame().getRoom().getFight().getTargetMap().get(fw.getGame().getPlayer().getSelectedHero().getTarget()).containsValue(hero)) {
 					g.setColor(Color.RED);

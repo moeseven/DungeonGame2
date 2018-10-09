@@ -25,7 +25,7 @@ public class compositeColdEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return Integer.parseInt(pars.get(1))/100+" cold damage";
+		return "+"+Integer.parseInt(pars.get(1))+"% cold damage";
 	}
 
 }

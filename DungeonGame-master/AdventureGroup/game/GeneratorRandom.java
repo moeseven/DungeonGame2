@@ -319,4 +319,11 @@ public class GeneratorRandom implements Serializable{
 		//return new TestQuest(game);
 		return questPool.get((int) Math.min(questPool.size()-1, Math.random()*questPool.size()));
 	}
+	public LinkedList<String> getAllCards() {
+		return allCards;
+	}
+	public void setAllCards(LinkedList<String> allCards) {
+		this.allCards = allCards;
+	}
+	
 }

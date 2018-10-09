@@ -32,14 +32,14 @@ public class RaceOgre extends MonsterRace{
 		hero.setSpeed(7);
 		hero.setBaseHp(400);		
 		//stats
-		hero.setStrength(46);
+		hero.setStrength(56);
 		hero.setDexterity(10);
 		hero.setIntelligence(7);
 		hero.setVitality(20);
 		//
 		//attack/defence
-		hero.setAttackSkill(18);
-		hero.setBlockSkill(6);
+		hero.setAttackSkill(48);
+		hero.setBlockSkill(16);
 		hero.setAccuracy(1);
 		hero.setDodge(2);
 		hero.setSpellPower(8);

@@ -8,7 +8,6 @@ public class Blazing extends Buff{
 	int burnDamage=3;
 	@Override
 	public void onTick(Hero hero) {
-		// TODO Auto-generated method stub
 		hero.getPlayer().getGame().log.addLine(hero.getName()+" is blazing!");
 		if(hero.getPlayer().getGame().dungeonMaster.getHeroes().size()>0&&hero.getPlayer().getGame().getPlayer().getHeroes().size()>0) {
 			for(int i=0;i<hero.getPlayer().getGame().dungeonMaster.getHeroes().size();i++) {
@@ -22,7 +21,6 @@ public class Blazing extends Buff{
 
 	@Override
 	public void mod(Hero hero) {
-		// TODO Auto-generated method stub
 		duration=5;
 		burnDamage=(int) (GameEquations.spellPowerCalc(hero)/3.0)+3;
 		hero.setResistFire(hero.getResistFire()+50);

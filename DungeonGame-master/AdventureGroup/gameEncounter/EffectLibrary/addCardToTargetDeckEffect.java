@@ -22,6 +22,7 @@ public class addCardToTargetDeckEffect extends CardEffect{
 			nextTargets.add(self.getTargets().get(i));
 			for (int j = 0; j < Integer.parseInt(pars.get(2)); j++) {
 				self.getTargets().get(i).getDiscardPile().add(self.getPlayer().getGame().cardBuilder.buildCard(pars.get(1)));
+				self.getPlayer().getGame().log.addLine("added "+pars.get(2)+" "+pars.get(1)+" to "+self.getTargets().get(i).getName()+" discard pile");
 			}			
 		}
 		self.setTargets(nextTargets);

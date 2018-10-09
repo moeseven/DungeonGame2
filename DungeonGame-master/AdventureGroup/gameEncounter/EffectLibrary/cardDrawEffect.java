@@ -19,6 +19,7 @@ public class cardDrawEffect extends CardEffect{
 		for(int i=0; i<Integer.parseInt(pars.get(1)); i++) {
 			self.drawCard();
 		}
+		self.getPlayer().getGame().log.addLine(self.getName()+" draws "+pars.get(1)+" cards");
 		return true;
 	}
 

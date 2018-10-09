@@ -20,13 +20,13 @@ public class regenerationSpellEffect extends CardEffect{
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.getTargets().get(i).buffHero(new RegenerationBuff(GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)),self),self.getSpellDuration()));
+			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" gets +"+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)), self)+" regeneration");
 		}
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		// TODO Auto-generated method stub
 		return  GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)), self)+" regeneration";
 	}
 

@@ -18,6 +18,7 @@ public class modifyStatEffect extends CardEffect{
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.getTargets().get(i).buffHero(new statModifyBuff(self.getTargets().get(i),pars.get(1), Integer.parseInt(pars.get(2)), self.getSpellDuration()));	
+			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" "+pars.get(2)+" "+pars.get(1)+" for "+self.getSpellDuration()+" rounds");
 		}
 		return true;
 	}

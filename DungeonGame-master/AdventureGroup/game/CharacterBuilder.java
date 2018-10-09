@@ -39,8 +39,13 @@ public class CharacterBuilder {
 		game.getPlayer().setSelectedHero(hero);
 	}
 	public void createHero(String name) {
-		hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
-		game.getPlayer().addHero(hero);
+		if (name.equals("super")) {//cheat code
+			hero= new Hero(name, game.getPlayer(),charRaces.getFirst(), new Weakling(game));
+		}else {
+			hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
+			
+		}
+		game.getPlayer().addHero(hero);		
 	}
 	public LinkedList<CharacterClass> getCharClasses() {
 		return charClasses;

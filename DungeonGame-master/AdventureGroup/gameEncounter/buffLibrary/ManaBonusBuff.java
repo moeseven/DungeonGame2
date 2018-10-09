@@ -25,6 +25,7 @@ public class ManaBonusBuff extends Buff{
 	@Override
 	public void onTick(Hero hero) {
 		hero.setMana(hero.getMana()+bonus);
+		hero.getPlayer().getGame().log.addLine("+"+bonus+" mana");
 	}
 	
 

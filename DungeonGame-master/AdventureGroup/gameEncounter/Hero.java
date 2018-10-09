@@ -327,8 +327,12 @@ public class Hero implements Serializable{
 		}
 		if(damage>0) {			
 			//crit roll here, make sure to not use this for poison/bleed/burn
-			damage=GameEquations.rollForCrit(damagingHero, damage);
-			player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
+			if (damagingHero!=this) {
+				damage=GameEquations.rollForCrit(damagingHero, damage);
+				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
+			}else {
+				player.getGame().log.addLine(name+" suffers "+damage+" damage");
+			}
 			finalDamage(damage);	
 			//option for wounds instead of death
 //				if(damage>hp/1.6) {	//wounds
@@ -648,6 +652,7 @@ public class Hero implements Serializable{
 	public boolean takeStun(int bonus) {
 		if(Math.random()<bonus/100.0) {
 			stunned=true;
+			player.getGame().log.addLine(name+" got stunned!");
 			buffHero(new Bashed());
 			return true;
 		}else {

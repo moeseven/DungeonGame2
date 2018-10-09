@@ -16,14 +16,14 @@ public class concentrateEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
-		self.moveBack();
 		self.buffHero(new statModifyBuff(self, "dexterity", self.getDexterity(), self.getSpellDuration()));
+		self.getPlayer().getGame().log.addLine(self.getName()+" doubles dexterity");
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return GameEquations.calculateBlockAmount(card.getBlock(), self)+" move back and double dexterity";
+		return "double dexterity";
 	}
 
 }

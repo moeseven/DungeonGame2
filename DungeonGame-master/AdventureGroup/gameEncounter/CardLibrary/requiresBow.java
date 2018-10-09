@@ -12,9 +12,11 @@ public class requiresBow extends CastCondition{
 
 	@Override
 	public boolean checkCondition(Hero hero) {
-		if (hero.getEquipment().getHand1().getItemClass().equals("bow")) {
-			return true;
-		}
+		if (hero.getEquipment().getHand1()!=null) {
+			if (hero.getEquipment().getHand1().getItemClass().equals("bow")) {
+				return true;
+			}
+		}	
 		return false;
 	}
 

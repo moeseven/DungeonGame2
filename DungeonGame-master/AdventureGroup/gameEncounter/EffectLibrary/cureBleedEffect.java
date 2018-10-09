@@ -18,6 +18,7 @@ public class cureBleedEffect extends CardEffect{
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.getTargets().get(i).setBleed(0);
+			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" stopped bleeding");
 		}		
 		return true;
 	}

@@ -50,7 +50,7 @@ public abstract class Card implements Serializable,Cloneable{
 	}
 	public void handleManaCost(Hero self) {
 		x=computeManaCost(self);
-		self.setMana(self.getMana()-computeManaCost(self));		
+		self.setMana(self.getMana()-x);		
 	}
 	public void cast(Hero self) {
 		handleManaCost(self);		
