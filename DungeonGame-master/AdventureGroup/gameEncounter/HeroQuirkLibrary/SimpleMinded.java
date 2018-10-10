@@ -11,7 +11,7 @@ public class SimpleMinded extends HeroQuirk{
 		// TODO Auto-generated constructor stub
 		name="simple minded";
 		stats.getStats()[ModableHeroStats.nameResolveStat("draw")]=-1;
-		stats.getStats()[ModableHeroStats.nameResolveStat("resistSpell")]=1;
+		stats.getStats()[ModableHeroStats.nameResolveStat("resistSpell")]=25;
 		stats.getStats()[ModableHeroStats.nameResolveStat("speed")]=1;
 	}
 	

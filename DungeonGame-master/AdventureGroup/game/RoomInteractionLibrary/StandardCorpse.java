@@ -13,13 +13,13 @@ public class StandardCorpse extends RoomInteraction{
 	private LinkedList<Item> items;
 	public StandardCorpse(Game game,Hero corpse) {
 		super(game);
+		setImageNumber(240);
 		hasBeenLooted=false;
 		this.corpse=corpse;
 		items= new LinkedList<Item>();
 		items.addAll(corpse.getEquipment().getAllEquippedItems());
 		
 		name=corpse.getName()+" corpse";
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -30,10 +30,10 @@ public class StandardCorpse extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		// TODO Auto-generated method stub
 		//loot corpse
 		if(!hero.isDead()) {
 			if(!hasBeenLooted) {
+			setImageNumber(241);
 			hero.loot(corpse);
 			hero.getPlayer().addMultipleItemsToInventory(items);
 		}else {

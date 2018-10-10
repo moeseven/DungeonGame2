@@ -50,6 +50,7 @@ public class Spectre extends MonsterRace{
 		hero.setResistPoison(15);
 		hero.setResistStun(25);
 		//
+		hero.setArmor(4);
 		hero.setSpellDuration(hero.getSpellDuration()+4);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*15.0));

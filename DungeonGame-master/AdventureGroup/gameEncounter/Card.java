@@ -10,7 +10,7 @@ public abstract class Card implements Serializable,Cloneable{
 	protected int manaCost;
 	protected boolean xCostCard=false;
 	protected int x;
-	protected int accuracy=0;
+	protected int accuracy=90;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
@@ -53,11 +53,13 @@ public abstract class Card implements Serializable,Cloneable{
 		self.setMana(self.getMana()-x);		
 	}
 	public void cast(Hero self) {
-		handleManaCost(self);		
-		self.getHand().remove(this);
-		self.getDiscardPile().add(this);
-		buildLogEntry(self);
-		applyEffect(self);
+		if (!self.isDead()) {
+			handleManaCost(self);		
+			self.getHand().remove(this);
+			self.getDiscardPile().add(this);
+			buildLogEntry(self);
+			applyEffect(self);
+		}		
 	}
 	public abstract boolean extraCastConditions(Hero hero);
 	public abstract boolean applyEffect(Hero self);// here happens the magic

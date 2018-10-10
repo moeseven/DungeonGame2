@@ -230,19 +230,34 @@ public class Fight implements Serializable{
 	public void handleFightisOver() {
 		//TODO
 	}
-	public boolean isFightOver() {
-		int monstersAlive=0,heroesAlive=0;
+	public boolean monstersAlive() {
+		int monstersAlive=0;
 		for (Hero m: monsters) {
 			if(!m.isDead()){
 				monstersAlive+=1;
 			}
 		}
+		if(monstersAlive>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean heroesAlive() {
+		int heroesAlive=0;
 		for (Hero h: heroes) {
 			if(!h.isDead()){
 				heroesAlive+=1;
 			}
 		}
-		if(monstersAlive>0&&heroesAlive>0) {
+		if(heroesAlive>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean isFightOver() {
+		if(heroesAlive()&&monstersAlive()) {
 			return false;
 		}else {
 			return true;

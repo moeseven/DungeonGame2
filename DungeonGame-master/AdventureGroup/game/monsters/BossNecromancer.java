@@ -55,6 +55,7 @@ public class BossNecromancer extends MonsterRace{
 		hero.setResistPoison(30);
 		hero.setResistStun(30);
 		//
+		hero.setArmor(4);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*45.0));
 		hero.setExperienceValue(200);

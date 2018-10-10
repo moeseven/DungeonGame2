@@ -49,14 +49,22 @@ public class GuiFight extends JPanel{
 		}
 	}
 	private void endTurn() {
-		fw.getGame().getRoom().getFight().nextTurn();
+		if (!fw.getGame().getRoom().getFight().heroesAlive()) {
+			
+			fw.getGame().tpHeroes();
+			fw.windowswitch();
+			//fw.getGame().enterRoom(fw.getGame().getRoom());
+		}else {
+			fw.getGame().getRoom().getFight().nextTurn();
+		}		
 		upadate();
 		fw.revalidate();
 		fw.repaint();
-		if(fw.getGame().getRoom().getFight().isFightOver()) {
+		if(!fw.getGame().getRoom().getFight().monstersAlive()) {
 			fw.getGame().getRoom().setHasFight(false);
 			fw.windowswitch();
 		}
+		
 	}
 	
 	private class mlRetreat extends MouseAdapter{

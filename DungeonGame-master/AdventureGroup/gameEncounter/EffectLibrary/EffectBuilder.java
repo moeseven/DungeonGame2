@@ -13,6 +13,9 @@ public class EffectBuilder {
 		if (name.equals("addCardToTargetDeck")) {
 			return new addCardToTargetDeckEffect(p);
 		}
+		if (name.equals("addCardToTargetDeckSpell")) {
+			return new addCardToTargetDeckSpellEffect(p);
+		}
 		if (name.equals("allResistSpell")) {
 			return new allResistSpellEffect(p);
 		}

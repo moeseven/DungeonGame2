@@ -50,6 +50,7 @@ public class RaceZombie extends MonsterRace{
 		hero.setResistPoison(80);
 		hero.setResistStun(60);
 		//
+		hero.setArmor(5);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*5.0));
 		hero.setExperienceValue(18);

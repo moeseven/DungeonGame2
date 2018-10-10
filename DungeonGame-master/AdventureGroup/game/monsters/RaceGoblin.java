@@ -49,6 +49,7 @@ public class RaceGoblin extends MonsterRace{
 		hero.setResistPoison(15);
 		hero.setResistStun(5);
 		//
+		hero.setArmor(8);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*9.0));
 		hero.setExperienceValue(20);

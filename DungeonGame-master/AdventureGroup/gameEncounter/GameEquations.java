@@ -66,7 +66,9 @@ public class GameEquations {
 	//crit combat calculation
 	public static int rollForCrit(Hero hero, int damage) {
 		if (Math.random()*100<critChanceCalc(hero)) {
-			hero.getPlayer().getGame().log.addLine("critical!");
+			if (hero.getPlayer().getGame()!=null) {
+				hero.getPlayer().getGame().log.addLine("crit!");
+			}			
 			damage=(int)(damage*(1+critDamageCalc(hero)/100.0));
 		}
 		return damage;

@@ -52,6 +52,7 @@ public class RaceOgre extends MonsterRace{
 		hero.setResistPoison(35);
 		hero.setResistStun(65);
 		//
+		hero.setArmor(12);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*95.0));
 		hero.setExperienceValue(280);

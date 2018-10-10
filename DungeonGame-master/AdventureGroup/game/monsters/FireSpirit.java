@@ -49,6 +49,7 @@ public class FireSpirit extends MonsterRace{
 		hero.setResistPoison(55);
 		hero.setResistStun(5);
 		//
+		hero.setArmor(4);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*5.0));
 		hero.setExperienceValue(60);
