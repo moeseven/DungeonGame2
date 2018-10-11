@@ -70,6 +70,9 @@ public class EffectBuilder {
 		if (name.equals("heal")) {
 			return new healEffect(p);
 		}
+		if (name.equals("increaseStatOfCard")) {
+			return new increaseStatOfCardEffect(p);
+		}
 		if (name.equals("lightningSpell")) {
 			return new lightningSpellEffect(p);
 		}

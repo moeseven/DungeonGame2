@@ -189,7 +189,7 @@ public class GeneratorRandom implements Serializable{
 		interactionPool.add(new Chest(game));
 		interactionPool.add(new EvilStatue(game));
 		interactionPool.add(new Shop(game));
-		interactionPool.add(new Sack(game));
+		interactionPool.add(new Sack(game,60));
 		interactionPool.add(new Well(game));
 		interactionPool.add(new SpikeTrap(game));
 		interactionPool.add(new PoisonTrap(game));

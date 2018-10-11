@@ -92,13 +92,14 @@ public class RoomButtonComponent extends JComponent{
 					rw.getGuiRoom().upadate();
 				}else {
 					if(rw.getGame().getPlayer().getHeroes().size()>0) {
-						rw.getGame().enterNextRoom();
-						rw.getGuiRoom().upadate();
-						rw.setVisible(true);
-						if(rw.getGame().getRoom().isHasFight()){
-							rw.setUpFightWindow();
-							rw.setVisible(false);
-						}
+						new MapWindow(rw.getGame(), rw);
+//						rw.getGame().enterNextRoom();
+//						rw.getGuiRoom().upadate();
+//						rw.setVisible(true);
+//						if(rw.getGame().getRoom().isHasFight()){
+//							rw.setUpFightWindow();
+//							rw.setVisible(false);
+//						}
 					}else {
 						rw.getGame().log.addLine("mission failed!");
 						rw.getGame().tpHeroes();

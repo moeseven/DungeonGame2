@@ -24,7 +24,8 @@ public class Weakling extends CharacterClass{
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
 		hero.setGood(true);
-		hero.setDraw(12);
+		hero.setBaseHp(1000);
+		hero.setDraw(10);
 		hero.setManaPower(10);
 		hero.setExperienceValue(10);
 		hero.setAccuracy(40);

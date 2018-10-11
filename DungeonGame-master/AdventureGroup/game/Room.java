@@ -14,6 +14,7 @@ import gameEncounter.Fight;
 import gameEncounter.Hero;
 
 public abstract class Room implements Serializable{
+	protected int xCoordinate,yCoordinate;
 	protected boolean hasFight;
 	protected LinkedList<Hero> monsters=new LinkedList<Hero>();
 	protected boolean shopOpen;
@@ -122,6 +123,18 @@ public abstract class Room implements Serializable{
 	}
 	public void setAltar(Altar altar) {
 		this.altar = altar;
+	}
+	public int getxCoordinate() {
+		return xCoordinate;
+	}
+	public void setxCoordinate(int xCoordinate) {
+		this.xCoordinate = xCoordinate;
+	}
+	public int getyCoordinate() {
+		return yCoordinate;
+	}
+	public void setyCoordinate(int yCoordinate) {
+		this.yCoordinate = yCoordinate;
 	}
 	
 }

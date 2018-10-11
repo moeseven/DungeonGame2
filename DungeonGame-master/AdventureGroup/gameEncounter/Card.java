@@ -11,6 +11,9 @@ public abstract class Card implements Serializable,Cloneable{
 	protected boolean xCostCard=false;
 	protected int x;
 	protected int accuracy=90;
+	protected int block=0;
+	protected int attackDamage=0;
+	protected int spellDamage=0;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
@@ -130,6 +133,30 @@ public abstract class Card implements Serializable,Cloneable{
 
 	public void setX(int x) {
 		this.x = x;
+	}
+
+	public int getBlock() {
+		return block;
+	}
+
+	public void setBlock(int block) {
+		this.block = block;
+	}
+
+	public int getAttackDamage() {
+		return attackDamage;
+	}
+
+	public void setAttackDamage(int attackDamage) {
+		this.attackDamage = attackDamage;
+	}
+
+	public int getSpellDamage() {
+		return spellDamage;
+	}
+
+	public void setSpellDamage(int spellDamage) {
+		this.spellDamage = spellDamage;
 	}
 			
 	

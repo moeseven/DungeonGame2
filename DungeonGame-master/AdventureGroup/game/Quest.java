@@ -13,6 +13,7 @@ protected int goldReward;
 protected LinkedList<Room> rooms;
 protected Game game;
 	public Quest(Game game) {
+		roomLayout= new Room[10][10];
 		finished=false;
 		rooms=new LinkedList<Room>();
 		this.game=game;

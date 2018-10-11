@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import GUI.grafics.MyImageLoader;
+import game.ActLibrary.Act1;
 import game.QuestLibrary.QuestReturnRelic;
 import game.RoomInteractionLibrary.Tavern;
 import game.RoomLibrary.Town;
@@ -21,25 +22,25 @@ public GeneratorRandom generator;
 //public MyImageLoader imageLoader;
 public CardBuilder cardBuilder;
 public ItemBuilder itemBuilder;
-public int day;
+public int day=0;
 public MyLog log;
 private Room room;
 private Room town;
 private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
+private Act activeAct;
 public Game() {
 	super();
 	cardBuilder = new CardBuilder();
-	itemBuilder = new ItemBuilder();
-	//imageLoader= new MyImageLoader();
+	itemBuilder = new ItemBuilder();	
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);
-	day=1;
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();
 	newQuest();
 	town=new Town(this);
 	room=town;
+	activeAct= new Act1(this);
 	player=new Player(this);
 	//cardBuilder.printMap();
 }
@@ -54,6 +55,9 @@ public void enterRoom(Room room) {
 public void newQuest() {
 	activeQuest=generator.generateRandomQuest(this);
 }
+public void nextDay() {
+	day++;
+}
 //getters and setters
 public Room getRoom() {
 	return room;
@@ -67,48 +71,48 @@ public Player getPlayer() {
 public void setPlayer(Player player) {
 	this.player = player;
 }
-public Room getNextRoom() {
-	if(room!=town) {
-		if(activeQuest.getRooms().size()>activeQuest.getRooms().indexOf(room)+1) {
-			return activeQuest.getRooms().get(activeQuest.getRooms().indexOf(room)+1);
-		}else {
-			return town;
-		}
-	}else {
-		return activeQuest.getRooms().getFirst();
-	}		
-}
-public void enterNextRoom() {
-	room=getNextRoom();
-	//check here if all heroes are dead
-    LinkedList<Hero> stressedOutHeroes= new LinkedList<Hero>();
-	for(int i=0; i<this.getPlayer().getHeroes().size();i++) {
-		if(!getPlayer().getHeroes().get(i).isDead()) {
-			if(player.getHeroes().get(i).getStress()==player.getHeroes().get(i).getStressCap()) {
-				stressedOutHeroes.add(getPlayer().getHeroes().get(i));
-			}
-		}		
-		//player.getHeroes().get(i).becomeStressed(2); find other ways to stress
-	}
-	player.removeDeadHeroesFromRoster();
-	for(int i=0; i<stressedOutHeroes.size();i++) {
-		if(!stressedOutHeroes.get(i).isDead()){
-			player.getHeroes().remove(stressedOutHeroes.get(i));
-			player.getAvailableHeroes().add(stressedOutHeroes.get(i));
-		}		
-	}
-	if(player.getHeroes().size()==0) {
-		//TODO return to town here -- Quest over!
-		room=town;
-	}	
-	log.clear();
-	
-	if(room!=town) {
-		log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+activeQuest.getRooms().indexOf(room)+"°°°°°°°°°°°°°°°||||");
-	}	
-	room.prepareRoomAndEnter(this);
-	
-}
+//public Room getNextRoom() {
+//	if(room!=town) {
+//		if(activeQuest.getRooms().size()>activeQuest.getRooms().indexOf(room)+1) {
+//			return activeQuest.getRooms().get(activeQuest.getRooms().indexOf(room)+1);
+//		}else {
+//			return town;
+//		}
+//	}else {
+//		return activeQuest.getRooms().getFirst();
+//	}		
+//}
+//public void enterNextRoom() {
+//	room=getNextRoom();
+//	//check here if all heroes are dead
+//    LinkedList<Hero> stressedOutHeroes= new LinkedList<Hero>();
+//	for(int i=0; i<this.getPlayer().getHeroes().size();i++) {
+//		if(!getPlayer().getHeroes().get(i).isDead()) {
+//			if(player.getHeroes().get(i).getStress()==player.getHeroes().get(i).getStressCap()) {
+//				stressedOutHeroes.add(getPlayer().getHeroes().get(i));
+//			}
+//		}		
+//		//player.getHeroes().get(i).becomeStressed(2); find other ways to stress
+//	}
+//	player.removeDeadHeroesFromRoster();
+//	for(int i=0; i<stressedOutHeroes.size();i++) {
+//		if(!stressedOutHeroes.get(i).isDead()){
+//			player.getHeroes().remove(stressedOutHeroes.get(i));
+//			player.getAvailableHeroes().add(stressedOutHeroes.get(i));
+//		}		
+//	}
+//	if(player.getHeroes().size()==0) {
+//		//TODO return to town here -- Quest over!
+//		room=town;
+//	}	
+//	log.clear();
+//	
+//	if(room!=town) {
+//		log.addLine("||||°°°°°°°°°°°°°°°"+"ROOM "+activeQuest.getRooms().indexOf(room)+"°°°°°°°°°°°°°°°||||");
+//	}	
+//	room.prepareRoomAndEnter(this);
+//	
+//}
 
 public void tpHeroes() {
 	player.removeDeadHeroesFromRoster();
@@ -121,9 +125,7 @@ public void tpHeroes() {
 		}
 	}	
 	player.setTpLocation(room);
-	this.enterRoom(town);
-	day+=1;
-	log.addLine("Day: "+day);		
+	this.enterRoom(town);		
 }
 public void retreatHeroes() {
 	player.removeDeadHeroesFromRoster();
@@ -156,6 +158,12 @@ public Quest getActiveQuest() {
 }
 public void setActiveQuest(Quest activeQuest) {
 	this.activeQuest = activeQuest;
+}
+public Act getActiveAct() {
+	return activeAct;
+}
+public void setActiveAct(Act activeAct) {
+	this.activeAct = activeAct;
 }
 
 }

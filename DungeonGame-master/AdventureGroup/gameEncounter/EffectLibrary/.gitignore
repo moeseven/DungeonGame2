@@ -49,3 +49,6 @@
 /growingStatEffect.class
 /growingStatSpellEffect.class
 /addCardToTargetDeckSpellEffect.class
+/modifyCardEffect.class
+/increaseStatOfCardEffect.class
+/increaseStatOfCardSpellEffect.class

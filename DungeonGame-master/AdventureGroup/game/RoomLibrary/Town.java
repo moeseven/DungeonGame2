@@ -20,13 +20,12 @@ public class Town extends Room{
 		getInteractions().add(new Shop(game));
 		getInteractions().add(new Tavern(game));
 		getInteractions().add(new MedicineMan(game)); 
-		getInteractions().add(new QuestBoard(game));
+		//getInteractions().add(new QuestBoard(game));
 		getInteractions().add(new TeleportStone(game));
 	}
 
 	@Override
 	public void enterRoom() {
-		// TODO Auto-generated method stub
 		super.enterRoom();
 		for(int i=0; i<game.getPlayer().getAvailableHeroes().size();i++) {
 			game.getPlayer().getAvailableHeroes().get(i).setStress(game.getPlayer().getAvailableHeroes().get(i).getStress()-idleStressRelief);
@@ -39,6 +38,9 @@ public class Town extends Room{
 			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
 			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
 		}
+		//increment day for final score
+		game.nextDay();
+		game.log.addLine("Day: "+game.day);
 		game.getActiveQuest().onReturnToTown(game.getPlayer());
 	}
 	

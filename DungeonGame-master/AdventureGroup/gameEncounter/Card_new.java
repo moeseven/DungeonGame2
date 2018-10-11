@@ -17,10 +17,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
 	protected String name;
-	protected int block=0;
-	protected int attackDamage=0;
-	protected int spellDamage=0;
-
 	protected boolean isFriendly =false;
 	protected String text="no data";
 	protected LinkedList<CardEffect> allEffects= new LinkedList<CardEffect>();
