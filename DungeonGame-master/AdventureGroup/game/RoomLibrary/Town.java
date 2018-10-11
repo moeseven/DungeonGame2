@@ -13,7 +13,7 @@ import game.RoomInteractionLibrary.Well;
 import gameEncounter.GameEquations;
 
 public class Town extends Room{
-	private int idleStressRelief=3;
+
 	public Town(Game game) {
 		// TODO Auto-generated constructor stub
 		super(game);
@@ -27,20 +27,9 @@ public class Town extends Room{
 	@Override
 	public void enterRoom() {
 		super.enterRoom();
-		for(int i=0; i<game.getPlayer().getAvailableHeroes().size();i++) {
-			game.getPlayer().getAvailableHeroes().get(i).setStress(game.getPlayer().getAvailableHeroes().get(i).getStress()-idleStressRelief);
-			if (game.getPlayer().getAvailableHeroes().get(i).getStress()<0) {
-				game.getPlayer().getAvailableHeroes().get(i).setStress(0);
-			}
-			game.getPlayer().getAvailableHeroes().get(i).setHp(GameEquations.maxHealthCalc(game.getPlayer().getAvailableHeroes().get(i)));
-		}	
-		if(game.getPlayer().getAvailableHeroes().size()<10) {
-			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
-			game.getPlayer().getAvailableHeroes().add(game.generator.generateRandomHero(game.getPlayer()));
-		}
-		//increment day for final score
-		game.nextDay();
-		game.log.addLine("Day: "+game.day);
+		
+
+		game.log.addLine("Day: "+game.turn/7);
 		game.getActiveQuest().onReturnToTown(game.getPlayer());
 	}
 	

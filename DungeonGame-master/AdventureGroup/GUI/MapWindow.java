@@ -99,12 +99,17 @@ public class MapWindow extends JFrame{
 			} 
 		}
 		protected void paintComponent(Graphics g){
-			super.paintComponent(g);	
+			super.paintComponent(g);
+			g.setColor(Color.BLACK);
 			int currentRoomX=game.getRoom().getxCoordinate();
 			int currentRoomY=game.getRoom().getyCoordinate();
 			for(int i=0; i<rc.rectAngles.size();i++) {						
 				if (game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize]==null) {
 					g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+				}else if (!game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize].isVisited()) {
+					g.setColor(Color.GRAY);
+					g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+					g.setColor(Color.BLACK);
 				}else {
 					g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 				}
@@ -114,7 +119,7 @@ public class MapWindow extends JFrame{
 					}					
 					//g.fillOval(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 				}
-				g.setColor(Color.DARK_GRAY);
+				
 //				for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 //					g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()*roomSquareSize+3, rc.rectAngles.get(i).getY()*roomSquareSize+11+a*11);
 //				

@@ -9,6 +9,7 @@ import game.QuestLibrary.QuestReturnRelic;
 import game.RoomInteractionLibrary.Tavern;
 import game.RoomLibrary.Town;
 import gameEncounter.Fight;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.CardLibrary.CardBuilder;
@@ -22,15 +23,17 @@ public GeneratorRandom generator;
 //public MyImageLoader imageLoader;
 public CardBuilder cardBuilder;
 public ItemBuilder itemBuilder;
-public int day=0;
+public int turn=0;
 public MyLog log;
 private Room room;
 private Room town;
 private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
 private Act activeAct;
+private int idleStressRelief=3;
 public Game() {
 	super();
+	
 	cardBuilder = new CardBuilder();
 	itemBuilder = new ItemBuilder();	
 	dungeonMaster=new DungeonMaster(this);
@@ -55,8 +58,22 @@ public void enterRoom(Room room) {
 public void newQuest() {
 	activeQuest=generator.generateRandomQuest(this);
 }
-public void nextDay() {
-	day++;
+public void increaseGameTurn() {
+	//increment turns for final score
+	//do time related stuff here
+	if (turn % 4==0) {
+		for(int i=0; i<getPlayer().getAvailableHeroes().size();i++) {
+		getPlayer().getAvailableHeroes().get(i).setStress(getPlayer().getAvailableHeroes().get(i).getStress()-idleStressRelief);
+		if (getPlayer().getAvailableHeroes().get(i).getStress()<0) {
+			getPlayer().getAvailableHeroes().get(i).setStress(0);
+		}
+		getPlayer().getAvailableHeroes().get(i).setHp(GameEquations.maxHealthCalc(getPlayer().getAvailableHeroes().get(i)));
+		}	
+		if(getPlayer().getAvailableHeroes().size()<10) {
+			getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
+		}
+	}	
+	turn++;
 }
 //getters and setters
 public Room getRoom() {

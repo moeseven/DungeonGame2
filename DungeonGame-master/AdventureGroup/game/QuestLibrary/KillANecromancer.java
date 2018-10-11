@@ -18,7 +18,6 @@ public class KillANecromancer extends Quest{
 	private Item questItem = new QuestRelic();
 	public KillANecromancer(Game game) {
 		super(game);
-		// TODO Auto-generated constructor stub
 		for(int i=0; i<5; i++) {
 			rooms.add(game.generator.generateRandomRoom(game,0.3,1));
 		}

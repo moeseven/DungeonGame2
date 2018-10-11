@@ -14,6 +14,7 @@ import gameEncounter.Fight;
 import gameEncounter.Hero;
 
 public abstract class Room implements Serializable{
+	protected boolean visited;
 	protected int xCoordinate,yCoordinate;
 	protected boolean hasFight;
 	protected LinkedList<Hero> monsters=new LinkedList<Hero>();
@@ -43,13 +44,17 @@ public abstract class Room implements Serializable{
 		enterRoom();
 	}
 	public void enterRoom() {
+		game.increaseGameTurn();
 		if(hasFight) {
 			game.dungeonMaster.setHeroes(new LinkedList<Hero>());
 			for(int i=0; i<monsters.size();i++) {
 				game.dungeonMaster.addHero(monsters.get(i));
 			}
 			this.fight= new Fight(game,game.dungeonMaster.getHeroes(), game.getPlayer().getHeroes());
+		}else {
+			//TODO more suffisticated visit with setting flag only when fight is won
 		}
+		visited=true;
 	}
 	//here the room is set up//food consumption//torch level
 	
@@ -135,6 +140,12 @@ public abstract class Room implements Serializable{
 	}
 	public void setyCoordinate(int yCoordinate) {
 		this.yCoordinate = yCoordinate;
+	}
+	public boolean isVisited() {
+		return visited;
+	}
+	public void setVisited(boolean visited) {
+		this.visited = visited;
 	}
 	
 }
