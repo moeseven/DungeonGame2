@@ -7,17 +7,13 @@ import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class Chest extends RoomInteraction{
+public class AncientTome extends RoomInteraction{
 	private int charges=1;
-	private int gold=100;
 	private LinkedList<Item> items= new LinkedList<Item>();
-	public Chest(Game game) {
+	public AncientTome(Game game) {
 		super(game);
-		//image=game.imageLoader.getImage(82);
 		setImageNumber(82);
-		name="chest";
-		gold=(int) (Math.random()*120);
-		
+		name="ancient tome";		
 	}
 
 	@Override
@@ -30,17 +26,16 @@ public class Chest extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		setImageNumber(90);
 		if(charges>0) {
-			if(Math.random()<0.18) {
-				items.add(game.generator.generateRandomItem(0));
+			charges+=-1;			
+			if (Math.random()<0.3) {
+				hero.becomeStressed(15);
+				hero.gainExp(10);
+			}else {
+				hero.gainExp(55);
 			}
-			charges+=-1;
-			hero.getPlayer().gainGold(gold);
-			for(int i=0; i<items.size();i++) {
-				hero.getPlayer().addItemtoInventory(items.get(i));
-			}			
 		}else {		
 			
-			hero.getPlayer().getGame().log.addLine("the chest is empty");
+			hero.getPlayer().getGame().log.addLine("the tome is read");
 		}
 		
 	}

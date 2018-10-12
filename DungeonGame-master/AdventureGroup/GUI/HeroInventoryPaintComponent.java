@@ -30,7 +30,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 		public HeroInventoryPaintComponent(StatsWindow sw){
 			this.gw=sw;
 			setBorder(new LineBorder(Color.YELLOW));
-			super.setPreferredSize(new Dimension(800,340));
+			super.setPreferredSize(new Dimension(800,200));
 			MyMouseListener ml = new MyMouseListener();
 			super.addMouseListener(ml);
 			setLayout(new BorderLayout());
@@ -164,7 +164,6 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}
 				@Override
 				public void updateCaption() {
-					// TODO Auto-generated method stub	
 					caption.removeFirst();
 					caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());					
 				}		
@@ -173,14 +172,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 			rc.addRect(new ClickableRectangle("head",60,10,50,50) {
 				@Override
 				public void onClick() {
-					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead());
 					}
 				}
 				@Override
 				public void updateCaption() {
-					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
 						caption.removeFirst();
 						caption.addFirst("");
@@ -197,7 +194,6 @@ public class HeroInventoryPaintComponent extends JComponent{
 			rc.addRect(new ClickableRectangle("body",60,70,50,50) {
 				@Override
 				public void onClick() {
-					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody());
 					}
@@ -221,14 +217,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 			rc.addRect(new ClickableRectangle("hand1",5,70,50,50) {
 				@Override
 				public void onClick() {
-					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1());
 					}
 				}
 				@Override
-				public void updateCaption() {
-					// TODO Auto-generated method stub					
+				public void updateCaption() {				
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
 						caption.removeFirst();	
 						caption.addFirst("");
@@ -245,14 +239,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 			rc.addRect(new ClickableRectangle("hand2",115,70,50,50) {
 				@Override
 				public void onClick() {
-					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2());
 					}
 				}
 				@Override
-				public void updateCaption() {
-					// TODO Auto-generated method stub					
+				public void updateCaption() {					
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
 						caption.removeFirst();	
 						caption.addFirst("");

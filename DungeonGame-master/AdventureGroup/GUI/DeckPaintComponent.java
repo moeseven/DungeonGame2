@@ -22,8 +22,10 @@ public class DeckPaintComponent extends JComponent{
 		private StatsWindow gw;
 		private int cardHeight=100;
 		private int cardWidth=80;
-		public DeckPaintComponent(StatsWindow gw,Hero hero){
+		private HeroInfoComponent hic;
+		public DeckPaintComponent(StatsWindow gw,HeroInfoComponent hic,Hero hero){
 			this.gw=gw;
+			this.hic=hic;
 			this.hero=hero;
 			setBorder(new LineBorder(Color.YELLOW));
 			super.setPreferredSize(new Dimension(cardWidth+1,hero.getDeck().getCards().size()*cardHeight+10));
@@ -39,6 +41,12 @@ public class DeckPaintComponent extends JComponent{
 				int y=e.getY();
 				//get card position from click
 				int i=Math.round(y/cardHeight);
+				if (gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)&&hic.removeCard) {
+					hic.removeCard=false;
+					hero.setCardPoints(hero.getCardPoints()-1);
+					hero.getDeck().getCards().remove(hero.getSelectedCard());
+					hero.setSelectedCard(hero.getDeck().getCards().getFirst());
+				}
 				if (i<hero.getDeck().getCards().size()) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getDeck().getCards().get(i));					
 				}	

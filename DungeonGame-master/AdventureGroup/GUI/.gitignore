@@ -123,3 +123,8 @@
 /MapWindow$GuiMap.class
 /MapWindow$GuiMap$1.class
 /MapWindow$GuiMap$MyMouseListener.class
+/HeroInfoComponent$LvlUpCardRewardPaintComponent$MyMouseListener.class
+/HeroInfoComponent$LvlUpCardRewardPaintComponent.class
+/HeroInfoComponent$removeOrAddPaintComponent$MouseListenerButtonAdd.class
+/HeroInfoComponent$removeOrAddPaintComponent$MouseListenerButtonRemove.class
+/HeroInfoComponent$removeOrAddPaintComponent.class

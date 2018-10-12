@@ -180,7 +180,7 @@ public class GameEquations {
 	}
 	public static int experienceThresholdForLevelUp(int level) {
 		if(level==0) {
-			return 100;
+			return 50;
 		}else {
 			return experienceThresholdForLevelUp(level-1)+100*level;
 		}		
