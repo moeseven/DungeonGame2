@@ -42,9 +42,10 @@ public class DeckPaintComponent extends JComponent{
 				//get card position from click
 				int i=Math.round(y/cardHeight);
 				if (gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)&&hic.removeCard) {
-					hic.removeCard=false;
-					hero.setCardPoints(hero.getCardPoints()-1);
-					hero.getDeck().getCards().remove(hero.getSelectedCard());
+					hic.removeCard=false;					
+					if(hero.getDeck().getCards().remove(hero.getSelectedCard())) {
+						hero.setCardPoints(hero.getCardPoints()-1);
+					}
 					hero.setSelectedCard(hero.getDeck().getCards().getFirst());
 				}
 				if (i<hero.getDeck().getCards().size()) {

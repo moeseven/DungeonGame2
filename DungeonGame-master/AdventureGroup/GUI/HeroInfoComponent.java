@@ -29,7 +29,7 @@ public class HeroInfoComponent extends JComponent{
 		private StatsWindow gf;
 		protected boolean removeCard;
 		protected boolean addCard;
-		protected boolean decide;
+		protected boolean decide=true;
 		public HeroInfoComponent(StatsWindow gf,Hero hero){
 			this.gf=gf;
 			this.hero=hero;
@@ -53,15 +53,47 @@ public class HeroInfoComponent extends JComponent{
 			sp=new JScrollPane(jp);
 			sp.setPreferredSize(new Dimension(115, 900));
 			jp.add(new DeckPaintComponent(gf,this, hero));
-			jp_Deck.add(sp,BorderLayout.EAST);
-			if (hero.getLvlUpCards().size()>0) {
-				decide=true;
-			}
-			if(hero.getLvlUpCards().size()>0&&decide) {
-				jp_Deck.add(new removeOrAddPaintComponent(this),BorderLayout.WEST);
-			}	
-			if (addCard||removeCard) {
+			jp_Deck.add(sp,BorderLayout.EAST);	
+			if (removeCard) {				
+			}else if (addCard) {
 				jp_Deck.add(new LvlUpCardRewardPaintComponent(gf,this, hero),BorderLayout.WEST);
+			}else {
+				if(decide&&hero.getCardPoints()>0) {
+				jp_Deck.add(new removeOrAddPaintComponent(this),BorderLayout.WEST);
+			}
+			}
+			if(hero.getSkillPoints()>0) {
+				jp_Deck.add(new StatsSkillComponent(gf, hero),BorderLayout.NORTH);
+			}
+			this.add(jp_Deck, BorderLayout.LINE_END);
+			this.add(jp_Equip_Stats, BorderLayout.CENTER);
+			setVisible(true);
+		}
+		public void upadate() {
+			remove(jp_Deck);
+			remove(jp_Equip_Stats);
+			jp_Equip_Stats=new JPanel();
+			jp_Equip_Stats.setLayout(new BorderLayout());
+			jp_Equip= new JPanel();
+			jp_Equip.add(new HeroInventoryPaintComponent(gf));
+			jp_Stats=new JPanel();
+			jp_Stats.add(new HeroStatsPaintComponent(gf.getGame().getPlayer()));
+			jp_Equip_Stats.add(jp_Stats,BorderLayout.NORTH);
+			jp_Equip_Stats.add(jp_Equip,BorderLayout.SOUTH);
+			jp_Deck=new JPanel();
+			jp_Deck.setLayout(new BorderLayout());			
+			jp=new JPanel();
+			sp=new JScrollPane(jp);
+			sp.setPreferredSize(new Dimension(115, 900));
+			jp.add(new DeckPaintComponent(gf,this, hero));
+			jp_Deck.add(sp,BorderLayout.EAST);	
+			if (removeCard) {				
+			}else if (addCard) {
+				jp_Deck.add(new LvlUpCardRewardPaintComponent(gf,this, hero),BorderLayout.WEST);
+			}else {
+				if(decide) {
+				jp_Deck.add(new removeOrAddPaintComponent(this),BorderLayout.WEST);
+			}
 			}
 			if(hero.getSkillPoints()>0) {
 				jp_Deck.add(new StatsSkillComponent(gf, hero),BorderLayout.NORTH);
@@ -97,7 +129,8 @@ public class HeroInfoComponent extends JComponent{
 			super();
 			this.hic=hic;
 			setVisible(true);
-			super.setPreferredSize(new Dimension(60,120));
+			setLayout(new GridLayout(2,0));
+			super.setPreferredSize(new Dimension(60,220));
 			buttonAdd=new JButton("add a new card");
 			buttonAdd.addMouseListener(new MouseListenerButtonAdd());
 			this.add(buttonAdd);
@@ -109,12 +142,16 @@ public class HeroInfoComponent extends JComponent{
 			public void mousePressed(MouseEvent e){	
 				hic.addCard=true;
 				hic.decide=false;
+				hic.upadate();
+				hic.revalidate();
 			}
 		}
 		private class MouseListenerButtonRemove extends MouseAdapter{
 			public void mousePressed(MouseEvent e){	
-				hic.removeCard=true;
+				hic.removeCard=true;				
 				hic.decide=false;
+				hic.upadate();
+				hic.revalidate();
 			}
 		}
 		protected void paintComponent(Graphics g){
@@ -152,30 +189,37 @@ public class HeroInfoComponent extends JComponent{
 				int x=e.getX();
 				int y=e.getY();
 				//get card position from click
-				int i=Math.round(y/cardHeight);
-				if (gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getLvlUpCards().get(i)) {
-					if (i<hero.getCharClass().getCardPool().size()) {					
+				int i=Math.round(y/cardHeight);				
+				if (i<hero.getLvlUpCards().size()) {
+					if (gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getLvlUpCards().get(i)) {					
 						gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getLvlUpCards().get(i));
 						gw.getGame().getPlayer().getSelectedHero().getDeck().getCards().addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedCard());
 						hic.addCard=false;
 						gw.getGame().getPlayer().getSelectedHero().setCardPoints(gw.getGame().getPlayer().getSelectedHero().getCardPoints()-1);
-					}						
-					gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());
+						gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());//is this needed?
+						if(gw.getGame().getPlayer().getSelectedHero().getCardPoints()>0) {
+							gw.getGame().getPlayer().getSelectedHero().generatelvlUpCards();
+							hic.decide=true;
+						}
+					}else {
+						if (i<hero.getLvlUpCards().size()) {					
+							gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getLvlUpCards().get(i));									
+						}
+					}				
+			}else{
+				if (i<hero.getLvlUpCards().size()+1) {
+					hic.addCard=false;
+					gw.getGame().getPlayer().getSelectedHero().setCardPoints(gw.getGame().getPlayer().getSelectedHero().getCardPoints()-1);
+					gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());					
 					if(gw.getGame().getPlayer().getSelectedHero().getCardPoints()>0) {
 						gw.getGame().getPlayer().getSelectedHero().generatelvlUpCards();
-					}
-				}else {
-					if (i<hero.getCharClass().getCardPool().size()) {					
-						gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getLvlUpCards().get(i));									
+						hic.decide=true;
 					}
 				}
-				
-				gw.myUpdate();
-				gw.repaint();			
-			}else{
-				if (e.getButton()==3){
-					//new CardView(card);
-				}
+			}
+				hic.upadate();
+				gw.repaint();	
+				gw.revalidate();
 			}
 		} 
 	}
@@ -190,7 +234,7 @@ public class HeroInfoComponent extends JComponent{
 				g.drawRect(1, 1+i*cardHeight, cardWidth, cardHeight);
 			}
 		}
-		g.drawString("skip", 10, 15+3*cardHeight);
+		g.drawString("skip", 10, 15+4*cardHeight);
 	}
 }
 }
