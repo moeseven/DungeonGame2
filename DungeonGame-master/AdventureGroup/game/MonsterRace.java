@@ -32,26 +32,28 @@ public abstract class MonsterRace extends CharacterRace{
 		this.nameList = nameList;
 	}
 
-	public LinkedList<CharacterClass> getPosition1Classes() {
-		return position1Classes;
-	}
-	public LinkedList<CharacterClass> getPosition2Classes() {
-		// TODO Auto-generated method stub
-		return position2Classes;
-	}
-
-	public LinkedList<CharacterClass> getPosition3Classes() {
-		// TODO Auto-generated method stub
-		return position3Classes;
-	}
-
-	public LinkedList<CharacterClass> getPosition4Classes() {
-		// TODO Auto-generated method stub
-		return position4Classes;
-	}
-
-	public LinkedList<CharacterClass> getPosition5Classes() {
-		// TODO Auto-generated method stub
-		return position5Classes;
+	public LinkedList<CharacterClass> getPositionClasses(int i) {
+		LinkedList<CharacterClass> retval= position1Classes;
+		switch(i){
+        case 1:
+        	retval=position1Classes;
+            break;
+        case 2:
+        	retval=position2Classes;
+            break;
+        case 3:
+        	retval=position3Classes;
+            break;
+        case 4:
+        	retval=position4Classes;
+            break;
+        case 5:
+        	retval=position5Classes;
+            break;
+        default:
+            System.out.println("non valid position");
+            return retval;
+        } 
+		return retval;
 	}
 }

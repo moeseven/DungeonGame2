@@ -17,19 +17,12 @@ public class blockableBleedEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {	
 		//attacks only apply bleed if block is down!
-		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if (self.getTargets().get(i).getBlock()<=0) {
 				self.doBleedDamage(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
 			}
 		}
-		self.setTargets(nextTargets);
-		if(nextTargets.size()>0) {
-			return true;
-		}else {
-			return false;
-		}
-				
+		return true;				
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class AncientTome extends RoomInteraction{
 	private LinkedList<Item> items= new LinkedList<Item>();
 	public AncientTome(Game game) {
 		super(game);
-		setImageNumber(82);
+		setImageNumber(142);
 		name="ancient tome";		
 	}
 
@@ -24,7 +24,7 @@ public class AncientTome extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		setImageNumber(90);
+		setImageNumber(141);
 		if(charges>0) {
 			charges+=-1;			
 			if (Math.random()<0.3) {

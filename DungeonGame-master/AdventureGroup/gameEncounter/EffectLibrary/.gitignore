@@ -52,3 +52,5 @@
 /modifyCardEffect.class
 /increaseStatOfCardEffect.class
 /increaseStatOfCardSpellEffect.class
+/stressEffect.class
+/stressSpellEffect.class

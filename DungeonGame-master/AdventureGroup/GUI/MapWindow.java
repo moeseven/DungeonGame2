@@ -70,9 +70,8 @@ public class MapWindow extends JFrame{
 								if (game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize]!=null) {
 									game.enterRoom(game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize]);
 									windowswitch();
-									System.out.println("next Room!");
 								}else {
-									System.out.println("not a room here");
+									//solid walls
 								}
 							}																	
 						}	

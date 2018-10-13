@@ -9,6 +9,9 @@ public static CastCondition buildCastCondition(String name) {
 	if (name.equals("requiresBow")) {
 		return new requiresBow();
 	}
+	if (name.equals("requiresShield")) {
+		return new requiresShield();
+	}
 	return new requiresBow();
 }
 }

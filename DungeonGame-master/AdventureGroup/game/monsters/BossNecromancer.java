@@ -119,7 +119,7 @@ public class BossNecromancer extends MonsterRace{
 		@Override
 		public boolean applyEffect(Hero self) {
 			MonsterRace monster= new RaceZombie(game);
-			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPosition1Classes().getFirst()));
+			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPositionClasses(1).getFirst()));
 			self.getPlayer().getHeroes().getFirst().setUpDrawPile();
 			return true;
 		}

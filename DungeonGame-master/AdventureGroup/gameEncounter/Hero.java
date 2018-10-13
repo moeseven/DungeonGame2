@@ -670,6 +670,9 @@ public class Hero implements Serializable{
 	//
 	//modify stats method for items and buffs...
 	public boolean modifyStat(String stat, int value) {
+		if (stat.equals("turnBlock")) {
+			block+=value;
+		}
 	/////stats//////
 		if (stat.equals("speed")) {
 			speed+=value;

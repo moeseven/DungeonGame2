@@ -25,7 +25,7 @@ public class PoisonTrap extends Trap{
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
 			trapStats.doPoisonDamage((int) (9*Math.random()), hero);
 			hero.becomeStressed(19);
-			
+			disarmed=true;
 		}
 	}
 	

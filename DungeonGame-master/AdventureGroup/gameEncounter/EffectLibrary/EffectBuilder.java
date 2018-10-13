@@ -112,6 +112,9 @@ public class EffectBuilder {
 		if (name.equals("resistableSpell")) {
 			return new resistableSpellEffect(p);
 		}
+		if (name.equals("stressSpell")) {
+			return new stressSpellEffect(p);
+		}
 		if (name.equals("targetAllAlliesOfTarget")) {
 			return new targetAllAlliesOfTargetEffect(p);
 		}

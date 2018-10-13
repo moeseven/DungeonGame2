@@ -22,6 +22,7 @@ public abstract class Act {
 			return false;
 		}		
 	}
+	public abstract boolean addRandomRoom(int x, int y);
 	public abstract boolean checkIfActFullfilled(Player player);
 	public void onReturnToTown(Player player) {		
 		if(checkIfActFullfilled(player)&&finished==false) {

@@ -12,7 +12,7 @@ public class TypeWarrior extends CharacterClass{
 
 	public TypeWarrior(Game game) {
 		super(game);
-		cardPool.add("carefulSlash");
+		cardPool.add("advancingAttack");
 		cardPool.add("bleedingSlice");
 		cardPool.add("cleave");
 		cardPool.add("shortStrike");
@@ -23,6 +23,7 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add("intimidatingCry");
 		cardPool.add("chargeAttack");
 		cardPool.add("sideStep");
+		cardPool.add("shieldBash");
 		name="warrior";
 		items.add(game.itemBuilder.buildItem("rustyBlade",3));			
 		cards.add(game.cardBuilder.buildCard("meeleAttack"));

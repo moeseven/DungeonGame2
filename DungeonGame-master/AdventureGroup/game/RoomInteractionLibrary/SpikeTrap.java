@@ -24,7 +24,7 @@ public class SpikeTrap extends Trap{
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
 			hero.takeDamage(trapStats, (int)(Math.random()*95), true);
 			hero.becomeStressed(13);
-			
+			disarmed=true;
 		}
 	}
 	

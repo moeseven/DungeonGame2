@@ -28,7 +28,7 @@ public class KillANecromancer extends Quest{
 		questRoom.getInteractions().add(questInteraction);
 		questRoom.setHasFight(true);
 		MonsterRace monster=new BossNecromancer(game);
-		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPosition1Classes().getFirst()));
+		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		rooms.add(questRoom);
 		description="find the -"+questItem.getName()+"- and return it to the town.";
 		goldReward=900;

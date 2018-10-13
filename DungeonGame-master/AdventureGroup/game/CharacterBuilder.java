@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import game.characterTypeLibrary.*;
 import gameEncounter.Hero;
+import gameEncounter.ItemLibrary.usables.ExperienceBook;
 
 public class CharacterBuilder {
 	private LinkedList<CharacterClass> charClasses;
@@ -44,6 +45,11 @@ public class CharacterBuilder {
 		}else {
 			hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
 			
+		}
+		if (name.equals("exp")) {
+			hero.getPlayer().addItemtoInventory(new ExperienceBook());
+			hero.getPlayer().addItemtoInventory(new ExperienceBook());
+			hero.getPlayer().addItemtoInventory(new ExperienceBook());
 		}
 		game.getPlayer().addHero(hero);		
 	}

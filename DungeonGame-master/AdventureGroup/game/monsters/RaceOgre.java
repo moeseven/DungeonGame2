@@ -68,6 +68,7 @@ public class RaceOgre extends MonsterRace{
 			name="";	
 			cards.add(game.cardBuilder.buildCard("bash"));
 			cards.add(game.cardBuilder.buildCard("ram"));
+			cards.add(game.cardBuilder.buildCard("advancingAttack"));
 			for (int i=0; i<4;i++) {				
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}

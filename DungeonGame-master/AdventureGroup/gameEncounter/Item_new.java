@@ -3,8 +3,10 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import gameEncounter.ItemLibrary.ItemSuffix;
+
 public class Item_new extends Item implements Serializable{
-	
+	protected int numberOfSuffixes=0;
 	protected int weight=10;
 	private int goldValue=100;
 	protected int category=10;
@@ -14,12 +16,10 @@ public class Item_new extends Item implements Serializable{
 	protected int requiredDexterity=0;
 	protected int requiredIntelligence=0;
 	protected int requiredVitality=0;
-	protected ModableHeroStats stats;
 	//item stats	
 	protected int attack=0;
 	protected int block=0;
-	protected int spell=0;
-	
+	protected int spell=0;	
 	protected int accuracy=0;
 	protected int dodge=0;
 	protected int speed=0;
@@ -35,10 +35,8 @@ public class Item_new extends Item implements Serializable{
 	protected int resistPoison=0;
 	protected int resistBleed=0;
 	protected int resistStun=0;
-	protected int resistStress=0;
-
+	protected int resistStress=0; 
 	protected int critChance=0;
-	//	not in yet
 	protected int duration=0;
 	protected int fireDmg=0;
 	protected int coldDmg=0;
@@ -179,6 +177,37 @@ public class Item_new extends Item implements Serializable{
 		}else {
 			setName("normal "+getName());
 		}
+	}
+	public void addSuffix(ItemSuffix suffix) {
+		//TODO add all stats of suffix to item
+		attack+=suffix.attack;
+		block+=suffix.block;
+		spell+=suffix.spell;
+		accuracy+=suffix.accuracy;
+		dodge+=suffix.dodge;
+		speed+=suffix.speed;
+		draw+=suffix.draw;
+		mana+=suffix.mana;
+		thorns+=suffix.thorns;
+		armor+=suffix.armor;
+		health+=suffix.health;
+		resistSpell+=suffix.resistSpell;
+		resistLightning +=suffix.resistLightning;
+		resistFire+=suffix.resistFire;
+		resistCold+=suffix.resistCold;
+		resistPoison+=suffix.resistPoison;
+		resistBleed+=suffix.resistBleed;
+		resistStun+=suffix.resistStun;
+		resistStress+=suffix.resistStress;
+		critChance+=suffix.critChance;
+		duration+=suffix.duration;
+		fireDmg+=suffix.fireDmg;
+		coldDmg+=suffix.coldDmg;
+		lightningDmg+=suffix.lightningDmg;
+		bleedDmg+=suffix.bleedDmg;
+		poisonDmg+=suffix.poisonDmg;
+		magicDmg+=suffix.magicDmg;
+		stunChance+=suffix.stunChance;
 	}
 	public void modification(Hero hero,int fac) {
 		hero.setArmor(hero.getArmor()+armor*fac);

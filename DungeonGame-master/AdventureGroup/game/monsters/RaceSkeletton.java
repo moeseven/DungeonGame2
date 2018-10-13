@@ -70,6 +70,7 @@ public class RaceSkeletton extends MonsterRace{
 			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
+			cards.add(game.cardBuilder.buildCard("advancingAttack"));
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));

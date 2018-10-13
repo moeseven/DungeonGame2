@@ -45,12 +45,18 @@ public class DeckPaintComponent extends JComponent{
 					hic.removeCard=false;					
 					if(hero.getDeck().getCards().remove(hero.getSelectedCard())) {
 						hero.setCardPoints(hero.getCardPoints()-1);
+						if (hero.getCardPoints()>0) {
+							hic.decide=true;
+							hic.upadate();
+						}
 					}
 					hero.setSelectedCard(hero.getDeck().getCards().getFirst());
+					
 				}
 				if (i<hero.getDeck().getCards().size()) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getDeck().getCards().get(i));					
 				}	
+				gw.revalidate();
 				gw.repaint();			
 			}else{
 				if (e.getButton()==3){

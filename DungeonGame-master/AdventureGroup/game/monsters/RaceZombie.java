@@ -38,7 +38,7 @@ public class RaceZombie extends MonsterRace{
 		//attack/defence
 		hero.setAttackSkill(6);
 		hero.setBlockSkill(3);
-		hero.setAccuracy(8);
+		hero.setAccuracy(1);
 		hero.setDodge(1);
 		hero.setSpellPower(8);
 		hero.setSpellResist(20);
@@ -52,10 +52,10 @@ public class RaceZombie extends MonsterRace{
 		//
 		hero.setArmor(5);
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*5.0));
-		hero.setExperienceValue(18);
+		hero.setGold((int)(Math.random()*15.0));
+		hero.setExperienceValue(38);
 		//zombieslow
-		hero.setManaPower(1);
+		hero.setManaPower(2);
 		hero.setResistStress(90);
 		//deck		
 		
@@ -71,8 +71,9 @@ public class RaceZombie extends MonsterRace{
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
-//			cards.add(new Moaning());
-//			cards.add(new Grab());
+			cards.add(game.cardBuilder.buildCard("zombieBite"));
+			cards.add(game.cardBuilder.buildCard("zombieGrab"));
+			cards.add(game.cardBuilder.buildCard("zombieMoan"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -90,58 +91,4 @@ public class RaceZombie extends MonsterRace{
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
 	}
-	private class Moaning extends Spell{
-
-		public Moaning() {
-			super();
-			manaCost=1;
-		}
-
-
-		@Override
-		public boolean applyEffect(Hero self) {
-			self.getTarget().becomeStressed(6);
-			return true;
-		}
-
-		@Override
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "horrible moaning";
-		}
-
-		@Override
-		public boolean isFriendly() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
-	}
-	public class Grab extends AttackCard{
-		public Grab() {
-			// TODO Auto-generated constructor stub
-			manaCost =1;
-			damageMult=0.3;
-			legalCastPositions[0]=true;
-			legalCastPositions[1]=false;
-			legalCastPositions[2]=false;
-			legalCastPositions[3]=false;
-			legalCastPositions[4]=false;
-		}
-		public boolean applyEffect(Hero self) {
-				if(self.attackHero(self.getTarget(),this)) {
-					damageTarget(self);
-					//stun
-					self.getTarget().becomeStressed(6);
-					return true;
-				}else {
-					return false;
-				}
-		}
-		@Override
-		public String getName() {
-			return "Grab";
-		}
-	}
-
 }

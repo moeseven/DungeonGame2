@@ -30,7 +30,7 @@ public class SleepingOgre extends RoomInteraction{
 	public void onEnter(Game game) {
 		// TODO Auto-generated method stub
 		if (charges>0) {
-			ogre=new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition1Classes().get(0));
+			ogre=new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get(0));
 		}
 	}
 

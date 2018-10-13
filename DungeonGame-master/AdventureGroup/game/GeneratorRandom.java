@@ -246,18 +246,18 @@ public class GeneratorRandom implements Serializable{
 		//TODO adjust this to difficulty and progression day
 		MonsterRace monsterRace= monsterRacePool.get((int) Math.min(monsterRacePool.size()-1, Math.random()*monsterRacePool.size()));
 		LinkedList<Hero> monsterSet= new LinkedList<Hero>();
-		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition1Classes().get((int) Math.min(monsterRace.getPosition1Classes().size()-1, Math.random()*monsterRace.getPosition1Classes().size()))));
+		monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get((int) Math.min(monsterRace.getPositionClasses(1).size()-1, Math.random()*monsterRace.getPositionClasses(1).size()))));
 		if(Math.random()<0.8+difficultyLevel/8){
-			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition2Classes().get((int) Math.min(monsterRace.getPosition2Classes().size()-1, Math.random()*monsterRace.getPosition2Classes().size()))));
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(2).get((int) Math.min(monsterRace.getPositionClasses(2).size()-1, Math.random()*monsterRace.getPositionClasses(2).size()))));
 		}		
 		if(Math.random()<0.7+difficultyLevel/9){
-			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition3Classes().get((int) Math.min(monsterRace.getPosition3Classes().size()-1, Math.random()*monsterRace.getPosition3Classes().size()))));
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(3).get((int) Math.min(monsterRace.getPositionClasses(3).size()-1, Math.random()*monsterRace.getPositionClasses(3).size()))));
 		}
 		if(Math.random()<0.3+difficultyLevel/10){
-			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition4Classes().get((int) Math.min(monsterRace.getPosition4Classes().size()-1, Math.random()*monsterRace.getPosition4Classes().size()))));
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(4).get((int) Math.min(monsterRace.getPositionClasses(4).size()-1, Math.random()*monsterRace.getPositionClasses(4).size()))));
 		}
 		if(Math.random()<0+difficultyLevel/15){
-			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPosition5Classes().get((int) Math.min(monsterRace.getPosition5Classes().size()-1, Math.random()*monsterRace.getPosition5Classes().size()))));
+			monsterSet.add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(5).get((int) Math.min(monsterRace.getPositionClasses(5).size()-1, Math.random()*monsterRace.getPositionClasses(5).size()))));
 		}
 		return monsterSet;
 	}

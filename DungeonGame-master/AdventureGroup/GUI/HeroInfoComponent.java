@@ -58,7 +58,7 @@ public class HeroInfoComponent extends JComponent{
 			}else if (addCard) {
 				jp_Deck.add(new LvlUpCardRewardPaintComponent(gf,this, hero),BorderLayout.WEST);
 			}else {
-				if(decide&&hero.getCardPoints()>0) {
+				if(decide&&hero.getCardPoints()>0&&hero.getSkillPoints()==0) {
 				jp_Deck.add(new removeOrAddPaintComponent(this),BorderLayout.WEST);
 			}
 			}
@@ -130,7 +130,7 @@ public class HeroInfoComponent extends JComponent{
 			this.hic=hic;
 			setVisible(true);
 			setLayout(new GridLayout(2,0));
-			super.setPreferredSize(new Dimension(60,220));
+			super.setPreferredSize(new Dimension(180,220));
 			buttonAdd=new JButton("add a new card");
 			buttonAdd.addMouseListener(new MouseListenerButtonAdd());
 			this.add(buttonAdd);
