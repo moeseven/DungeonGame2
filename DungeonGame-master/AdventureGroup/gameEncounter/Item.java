@@ -5,10 +5,11 @@ import java.util.LinkedList;
 
 public abstract class Item implements Serializable{
 	protected int imageNumber=101;
+	protected int numberOfSuffixes=0;
 	protected String itemClass="bow";
 	protected int weight=10;
 	private int goldValue=100;
-	protected int baseGoldValue=10;
+	protected int baseGoldValue=goldValue;
 	protected int numberOfModifications=0;
 	protected int category=10;
 	protected boolean droppable=true;
@@ -137,6 +138,12 @@ public abstract class Item implements Serializable{
 	}
 	public void setImageNumber(int imageNumber) {
 		this.imageNumber = imageNumber;
+	}
+	public int getNumberOfSuffixes() {
+		return numberOfSuffixes;
+	}
+	public void setNumberOfSuffixes(int numberOfSuffixes) {
+		this.numberOfSuffixes = numberOfSuffixes;
 	}
 	
 }

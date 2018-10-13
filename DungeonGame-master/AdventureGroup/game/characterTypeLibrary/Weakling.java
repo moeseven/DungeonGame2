@@ -9,8 +9,6 @@ import game.CharacterType;
 import game.Game;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.BasicAttack;
 
 public class Weakling extends CharacterClass{
 	public Weakling(Game game) {

@@ -3,17 +3,6 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Channel;
-import gameEncounter.CardLibrary.FireBall;
-import gameEncounter.CardLibrary.Firewave;
-import gameEncounter.CardLibrary.Magicmissile;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.RosesAndThorns;
-import gameEncounter.CardLibrary.SleepCharm;
-import gameEncounter.CardLibrary.Wisdom;
-import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeMage extends CharacterClass{
 

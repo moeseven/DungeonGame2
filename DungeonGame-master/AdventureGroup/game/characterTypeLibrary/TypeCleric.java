@@ -3,16 +3,6 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Bash;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.DivineGrace;
-import gameEncounter.CardLibrary.Harden;
-import gameEncounter.CardLibrary.HeavenlyShield;
-import gameEncounter.CardLibrary.HeavenlyStrength;
-import gameEncounter.CardLibrary.MeeleAttack;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.ItemLibrary.RustyBlade;
 
 
 public class TypeCleric extends CharacterClass{

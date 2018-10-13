@@ -3,8 +3,6 @@ package game;
 import java.util.LinkedList;
 
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Block;
 
 public abstract class MonsterRace extends CharacterRace{
 	protected LinkedList<String> nameList = new LinkedList<String>();

@@ -57,7 +57,7 @@ public class RaceDwarf extends CharacterRace{
 		hero.setTrapDisarm(10);
 		//
 		hero.setCritDamage(9);
-		hero.setCritChance(3);
+		hero.setCritChance(2);
 	}
 
 

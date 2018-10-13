@@ -4,9 +4,6 @@ import game.CharacterRace;
 import game.Game;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Cleave;
-import gameEncounter.CardLibrary.BasicAttack;
 
 public class RaceHuman extends CharacterRace{
 
@@ -49,7 +46,7 @@ public class RaceHuman extends CharacterRace{
 		hero.setTrapDisarm(12);
 		//
 		hero.setCritDamage(10);
-		hero.setCritChance(4);
+		hero.setCritChance(3);
 		//deck
 				
 	}

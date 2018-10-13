@@ -164,10 +164,20 @@ public class GuiRoom extends JPanel{
 			@Override
 			public void updateCaption() {
 				// TODO Auto-generated method stub
+				setFirstLineColor(Color.black);
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
 					caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
 					caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>0) {
+						setFirstLineColor(Color.blue);
+						if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>1) {
+							setFirstLineColor(Color.orange);
+							if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>2) {
+								setFirstLineColor(Color.PINK);
+							}
+						}
+					}
 				}else {
 					caption=new LinkedList<String>();
 				}					
@@ -269,6 +279,10 @@ public class GuiRoom extends JPanel{
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.setColor(Color.black);
+				if(a==0) {
+					g.setColor(rc.rectAngles.get(i).getFirstLineColor());
+				}
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
 		}

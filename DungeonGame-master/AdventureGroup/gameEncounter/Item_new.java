@@ -6,9 +6,8 @@ import java.util.LinkedList;
 import gameEncounter.ItemLibrary.ItemSuffix;
 
 public class Item_new extends Item implements Serializable{
-	protected int numberOfSuffixes=0;
 	protected int weight=10;
-	private int goldValue=100;
+	protected int goldValue=100;
 	protected int category=10;
 	protected String itemClass="bow";
 	protected boolean droppable=true;
@@ -37,6 +36,7 @@ public class Item_new extends Item implements Serializable{
 	protected int resistStun=0;
 	protected int resistStress=0; 
 	protected int critChance=0;
+	protected int critDamage=0;
 	protected int duration=0;
 	protected int fireDmg=0;
 	protected int coldDmg=0;
@@ -50,7 +50,7 @@ public class Item_new extends Item implements Serializable{
 	protected LinkedList<String> description;
 	protected String name="";
 	
-	public Item_new(double power,String weight, String goldValue, String category, String droppable, String critChance,String attack, String block, String spell,
+	public Item_new(double power,String weight, String goldValue, String category, String droppable, String critChance,String critDamage,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
 			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,String duration,
 			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass,String imageNumber, String name) {
@@ -68,13 +68,19 @@ public class Item_new extends Item implements Serializable{
 		if (category!=null) {
 			this.category = getItemCategoryInteger(category);
 		}
-		if (droppable.equals("0")) {
-			this.droppable = false;
-		}	
+		if (droppable!=null) {
+			if (droppable.equals("0")) {
+				this.droppable = false;
+			}
+		}
+			
 		//
 		//modifiers
 		if (critChance!=null) {			
 			this.critChance = GameEquations.RandomizeItemStat(critChance,this,power);
+		}
+		if (critDamage!=null) {			
+			this.critDamage = GameEquations.RandomizeItemStat(critDamage,this,power);
 		}
 		if (attack!=null) {
 			this.attack = GameEquations.RandomizeItemStat(attack,this,power);
@@ -163,9 +169,17 @@ public class Item_new extends Item implements Serializable{
 		if (imageNumber!=null) {
 			this.imageNumber= Integer.parseInt(imageNumber);
 		}
+		updateName();
+	}
+	public void updateName() {
 		// adjust name
 		double itemQuality=0;
-		itemQuality=(this.goldValue-baseGoldValue)/numberOfModifications;
+		if (numberOfModifications==0) {
+			itemQuality=baseGoldValue;
+		}else {
+			itemQuality=(this.goldValue-baseGoldValue)/numberOfModifications;
+		}
+		
 		this.goldValue=(int) (baseGoldValue+itemQuality);
 		itemQuality=itemQuality/baseGoldValue;		
 		if (itemQuality>0.9) {
@@ -180,34 +194,46 @@ public class Item_new extends Item implements Serializable{
 	}
 	public void addSuffix(ItemSuffix suffix) {
 		//TODO add all stats of suffix to item
-		attack+=suffix.attack;
-		block+=suffix.block;
-		spell+=suffix.spell;
-		accuracy+=suffix.accuracy;
-		dodge+=suffix.dodge;
-		speed+=suffix.speed;
-		draw+=suffix.draw;
-		mana+=suffix.mana;
-		thorns+=suffix.thorns;
-		armor+=suffix.armor;
-		health+=suffix.health;
-		resistSpell+=suffix.resistSpell;
-		resistLightning +=suffix.resistLightning;
-		resistFire+=suffix.resistFire;
-		resistCold+=suffix.resistCold;
-		resistPoison+=suffix.resistPoison;
-		resistBleed+=suffix.resistBleed;
-		resistStun+=suffix.resistStun;
-		resistStress+=suffix.resistStress;
-		critChance+=suffix.critChance;
-		duration+=suffix.duration;
-		fireDmg+=suffix.fireDmg;
-		coldDmg+=suffix.coldDmg;
-		lightningDmg+=suffix.lightningDmg;
-		bleedDmg+=suffix.bleedDmg;
-		poisonDmg+=suffix.poisonDmg;
-		magicDmg+=suffix.magicDmg;
-		stunChance+=suffix.stunChance;
+		if (suffix.getCategory()==category) {
+			attack+=suffix.attack;
+			block+=suffix.block;
+			spell+=suffix.spell;
+			accuracy+=suffix.accuracy;
+			dodge+=suffix.dodge;
+			speed+=suffix.speed;
+			draw+=suffix.draw;
+			mana+=suffix.mana;
+			thorns+=suffix.thorns;
+			armor+=suffix.armor;
+			health+=suffix.health;
+			resistSpell+=suffix.resistSpell;
+			resistLightning +=suffix.resistLightning;
+			resistFire+=suffix.resistFire;
+			resistCold+=suffix.resistCold;
+			resistPoison+=suffix.resistPoison;
+			resistBleed+=suffix.resistBleed;
+			resistStun+=suffix.resistStun;
+			resistStress+=suffix.resistStress;
+			critChance+=suffix.critChance;
+			critDamage+=suffix.critDamage;
+			duration+=suffix.duration;
+			fireDmg+=suffix.fireDmg;
+			coldDmg+=suffix.coldDmg;
+			lightningDmg+=suffix.lightningDmg;
+			bleedDmg+=suffix.bleedDmg;
+			poisonDmg+=suffix.poisonDmg;
+			magicDmg+=suffix.magicDmg;
+			stunChance+=suffix.stunChance;
+			//gold value change
+			goldValue=(int) (goldValue*(suffix.goldValue/suffix.baseGoldValue/suffix.getNumberOfModifications()));
+			//name change
+			this.numberOfSuffixes++;
+			if (numberOfSuffixes==1) {
+				name+=" of "+suffix.name;
+			}else {
+				name+=" and "+suffix.name;
+			}
+		}		
 	}
 	public void modification(Hero hero,int fac) {
 		hero.setArmor(hero.getArmor()+armor*fac);
@@ -218,6 +244,7 @@ public class Item_new extends Item implements Serializable{
 	    hero.setSpellPower(hero.getSpellPower()+spell*fac);
 	    hero.setDodge(hero.getDodge()+dodge*fac);
 	    hero.setAccuracy(hero.getAccuracy()+accuracy*fac);
+	    //resist
 	    hero.setSpellResist(hero.getSpellResist()+resistSpell*fac);
 	    hero.setResistFire(hero.getResistFire()+resistFire*fac);
 	    hero.setResistCold(hero.getResistCold()+resistCold*fac);
@@ -225,6 +252,7 @@ public class Item_new extends Item implements Serializable{
 	    hero.setResistPoison(hero.getResistPoison()+resistPoison*fac);
 	    hero.setResistStun(hero.getResistStun()+resistStun*fac);
 	    hero.setResistStress(hero.getResistStress()+resistStress*fac);
+	    
 	    hero.setBaseHp(hero.getBaseHp()+health*fac);
 	    hero.setSpeed(hero.getSpeed()+speed*fac);
 	    hero.setManaPower(hero.getManaPower()+mana*fac);
@@ -236,6 +264,8 @@ public class Item_new extends Item implements Serializable{
 	    hero.setPoisonDmg(hero.getPoisonDmg()+poisonDmg*fac);
 	    hero.setMagicDmg(hero.getMagicDmg()+magicDmg*fac);
 	    hero.setStunChance(hero.getStunChance()+stunChance*fac);
+	    hero.setCritChance(hero.getCritChance()+critChance*fac);
+	    hero.setCritDamage(hero.getCritDamage()+critDamage*fac);
 	}
 	public void mod(Hero hero) {
 		modification(hero, 1);
@@ -260,7 +290,10 @@ public class Item_new extends Item implements Serializable{
 //		description.add(requirements);
 		//all the stats need to be here
 		if (critChance!=0) {
-			description.add("crit chance: "+critChance);
+			description.add("crit chance: "+critChance+"%");
+		}
+		if (critDamage!=0) {
+			description.add("crit damage: "+critDamage+"%");
 		}
 		if (attack!=0) {
 			description.add("attack skill: "+attack);

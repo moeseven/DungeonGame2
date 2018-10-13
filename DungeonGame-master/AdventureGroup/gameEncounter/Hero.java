@@ -367,6 +367,7 @@ public class Hero implements Serializable{
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(player.getGame(),this)); //generate corpses
 			block=0;
 			this.isDead=true;
+			player.getHeroes().remove(this);
 			for(int i=0;i<player.getHeroes().size();i++) {
 				player.getHeroes().get(i).becomeStressed(35);
 			}			
@@ -656,6 +657,7 @@ public class Hero implements Serializable{
 			buffHero(new Bashed());
 			return true;
 		}else {
+			player.getGame().log.addLine(name+" resisted stun!");
 			return false;
 		}
 	};

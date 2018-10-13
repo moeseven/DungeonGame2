@@ -72,7 +72,6 @@ import gameEncounter.ItemLibrary.SanguineBloodletter;
 import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
-import gameEncounter.ItemLibrary.Spellbook;
 import gameEncounter.ItemLibrary.usables.AntiVenom;
 import gameEncounter.ItemLibrary.usables.Bandages;
 import gameEncounter.ItemLibrary.usables.ExperienceBook;
@@ -213,7 +212,6 @@ public class GeneratorRandom implements Serializable{
 		itemPool.add(new Helmet());
 		itemPool.add(new CrownOfThorns());
 		itemPool.add(new MorningStar());
-		itemPool.add(new Spellbook());
 		//consumables
 		itemPool.add(new AntiVenom());
 		itemPool.add(new Bandages());

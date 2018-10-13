@@ -7,8 +7,7 @@ import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.ItemLibrary.*;
-import gameEncounter.ItemLibrary.usables.ExperienceBook;
-import gameEncounter.ItemLibrary.usables.HealingPotion;
+import gameEncounter.ItemLibrary.usables.*;
 
 public class Shop extends RoomInteraction{
 	private LinkedList<Item> items;
@@ -17,11 +16,12 @@ public class Shop extends RoomInteraction{
 		setImageNumber(108);
 		name="merchant";
 		items=new LinkedList<Item>();
-		items.add(new HealingPotion());
+		
 	}
 
 	@Override
 	public void onEnter(Game game) {
+		items=new LinkedList<Item>();
 		items.add(game.generator.generateRandomItem(3.6));
 		items.add(game.generator.generateRandomItem(3.5));
 		items.add(game.generator.generateRandomItem(3.4));
@@ -31,7 +31,10 @@ public class Shop extends RoomInteraction{
 		items.add(game.generator.generateRandomItem(2.2));
 		items.add(game.generator.generateRandomItem(2.1));
 		items.add(game.generator.generateRandomItem(2));
-		items.add(game.generator.generateRandomItem(1.6));
+		items.add(game.generator.generateRandomItem(1.6));		
+		items.add(new Bandages());
+		items.add(new AntiVenom());
+		items.add(new HealingPotion());
 	}
 
 	@Override
@@ -42,6 +45,7 @@ public class Shop extends RoomInteraction{
 			hero.getPlayer().getGame().log.addLine("entering shop");
 			hero.getPlayer().getGame().getRoom().setShop(this);
 			hero.getPlayer().getGame().getRoom().setShopOpen(true);
+			hero.setSelectedItem(items.getLast());
 		}
 		
 	}

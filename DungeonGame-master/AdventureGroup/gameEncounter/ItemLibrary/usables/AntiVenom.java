@@ -10,7 +10,7 @@ public class AntiVenom extends ItemConsumable{
 	public AntiVenom() {
 		super();
 		name="anti venom";
-		this.setImageNumber(222);
+		this.setImageNumber(221);
 		setGoldValue(25);
 	}
 

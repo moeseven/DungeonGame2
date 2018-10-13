@@ -45,7 +45,7 @@ public class GameEquations {
 	}
 	//crit calculations
 	public static int critDamageCalc(Hero hero) {
-		return (int) (hero.getCritDamage()*hero.getDexterity()/20);
+		return 100+ (int)(hero.getCritDamage()*hero.getDexterity()/20.0);
 	}
 	public static int critChanceCalc(Hero hero) {
 		return (int) (hero.getCritChance());
@@ -69,7 +69,7 @@ public class GameEquations {
 			if (hero.getPlayer().getGame()!=null) {
 				hero.getPlayer().getGame().log.addLine("crit!");
 			}			
-			damage=(int)(damage*(1+critDamageCalc(hero)/100.0));
+			damage=(int)(damage*(critDamageCalc(hero)/100.0));
 		}
 		return damage;
 	}
@@ -190,11 +190,11 @@ public class GameEquations {
 	public static int RandomizeItemStat(String itemString,Item item, double power) {
 		LinkedList<String>	parameters= new LinkedList<String>();
 		int value=0;
-		double r=0;
+		double r=1;
 		String[] splitted =itemString.split("\\,");
 		for (int i = 0; i < splitted.length; i++) {
 			parameters.add(splitted[i]);
-			System.out.println(splitted[i]);
+			//System.out.println(splitted[i]);
 		}
 		if (splitted.length>1) {
 			r=Math.pow(Math.random(), power);

@@ -66,7 +66,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("");
 		//offensive
 		lines.add("crit chance: "+ player.getSelectedHero().getCritChance()+"%");
-		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero())+100)+"%");	
+		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero()))+"%");	
 		lines.add("magic damage: "+player.getSelectedHero().getMagicDmg());
 		lines.add("fire damage: "+player.getSelectedHero().getFireDmg());
 		lines.add("cold damage: "+player.getSelectedHero().getColdDmg());

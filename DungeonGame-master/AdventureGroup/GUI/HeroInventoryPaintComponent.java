@@ -41,7 +41,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
-			rc.addRect(new ClickableRectangle("search inventory",435,10,90,40) {
+			rc.addRect(new ClickableRectangle("search inventory",305,120,230,20) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -60,34 +60,44 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//item description
-			rc.addRect(new ClickableRectangle("description",305,10,130,110) {
+			rc.addRect(new ClickableRectangle("description",305,10,230,110) {
 				@Override
 				public void onClick() {
 
 				}
 				@Override
 				public void updateCaption() {
-					// TODO Auto-generated method stub
+					setFirstLineColor(Color.black);
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
 						caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
 						caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
-						
+						if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>0) {
+							setFirstLineColor(Color.blue);
+							if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>1) {
+								setFirstLineColor(Color.orange);
+								if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>2) {
+									setFirstLineColor(Color.PINK);
+								}
+							}
+						}
 					}else {
 						caption=new LinkedList<String>();
 					}					
 				}		
 			});
 			//item picture
-			rc.addRect(new ClickableRectangle("",435,50,90,70) {
+			rc.addRect(new ClickableRectangle("",445,50,90,70) {
 				@Override
 				public void onClick() {
 
 				}
 				@Override
 				public void updateCaption() {
+					
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getImageNumber());
+						
 					}					
 				}		
 			});
@@ -264,14 +274,14 @@ public class HeroInventoryPaintComponent extends JComponent{
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());				
-				gw.repaint();				
+				rc.triggerClick(e.getX(), e.getY());												
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);
 				}
 			}
 			rc.updateCaptions();
+			gw.repaint();
 		} 
 	}
 	protected void paintComponent(Graphics g){
@@ -282,7 +292,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 				if (rc.rectAngles.get(i).getImageNumber()!=1) {
 					g.drawImage(StaticImageLoader.getImage(rc.rectAngles.get(i).getImageNumber()).getScaledInstance(120,102, 2),rc.rectAngles.get(i).getX()-35,rc.rectAngles.get(i).getY()-20,null);
 				}
+				if(a==0) {
+					g.setColor(rc.rectAngles.get(i).getFirstLineColor());
+				}
+				
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+				g.setColor(Color.black);
 			}
 		}
 		//omit lines with no entry

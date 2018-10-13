@@ -14,6 +14,7 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.CardLibrary.CardBuilder;
 import gameEncounter.ItemLibrary.ItemBuilder;
+import gameEncounter.ItemLibrary.ItemSuffixBuilder;
 import tools.MyLog;
 
 public class Game implements Serializable{
@@ -23,6 +24,7 @@ public GeneratorRandom generator;
 //public MyImageLoader imageLoader;
 public CardBuilder cardBuilder;
 public ItemBuilder itemBuilder;
+public ItemSuffixBuilder itemSuffixBuilder;
 public int turn=0;
 public MyLog log;
 private Room room;
@@ -35,7 +37,8 @@ public Game() {
 	super();
 	
 	cardBuilder = new CardBuilder();
-	itemBuilder = new ItemBuilder();	
+	itemBuilder = new ItemBuilder(this);
+	itemSuffixBuilder= new ItemSuffixBuilder();
 	dungeonMaster=new DungeonMaster(this);
 	generator=new GeneratorRandom(this);
 	log=new MyLog();

@@ -63,6 +63,7 @@ public class RoomButtonComponent extends JComponent{
 		private class mouseListenerInventory extends MouseAdapter{
 			public void mousePressed(MouseEvent e){
 				//show inventory
+				rw.getGame().getPlayer().getSelectedHero().setSelectedItem(null);
 				rw.windowswitch();
 			}
 		}

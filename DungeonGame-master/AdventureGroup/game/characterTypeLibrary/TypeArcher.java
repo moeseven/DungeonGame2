@@ -5,17 +5,6 @@ import game.Game;
 import gameEncounter.Hero;
 import gameEncounter.CardLibrary.Bandage;
 import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.Concentrate;
-import gameEncounter.CardLibrary.DivineGrace;
-import gameEncounter.CardLibrary.FireArrow;
-import gameEncounter.CardLibrary.FrostArrow;
-import gameEncounter.CardLibrary.HeadShot;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.PoisonShot;
-import gameEncounter.ItemLibrary.GoblinBow;
-import gameEncounter.ItemLibrary.RustyBlade;
-import gameEncounter.ItemLibrary.ShortBow;
 
 public class TypeArcher extends CharacterClass{
 

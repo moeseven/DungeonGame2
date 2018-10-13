@@ -27,7 +27,7 @@ public class Player implements Serializable{
 		availableHeroes=new LinkedList<Hero>();
 		inventoryCapacity=100;
 		inventory=new LinkedList<Item>();
-		gold=200;
+		gold=100;
 		groupSize=3;
 	}
 	public void gainGold(int g) {

@@ -18,10 +18,8 @@ public class bashEffect extends CardEffect{
 		
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			if(self.attackHero(self.getTargets().get(i),card)) {
 				nextTargets.add(self.getTargets().get(i));
 				self.doStun(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
-			}
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {

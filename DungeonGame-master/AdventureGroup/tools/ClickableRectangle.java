@@ -1,9 +1,11 @@
 package tools;
 
+import java.awt.Color;
 import java.util.LinkedList;
 
 public abstract class ClickableRectangle {
 	private int imageNumber=1;
+	private Color firstLineColor=Color.black;
 	private int x;
 	private int y;
 	private int height;
@@ -71,6 +73,12 @@ public abstract class ClickableRectangle {
 	}
 	public void setImageNumber(int imageNumber) {
 		this.imageNumber = imageNumber;
+	}
+	public Color getFirstLineColor() {
+		return firstLineColor;
+	}
+	public void setFirstLineColor(Color firstLineColor) {
+		this.firstLineColor = firstLineColor;
 	}
 
 	

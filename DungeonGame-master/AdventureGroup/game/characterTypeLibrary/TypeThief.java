@@ -3,18 +3,6 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.BackStab;
-import gameEncounter.CardLibrary.BasicAttack;
-import gameEncounter.CardLibrary.BlindingBomb;
-import gameEncounter.CardLibrary.Block;
-import gameEncounter.CardLibrary.DaggerThrow;
-import gameEncounter.CardLibrary.Feint;
-import gameEncounter.CardLibrary.Parry;
-import gameEncounter.CardLibrary.PoisonAttack;
-import gameEncounter.CardLibrary.PoisonBomb;
-import gameEncounter.CardLibrary.RangedAttack;
-import gameEncounter.CardLibrary.Sidestep;
-import gameEncounter.ItemLibrary.RustyBlade;
 
 public class TypeThief extends CharacterClass{
 

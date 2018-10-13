@@ -4,7 +4,6 @@ import game.CharacterRace;
 import game.Game;
 import gameEncounter.Deck;
 import gameEncounter.Hero;
-import gameEncounter.CardLibrary.Block;
 import gameEncounter.CardLibrary.BasicAttack;
 
 public class RaceHalfling extends CharacterRace{
