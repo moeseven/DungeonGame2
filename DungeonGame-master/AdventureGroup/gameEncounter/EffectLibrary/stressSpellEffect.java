@@ -17,14 +17,14 @@ public class stressSpellEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).becomeStressed(GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)), self));
+			self.getTargets().get(i).becomeStressed(GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self));
 		}		
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return "stress target for "+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)),self)+" stress";
+		return "stress target for "+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)),self)+" stress";
 	}
 
 }

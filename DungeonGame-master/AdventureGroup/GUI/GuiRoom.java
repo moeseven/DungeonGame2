@@ -169,6 +169,7 @@ public class GuiRoom extends JPanel{
 					gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
 					caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
 					caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
+					//color
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>0) {
 						setFirstLineColor(Color.blue);
 						if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>1) {
@@ -178,6 +179,7 @@ public class GuiRoom extends JPanel{
 							}
 						}
 					}
+					//
 				}else {
 					caption=new LinkedList<String>();
 				}					

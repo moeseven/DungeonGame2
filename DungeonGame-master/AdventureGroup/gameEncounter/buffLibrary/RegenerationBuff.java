@@ -17,7 +17,7 @@ public class RegenerationBuff extends Buff{
 
 	@Override
 	public void demod(Hero hero) {
-		// TODO Auto-generated method stub
+		hero.getPlayer().getGame().log.addLine("regeneration buff ended");
 		
 	}
 

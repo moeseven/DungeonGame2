@@ -7,10 +7,10 @@ import java.util.Map;
 public class UsefulFunctions1 {
 
 	public static ArrayList<String> getAllKeysFromMapWithValue(HashMap<String,String> map,String value){
-		ArrayList<String> keyList = new ArrayList<>();
+		ArrayList<String> keyList = new ArrayList<String>();
 		if(map.containsValue(value)){	
 			// Create an Empty List
-			keyList = new ArrayList<>();					
+			keyList = new ArrayList<String>();					
 			// Iterate over each entry of map using entrySet
 			for (Map.Entry<String,String> entry : map.entrySet()){ 			
 				// Check if value matches with given value

@@ -556,19 +556,19 @@ public class Hero implements Serializable{
 		target.takePoisonDamage(damage,bonus);
 	}
 	public void doFireDamage(int damage,Hero target) {
-		int bonus = this.getFireDmg()-target.resistFire;
+		int bonus = -target.resistFire;
 		target.takeFireDamage(this,damage,bonus);
 	}
 	public void doColdDamage(int damage,Hero target) {
-		int bonus = this.getColdDmg()-target.resistCold;
+		int bonus = -target.resistCold;
 		target.takeColdDamage(this,damage,bonus);
 	}
 	public void doLightningDamage(int damage,Hero target) {
-		int bonus = this.getLightningDmg()-target.resistLightning;
+		int bonus = -target.resistLightning;
 		target.takeLightningDamage(this,damage,bonus);
 	}
 	public void doMagicDamage(int damage,Hero target) {
-		int bonus = this.getMagicDmg()-target.resistSpell;
+		int bonus = -target.resistSpell;
 		target.takeMagicDamage(this,damage,bonus);
 	}
 	public void doStun(int stunChance,Hero target) {

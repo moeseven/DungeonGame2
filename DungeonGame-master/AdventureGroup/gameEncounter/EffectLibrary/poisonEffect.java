@@ -18,7 +18,7 @@ public class poisonEffect extends CardEffect{
 	public boolean applyEffect(Hero self, Card_new card) {	
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.doPoisonDamage(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
+			self.doPoisonDamage(GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i));
 			nextTargets.add(self.getTargets().get(i));	
 		}
 		self.setTargets(nextTargets);
@@ -31,7 +31,7 @@ public class poisonEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return pars.get(1)+" poison";
+		return GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self)+" poison";
 	}
 
 }

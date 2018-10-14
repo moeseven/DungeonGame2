@@ -28,7 +28,7 @@ public class statGrowthBuff extends Buff{
 	@Override
 	public void demod(Hero hero) {
 		hero.modifyStat(stat, -growingStatValue);
-		hero.getPlayer().getGame().log.addLine(value+" buff ended");
+		hero.getPlayer().getGame().log.addLine(stat+" buff ended");
 	}
 
 }

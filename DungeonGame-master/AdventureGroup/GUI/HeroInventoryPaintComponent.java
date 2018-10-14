@@ -41,7 +41,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
-			rc.addRect(new ClickableRectangle("search inventory",305,120,230,20) {
+			rc.addRect(new ClickableRectangle("search inventory",305,120,300,20) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -60,7 +60,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//item description
-			rc.addRect(new ClickableRectangle("description",305,10,230,110) {
+			rc.addRect(new ClickableRectangle("description",305,10,300,110) {
 				@Override
 				public void onClick() {
 
@@ -87,7 +87,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//item picture
-			rc.addRect(new ClickableRectangle("",445,50,90,70) {
+			rc.addRect(new ClickableRectangle("",515,50,80,70) {
 				@Override
 				public void onClick() {
 
@@ -201,7 +201,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//body
-			rc.addRect(new ClickableRectangle("body",60,70,50,50) {
+			rc.addRect(new ClickableRectangle("body",60,70,50,70) {
 				@Override
 				public void onClick() {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
@@ -224,7 +224,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//hand1
-			rc.addRect(new ClickableRectangle("hand1",5,70,50,50) {
+			rc.addRect(new ClickableRectangle("hand1",5,70,50,70) {
 				@Override
 				public void onClick() {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
@@ -246,7 +246,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//hand2
-			rc.addRect(new ClickableRectangle("hand2",115,70,50,50) {
+			rc.addRect(new ClickableRectangle("hand2",115,70,50,70) {
 				@Override
 				public void onClick() {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
@@ -265,6 +265,48 @@ public class HeroInventoryPaintComponent extends JComponent{
 						caption.removeFirst();
 						caption.addFirst(name);
 					}
+				}		
+			});
+			//ring1
+			rc.addRect(new ClickableRectangle("ring1",15,140,30,30) {
+				@Override
+				public void onClick() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1()!=null) {
+						caption.removeFirst();
+						caption.addFirst("");					
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1().getImageNumber());
+					}else {
+						this.setImageNumber(1);
+						caption.removeFirst();
+						caption.addFirst(name);
+					}					
+				}		
+			});
+			//ring2
+			rc.addRect(new ClickableRectangle("ring2",125,140,30,30) {
+				@Override
+				public void onClick() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2()!=null) {
+						caption.removeFirst();
+						caption.addFirst("");					
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2().getImageNumber());
+					}else {
+						this.setImageNumber(1);
+						caption.removeFirst();
+						caption.addFirst(name);
+					}					
 				}		
 			});
 			rc.updateCaptions();
@@ -304,7 +346,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 		int omitted=0;
 		if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
 			for (int l=0; l<gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).size();l++) {
-				g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l), 580, 20+16*(l-omitted));
+				g.drawString(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l), 610, 20+16*(l-omitted));
 				if ("".equals(gw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(gw.getGame().getPlayer().getSelectedHero()).get(l))) {
 					omitted++;
 				}

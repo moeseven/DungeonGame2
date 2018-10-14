@@ -24,11 +24,11 @@ public class HeroFightManaComponent extends JComponent{
 	public HeroFightManaComponent(FightWindow fwindow) {
 		this.fw=fwindow;
 		rc=new RectangleClicker();
-		super.setPreferredSize(new Dimension(200,180));
+		super.setPreferredSize(new Dimension(180,300));
 		setLayout(new BorderLayout());
 		setVisible(true);
 		//move forward fight movement
-		rc.addRect(new ClickableRectangle(">",120,10,20,10) {
+		rc.addRect(new ClickableRectangle(">",70,10,20,10) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -45,7 +45,7 @@ public class HeroFightManaComponent extends JComponent{
 			}		
 		});
 		//move backward fight movement
-		rc.addRect(new ClickableRectangle("<",100,10,20,10) {
+		rc.addRect(new ClickableRectangle("<",50,10,20,10) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -82,13 +82,25 @@ public class HeroFightManaComponent extends JComponent{
 		super.paintComponent(g);		
 		g.setColor(Color.black);
 		for(int i=0;i<fw.getGame().getPlayer().getSelectedHero().getMana();i++) {
-			g.drawOval(80, 1+i*12, 10, 10);
+			g.drawOval(30, 1+i*12, 10, 10);
 		}
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
 			}
+		}
+		int skippedLines=0;
+		for (int i = 0; i < fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).size(); i++) {
+			if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).equals("")) {
+				//skip empty lines
+				skippedLines++;
+			}else {
+				g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i), 50, 12*(i-skippedLines)+40);
+			}
+			
+			
+			
 		}
 	}
 }

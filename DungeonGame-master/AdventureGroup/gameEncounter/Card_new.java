@@ -145,12 +145,12 @@ public class Card_new extends Card implements Serializable,Cloneable{
 			CardEffect cardEffect = (CardEffect) iterator.next();
 			cardText.add(cardEffect.generateCardText(hero, this));
 		}
-		if (critChance>0) {
-			cardText.add("crit chance: +"+critChance);
-		}
-		if (accuracy>0) {
-			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero,hero.getTarget())));
-		}
+//		if (critChance>0) {
+//			cardText.add("crit chance: +"+critChance);
+//		}
+//		if (accuracy>0) {
+//			cardText.add("accuracy: "+(accuracy+GameEquations.accuracyCalc(hero,hero.getTarget())));
+//		}
 		if (cardText.size()==0) {
 			System.out.println("empty card has been built!!!");
 		}

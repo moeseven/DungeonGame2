@@ -52,6 +52,7 @@ public class TypeCleric extends CharacterClass{
 		hero.setVitality(hero.getVitality()+5);
 		//
 		hero.setSpellDuration(hero.getSpellDuration()+1);
+		hero.setMagicDmg(hero.getMagicDmg()+5);
 		hero.setBlockSkill(hero.getBlockSkill()+3);
 		hero.setAttackSkill(hero.getAttackSkill()-2);
 		hero.setSpellResist(hero.getSpellResist()+5);

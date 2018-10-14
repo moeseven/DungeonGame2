@@ -156,13 +156,7 @@ public class HeroInfoComponent extends JComponent{
 		}
 		protected void paintComponent(Graphics g){
 			super.paintComponent(g);
-			if (hic.removeCard) {
-				g.drawString("click a card in your deck to remove", 10, 15);
-			}
-			if (hic.addCard) {
-				g.drawString("choose a card to add to your deck", 10, 15);
-			}
-			g.drawString("is this component even there?", 0, 45);
+
 		}	
 	}
 	

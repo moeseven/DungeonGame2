@@ -19,7 +19,7 @@ public class blockableBleedEffect extends CardEffect{
 		//attacks only apply bleed if block is down!
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if (self.getTargets().get(i).getBlock()<=0) {
-				self.doBleedDamage(Integer.parseInt(pars.get(1)), self.getTargets().get(i));
+				self.doBleedDamage(GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i));
 			}
 		}
 		return true;				
@@ -27,7 +27,7 @@ public class blockableBleedEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return pars.get(1)+" bleed";
+		return GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self)+" bleed";
 	}
 
 }

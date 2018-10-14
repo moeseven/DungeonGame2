@@ -32,6 +32,7 @@ public class allResistBuff extends Buff{
 		hero.setResistLightning(hero.getResistLightning()-resist);
 		hero.setResistStun(hero.getResistStun()-resist);
 		hero.setResistStress(hero.getResistStress()-resist);
+		hero.getPlayer().getGame().log.addLine("all resist modification ended");
 	}
 
 }

@@ -59,6 +59,7 @@ public class TypeThief extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+2);
 		hero.setVitality(hero.getVitality()+1);
 		//
+		hero.setPoisonDmg(hero.getPoisonDmg()+5);
 		hero.setCritChance(hero.getCritChance()+7);
 		hero.setCritDamage(hero.getCritDamage()+10);
 		hero.setDodge(hero.getDodge()+4);

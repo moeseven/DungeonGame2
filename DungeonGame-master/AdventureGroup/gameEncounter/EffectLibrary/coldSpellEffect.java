@@ -19,7 +19,7 @@ public class coldSpellEffect extends CardEffect{
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			nextTargets.add(self.getTargets().get(i));
-			self.doColdDamage(GameEquations.calculateSpellDamage(card.getSpellDamage(),self), self.getTargets().get(i));
+			self.doColdDamage(GameEquations.calculateSpellColdDamage(card.getSpellDamage(),self), self.getTargets().get(i));
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
@@ -32,7 +32,7 @@ public class coldSpellEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return GameEquations.calculateSpellDamage(card.getSpellDamage(), self)+" cold damage";
+		return GameEquations.calculateSpellColdDamage(card.getSpellDamage(), self)+" cold damage";
 	}
 
 }

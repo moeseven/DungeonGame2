@@ -29,13 +29,13 @@ public class increaseStatOfCardEffect extends CardEffect{
 		}else {
 			System.out.println("increaseStatOfCardEffect received wrong stat name!");
 		}
-		self.getPlayer().getGame().log.addLine("increased "+pars.get(1)+" by "+(int)GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)),self)+" of "+newCard.getName());			
+		self.getPlayer().getGame().log.addLine("increased "+pars.get(1)+" by "+(int)GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)),self)+" of "+newCard.getName());			
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return "increases its "+pars.get(1)+" by "+(int)GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)),self);
+		return "increases its "+pars.get(1)+" by "+(int)GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)),self);
 	}
 
 }

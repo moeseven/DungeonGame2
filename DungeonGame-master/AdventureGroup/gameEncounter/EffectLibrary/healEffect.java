@@ -17,7 +17,7 @@ public class healEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).heal(GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)), self));		
+			self.getTargets().get(i).heal(GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self));		
 		}
 		return true;
 	}
@@ -25,7 +25,7 @@ public class healEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return "heal "+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(1)), self)+" health.";
+		return "heal "+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self)+" health.";
 	}
 
 }

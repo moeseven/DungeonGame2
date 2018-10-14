@@ -55,6 +55,7 @@ public class RaceElf extends CharacterRace{
 		hero.setResistStress(15);
 		hero.setTrapDisarm(16);
 		//
+		hero.setLightningDmg(5);
 		hero.setCritDamage(11);
 		hero.setCritChance(4);
 	}

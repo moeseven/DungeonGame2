@@ -46,6 +46,7 @@ public class RaceHalfling extends CharacterRace{
 		hero.setResistStress(26);
 		hero.setTrapDisarm(30);
 		//
+		hero.setPoisonDmg(5);
 		hero.setCritDamage(9);
 		hero.setCritChance(5);
 		//deck

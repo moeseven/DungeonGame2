@@ -18,15 +18,15 @@ public class modifyStatSpellEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card_new card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).buffHero(new statModifyBuff(self.getTargets().get(i),pars.get(1), GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)), self), self.getSpellDuration()));	
-			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" "+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)), self)+" "+pars.get(1)+" for "+self.getSpellDuration()+" rounds");
+			self.getTargets().get(i).buffHero(new statModifyBuff(self.getTargets().get(i),pars.get(1), GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)), self), self.getSpellDuration()));	
+			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" "+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)), self)+" "+pars.get(1)+" for "+self.getSpellDuration()+" rounds");
 		}
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
-		return GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)), self)+" "+pars.get(1)+"for "+self.getSpellDuration()+" rounds";
+		return GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)), self)+" "+pars.get(1)+"for "+self.getSpellDuration()+" rounds";
 	}
 
 }

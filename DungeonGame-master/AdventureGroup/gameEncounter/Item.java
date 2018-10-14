@@ -69,9 +69,38 @@ public abstract class Item implements Serializable{
         case 3:  return "twoHanded";
         case 4:  return "body";
         case 5:  return "head";
+        case 6:	 return "ring";
         case 10: return "relic";
         default: return "there is no such category!";
 		}
+	}
+	public final  int getItemCategoryInteger(String s) {
+		int retVal=-1;
+		if (s.equals("consumable")) {
+			retVal=0;
+		}
+		if (s.equals("mainHand")) {
+			retVal=1;
+		}
+		if (s.equals("offHand")) {
+			retVal=2;
+		}
+		if (s.equals("twoHanded")) {
+			retVal=3;
+		}
+		if (s.equals("body")) {
+			retVal=4;
+		}
+		if (s.equals("head")) {
+			retVal=5;
+		}
+		if (s.equals("ring")) {
+			retVal=6;
+		}
+		if (s.equals("relic")) {
+			retVal=10;
+		}
+		return retVal;
 	}
 	public int getWeight() {
 		return weight;

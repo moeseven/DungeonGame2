@@ -45,7 +45,7 @@ public class GameEquations {
 	}
 	//crit calculations
 	public static int critDamageCalc(Hero hero) {
-		return 100+ (int)(hero.getCritDamage()*hero.getDexterity()/20.0);
+		return 100+ (int)(hero.getCritDamage()*(1+hero.getDexterity()/20.0));
 	}
 	public static int critChanceCalc(Hero hero) {
 		return (int) (hero.getCritChance());
@@ -86,12 +86,30 @@ public class GameEquations {
 	}
 
 	//damage for spells
-	public static int calculateSpellDamage(int dmg,Hero hero) {
-		return (int) (dmg*(1+(spellPowerCalc(hero))/100.0));
+	public static int calculateSpellDamage(int dmg,Hero hero,String damageType) {
+		double damage=(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0);
+		return (int) damage;
 	}
-	
+	public static int calculateSpellFireDamage(int dmg,Hero hero) {
+		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getFireDmg()/100.0));
+	}
+	public static int calculateSpellColdDamage(int dmg,Hero hero) {
+		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getColdDmg()/100.0));
+	}
+	public static int calculateSpellLightningDamage(int dmg,Hero hero) {
+		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getLightningDmg()/100.0));
+	}
+	public static int calculateSpellMagicDamage(int dmg,Hero hero) {
+		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0));
+	}
+	public static int calculatePoisonDamage(int dmg, Hero hero) {
+		return (int) (dmg*(1+hero.getPoisonDmg()/100.0));
+	}
+	public static int calculateBleedDamage(int dmg, Hero hero) {
+		return (int) (dmg*(1+hero.getBleedDmg()/100.0));
+	}
 	//damage for attacks
-	public static int calculateAttackDamage(Card_new card,Hero hero) {
+	public static int calculateAttackDamage(Card card,Hero hero) {
 		return (int) (card.getAttackDamage()*(1+(attackSkillCalc(hero))/100.0));
 	}
 	//block amount calculation

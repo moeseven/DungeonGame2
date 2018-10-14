@@ -194,7 +194,8 @@ public class Item_new extends Item implements Serializable{
 	}
 	public void addSuffix(ItemSuffix suffix) {
 		//TODO add all stats of suffix to item
-		if (suffix.getCategory()==category) {
+		//ring can have any suffix
+		if (suffix.getCategory()==category||category==6) {
 			attack+=suffix.attack;
 			block+=suffix.block;
 			spell+=suffix.spell;
@@ -375,31 +376,7 @@ public class Item_new extends Item implements Serializable{
 		}
 		//
 	} 
-	public final  int getItemCategoryInteger(String s) {
-		int retVal=-1;
-		if (s.equals("consumable")) {
-			retVal=0;
-		}
-		if (s.equals("mainHand")) {
-			retVal=1;
-		}
-		if (s.equals("offHand")) {
-			retVal=2;
-		}
-		if (s.equals("twoHanded")) {
-			retVal=3;
-		}
-		if (s.equals("body")) {
-			retVal=4;
-		}
-		if (s.equals("head")) {
-			retVal=5;
-		}
-		if (s.equals("relic")) {
-			retVal=10;
-		}
-		return retVal;
-	}
+	
 
 	public int getWeight() {
 		return weight;

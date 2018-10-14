@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import gameEncounter.Card;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class HandPaintComponent extends JComponent{
@@ -78,11 +79,23 @@ public class HandPaintComponent extends JComponent{
 					}
 					g.fillOval(42+b*10+i*100, 25, 8, 8);
 				}
-			}			
-			if(fw.getGame().getPlayer().getSelectedHero().getSelectedCard()==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
+			}	
+			Hero hero =fw.getGame().getPlayer().getSelectedHero();
+			Card card=hero.getSelectedCard();
+			if(card==fw.getGame().getPlayer().getSelectedHero().getHand().get(i)){
 				g.setColor(Color.red);
 				g.drawRect(1+i*100, 1, 100, 80);
-				g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getCardText(fw.getGame().getPlayer().getSelectedHero()), 100, 90);
+								
+				if (hero.getTarget()!=null) {
+					if (card.getAttackDamage()>0) {
+						g.drawString("damage: "+(GameEquations.calculateAttackDamage(card, hero)+"("+GameEquations.damageReducedByArmor(GameEquations.calculateAttackDamage(card, hero), hero.getTarget().getArmor()))+")", 10, 95);
+					}	
+					if (card.getAttackDamage()>0||card.getSpellDamage()>0) {
+						g.drawString("crit chance: "+GameEquations.critChanceCalc(hero), 10, 115);
+						g.drawString("accuracy: "+(card.getAccuracy()+GameEquations.accuracyCalc(hero,hero.getTarget())), 10, 105);
+					}
+				}
+				
 			}
 		}
 	}

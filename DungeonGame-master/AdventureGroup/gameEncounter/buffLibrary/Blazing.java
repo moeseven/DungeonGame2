@@ -11,10 +11,10 @@ public class Blazing extends Buff{
 		hero.getPlayer().getGame().log.addLine(hero.getName()+" is blazing!");
 		if(hero.getPlayer().getGame().dungeonMaster.getHeroes().size()>0&&hero.getPlayer().getGame().getPlayer().getHeroes().size()>0) {
 			for(int i=0;i<hero.getPlayer().getGame().dungeonMaster.getHeroes().size();i++) {
-			hero.doFireDamage(GameEquations.calculateSpellDamage(burnDamage, hero), hero.getPlayer().getGame().dungeonMaster.getHeroes().get(i));
+			hero.doFireDamage(GameEquations.calculateSpellFireDamage(burnDamage, hero), hero.getPlayer().getGame().dungeonMaster.getHeroes().get(i));
 			}
 			for(int i=0;i<hero.getPlayer().getGame().getPlayer().getHeroes().size();i++) {
-				hero.doFireDamage(GameEquations.calculateSpellDamage(burnDamage, hero), hero.getPlayer().getGame().getPlayer().getHeroes().get(i));
+				hero.doFireDamage(GameEquations.calculateSpellFireDamage(burnDamage, hero), hero.getPlayer().getGame().getPlayer().getHeroes().get(i));
 			}	
 		}
 	}

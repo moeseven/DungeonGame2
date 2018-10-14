@@ -8,6 +8,7 @@ import java.util.Map;
 import game.Act;
 import game.CharacterRace;
 import game.Game;
+import game.GeneratorRandom;
 import game.MonsterRace;
 import game.Player;
 import game.Room;
@@ -121,6 +122,10 @@ public class Act1 extends Act{
 			act1Interactions.add(new Sack(game,60));
 			act1Interactions.add(new Chest(game));
 			act1Interactions.add(new Chest(game));
+			Chest itemChest= new Chest(game);
+			itemChest.getItems().add(game.generator.generateRandomItem(4));
+			act1Interactions.add(itemChest);
+			act1Interactions.add(itemChest);
 			act1Interactions.add(new HayHeap(game));
 			act1Interactions.add(new Well(game));
 			act1Interactions.add(new SpikeTrap(game));
@@ -153,8 +158,8 @@ public class Act1 extends Act{
 		    while (it.hasNext()) {
 		    	Map.Entry pair = (Map.Entry)it.next();
 		    	if (count==randomToken) {
-			        
-			        for (int i = Math.min((int) (pair.getValue())+1, game.dungeonMaster.getGroupSize()); i >0; i--) {		
+			        int numberOfMonsters = (Integer) pair.getValue();
+			        for (int i = Math.min(numberOfMonsters+1, game.dungeonMaster.getGroupSize()); i >0; i--) {		
 			        	MonsterRace mapMonster=(MonsterRace) pair.getKey();
 						questRoom.getMonsters().add(new Hero("", game.dungeonMaster,mapMonster, mapMonster.getPositionClasses(i).get((int) Math.min(mapMonster.getPositionClasses(i).size()-1, Math.random()*mapMonster.getPositionClasses(i).size()))));//if multiple classes maybe choose randomly
 					}					
