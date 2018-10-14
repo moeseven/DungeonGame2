@@ -188,7 +188,11 @@ public class Fight implements Serializable{
 					
 					 nextTurn();
 					}else {
-						this.game.getPlayer().setSelectedHero(turnOrder.get(turnOrderCounter));
+						if (turnOrder.get(turnOrderCounter).isDead()) {
+							nextTurn();
+						}else {
+							this.game.getPlayer().setSelectedHero(turnOrder.get(turnOrderCounter));
+						}									
 					}
 				}
 			}						
