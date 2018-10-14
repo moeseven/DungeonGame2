@@ -25,7 +25,6 @@ public class QuestBoard extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		game.newQuest();
 		hero.getPlayer().getGame().log.addLine(hero.getPlayer().getGame().getActiveQuest().getDescription());
 	}
 	

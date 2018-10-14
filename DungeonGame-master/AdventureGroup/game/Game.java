@@ -26,16 +26,16 @@ public CardBuilder cardBuilder;
 public ItemBuilder itemBuilder;
 public ItemSuffixBuilder itemSuffixBuilder;
 public int turn=0;
+public int points=0;
 public MyLog log;
 private Room room;
 private Room town;
 private LinkedList<Quest> availableQuests;
 private Quest activeQuest;
 private Act activeAct;
-private int idleStressRelief=3;
+private int idleStressRelief=10;
 public Game() {
-	super();
-	
+	super();	
 	cardBuilder = new CardBuilder();
 	itemBuilder = new ItemBuilder(this);
 	itemSuffixBuilder= new ItemSuffixBuilder();
@@ -43,10 +43,10 @@ public Game() {
 	generator=new GeneratorRandom(this);
 	log=new MyLog();
 	this.availableQuests=new LinkedList<Quest>();
-	newQuest();
 	town=new Town(this);
 	room=town;
 	activeAct= new Act1(this);
+	activeQuest= activeAct.getMainQuest();
 	player=new Player(this);
 	//cardBuilder.printMap();
 }
@@ -57,9 +57,6 @@ public void enterRoom(Room room) {
 		player.getHeroes().get(i).applyNegativeTurnEffects();
 	}	
 	room.prepareRoomAndEnter(this);
-}
-public void newQuest() {
-	activeQuest=generator.generateRandomQuest(this);
 }
 public void increaseGameTurn() {
 	//increment turns for final score

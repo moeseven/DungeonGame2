@@ -15,12 +15,11 @@ import gameEncounter.GameEquations;
 public class Town extends Room{
 
 	public Town(Game game) {
-		// TODO Auto-generated constructor stub
 		super(game);
 		getInteractions().add(new Shop(game));
 		getInteractions().add(new Tavern(game));
 		getInteractions().add(new MedicineMan(game)); 
-		//getInteractions().add(new QuestBoard(game));
+		getInteractions().add(new QuestBoard(game));
 		getInteractions().add(new TeleportStone(game));
 	}
 

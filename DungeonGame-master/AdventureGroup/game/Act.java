@@ -1,11 +1,14 @@
 package game;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public abstract class Act {
+public abstract class Act implements Serializable{
 	protected Room[][] roomMap;//work on this
 	protected String description;
 	protected boolean finished;
+	protected Quest mainQuest;
+	protected LinkedList<Quest> sidequests;
 	protected Game game;
 	public Act(Game game) {
 		roomMap= new Room[10][10];
@@ -54,4 +57,11 @@ public abstract class Act {
 	public void setGame(Game game) {
 		this.game = game;
 	}
+	public Quest getMainQuest() {
+		return mainQuest;
+	}
+	public void setMainQuest(Quest mainQuest) {
+		this.mainQuest = mainQuest;
+	}
+	
 }

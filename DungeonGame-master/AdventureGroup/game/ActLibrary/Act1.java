@@ -3,16 +3,20 @@ package game.ActLibrary;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
+import GUI.LeaderboardWindow;
 import game.Act;
 import game.CharacterRace;
 import game.Game;
 import game.GeneratorRandom;
 import game.MonsterRace;
 import game.Player;
+import game.Quest;
 import game.Room;
 import game.RoomInteraction;
+import game.Leaderboard.Leaderboard;
 import game.RoomInteractionLibrary.*;
 import game.RoomLibrary.EmptyRoom;
 import game.RoomLibrary.GoblinRoom1;
@@ -21,6 +25,7 @@ import game.monsters.RaceGoblin;
 import game.monsters.RaceRat;
 import game.monsters.RaceZombie;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 
 public class Act1 extends Act{
 	protected Room questRoom;
@@ -39,6 +44,8 @@ public class Act1 extends Act{
 		interaction = new SleepingOgre(game);
 		questRoom.getInteractions().add(interaction);
 		addRoom(questRoom, 3, 2);
+		//room 2,1
+		addRandomRoom(2,2);
 		//room 2,3
 		questRoom=new EmptyRoom(game);
 		interaction = new HayHeap(game);
@@ -62,14 +69,9 @@ public class Act1 extends Act{
 		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		
 		addRoom(questRoom, 1, 4);
-		//room 8,8
-		questRoom=new EmptyRoom(game);
-		interaction = new Chest(game);
-		questRoom.getInteractions().add(interaction);
-		questRoom.setHasFight(true);
-		monster=new BossNecromancer(game);
-		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
-		addRoom(questRoom, 8, 8);
+		//room 8,8 ~~~main act quest~~~		
+		mainQuest=new Act1Finish(game);
+		addRoom(mainQuest.getRooms().getFirst(), 8, 8);
 		//room 8,7
 		questRoom=new EmptyRoom(game);
 		interaction = new Chest(game);
@@ -106,6 +108,7 @@ public class Act1 extends Act{
 		addRandomRoom(8, 3);
 		//room 8,4
 		addRandomRoom(8, 4);
+		
 	}
 	
 	@Override
@@ -122,6 +125,7 @@ public class Act1 extends Act{
 			act1Interactions.add(new Sack(game,60));
 			act1Interactions.add(new Chest(game));
 			act1Interactions.add(new Chest(game));
+			act1Interactions.add(new SleepingOgre(game));
 			Chest itemChest= new Chest(game);
 			itemChest.getItems().add(game.generator.generateRandomItem(4));
 			act1Interactions.add(itemChest);
@@ -132,7 +136,7 @@ public class Act1 extends Act{
 			act1Interactions.add(new PoisonTrap(game));
 			act1Interactions.add(new EvilStatue(game));
 			act1Interactions.add(new AncientTome(game));
-			act1Interactions.add(new UndeadCorpse(game, 12,(int) Math.random()*30));
+			act1Interactions.add(new UndeadCorpse(game, 12,(int) Math.random()*40));
 			act1Interactions.add(new Sack(game,10));
 			questRoom.getInteractions().add(act1Interactions.get((int) (Math.random()*act1Interactions.size())));
 		}				
@@ -177,5 +181,59 @@ public class Act1 extends Act{
 		
 		return false;
 	}
+	private class Act1Finish extends Quest{
+		private Item questItem = new QuestRelic();
+		public Act1Finish(Game game) {
+			super(game);
+			Room questRoom=new EmptyRoom(game);
+			Chest questInteraction = new Chest(game);
+			questInteraction.getItems().add(questItem);
+			questRoom.getInteractions().add(questInteraction);
+			questRoom.setHasFight(true);
+			MonsterRace monster=new BossNecromancer(game);
+			questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
+			rooms.add(questRoom);
+			description="find the -"+questItem.getName()+"- and return it to the town.";
+			goldReward=600;
+			experienceReward=500;
+			gamePoints=500;
+		}
+		public boolean checkIfQuestFullfilled(Player player) {
+			if(player.getInventory().contains(questItem)) {
+				giveReward(player);
+				player.getInventory().remove(questItem);
+				return true;
+			}
+			return false;
+		}	
+		
+		
+		@Override
+		public void giveReward(Player player) {
+			super.giveReward(player);
+			//leaderboard here
+			Leaderboard lb= Leaderboard.loadLeaderboard();
+			new LeaderboardWindow(lb,game, true);
+		}
 
+
+		private class QuestRelic extends Item{
+
+			public QuestRelic() {
+				super();
+				LinkedList<String> relicNames= new LinkedList<String>();
+				relicNames.add("necromancers book");
+				name=relicNames.get((int) Math.min(relicNames.size()-1,(Math.random()*relicNames.size())));
+				
+			}
+
+			@Override
+			public void generateItemDescription() {
+				super.generateItemDescription();
+				description.add("return this to town to gain quest rewards");
+			}
+			
+		}
+		
+	}
 }

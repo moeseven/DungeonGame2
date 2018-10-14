@@ -367,7 +367,9 @@ public class Hero implements Serializable{
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(player.getGame(),this)); //generate corpses
 			block=0;
 			this.isDead=true;
-			player.getHeroes().remove(this);
+			if (!player.getGame().getRoom().isHasFight()) {// in order to provide experience in fights!!
+				player.getHeroes().remove(this);
+			}		
 			for(int i=0;i<player.getHeroes().size();i++) {
 				player.getHeroes().get(i).becomeStressed(35);
 			}			

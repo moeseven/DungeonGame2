@@ -7,7 +7,7 @@ public class requiresShield extends CastCondition{
 	
 	public requiresShield() {
 		super();
-		this.explanation="requieres a bow";
+		this.explanation="requieres a shield";
 	}
 
 	@Override

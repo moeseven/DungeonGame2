@@ -33,7 +33,7 @@ public class RaceOgre extends MonsterRace{
 		hero.setBaseHp(400);		
 		//stats
 		hero.setStrength(56);
-		hero.setDexterity(10);
+		hero.setDexterity(8);
 		hero.setIntelligence(7);
 		hero.setVitality(20);
 		//
@@ -69,10 +69,11 @@ public class RaceOgre extends MonsterRace{
 			cards.add(game.cardBuilder.buildCard("bash"));
 			cards.add(game.cardBuilder.buildCard("ram"));
 			cards.add(game.cardBuilder.buildCard("advancingAttack"));
-			for (int i=0; i<4;i++) {				
+			for (int i=0; i<2;i++) {				
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			for (int i=0; i<2;i++) {
+				cards.add(game.cardBuilder.buildCard("sidestep"));
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}

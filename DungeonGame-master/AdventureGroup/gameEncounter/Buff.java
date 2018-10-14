@@ -1,6 +1,8 @@
 package gameEncounter;
 
-public abstract class Buff {
+import java.io.Serializable;
+
+public abstract class Buff implements Serializable{
 protected int duration=2;
 public abstract void onTick(Hero hero);
 public abstract void mod(Hero hero);

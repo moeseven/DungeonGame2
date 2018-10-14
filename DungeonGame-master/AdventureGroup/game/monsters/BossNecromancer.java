@@ -121,6 +121,7 @@ public class BossNecromancer extends MonsterRace{
 			MonsterRace monster= new RaceZombie(game);
 			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPositionClasses(1).getFirst()));
 			self.getPlayer().getHeroes().getFirst().setUpDrawPile();
+			self.getPlayer().getGame().getRoom().getFight().precalculateMonsterTurn(self.getPlayer().getHeroes().getFirst());
 			return true;
 		}
 

@@ -38,7 +38,7 @@ public class UndeadCorpse extends RoomInteraction{
 		//loot corpse
 		if(!hero.isDead()) {
 			if(!hasBeenLooted) {
-				if (Math.random()<awakeChance/100) {
+				if (Math.random()<awakeChance/100.0) {
 					LinkedList<UndeadCorpse> razeUd= new LinkedList<UndeadCorpse>();
 					for (int i = 0; i < game.getRoom().getInteractions().size(); i++) {
 						if (game.getRoom().getInteractions().get(i) instanceof UndeadCorpse) {

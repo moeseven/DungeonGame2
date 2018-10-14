@@ -8,8 +8,9 @@ public abstract class Quest implements Serializable{
 protected Room[][] roomLayout;//work on this
 protected String description;
 protected boolean finished;
-protected int experienceReward;
-protected int goldReward;
+protected int experienceReward=0;
+protected int goldReward=0;
+protected int gamePoints=0;
 protected LinkedList<Room> rooms;
 protected Game game;
 	public Quest(Game game) {
@@ -20,6 +21,7 @@ protected Game game;
 	}
 	public abstract boolean checkIfQuestFullfilled(Player player);
 	public void giveReward(Player player) {
+		game.points+=gamePoints;
 		player.gainGold(goldReward);
 		for(int i=0; i<player.getHeroes().size();i++){
 			player.getHeroes().get(i).gainExp(experienceReward/player.getHeroes().size());

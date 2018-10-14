@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import game.CharacterBuilder;
 import game.Game;
+import game.Leaderboard.Leaderboard;
 
 
 
@@ -26,6 +27,7 @@ public class MainMenu extends JFrame{
 	private JButton buttonCharacterBuilder;
 	private JButton buttonSaveGame;
 	private JButton buttonLoadGame;
+	private JButton buttonShowLeaderboard;
 	private Game game;
 	protected StatsWindow gw;
 	protected RoomWindow rw;
@@ -44,14 +46,22 @@ public class MainMenu extends JFrame{
 		buttonLoadGame.addMouseListener(new ButtonLoadUserListener());
 		buttonStart=new JButton("Play");
 		buttonStart.addMouseListener(new ButtonStartListener());
+		buttonShowLeaderboard=new JButton("view leaderboard");
+		buttonShowLeaderboard.addMouseListener(new ButtonShowLeaderboardListener());
 		buttonCharacterBuilder= new JButton("Charakter Builder");
 		buttonCharacterBuilder.addMouseListener(new ButtonBuildCharacterListener());
 		jp01.add(buttonStart);
 		//jp01.add(buttonCharacterBuilder); integrated in start of game
 		jp01.add(buttonSaveGame);
 		jp01.add(buttonLoadGame);
+		jp01.add(buttonShowLeaderboard);
 		add(jp01);
 		setVisible(true);
+	}
+	private class ButtonShowLeaderboardListener extends MouseAdapter{
+		public void mousePressed(MouseEvent e){
+			new LeaderboardWindow(Leaderboard.loadLeaderboard(),game,false);
+		} 
 	}
 	private class ButtonStartListener extends MouseAdapter{
 		public void mousePressed(MouseEvent e){

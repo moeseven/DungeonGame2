@@ -130,3 +130,16 @@
 /HeroInfoComponent$removeOrAddPaintComponent.class
 /HeroInventoryPaintComponent$11.class
 /HeroInventoryPaintComponent$12.class
+/Leaderboard$ButtonBuildCharacterListener.class
+/Leaderboard$ButtonLoadUserListener.class
+/Leaderboard$ButtonSaveUserListener.class
+/Leaderboard$ButtonStartListener.class
+/Leaderboard.class
+/LeaderboardWindow$ButtonBuildCharacterListener.class
+/LeaderboardWindow$ButtonLoadUserListener.class
+/LeaderboardWindow$ButtonSaveUserListener.class
+/LeaderboardWindow$ButtonStartListener.class
+/LeaderboardWindow.class
+/LeaderboardWindow$LeaderBoardPanel.class
+/LeaderboardWindow$LeaderBoardPanel$ButtonOKListener.class
+/MainMenu$ButtonShowLeaderboardListener.class

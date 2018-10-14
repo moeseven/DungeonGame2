@@ -135,6 +135,7 @@ public class Fight implements Serializable{
 					this.getHeroes().getFirst().getPlayer().getGame().log.addLine("~~~~~"+turnOrder.get(turnOrderCounter).getName()+"'s turn"+"~~~~~");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
 					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
+						if(!turnOrder.get(turnOrderCounter).isDead()) {
 						//monster chooses random target here make sure it attacks only targets in range!	
 						Hero monster=turnOrder.get(turnOrderCounter);
 						HashMap<Card, Hero> mapTest = targetMap.get(monster);
@@ -183,7 +184,9 @@ public class Fight implements Serializable{
 //							e.printStackTrace();
 //						}
 						precalculateMonsterTurn(monster);
-					    nextTurn();
+					}
+					
+					 nextTurn();
 					}else {
 						this.game.getPlayer().setSelectedHero(turnOrder.get(turnOrderCounter));
 					}
