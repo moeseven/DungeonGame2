@@ -181,16 +181,19 @@ public class Item_new extends Item implements Serializable{
 		}
 		
 		this.goldValue=(int) (baseGoldValue+itemQuality);
-		itemQuality=itemQuality/baseGoldValue;		
-		if (itemQuality>0.9) {
-			setName("perfect "+getName());
-		}else if (itemQuality>0.7) {
-			setName("good "+getName());
-		}else if (itemQuality<0.2) {
-			setName("low quality "+getName());
-		}else {
-			setName("normal "+getName());
+		if (category!=6) {
+			itemQuality=itemQuality/baseGoldValue;		
+			if (itemQuality>0.9) {
+				setName("perfect "+getName());
+			}else if (itemQuality>0.7) {
+				setName("good "+getName());
+			}else if (itemQuality<0.2) {
+				setName("low quality "+getName());
+			}else {
+				setName("normal "+getName());
+			}
 		}
+		
 	}
 	public void addSuffix(ItemSuffix suffix) {
 		//TODO add all stats of suffix to item
