@@ -108,7 +108,30 @@ public class Act1 extends Act{
 		addRandomRoom(8, 3);
 		//room 8,4
 		addRandomRoom(8, 4);
-		
+		//room 2,4
+		addRandomRoom(2, 4);
+		//room 2,5
+		addRandomRoom(2, 5);
+		//room 2,6
+				addRandomRoom(2, 6);
+		//room 3,6
+				addRandomRoom(3, 6);
+		//room 3,7
+				addRandomRoom(3, 7);
+		//room 3,8
+				addRandomRoom(3, 8);
+		//room 3,9
+		addRandomRoom(3, 9);
+		//room 4,9
+		addRandomRoom(4, 9);
+		//room 5,9
+		addRandomRoom(5, 9);
+		//room 6,9
+		addRandomRoom(6, 9);
+		//room 7,9
+		addRandomRoom(7, 9);
+		//room 8,9
+		addRandomRoom(8, 9);
 	}
 	
 	@Override

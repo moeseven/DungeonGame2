@@ -106,7 +106,10 @@ public class Fight implements Serializable{
 			heroes.remove(dead.get(i));	
 		}
 		for(int i=0; i<stressed.size();i++) {//remove stressed heroes
-			if(stressed.get(i).getPlayer() instanceof DungeonMaster) {				
+			if(stressed.get(i).getPlayer() instanceof DungeonMaster) {	
+				for (int j = 0; j < heroes.size(); j++) {
+					heroes.get(j).gainExp(stressed.get(i).getExperienceValue());
+				}
 			}else {
 				heroes.remove(stressed.get(i));	
 				stressed.get(i).getPlayer().getAvailableHeroes().add(stressed.get(i));//flee to tavern
