@@ -229,7 +229,10 @@ public class Item_new extends Item implements Serializable{
 			magicDmg+=suffix.magicDmg;
 			stunChance+=suffix.stunChance;
 			//gold value change
-			goldValue=(int) (goldValue*(suffix.goldValue/suffix.baseGoldValue/suffix.getNumberOfModifications()));
+			goldValue=(int) (goldValue*(suffix.goldValue/suffix.baseGoldValue));
+//			if (goldValue==0) {//ugly fix to random 0 cost items
+//				goldValue=baseGoldValue*3;
+//			} 
 			//name change
 			this.numberOfSuffixes++;
 			if (numberOfSuffixes==1) {

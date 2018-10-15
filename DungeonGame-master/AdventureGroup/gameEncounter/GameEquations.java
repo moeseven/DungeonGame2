@@ -216,7 +216,7 @@ public class GameEquations {
 		}
 		if (splitted.length>1) {
 			r=Math.pow(Math.random(), power);
-			value=(int) (Integer.parseInt(splitted[0])+r*(1+Integer.parseInt(splitted[1])-Integer.parseInt(splitted[0])));
+			value=(int) (Integer.parseInt(splitted[0])+r*(1.0+Integer.parseInt(splitted[1])-Integer.parseInt(splitted[0])));
 		}else {
 			value=Integer.parseInt(splitted[0]);
 		}

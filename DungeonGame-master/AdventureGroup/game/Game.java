@@ -45,6 +45,7 @@ public class Game implements Serializable {
 		log = new MyLog();
 		this.availableQuests = new LinkedList<Quest>();
 		town = new Town(this);
+		
 		room = town;
 		activeAct = new Act1(this);
 		activeQuest = activeAct.getMainQuest();
@@ -71,10 +72,12 @@ public class Game implements Serializable {
 				if (getPlayer().getAvailableHeroes().get(i).getStress() < 0) {
 					getPlayer().getAvailableHeroes().get(i).setStress(0);
 				}
-				getPlayer().getAvailableHeroes().get(i)
-						.setHp(GameEquations.maxHealthCalc(getPlayer().getAvailableHeroes().get(i)));
+				getPlayer().getAvailableHeroes().get(i).heal(getPlayer().getAvailableHeroes().get(i).getVitality());
+						
 			}
 			if (getPlayer().getAvailableHeroes().size() < 10) {
+				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
+				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
 				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
 			}
 		}
