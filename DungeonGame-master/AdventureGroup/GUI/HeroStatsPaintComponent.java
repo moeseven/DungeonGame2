@@ -39,7 +39,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		LinkedList<String> lines=new LinkedList<String>();
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
-		lines.add("health: "+player.getSelectedHero().getHp()+"/"+GameEquations.maxHealthCalc(player.getSelectedHero())+" ("+player.getSelectedHero().getWounds()+")");
+		lines.add("health: "+player.getSelectedHero().getHp()+"/"+GameEquations.maxHealthCalc(player.getSelectedHero())+" ("+player.getSelectedHero().getLevel()+")");
 		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
 		lines.add("");
 //		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
@@ -78,6 +78,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("armor: "+player.getSelectedHero().getArmor()+"("+(100-GameEquations.damageReducedByArmor(100, player.getSelectedHero().getArmor()))+"%)");
 		lines.add("spell resist: "+player.getSelectedHero().getSpellResist());
 		lines.add("fire resistance: "+player.getSelectedHero().getResistFire());
+		lines.add("lightning resistance: "+player.getSelectedHero().getResistLightning());
 		lines.add("cold resistance: "+player.getSelectedHero().getResistCold());
 		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison());
 		lines.add("bleed resistance: "+player.getSelectedHero().getResistBleed());

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
@@ -54,6 +55,21 @@ public class HandPaintComponent extends JComponent{
 		super.paintComponent(g);
 		//g.drawImage(image,0,0,null);
 		for (int i=0;i<fw.getGame().getPlayer().getSelectedHero().getHand().size();i++){
+			if (fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getAttackDamage()>0) {
+				g.drawImage(StaticImageLoader.getImage(16).getScaledInstance(120,102, 2),20+i*100, 15,null);
+			}else {
+				if (fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getBlock()>0) {
+					g.drawImage(StaticImageLoader.getImage(17).getScaledInstance(120,102, 2),20+i*100, 15,null);
+				}else {
+					if (fw.getGame().getPlayer().getSelectedHero().getHand().get(i).isFriendly()) {
+						g.drawImage(StaticImageLoader.getImage(18).getScaledInstance(120,102, 2),20+i*100, 15,null);
+					}else {
+						g.drawImage(StaticImageLoader.getImage(19).getScaledInstance(120,102, 2),20+i*100, 15,null);
+					}
+					
+				}
+			}
+			
 			g.setColor(Color.black);
 			g.drawString(fw.getGame().getPlayer().getSelectedHero().getHand().get(i).getName(), 20+i*100, 15);
 			g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getHand().get(i).computeManaCost(fw.getGame().getPlayer().getSelectedHero()), 5+i*100, 10);

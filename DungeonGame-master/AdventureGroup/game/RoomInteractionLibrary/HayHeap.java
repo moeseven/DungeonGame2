@@ -51,7 +51,7 @@ public class HayHeap extends RoomInteraction{
 		MonsterRace monsterRace= new RaceRat(game);
 		int monstersAmount= (int) Math.max(1, (Math.random()*5));
 		for(int i=0; i<monstersAmount;i++) {
-			game.getRoom().getMonsters().add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get(0)));
+			game.getRoom().addMonster(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get(0)));
 		}
 		game.getRoom().setHasFight(true);		
 		game.getRoom().getInteractions().remove(this);

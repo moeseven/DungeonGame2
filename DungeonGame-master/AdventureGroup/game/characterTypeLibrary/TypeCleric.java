@@ -58,6 +58,7 @@ public class TypeCleric extends CharacterClass{
 		hero.setSpellResist(hero.getSpellResist()+5);
 		hero.setSpellPower(hero.getSpellPower()+3);
 		hero.setResistStress(hero.getResistStress()+8);
+		hero.setStunChance(hero.getStunChance()+2);
 	}
 
 }

@@ -16,6 +16,7 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("fireArrow");
 		cardPool.add("frostArrow");
 		cardPool.add("bandage");
+		cardPool.add("energize");
 		name="archer";
 		items.add(game.itemBuilder.buildItem("shortBow",5));	
 		for (int i=0; i<2;i++) {

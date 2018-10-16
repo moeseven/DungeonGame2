@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import GUI.grafics.StaticImageLoader;
@@ -120,7 +121,7 @@ public class GuiRoom extends JPanel{
 		//rectangles
 		rc=new RectangleClicker();
 		//Inventory player
-		rc.addRect(new ClickableRectangle("search inventory",455,10,90,40) {
+		rc.addRect(new ClickableRectangle("search inventory",375,80,90,40) {
 			@Override
 			public void onClick() {
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
@@ -137,7 +138,7 @@ public class GuiRoom extends JPanel{
 			}		
 		});
 		//Inventory shop
-		rc.addRect(new ClickableRectangle("search shop",455,80,90,40) {
+		rc.addRect(new ClickableRectangle("search shop",465,80,90,40) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -156,7 +157,7 @@ public class GuiRoom extends JPanel{
 		});
 		
 		//item description
-		rc.addRect(new ClickableRectangle("description",305,10,150,110) {
+		rc.addRect(new ClickableRectangle("description",305,10,250,110) {
 			@Override
 			public void onClick() {
 
@@ -232,7 +233,7 @@ public class GuiRoom extends JPanel{
 			}		
 		});
 		//gold
-		rc.addRect(new ClickableRectangle("gold",305,120,150,20) {
+		rc.addRect(new ClickableRectangle("gold",305,120,250,20) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -302,6 +303,8 @@ public class GuiRoom extends JPanel{
 		MyMouseListener ml = new MyMouseListener();
 		super.addMouseListener(ml);
 		setLayout(new BorderLayout());
+		JScrollPane scroll= new JScrollPane(new HeroStatsPaintComponent(gw.getGame().getPlayer()));
+		add(scroll,BorderLayout.EAST);
 		setVisible(true);
 		//rectangles
 		rc=new RectangleClicker();
@@ -442,6 +445,7 @@ private class MyMouseListener extends MouseAdapter{
 protected void paintComponent(Graphics g){
 	super.paintComponent(g);
 	g.drawImage(StaticImageLoader.getImage(tavern.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
+	//g.drawImage(StaticImageLoader.getImage(gw.getGame().getPlayer().getSelectedHero().getImageNumber()).getScaledInstance(180, 153, 3),300,0,null);
 	for(int i=0; i<rc.rectAngles.size();i++) {
 		g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 		for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {

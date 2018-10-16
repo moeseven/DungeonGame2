@@ -69,7 +69,7 @@ public class UndeadCorpse extends RoomInteraction{
 		}	
 		MonsterRace monsterRace= new RaceZombie(game);
 		for(int i=0; i<Math.min(game.dungeonMaster.getGroupSize(),amount);i++) {
-			game.getRoom().getMonsters().add(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get(0)));
+			game.getRoom().addMonster(new Hero("", game.dungeonMaster,monsterRace, monsterRace.getPositionClasses(1).get(0)));
 		}
 		game.getRoom().setHasFight(true);		
 		game.getRoom().getInteractions().remove(this);

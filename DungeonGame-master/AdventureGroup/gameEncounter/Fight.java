@@ -108,7 +108,7 @@ public class Fight implements Serializable{
 		for(int i=0; i<stressed.size();i++) {//remove stressed heroes
 			if(stressed.get(i).getPlayer() instanceof DungeonMaster) {	
 				for (int j = 0; j < heroes.size(); j++) {
-					heroes.get(j).gainExp(stressed.get(i).getExperienceValue());
+					heroes.get(j).gainExp(stressed.get(i).getExperienceValue()/heroes.size());
 				}
 			}else {
 				heroes.remove(stressed.get(i));	
@@ -116,11 +116,7 @@ public class Fight implements Serializable{
 			}
 		}
 		if (this.isFightOver()){
-			for(int i=0; i<heroes.size();i++) {
-				heroes.get(i).setBlock(0);
-				heroes.get(i).removeBuffs();	
-				heroes.get(i).applyNegativeTurnEffects();
-			}
+			fightOverHandling();
 			if(heroes.size()>0) {
 				game.log.addLine("§§§§§§§§§§ Fight won! §§§§§§§§§§");
 			}else {
@@ -200,6 +196,25 @@ public class Fight implements Serializable{
 				}
 			}						
 		}		
+	}
+	public void fightOverHandling() {
+		retreatWish=0;
+		for(int i=0; i<heroes.size();i++) {
+			heroes.get(i).setBlock(0);
+			heroes.get(i).removeBuffs();	
+			heroes.get(i).applyNegativeTurnEffects();
+		}
+		for(int i=0; i<monsters.size();i++) {
+			monsters.get(i).setBlock(0);
+			monsters.get(i).removeBuffs();	
+			monsters.get(i).applyNegativeTurnEffects();
+			monsters.get(i).applyNegativeTurnEffects();
+			monsters.get(i).applyNegativeTurnEffects();
+			monsters.get(i).applyNegativeTurnEffects();
+			monsters.get(i).setPoison(0);
+			monsters.get(i).setBleed(0);
+			monsters.get(i).setCold(0);
+		}
 	}
 	//attack indication 
 	public void precalculateMonsterTurn(Hero monster) {

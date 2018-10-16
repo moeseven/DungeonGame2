@@ -220,9 +220,9 @@ public class GameEquations {
 		}else {
 			value=Integer.parseInt(splitted[0]);
 		}
-		//modify gold value
+		//modify quality
 		item.setNumberOfModifications(item.getNumberOfModifications()+1);
-		item.setGoldValue(item.getGoldValue()+(int) (item.getBaseGoldValue()*r));
+		item.setItemQuality(item.getItemQuality()+r);
 		return value;
 				
 	}

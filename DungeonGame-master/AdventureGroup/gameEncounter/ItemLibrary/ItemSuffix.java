@@ -20,6 +20,9 @@ public class ItemSuffix extends Item_new{
 	}
 
 	@Override
+	public void updateGoldValue() {
+	}
+	@Override
 	public void updateName() {
 		
 	}

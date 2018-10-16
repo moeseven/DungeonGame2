@@ -55,7 +55,7 @@ public class RaceOgre extends MonsterRace{
 		hero.setArmor(12);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*95.0));
-		hero.setExperienceValue(280);
+		hero.setExperienceValue(480);
 		//ogre
 		hero.setManaPower(2);
 		//deck		

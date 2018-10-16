@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public abstract class Item implements Serializable{
+	protected double itemQuality=0;
 	protected int imageNumber=101;
 	protected int numberOfSuffixes=0;
 	protected String itemClass="bow";
@@ -173,6 +174,12 @@ public abstract class Item implements Serializable{
 	}
 	public void setNumberOfSuffixes(int numberOfSuffixes) {
 		this.numberOfSuffixes = numberOfSuffixes;
+	}
+	public double getItemQuality() {
+		return itemQuality;
+	}
+	public void setItemQuality(double itemQuality) {
+		this.itemQuality = itemQuality;
 	}
 	
 }

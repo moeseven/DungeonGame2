@@ -169,20 +169,18 @@ public class Item_new extends Item implements Serializable{
 		if (imageNumber!=null) {
 			this.imageNumber= Integer.parseInt(imageNumber);
 		}
+		if (numberOfModifications!=0) {
+			itemQuality=itemQuality/numberOfModifications;
+		}
+		updateGoldValue();
 		updateName();
 	}
+	public void updateGoldValue(){
+		goldValue=(int) (baseGoldValue*(1+itemQuality));
+	}
 	public void updateName() {
-		// adjust name
-		double itemQuality=0;
-		if (numberOfModifications==0) {
-			itemQuality=baseGoldValue;
-		}else {
-			itemQuality=(this.goldValue-baseGoldValue)/numberOfModifications;
-		}
-		
-		this.goldValue=(int) (baseGoldValue+itemQuality);
-		if (category!=6) {
-			itemQuality=itemQuality/baseGoldValue;		
+		// adjust name				
+		if (category!=6) {	
 			if (itemQuality>0.9) {
 				setName("perfect "+getName());
 			}else if (itemQuality>0.7) {
@@ -229,10 +227,7 @@ public class Item_new extends Item implements Serializable{
 			magicDmg+=suffix.magicDmg;
 			stunChance+=suffix.stunChance;
 			//gold value change
-			goldValue=(int) (goldValue*(suffix.goldValue/suffix.baseGoldValue));
-//			if (goldValue==0) {//ugly fix to random 0 cost items
-//				goldValue=baseGoldValue*3;
-//			} 
+			goldValue=(int) (goldValue*(1+suffix.getItemQuality()));
 			//name change
 			this.numberOfSuffixes++;
 			if (numberOfSuffixes==1) {
@@ -340,6 +335,9 @@ public class Item_new extends Item implements Serializable{
 		}
 		if (resistFire!=0) {
 			description.add("fire resistance: "+resistFire+"%");
+		}
+		if (resistFire!=0) {
+			description.add("lightning resistance: "+resistLightning+"%");
 		}
 		if (resistCold!=0) {
 			description.add("cold resistance: "+resistCold+"%");

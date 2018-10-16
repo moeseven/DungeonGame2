@@ -167,7 +167,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//gold
-			rc.addRect(new ClickableRectangle("gold",210,70,55,20) {
+			rc.addRect(new ClickableRectangle("gold",515,120,90,20) {
 				@Override
 				public void onClick() {
 					// TODO Auto-generated method stub
@@ -175,7 +175,12 @@ public class HeroInventoryPaintComponent extends JComponent{
 				@Override
 				public void updateCaption() {
 					caption.removeFirst();
-					caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());					
+					if (gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						caption.addFirst("gold: "+gw.getGame().getPlayer().getGold()+" ("+gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue()+")");					
+					}else {
+						caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());					
+					}
+					
 				}		
 			});
 			//head

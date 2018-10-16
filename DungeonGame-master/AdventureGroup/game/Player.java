@@ -77,7 +77,7 @@ public class Player implements Serializable{
 	public void removeHero(Hero hero) {
 		if(heroes.size()>=1&&heroes.contains(hero)) {
 			heroes.remove(hero);
-			hero.setPlayer(null);
+			//hero.setPlayer(null);
 //			hero.setInventory(new LinkedList<Item>());
 		}
 	}

@@ -15,6 +15,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 
@@ -220,6 +222,20 @@ public class HeroInfoComponent extends JComponent{
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		for (int i=0;i<hero.getLvlUpCards().size();i++){
+			if (hero.getLvlUpCards().get(i).getAttackDamage()>0) {
+				g.drawImage(StaticImageLoader.getImage(16).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
+			}else {
+				if (hero.getLvlUpCards().get(i).getBlock()>0) {
+					g.drawImage(StaticImageLoader.getImage(17).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
+				}else {
+					if (hero.getLvlUpCards().get(i).isFriendly()) {
+						g.drawImage(StaticImageLoader.getImage(18).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
+					}else {
+						g.drawImage(StaticImageLoader.getImage(19).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
+					}
+					
+				}
+			}
 			g.setColor(Color.black);
 			g.drawString(hero.getLvlUpCards().get(i).getName(), 10, 15+i*cardHeight);
 			g.drawString(""+hero.getLvlUpCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);

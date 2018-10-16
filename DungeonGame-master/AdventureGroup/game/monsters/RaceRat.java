@@ -52,7 +52,7 @@ public class RaceRat extends MonsterRace{
 		//
 		hero.setGood(false);
 		hero.setGold(0);
-		hero.setExperienceValue(8);
+		hero.setExperienceValue(9);
 		//zombieslow
 		hero.setManaPower(1);
 		//deck		

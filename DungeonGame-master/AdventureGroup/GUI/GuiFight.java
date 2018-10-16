@@ -72,7 +72,7 @@ public class GuiFight extends JPanel{
 			//try to retreat
 			fw.getGame().getRoom().getFight().retreatWish+=fw.getGame().getPlayer().getSelectedHero().getMana()/fw.getGame().getPlayer().getSelectedHero().getManaPower();			
 			if (Math.random()*3<fw.getGame().getRoom().getFight().retreatWish&&fw.getGame().getPlayer().getSelectedHero().getMana()>0) {
-				fw.getGame().getRoom().getFight().retreatWish=0;
+				fw.getGame().getRoom().getFight().handleFightisOver();
 				fw.getGame().retreatHeroes();
 				fw.windowswitch();
 			}else{

@@ -161,7 +161,7 @@ public class Hero implements Serializable{
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
-		spellDuration=2;
+		spellDuration=3;
 		setExperienceValue(10);
 	}
 	public void initialize() {			
@@ -399,8 +399,10 @@ public class Hero implements Serializable{
 	}
 	public void heal(int heal) {//prevent overhealing
 		int healing= Math.min(heal, GameEquations.maxHealthCalc(this)-getHp());
-		this.setHp(this.getHp()+healing);
-		player.getGame().log.addLine(name+" healed for "+healing+" hp");		
+		if (healing>0) {
+			this.setHp(this.getHp()+healing);
+			player.getGame().log.addLine(name+" healed for "+healing+" hp");
+		}				
 	}
 	public boolean targetInRange(Hero target2, int range) {
 		//this seems to not work for targeting own heroes

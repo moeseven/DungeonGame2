@@ -64,9 +64,9 @@ public class Act1 extends Act{
 		questRoom.getInteractions().add(interaction);
 		questRoom.setHasFight(true);
 		monster=new RaceGoblin(game);
-		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
-		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
-		questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
+		questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
+		questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
+		questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		
 		addRoom(questRoom, 1, 4);
 		//room 8,8 ~~~main act quest~~~		
@@ -185,10 +185,10 @@ public class Act1 extends Act{
 		    while (it.hasNext()) {
 		    	Map.Entry pair = (Map.Entry)it.next();
 		    	if (count==randomToken) {
-			        int numberOfMonsters = (Integer) pair.getValue();
-			        for (int i = Math.min(numberOfMonsters+1, game.dungeonMaster.getGroupSize()); i >0; i--) {		
+			        int numberOfMonsters = Math.min((Integer) pair.getValue(),game.dungeonMaster.getGroupSize());    
+			        for (int i = numberOfMonsters; i >0; i--) {		
 			        	MonsterRace mapMonster=(MonsterRace) pair.getKey();
-						questRoom.getMonsters().add(new Hero("", game.dungeonMaster,mapMonster, mapMonster.getPositionClasses(i).get((int) Math.min(mapMonster.getPositionClasses(i).size()-1, Math.random()*mapMonster.getPositionClasses(i).size()))));//if multiple classes maybe choose randomly
+						questRoom.addMonster(new Hero("", game.dungeonMaster,mapMonster, mapMonster.getPositionClasses(i).get((int) Math.min(mapMonster.getPositionClasses(i).size()-1, Math.random()*mapMonster.getPositionClasses(i).size()))));//if multiple classes maybe choose randomly
 					}					
 				}
 		    	count++;
@@ -214,7 +214,7 @@ public class Act1 extends Act{
 			questRoom.getInteractions().add(questInteraction);
 			questRoom.setHasFight(true);
 			MonsterRace monster=new BossNecromancer(game);
-			questRoom.getMonsters().add(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
+			questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 			rooms.add(questRoom);
 			description="find the -"+questItem.getName()+"- and return it to the town.";
 			goldReward=600;

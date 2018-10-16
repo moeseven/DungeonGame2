@@ -79,6 +79,9 @@ public class EffectBuilder {
 		if (name.equals("magicSpell")) {
 			return new magicSpellEffect(p);
 		}
+		if (name.equals("mana")) {
+			return new manaEffect(p);
+		}
 		if (name.equals("manaBuff")) {
 			return new manaBuffEffect(p);
 		}

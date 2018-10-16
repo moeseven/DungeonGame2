@@ -57,7 +57,18 @@ public abstract class Room implements Serializable{
 		visited=true;
 	}
 	//here the room is set up//food consumption//torch level
-	
+	public boolean addMonster(Hero m){
+		if (monsters.size()<game.dungeonMaster.groupSize) {
+			monsters.add(m);
+			//increase experience bounty for larger fights
+			for (int i = 0; i < monsters.size(); i++) {
+				monsters.get(i).setExperienceValue((int) (monsters.get(i).getExperienceValue()*(0.9+monsters.size()/10.0)));
+			}
+			return true;
+		}    else {
+			return false;
+		}
+	}
 	public Fight getFight() {
 		if(hasFight) {
 			return fight;
@@ -98,12 +109,6 @@ public abstract class Room implements Serializable{
 	}
 	public void setTavern(Tavern tavern) {
 		this.tavern = tavern;
-	}
-	public LinkedList<Hero> getMonsters() {
-		return monsters;
-	}
-	public void setMonsters(LinkedList<Hero> monsters) {
-		this.monsters = monsters;
 	}
 	public boolean isMedicineOpen() {
 		return medicineOpen;
