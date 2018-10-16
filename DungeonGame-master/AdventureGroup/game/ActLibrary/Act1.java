@@ -69,15 +69,24 @@ public class Act1 extends Act{
 		questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		
 		addRoom(questRoom, 1, 4);
-		//room 8,8 ~~~main act quest~~~		
+		//room 9,8 ~~~main act quest~~~		
 		mainQuest=new Act1Finish(game);
-		addRoom(mainQuest.getRooms().getFirst(), 8, 8);
-		//room 8,7
+		addRoom(mainQuest.getRooms().getFirst(), 9, 8);
+		//room 8,8
 		questRoom=new EmptyRoom(game);
 		interaction = new Chest(game);
 		questRoom.getInteractions().add(interaction);
 		questRoom.getInteractions().add(new UndeadCorpse(game,30,(int) Math.random()*50));
 		questRoom.getInteractions().add(new UndeadCorpse(game,90,(int) Math.random()*50));
+		addRoom(questRoom, 8,8);
+		//room 8,7
+		questRoom=new EmptyRoom(game);
+		interaction= new Sack(game, 30);
+		questRoom.getInteractions().add(interaction);
+		interaction = new Well(game);
+		questRoom.getInteractions().add(interaction);
+		interaction= new Sack(game, 30);
+		questRoom.getInteractions().add(interaction);
 		addRoom(questRoom, 8,7);
 		//room 8,6
 		questRoom=new EmptyRoom(game);
@@ -94,6 +103,43 @@ public class Act1 extends Act{
 		interaction = new AncientTome(game);
 		questRoom.getInteractions().add(interaction);
 		addRoom(questRoom, 5, 4);
+		//room 9,6
+		questRoom=new EmptyRoom(game);
+		Chest chest = new Chest(game);
+		chest.setGold(chest.getGold()+50);
+		questRoom.getInteractions().add(chest);
+		monster=new RaceGoblin(game);
+		for (int i = 1; i < 6; i++) {
+			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
+		}
+		addRandomRoom(9, 6);
+		//room 7,1
+		questRoom=new EmptyRoom(game);
+		monster=new RaceGoblin(game);
+		for (int i = 1; i < 6; i++) {
+			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
+		}
+		addRandomRoom(7, 1);
+		//room 7,0
+		questRoom=new EmptyRoom(game);
+		chest = new Chest(game);
+		chest.setGold(chest.getGold()+100);
+		interaction=new AncientTome(game);
+		questRoom.getInteractions().add(interaction);
+		questRoom.getInteractions().add(chest);
+		interaction=new AncientTome(game);
+		questRoom.getInteractions().add(interaction);
+		addRandomRoom(7, 0);
+		//room 4,7
+		questRoom=new EmptyRoom(game);
+		chest = new Chest(game);
+		chest.setGold(chest.getGold()+20);
+		questRoom.getInteractions().add(chest);
+		monster=new RaceGoblin(game);
+		for (int i = 1; i < 5; i++) {
+			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
+		}
+		addRandomRoom(4, 7);
 		//room 5,3
 		addRandomRoom(5, 3);
 		//room 5,2
@@ -113,13 +159,13 @@ public class Act1 extends Act{
 		//room 2,5
 		addRandomRoom(2, 5);
 		//room 2,6
-				addRandomRoom(2, 6);
+		addRandomRoom(2, 6);
 		//room 3,6
-				addRandomRoom(3, 6);
+		addRandomRoom(3, 6);
 		//room 3,7
-				addRandomRoom(3, 7);
+		addRandomRoom(3, 7);
 		//room 3,8
-				addRandomRoom(3, 8);
+		addRandomRoom(3, 8);
 		//room 3,9
 		addRandomRoom(3, 9);
 		//room 4,9

@@ -52,5 +52,21 @@ public class Chest extends RoomInteraction{
 	public void setItems(LinkedList<Item> items) {
 		this.items = items;
 	}
+
+	public int getCharges() {
+		return charges;
+	}
+
+	public void setCharges(int charges) {
+		this.charges = charges;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
 	
 }
