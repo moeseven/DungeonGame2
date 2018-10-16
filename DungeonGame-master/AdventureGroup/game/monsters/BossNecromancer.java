@@ -134,7 +134,7 @@ public class BossNecromancer extends MonsterRace{
 		@Override
 		public boolean isFriendly() {
 			// TODO Auto-generated method stub
-			return false;
+			return true;
 		}
 		
 	}
