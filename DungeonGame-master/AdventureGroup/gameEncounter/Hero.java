@@ -482,7 +482,6 @@ public class Hero implements Serializable{
 		}
 	}
 	public void gainExp(int exp) {	
-		//int t=GameEquations.experienceThresholdForLevelUp(level);
 		int expToNextLvl=GameEquations.experienceThresholdForLevelUp(level)-experience;
 		if(expToNextLvl<exp) {
 			experience=GameEquations.experienceThresholdForLevelUp(level);
@@ -540,9 +539,13 @@ public class Hero implements Serializable{
 			this.die();
 		}
 	}
-	public void sufferPoison() {	
-		player.getGame().log.addLine(name+" suffers poison damage of "+poison+".");
+	public void sufferPoison() {
+		if (poison>hp/1.5) {
+			player.getGame().log.addLine(name+" suffers poison damage of "+poison+".");
+		}
+		
 		this.setHp(hp-poison);
+		poison=0;
 		if(hp<=0) {
 			hp=0;
 			this.die();
@@ -596,6 +599,7 @@ public class Hero implements Serializable{
 		return true;
 	}
 	public boolean takePoisonDamage(int poisonAmount, int bonus) {
+		poisonAmount+=poison/2;
 		if (bonus>0) {
 			poison+=poisonAmount*(1+bonus/100);
 		}else {

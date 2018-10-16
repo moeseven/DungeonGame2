@@ -198,9 +198,9 @@ public class GameEquations {
 	}
 	public static int experienceThresholdForLevelUp(int level) {
 		if(level==0) {
-			return 50;
+			return 40;
 		}else {
-			return experienceThresholdForLevelUp(level-1)+100*level;
+			return experienceThresholdForLevelUp(level-1)+40+10*level;
 		}		
 	}
 	///Items
