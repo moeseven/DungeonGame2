@@ -28,7 +28,6 @@ public abstract class Card implements Serializable,Cloneable{
 	}
 
 	public boolean playable(Hero self){
-		//poison here
 		if(isFriendly()) {
 			if(self.getTarget().getPlayer()==self.getPlayer()) {
 				return castable(self);

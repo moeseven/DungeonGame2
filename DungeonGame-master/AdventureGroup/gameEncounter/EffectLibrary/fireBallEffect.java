@@ -18,7 +18,9 @@ public class fireBallEffect extends CardEffect{
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			nextTargets.add(self.getTargets().get(i));
-			self.doFireDamage(GameEquations.calculateSpellFireDamage((int)(card.getSpellDamage()*((card.getX())*(card.getX()/4.0))),self), self.getTargets().get(i));
+			self.doFireDamage(GameEquations.calculateSpellFireDamage((int)(card.getSpellDamage()*card.getX()),self), self.getTargets().get(i));
+			//increase burn
+			self.getTargets().get(i).setFire(self.getTargets().get(i).getFire()*(card.getX()));
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
@@ -31,7 +33,7 @@ public class fireBallEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card_new card) {
 		// TODO Auto-generated method stub
-		return "consumes all mana, " +GameEquations.calculateSpellFireDamage((int)(card.getSpellDamage()*(self.getMana())*(self.getMana()/4.0)), self)+" fire damage";
+		return GameEquations.calculateSpellFireDamage((int)(card.getSpellDamage()*self.getMana()), self)+" fire damage and enhanced burning";
 	}
 
 }

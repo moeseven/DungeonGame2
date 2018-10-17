@@ -199,7 +199,7 @@ public class Hero implements Serializable{
 		//poison
 		if(poison>0) {		//poison increases when using mana		
 			sufferPoison();	
-			poison-=1;		
+			poison+=1;		
 		}		
 		//bleed
 		if(bleed>0) {
@@ -599,7 +599,6 @@ public class Hero implements Serializable{
 		return true;
 	}
 	public boolean takePoisonDamage(int poisonAmount, int bonus) {
-		poisonAmount+=poison/2;
 		if (bonus>0) {
 			poison+=poisonAmount*(1+bonus/100);
 		}else {

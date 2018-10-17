@@ -117,12 +117,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 				previousSuccess=allEffects.get(i).applyEffect(self,this);				
 			}			
 		}
-		//poison
-		if(self.poison>0) {
-			if(Math.random()>self.resistPoison/100.0) {
-				self.poison+=manaCost;
-			}			
-		}
 		return true;
 	}
 	public String getName() {
