@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Equipment implements Serializable{
 	private Hero hero;
-	
+	private Item potion=null;
 	private Item hand1=null;
 	private Item hand2=null;
 	private Item body=null;
@@ -20,7 +20,7 @@ public class Equipment implements Serializable{
 		boolean success=true;
 		if(item.requiredDexterity<=hero.dexterity&&item.requiredStrength<=hero.strength&&item.requiredIntelligence<=hero.intelligence) {
 			switch (item.getCategory()) {
-			case 0:  consume(item);break;
+			case 0:  equipPotion(item);break;
 	        case 1:  equipHand1(item);break;
 	        case 2:  equipHand2(item);break;
 	        case 3:  equipBiHand(item);break;
@@ -39,6 +39,7 @@ public class Equipment implements Serializable{
 	public boolean unequipItem(Item item) {
 		boolean success=true;
 		switch (item.getCategory()) {
+		case 0:  unequipPotion(); break;
         case 1:  unequipHand1();break;
         case 2:  unequipHand2();break;
         case 3:  unequipBiHand();break;
@@ -56,6 +57,9 @@ public class Equipment implements Serializable{
 	public LinkedList<Item> getAllEquippedItems(){
 		LinkedList<Item> allItems=new LinkedList<Item>();
 		//only return items that are equipable to heroes dont return "teeth,claws" for example
+		if(potion!=null&&potion.droppable) {
+			allItems.add(potion);
+		}
 		if(hand1!=null&&hand1.droppable) {
 			allItems.add(hand1);
 		}		
@@ -76,14 +80,24 @@ public class Equipment implements Serializable{
 		}
 		return allItems;
 	}
-	private void consume(Item item) {
-		if(item.getCategory()==0&&hero.getPlayer().getInventory().contains(item)) {
-			item.mod(hero);
-			hero.getPlayer().getInventory().remove(item);
-		}	
-		
+	public boolean drinkPotion() {
+		if(potion!=null) {
+			potion.mod(hero);
+			potion=null;
+			return true;
+		}else {
+			return false;
+		}		
 	}
 	//equip
+	public void equipPotion(Item item) {
+		if(item.getCategory()==0) {
+			unequipPotion();
+			hero.getPlayer().getInventory().remove(item);			
+			potion=item;					
+		}
+	}
+	
 	public void equipHand1(Item item) {
 		if(item.getCategory()==1) {
 			unequipHand1();
@@ -151,6 +165,12 @@ public class Equipment implements Serializable{
 			
 	}
 	//unequip
+	public void unequipPotion() {
+		if(potion!=null) {
+			hero.getPlayer().getInventory().add(potion);
+		}		
+		potion=null;
+	}
 	public void unequipHand1() {
 		if(hand1!=null) {
 			hand1.demod(hero);
@@ -250,6 +270,12 @@ public class Equipment implements Serializable{
 	}
 	public void setRing2(Item ring2) {
 		this.ring2 = ring2;
+	}
+	public Item getPotion() {
+		return potion;
+	}
+	public void setPotion(Item potion) {
+		this.potion = potion;
 	}
 	
 }

@@ -4,22 +4,19 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.CardLibrary.CastCondition;
 import gameEncounter.CardLibrary.CastConditionBuilder;
 import gameEncounter.CardLibrary.EffectParameters;
 import gameEncounter.EffectLibrary.EffectBuilder;
 import gameEncounter.EffectLibrary.attackEffect;
 import gameEncounter.EffectLibrary.blockEffect;
+import gameEncounter.EffectLibrary.useupEffect;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Card_new extends Card implements Serializable,Cloneable{
-	protected LinkedList<CastCondition> castConditions =new LinkedList<CastCondition>();
-	protected boolean[] legalCastPositions={true,true,true,true,true};
-	protected boolean[] legalTargetPositions={true,true,true,true,true};
-	protected String name;
-	protected boolean isFriendly =false;
-	protected String text="no data";
-	protected LinkedList<CardEffect> allEffects= new LinkedList<CardEffect>();
+	protected LinkedList<CastCondition> castConditions =new LinkedList<CastCondition>();	
+	protected String text="no data";	
 	//protected LinkedList<EffectParameters> allEffectsParameter= new LinkedList<EffectParameters>();
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
@@ -87,7 +84,24 @@ public class Card_new extends Card implements Serializable,Cloneable{
 				this.isFriendly = true;
 			}
 		}
-		
+		//determine image number
+		if (getAttackDamage()>0) {
+			imageNumber=16;
+		}else {
+			if (getBlock()>0) {
+				imageNumber=17;
+			}else {
+				if (isFriendly()) {
+					if (getAllEffects().isEmpty()||getAllEffects().getLast() instanceof useupEffect&&getAllEffects().size()==1) {
+						imageNumber=99;
+					}else {
+						imageNumber=18;
+					}						
+				}else {
+					imageNumber=19;
+				}				
+			}
+		}
 		if (text!=null) {
 			this.text=text;
 		}
@@ -252,15 +266,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public void setFriendly(boolean isFriendly) {
 		this.isFriendly = isFriendly;
-	}
-
-	public LinkedList<CardEffect> getAllEffects() {
-		return allEffects;
-	}
-
-	public void setAllEffects(LinkedList<CardEffect> allEffects) {
-		this.allEffects = allEffects;
-	}
-			
+	}			
 	
 }

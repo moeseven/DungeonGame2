@@ -6,16 +6,22 @@ import java.util.LinkedList;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public abstract class Card implements Serializable,Cloneable{
+	protected int imageNumber=99;
 	protected int critChance=0;
 	protected int manaCost;
 	protected boolean xCostCard=false;
 	protected int x;
+	protected boolean isFriendly =false;
 	protected int accuracy=90;
 	protected int block=0;
 	protected int attackDamage=0;
 	protected int spellDamage=0;
 	protected boolean[] legalCastPositions={true,true,true,true,true};
 	protected boolean[] legalTargetPositions={true,true,true,true,true};
+	protected LinkedList<CardEffect> allEffects= new LinkedList<CardEffect>();
+	protected LinkedList<CardEffect> drawEffects=new LinkedList<CardEffect>();
+	protected LinkedList<CardEffect> discardEffects=new LinkedList<CardEffect>();
+	protected LinkedList<CardEffect> useupEffects=new LinkedList<CardEffect>();
 	protected String name;
 	public Card() {
 		// TODO Auto-generated constructor stub
@@ -156,6 +162,46 @@ public abstract class Card implements Serializable,Cloneable{
 
 	public void setSpellDamage(int spellDamage) {
 		this.spellDamage = spellDamage;
+	}
+
+	public int getImageNumber() {
+		return imageNumber;
+	}
+
+	public void setImageNumber(int imageNumber) {
+		this.imageNumber = imageNumber;
+	}
+
+	public LinkedList<CardEffect> getAllEffects() {
+		return allEffects;
+	}
+
+	public void setAllEffects(LinkedList<CardEffect> allEffects) {
+		this.allEffects = allEffects;
+	}
+
+	public LinkedList<CardEffect> getDrawEffects() {
+		return drawEffects;
+	}
+
+	public void setDrawEffects(LinkedList<CardEffect> drawEffects) {
+		this.drawEffects = drawEffects;
+	}
+
+	public LinkedList<CardEffect> getDiscardEffects() {
+		return discardEffects;
+	}
+
+	public void setDiscardEffects(LinkedList<CardEffect> discardEffects) {
+		this.discardEffects = discardEffects;
+	}
+
+	public LinkedList<CardEffect> getUseupEffects() {
+		return useupEffects;
+	}
+
+	public void setUseupEffects(LinkedList<CardEffect> useupEffects) {
+		this.useupEffects = useupEffects;
 	}
 			
 	

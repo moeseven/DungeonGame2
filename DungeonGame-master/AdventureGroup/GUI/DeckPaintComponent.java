@@ -67,23 +67,9 @@ public class DeckPaintComponent extends JComponent{
 		} 
 	}
 	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
-		//g.drawImage(image,0,0,null);
-		for (int i=0;i<hero.getDeck().getCards().size();i++){
-			if (hero.getDeck().getCards().get(i).getAttackDamage()>0) {
-				g.drawImage(StaticImageLoader.getImage(16).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
-			}else {
-				if (hero.getDeck().getCards().get(i).getBlock()>0) {
-					g.drawImage(StaticImageLoader.getImage(17).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
-				}else {
-					if (hero.getDeck().getCards().get(i).isFriendly()) {
-						g.drawImage(StaticImageLoader.getImage(18).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
-					}else {
-						g.drawImage(StaticImageLoader.getImage(19).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);
-					}
-					
-				}
-			}
+		super.paintComponent(g);		
+		for (int i=0;i<hero.getDeck().getCards().size();i++){	
+			g.drawImage(StaticImageLoader.getImage(hero.getDeck().getCards().get(i).getImageNumber()).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);		
 			g.setColor(Color.WHITE);
 			g.drawString(""+hero.getDeck().getCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);
 			g.setColor(Color.black);

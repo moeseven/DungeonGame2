@@ -129,7 +129,20 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}
 				
 			});
-			//equip/unequip/use
+			//use
+			rc.addRect(new ClickableRectangle("use potion",210,60,55,20) {
+				@Override
+				public void onClick() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().getEquipment().drinkPotion();			
+					}
+				}
+				@Override
+				public void updateCaption() {
+										
+				}		
+			});
+			//equip/unequip
 			rc.addRect(new ClickableRectangle("equip",210,10,55,20) {
 				@Override
 				public void onClick() {
@@ -149,21 +162,14 @@ public class HeroInventoryPaintComponent extends JComponent{
 					
 				}
 				@Override
-				public void updateCaption() {
-					// TODO Auto-generated method stub
-					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem() instanceof ItemConsumable) {
-						caption.removeFirst();
-						caption.add("use");
+				public void updateCaption() {					
+					if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						caption.removeFirst();						
+						caption.addFirst(name);
 					}else {
-						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
-							caption.removeFirst();						
-							caption.addFirst(name);
-						}else {
-							caption.removeFirst();
-							caption.addFirst("unequip");
-						}
+						caption.removeFirst();
+						caption.addFirst("unequip");
 					}
-										
 				}		
 			});
 			//gold
@@ -181,6 +187,27 @@ public class HeroInventoryPaintComponent extends JComponent{
 						caption.addFirst("gold: "+gw.getGame().getPlayer().getGold());					
 					}
 					
+				}		
+			});
+			//potion
+			rc.addRect(new ClickableRectangle("potion",60,142,50,34) {
+				@Override
+				public void onClick() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion());
+					}
+				}
+				@Override
+				public void updateCaption() {
+					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+						caption.removeFirst();
+						caption.addFirst("");
+						this.setImageNumber(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion().getImageNumber());
+					}else {
+						cleanImageNumber();
+						caption.removeFirst();
+						caption.addFirst(name);
+					}					
 				}		
 			});
 			//head
@@ -273,7 +300,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//ring1
-			rc.addRect(new ClickableRectangle("ring1",15,140,30,30) {
+			rc.addRect(new ClickableRectangle("ring1",15,142,30,30) {
 				@Override
 				public void onClick() {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1()!=null) {
@@ -294,7 +321,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}		
 			});
 			//ring2
-			rc.addRect(new ClickableRectangle("ring2",125,140,30,30) {
+			rc.addRect(new ClickableRectangle("ring2",125,142,30,30) {
 				@Override
 				public void onClick() {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2()!=null) {

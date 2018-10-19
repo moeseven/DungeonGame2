@@ -45,16 +45,10 @@ public class HeroFightComponent extends HeroComponent{
 			fw.repaint();
 		}
 		public void mousePressed(MouseEvent e){
-			if(e.getButton()==1){
-				if (!(hero.getPlayer() instanceof DungeonMaster)) {
-					fw.getGame().getPlayer().setSelectedHero(hero);		
-				}								
-			}else{
-				if (e.getButton()==3){
-					fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
-					if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playable(fw.getGame().getPlayer().getSelectedHero())) {
-						fw.getGame().getPlayer().getSelectedHero().getSelectedCard().cast(fw.getGame().getPlayer().getSelectedHero());
-					}
+			if(e.getButton()==1||e.getButton()==3){
+				fw.getGame().getPlayer().getSelectedHero().setNewTarget(hero);
+				if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().playable(fw.getGame().getPlayer().getSelectedHero())) {
+					fw.getGame().getPlayer().getSelectedHero().getSelectedCard().cast(fw.getGame().getPlayer().getSelectedHero());
 				}
 			}
 			fw.revalidate();

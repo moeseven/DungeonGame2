@@ -31,7 +31,9 @@ public abstract class ClickableRectangle {
 	}
 	public abstract void onClick();
 	public abstract void updateCaption();
-	
+	public void cleanImageNumber() {
+		imageNumber=1;
+	}
 	public int getX() {
 		return x;
 	}
@@ -80,6 +82,6 @@ public abstract class ClickableRectangle {
 	public void setFirstLineColor(Color firstLineColor) {
 		this.firstLineColor = firstLineColor;
 	}
-
+	
 	
 }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.Hero;
 import tools.ClickableRectangle;
@@ -27,6 +28,30 @@ public class HeroFightManaComponent extends JComponent{
 		super.setPreferredSize(new Dimension(180,300));
 		setLayout(new BorderLayout());
 		setVisible(true);
+		//use potion
+		ClickableRectangle potion = new ClickableRectangle("",94,0,30,30) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(fw.getGame().getPlayer().getHeroes().contains(fw.getGame().getPlayer().getSelectedHero())&&fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+					fw.getGame().getPlayer().getSelectedHero().getEquipment().drinkPotion();
+					fw.getGuiFight().upadate();
+				}
+					
+			}
+			@Override
+			public void updateCaption() {
+				if (fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+					setImageNumber(fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion().getImageNumber());
+				}else {
+					cleanImageNumber();
+				}
+			}		
+		};
+		if (fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
+			potion.setImageNumber(fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion().getImageNumber());
+		}
+		rc.addRect(potion);
 		//move forward fight movement
 		rc.addRect(new ClickableRectangle(">",70,10,20,10) {
 			@Override
@@ -88,6 +113,9 @@ public class HeroFightManaComponent extends JComponent{
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
+			}			
+			if (rc.rectAngles.get(i).getImageNumber()!=1) {
+				g.drawImage(StaticImageLoader.getImage(rc.rectAngles.get(i).getImageNumber()).getScaledInstance(120,102, 2),rc.rectAngles.get(i).getX()-26,rc.rectAngles.get(i).getY()-18,null);
 			}
 		}
 		int skippedLines=0;

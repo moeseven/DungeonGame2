@@ -4,19 +4,19 @@ import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class HealingPotion extends ItemConsumable{
+public class EnergyPotion extends ItemConsumable{
 
 
-	public HealingPotion() {
+	public EnergyPotion() {
 		super();
 		name="healing potion";
-		this.setImageNumber(220);
-		setGoldValue(35);
+		this.setImageNumber(230);
+		setGoldValue(45);
 	}
 
 	@Override
 	public void mod(Hero hero) {
-		hero.heal((50));		
+		hero.setMana(hero.getMana()+1);		
 	}
 	
 }

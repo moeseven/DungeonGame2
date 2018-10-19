@@ -271,6 +271,7 @@ public class Hero implements Serializable{
 	//Cast resistable spell
 	public boolean castResistableSpellOnHero(Hero hero) {
 		if(Math.random()<(hero.getSpellResist()-magicDmg)/100.0) {
+			player.getGame().log.addLine(hero.getName()+"resisted");
 			return false;
 		}else {
 			return true;

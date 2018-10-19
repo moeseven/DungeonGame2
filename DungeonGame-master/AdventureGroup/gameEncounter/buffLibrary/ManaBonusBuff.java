@@ -12,20 +12,19 @@ public class ManaBonusBuff extends Buff{
 	}
 	@Override
 	public void mod(Hero hero) {
-		// TODO Auto-generated method stub
+		hero.setManaPower(hero.getManaPower()+bonus);
 		
 	}
 
 	@Override
 	public void demod(Hero hero) {
-		// TODO Auto-generated method stub
+		hero.setManaPower(hero.getManaPower()-bonus);
 		
 	}
 
 	@Override
 	public void onTick(Hero hero) {
-		hero.setMana(hero.getMana()+bonus);
-		hero.getPlayer().getGame().log.addLine("+"+bonus+" mana");
+
 	}
 	
 
