@@ -21,7 +21,6 @@ public class Town extends Room{
 		getInteractions().add(new MedicineMan(game)); 
 		getInteractions().add(new QuestBoard(game));
 		getInteractions().add(new TeleportStone(game));
-		getInteractions().add(new Altar(game));
 	}
 
 	@Override

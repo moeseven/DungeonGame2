@@ -9,7 +9,7 @@ public class ManaPotion extends ItemConsumable{
 
 	public ManaPotion() {
 		super();
-		name="healing potion";
+		name="mana potion";
 		this.setImageNumber(230);
 		setGoldValue(45);
 	}

@@ -605,11 +605,10 @@ protected void paintComponent(Graphics g){
 		setVisible(true);
 		//rectangles
 		rc=new RectangleClicker();
-		//Inventory player
+		///from shop
 		rc.addRect(new ClickableRectangle("search inventory",455,10,90,40) {
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 					if(gw.getGame().getPlayer().getInventory().size()>1) {
@@ -620,12 +619,41 @@ protected void paintComponent(Graphics g){
 					
 			}
 			@Override
+			public void updateCaption() {					
+			}		
+		});
+		//item description
+		rc.addRect(new ClickableRectangle("description",305,10,145,110) {
+			@Override
+			public void onClick() {
+
+			}
+			@Override
 			public void updateCaption() {
-				// TODO Auto-generated method stub					
+				// TODO Auto-generated method stub
+				setFirstLineColor(Color.black);
+				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+					gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
+					caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
+					caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
+					//color
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>0) {
+						setFirstLineColor(Color.blue);
+						if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>1) {
+							setFirstLineColor(Color.orange);
+							if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getNumberOfSuffixes()>2) {
+								setFirstLineColor(Color.PINK);
+							}
+						}
+					}
+					//
+				}else {
+					caption=new LinkedList<String>();
+				}					
 			}		
 		});
 		//pray
-		rc.addRect(new ClickableRectangle("pray",455,50,90,40) {
+		rc.addRect(new ClickableRectangle("pray",455,50,90,25) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method st
@@ -636,27 +664,8 @@ protected void paintComponent(Graphics g){
 				// TODO Auto-generated method stub					
 			}		
 		});
-
-		//item description
-		rc.addRect(new ClickableRectangle("description",305,10,150,110) {
-			@Override
-			public void onClick() {
-
-			}
-			@Override
-			public void updateCaption() {
-				// TODO Auto-generated method stub
-				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
-					gw.getGame().getPlayer().getSelectedHero().getSelectedItem().generateItemDescription();						
-					caption=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getDescription();
-					caption.addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getName());
-				}else {
-					caption=new LinkedList<String>();
-				}					
-			}		
-		});
 		//sacrifice
-		rc.addRect(new ClickableRectangle("sacrifice item",455,100,90,20) {
+		rc.addRect(new ClickableRectangle("sacrifice item",455,75,90,25) {
 			@Override
 			public void onClick() {
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
@@ -680,7 +689,7 @@ protected void paintComponent(Graphics g){
 			}		
 		});
 		//sacrifice blood
-		rc.addRect(new ClickableRectangle("sacrifice blood",455,120,90,20) {
+		rc.addRect(new ClickableRectangle("sacrifice blood",455,100,90,25) {
 			@Override
 			public void onClick() {
 				altar.goldForBlood(gw.getGame().getPlayer().getSelectedHero());
@@ -691,6 +700,7 @@ protected void paintComponent(Graphics g){
 				// TODO Auto-generated method stub				
 			}		
 		});
+		rc.updateCaptions();
 	}
 
 	private class MyMouseListener extends MouseAdapter{
@@ -710,14 +720,20 @@ protected void paintComponent(Graphics g){
 		} 
 	}
 	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
+		super.paintComponent(g);				
 		g.drawImage(StaticImageLoader.getImage(altar.getImageNumber()).getScaledInstance(180, 153, 3),-40,0,null);
-		
+		if (gw.getGame().getPlayer().getSelectedHero()!=null&&gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+				g.drawImage(StaticImageLoader.getImage(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getImageNumber()).getScaledInstance(180,153, 3),150,10,null);				
+		}
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+			
 			for(int a=0; a<rc.rectAngles.get(i).getCaption().size();a++) {
+				g.setColor(Color.black);
+				if(a==0) {
+					g.setColor(rc.rectAngles.get(i).getFirstLineColor());
+				}
 				g.drawString(rc.rectAngles.get(i).getCaption().get(a), rc.rectAngles.get(i).getX()+3, rc.rectAngles.get(i).getY()+11+a*11);
-				
 			}
 		}
 	}
