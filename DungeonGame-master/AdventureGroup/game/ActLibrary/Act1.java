@@ -44,7 +44,10 @@ public class Act1 extends Act{
 		interaction = new SleepingOgre(game);
 		questRoom.getInteractions().add(interaction);
 		addRoom(questRoom, 3, 2);
-		//room 2,1
+		//room 2,2
+		questRoom=new EmptyRoom(game);
+		interaction= new Altar(game);
+		questRoom.getInteractions().add(interaction);
 		addRandomRoom(2,2);
 		//room 2,3
 		questRoom=new EmptyRoom(game);
@@ -206,6 +209,7 @@ public class Act1 extends Act{
 			act1Interactions.add(new EvilStatue(game));
 			act1Interactions.add(new AncientTome(game));
 			act1Interactions.add(new UndeadCorpse(game, 12,(int) Math.random()*40));
+			act1Interactions.add(new Altar(game));
 			act1Interactions.add(new Sack(game,10));
 			questRoom.getInteractions().add(act1Interactions.get((int) (Math.random()*act1Interactions.size())));
 		}				

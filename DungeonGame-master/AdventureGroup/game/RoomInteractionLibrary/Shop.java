@@ -31,9 +31,9 @@ public class Shop extends RoomInteraction{
 		items.add(game.generator.generateRandomItem(2.2));
 		items.add(game.generator.generateRandomItem(2.1));
 		items.add(game.generator.generateRandomItem(2));
-		items.add(game.generator.generateRandomItem(1.6));		
-		items.add(new Bandages());
-		items.add(new AntiVenom());
+		items.add(game.generator.generateRandomItem(1.6));	
+		items.add(ItemConsumable.generateRandomConsumable());
+		items.add(ItemConsumable.generateRandomConsumable());
 		items.add(new HealingPotion());
 	}
 

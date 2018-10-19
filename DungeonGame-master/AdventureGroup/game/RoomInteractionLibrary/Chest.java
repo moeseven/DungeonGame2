@@ -6,6 +6,7 @@ import game.Game;
 import game.RoomInteraction;
 import gameEncounter.Hero;
 import gameEncounter.Item;
+import gameEncounter.ItemLibrary.usables.ItemConsumable;
 
 public class Chest extends RoomInteraction{
 	private int charges=1;
@@ -31,7 +32,10 @@ public class Chest extends RoomInteraction{
 		setImageNumber(90);
 		if(charges>0) {
 			if(Math.random()<0.18) {
-				items.add(game.generator.generateRandomItem(0));
+				items.add(game.generator.generateRandomItem(1.5));
+			}
+			if (Math.random()<0.4) {
+				items.add(ItemConsumable.generateRandomConsumable());
 			}
 			charges+=-1;
 			hero.getPlayer().gainGold(gold);

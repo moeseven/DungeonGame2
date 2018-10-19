@@ -64,10 +64,11 @@ public class RaceGoblin extends MonsterRace{
 			super(game);
 			name="warrior";		
 			items.add(game.itemBuilder.buildItem("rustyBlade",4));	
-			for (int i=0; i<3;i++) {
+			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
-			}
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
+				cards.add(game.cardBuilder.buildCard("shortStrike"));
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
+			}			
 			cards.add(game.cardBuilder.buildCard("advancingAttack"));
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
@@ -99,9 +100,10 @@ public class RaceGoblin extends MonsterRace{
 			items.add(game.itemBuilder.buildItem("buckler", 5));
 			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
+				cards.add(game.cardBuilder.buildCard("shortStrike"));
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
 			cards.add(game.cardBuilder.buildCard("advancingAttack"));
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<6;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
@@ -129,11 +131,12 @@ public class RaceGoblin extends MonsterRace{
 			super(game);
 			name="piker";		
 			items.add(game.itemBuilder.buildItem("spear",8));	
-			for (int i=0; i<1;i++) {
-				cards.add(game.cardBuilder.buildCard("meeleAttack"));
-			}
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			for (int i=0; i<2;i++) {
+				cards.add(game.cardBuilder.buildCard("meeleAttack"));				
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
+			}
+			
+			for (int i=0; i<3;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			cards.add(game.cardBuilder.buildCard("carefulSlash"));
@@ -145,7 +148,7 @@ public class RaceGoblin extends MonsterRace{
 			super.modifyHero(hero);
 			//mainstats
 			hero.setImageNumber(45);
-			hero.setStrength(hero.getStrength()+7);
+			hero.setAttackSkill(hero.getAttackSkill()+10);
 			hero.setDexterity(hero.getDexterity()-2);
 			//
 			hero.setArmor(hero.getArmor()+1);			

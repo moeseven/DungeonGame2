@@ -629,13 +629,7 @@ protected void paintComponent(Graphics g){
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method st
-				if (altar.prayers>0) {
-					altar.prayers-=1;
-					gw.getGame().getPlayer().getSelectedHero().healStress(8);
-					gw.getGame().getPlayer().getSelectedHero().heal(1);
-				}else {
-					
-				}
+				altar.pray(gw.getGame().getPlayer().getSelectedHero());
 			}
 			@Override
 			public void updateCaption() {
@@ -662,31 +656,15 @@ protected void paintComponent(Graphics g){
 			}		
 		});
 		//sacrifice
-		rc.addRect(new ClickableRectangle("sacrifice",455,100,90,20) {
+		rc.addRect(new ClickableRectangle("sacrifice item",455,100,90,20) {
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
-				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null&&altar.sacrefices>0) {
+				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
 					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
 					if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 						//sacrifice
-						gw.getGame().getPlayer().getInventory().remove(item);
-						altar.sacrefices-=1;
-						int altarRoll= (int) (Math.random()*1000)+item.getGoldValue();
-						if(altarRoll>920) {
-							gw.getGame().log.addLine("the gods gift you power and insight!");
-							hero.gainExp(300);						
-						}else {
-							if(altarRoll>470) {
-								gw.getGame().log.addLine("the god's are content");
-								hero.gainExp(15);
-							}else {
-								gw.getGame().log.addLine("the god's are angered");
-								hero.takeFireDamage(hero, 45,-1*hero.getResistFire());
-								hero.becomeStressed(30);
-							}
-						}
+						altar.itemForExperience(hero, item);
 						rc.rectAngles.remove(this);
 						if(gw.getGame().getPlayer().getInventory().size()>0) {
 							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
@@ -695,6 +673,18 @@ protected void paintComponent(Graphics g){
 					}				
 				}
 
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub				
+			}		
+		});
+		//sacrifice blood
+		rc.addRect(new ClickableRectangle("sacrifice blood",455,120,90,20) {
+			@Override
+			public void onClick() {
+				altar.goldForBlood(gw.getGame().getPlayer().getSelectedHero());
+				rc.rectAngles.remove(this);
 			}
 			@Override
 			public void updateCaption() {

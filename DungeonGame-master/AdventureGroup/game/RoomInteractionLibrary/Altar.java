@@ -11,7 +11,6 @@ import gameEncounter.ItemLibrary.usables.ExperienceBook;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 
 public class Altar extends RoomInteraction{
-	public int prayers=3;
 	public int sacrefices=2;
 	public Altar(Game game) {
 		super(game);
@@ -36,5 +35,26 @@ public class Altar extends RoomInteraction{
 			hero.getPlayer().getGame().getRoom().setAltarOpen(true);
 		}
 		
+	}
+	public void goldForBlood(Hero hero) {
+		if(sacrefices>0) {
+			int gold=(int) (hero.getHp()*Math.random());
+			hero.finalDamage(gold);
+			hero.getPlayer().gainGold(gold);
+			sacrefices--;
+		}		
+	}
+	public void itemForExperience(Hero hero, Item item) {
+		if(sacrefices>0&&hero.getPlayer().getInventory().contains(item)) {
+			hero.getPlayer().getInventory().remove(item);
+			hero.gainExp((int) (item.getItemQuality()*50));
+			sacrefices--;
+		}
+	}
+	public void pray(Hero hero) {
+		if (sacrefices>0) {
+			hero.healStress(hero.getStress()/2);
+			sacrefices--;
+		}
 	}
 }

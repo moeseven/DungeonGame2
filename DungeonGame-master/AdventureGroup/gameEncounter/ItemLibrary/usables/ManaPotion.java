@@ -4,10 +4,10 @@ import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class EnergyPotion extends ItemConsumable{
+public class ManaPotion extends ItemConsumable{
 
 
-	public EnergyPotion() {
+	public ManaPotion() {
 		super();
 		name="healing potion";
 		this.setImageNumber(230);

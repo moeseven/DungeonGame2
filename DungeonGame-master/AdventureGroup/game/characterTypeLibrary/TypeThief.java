@@ -10,8 +10,8 @@ public class TypeThief extends CharacterClass{
 		super(game);
 		name="thief";
 		cardPool.add("backStab");
-		cardPool.add("blindingBomb");
-		cardPool.add("poisonBomb");
+		cardPool.add("blind");
+		cardPool.add("poisonClowd");
 		cardPool.add("poisonousSlice");		
 		cardPool.add("daggerThrow");
 		cardPool.add("feint");

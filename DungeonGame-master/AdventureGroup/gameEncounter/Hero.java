@@ -607,7 +607,11 @@ public class Hero implements Serializable{
 				player.getGame().log.addLine(name+" resisted poison");
 				return false;
 			}else {
-				poison+=poisonAmount;
+				if (poison>0) {
+					poison+=poisonAmount;
+				}else {
+					poison++;
+				}				
 				player.getGame().log.addLine(name+" got poisoned");
 				return true;
 			}
