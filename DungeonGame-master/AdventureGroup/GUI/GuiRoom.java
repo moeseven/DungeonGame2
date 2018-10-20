@@ -462,7 +462,7 @@ protected void paintComponent(Graphics g){
 		private RoomWindow gw;
 		private MedicineMan mm;
 		private int woundhealfee=110;
-		private int stresshealfee=30;
+		private int stresshealfee=10;
 		private int healfee=5;
 		private MedicineInterface(RoomWindow roomWindow, MedicineMan s) {
 		this.gw=roomWindow;

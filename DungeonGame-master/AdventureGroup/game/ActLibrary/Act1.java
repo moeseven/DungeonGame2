@@ -122,7 +122,7 @@ public class Act1 extends Act{
 		for (int i = 1; i < 6; i++) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
-		addRandomRoom(7, 1);
+		addRoom(questRoom, 7, 1);
 		//room 7,0
 		questRoom=new EmptyRoom(game);
 		chest = new Chest(game);
@@ -132,7 +132,7 @@ public class Act1 extends Act{
 		questRoom.getInteractions().add(chest);
 		interaction=new AncientTome(game);
 		questRoom.getInteractions().add(interaction);
-		addRandomRoom(7, 0);
+		addRoom(questRoom, 7, 0);
 		//room 4,7
 		questRoom=new EmptyRoom(game);
 		chest = new Chest(game);
@@ -142,7 +142,7 @@ public class Act1 extends Act{
 		for (int i = 1; i < 5; i++) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
-		addRandomRoom(4, 7);
+		addRoom(questRoom, 4, 7);
 		//room 5,3
 		addRandomRoom(5, 3);
 		//room 5,2

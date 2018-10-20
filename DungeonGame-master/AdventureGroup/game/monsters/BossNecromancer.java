@@ -55,6 +55,7 @@ public class BossNecromancer extends MonsterRace{
 		hero.setResistPoison(30);
 		hero.setResistStun(30);
 		//
+		hero.setSpellDuration(8);
 		hero.setArmor(4);
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*45.0));
@@ -118,10 +119,9 @@ public class BossNecromancer extends MonsterRace{
 
 		@Override
 		public boolean applyEffect(Hero self) {
-			MonsterRace monster= new RaceZombie(game);
-			self.getPlayer().addHero(new Hero("", self.getPlayer(), monster, monster.getPositionClasses(1).getFirst()));
-			self.getPlayer().getHeroes().getFirst().setUpDrawPile();
-			self.getPlayer().getGame().getRoom().getFight().precalculateMonsterTurn(self.getPlayer().getHeroes().getFirst());
+			MonsterRace monsterRace= new RaceZombie(game);
+			Hero monster=new Hero("", self.getPlayer(), monsterRace, monsterRace.getPositionClasses(1).getFirst());
+			self.getPlayer().getGame().getRoom().getFight().addHeroToFight(monster);
 			return true;
 		}
 

@@ -252,6 +252,17 @@ public class Fight implements Serializable{
 		}
 		monster.setMana(0);
 	}
+	public void addHeroToFight(Hero hero) {
+		if (hero.getPlayer() instanceof DungeonMaster) {
+			monsters.add(hero);
+			game.dungeonMaster.addHero(hero);
+			hero.setUpDrawPile();
+			precalculateMonsterTurn(hero);
+		}else {
+			heroes.add(hero);
+			hero.getPlayer().addHero(hero);
+		}
+	}
 	public void handleFightisOver() {
 		//TODO
 	}
