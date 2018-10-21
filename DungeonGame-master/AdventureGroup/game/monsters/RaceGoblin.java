@@ -24,39 +24,59 @@ public class RaceGoblin extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-//		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(40));
-		hero.setImageNumber(40);
-		hero.setSpeed(11);
-		hero.setBaseHp(55);		
-		//stats
-		hero.setStrength(5);
-		hero.setDexterity(7);
-		hero.setIntelligence(5);
-		hero.setVitality(5);
-		//
-		//attack/defence
-		hero.setAttackSkill(5);
+		//all stats		
+		hero.setStrength(7);
+		hero.setDexterity(11);		
+		hero.setIntelligence(6);
+		hero.setVitality(6);
+		//main attributes
+		hero.setAttackSkill(8);
 		hero.setBlockSkill(5);
-		hero.setAccuracy(9);
-		hero.setDodge(12);
+		hero.setAccuracy(10);
+		hero.setDodge(10);
 		hero.setSpellPower(8);
-		hero.setSpellResist(6);
+		hero.setSpellDuration(8);
 		//
-		//resistances
-		hero.setResistFire(12);
-		hero.setResistCold(3);
-		hero.setResistBleed(7);
+		hero.setArmor(9);
+		hero.setSpeed(11);					
+		hero.setThorns(0);
+		hero.setDraw(4);
+		hero.setManaPower(2);
+		//offensive
+		hero.setCritChance(5);
+		hero.setCritDamage(40);
+		//elemental bonus
+		hero.setStunChance(0);
+		hero.setFireDmg(30);
+		hero.setColdDmg(0);
+		hero.setLightningDmg(25);
+		hero.setPoisonDmg(5);
+		hero.setBleedDmg(5);
+		hero.setMagicDmg(5);		
+		//resistance
+		hero.setResistSpell(10);
+		hero.setResistFire(20);
+		hero.setResistLightning(5);
+		hero.setResistCold(-5);
 		hero.setResistPoison(15);
-		hero.setResistStun(5);
+		hero.setResistBleed(10);
+		hero.setResistStun(0);
+		hero.setResistStress(-20);
+		hero.setStressCap(81);
 		//
-		hero.setArmor(8);
+		hero.setTrapDisarm(10);
+		hero.setBaseHp(55);		
+		//
+		hero.setImageNumber(40);	
+		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*9.0));
-		hero.setExperienceValue(22);
-		hero.setDraw(4);
-		hero.setStressCap(71);
+		hero.setExperienceValue(8);
 		//deck		
-		
+		for (int i=0; i<2;i++) {
+			cards.add(game.cardBuilder.buildCard("basicBlock"));				
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+		}
 	}
 	private class GoblinWarrior extends CharacterClass{
 
@@ -67,10 +87,9 @@ public class RaceGoblin extends MonsterRace{
 			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 				cards.add(game.cardBuilder.buildCard("shortStrike"));
-				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}			
 			cards.add(game.cardBuilder.buildCard("advancingAttack"));
-			for (int i=0; i<6;i++) {
+			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
@@ -101,17 +120,16 @@ public class RaceGoblin extends MonsterRace{
 			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 				cards.add(game.cardBuilder.buildCard("shortStrike"));
-				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
 			cards.add(game.cardBuilder.buildCard("advancingAttack"));
-			for (int i=0; i<6;i++) {
+			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
+			cards.add(game.cardBuilder.buildCard("bullWork"));
 			cards.add(game.cardBuilder.buildCard("sideStep"));
 		}
 
 		public void modifyHero(Hero hero) {
-			// TODO Auto-generated method stub
 			super.modifyHero(hero);
 			//mainstats
 			hero.setImageNumber(46);
@@ -133,10 +151,8 @@ public class RaceGoblin extends MonsterRace{
 			items.add(game.itemBuilder.buildItem("spear",8));	
 			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));				
-				cards.add(game.cardBuilder.buildCard("basicAttack"));
-			}
-			
-			for (int i=0; i<3;i++) {
+			}			
+			for (int i=0; i<1;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
 			cards.add(game.cardBuilder.buildCard("carefulSlash"));
@@ -165,11 +181,7 @@ public class RaceGoblin extends MonsterRace{
 				cards.add(game.cardBuilder.buildCard("rangedAttack"));
 			}
 			cards.add(game.cardBuilder.buildCard("basicBlock"));
-			cards.add(game.cardBuilder.buildCard("basicBlock"));
-			cards.add(game.cardBuilder.buildCard("basicBlock"));
 			cards.add(game.cardBuilder.buildCard("poisonShot"));
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -195,14 +207,12 @@ public class RaceGoblin extends MonsterRace{
 			super(game);
 			name="shaman";	
 			items.add(game.itemBuilder.buildItem("rootWand",5));	
-			for (int i=0; i<5;i++) {
-				cards.add(game.cardBuilder.buildCard("basicAttack"));
-				cards.add(game.cardBuilder.buildCard("basicBlock"));
-			}			
+			cards.add(game.cardBuilder.buildCard("carefulSlash"));
 			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("fireBall"));
+			cards.add(game.cardBuilder.buildCard("sparks"));
 		}
 
 		public void modifyHero(Hero hero) {
@@ -215,7 +225,7 @@ public class RaceGoblin extends MonsterRace{
 			hero.setDexterity(hero.getDexterity()-2);
 			hero.setIntelligence(hero.getIntelligence()+9);
 			hero.setSpellDuration(12);
-			hero.setVitality(hero.getVitality()-4);
+			hero.setVitality(hero.getVitality()-3);
 			//
 			hero.setAccuracy(hero.getAccuracy()-2);
 			hero.setAttackSkill(hero.getAttackSkill()-2);

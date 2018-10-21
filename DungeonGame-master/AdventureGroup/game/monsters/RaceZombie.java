@@ -27,50 +27,73 @@ public class RaceZombie extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		hero.setSpeed(4);
-		hero.setBaseHp(180);		
-		//stats
+		//all stats		
 		hero.setStrength(12);
 		hero.setDexterity(3);
-		hero.setIntelligence(1);
-		hero.setVitality(6);
-		//
-		//attack/defence
-		hero.setAttackSkill(6);
-		hero.setBlockSkill(3);
+		hero.setVitality(1);
+		hero.setIntelligence(6);
+		//main attributes
+		hero.setAttackSkill(28);
+		hero.setBlockSkill(4);
 		hero.setAccuracy(1);
 		hero.setDodge(1);
-		hero.setSpellPower(8);
-		hero.setSpellResist(20);
+		hero.setSpellPower(15);
+		hero.setSpellDuration(7);
 		//
-		//resistances
-		hero.setResistFire(5);
-		hero.setResistCold(40);
-		hero.setResistBleed(10);
-		hero.setResistPoison(80);
-		hero.setResistStun(60);
+		hero.setArmor(7);
+		hero.setSpeed(2);					
+		hero.setThorns(0);
 		//
-		hero.setArmor(5);
+		hero.setDraw(4);
+		hero.setManaPower(2);
+		//offensive
+		hero.setCritChance(4);
+		hero.setCritDamage(20);
+		//elemental bonus
+		hero.setStunChance(10);
+		hero.setFireDmg(10);
+		hero.setColdDmg(50);
+		hero.setLightningDmg(35);
+		hero.setPoisonDmg(5);
+		hero.setBleedDmg(5);
+		hero.setMagicDmg(25);		
+		//resistance
+		hero.setResistSpell(20);
+		hero.setResistFire(-30);
+		hero.setResistLightning(0);
+		hero.setResistCold(20);
+		hero.setResistPoison(35);
+		hero.setResistBleed(15);
+		hero.setResistStun(35);
+		hero.setResistStress(90);
+		hero.setStressCap(81);
+		//
+		hero.setTrapDisarm(10);
+		hero.setBaseHp(120);		
+		//
+		hero.setImageNumber(65);	
+		//
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*15.0));
-		hero.setExperienceValue(30);
-		//zombieslow
-		hero.setManaPower(2);
-		hero.setResistStress(90);
-		//deck		
+		hero.setExperienceValue(11);	
 		
+		for (int i=0; i<2;i++) {
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+		}
 	}
 	private class ZombieWarrior extends CharacterClass{
 
 		public ZombieWarrior(Game game) {	
 			super(game);
 			name="";				
-			for (int i=0; i<4;i++) {
+			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
-			for (int i=0; i<6;i++) {
+			for (int i=0; i<3;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			}
+			cards.add(game.cardBuilder.buildCard("shortStrike"));
+			cards.add(game.cardBuilder.buildCard("shortStrike"));
 			cards.add(game.cardBuilder.buildCard("zombieBite"));
 			cards.add(game.cardBuilder.buildCard("zombieGrab"));
 			cards.add(game.cardBuilder.buildCard("zombieMoan"));
@@ -86,9 +109,9 @@ public class RaceZombie extends MonsterRace{
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+6);
 			//
-			hero.setArmor(hero.getArmor()+1);
-			hero.setAttackSkill(hero.getAttackSkill()+1);
-			hero.setBlockSkill(hero.getBlockSkill()+1);
+			hero.setArmor(hero.getArmor()+5);
+			hero.setAttackSkill(hero.getAttackSkill()+3);
+			hero.setBlockSkill(hero.getBlockSkill()+5);
 		}
 	}
 }

@@ -67,6 +67,9 @@ public abstract class Card implements Serializable,Cloneable{
 			self.getDiscardPile().add(this);
 			buildLogEntry(self);
 			applyEffect(self);
+			if (self.getHand().size()>0) {
+				self.setSelectedCard(self.getHand().getFirst());
+			}			
 		}		
 	}
 	public abstract boolean extraCastConditions(Hero hero);

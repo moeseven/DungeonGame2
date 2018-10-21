@@ -22,48 +22,64 @@ public class BossNecromancer extends MonsterRace{
 		name="necromancer";
 		//set Position classes
 		position1Classes.add(new NecromancerAspirant(game));
-		position2Classes.add(null);
-		position3Classes.add(null);
-		position4Classes.add(null);
-		position5Classes.add(null);
+		position2Classes.add(new NecromancerAspirant(game));
+		position3Classes.add(new NecromancerAspirant(game));
+		position4Classes.add(new NecromancerAspirant(game));
+		position5Classes.add(new NecromancerAspirant(game));
 	}
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-		//hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(66));
-		hero.setImageNumber(66);
-		hero.setSpeed(12);
-		hero.setBaseHp(220);		
-		//stats
+		//all stats		
 		hero.setStrength(12);
-		hero.setDexterity(14);
+		hero.setDexterity(14);		
 		hero.setIntelligence(34);
 		hero.setVitality(12);
-		//
-		//attack/defence
+		//main attributes
 		hero.setAttackSkill(12);
 		hero.setBlockSkill(10);
 		hero.setAccuracy(14);
 		hero.setDodge(13);
 		hero.setSpellPower(35);
-		hero.setSpellResist(14);
-		//
-		//resistances
-		hero.setResistFire(4);
-		hero.setResistCold(10);
-		hero.setResistBleed(10);
-		hero.setResistPoison(30);
-		hero.setResistStun(30);
-		//
 		hero.setSpellDuration(8);
-		hero.setArmor(4);
-		hero.setGood(false);
-		hero.setGold((int)(Math.random()*45.0));
-		hero.setExperienceValue(300);
-		//boss
+		//
+		hero.setArmor(9);
+		hero.setSpeed(16);					
+		hero.setThorns(0);
+		hero.setDraw(6);
 		hero.setManaPower(3);
-		hero.setDraw(5);
-		//deck		
+		//offensive
+		hero.setCritChance(5);
+		hero.setCritDamage(40);
+		//elemental bonus
+		hero.setStunChance(0);
+		hero.setFireDmg(30);
+		hero.setColdDmg(0);
+		hero.setLightningDmg(25);
+		hero.setPoisonDmg(5);
+		hero.setBleedDmg(5);
+		hero.setMagicDmg(5);		
+		//resistance
+		hero.setResistSpell(10);
+		hero.setResistFire(0);
+		hero.setResistLightning(5);
+		hero.setResistCold(20);
+		hero.setResistPoison(35);
+		hero.setResistBleed(10);
+		hero.setResistStun(30);
+		hero.setResistStress(30);
+		hero.setStressCap(100);
+		//
+		hero.setTrapDisarm(10);
+		hero.setBaseHp(220);		
+		//
+		hero.setImageNumber(40);	
+		//
+		hero.setGood(false);
+		hero.setGold((int)(Math.random()*99.0));
+		hero.setExperienceValue(110);
+		hero.setImageNumber(66);		
+	
 		
 	}
 	private class NecromancerAspirant extends CharacterClass{
@@ -72,19 +88,23 @@ public class BossNecromancer extends MonsterRace{
 			super(game);
 			name="";				
 			for (int i=0; i<5;i++) {	
-				cards.add(game.cardBuilder.buildCard("basicBlock"));
-				cards.add(game.cardBuilder.buildCard("basicAttack"));
+				cards.add(game.cardBuilder.buildCard("basicBlock"));				
 			}
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("basicAttack"));
+			cards.add(game.cardBuilder.buildCard("magicShield"));
 			//attacks
 			cards.add(game.cardBuilder.buildCard("meeleAttack"));
 			//spells
+			cards.add(game.cardBuilder.buildCard("sparks"));
 			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("channel"));
-			cards.add(new SummonZombie());
-			cards.add(new SummonZombie());
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
 		}
 
 		public void modifyHero(Hero hero) {

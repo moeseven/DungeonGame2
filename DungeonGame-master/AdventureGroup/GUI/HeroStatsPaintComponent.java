@@ -56,35 +56,35 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("");
 		//			
 		lines.add("speed: "+player.getSelectedHero().getSpeed()+" ("+GameEquations.speedCalc(player.getSelectedHero())+")");
-		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+")");
-		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+")");
-		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero(),null)+")");
-		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+GameEquations.dodgeCalc(player.getSelectedHero())+")");
-		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+")");		
+		lines.add("attack skill: "+player.getSelectedHero().getAttackSkill()+" ("+GameEquations.attackSkillCalc(player.getSelectedHero())+"%)");
+		lines.add("block skill: "+player.getSelectedHero().getBlockSkill()+" ("+GameEquations.blockSkillCalc(player.getSelectedHero())+"%)");
+		lines.add("accuracy: "+player.getSelectedHero().getAccuracy()+" ("+GameEquations.accuracyCalc(player.getSelectedHero(),null)+"%)");
+		lines.add("dodge: "+player.getSelectedHero().getDodge()+" ("+GameEquations.dodgeCalc(player.getSelectedHero())+"%)");
+		lines.add("spell power: "+player.getSelectedHero().getSpellPower()+" ("+GameEquations.spellPowerCalc(player.getSelectedHero())+"%)");		
 		
 		lines.add("thorns: "+player.getSelectedHero().getThorns());
 		lines.add("");
 		//offensive
 		lines.add("crit chance: "+ player.getSelectedHero().getCritChance()+"%");
 		lines.add("crit damage: "+ (GameEquations.critDamageCalc(player.getSelectedHero()))+"%");	
-		lines.add("magic damage: "+player.getSelectedHero().getMagicDmg());
-		lines.add("fire damage: "+player.getSelectedHero().getFireDmg());
-		lines.add("cold damage: "+player.getSelectedHero().getColdDmg());
-		lines.add("lightning damage: "+player.getSelectedHero().getLightningDmg());
-		lines.add("poison damage: "+player.getSelectedHero().getPoisonDmg());
-		lines.add("bleed damage: "+player.getSelectedHero().getBleedDmg());
+		lines.add("magic damage: "+player.getSelectedHero().getMagicDmg()+"%");
+		lines.add("fire damage: "+player.getSelectedHero().getFireDmg()+"%");
+		lines.add("cold damage: "+player.getSelectedHero().getColdDmg()+"%");
+		lines.add("lightning damage: "+player.getSelectedHero().getLightningDmg()+"%");
+		lines.add("poison damage: "+player.getSelectedHero().getPoisonDmg()+"%");
+		lines.add("bleed damage: "+player.getSelectedHero().getBleedDmg()+"%");
 		lines.add("");
 		//defensive
 		lines.add("armor: "+player.getSelectedHero().getArmor()+"("+(100-GameEquations.damageReducedByArmor(100, player.getSelectedHero().getArmor()))+"%)");
-		lines.add("spell resist: "+player.getSelectedHero().getSpellResist());
-		lines.add("fire resistance: "+player.getSelectedHero().getResistFire());
-		lines.add("lightning resistance: "+player.getSelectedHero().getResistLightning());
-		lines.add("cold resistance: "+player.getSelectedHero().getResistCold());
-		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison());
-		lines.add("bleed resistance: "+player.getSelectedHero().getResistBleed());
-		lines.add("stun resistance: "+player.getSelectedHero().getResistStun());
-		lines.add("stress resistance: "+player.getSelectedHero().getResistStress());
-		lines.add("trap disarm: "+player.getSelectedHero().getTrapDisarm());
+		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+"%");
+		lines.add("fire resistance: "+player.getSelectedHero().getResistFire()+"%");
+		lines.add("lightning resistance: "+player.getSelectedHero().getResistLightning()+"%");
+		lines.add("cold resistance: "+player.getSelectedHero().getResistCold()+"%");
+		lines.add("poison resistance: "+player.getSelectedHero().getResistPoison()+"%");
+		lines.add("bleed resistance: "+player.getSelectedHero().getResistBleed()+"%");
+		lines.add("stun resistance: "+player.getSelectedHero().getResistStun()+"%");
+		lines.add("stress resistance: "+player.getSelectedHero().getResistStress()+"%");
+		lines.add("trap disarm: "+player.getSelectedHero().getTrapDisarm()+"%");
 		lines.add("");
 		lines.add("spell duration: "+player.getSelectedHero().getSpellDuration());
 		lines.add("wisdom: "+player.getSelectedHero().getDraw());

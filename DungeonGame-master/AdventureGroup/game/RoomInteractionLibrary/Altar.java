@@ -45,11 +45,15 @@ public class Altar extends RoomInteraction{
 		}		
 	}
 	public void itemForExperience(Hero hero, Item item) {
-		if(sacrefices>0&&hero.getPlayer().getInventory().contains(item)) {
-			hero.getPlayer().getInventory().remove(item);
-			hero.gainExp((int) (item.getItemQuality()*50));
-			sacrefices--;
-		}
+		if (item.getCategory()!=0) {
+			if(sacrefices>0&&hero.getPlayer().getInventory().contains(item)) {
+				hero.getPlayer().getInventory().remove(item);
+				hero.gainExp((int) (item.getItemQuality()*60+5));
+				sacrefices--;
+			}
+		}else {
+			hero.getPlayer().getGame().log.addLine("offer rejected");
+		}		
 	}
 	public void pray(Hero hero) {
 		if (sacrefices>0) {

@@ -9,6 +9,7 @@ import game.DungeonMaster;
 import game.Game;
 
 public class Fight implements Serializable{
+	
 	public int retreatWish=0;
 	private Game game;
 	private int round=0;
@@ -35,9 +36,6 @@ public class Fight implements Serializable{
 		this.newRound();
 	}
 	public void newRound() {
-		for (Hero m : monsters) {	
-		    
-		}
 		round+=1;
 		game.log.addLine("########## ROUND "+round+" ##########");		
 		allFightParticipants=new LinkedList<Hero>();
@@ -79,7 +77,7 @@ public class Fight implements Serializable{
 				exp=monsters.get(i).getExperienceValue();				
 				dead.add(monsters.get(i));
 				for (Hero h: heroes) {//give experience to heroes
-						h.gainExp((int)(1.0+(exp/heroes.size())));			
+						h.gainExp(exp);			
 				}
 			}else {
 				if(monsters.get(i).getStress()>=monsters.get(i).getStressCap()) {
@@ -108,7 +106,7 @@ public class Fight implements Serializable{
 		for(int i=0; i<stressed.size();i++) {//remove stressed heroes
 			if(stressed.get(i).getPlayer() instanceof DungeonMaster) {	
 				for (int j = 0; j < heroes.size(); j++) {
-					heroes.get(j).gainExp(stressed.get(i).getExperienceValue()/heroes.size());
+					heroes.get(j).gainExp(stressed.get(i).getExperienceValue());
 				}
 			}else {
 				heroes.remove(stressed.get(i));	
@@ -133,7 +131,7 @@ public class Fight implements Serializable{
 				}else {
 					this.getHeroes().getFirst().getPlayer().getGame().log.addLine("~~~~~"+turnOrder.get(turnOrderCounter).getName()+"'s turn"+"~~~~~");
 					turnOrder.get(turnOrderCounter).turnBegin();//draw cards and reset buffs/debuffs
-					if(monsters.contains(turnOrder.get(turnOrderCounter))){	
+					if(monsters.contains(turnOrder.get(turnOrderCounter))||turnOrder.get(turnOrderCounter).isSummon()){	
 						if(!turnOrder.get(turnOrderCounter).isDead()) {
 						//monster chooses random target here make sure it attacks only targets in range!	
 						Hero monster=turnOrder.get(turnOrderCounter);
@@ -197,6 +195,18 @@ public class Fight implements Serializable{
 			}						
 		}		
 	}
+	public boolean retreatHeroes() {
+		retreatWish+=game.getPlayer().getSelectedHero().getMana()/game.getPlayer().getSelectedHero().getManaPower();			
+		if (Math.random()*3<game.getRoom().getFight().retreatWish&&game.getPlayer().getSelectedHero().getMana()>0) {
+			game.getRoom().getFight().fightOverHandling();
+			game.retreatHeroes();
+			return true;
+		}else{
+			game.log.addLine("retreat failed!");
+			game.getPlayer().getSelectedHero().setMana(0); 
+			return false;
+		}
+	}
 	public void fightOverHandling() {
 		retreatWish=0;
 		for(int i=0; i<heroes.size();i++) {
@@ -219,19 +229,28 @@ public class Fight implements Serializable{
 	//attack indication 
 	public void precalculateMonsterTurn(Hero monster) {
 		targetMap.put(monster,new HashMap<Card,Hero>());
+		LinkedList<Hero> enemy;
+		LinkedList<Hero> friend;
+		if (monster.getPlayer()==game.getPlayer()) {
+			enemy=monsters;
+			friend=heroes;
+		}else {
+			enemy=heroes;
+			friend=monsters;
+		}
 		for (int i = 0; i < monster.draw; i++) {
 			monster.drawCard();
 		}		
 		monster.setMana(monster.getManaPower());
 	    for(int i=0; i<monster.getHand().size(); i++){
 	    	LinkedList<Hero> targets = new LinkedList<Hero>();
-	    	for(int h=0;h<heroes.size();h++) {
-	    		if (monster.getHand().get(i).legalTargetPositions[heroes.get(h).getPosition()]) {
-					targets.add(heroes.get(h));
+	    	for(int h=0;h<enemy.size();h++) {
+	    		if (monster.getHand().get(i).legalTargetPositions[enemy.get(h).getPosition()]) {
+					targets.add(enemy.get(h));
 				}
 	    	}		    		
 	    	if(monster.getHand().get(i).isFriendly()) {
-	    		monster.setNewTarget(monsters.get(Math.min((int) (Math.random()*(monsters.size()+0.0)),monsters.size()-1)));
+	    		monster.setNewTarget(friend.get(Math.min((int) (Math.random()*(friend.size()+0.0)),friend.size()-1)));
 	    		if(monster.getHand().get(i).playable(monster)) {
 	    			targetMap.get(monster).put(monster.getHand().get(i),monster.getTarget());
 	    			monster.getHand().get(i).handleManaCost(monster);
@@ -254,17 +273,14 @@ public class Fight implements Serializable{
 	}
 	public void addHeroToFight(Hero hero) {
 		if (hero.getPlayer() instanceof DungeonMaster) {
-			monsters.add(hero);
-			game.dungeonMaster.addHero(hero);
-			hero.setUpDrawPile();
-			precalculateMonsterTurn(hero);
+			//monsters.add(hero);
+			game.dungeonMaster.addHero(hero);			
 		}else {
-			heroes.add(hero);
+			//heroes.add(hero);			
 			hero.getPlayer().addHero(hero);
 		}
-	}
-	public void handleFightisOver() {
-		//TODO
+		hero.setUpDrawPile();
+		precalculateMonsterTurn(hero);
 	}
 	public boolean monstersAlive() {
 		int monstersAlive=0;
@@ -299,28 +315,6 @@ public class Fight implements Serializable{
 			return true;
 		}		
 	}
-//	public void createMeele() {//give heroes a foe not good like this! Rework!!!
-//		if(monsters.size()>=heroes.size()) {
-//			for (int i=0; i<heroes.size();i++) {
-//				LinkedList<Hero> newList =new LinkedList<Hero>();
-//				newList.add(heroes.get(i));
-//				meele.add(newList);
-//			}
-//			for (int i=0; i<monsters.size();i++) {
-//				meele.get(i % heroes.size()).add(monsters.get(i));
-//			}
-//			
-//		}else {
-//			for (int i=0; i<monsters.size();i++) {
-//				LinkedList<Hero> newList =new LinkedList<Hero>();
-//				newList.add(monsters.get(i));
-//				meele.add(newList);
-//			}
-//			for (int i=0; i<heroes.size();i++) {
-//				meele.get(i % monsters.size()).add(heroes.get(i));
-//			}
-//		}
-//	}
 	//getters and setters
 	public LinkedList<Hero> getMonsters() {
 		return monsters;

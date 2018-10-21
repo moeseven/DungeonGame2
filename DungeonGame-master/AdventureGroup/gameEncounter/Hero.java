@@ -18,6 +18,7 @@ import gameEncounter.buffLibrary.Bashed;
 public class Hero implements Serializable{
 
 	//private LinkedList<Item> inventory;
+	private boolean isSummon=false;
 	private int imageScale=3;
 	private LinkedList<Buff> buffs;
 	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();;
@@ -33,6 +34,7 @@ public class Hero implements Serializable{
 	protected int skillPoints=0;
 	protected int cardPoints=0;
 	protected Player player;
+	protected int maxHandSize=10;
 	//game
 	private boolean isReady;
 	//Fight
@@ -46,9 +48,9 @@ public class Hero implements Serializable{
 	//type
 	protected CharacterClass charClass;
 	protected CharacterRace charRace;
+	protected ModableHeroStats stats;
 	/////stats//////
-	protected int speed;
-	protected ModableHeroStats stats;			
+	protected int speed;				
 	protected Deck deck;	
 	private int thorns;
 	protected int draw;
@@ -86,6 +88,7 @@ public class Hero implements Serializable{
 	protected int vitality;
 	protected int dexterity;
 	protected int intelligence;
+	protected int stressCap=100;
 	////
 	//status
 	protected boolean stunned;
@@ -101,8 +104,7 @@ public class Hero implements Serializable{
 	private LinkedList<Card> discardPile=new LinkedList<Card>();
 	private int mana;
 	protected int hp;
-	protected int stress=0;
-	protected int stressCap=100;
+	protected int stress=0;	
 	private int block;
 	private LinkedList<Card> hand;
 	//
@@ -161,7 +163,7 @@ public class Hero implements Serializable{
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
-		spellDuration=3;
+		spellDuration=2;
 		setExperienceValue(10);
 	}
 	public void initialize() {			
@@ -190,7 +192,11 @@ public class Hero implements Serializable{
 			discardPile=new LinkedList<Card>();
 		}
 		if(drawPile.size()>0) {
-			hand.add(drawPile.removeFirst());
+			if (hand.size()<maxHandSize) {
+				hand.add(drawPile.removeFirst());
+			}else {
+				player.getGame().log.addLine("cand draw more!");
+			}			
 		}else {
 			player.getGame().log.addLine("no more cards in draw Pile!");
 		}
@@ -483,14 +489,17 @@ public class Hero implements Serializable{
 		}
 	}
 	public void gainExp(int exp) {	
-		int expToNextLvl=GameEquations.experienceThresholdForLevelUp(level)-experience;
-		if(expToNextLvl<exp) {
-			experience=GameEquations.experienceThresholdForLevelUp(level);
-			levelUP();		
-			gainExp(exp-expToNextLvl);
-		}else {
-			experience+=exp;
+		if (!isSummon) {
+			int expToNextLvl=GameEquations.experienceThresholdForLevelUp(level)-experience;
+			if(expToNextLvl<exp) {
+				experience=GameEquations.experienceThresholdForLevelUp(level);
+				levelUP();		
+				gainExp(exp-expToNextLvl);
+			}else {
+				experience+=exp;
+			}
 		}
+		
 	}
 	public void levelUP() {
 		level+=1;
@@ -541,16 +550,15 @@ public class Hero implements Serializable{
 		}
 	}
 	public void sufferPoison() {
-		if (poison>hp/1.5) {
+		if (poison>GameEquations.maxHealthCalc(this)/2) {
 			player.getGame().log.addLine(name+" suffers poison damage of "+poison+".");
-		}
-		
-		this.setHp(hp-poison);
-		poison=0;
-		if(hp<=0) {
-			hp=0;
-			this.die();
-		}
+			this.setHp(hp-poison);
+			poison=0;
+			if(hp<=0) {
+				hp=0;
+				this.die();
+			}
+		}				
 	}
 	//elemental damage
 	
@@ -1262,6 +1270,12 @@ public class Hero implements Serializable{
 	}
 	public boolean isStunned() {
 		return stunned;
+	}
+	public boolean isSummon() {
+		return isSummon;
+	}
+	public void setSummon(boolean isSummon) {
+		this.isSummon = isSummon;
 	}
 
 	

@@ -69,15 +69,9 @@ public class GuiFight extends JPanel{
 	
 	private class mlRetreat extends MouseAdapter{
 		public void mousePressed(MouseEvent e){
-			//try to retreat
-			fw.getGame().getRoom().getFight().retreatWish+=fw.getGame().getPlayer().getSelectedHero().getMana()/fw.getGame().getPlayer().getSelectedHero().getManaPower();			
-			if (Math.random()*3<fw.getGame().getRoom().getFight().retreatWish&&fw.getGame().getPlayer().getSelectedHero().getMana()>0) {
-				fw.getGame().getRoom().getFight().handleFightisOver();
-				fw.getGame().retreatHeroes();
+			if (fw.getGuiFight().getFight().retreatHeroes()) {
 				fw.windowswitch();
-			}else{
-				fw.getGame().log.addLine("retreat failed!");
-				fw.getGame().getPlayer().getSelectedHero().setMana(0); 
+			}else {
 				endTurn();
 			}
 		}

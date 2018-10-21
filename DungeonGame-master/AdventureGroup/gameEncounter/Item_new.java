@@ -174,6 +174,7 @@ public class Item_new extends Item implements Serializable{
 		}
 		updateGoldValue();
 		updateName();
+		
 	}
 	public void updateGoldValue(){
 		goldValue=(int) (baseGoldValue*(1+itemQuality));

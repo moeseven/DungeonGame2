@@ -118,6 +118,9 @@ public class EffectBuilder {
 		if (name.equals("stressSpell")) {
 			return new stressSpellEffect(p);
 		}
+		if (name.equals("summon")) {
+			return new summonEffect(p);
+		}
 		if (name.equals("targetAllAlliesOfTarget")) {
 			return new targetAllAlliesOfTargetEffect(p);
 		}

@@ -25,38 +25,55 @@ public class RaceRat extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-//		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(54));
-		hero.setImageNumber(54);
-		hero.setSpeed(17);
-		hero.setBaseHp(40);		
-		//stats
+		//all stats		
 		hero.setStrength(8);
 		hero.setDexterity(19);
-		hero.setIntelligence(11);
-		hero.setVitality(6);
-		//
-		//attack/defence
+		hero.setVitality(11);
+		hero.setIntelligence(6);
+		//main attributes
 		hero.setAttackSkill(9);
 		hero.setBlockSkill(3);
 		hero.setAccuracy(21);
 		hero.setDodge(13);
-		hero.setSpellPower(8);
-		hero.setSpellResist(5);
+		hero.setSpellPower(6);
+		hero.setSpellDuration(4);
 		//
-		//resistances
-		hero.setResistFire(10);
-		hero.setResistCold(10);
-		hero.setResistBleed(16);
-		hero.setResistPoison(45);
-		hero.setResistStun(5);
+		hero.setArmor(3);
+		hero.setSpeed(17);					
+		hero.setThorns(0);
+		hero.setDraw(4);
+		hero.setManaPower(1);
+		//offensive
+		hero.setCritChance(9);
+		hero.setCritDamage(30);
+		//elemental bonus
+		hero.setStunChance(0);
+		hero.setFireDmg(0);
+		hero.setColdDmg(0);
+		hero.setLightningDmg(5);
+		hero.setPoisonDmg(5);
+		hero.setBleedDmg(5);
+		hero.setMagicDmg(5);		
+		//resistance
+		hero.setResistSpell(-20);
+		hero.setResistFire(5);
+		hero.setResistLightning(5);
+		hero.setResistCold(15);
+		hero.setResistPoison(40);
+		hero.setResistBleed(10);
+		hero.setResistStun(10);
+		hero.setResistStress(-20);
+		hero.setStressCap(81);
+		//
+		hero.setTrapDisarm(10);
+		hero.setBaseHp(40);		
+		//
+		hero.setImageNumber(40);	
 		//
 		hero.setGood(false);
 		hero.setGold(0);
-		hero.setExperienceValue(9);
-		//zombieslow
-		hero.setManaPower(1);
-		//deck		
-		hero.setImageScale(3);
+		hero.setExperienceValue(4);
+		hero.setImageNumber(54);	
 	}
 	private class RatWarrior extends CharacterClass{
 

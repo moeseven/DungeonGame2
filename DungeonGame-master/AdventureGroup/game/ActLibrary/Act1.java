@@ -35,6 +35,14 @@ public class Act1 extends Act{
 		super(game);
 		//town
 		addRoom(game.getTown(), 4, 4);
+		//test room
+		questRoom=new EmptyRoom(game);
+		interaction = new Altar(game);
+		questRoom.setHasFight(true);
+		monster=new BossNecromancer(game);
+		questRoom.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
+		questRoom.getInteractions().add(interaction);
+		//addRoom(questRoom, 4, 5);
 		//room 3,4
 		addRoom(new EmptyRoom(game), 3, 4);
 		//room 3,3
