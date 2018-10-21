@@ -53,8 +53,8 @@ public class BossNecromancer extends MonsterRace{
 		hero.setCritDamage(40);
 		//elemental bonus
 		hero.setStunChance(0);
-		hero.setFireDmg(30);
-		hero.setColdDmg(0);
+		hero.setFireDmg(10);
+		hero.setColdDmg(10);
 		hero.setLightningDmg(25);
 		hero.setPoisonDmg(5);
 		hero.setBleedDmg(5);
@@ -95,14 +95,16 @@ public class BossNecromancer extends MonsterRace{
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("magicShield"));
 			//attacks
-			cards.add(game.cardBuilder.buildCard("meeleAttack"));
+			cards.add(game.cardBuilder.buildCard("poisonousSlice"));
 			//spells
 			cards.add(game.cardBuilder.buildCard("sparks"));
+			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("growth"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("channel"));
+			cards.add(game.cardBuilder.buildCard("sleepCharm"));
 			cards.add(game.cardBuilder.buildCard("summonZombie"));
 			cards.add(game.cardBuilder.buildCard("summonZombie"));
 		}
