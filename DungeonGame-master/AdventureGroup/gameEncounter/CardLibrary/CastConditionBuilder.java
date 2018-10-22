@@ -12,6 +12,9 @@ public static CastCondition buildCastCondition(String name) {
 	if (name.equals("requiresShield")) {
 		return new requiresShield();
 	}
+	if (name.equals("requiresSpaceForSummon")) {
+		return new requiresSpaceForSummon();
+	}
 	return new requiresBow();
 }
 }

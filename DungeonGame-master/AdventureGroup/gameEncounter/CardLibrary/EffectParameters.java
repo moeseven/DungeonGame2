@@ -13,7 +13,7 @@ public class EffectParameters {
 		String[] splitted =effectString.split("\\,");
 		for (int i = 0; i < splitted.length; i++) {
 			parameters.add(splitted[i]);
-			System.out.println(splitted[i]);
+			//System.out.println(splitted[i]);
 		}
 		
 				

@@ -1,12 +1,15 @@
 package gameEncounter;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 import game.DungeonMaster;
 import game.Game;
+import gameEncounter.EffectLibrary.cardDrawEffect;
+import gameEncounter.EffectLibrary.manaEffect;
 
 public class Fight implements Serializable{
 	
@@ -30,9 +33,12 @@ public class Fight implements Serializable{
 		}
 		for (Hero m : monsters) {	
 		    m.setUpDrawPile();	 
-		    m.setFight(this);
-		    precalculateMonsterTurn(m);
+		    m.setFight(this);		    
 		}
+		for (Hero m : monsters) {	
+			precalculateMonsterTurn(m);		    
+		}
+		
 		this.newRound();
 	}
 	public void newRound() {
@@ -238,47 +244,72 @@ public class Fight implements Serializable{
 			enemy=heroes;
 			friend=monsters;
 		}
-		for (int i = 0; i < monster.draw; i++) {
-			monster.drawCard();
+		//should not actually draw the cards
+		LinkedList<Card> pseudoHand= new LinkedList<Card>();
+		if (monster.getDrawPile().size()<monster.getDraw()) {
+			Collections.shuffle(monster.getDiscardPile());
+			for (int i = 0; i < monster.getDiscardPile().size(); i++) {
+				monster.getDrawPile().add(monster.getDiscardPile().get(i));
+			}
+			monster.setDiscardPile(new LinkedList<Card>());
+		}
+		for (int i = 0; i < Math.min(monster.getDraw(), monster.getDrawPile().size()); i++) {
+			pseudoHand.add(monster.getDrawPile().get(i));
 		}		
 		monster.setMana(monster.getManaPower());
-	    for(int i=0; i<monster.getHand().size(); i++){
+	    for(int i=0; i<pseudoHand.size(); i++){
 	    	LinkedList<Hero> targets = new LinkedList<Hero>();
 	    	for(int h=0;h<enemy.size();h++) {
-	    		if (monster.getHand().get(i).legalTargetPositions[enemy.get(h).getPosition()]) {
+	    		if (pseudoHand.get(i).legalTargetPositions[enemy.get(h).getPosition()]) {
 					targets.add(enemy.get(h));
 				}
-	    	}		    		
-	    	if(monster.getHand().get(i).isFriendly()) {
-	    		monster.setNewTarget(friend.get(Math.min((int) (Math.random()*(friend.size()+0.0)),friend.size()-1)));
-	    		if(monster.getHand().get(i).playable(monster)) {
-	    			targetMap.get(monster).put(monster.getHand().get(i),monster.getTarget());
-	    			monster.getHand().get(i).handleManaCost(monster);
-		    	}
+	    	}			    	
+	    	if(pseudoHand.get(i).isFriendly()) {
+	    		monster.setNewTarget(friend.get((int) (Math.random()*(friend.size()))));    		
 	    	}else {
 	    		if(targets.size()>0) {
-		    		monster.setNewTarget(targets.get(Math.min((int) (Math.random()*(targets.size()+0.0)),targets.size()-1)));//choose target for attacks
-			    	if(monster.getHand().get(i).playable(monster)) {
-			    		targetMap.get(monster).put(monster.getHand().get(i),monster.getTarget());
-			    		monster.getHand().get(i).handleManaCost(monster);
-			    	}
+		    		monster.setNewTarget(targets.get((int) (Math.random()*(targets.size()))));//choose target for attacks
 		    	}
-	    	}					    					    	
-	    }	
-	    int handSize = monster.getHand().size();
-		for (int i=0; i<handSize;i++) {
-			monster.getDrawPile().addFirst(monster.getHand().removeLast());			
-		}
+	    	}
+	    	int [] mana_draw =precalculatedSpellWithManaOrDraw(pseudoHand.get(i));
+	    	if(pseudoHand.get(i).aiPlayableCheck(monster)) {
+    			targetMap.get(monster).put(pseudoHand.get(i),monster.getTarget());
+    			pseudoHand.get(i).handleManaCost(monster);	    			
+    			monster.setMana(monster.getMana()+mana_draw[0]);
+    			for (int j = 0; j < mana_draw[1]; j++) {
+    				if (monster.getDrawPile().size()>pseudoHand.size()) {
+    					pseudoHand.add(monster.getDrawPile().get(pseudoHand.size()));
+					}   				
+				}
+	    	}
+	    }	    
+//	    int handSize = monster.getHand().size();
+//		for (int i=0; i<handSize;i++) {
+//			monster.getDrawPile().addFirst(monster.getHand().removeLast());			
+//		}
 		monster.setMana(0);
 	}
-	public void addHeroToFight(Hero hero) {
+	private int[] precalculatedSpellWithManaOrDraw(Card card) {
+		int[] mana_card_Plus=new int [2];
+		for (int i = 0; i < card.getAllEffects().size(); i++) {
+			if (card.getAllEffects().get(i)instanceof manaEffect) {
+				mana_card_Plus[0]+=Integer.parseInt(card.getAllEffects().get(i).pars.get(1));
+			}
+			if (card.getAllEffects().get(i)instanceof cardDrawEffect) {
+				mana_card_Plus[1]+=Integer.parseInt(card.getAllEffects().get(i).pars.get(1));
+			}
+		}
+		return mana_card_Plus;
+	}
+	public void addSummonToFight(Hero hero) {
 		if (hero.getPlayer() instanceof DungeonMaster) {
 			//monsters.add(hero);
-			game.dungeonMaster.addHero(hero);			
+			game.dungeonMaster.addSummon(hero);			
 		}else {
 			//heroes.add(hero);			
-			hero.getPlayer().addHero(hero);
+			hero.getPlayer().addSummon(hero);
 		}
+		hero.setFight(this);
 		hero.setUpDrawPile();
 		precalculateMonsterTurn(hero);
 	}

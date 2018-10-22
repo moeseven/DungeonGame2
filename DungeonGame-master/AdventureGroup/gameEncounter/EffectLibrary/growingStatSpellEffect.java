@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -13,21 +14,21 @@ public class growingStatSpellEffect extends CardEffect{
 
 	public growingStatSpellEffect(LinkedList<String> pars) {
 		super(pars);
-		assert pars.size()>2;
+		assert pars.size()>3;
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).buffHero(new statGrowthBuff(self.getTargets().get(i),pars.get(1), GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)), self), self.getSpellDuration()));	
-			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" +"+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)),self)+" "+pars.get(1)+" every round for "+self.getSpellDuration()+" rounds");
+			self.getTargets().get(i).buffHero(new statGrowthBuff(self.getTargets().get(i),pars.get(1), GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)), self,pars.get(3)), self.getSpellDuration()));	
+			self.getPlayer().getGame().log.addLine(self.getTargets().get(i).getName()+" +"+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)),self,pars.get(3))+" "+pars.get(1)+" every round for "+self.getSpellDuration()+" rounds");
 		}
 		return true;
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
-		return "+"+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)),self)+" "+pars.get(1)+" every round for "+self.getSpellDuration()+" rounds";
+	public String generateCardText(Hero self, Card card) {
+		return "+"+GameEquations.calculateSpellDamage(Integer.parseInt(pars.get(2)),self,pars.get(3))+" "+pars.get(1)+" every round for "+self.getSpellDuration()+" rounds ("+pars.get(3)+")";
 	}
 
 }

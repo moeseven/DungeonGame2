@@ -39,6 +39,18 @@ public class Player implements Serializable{
 		}
 		
 	}
+	public boolean addSummon(Hero hero) {
+		for(int a=0; a<heroes.size();a++) {// prevent equal names
+			for(int b=0; b<heroes.size();b++) {
+				if(heroes.get(b).getName().equals(hero.getName())) {
+					hero.setName(hero.getName()+" I");
+				}
+			}
+		}
+		heroes.addFirst(hero);
+		hero.setPlayer(this);
+		return true;
+	}
 	public boolean addHero(Hero hero) {// do not exeed maximum size
 		if(heroes.size()<groupSize) {
 			for(int a=0; a<heroes.size();a++) {// prevent equal names
@@ -51,7 +63,7 @@ public class Player implements Serializable{
 			heroes.addFirst(hero);
 //			hero.setInventory(inventory);
 			hero.setPlayer(this);
-			//selectedHero=hero;
+			selectedHero=hero;
 			return true;
 		}else {
 			return false;

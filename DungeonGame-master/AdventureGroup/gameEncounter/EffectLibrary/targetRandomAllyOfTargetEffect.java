@@ -8,32 +8,30 @@ import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
-public class fireSpellEffect extends CardEffect{
+public class targetRandomAllyOfTargetEffect extends CardEffect{
 
-	public fireSpellEffect(LinkedList<String> pars) {
+	public targetRandomAllyOfTargetEffect(LinkedList<String> pars) {
 		super(pars);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
+		//switches target to self
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
-		for (int i = 0; i < self.getTargets().size(); i++) {
-			nextTargets.add(self.getTargets().get(i));
-			//roll cirts for every target
-			self.doFireDamage(GameEquations.calculateSpellFireDamage(card.getSpellDamage(), self), self.getTargets().get(i));
+		for(int i=0; i<self.getTargets().get(0).getPlayer().getHeroes().size();i++) {
+			nextTargets.add(self.getTargets().get(0).getPlayer().getHeroes().get(i));
 		}
+		Hero randomTarget= nextTargets.get((int) (Math.random()*nextTargets.size()));
+		nextTargets = new LinkedList<Hero>();
+		nextTargets.add(randomTarget);
 		self.setTargets(nextTargets);
-		if(nextTargets.size()>0) {
-			return true;
-		}else {
-			return false;
-		}
+		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		return GameEquations.calculateSpellFireDamage(card.getSpellDamage(), self)+" fire damage";
+		return "random target";
 	}
 
 }

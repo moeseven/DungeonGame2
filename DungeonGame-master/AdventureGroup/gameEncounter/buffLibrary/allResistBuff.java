@@ -5,9 +5,9 @@ import gameEncounter.Hero;
 
 public class allResistBuff extends Buff{
 	private int resist;
-	private int duration=5;
-	public allResistBuff(Hero hero, int resist) {
+	public allResistBuff(Hero hero, int resist, int duration) {
 		this.resist=resist;
+		this.duration=duration;
 	}
 	@Override
 	public void onTick(Hero hero) {

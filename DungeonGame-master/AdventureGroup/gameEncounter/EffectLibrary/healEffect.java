@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -15,7 +16,7 @@ public class healEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.getTargets().get(i).heal(GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self));		
 		}
@@ -23,7 +24,7 @@ public class healEffect extends CardEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		// TODO Auto-generated method stub
 		return "heal "+GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self)+" health.";
 	}

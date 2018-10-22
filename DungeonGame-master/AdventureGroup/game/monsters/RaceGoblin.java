@@ -83,7 +83,9 @@ public class RaceGoblin extends MonsterRace{
 		public GoblinWarrior(Game game) {	
 			super(game);
 			name="warrior";		
-			items.add(game.itemBuilder.buildItem("rustyBlade",4));	
+			items.add(game.itemBuilder.buildItem("rustyBlade",4));
+			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
+			cards.add(game.cardBuilder.buildCard("bleedingSlice"));	
 			for (int i=0; i<2;i++) {
 				cards.add(game.cardBuilder.buildCard("meeleAttack"));
 				cards.add(game.cardBuilder.buildCard("shortStrike"));
@@ -92,8 +94,7 @@ public class RaceGoblin extends MonsterRace{
 			for (int i=0; i<4;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
-			cards.add(game.cardBuilder.buildCard("bleedingSlice"));
+			
 		}
 
 		public void modifyHero(Hero hero) {
@@ -227,6 +228,7 @@ public class RaceGoblin extends MonsterRace{
 			hero.setSpellDuration(12);
 			hero.setVitality(hero.getVitality()-3);
 			//
+			hero.setBleedDmg(50);
 			hero.setAccuracy(hero.getAccuracy()-2);
 			hero.setAttackSkill(hero.getAttackSkill()-2);
 		}

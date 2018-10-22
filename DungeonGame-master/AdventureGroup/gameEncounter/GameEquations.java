@@ -53,16 +53,16 @@ public class GameEquations {
 	
 	////////////////////////////////////////////////////////////////////
 		
-	//spell resist calculation
-		public static boolean resist(Hero caster, Hero target) {
-			if(Math.random()>1/(1.1+(spellResistCalc(target)-spellPowerCalc(caster))*0.05)) {
-				
-				caster.getPlayer().getGame().log.addLine(target.getName()+" resisted!");
-				return true;			
-			}else {
-				return false;
-			}
-		}
+//	//spell resist calculation
+//		public static boolean resist(Hero caster, Hero target) {
+//			if(Math.random()>1/(1.1+(spellResistCalc(target)-spellPowerCalc(caster))*0.05)) {
+//				
+//				caster.getPlayer().getGame().log.addLine(target.getName()+" resisted!");
+//				return true;			
+//			}else {
+//				return false;
+//			}
+//		}
 	//crit combat calculation
 	public static int rollForCrit(Hero hero, int damage) {
 		if (Math.random()*100<critChanceCalc(hero)) {
@@ -87,8 +87,27 @@ public class GameEquations {
 
 	//damage for spells
 	public static int calculateSpellDamage(int dmg,Hero hero,String damageType) {
-		double damage=(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0);
-		return (int) damage;
+		//!!!only for spells that scale with spell power
+		if (damageType.equals("fire")) {
+			return calculateSpellFireDamage(dmg, hero);
+		}
+		if (damageType.equals("cold")) {
+			return calculateSpellColdDamage(dmg, hero);
+		}
+		if (damageType.equals("lightning")) {
+			return calculateSpellLightningDamage(dmg, hero);
+		}
+		if (damageType.equals("magic")) {
+			return calculateSpellMagicDamage(dmg, hero);
+		}
+		if (damageType.equals("poison")) {
+			return (int) (calculatePoisonDamage(dmg, hero)*(1+(spellPowerCalc(hero))/100.0));
+		}
+		if (damageType.equals("bleed")) {
+			return (int) (calculateBleedDamage(dmg, hero)*(1+(spellPowerCalc(hero))/100.0));
+		}
+		System.out.println("no such damage Type (getting damage number from damge type)");
+		return calculateSpellMagicDamage(dmg, hero);
 	}
 	public static int calculateSpellFireDamage(int dmg,Hero hero) {
 		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getFireDmg()/100.0));

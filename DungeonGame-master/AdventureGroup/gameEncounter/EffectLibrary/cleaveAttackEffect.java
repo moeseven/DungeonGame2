@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -15,7 +16,7 @@ public class cleaveAttackEffect extends attackEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		boolean success=false;
 		if(self.attackHero(self.getTarget(),card)) {
 			damageTarget(self, self.getTarget(), card);
@@ -33,7 +34,7 @@ public class cleaveAttackEffect extends attackEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		// TODO Auto-generated method stub
 		return GameEquations.calculateAttackDamage(card, self)+" attack damage on target and behind";
 	}

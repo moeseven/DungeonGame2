@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -14,14 +15,14 @@ public class penetrateArmorAttackEffect extends attackEffect{
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void damageTarget(Hero self, Hero target, Card_new card) {
+	protected void damageTarget(Hero self, Hero target, Card card) {
 		int damage=GameEquations.calculateAttackDamage(card, self);		
 		int afterBlock = GameEquations.attackIntoBlock(self, target, damage);
 		target.takeDamage(self, afterBlock, false);
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		// TODO Auto-generated method stub
 		return GameEquations.calculateAttackDamage(card, self)+" armor penetrating attack damage";
 	}

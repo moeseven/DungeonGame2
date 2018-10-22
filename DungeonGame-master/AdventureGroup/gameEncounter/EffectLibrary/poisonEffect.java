@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -15,7 +16,7 @@ public class poisonEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {	
+	public boolean applyEffect(Hero self, Card card) {	
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.doPoisonDamage(GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i));
@@ -30,7 +31,7 @@ public class poisonEffect extends CardEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		return GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self)+" poison";
 	}
 

@@ -56,3 +56,11 @@
 /stressSpellEffect.class
 /manaEffect.class
 /summonEffect.class
+/lightningClowdEffect.class
+/hpLossEffect.class
+/addCardToTargetDeckBuffEffect.class
+/addCardToHandEffect.class
+/addCardToHandBuffEffect.class
+/targetRandomEnemyEffect.class
+/targetRandomAllyOfTargetEffect.class
+/cardsPlayedThisRoundAttackEffect.class

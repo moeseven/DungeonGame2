@@ -19,6 +19,7 @@ import tools.MyLog;
 
 public class Game implements Serializable {
 	private Player player; // change this for multiplayer
+	protected int maximumGroupSize=5;
 	public Player dungeonMaster;
 	public GeneratorRandom generator;
 	// public MyImageLoader imageLoader;
@@ -203,6 +204,10 @@ public class Game implements Serializable {
 
 	public void setActiveAct(Act activeAct) {
 		this.activeAct = activeAct;
+	}
+
+	public int getMaximumGroupSize() {
+		return maximumGroupSize;
 	}
 
 }

@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -15,7 +16,7 @@ public class cardDrawEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		for(int i=0; i<Integer.parseInt(pars.get(1)); i++) {
 			self.drawCard();
 		}
@@ -24,7 +25,7 @@ public class cardDrawEffect extends CardEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		return "Draw "+pars.get(1)+" cards";
 	}
 

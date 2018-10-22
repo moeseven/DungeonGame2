@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
@@ -15,7 +16,7 @@ public class targetSelfEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		//switches target to self
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
 		nextTargets.add(self);
@@ -24,8 +25,8 @@ public class targetSelfEffect extends CardEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
-		return "";
+	public String generateCardText(Hero self, Card card) {
+		return "self";
 	}
 
 }

@@ -6,9 +6,9 @@ import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Hero;
 
-public class addCardToTargetDeckEffect extends CardEffect{
+public class addCardToHandEffect extends CardEffect{
 
-	public addCardToTargetDeckEffect(LinkedList<String> pars) {
+	public addCardToHandEffect(LinkedList<String> pars) {
 		super(pars);
 		//1: cardname , 2: amount
 		assert pars.size()>2;
@@ -20,9 +20,9 @@ public class addCardToTargetDeckEffect extends CardEffect{
 		for (int i = 0; i < self.getTargets().size(); i++) {			
 			nextTargets.add(self.getTargets().get(i));
 			for (int j = 0; j < Integer.parseInt(pars.get(2)); j++) {
-				self.getTargets().get(i).getDiscardPile().add(self.getPlayer().getGame().cardBuilder.buildCard(pars.get(1)));				
+				self.getTargets().get(i).getHand().add(self.getPlayer().getGame().cardBuilder.buildCard(pars.get(1)));				
 			}
-			self.getPlayer().getGame().log.addLine("added "+pars.get(2)+" "+pars.get(1)+" to "+self.getTargets().get(i).getName()+" discard pile");			
+			self.getPlayer().getGame().log.addLine("added "+pars.get(2)+" "+pars.get(1)+" to "+self.getTargets().get(i).getName()+" hand");			
 		}
 		self.setTargets(nextTargets);
 		if(nextTargets.size()>0) {
@@ -34,7 +34,7 @@ public class addCardToTargetDeckEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		return "adds "+pars.get(2)+" "+pars.get(1)+" to the targets discard pile";
+		return "adds "+pars.get(2)+" "+pars.get(1)+" to the targets hand";
 	}
 
 }

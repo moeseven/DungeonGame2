@@ -9,6 +9,6 @@ public abstract class CardEffect implements Serializable{
 		super();
 		this.pars=pars;
 	}
-	public abstract boolean applyEffect(Hero self, Card_new card);
-	public abstract String generateCardText(Hero self, Card_new card);
+	public abstract boolean applyEffect(Hero self, Card card);
+	public abstract String generateCardText(Hero self, Card card);
 }

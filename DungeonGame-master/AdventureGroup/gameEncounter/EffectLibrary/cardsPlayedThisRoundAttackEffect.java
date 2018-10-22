@@ -8,18 +8,16 @@ import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
-public class chargeAttackEffect extends CardEffect{
-private int charges=0;
-	public chargeAttackEffect(LinkedList<String> pars) {
+public class cardsPlayedThisRoundAttackEffect extends CardEffect{
+	private int attackDamagePerCardPlayed;
+	public cardsPlayedThisRoundAttackEffect(LinkedList<String> pars) {
 		super(pars);
+		attackDamagePerCardPlayed=Integer.parseInt(pars.get(1));
 	}
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
-		charges=0;
-		while (self.moveForward()) {
-			charges++;
-		}
 		LinkedList<Hero> nextTargets = new LinkedList<Hero>();
+		card.setAttackDamage(attackDamagePerCardPlayed*self.getCardsPlayedThisRound());
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if(self.attackHero(self.getTargets().get(i),card)) {
 				nextTargets.add(self.getTargets().get(i));
@@ -34,16 +32,12 @@ private int charges=0;
 		}
 	}
 	protected void damageTarget(Hero self, Hero target, Card card) {	
-		int damage;
-		damage= (1+charges)*GameEquations.calculateAttackDamage(card, self);
-		int afterBlockDamage = GameEquations.attackIntoBlock(self, target, damage);		
-		int afterArmorDamage = GameEquations.damageReducedByArmor(afterBlockDamage, target.armor);
-		target.takeDamage(self, afterArmorDamage, false);
+		self.dealAttackDamage(target, card, false);
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		return GameEquations.calculateAttackDamage(card, self)*(1+self.getPosition())+" physical damage (more damage with greater charge range)";
+		return attackDamagePerCardPlayed+" damage for every card played ("+(int) (attackDamagePerCardPlayed*self.getCardsPlayedThisRound()*(1+(GameEquations.attackSkillCalc(self))/100.0))+")";
 	}
 
 }

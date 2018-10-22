@@ -64,3 +64,14 @@
 /RaceGoblin$GoblinShaman.class
 /RaceGoblin$GoblinDefender.class
 /RaceGoblin$GoblinPiker.class
+/IceWall$GoblinArcher.class
+/IceWall$GoblinDefender.class
+/IceWall$GoblinPiker.class
+/IceWall$GoblinShaman.class
+/IceWall$GoblinWarrior.class
+/IceWall.class
+/Wall$GoblinWarrior.class
+/Wall.class
+/Wall$IceWall.class
+/RaceWall$IceWall.class
+/RaceWall.class

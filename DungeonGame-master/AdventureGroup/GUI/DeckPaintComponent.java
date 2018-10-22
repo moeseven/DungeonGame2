@@ -70,8 +70,8 @@ public class DeckPaintComponent extends JComponent{
 		super.paintComponent(g);		
 		for (int i=0;i<hero.getDeck().getCards().size();i++){	
 			g.drawImage(StaticImageLoader.getImage(hero.getDeck().getCards().get(i).getImageNumber()).getScaledInstance(120,102, 2),-15, 10+i*cardHeight,null);		
-			g.setColor(Color.WHITE);
-			g.drawString(""+hero.getDeck().getCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);
+			//g.setColor(Color.WHITE);
+			//g.drawString(""+hero.getDeck().getCards().get(i).computeManaCost(hero), 5, 10+i*cardHeight);
 			g.setColor(Color.black);
 			g.drawString(hero.getDeck().getCards().get(i).getName(), 10, 15+i*cardHeight);
 			//mana bubbles
@@ -80,23 +80,23 @@ public class DeckPaintComponent extends JComponent{
 				g.fillOval(10+m*10, 15+i*cardHeight, 8, 8);
 			}
 			//cast positions
-			for(int b=hero.getPlayer().getGroupSize()-1;b>=0;b--) {
+			for(int b=hero.getPlayer().getGame().getMaximumGroupSize()-1;b>=0;b--) {
 				if(hero.getPlayer().getSelectedHero().getDeck().getCards().get(i).getLegalCastPositions()[b]) {
 					g.setColor(Color.WHITE);
 				}else {
 					g.setColor(Color.DARK_GRAY);
 				}
-				g.fillOval(10+10*(hero.getPlayer().getGroupSize()-1)-b*10, 25+i*cardHeight, 8, 8);
+				g.fillOval(10+5*(hero.getPlayer().getGame().getMaximumGroupSize()-1)-b*5, 25+i*cardHeight, 5, 5);
 			}
 			//target positions
 			if (!hero.getDeck().getCards().get(i).isFriendly()) {
-				for(int b=0;b<hero.getPlayer().getGame().dungeonMaster.getGroupSize();b++) {
+				for(int b=0;b<hero.getPlayer().getGame().getMaximumGroupSize();b++) {
 					if(hero.getDeck().getCards().get(i).getLegalTargetPositions()[b]) {
 						g.setColor(Color.ORANGE);
 					}else {
 						g.setColor(Color.DARK_GRAY);
 					}
-					g.fillOval(42+b*10, 25+i*cardHeight, 8, 8);
+					g.fillOval(42+b*5, 25+i*cardHeight, 5, 5);
 				}
 			}			
 			if(gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getDeck().getCards().get(i)){

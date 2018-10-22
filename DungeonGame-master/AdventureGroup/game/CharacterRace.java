@@ -13,9 +13,15 @@ public abstract class CharacterRace extends CharacterType{
 
 	@Override
 	public void modifyHero(Hero hero) {
-		hero.setName(name);
+		hero.setName(name);		
+		for(int i=0; i<items.size();i++) {
+			hero.getPlayer().getInventory().add(items.get(i));
+			hero.getEquipment().equipItem(items.get(i));
+		}
 		//deck
-
+		for(int i=0; i<cards.size();i++) {
+			hero.getDeck().addCard(cards.get(i));
+		}
 	}
 
 	public LinkedList<String> getNameList() {

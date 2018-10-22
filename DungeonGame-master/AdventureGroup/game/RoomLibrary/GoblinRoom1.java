@@ -2,7 +2,9 @@ package game.RoomLibrary;
 
 import java.util.LinkedList;
 
+import game.CharacterRace;
 import game.Game;
+import game.MonsterRace;
 import game.Room;
 import game.RoomInteractionLibrary.Sack;
 import game.RoomInteractionLibrary.Shop;
@@ -18,7 +20,8 @@ public class GoblinRoom1 extends Room{
 		super(game);
 		this.hasFight=true;
 		getInteractions().add(new Sack(game,60));
-		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(game), new TypeWarrior(game)));
-		monsters.add(new Hero("", game.dungeonMaster,new RaceGoblin(game), new TypeWarrior(game)));
+		MonsterRace race= new RaceGoblin(game);
+		monsters.add(new Hero("", game.dungeonMaster,race, race.getPositionClasses(1).getFirst()));
+		monsters.add(new Hero("", game.dungeonMaster,race, race.getPositionClasses(1).getFirst()));
 	}
 }

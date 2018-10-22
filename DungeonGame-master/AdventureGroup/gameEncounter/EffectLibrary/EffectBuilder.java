@@ -10,6 +10,12 @@ public class EffectBuilder {
 	public static CardEffect buildEffect(EffectParameters pars) {
 		String name = pars.parameters.get(0);
 		LinkedList<String> p = pars.parameters;
+		if (name.equals("addCardToHandBuff")) {
+			return new addCardToHandBuffEffect(p);
+		}
+		if (name.equals("addCardToHand")) {
+			return new addCardToHandEffect(p);
+		}
 		if (name.equals("addCardToTargetDeck")) {
 			return new addCardToTargetDeckEffect(p);
 		}
@@ -36,6 +42,9 @@ public class EffectBuilder {
 		}
 		if (name.equals("cardDraw")) {
 			return new cardDrawEffect(p);
+		}
+		if (name.equals("cardsPlayedThisRoundAttack")) {
+			return new cardsPlayedThisRoundAttackEffect(p);
 		}
 		if (name.equals("chargeAttack")) {
 			return new chargeAttackEffect(p);
@@ -70,8 +79,14 @@ public class EffectBuilder {
 		if (name.equals("heal")) {
 			return new healEffect(p);
 		}
+		if (name.equals("hpLoss")) {
+			return new hpLossEffect(p);
+		}
 		if (name.equals("increaseStatOfCard")) {
 			return new increaseStatOfCardEffect(p);
+		}
+		if (name.equals("lightningClowd")) {
+			return new lightningClowdEffect(p);
 		}
 		if (name.equals("lightningSpell")) {
 			return new lightningSpellEffect(p);
@@ -123,6 +138,9 @@ public class EffectBuilder {
 		}
 		if (name.equals("targetAllAlliesOfTarget")) {
 			return new targetAllAlliesOfTargetEffect(p);
+		}
+		if (name.equals("targetRandomAllyOfTarget")) {
+			return new targetRandomAllyOfTargetEffect(p);
 		}
 		if (name.equals("targetSelf")) {
 			return new targetSelfEffect(p);

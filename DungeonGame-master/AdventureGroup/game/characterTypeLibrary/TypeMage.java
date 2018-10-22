@@ -17,6 +17,8 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("breeze");
 		cardPool.add("sparks");
 		cardPool.add("magicShield");
+		cardPool.add("iceArmor");
+		cardPool.add("iceWall");
 		name="mage";		
 		items.add(game.itemBuilder.buildItem("rustyBlade",6));
 		for (int i=0; i<2;i++) {

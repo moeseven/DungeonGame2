@@ -18,6 +18,7 @@ import gameEncounter.buffLibrary.Bashed;
 public class Hero implements Serializable{
 
 	//private LinkedList<Item> inventory;
+	private int  cardsPlayedThisRound=0;
 	private boolean isSummon=false;
 	private int imageScale=3;
 	private LinkedList<Buff> buffs;
@@ -183,29 +184,35 @@ public class Hero implements Serializable{
 		for(int i=0;i<wounds;i++) {
 			drawPile.add(new Wound());
 		}
-		Collections.shuffle(this.getDrawPile());
+		Collections.shuffle(drawPile);
 	}
 	public void drawCard() {
-		if(drawPile.size()==0) {
-			drawPile=discardPile;
-			Collections.shuffle(this.getDrawPile());
-			discardPile=new LinkedList<Card>();
-		}
-		if(drawPile.size()>0) {
-			if (hand.size()<maxHandSize) {
-				hand.add(drawPile.removeFirst());
+		if (hand.size()<maxHandSize) {
+			if(drawPile.size()==0) {
+				
+				drawPile=discardPile;
+				Collections.shuffle(drawPile);
+				discardPile=new LinkedList<Card>();
+			}
+			if(drawPile.size()>0) {	
+				Card card=drawPile.removeFirst();
+				//on draw card effects
+				for (int i = 0; i < card.drawEffects.size(); i++) {
+					card.drawEffects.get(i).applyEffect(this, card);
+				}
+				hand.add(card);		
 			}else {
-				player.getGame().log.addLine("cand draw more!");
-			}			
+				player.getGame().log.addLine("no more cards in draw Pile!");
+			}
 		}else {
-			player.getGame().log.addLine("no more cards in draw Pile!");
+			player.getGame().log.addLine("cant draw more cards!");
 		}
 	}
 	public void applyNegativeTurnEffects() {
 		//poison
 		if(poison>0) {		//poison increases when using mana		
-			sufferPoison();	
-			poison+=1;		
+			poison+=1;
+			sufferPoison();						
 		}		
 		//bleed
 		if(bleed>0) {
@@ -236,7 +243,7 @@ public class Hero implements Serializable{
 					this.block(GameEquations.calculateBlockAmount(10, this));
 				}
 			}
-			cold=(int) Math.max(0, cold-GameEquations.maxHealthCalc(this)*0.05*(1+resistCold));
+			cold=(int) Math.max(0, cold-GameEquations.maxHealthCalc(this)*0.05*(1+resistCold/100));
 		}
 		//lightning
 		if(shock>0) {
@@ -252,6 +259,7 @@ public class Hero implements Serializable{
 	public void turnBegin(){
 		if(!isDead) {			
 			this.discardHand();
+			cardsPlayedThisRound=0;
 			this.block=0;
 			this.mana=manaPower;
 			for(int i=0; i<draw;i++) {
@@ -314,7 +322,7 @@ public class Hero implements Serializable{
 	}
 	//no direct call of Step 2 the card determines what is done with the hit
 	//Step 2: calculate damage and forward to breach Block
-	public void dealAttackDamage (Hero attackedHero, Card_new card, boolean thornFlag) {
+	public void dealAttackDamage (Hero attackedHero, Card card, boolean thornFlag) {
 		int damage;
 		if (thornFlag) {
 			damage=thorns;
@@ -550,14 +558,10 @@ public class Hero implements Serializable{
 		}
 	}
 	public void sufferPoison() {
-		if (poison>GameEquations.maxHealthCalc(this)/2) {
-			player.getGame().log.addLine(name+" suffers poison damage of "+poison+".");
-			this.setHp(hp-poison);
+		if (poison>=hp) {
+			player.getGame().log.addLine("the poison strikes "+name+".");
+			setHp(1);
 			poison=0;
-			if(hp<=0) {
-				hp=0;
-				this.die();
-			}
 		}				
 	}
 	//elemental damage
@@ -682,7 +686,16 @@ public class Hero implements Serializable{
 		}
 	};
 	
-	
+	public void enhance(int percent) {
+		//for summoned monsters (100 is normal)
+		dexterity=(int) (dexterity*percent/100.0);
+		//attributes
+		attackSkill=(int) (attackSkill*percent/100.0);
+		blockSkill=(int) (blockSkill*percent/100.0);
+		spellPower=(int) (spellPower*percent/100.0);
+		baseHp=(int) (baseHp*percent/100.0);
+		hp=GameEquations.maxHealthCalc(this);
+	}
 	public int rollSpeed() {
 		currentSpeed=GameEquations.speedRoll(this);
 		return currentSpeed;
@@ -1276,6 +1289,12 @@ public class Hero implements Serializable{
 	}
 	public void setSummon(boolean isSummon) {
 		this.isSummon = isSummon;
+	}
+	public int getCardsPlayedThisRound() {
+		return cardsPlayedThisRound;
+	}
+	public void setCardsPlayedThisRound(int cardsPlayedThisRound) {
+		this.cardsPlayedThisRound = cardsPlayedThisRound;
 	}
 
 	

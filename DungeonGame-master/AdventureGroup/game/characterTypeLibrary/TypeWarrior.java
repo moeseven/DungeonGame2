@@ -24,6 +24,9 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add("chargeAttack");
 		cardPool.add("sideStep");
 		cardPool.add("shieldBash");
+		cardPool.add("bloodOffer");
+		cardPool.add("bloodRitual");
+		cardPool.add("bloodStrike");
 		name="warrior";
 		items.add(game.itemBuilder.buildItem("rustyBlade",3));			
 		cards.add(game.cardBuilder.buildCard("meeleAttack"));

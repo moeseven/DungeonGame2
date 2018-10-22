@@ -17,7 +17,7 @@ public class increaseStatOfCardEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {		
+	public boolean applyEffect(Hero self, Card card) {		
 		Card  newCard = self.getPlayer().getGame().cardBuilder.buildCard(card.getName());	
 		self.getDiscardPile().add(newCard);	
 		if (pars.get(1).equals("spell")) {
@@ -34,7 +34,7 @@ public class increaseStatOfCardEffect extends CardEffect{
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		return "increases its "+pars.get(1)+" by "+(int)GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(2)),self);
 	}
 

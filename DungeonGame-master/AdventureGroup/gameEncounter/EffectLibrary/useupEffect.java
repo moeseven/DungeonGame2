@@ -2,9 +2,8 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import gameEncounter.Card;
 import gameEncounter.CardEffect;
-import gameEncounter.Card_new;
-import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 
 public class useupEffect extends CardEffect{
@@ -15,15 +14,15 @@ public class useupEffect extends CardEffect{
 	}
 
 	@Override
-	public boolean applyEffect(Hero self, Card_new card) {
+	public boolean applyEffect(Hero self, Card card) {
 		self.getDiscardPile().remove(card);
 		return true;
 	}
 
 	@Override
-	public String generateCardText(Hero self, Card_new card) {
+	public String generateCardText(Hero self, Card card) {
 		// TODO Auto-generated method stub
-		return "useup";
+		return "card gets consumed";
 	}
 
 }

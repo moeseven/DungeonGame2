@@ -57,7 +57,7 @@ public class BossNecromancer extends MonsterRace{
 		hero.setColdDmg(10);
 		hero.setLightningDmg(25);
 		hero.setPoisonDmg(5);
-		hero.setBleedDmg(5);
+		hero.setBleedDmg(15);
 		hero.setMagicDmg(5);		
 		//resistance
 		hero.setResistSpell(10);
@@ -93,7 +93,9 @@ public class BossNecromancer extends MonsterRace{
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
-			cards.add(game.cardBuilder.buildCard("magicShield"));
+			cards.add(game.cardBuilder.buildCard("iceArmor"));
+			cards.add(game.cardBuilder.buildCard("energize"));
+			cards.add(game.cardBuilder.buildCard("energize"));
 			//attacks
 			cards.add(game.cardBuilder.buildCard("poisonousSlice"));
 			//spells
@@ -105,6 +107,10 @@ public class BossNecromancer extends MonsterRace{
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 			cards.add(game.cardBuilder.buildCard("channel"));
 			cards.add(game.cardBuilder.buildCard("sleepCharm"));
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
+			cards.add(game.cardBuilder.buildCard("summonZombie"));
 			cards.add(game.cardBuilder.buildCard("summonZombie"));
 			cards.add(game.cardBuilder.buildCard("summonZombie"));
 		}
@@ -122,43 +128,6 @@ public class BossNecromancer extends MonsterRace{
 			hero.setAttackSkill(hero.getAttackSkill()+1);
 			hero.setBlockSkill(hero.getBlockSkill()+1);
 		}
-	}
-	private class SummonZombie extends SpellnoTarget{
-
-		public SummonZombie() {
-			super();
-			manaCost=3;
-		}
-
-		@Override
-		public boolean extraCastConditions(Hero hero) {
-			boolean isThereSpace=false;
-			if(hero.getPlayer().getGroupSize()-1-hero.getPlayer().getHeroes().size()>0) {
-				isThereSpace=true;
-			}
-			return isThereSpace;
-		}
-
-		@Override
-		public boolean applyEffect(Hero self) {
-			MonsterRace monsterRace= new RaceZombie(game);
-			Hero monster=new Hero("", self.getPlayer(), monsterRace, monsterRace.getPositionClasses(1).getFirst());
-			self.getPlayer().getGame().getRoom().getFight().addHeroToFight(monster);
-			return true;
-		}
-
-		@Override
-		public String getName() {
-			// TODO Auto-generated method stub
-			return "summon Zombie";
-		}
-
-		@Override
-		public boolean isFriendly() {
-			// TODO Auto-generated method stub
-			return true;
-		}
-		
 	}
 
 }

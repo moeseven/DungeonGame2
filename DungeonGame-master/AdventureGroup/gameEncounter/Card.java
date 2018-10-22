@@ -56,6 +56,13 @@ public abstract class Card implements Serializable,Cloneable{
 			return false;
 		}
 	}
+	public boolean aiPlayableCheck(Hero self){
+		if(extraCastConditions(self)&&self.getMana()>=computeManaCost(self)&&checkPositonsLegal(self)) {						
+			return true;
+		}else {
+			return false;
+		}
+	}
 	public void handleManaCost(Hero self) {
 		x=computeManaCost(self);
 		self.setMana(self.getMana()-x);		
@@ -67,6 +74,7 @@ public abstract class Card implements Serializable,Cloneable{
 			self.getDiscardPile().add(this);
 			buildLogEntry(self);
 			applyEffect(self);
+			self.setCardsPlayedThisRound(self.getCardsPlayedThisRound()+1);
 			if (self.getHand().size()>0) {
 				self.setSelectedCard(self.getHand().getFirst());
 			}			
@@ -86,9 +94,9 @@ public abstract class Card implements Serializable,Cloneable{
 		}
 	}
 	//getters and setters
-//	public int getManaCost() {
-//		return manaCost;
-//	}
+	public int getManaCost() {
+		return manaCost;
+	}
 	public void setManaCost(int manaCost) {
 		this.manaCost = manaCost;
 	}

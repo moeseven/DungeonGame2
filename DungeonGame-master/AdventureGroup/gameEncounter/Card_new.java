@@ -175,12 +175,6 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		return true;
 	}
 	//getters and setters
-	public int getManaCost() {
-		return manaCost;
-	}
-	public void setManaCost(int manaCost) {
-		this.manaCost = manaCost;
-	}
 	public void setName(String name) {
 		this.name = name;
 	}
