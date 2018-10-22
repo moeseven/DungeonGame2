@@ -203,7 +203,7 @@ public class Fight implements Serializable{
 	}
 	public boolean retreatHeroes() {
 		retreatWish+=game.getPlayer().getSelectedHero().getMana()/game.getPlayer().getSelectedHero().getManaPower();			
-		if (Math.random()*3<game.getRoom().getFight().retreatWish&&game.getPlayer().getSelectedHero().getMana()>0) {
+		if (Math.random()*2.8<game.getRoom().getFight().retreatWish&&game.getPlayer().getSelectedHero().getMana()>0) {
 			game.getRoom().getFight().fightOverHandling();
 			game.retreatHeroes();
 			return true;
