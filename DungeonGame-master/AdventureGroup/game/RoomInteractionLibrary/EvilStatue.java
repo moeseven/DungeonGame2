@@ -22,15 +22,17 @@ public class EvilStatue extends RoomInteraction{
 
 	@Override
 	public void onEnter(Game game) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).becomeStressed(15);
-		}		
+		
 	}
 
 	@Override
 	public void onInteraction(Hero hero) {
-		hero.getPlayer().getGame().log.addLine("it gazes viciously");
+		if (charges>0) {
+			hero.getPlayer().getGame().log.addLine("it gazes viciously and "+hero.getName()+" changes.");
+			hero.getPlayer().getGame().generator.generateRandomHeroQuirk().gainQuirk(hero);
+		}else {
+			hero.becomeStressed(10);
+		}						
 	}
 
 	public LinkedList<Item> getItems() {

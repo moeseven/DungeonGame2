@@ -3,6 +3,7 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 
 public class TypeMage extends CharacterClass{
 
@@ -20,7 +21,9 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("iceArmor");
 		cardPool.add("iceWall");
 		name="mage";		
-		items.add(game.itemBuilder.buildItem("rustyBlade",6));
+		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
+		startItem.setGoldValue(0);
+		items.add(startItem);
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
 		}		

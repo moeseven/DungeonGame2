@@ -3,6 +3,7 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 
 public class TypeThief extends CharacterClass{
 
@@ -22,7 +23,9 @@ public class TypeThief extends CharacterClass{
 		cardPool.add("daggerArsenal");
 		cardPool.add("armorCracker");
 		cardPool.add("combo");
-		items.add(game.itemBuilder.buildItem("rustyBlade",2));
+		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
+		startItem.setGoldValue(0);
+		items.add(startItem);
 		cards.add(game.cardBuilder.buildCard("feint"));
 		cards.add(game.cardBuilder.buildCard("daggerThrow"));	
 		cards.add(game.cardBuilder.buildCard("poisonDagger"));	

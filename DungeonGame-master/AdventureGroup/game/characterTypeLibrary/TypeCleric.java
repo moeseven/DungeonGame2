@@ -3,6 +3,7 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 
 
 public class TypeCleric extends CharacterClass{
@@ -15,10 +16,13 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("heavenlyStrength");
 		cardPool.add("harden");
 		cardPool.add("growth");
+		cardPool.add("groupHeal");
 		cardPool.add("shooAway");
 		cardPool.add("electroStaticCharge");
 		name="cleric";
-		items.add(game.itemBuilder.buildItem("rustyBlade",4));		
+		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
+		startItem.setGoldValue(0);
+		items.add(startItem);
 		cards.add(game.cardBuilder.buildCard("bash"));
 		cards.add(game.cardBuilder.buildCard("divineGrace"));
 		for (int i=0; i<5;i++) {

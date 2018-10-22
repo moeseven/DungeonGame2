@@ -30,9 +30,23 @@ import gameEncounter.Item;
 public class Act1 extends Act{
 	protected Room questRoom;
 	protected RoomInteraction interaction;
+	HashMap<MonsterRace,Integer> act1Monsters= new HashMap<MonsterRace,Integer>();
 	protected MonsterRace monster;
 	public Act1(Game game) {
 		super(game);
+		//possible monsters	in act1
+		act1Monsters.put(new RaceGoblin(game),1);
+		act1Monsters.put(new RaceGoblin(game),2);
+		act1Monsters.put(new RaceGoblin(game),3);
+		act1Monsters.put(new RaceGoblin(game),3);
+		act1Monsters.put(new RaceGoblin(game),3);
+		act1Monsters.put(new RaceGoblin(game),3);
+		act1Monsters.put(new RaceGoblin(game),4);
+		act1Monsters.put(new RaceZombie(game),2);
+		act1Monsters.put(new RaceRat(game),2);
+		act1Monsters.put(new RaceRat(game),3);
+		act1Monsters.put(new RaceRat(game),5);
+		//
 		//town
 		addRoom(game.getTown(), 4, 4);
 		//test room
@@ -101,7 +115,7 @@ public class Act1 extends Act{
 		addRoom(questRoom, 8,7);
 		//room 8,6
 		questRoom=new EmptyRoom(game);
-		interaction = new EvilStatue(game);
+		interaction = new Chest(game);
 		questRoom.getInteractions().add(interaction);
 		addRoom(questRoom, 8,6);
 		//room 8,5
@@ -123,6 +137,7 @@ public class Act1 extends Act{
 		for (int i = 1; i < 6; i++) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
+		questRoom.setHasFight(true);
 		addRandomRoom(9, 6);
 		//room 7,1
 		questRoom=new EmptyRoom(game);
@@ -130,6 +145,7 @@ public class Act1 extends Act{
 		for (int i = 1; i < 6; i++) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
+		questRoom.setHasFight(true);;
 		addRoom(questRoom, 7, 1);
 		//room 7,0
 		questRoom=new EmptyRoom(game);
@@ -147,9 +163,10 @@ public class Act1 extends Act{
 		chest.setGold(chest.getGold()+20);
 		questRoom.getInteractions().add(chest);
 		monster=new RaceGoblin(game);
-		for (int i = 1; i < 5; i++) {
+		for (int i = 1; i < 4; i++) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
+		questRoom.setHasFight(true);
 		addRoom(questRoom, 4, 7);
 		//room 5,3
 		addRandomRoom(5, 3);
@@ -166,6 +183,13 @@ public class Act1 extends Act{
 		//room 8,4
 		addRandomRoom(8, 4);
 		//room 2,4
+		questRoom=new EmptyRoom(game);
+		questRoom.getInteractions().add(new Chest(game));
+		monster=new RaceGoblin(game);
+		for (int i = 1; i < 2; i++) {
+			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
+		}
+		questRoom.setHasFight(true);
 		addRandomRoom(2, 4);
 		//room 2,5
 		addRandomRoom(2, 5);
@@ -220,22 +244,7 @@ public class Act1 extends Act{
 			act1Interactions.add(new Altar(game));
 			act1Interactions.add(new Sack(game,10));
 			questRoom.getInteractions().add(act1Interactions.get((int) (Math.random()*act1Interactions.size())));
-		}				
-		//possible monsters
-		HashMap<MonsterRace,Integer> act1Monsters= new HashMap<MonsterRace,Integer>();		
-		act1Monsters.put(new RaceGoblin(game),1);
-		act1Monsters.put(new RaceGoblin(game),2);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),4);
-		act1Monsters.put(new RaceZombie(game),2);
-		act1Monsters.put(new RaceRat(game),2);
-		act1Monsters.put(new RaceRat(game),3);
-		act1Monsters.put(new RaceRat(game),5);
-		//
-		
+		}						
 		if (Math.random()<fightProbability) {
 			Iterator it = act1Monsters.entrySet().iterator();
 			int randomToken=(int)(Math.random()*act1Monsters.size());

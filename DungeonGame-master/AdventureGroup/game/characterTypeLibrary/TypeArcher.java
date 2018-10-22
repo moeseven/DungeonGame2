@@ -3,6 +3,7 @@ package game.characterTypeLibrary;
 import game.CharacterClass;
 import game.Game;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 import gameEncounter.CardLibrary.Bandage;
 import gameEncounter.CardLibrary.BasicAttack;
 
@@ -19,7 +20,9 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("energize");
 		cardPool.add("blindShot");
 		name="archer";
-		items.add(game.itemBuilder.buildItem("shortBow",5));	
+		Item startItem = game.itemBuilder.buildItem("shortBow",6);
+		startItem.setGoldValue(0);
+		items.add(startItem);	
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("rangedAttack"));
 		}
