@@ -73,10 +73,11 @@ public class RaceGoblin extends MonsterRace{
 		hero.setGold((int)(Math.random()*9.0));
 		hero.setExperienceValue(8);
 		//deck		
-		for (int i=0; i<2;i++) {
-			cards.add(game.cardBuilder.buildCard("basicBlock"));				
-			cards.add(game.cardBuilder.buildCard("basicAttack"));
+		for (int i=0; i<4;i++) {
+			cards.add(game.cardBuilder.buildCard("basicBlock"));							
 		}
+		cards.add(game.cardBuilder.buildCard("basicAttack"));
+		cards.add(game.cardBuilder.buildCard("basicAttack"));
 	}
 	private class GoblinWarrior extends CharacterClass{
 
@@ -181,7 +182,6 @@ public class RaceGoblin extends MonsterRace{
 			for (int i=0; i<5;i++) {
 				cards.add(game.cardBuilder.buildCard("rangedAttack"));
 			}
-			cards.add(game.cardBuilder.buildCard("basicBlock"));
 			cards.add(game.cardBuilder.buildCard("poisonShot"));
 		}
 

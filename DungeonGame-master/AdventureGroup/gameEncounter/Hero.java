@@ -65,6 +65,7 @@ public class Hero implements Serializable{
 	protected int blockSkill;
 	protected int spellPower;
 	protected int spellDuration;
+	protected int turnBlock=0;
 	//elemental bonus
 	protected int stunChance;
 	protected int fireDmg;
@@ -164,7 +165,7 @@ public class Hero implements Serializable{
 		setArmor(0);
 		setManaPower(2);
 		setDraw(3);		
-		spellDuration=2;
+		spellDuration=3;
 		setExperienceValue(10);
 	}
 	public void initialize() {			
@@ -261,7 +262,9 @@ public class Hero implements Serializable{
 		if(!isDead) {			
 			this.discardHand();
 			cardsPlayedThisRound=0;
-			this.block=0;
+			//turn block
+			this.block=GameEquations.calculateBlockAmount(turnBlock, this);
+			//
 			this.mana=manaPower;
 			for(int i=0; i<draw;i++) {
 				drawCard();
@@ -705,7 +708,7 @@ public class Hero implements Serializable{
 	//
 	//modify stats method for items and buffs...
 	public boolean modifyStat(String stat, int value) {
-		if (stat.equals("turnBlock")) {
+		if (stat.equals("shielding")) {//for magic shields that don't scale with blockskill
 			block+=value;
 		}
 	/////stats//////
@@ -751,6 +754,10 @@ public class Hero implements Serializable{
 		}
 		if (stat.equals("blockSkill")) {
 			blockSkill+=value;
+			return true;
+		}
+		if (stat.equals("turnBlock")) {
+			turnBlock+=value;
 			return true;
 		}
 		if (stat.equals("spellPower")) {

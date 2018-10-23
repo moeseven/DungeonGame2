@@ -97,14 +97,14 @@ public class EffectBuilder {
 		if (name.equals("mana")) {
 			return new manaEffect(p);
 		}
-		if (name.equals("manaBuff")) {
-			return new manaBuffEffect(p);
-		}
 		if (name.equals("missileSpell")) {
 			return new missileSpellEffect(p);
 		}
 		if (name.equals("modifyStat")) {
 			return new modifyStatEffect(p);
+		}
+		if (name.equals("modifyStatOneTurn")) {
+			return new modifyStatOneTurnEffect(p);
 		}
 		if (name.equals("modifyStatSpell")) {
 			return new modifyStatSpellEffect(p);

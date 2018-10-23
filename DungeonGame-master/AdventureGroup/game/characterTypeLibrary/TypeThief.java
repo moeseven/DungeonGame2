@@ -23,6 +23,9 @@ public class TypeThief extends CharacterClass{
 		cardPool.add("daggerArsenal");
 		cardPool.add("armorCracker");
 		cardPool.add("combo");
+		cardPool.add("doubleBlock");
+		cardPool.add("energyBlock");
+		cardPool.add("energyAttack");
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
 		startItem.setGoldValue(0);
 		items.add(startItem);
