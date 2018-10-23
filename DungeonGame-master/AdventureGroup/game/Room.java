@@ -64,6 +64,7 @@ public abstract class Room implements Serializable{
 			for (int i = 0; i < monsters.size(); i++) {
 				monsters.get(i).setExperienceValue((int) (monsters.get(i).getExperienceValue()*(0.9+monsters.size()/10.0)));
 			}
+			hasFight=true;
 			return true;
 		}    else {
 			return false;
@@ -151,6 +152,9 @@ public abstract class Room implements Serializable{
 	}
 	public void setVisited(boolean visited) {
 		this.visited = visited;
+	}
+	public LinkedList<Hero> getMonsters() {
+		return monsters;
 	}
 	
 }

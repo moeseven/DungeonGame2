@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import GUI.grafics.StaticImageLoader;
 import game.Game;
+import game.Room;
 import tools.ClickableRectangle;
 import tools.RectangleClicker;
 
@@ -66,14 +67,22 @@ public class MapWindow extends JFrame{
 							//move to clicked room if adjacent
 							int currentRoomX=game.getRoom().getxCoordinate();
 							int currentRoomY=game.getRoom().getyCoordinate();
-							if(Math.abs(currentRoomX-getX()/roomSquareSize)+Math.abs(currentRoomY-getY()/roomSquareSize)<=1) {
-								if (game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize]!=null) {
-									game.enterRoom(game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize]);
-									windowswitch();
+							Room room=game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize];
+							int distance=Math.abs(currentRoomX-getX()/roomSquareSize)+Math.abs(currentRoomY-getY()/roomSquareSize);
+							if(distance==1) {
+								if (room!=null) {
+									if (room.isVisited()&&!room.isHasFight()) {
+										game.enterRoom(room);
+									}else {
+										game.enterRoom(room);
+										windowswitch();
+									}											
 								}else {
 									//solid walls
 								}
-							}																	
+							}else if (distance==0) {
+								windowswitch();
+							}
 						}	
 						@Override
 						public void updateCaption() {

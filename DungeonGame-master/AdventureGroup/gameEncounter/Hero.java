@@ -255,6 +255,7 @@ public class Hero implements Serializable{
 			}
 			shock=0;
 		}	
+		buffTick();
 	}
 	public void turnBegin(){
 		if(!isDead) {			
@@ -265,8 +266,7 @@ public class Hero implements Serializable{
 			for(int i=0; i<draw;i++) {
 				drawCard();
 			}
-			applyNegativeTurnEffects();
-			this.buffTick();
+			applyNegativeTurnEffects();			
 			if(stunned) {
 				mana=0;
 				this.discardHand();

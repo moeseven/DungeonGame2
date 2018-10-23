@@ -40,7 +40,7 @@ public class RaceWall extends MonsterRace{
 		hero.setArmor(10);
 		hero.setSpeed(50);					
 		hero.setThorns(0);
-		hero.setDraw(1);
+		hero.setDraw(0);
 		hero.setManaPower(1);
 		//offensive
 		hero.setCritChance(5);

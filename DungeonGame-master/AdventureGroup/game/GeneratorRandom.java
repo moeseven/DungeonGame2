@@ -45,6 +45,7 @@ import gameEncounter.ModableHeroStats;
 import gameEncounter.HeroQuirkLibrary.Aggressive;
 import gameEncounter.HeroQuirkLibrary.Bleeder;
 import gameEncounter.HeroQuirkLibrary.Defensive;
+import gameEncounter.HeroQuirkLibrary.Enchanter;
 import gameEncounter.HeroQuirkLibrary.Hairy;
 import gameEncounter.HeroQuirkLibrary.Hasty;
 import gameEncounter.HeroQuirkLibrary.OneEyed;
@@ -114,6 +115,7 @@ public class GeneratorRandom implements Serializable{
 		heroQuirkPool.add(new Hasty(game));
 		heroQuirkPool.add(new SimpleMinded(game));
 		heroQuirkPool.add(new Sleeper(game));
+		heroQuirkPool.add(new Enchanter(game));
 		////
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman(game));

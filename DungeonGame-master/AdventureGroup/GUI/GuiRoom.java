@@ -186,8 +186,8 @@ public class GuiRoom extends JPanel{
 				}					
 			}		
 		});
-		//buy/sell
-		rc.addRect(new ClickableRectangle("sell",210,10,55,20) {
+		//sell
+		rc.addRect(new ClickableRectangle("sell",510,35,45,20) {
 			@Override
 			public void onClick() {
 				// TODO Auto-generated method stub
@@ -201,7 +201,29 @@ public class GuiRoom extends JPanel{
 						if(gw.getGame().getPlayer().getInventory().size()>0) {
 							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 						}
-					}else {
+					}	
+				}
+
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+					this.setFirstLineColor(Color.black);
+				}else {
+					if(shop.getItems().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
+						this.setFirstLineColor(Color.GRAY);
+					}			
+				}					
+			}		
+		});
+		rc.addRect(new ClickableRectangle("buy",510,10,45,20) {
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
+					if(!gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 						if(shop.getItems().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
 							//buy
 							if(gw.getGame().getPlayer().getGold()>=gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getGoldValue()) {
@@ -222,12 +244,10 @@ public class GuiRoom extends JPanel{
 			public void updateCaption() {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
-					caption.removeFirst();						
-					caption.addFirst(name);
+					this.setFirstLineColor(Color.GRAY);
 				}else {
 					if(shop.getItems().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
-						caption.removeFirst();
-						caption.addFirst("buy");
+						this.setFirstLineColor(Color.black);
 					}			
 				}					
 			}		
@@ -725,6 +745,7 @@ protected void paintComponent(Graphics g){
 		if (gw.getGame().getPlayer().getSelectedHero()!=null&&gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 				g.drawImage(StaticImageLoader.getImage(gw.getGame().getPlayer().getSelectedHero().getSelectedItem().getImageNumber()).getScaledInstance(180,153, 3),150,10,null);				
 		}
+		g.setColor(Color.black);
 		for(int i=0; i<rc.rectAngles.size();i++) {
 			g.drawRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 			

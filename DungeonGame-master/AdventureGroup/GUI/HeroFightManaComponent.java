@@ -119,27 +119,27 @@ public class HeroFightManaComponent extends JComponent{
 			if (rc.rectAngles.get(i).getImageNumber()!=1) {
 				g.drawImage(StaticImageLoader.getImage(rc.rectAngles.get(i).getImageNumber()).getScaledInstance(120,102, 2),rc.rectAngles.get(i).getX()-26,rc.rectAngles.get(i).getY()-18,null);
 			}
-		}
-		int skippedLines=0;
-		for (int i = 0; i < fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).size(); i++) {
-			if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).equals("")) {
-				//skip empty lines
-				skippedLines++;
-			}else {
-				if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i).length()>20) {
-					String[] split= addLinebreaks(fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i), 20).split("#");
-					for (int j = 0; j < split.length; j++) {
-						g.drawString(split[j], 50, 12*(i-skippedLines+j)+40);
-					}
-					skippedLines-=split.length-1;
+		}				
+		if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard()!=null) {
+			int skippedLines=0;
+			for (int i = 0; i < fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).size(); i++) {
+				if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).equals("")) {
+					//skip empty lines
+					skippedLines++;
 				}else {
-					g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i), 50, 12*(i-skippedLines)+40);
-				}			
+					if (fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i).length()>20) {
+						String[] split= addLinebreaks(fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i), 20).split("#");
+						for (int j = 0; j < split.length; j++) {
+							g.drawString(split[j], 50, 12*(i-skippedLines+j)+40);
+						}
+						skippedLines-=split.length-1;
+					}else {
+						g.drawString(""+fw.getGame().getPlayer().getSelectedHero().getSelectedCard().getCardText(fw.getGame().getPlayer().getSelectedHero()).get(i), 50, 12*(i-skippedLines)+40);
+					}			
+				}	
 			}
-			
-			
-			
 		}
+		
 	}
 	public String addLinebreaks(String input, int maxLineLength) {
 	    StringTokenizer tok = new StringTokenizer(input, " ");

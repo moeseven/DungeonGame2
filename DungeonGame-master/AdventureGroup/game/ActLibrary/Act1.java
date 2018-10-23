@@ -37,15 +37,15 @@ public class Act1 extends Act{
 		//possible monsters	in act1
 		act1Monsters.put(new RaceGoblin(game),1);
 		act1Monsters.put(new RaceGoblin(game),2);
+		act1Monsters.put(new RaceGoblin(game),2);
+		act1Monsters.put(new RaceGoblin(game),2);
 		act1Monsters.put(new RaceGoblin(game),3);
 		act1Monsters.put(new RaceGoblin(game),3);
 		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),4);
 		act1Monsters.put(new RaceZombie(game),2);
 		act1Monsters.put(new RaceRat(game),2);
 		act1Monsters.put(new RaceRat(game),3);
-		act1Monsters.put(new RaceRat(game),5);
+		act1Monsters.put(new RaceRat(game),4);
 		//
 		//town
 		addRoom(game.getTown(), 4, 4);
@@ -138,11 +138,11 @@ public class Act1 extends Act{
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		questRoom.setHasFight(true);
-		addRandomRoom(9, 6);
+		addRoom(questRoom,9, 6);
 		//room 7,1
 		questRoom=new EmptyRoom(game);
 		monster=new RaceGoblin(game);
-		for (int i = 1; i < 6; i++) {
+		for (int i = 4; i > 1; i--) {
 			questRoom.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		questRoom.setHasFight(true);;
@@ -252,7 +252,7 @@ public class Act1 extends Act{
 		    while (it.hasNext()) {
 		    	Map.Entry pair = (Map.Entry)it.next();
 		    	if (count==randomToken) {
-			        int numberOfMonsters = Math.min((Integer) pair.getValue(),game.dungeonMaster.getGroupSize());    
+			        int numberOfMonsters = 1+Math.min((Integer) pair.getValue(),game.dungeonMaster.getGroupSize()-1);    
 			        for (int i = numberOfMonsters; i >0; i--) {		
 			        	MonsterRace mapMonster=(MonsterRace) pair.getKey();
 						questRoom.addMonster(new Hero("", game.dungeonMaster,mapMonster, mapMonster.getPositionClasses(i).get((int) Math.min(mapMonster.getPositionClasses(i).size()-1, Math.random()*mapMonster.getPositionClasses(i).size()))));//if multiple classes maybe choose randomly
@@ -261,7 +261,9 @@ public class Act1 extends Act{
 		    	count++;
 		        it.remove(); // avoids a ConcurrentModificationException
 		    }
-			questRoom.setHasFight(true);
+		    if (questRoom.getMonsters().size()>0) {
+				questRoom.setHasFight(true);
+			}			
 		}
 		return addRoom(questRoom, x, y);
 	}

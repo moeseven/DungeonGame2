@@ -79,7 +79,7 @@ public class BossNecromancer extends MonsterRace{
 		hero.setGold((int)(Math.random()*99.0));
 		hero.setExperienceValue(110);
 		hero.setImageNumber(66);		
-	
+		items.add(game.itemBuilder.buildItem("crystalOrb", 3));
 		
 	}
 	private class NecromancerAspirant extends CharacterClass{
