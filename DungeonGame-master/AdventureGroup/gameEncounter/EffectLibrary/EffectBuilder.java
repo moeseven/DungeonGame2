@@ -106,6 +106,9 @@ public class EffectBuilder {
 		if (name.equals("modifyStatOneTurn")) {
 			return new modifyStatOneTurnEffect(p);
 		}
+		if (name.equals("modifyStatOneTurnSpell")) {
+			return new modifyStatOneTurnSpellEffect(p);
+		}
 		if (name.equals("modifyStatSpell")) {
 			return new modifyStatSpellEffect(p);
 		}

@@ -19,6 +19,7 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("groupHeal");
 		cardPool.add("shooAway");
 		cardPool.add("electroStaticCharge");
+		cardPool.add("hedgehog");
 		name="cleric";
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
 		startItem.setGoldValue(0);
