@@ -28,6 +28,7 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add("bloodRitual");
 		cardPool.add("bloodStrike");
 		cardPool.add("goodBlock");
+		cardPool.add("blockMastery");
 		name="warrior";
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
 		startItem.setGoldValue(0);

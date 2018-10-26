@@ -706,12 +706,104 @@ public class Hero implements Serializable{
 
 	//A all stats to String method might be handy for gui
 	//
+	public int getStatValueFromString(String stat) {
+		if (stat.equals("shielding")) {//for magic shields that don't scale with blockskill			
+			return block;
+		}
+		/////stats//////
+		if (stat.equals("speed")) {			
+			return speed;
+		}	
+		if (stat.equals("thorns")) {			
+			return thorns;
+		}	
+		if (stat.equals("draw")) {			
+			return draw;
+		}	
+		if (stat.equals("manaPower")) {			
+			return manaPower;
+		}
+		if (stat.equals("armor")) {			
+			return armor;
+		}
+		if (stat.equals("accuracy")) {			
+			return accuracy;
+		}
+		if (stat.equals("dodge")) {			
+			return dodge;
+		}
+		if (stat.equals("critChance")) {			
+			return critChance;
+		}
+		if (stat.equals("critDamage")) {			
+			return critDamage;
+		}
+		if (stat.equals("attackSkill")) {			
+			return attackSkill;
+		}
+		if (stat.equals("blockSkill")) {		
+			return 	blockSkill;
+		}
+		if (stat.equals("turnBlock")) {			
+			return turnBlock;
+		}
+		if (stat.equals("spellPower")) {			
+			return spellPower;
+		}
+		//resistance
+		if (stat.equals("resistSpell")) {			
+			return resistSpell;
+		}		
+		if (stat.equals("resistFire")) {
+			return resistFire;
+		}
+		if (stat.equals("resistLightning")) {			
+			return resistLightning;
+		}
+		if (stat.equals("resistCold")) {			
+			return resistCold;
+		}
+		if (stat.equals("resistPoison")) {			
+			return resistPoison;
+		}
+		if (stat.equals("resistBleed")) {			
+			return resistBleed;
+		}
+		if (stat.equals("resistStun")) {			
+			return resistStun;
+		}
+		if (stat.equals("resistStress")) {			
+			return resistStress;
+		}
+		if (stat.equals("trapDisarm")) {			
+			return trapDisarm;
+		}
+		if (stat.equals("baseHp")) {			
+			return baseHp;
+		}
+		if (stat.equals("strength")) {			
+			return strength;
+		}
+		if (stat.equals("vitality")) {			
+			return vitality;
+		}
+		if (stat.equals("dexterity")) {			
+			return dexterity;
+		}
+		if (stat.equals("intelligence")) {			
+			return intelligence;
+		}
+		System.out.println("stat resolve error!");
+		return 0;
+		
+	}
 	//modify stats method for items and buffs...
 	public boolean modifyStat(String stat, int value) {
 		if (stat.equals("shielding")) {//for magic shields that don't scale with blockskill
 			block+=value;
+			return true;
 		}
-	/////stats//////
+		/////stats//////
 		if (stat.equals("speed")) {
 			speed+=value;
 			return true;

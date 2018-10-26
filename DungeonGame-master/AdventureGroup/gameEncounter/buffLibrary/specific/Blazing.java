@@ -1,4 +1,4 @@
-package gameEncounter.buffLibrary;
+package gameEncounter.buffLibrary.specific;
 
 import gameEncounter.Buff;
 import gameEncounter.GameEquations;

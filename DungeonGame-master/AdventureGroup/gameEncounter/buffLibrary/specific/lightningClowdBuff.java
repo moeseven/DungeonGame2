@@ -1,4 +1,4 @@
-package gameEncounter.buffLibrary;
+package gameEncounter.buffLibrary.specific;
 
 import java.util.LinkedList;
 

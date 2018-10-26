@@ -7,7 +7,7 @@ import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
 import gameEncounter.GameEquations;
 import gameEncounter.Hero;
-import gameEncounter.buffLibrary.lightningClowdBuff;
+import gameEncounter.buffLibrary.specific.lightningClowdBuff;
 
 public class lightningClowdEffect extends CardEffect{
 

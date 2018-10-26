@@ -60,12 +60,12 @@ public class EffectBuilder {
 		}
 		if (name.equals("compositeFire")) {
 			return new compositeFireEffect(p);
-		}
-		if (name.equals("concentrate")) {
-			return new concentrateEffect(p);
-		}
+		}		
 		if (name.equals("cureBleed")) {
 			return new cureBleedEffect(p);
+		}
+		if (name.equals("delayedCombustion")) {
+			return new delayedCombustionEffect(p);
 		}
 		if (name.equals("fireBall")) {
 			return new fireBallEffect(p);
@@ -108,6 +108,9 @@ public class EffectBuilder {
 		}
 		if (name.equals("modifyStatOneTurnSpell")) {
 			return new modifyStatOneTurnSpellEffect(p);
+		}
+		if (name.equals("modifyStatPercentile")) {
+			return new modifyStatPercentileEffect(p);
 		}
 		if (name.equals("modifyStatSpell")) {
 			return new modifyStatSpellEffect(p);
