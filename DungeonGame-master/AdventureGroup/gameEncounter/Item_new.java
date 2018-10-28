@@ -251,6 +251,7 @@ public class Item_new extends Item implements Serializable{
 	    hero.setSpellResist(hero.getSpellResist()+resistSpell*fac);
 	    hero.setResistFire(hero.getResistFire()+resistFire*fac);
 	    hero.setResistCold(hero.getResistCold()+resistCold*fac);
+	    hero.setResistLightning(hero.getResistLightning()+resistLightning*fac);
 	    hero.setResistBleed(hero.getResistBleed()+resistBleed*fac);
 	    hero.setResistPoison(hero.getResistPoison()+resistPoison*fac);
 	    hero.setResistStun(hero.getResistStun()+resistStun*fac);
