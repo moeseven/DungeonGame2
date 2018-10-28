@@ -40,20 +40,16 @@ public class StatsSkillComponent extends JComponent{
 				//get card position from click
 				int i=Math.round(y/cardHeight);
 				if (i==0) {
-					gw.getGame().getPlayer().getSelectedHero().setSkillPoints(gw.getGame().getPlayer().getSelectedHero().getSkillPoints()-1);
-					gw.getGame().getPlayer().getSelectedHero().setStrength(gw.getGame().getPlayer().getSelectedHero().getStrength()+1);
+					gw.getGame().getPlayer().getSelectedHero().skillMainStat("strength");
 				}
 				if (i==1) {
-					gw.getGame().getPlayer().getSelectedHero().setSkillPoints(gw.getGame().getPlayer().getSelectedHero().getSkillPoints()-1);
-					gw.getGame().getPlayer().getSelectedHero().setDexterity(gw.getGame().getPlayer().getSelectedHero().getDexterity()+1);				
+					gw.getGame().getPlayer().getSelectedHero().skillMainStat("dexterity");
 								}
 				if (i==2) {
-					gw.getGame().getPlayer().getSelectedHero().setSkillPoints(gw.getGame().getPlayer().getSelectedHero().getSkillPoints()-1);
-					gw.getGame().getPlayer().getSelectedHero().setIntelligence(gw.getGame().getPlayer().getSelectedHero().getIntelligence()+1);
+					gw.getGame().getPlayer().getSelectedHero().skillMainStat("intelligence");
 				}
 				if (i==3) {
-					gw.getGame().getPlayer().getSelectedHero().setSkillPoints(gw.getGame().getPlayer().getSelectedHero().getSkillPoints()-1);
-					gw.getGame().getPlayer().getSelectedHero().setVitality(gw.getGame().getPlayer().getSelectedHero().getVitality()+1);
+					gw.getGame().getPlayer().getSelectedHero().skillMainStat("vitality");
 				}	
 				gw.myUpdate();
 				gw.repaint();			

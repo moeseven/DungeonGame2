@@ -80,9 +80,16 @@ public class LeaderboardWindow extends JFrame{
 				g.drawString("Type your name to join the Leaderboard:",20, 22);
 			}else {
 				for (int i = 0; i < lb.getLeaderboardEntries().size(); i++) {
-					g.drawString(lb.getLeaderboardEntries().get(i).getPlayerName(),30, 11+i*20);
-					g.drawString("needed "+lb.getLeaderboardEntries().get(i).getTurns()+" turns",140, 11+i*20);
-					g.drawString(","+lb.getLeaderboardEntries().get(i).getPoints()+" points",260, 11+i*20);
+					g.drawString(lb.getLeaderboardEntries().get(i).getPlayerName(),140, 20+i*20);
+					g.drawString("Platz "+(i+1),30, 20+i*20);
+					int divisor=10;int decimalCounter=1;
+					while (lb.getLeaderboardEntries().get(i).getPoints()/divisor>=1) {
+						divisor*=10;	
+						decimalCounter++;
+					}			
+					
+					g.drawString(lb.getLeaderboardEntries().get(i).getPoints()+"",250-decimalCounter*6, 20+i*20);
+					g.drawString(" points       (in "+lb.getLeaderboardEntries().get(i).getTurns()+" turns)",260, 20+i*20);
 				}
 			}
 			

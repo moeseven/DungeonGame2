@@ -11,7 +11,7 @@ public class Deck implements Serializable{
 	}
 	//functions
 	public void addCard(Card card) {
-		cards.add(card);
+		cards.addFirst(card);
 	}
 	//g&S
 	public LinkedList<Card> getCards() {

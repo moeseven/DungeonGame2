@@ -38,6 +38,7 @@ public class Game implements Serializable {
 
 	public Game() {
 		super();
+		player = new Player(this);
 		cardBuilder = new CardBuilder();
 		itemBuilder = new ItemBuilder(this);
 		itemSuffixBuilder = new ItemSuffixBuilder();
@@ -45,12 +46,11 @@ public class Game implements Serializable {
 		generator = new GeneratorRandom(this);
 		log = new MyLog();
 		this.availableQuests = new LinkedList<Quest>();
-		town = new Town(this);
-		
-		room = town;
+		town = new Town(this);	
 		activeAct = new Act1(this);
+		room = activeAct.getStartRoom();
 		activeQuest = activeAct.getMainQuest();
-		player = new Player(this);
+		
 		// cardBuilder.printMap();
 	}
 
@@ -75,11 +75,6 @@ public class Game implements Serializable {
 				}
 				getPlayer().getAvailableHeroes().get(i).heal(getPlayer().getAvailableHeroes().get(i).getVitality());
 						
-			}
-			if (getPlayer().getAvailableHeroes().size() < 10) {
-				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
-				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
-				getPlayer().getAvailableHeroes().add(generator.generateRandomHero(getPlayer()));
 			}
 		}
 		turn++;

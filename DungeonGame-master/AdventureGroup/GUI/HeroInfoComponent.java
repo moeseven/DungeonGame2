@@ -189,12 +189,9 @@ public class HeroInfoComponent extends JComponent{
 				if (i<hero.getLvlUpCards().size()) {
 					if (gw.getGame().getPlayer().getSelectedHero().getSelectedCard()==hero.getLvlUpCards().get(i)) {					
 						gw.getGame().getPlayer().getSelectedHero().setSelectedCard(hero.getLvlUpCards().get(i));
-						gw.getGame().getPlayer().getSelectedHero().getDeck().getCards().addFirst(gw.getGame().getPlayer().getSelectedHero().getSelectedCard());
+						gw.getGame().getPlayer().getSelectedHero().pickLvlUpCard(gw.getGame().getPlayer().getSelectedHero().getSelectedCard());
 						hic.addCard=false;
-						gw.getGame().getPlayer().getSelectedHero().setCardPoints(gw.getGame().getPlayer().getSelectedHero().getCardPoints()-1);
-						gw.getGame().getPlayer().getSelectedHero().setLvlUpCards(new LinkedList<Card>());//is this needed?
 						if(gw.getGame().getPlayer().getSelectedHero().getCardPoints()>0) {
-							gw.getGame().getPlayer().getSelectedHero().generatelvlUpCards();
 							hic.decide=true;
 						}
 					}else {

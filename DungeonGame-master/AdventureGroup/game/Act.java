@@ -10,6 +10,7 @@ public abstract class Act implements Serializable{
 	protected Quest mainQuest;
 	protected LinkedList<Quest> sidequests;
 	protected Game game;
+	protected Room startRoom;
 	public Act(Game game) {
 		roomMap= new Room[10][10];
 		finished=false;
@@ -62,6 +63,12 @@ public abstract class Act implements Serializable{
 	}
 	public void setMainQuest(Quest mainQuest) {
 		this.mainQuest = mainQuest;
+	}
+	public Room getStartRoom() {
+		return startRoom;
+	}
+	public void setStartRoom(Room startRoom) {
+		this.startRoom = startRoom;
 	}
 	
 }

@@ -4,19 +4,19 @@ import gameEncounter.GameEquations;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class ManaPotion extends ItemConsumable{
+public class BlockPotion extends ItemConsumable{
 
 
-	public ManaPotion() {
+	public BlockPotion() {
 		super();
-		name="mana potion";
-		this.setImageNumber(230);
-		setGoldValue(45);
+		name="hard potion";
+		this.setImageNumber(231);
+		setGoldValue(20);
 	}
 
 	@Override
 	public void mod(Hero hero) {
-		hero.setMana(hero.getMana()+2);		
+		hero.setBlock(hero.getBlock()+45);	
 	}
 	
 }

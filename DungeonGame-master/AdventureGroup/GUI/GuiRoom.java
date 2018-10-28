@@ -389,6 +389,24 @@ public class GuiRoom extends JPanel{
 				}					
 			}		
 		});
+		//increase Tavern size
+		rc.addRect(new ClickableRectangle("increase Tavern slots",545,130,145,20) {
+			int goldcost=(gw.getGame().getPlayer().getHeroes().size()+gw.getGame().getPlayer().getAvailableHeroes().size())*18-15;
+			@Override
+			public void onClick() {
+				if (gw.getGame().getPlayer().getGold()>= goldcost){
+					gw.getGame().getPlayer().gainGold(-goldcost);
+					gw.getGame().getPlayer().getAvailableHeroes().add(gw.getGame().generator.generateRandomHero(gw.getGame().getPlayer()));
+				}
+				
+				gw.getGuiRoom().upadate();
+			}
+			@Override
+			public void updateCaption() {
+				caption.removeFirst();						
+				caption.addFirst(name+"("+goldcost+" gold)");						
+			}		
+		});
 		//dismiss hero
 		rc.addRect(new ClickableRectangle("dismiss hero",545,110,145,20) {
 			@Override
@@ -398,7 +416,7 @@ public class GuiRoom extends JPanel{
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
 					if(gw.getGame().getPlayer().getHeroes().contains(hero)&&gw.getGame().getPlayer().getHeroes().size()>1) {
 						//dismiss from roster
-						gw.getGame().getPlayer().removeHero(hero);
+						gw.getGame().getPlayer().removeHero(hero);						
 						if(gw.getGame().getPlayer().getHeroes().size()>0) {
 							gw.getGame().getPlayer().setSelectedHero(gw.getGame().getPlayer().getHeroes().getFirst());
 						}

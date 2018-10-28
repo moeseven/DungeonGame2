@@ -18,6 +18,7 @@ public abstract class ItemConsumable extends Item{
 		allConsumables = new ArrayList<ItemConsumable>();
 		//all the consumables
 		allConsumables.add(new HealingPotion());
+		allConsumables.add(new BlockPotion());
 		allConsumables.add(new ManaPotion());
 		allConsumables.add(new AntiVenom());
 		allConsumables.add(new Bandages());

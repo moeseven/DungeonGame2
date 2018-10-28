@@ -42,23 +42,7 @@ import gameEncounter.HeroQuirk;
 import gameEncounter.Item;
 import gameEncounter.Item_new;
 import gameEncounter.ModableHeroStats;
-import gameEncounter.HeroQuirkLibrary.Aggressive;
-import gameEncounter.HeroQuirkLibrary.Bleeder;
-import gameEncounter.HeroQuirkLibrary.Defensive;
-import gameEncounter.HeroQuirkLibrary.Enchanter;
-import gameEncounter.HeroQuirkLibrary.Hairy;
-import gameEncounter.HeroQuirkLibrary.Hasty;
-import gameEncounter.HeroQuirkLibrary.OneEyed;
-import gameEncounter.HeroQuirkLibrary.SimpleMinded;
-import gameEncounter.HeroQuirkLibrary.Sleeper;
-import gameEncounter.HeroQuirkLibrary.SlugBrained;
-import gameEncounter.HeroQuirkLibrary.Stresser;
-import gameEncounter.HeroQuirkLibrary.Strong;
-import gameEncounter.HeroQuirkLibrary.SubstanceAbuser;
-import gameEncounter.HeroQuirkLibrary.Tender;
-import gameEncounter.HeroQuirkLibrary.Thoughtfull;
-import gameEncounter.HeroQuirkLibrary.Tough;
-import gameEncounter.HeroQuirkLibrary.Weak;
+import gameEncounter.HeroQuirkLibrary.*;
 import gameEncounter.ItemLibrary.ArmorThinLeather;
 import gameEncounter.ItemLibrary.Buckler;
 import gameEncounter.ItemLibrary.CrownOfThorns;
@@ -73,15 +57,8 @@ import gameEncounter.ItemLibrary.SanguineBloodletter;
 import gameEncounter.ItemLibrary.ShortBow;
 import gameEncounter.ItemLibrary.ShortSword;
 import gameEncounter.ItemLibrary.Speer;
-import gameEncounter.ItemLibrary.usables.AntiVenom;
-import gameEncounter.ItemLibrary.usables.Bandages;
-import gameEncounter.ItemLibrary.usables.ExperienceBook;
-import gameEncounter.ItemLibrary.usables.HealingPotion;
-import gameEncounter.ItemLibrary.usables.ItemConsumable;
-import gameEncounter.ItemLibrary.usables.PotionOfDexterity;
-import gameEncounter.ItemLibrary.usables.PotionOfIntelligence;
-import gameEncounter.ItemLibrary.usables.PotionOfStrength;
-import gameEncounter.ItemLibrary.usables.PotionOfVitality;
+import gameEncounter.ItemLibrary.usables.*;
+
 
 public class GeneratorRandom implements Serializable{
 	private LinkedList<String> allCards;
@@ -217,6 +194,8 @@ public class GeneratorRandom implements Serializable{
 		//consumables
 		itemPool.add(new AntiVenom());
 		itemPool.add(new Bandages());
+		itemPool.add(new ManaPotion());
+		itemPool.add(new BlockPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());
 		itemPool.add(new HealingPotion());

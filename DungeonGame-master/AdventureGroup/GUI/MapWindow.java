@@ -114,12 +114,16 @@ public class MapWindow extends JFrame{
 			for(int i=0; i<rc.rectAngles.size();i++) {						
 				if (game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize]==null) {
 					g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
-				}else if (!game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize].isVisited()) {
-					
+				}else if (!game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize].isVisited()) {					
 					g.setColor(Color.GRAY);
 					g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
 					g.setColor(Color.BLACK);
 				}else {
+					if (game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize]==game.getTown()) {
+						g.setColor(new Color(230, 168, 32));
+						g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());
+						g.setColor(Color.BLACK);
+					}
 					if (game.getActiveAct().getRoomMap()[rc.rectAngles.get(i).getX()/roomSquareSize][rc.rectAngles.get(i).getY()/roomSquareSize].isHasFight()) {
 						g.setColor(Color.red);
 						g.fillRect(rc.rectAngles.get(i).getX(), rc.rectAngles.get(i).getY(), rc.rectAngles.get(i).getLength(), rc.rectAngles.get(i).getHeight());

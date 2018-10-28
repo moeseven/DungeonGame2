@@ -21,24 +21,24 @@ public LeaderBoardEntry(Game game, String playerName) {
 	this.playerName=playerName;
 	int pointsum=0;
 	for (int i = 0; i < game.getPlayer().getHeroes().size(); i++) {
-		pointsum+=game.getPlayer().getHeroes().get(i).getExperience()*2;
+		pointsum+=game.getPlayer().getHeroes().get(i).getExperience()*3;
 		LinkedList<Item> items=game.getPlayer().getHeroes().get(i).getEquipment().getAllEquippedItems();
 		for (int j = 0; j < items.size(); j++) {
-			pointsum+=items.get(j).getGoldValue();
+			pointsum+=items.get(j).getGoldValue()/4;//item would sell for 1/5
 		}
 		
 	}
 	for (int i = 0; i < game.getPlayer().getAvailableHeroes().size(); i++) {
-		pointsum+=game.getPlayer().getAvailableHeroes().get(i).getExperience()*2;
+		pointsum+=game.getPlayer().getAvailableHeroes().get(i).getExperience()*3;
 		LinkedList<Item> items=game.getPlayer().getAvailableHeroes().get(i).getEquipment().getAllEquippedItems();
 		for (int j = 0; j < items.size(); j++) {
-			pointsum+=items.get(j).getGoldValue();
+			pointsum+=items.get(j).getGoldValue()/4;
 		}
 	}
 	for (int i = 0; i < game.getPlayer().getInventory().size(); i++) {
-		pointsum+=game.getPlayer().getInventory().get(i).getGoldValue();
+		pointsum+=game.getPlayer().getInventory().get(i).getGoldValue()/4;
 	}
-	points=(pointsum+game.getPlayer().getGold()+game.points-100)/(turns+1);
+	points=(pointsum+game.getPlayer().getGold()+game.points-100)/(turns+5);
 }
 public int getTurns() {
 	return turns;

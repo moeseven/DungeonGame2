@@ -383,13 +383,14 @@ public class Hero implements Serializable{
 		if(!isDead) {
 			player.getGame().log.addLine(name+ " died!");
 			player.getGame().getRoom().getInteractions().add(new StandardCorpse(player.getGame(),this)); //generate corpses
+			player.getAvailableHeroes().add(player.getGame().generator.generateRandomHero(player));
 			block=0;
 			this.isDead=true;
 			if (!player.getGame().getRoom().isHasFight()) {// in order to provide experience in fights!!
 				player.getHeroes().remove(this);
 			}		
 			for(int i=0;i<player.getHeroes().size();i++) {
-				player.getHeroes().get(i).becomeStressed(35);
+				player.getHeroes().get(i).becomeStressed(33);
 			}			
 		}else {
 			player.getGame().log.addLine(name+ " allready dead");
@@ -515,13 +516,15 @@ public class Hero implements Serializable{
 	public void levelUP() {
 		level+=1;
 		strength+=1;dexterity+=1;intelligence+=1;vitality+=1;
-		stressCap+=5;
+		stressCap+=1;
 		skillPoints+=1;
 		if(cardPoints==0) {
 			generatelvlUpCards();
 		}
 		cardPoints+=1;
-		player.getGame().log.addLine(this.getName()+" leveled up to level "+level);		
+		if (player.getHeroes().contains(this)) {
+			player.getGame().log.addLine(this.getName()+" leveled up to level "+level);
+		}				
 	}
 	public void generatelvlUpCards() {
 		lvlUpCards=new LinkedList<Card>();
@@ -529,6 +532,54 @@ public class Hero implements Serializable{
 		for(int i=0; i<3;i++) {//cards should be cloned
 			lvlUpCards.add(player.getGame().cardBuilder.buildCard(charClass.getCardPool().get(Math.min(charClass.getCardPool().size()-1,(int)(Math.random()*charClass.getCardPool().size())))));	
 		}
+	}
+	//
+	public void autoskill() {
+		while (skillPoints>0) {
+			int random= (int) (Math.random()*5);
+			String stat= "vitality";
+			if (random==1) {
+				stat= "dexterity";
+			}
+			if (random==2) {
+				stat= "intelligence";
+			}
+			if (random==3) {
+				stat= "strength";
+			}
+			skillMainStat(stat);
+		}
+		while (cardPoints>0) {
+			pickLvlUpCard(lvlUpCards.getLast());
+		}
+	}
+	public boolean skillMainStat(String stat) {
+		if (skillPoints>0) {
+			if (modifyStat(stat, 1)) {
+				skillPoints-=1;
+				return true;
+			}
+		}		
+		return false;
+	}
+	public boolean pickLvlUpCard(Card card) {
+		if (lvlUpCards.contains(card)) {
+			deck.addCard(card);
+			cardPoints-=1;
+			if (cardPoints>0) {
+				generatelvlUpCards();
+			}		
+			return true;
+		}
+		return false;
+	}
+	public boolean removeCardWithCardpoint(Card card) {
+		if (deck.getCards().contains(card)&&cardPoints>0) {
+			deck.getCards().remove(card);
+			cardPoints-=1;
+			return true;
+		}
+		return false;
 	}
 	//
 	public void becomeStressed(int s) {
