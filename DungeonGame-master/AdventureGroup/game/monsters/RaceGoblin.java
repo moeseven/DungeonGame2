@@ -74,8 +74,10 @@ public class RaceGoblin extends MonsterRace{
 		hero.setExperienceValue(8);
 		//deck		
 		for (int i=0; i<4;i++) {
-			cards.add(game.cardBuilder.buildCard("basicBlock"));							
+			cards.add(game.cardBuilder.buildCard("basicBlock"));
+										
 		}
+		cards.add(game.cardBuilder.buildCard("basicAttack"));
 		cards.add(game.cardBuilder.buildCard("basicAttack"));
 		cards.add(game.cardBuilder.buildCard("basicAttack"));
 	}
