@@ -32,14 +32,14 @@ public class Sack extends RoomInteraction{
 		setImageNumber(91);
 		if(charges>0) {
 			charges+=-1;
-			if(Math.random()>0.4) {
+			if(Math.random()>0.36) {
 				hero.getPlayer().gainGold(gold);
 				for(int i=0; i<items.size();i++) {
 					hero.getPlayer().addItemtoInventory(items.get(i));
 				}
 			}else {
 				hero.getPlayer().getGame().log.addLine("rotten remains");
-				hero.becomeStressed((int) (Math.random()*12));
+				hero.becomeStressed((int) (Math.random()*11));
 			}
 						
 		}else {			

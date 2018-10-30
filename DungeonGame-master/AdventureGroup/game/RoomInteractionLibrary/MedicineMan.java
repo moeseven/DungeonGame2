@@ -21,17 +21,16 @@ public class MedicineMan extends RoomInteraction{
 
 	@Override
 	public void onEnter(Game game) {
-		// TODO Auto-generated method stub
-		for(int i=0; i<heroestress.size();i++) {
-			game.getPlayer().getAvailableHeroes().add(heroestress.get(i));
-			heroestress.get(i).setStress(0);
-		}
-		heroestress=new LinkedList<Hero>();
-		for(int i=0; i<heroeswound.size();i++) {
-			game.getPlayer().getAvailableHeroes().add(heroeswound.get(i));
-			heroeswound.get(i).setWounds(0);
-		}
-		heroeswound=new LinkedList<Hero>();
+//		for(int i=0; i<heroestress.size();i++) {
+//			game.getPlayer().getAvailableHeroes().add(heroestress.get(i));
+//			heroestress.get(i).setStress(0);
+//		}
+//		heroestress=new LinkedList<Hero>();
+//		for(int i=0; i<heroeswound.size();i++) {
+//			game.getPlayer().getAvailableHeroes().add(heroeswound.get(i));
+//			heroeswound.get(i).setWounds(0);
+//		}
+//		heroeswound=new LinkedList<Hero>();
 	}
 
 	@Override

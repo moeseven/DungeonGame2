@@ -15,7 +15,7 @@ public class Altar extends RoomInteraction{
 	public Altar(Game game) {
 		super(game);
 		//image=game.imageLoader.getImage(86);
-		setImageNumber(86);
+		setImageNumber(95);
 		name="altar";
 		// TODO Auto-generated constructor stub
 	}
@@ -36,12 +36,18 @@ public class Altar extends RoomInteraction{
 		}
 		
 	}
+	private void reduceSacreficePoints() {
+		sacrefices--;
+		if (sacrefices<=0) {
+			setImageNumber(86);
+		} 
+	}
 	public void goldForBlood(Hero hero) {
 		if(sacrefices>0) {
 			int gold=(int) (hero.getHp()*Math.random());
 			hero.finalDamage(gold);
 			hero.getPlayer().gainGold(gold);
-			sacrefices--;
+			reduceSacreficePoints();
 		}		
 	}
 	public void itemForExperience(Hero hero, Item item) {
@@ -49,7 +55,7 @@ public class Altar extends RoomInteraction{
 			if(sacrefices>0&&hero.getPlayer().getInventory().contains(item)) {
 				hero.getPlayer().getInventory().remove(item);
 				hero.gainExp((int) (item.getItemQuality()*60+5));
-				sacrefices--;
+				reduceSacreficePoints();
 			}
 		}else {
 			hero.getPlayer().getGame().log.addLine("offer rejected");
@@ -58,7 +64,7 @@ public class Altar extends RoomInteraction{
 	public void pray(Hero hero) {
 		if (sacrefices>0) {
 			hero.healStress(hero.getStress()/2);
-			sacrefices--;
+			reduceSacreficePoints();
 		}
 	}
 }

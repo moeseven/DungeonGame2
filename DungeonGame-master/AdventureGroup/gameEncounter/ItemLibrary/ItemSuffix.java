@@ -11,11 +11,11 @@ public class ItemSuffix extends Item_new{
 			String resistSpell, String resistLightning, String resistFire, String resistCold, String resistPoison,
 			String resistBleed, String resistStun, String resistStress, String duration, String fireDmg, String coldDmg,
 			String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,
-			String itemClass, String imageNumber, String name) {
+			String itemClass, String imageNumber,String turnBlock, String name) {
 		super(power, weight, goldValue, category, droppable, critChance, critDamage, attack, block, spell, accuracy, dodge,
 				speed, draw, mana, thorns, armor, health, resistSpell, resistLightning, resistFire, resistCold, resistPoison,
 				resistBleed, resistStun, resistStress, duration, fireDmg, coldDmg, lightningDmg, bleedDmg, poisonDmg, magicDmg,
-				stunChance, itemClass, imageNumber, name);
+				stunChance, itemClass, imageNumber,turnBlock, name);
 		// TODO Auto-generated constructor stub
 	}
 

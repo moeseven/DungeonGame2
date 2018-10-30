@@ -15,6 +15,7 @@ import gameEncounter.Item;
 
 public abstract class Trap extends RoomInteraction{
 	protected boolean disarmed;
+	protected boolean triggered;
 	protected Hero trapStats;
 	protected Card card;
 	public Trap(Game game) {
@@ -30,22 +31,26 @@ public abstract class Trap extends RoomInteraction{
 	@Override
 	public void onEnter(Game game) {
 		//give heros trap detection capabilities
-		if(Math.random()>(game.getPlayer().getSelectedHero().getTrapDisarm()/100.0)) {
-			trapHits(game.getPlayer().getSelectedHero());
-		}else {
-			hidden=false;
-			game.log.addLine(game.getPlayer().getSelectedHero().getName()+" detected a "+getName());
+		if (!disarmed) {
+			if(Math.random()>(game.getPlayer().getSelectedHero().getTrapDisarm()/100.0)) {
+				trapHits(game.getPlayer().getSelectedHero());
+				disarmed=true;
+			}else {
+				hidden=false;
+				game.log.addLine(game.getPlayer().getSelectedHero().getName()+" detected a "+getName());
+			}
 		}
+		
 		
 	}
 
 	@Override
 	public void onInteraction(Hero hero) {
-		int exp=15;		
+		int exp=35;		
 		if(disarmed) {
 			hero.getPlayer().getGame().log.addLine("nothing more to see");
 		}else {
-			if(Math.random()>(hero.getTrapDisarm()/100.0)+10) {
+			if(Math.random()>(hero.getTrapDisarm()/100.0)) {
 				hero.getPlayer().getGame().log.addLine(hero.getName()+" disarms a "+getName()+" and gains "+exp+" experience");
 				hero.gainExp(exp);				
 			}else {

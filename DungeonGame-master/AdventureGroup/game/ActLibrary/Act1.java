@@ -268,6 +268,7 @@ public class Act1 extends Act{
 			act1Interactions.add(new UndeadCorpse(game, 12,(int) Math.random()*40));
 			act1Interactions.add(new Altar(game));
 			act1Interactions.add(new SeekingHero(game,-1));
+			act1Interactions.add(new PotionShelf(game));
 			act1Interactions.add(new Sack(game,10));
 			room.getInteractions().add(act1Interactions.get((int) (Math.random()*act1Interactions.size())));
 		}						

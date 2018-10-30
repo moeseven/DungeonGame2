@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 import GUI.grafics.StaticImageLoader;
 import gameEncounter.Card;
 import gameEncounter.Hero;
+import gameEncounter.Item;
 import gameEncounter.ItemLibrary.usables.ItemConsumable;
 import tools.ClickableRectangle;
 import tools.RectangleClicker;
@@ -130,11 +131,17 @@ public class HeroInventoryPaintComponent extends JComponent{
 				
 			});
 			//use
-			rc.addRect(new ClickableRectangle("use potion",210,60,55,20) {
+			rc.addRect(new ClickableRectangle("use",210,60,55,20) {
 				@Override
-				public void onClick() {
-					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
-						gw.getGame().getPlayer().getSelectedHero().getEquipment().drinkPotion();			
+				public void onClick() {					
+					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
+						Item itemUsable=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
+						if(gw.getGame().getPlayer().getInventory().contains(itemUsable)) {
+							if (itemUsable instanceof ItemConsumable) {
+								itemUsable.mod(gw.getGame().getPlayer().getSelectedHero());
+								gw.getGame().getPlayer().getInventory().remove(itemUsable);								
+							}
+						}			
 					}
 				}
 				@Override

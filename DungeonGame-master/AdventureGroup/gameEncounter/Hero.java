@@ -1446,6 +1446,12 @@ public class Hero implements Serializable{
 	public void setCardsPlayedThisRound(int cardsPlayedThisRound) {
 		this.cardsPlayedThisRound = cardsPlayedThisRound;
 	}
+	public int getTurnBlock() {
+		return turnBlock;
+	}
+	public void setTurnBlock(int turnBlock) {
+		this.turnBlock = turnBlock;
+	}
 
 	
 	

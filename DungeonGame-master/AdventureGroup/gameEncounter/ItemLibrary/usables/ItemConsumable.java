@@ -26,5 +26,4 @@ public abstract class ItemConsumable extends Item{
 		int random= (int) (Math.random()*allConsumables.size());
 		return allConsumables.get(random);
 	}
-	
 }

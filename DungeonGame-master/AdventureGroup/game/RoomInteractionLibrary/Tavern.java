@@ -21,13 +21,9 @@ public class Tavern extends RoomInteraction{
 
 	@Override
 	public void onEnter(Game game) {
-		// TODO Auto-generated method stub
 		heroes=game.getPlayer().getAvailableHeroes();
 		for(int i=0; i<heroes.size();i++) {
 			heroes.get(i).cleanseHero();
-		}
-		for(int i=0; i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).cleanseHero();
 		}
 	}
 
