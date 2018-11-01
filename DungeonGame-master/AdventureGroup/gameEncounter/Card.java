@@ -10,7 +10,8 @@ public abstract class Card implements Serializable,Cloneable{
 	protected int critChance=0;
 	protected int manaCost;
 	protected boolean xCostCard=false;
-	protected int x;
+	protected int manacostX;
+	protected int interEffectValue=0;
 	protected boolean isFriendly =false;
 	protected int accuracy=90;
 	protected int block=0;
@@ -64,8 +65,8 @@ public abstract class Card implements Serializable,Cloneable{
 		}
 	}
 	public void handleManaCost(Hero self) {
-		x=computeManaCost(self);
-		self.setMana(self.getMana()-x);		
+		manacostX=computeManaCost(self);
+		self.setMana(self.getMana()-manacostX);		
 	}
 	public void cast(Hero self) {
 		if (!self.isDead()) {
@@ -142,15 +143,6 @@ public abstract class Card implements Serializable,Cloneable{
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getBlock() {
 		return block;
 	}
@@ -213,6 +205,22 @@ public abstract class Card implements Serializable,Cloneable{
 
 	public void setUseupEffects(LinkedList<CardEffect> useupEffects) {
 		this.useupEffects = useupEffects;
+	}
+
+	public int getX() {
+		return interEffectValue;
+	}
+
+	public void setX(int interEffectValue) {
+		this.interEffectValue = interEffectValue;
+	}
+
+	public int getManacostX() {
+		return manacostX;
+	}
+
+	public void setManacostX(int manacostX) {
+		this.manacostX = manacostX;
 	}
 			
 	

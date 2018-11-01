@@ -17,16 +17,23 @@ public class blockEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
+		int block=GameEquations.calculateBlockAmount(card.getBlock(), self);
+		if (pars.size()>1&&pars.get(2).equals("x")) {
+			block=Integer.parseInt(pars.get(2));
+		}
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).block(GameEquations.calculateBlockAmount(card.getBlock(), self));
+			self.getTargets().get(i).block(block);
 		}		
 		return true;
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		// TODO Auto-generated method stub
-		return GameEquations.calculateBlockAmount(card.getBlock(), self)+" block";
+		String block=""+GameEquations.calculateBlockAmount(card.getBlock(), self);
+		if (pars.size()>1&&pars.get(2).equals("x")) {
+			block="x";
+		}
+		return block+" block";
 	}
 
 }

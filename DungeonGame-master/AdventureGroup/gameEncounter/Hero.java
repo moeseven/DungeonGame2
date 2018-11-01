@@ -38,6 +38,7 @@ public class Hero implements Serializable{
 	protected int maxHandSize=10;
 	//game
 	private boolean isReady;
+	private boolean undead;
 	//Fight
 	private Fight fight;
 	private Hero target;
@@ -189,8 +190,7 @@ public class Hero implements Serializable{
 	}
 	public void drawCard() {
 		if (hand.size()<maxHandSize) {
-			if(drawPile.size()==0) {
-				
+			if(drawPile.size()==0) {				
 				drawPile=discardPile;
 				Collections.shuffle(drawPile);
 				discardPile=new LinkedList<Card>();
@@ -209,20 +209,19 @@ public class Hero implements Serializable{
 			player.getGame().log.addLine("cant draw more cards!");
 		}
 	}
-	public void applyNegativeTurnEffects() {
-		//poison
-		if(poison>0) {		//poison increases when using mana		
-			poison+=1;
-			sufferPoison();						
-		}		
-		//bleed
-		if(bleed>0) {
-			if(Math.random()<resistBleed/100) {
-				bleed-=1;
+	public void discard(Card card) {
+		if (hand.contains(card)) {
+			hand.remove(card);
+			//discard Effects
+			for (int i = 0; i < card.discardEffects.size(); i++) {
+				card.discardEffects.get(i).applyEffect(this, card);
 			}
-			sufferBleeding();
-			bleed-=1;
+			discardPile.add(card);
 		}
+	}
+	public void applyNegativeTurnEffects() {
+		sufferPoison();				//poison					
+		sufferBleeding();			//bleed	
 		//fire
 		if (fire>5) {
 			fire=(int) (fire*0.25);
@@ -325,13 +324,7 @@ public class Hero implements Serializable{
 	}
 	//no direct call of Step 2 the card determines what is done with the hit
 	//Step 2: calculate damage and forward to breach Block
-	public void dealAttackDamage (Hero attackedHero, Card card, boolean thornFlag) {
-		int damage;
-		if (thornFlag) {
-			damage=thorns;
-		}else {
-			damage= GameEquations.calculateAttackDamage(card, this);
-		}
+	public void dealAttackDamage (Hero attackedHero, int damage, boolean thornFlag) {
 		int afterBlockDamage = GameEquations.attackIntoBlock(this, attackedHero, damage);		
 		int afterArmorDamage = GameEquations.damageReducedByArmor(afterBlockDamage, attackedHero.armor);
 		attackedHero.takeDamage(this, afterArmorDamage, thornFlag);
@@ -341,7 +334,7 @@ public class Hero implements Serializable{
 		if (!thornFlag&&thorns>0&&damagingHero!=this) {//this is thorns
 			//go directly to Step 2 with thorns (thorns can't miss)
 			player.getGame().log.addLine("thorns: "+thorns);
-			dealAttackDamage(damagingHero, null, true);
+			dealAttackDamage(damagingHero, thorns, true);
 		}
 		if(damage>0) {			
 			//crit roll here, make sure to not use this for poison/bleed/burn
@@ -407,7 +400,12 @@ public class Hero implements Serializable{
 	}
 	public void discardHand() {
 		while(hand.size()>0) {
-			discardPile.add(hand.removeFirst());
+			discard(hand.getFirst());
+		}		
+	}
+	public void useupHand() {
+		while(hand.size()>0) {
+			hand.removeFirst();
 		}		
 	}
 	public void healStress(int heal) {
@@ -604,29 +602,43 @@ public class Hero implements Serializable{
 	//////
 	//bleed/poison/fire/lightning/cold/stun
 	public void sufferBleeding() {
-		player.getGame().log.addLine(name+" bleeds for "+bleed+" damage.");
-		this.setHp(hp-bleed);
-		if(hp<=0) {
-			hp=0;
-			this.die();
+		if(bleed>0) {
+			if(Math.random()<resistBleed/100&&bleed>1) {
+				bleed-=1;
+			}
+			bleed-=1;
+			player.getGame().log.addLine(name+" bleeds for "+bleed+" damage.");	
+			this.setHp(hp-bleed);
+			if(hp<=0) {
+				hp=0;
+				die();
+			}		
 		}
+		
+		
 	}
 	public void sufferPoison() {
-		if (poison>=hp) {
-			player.getGame().log.addLine("the poison strikes "+name+".");
-			setHp(1);
-			poison=0;
+		if (poison>=0) {
+			int damage=(int) ((poison/(100.00+resistPoison))*hp);
+			player.getGame().log.addLine(name+" suffers poison damage of "+damage+".");
+			hp=hp-damage;
+			poison--;
+			if (hp>0) {
+				hp=0;
+				die();
+			}
+			
 		}				
 	}
 	//elemental damage
 	
 	//apply
-	public void doBleedDamage(int damage, Hero target) {
-		int bonus=this.getBleedDmg()-target.resistBleed;
+	public void doBleedDamage(int damage, Hero target, int chance) {
+		int bonus=chance+getBleedDmg()-target.resistBleed;
 		target.takeBleedDamage(damage,bonus);
 	}
-	public void doPoisonDamage(int damage,Hero target) {
-		int bonus = this.getPoisonDmg()-target.resistPoison;
+	public void doPoisonDamage(int damage,Hero target,int chance) {
+		int bonus = chance+getPoisonDmg()-target.resistPoison;
 		target.takePoisonDamage(damage,bonus);
 	}
 	public void doFireDamage(int damage,Hero target) {
@@ -651,38 +663,24 @@ public class Hero implements Serializable{
 	}
 	//receive		
 	public boolean takeBleedDamage(int bleedAmount, int bonus) {
-		if (bonus>0) {
-			bleed+=bleedAmount*(1+bonus/100);
+		if(Math.random()*100.0>bonus) {
+			player.getGame().log.addLine(name+" resisted bleeding");
+			return false;
 		}else {
-			if(Math.random()<-bonus/100.0) {
-				player.getGame().log.addLine(name+" resisted bleeding");
-				return false;
-			}else {
-				bleed+=bleedAmount;
-				player.getGame().log.addLine(name+" bleeds");
-				return true;
-			}
+			bleed+=Math.max(1, bleedAmount*((100.0-resistBleed)/100.0));
+			player.getGame().log.addLine(name+" bleeds");
+			return true;
 		}
-		return true;
 	}
 	public boolean takePoisonDamage(int poisonAmount, int bonus) {
-		if (bonus>0) {
-			poison+=poisonAmount*(1+bonus/100);
+		if(Math.random()*100.0>bonus) {
+			player.getGame().log.addLine(name+" resisted poison");
+			return false;
 		}else {
-			if(Math.random()<-bonus/100.0) {
-				player.getGame().log.addLine(name+" resisted poison");
-				return false;
-			}else {
-				if (poison>0) {
-					poison+=poisonAmount;
-				}else {
-					poison++;
-				}				
-				player.getGame().log.addLine(name+" got poisoned");
-				return true;
-			}
+			poison+=Math.max(1, poisonAmount*((100.0-resistPoison)/100.0));				
+			player.getGame().log.addLine(name+" got poisoned");
+			return true;
 		}
-		return true;
 	}
 	public void takeFireDamage(Hero damagingHero, int damage, int bonus) {
 		int fireDamage=(int)(damage*(1.0-bonus/100.0));
@@ -1451,6 +1449,12 @@ public class Hero implements Serializable{
 	}
 	public void setTurnBlock(int turnBlock) {
 		this.turnBlock = turnBlock;
+	}
+	public boolean isUndead() {
+		return undead;
+	}
+	public void setUndead(boolean undead) {
+		this.undead = undead;
 	}
 
 	

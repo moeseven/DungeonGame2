@@ -59,7 +59,7 @@ public class RaceSkeletton extends MonsterRace{
 		hero.setResistStress(20);
 		hero.setDraw(4);
 		//deck		
-		
+		hero.setUndead(true);
 	}
 	private class SkelettonWarrior extends CharacterClass{
 

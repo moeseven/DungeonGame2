@@ -12,7 +12,7 @@ public class blockableBleedEffect extends CardEffect{
 	
 	public blockableBleedEffect(LinkedList<String> pars) {
 		super(pars);
-		assert pars.size()>1;
+		assert pars.size()>2;
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class blockableBleedEffect extends CardEffect{
 		//attacks only apply bleed if block is down!
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if (self.getTargets().get(i).getBlock()<=0) {
-				self.doBleedDamage(GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i));
+				self.doBleedDamage(GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i),Integer.parseInt(pars.get(2)));
 			}
 		}
 		return true;				
@@ -28,7 +28,8 @@ public class blockableBleedEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		return GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self)+" bleed";
+		int bleedChance= Integer.parseInt(pars.get(2))+self.getBleedDmg();
+		return bleedChance+"% chance for "+GameEquations.calculateBleedDamage(Integer.parseInt(pars.get(1)), self)+" bleed if block is down";
 	}
 
 }

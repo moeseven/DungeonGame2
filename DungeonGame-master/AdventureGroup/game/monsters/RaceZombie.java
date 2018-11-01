@@ -76,7 +76,7 @@ public class RaceZombie extends MonsterRace{
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*15.0));
 		hero.setExperienceValue(11);	
-		
+		hero.setUndead(true);
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("basicAttack"));
 		}

@@ -68,3 +68,9 @@
 /modifyStatOneTurnSpellEffect.class
 /modifyStatPercentileEffect.class
 /delayedCombustionEffect.class
+/setInterValueEffect.class
+/spellDamageEffect.class
+/setXEffect.class
+/discardHandEffect.class
+/useUPHandEffect.class
+/useupHandEffect.class

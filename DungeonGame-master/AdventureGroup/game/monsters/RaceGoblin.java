@@ -31,7 +31,7 @@ public class RaceGoblin extends MonsterRace{
 		hero.setVitality(6);
 		//main attributes
 		hero.setAttackSkill(7);
-		hero.setBlockSkill(5);
+		hero.setBlockSkill(0);
 		hero.setAccuracy(10);
 		hero.setDodge(10);
 		hero.setSpellPower(8);
@@ -47,9 +47,9 @@ public class RaceGoblin extends MonsterRace{
 		hero.setCritDamage(40);
 		//elemental bonus
 		hero.setStunChance(0);
-		hero.setFireDmg(30);
+		hero.setFireDmg(10);
 		hero.setColdDmg(0);
-		hero.setLightningDmg(25);
+		hero.setLightningDmg(5);
 		hero.setPoisonDmg(5);
 		hero.setBleedDmg(5);
 		hero.setMagicDmg(5);		

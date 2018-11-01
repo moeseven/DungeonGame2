@@ -31,8 +31,8 @@ public class RaceRat extends MonsterRace{
 		hero.setVitality(11);
 		hero.setIntelligence(6);
 		//main attributes
-		hero.setAttackSkill(9);
-		hero.setBlockSkill(3);
+		hero.setAttackSkill(5);
+		hero.setBlockSkill(0);
 		hero.setAccuracy(21);
 		hero.setDodge(13);
 		hero.setSpellPower(6);
@@ -52,7 +52,7 @@ public class RaceRat extends MonsterRace{
 		hero.setColdDmg(0);
 		hero.setLightningDmg(5);
 		hero.setPoisonDmg(5);
-		hero.setBleedDmg(5);
+		hero.setBleedDmg(35);
 		hero.setMagicDmg(5);		
 		//resistance
 		hero.setResistSpell(-20);

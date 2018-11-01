@@ -10,151 +10,103 @@ public class EffectBuilder {
 	public static CardEffect buildEffect(EffectParameters pars) {
 		String name = pars.parameters.get(0);
 		LinkedList<String> p = pars.parameters;
-		if (name.equals("addCardToHandBuff")) {
-			return new addCardToHandBuffEffect(p);
+		switch (name) {
+        case "addCardToHandBuff":
+        	return new addCardToHandBuffEffect(p);
+        case "addCardToHand":
+        	return new addCardToHandEffect(p);
+        case "addCardToTargetDeck":
+        	return new addCardToTargetDeckEffect(p);
+        case "addCardToTargetDeckSpell":
+        	return new addCardToTargetDeckSpellEffect(p);  
+        case "allResistSpell":
+        	return new allResistSpellEffect(p);      
+        case "attack":
+        	return new attackEffect(p);   
+        case "bash":
+        	return new bashEffect(p); 
+        case "blockableBleed":
+        	return new blockableBleedEffect(p);
+        case "blockablePoison":
+        	return new blockablePoisonEffect(p);
+        case "block":
+        	return new blockEffect(p);
+        case "cardDraw":
+        	return new cardDrawEffect(p);
+        case "chargeAttack":
+        	return new chargeAttackEffect(p);
+        case "cleaveAttack":
+        	return new cleaveAttackEffect(p);
+        case "compositeCold":
+        	return new compositeColdEffect(p);
+        case "compositeFire":
+        	return new compositeFireEffect(p);
+        case "cureBleed":
+        	return new cureBleedEffect(p);
+        case "delayedCombustion":
+        	return new delayedCombustionEffect(p);
+        case "discardHand":
+        	return new discardHandEffect(p);
+        case "fireSpell":
+        	return new fireSpellEffect(p);
+        case "growingStatSpell":
+        	return new growingStatSpellEffect(p);
+        case "heal":
+        	return new healEffect(p);
+        case "hpLoss":
+        	return new hpLossEffect(p);
+        case "increaseStatOfCard":
+        	return new increaseStatOfCardEffect(p);
+        case "lightningClowd":
+        	return new lightningClowdEffect(p);
+        case "mana":
+        	return new manaEffect(p);
+        case "missileSpell":
+        	return new missileSpellEffect(p);
+        case "modifyStat":
+        	return new modifyStatEffect(p);
+        case "modifyStatOneTurn":
+        	return new modifyStatOneTurnEffect(p);        	
+        case "modifyStatOneTurnSpell":
+        	return new modifyStatOneTurnSpellEffect(p);
+        case "modifyStatPercentile":
+        	return new modifyStatPercentileEffect(p);
+        case "modifyStatSpell":
+        	return new modifyStatSpellEffect(p);
+        case "move":
+        	return new moveEffect(p);
+        case "penetrateArmorAttack":
+        	return new penetrateArmorAttackEffect(p);
+        case "penetrateBlockAttack":
+        	return new penetrateBlockAttackEffect(p);
+        case "poison":
+        	return new poisonEffect(p);
+        case "ram":
+        	return new ramEffect(p);
+        case "regenerationSpell":
+        	return new regenerationSpellEffect(p);
+        case "resistableSpell":
+        	return new resistableSpellEffect(p);
+        case "setX":
+        	return new setXEffect(p);
+        case "spellDamage":
+        	return new spellDamageEffect(p);
+        case "stressSpell":
+        	return new stressSpellEffect(p);
+        case "summon":
+        	return new summonEffect(p);
+        case "targetAllAlliesOfTarget":
+        	return new targetAllAlliesOfTargetEffect(p);
+        case "targetRandomAllyOfTarget":
+        	return new targetRandomAllyOfTargetEffect(p);
+        case "targetSelf":
+        	return new targetSelfEffect(p);
+        case "useup":
+        	return new useupEffect(p);
+        case "useupHand":
+        	return new useupHandEffect(p);
+        default:
+        	throw new IllegalArgumentException("Invalid argument: "+name+", no such effect!");		
 		}
-		if (name.equals("addCardToHand")) {
-			return new addCardToHandEffect(p);
-		}
-		if (name.equals("addCardToTargetDeck")) {
-			return new addCardToTargetDeckEffect(p);
-		}
-		if (name.equals("addCardToTargetDeckSpell")) {
-			return new addCardToTargetDeckSpellEffect(p);
-		}
-		if (name.equals("allResistSpell")) {
-			return new allResistSpellEffect(p);
-		}
-		if (name.equals("attack")) {
-			return new attackEffect(p);
-		}
-		if (name.equals("bash")) {
-			return new bashEffect(p);
-		}
-		if (name.equals("blockableBleed")) {
-			return new blockableBleedEffect(p);
-		}
-		if (name.equals("blockablePoison")) {
-			return new blockablePoisonEffect(p);
-		}
-		if (name.equals("block")) {
-			return new blockEffect(p);
-		}
-		if (name.equals("cardDraw")) {
-			return new cardDrawEffect(p);
-		}
-		if (name.equals("cardsPlayedThisRoundAttack")) {
-			return new cardsPlayedThisRoundAttackEffect(p);
-		}
-		if (name.equals("chargeAttack")) {
-			return new chargeAttackEffect(p);
-		}
-		if (name.equals("cleaveAttack")) {
-			return new cleaveAttackEffect(p);
-		}
-		if (name.equals("coldSpell")) {
-			return new coldSpellEffect(p);
-		}
-		if (name.equals("compositeCold")) {
-			return new compositeColdEffect(p);
-		}
-		if (name.equals("compositeFire")) {
-			return new compositeFireEffect(p);
-		}		
-		if (name.equals("cureBleed")) {
-			return new cureBleedEffect(p);
-		}
-		if (name.equals("delayedCombustion")) {
-			return new delayedCombustionEffect(p);
-		}
-		if (name.equals("fireBall")) {
-			return new fireBallEffect(p);
-		}
-		if (name.equals("fireSpell")) {
-			return new fireSpellEffect(p);
-		}
-		if (name.equals("growingStatSpell")) {
-			return new growingStatSpellEffect(p);
-		}
-		if (name.equals("heal")) {
-			return new healEffect(p);
-		}
-		if (name.equals("hpLoss")) {
-			return new hpLossEffect(p);
-		}
-		if (name.equals("increaseStatOfCard")) {
-			return new increaseStatOfCardEffect(p);
-		}
-		if (name.equals("lightningClowd")) {
-			return new lightningClowdEffect(p);
-		}
-		if (name.equals("lightningSpell")) {
-			return new lightningSpellEffect(p);
-		}
-		if (name.equals("magicSpell")) {
-			return new magicSpellEffect(p);
-		}
-		if (name.equals("mana")) {
-			return new manaEffect(p);
-		}
-		if (name.equals("missileSpell")) {
-			return new missileSpellEffect(p);
-		}
-		if (name.equals("modifyStat")) {
-			return new modifyStatEffect(p);
-		}
-		if (name.equals("modifyStatOneTurn")) {
-			return new modifyStatOneTurnEffect(p);
-		}
-		if (name.equals("modifyStatOneTurnSpell")) {
-			return new modifyStatOneTurnSpellEffect(p);
-		}
-		if (name.equals("modifyStatPercentile")) {
-			return new modifyStatPercentileEffect(p);
-		}
-		if (name.equals("modifyStatSpell")) {
-			return new modifyStatSpellEffect(p);
-		}
-		if (name.equals("move")) {
-			return new moveEffect(p);
-		}
-		if (name.equals("penetrateArmorAttack")) {
-			return new penetrateArmorAttackEffect(p);
-		}
-		if (name.equals("penetrateBlockAttack")) {
-			return new penetrateBlockAttackEffect(p);
-		}
-		if (name.equals("poison")) {
-			return new poisonEffect(p);
-		}
-		if (name.equals("ram")) {
-			return new ramEffect(p);
-		}
-		if (name.equals("regenerationSpell")) {
-			return new regenerationSpellEffect(p);
-		}
-		if (name.equals("resistableSpell")) {
-			return new resistableSpellEffect(p);
-		}
-		if (name.equals("stressSpell")) {
-			return new stressSpellEffect(p);
-		}
-		if (name.equals("summon")) {
-			return new summonEffect(p);
-		}
-		if (name.equals("targetAllAlliesOfTarget")) {
-			return new targetAllAlliesOfTargetEffect(p);
-		}
-		if (name.equals("targetRandomAllyOfTarget")) {
-			return new targetRandomAllyOfTargetEffect(p);
-		}
-		if (name.equals("targetSelf")) {
-			return new targetSelfEffect(p);
-		}
-		if (name.equals("useup")) {
-			return new useupEffect(p);
-		}
-		System.out.println("Effectbuilder failed to resolve effect name!!!");
-		return null;
 	}
 }

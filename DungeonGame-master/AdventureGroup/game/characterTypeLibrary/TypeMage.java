@@ -20,6 +20,10 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("magicShield");
 		cardPool.add("iceArmor");
 		cardPool.add("iceWall");
+		cardPool.add("mindBlast");
+		cardPool.add("exert");
+		cardPool.add("thinkFast");
+		cardPool.add("slow");
 		name="mage";		
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
 		startItem.setGoldValue(0);

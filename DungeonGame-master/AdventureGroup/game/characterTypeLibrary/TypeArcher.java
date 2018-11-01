@@ -21,6 +21,8 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("blindShot");
 		cardPool.add("woundingArrow");
 		cardPool.add("blur");
+		cardPool.add("zenBlock");
+		cardPool.add("zenShot");
 		name="archer";
 		Item startItem = game.itemBuilder.buildItem("shortBow",6);
 		startItem.setGoldValue(0);

@@ -12,7 +12,7 @@ public class blockablePoisonEffect extends CardEffect{
 	
 	public blockablePoisonEffect(LinkedList<String> pars) {
 		super(pars);
-		assert pars.size()>1;
+		assert pars.size()>2;
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class blockablePoisonEffect extends CardEffect{
 		//attacks only apply poison if block is down!
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			if (self.getTargets().get(i).getBlock()<=0) {
-				self.doPoisonDamage(GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i));
+				self.doPoisonDamage(GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self), self.getTargets().get(i),Integer.parseInt(pars.get(2)));
 			}
 		}
 		return true;	
@@ -28,8 +28,8 @@ public class blockablePoisonEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		// TODO Auto-generated method stub
-		return GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self)+" poison";
+		int poisonChance= Integer.parseInt(pars.get(2))+self.getPoisonDmg();
+		return poisonChance+"% chance for "+GameEquations.calculatePoisonDamage(Integer.parseInt(pars.get(1)), self)+" poison if block is down";
 	}
 
 }

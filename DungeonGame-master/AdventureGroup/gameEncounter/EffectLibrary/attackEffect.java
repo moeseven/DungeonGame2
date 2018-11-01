@@ -29,13 +29,25 @@ public class attackEffect extends CardEffect{
 			return false;
 		}
 	}
-	protected void damageTarget(Hero self, Hero target, Card card) {	
-		self.dealAttackDamage(target, card, false);
+	protected void damageTarget(Hero self, Hero target, Card card) {
+		int damage=GameEquations.calculateAttackDamage(card, self);
+		if (pars.size()>1) {
+			if (pars.get(1).equals("x")) {
+				damage=damage*Integer.parseInt(pars.get(1));
+			}
+		}
+		self.dealAttackDamage(target, damage, false);
 	}
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		return GameEquations.calculateAttackDamage(card, self)+" attack damage";
+		String damage=""+GameEquations.calculateAttackDamage(card, self);
+		if (pars.size()>1) {
+			if (pars.get(1).equals("x")) {
+				damage="x";
+			}
+		}
+		return damage+" attack damage";
 	}
 
 }

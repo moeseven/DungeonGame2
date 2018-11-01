@@ -88,26 +88,24 @@ public class GameEquations {
 	//damage for spells
 	public static int calculateSpellDamage(int dmg,Hero hero,String damageType) {
 		//!!!only for spells that scale with spell power
-		if (damageType.equals("fire")) {
-			return calculateSpellFireDamage(dmg, hero);
+		switch (damageType) {
+        case "fire":
+        	return calculateSpellFireDamage(dmg, hero);
+        case "cold":
+        	return calculateSpellColdDamage(dmg, hero);
+        case "magic":
+        	return calculateSpellMagicDamage(dmg, hero);
+        case "lightning":
+        	return calculateSpellLightningDamage(dmg, hero);    
+        //poison and bleed dont scale with spell damage
+        case "poison":
+        	return (int) (calculatePoisonDamage(dmg, hero));      
+        case "bleed":
+        	return (int) (calculateBleedDamage(dmg, hero));      
+        default:
+        	throw new IllegalArgumentException("Invalid argument: "+damageType+" no such damage type!");		
 		}
-		if (damageType.equals("cold")) {
-			return calculateSpellColdDamage(dmg, hero);
-		}
-		if (damageType.equals("lightning")) {
-			return calculateSpellLightningDamage(dmg, hero);
-		}
-		if (damageType.equals("magic")) {
-			return calculateSpellMagicDamage(dmg, hero);
-		}
-		if (damageType.equals("poison")) {
-			return (int) (calculatePoisonDamage(dmg, hero)*(1+(spellPowerCalc(hero))/100.0));
-		}
-		if (damageType.equals("bleed")) {
-			return (int) (calculateBleedDamage(dmg, hero)*(1+(spellPowerCalc(hero))/100.0));
-		}
-		System.out.println("no such damage Type (getting damage number from damge type)");
-		return calculateSpellMagicDamage(dmg, hero);
+
 	}
 	public static int calculateSpellFireDamage(int dmg,Hero hero) {
 		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getFireDmg()/100.0));
@@ -122,7 +120,8 @@ public class GameEquations {
 		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0));
 	}
 	public static int calculatePoisonDamage(int dmg, Hero hero) {
-		return (int) (dmg*(1+hero.getPoisonDmg()/100.0));
+		//return (int) (dmg*(1+hero.getPoisonDmg()/100.0)); //already scales due to hp percent
+		return dmg;
 	}
 	public static int calculateBleedDamage(int dmg, Hero hero) {
 		return (int) (dmg*(1+hero.getBleedDmg()/100.0));

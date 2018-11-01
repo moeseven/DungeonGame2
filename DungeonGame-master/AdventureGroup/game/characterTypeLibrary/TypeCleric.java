@@ -21,6 +21,11 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("electroStaticCharge");
 		cardPool.add("hedgehog");
 		cardPool.add("delayedCombustion");
+		cardPool.add("smiteUndead");
+		cardPool.add("guard");
+		cardPool.add("energyBlock");
+		cardPool.add("energyAttack");
+		cardPool.add("doubleBlock");
 		name="cleric";
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
 		startItem.setGoldValue(0);
