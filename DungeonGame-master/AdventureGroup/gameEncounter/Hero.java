@@ -618,12 +618,12 @@ public class Hero implements Serializable{
 		
 	}
 	public void sufferPoison() {
-		if (poison>=0) {
-			int damage=(int) ((poison/(100.00+resistPoison))*hp);
+		if (poison>0) {
+			int damage=Math.max(1, (int) ((poison/(100.00+resistPoison))*hp));
 			player.getGame().log.addLine(name+" suffers poison damage of "+damage+".");
 			hp=hp-damage;
 			poison--;
-			if (hp>0) {
+			if (hp<=0) {
 				hp=0;
 				die();
 			}

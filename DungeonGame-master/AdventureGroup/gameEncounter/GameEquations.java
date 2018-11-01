@@ -130,6 +130,9 @@ public class GameEquations {
 	public static int calculateAttackDamage(Card card,Hero hero) {
 		return (int) (card.getAttackDamage()*(1+(attackSkillCalc(hero))/100.0));
 	}
+	public static int calculateAttackDamage(int damage,Hero hero) {
+		return (int) (damage*(1+(attackSkillCalc(hero))/100.0));
+	}
 	//block amount calculation
 	public static int calculateBlockAmount(int block,Hero hero) {
 		return (int) (block*(1+(blockSkillCalc(hero))/100.0));

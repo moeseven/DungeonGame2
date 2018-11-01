@@ -33,7 +33,7 @@ public class attackEffect extends CardEffect{
 		int damage=GameEquations.calculateAttackDamage(card, self);
 		if (pars.size()>1) {
 			if (pars.get(1).equals("x")) {
-				damage=damage*Integer.parseInt(pars.get(1));
+				damage=GameEquations.calculateAttackDamage(card.getX(),self);
 			}
 		}
 		self.dealAttackDamage(target, damage, false);

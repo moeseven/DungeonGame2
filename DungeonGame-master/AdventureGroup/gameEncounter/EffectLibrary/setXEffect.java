@@ -85,7 +85,10 @@ public class setXEffect extends CardEffect{
 	public String generateCardText(Hero self, Card card) {
 		String retVal="x="+pars.get(1);
 		if (pars.size()>2) {
-			retVal+="; "+pars.get(2)+pars.get(3);
+			retVal+=""+pars.get(2);
+			if (pars.size()>3) {
+				retVal+=pars.get(3);
+			}
 		}
 		return retVal;
 	}

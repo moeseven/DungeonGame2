@@ -17,10 +17,16 @@ public class cardDrawEffect extends CardEffect{
 
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
-		for(int i=0; i<Integer.parseInt(pars.get(1)); i++) {
+		int draws;
+		if (pars.get(1).equals("x")) {
+			draws=card.getX();
+		}else {
+			draws= Integer.parseInt(pars.get(1));
+		}
+		for(int i=0; i<draws; i++) {
 			self.drawCard();
 		}
-		self.getPlayer().getGame().log.addLine(self.getName()+" draws "+pars.get(1)+" cards");
+		self.getPlayer().getGame().log.addLine(self.getName()+" draws "+draws+" cards");
 		return true;
 	}
 

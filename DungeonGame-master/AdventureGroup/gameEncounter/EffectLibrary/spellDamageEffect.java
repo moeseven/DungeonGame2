@@ -19,7 +19,7 @@ public class spellDamageEffect extends CardEffect{
 		int dmg=0;
 		if (pars.size()>2) {
 			if (pars.get(2).equals("x")) {
-				dmg=card.getX();
+				dmg=GameEquations.calculateSpellDamage(card.getX(), self, damageType);	
 			}
 		}else {
 			dmg = GameEquations.calculateSpellDamage(card.getSpellDamage(), self, damageType);	
@@ -55,10 +55,12 @@ public class spellDamageEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card card) {
 		String damageType= pars.get(1);
-		String dmg = ""+GameEquations.calculateSpellDamage(card.getSpellDamage(), self, damageType);	
-		if (pars.get(2).equals("x")) {
-			dmg="x";
-		}
+		String dmg = ""+GameEquations.calculateSpellDamage(card.getSpellDamage(), self, damageType);
+		if (pars.size()>2) {
+			if (pars.get(2).equals("x")) {
+				dmg="x";
+			}
+		}		
 		return dmg+" "+damageType+" damage.";
 	}
 

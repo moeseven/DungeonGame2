@@ -2,6 +2,7 @@ package gameEncounter.EffectLibrary;
 
 import java.util.LinkedList;
 
+import game.Game;
 import gameEncounter.Card;
 import gameEncounter.CardEffect;
 import gameEncounter.Card_new;
@@ -18,8 +19,8 @@ public class blockEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
 		int block=GameEquations.calculateBlockAmount(card.getBlock(), self);
-		if (pars.size()>1&&pars.get(2).equals("x")) {
-			block=Integer.parseInt(pars.get(2));
+		if (pars.size()>1&&pars.get(1).equals("x")) {
+			block=GameEquations.calculateBlockAmount(card.getX(), self);
 		}
 		for (int i = 0; i < self.getTargets().size(); i++) {
 			self.getTargets().get(i).block(block);
@@ -30,8 +31,10 @@ public class blockEffect extends CardEffect{
 	@Override
 	public String generateCardText(Hero self, Card card) {
 		String block=""+GameEquations.calculateBlockAmount(card.getBlock(), self);
-		if (pars.size()>1&&pars.get(2).equals("x")) {
-			block="x";
+		if (pars.size()>1) {
+			if (pars.get(1).equals("x")) {
+				block="x";
+			}		
 		}
 		return block+" block";
 	}

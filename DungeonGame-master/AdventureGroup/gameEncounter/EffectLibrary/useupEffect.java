@@ -21,7 +21,6 @@ public class useupEffect extends CardEffect{
 
 	@Override
 	public String generateCardText(Hero self, Card card) {
-		// TODO Auto-generated method stub
 		return "card gets consumed";
 	}
 
