@@ -149,7 +149,7 @@ public class Hero implements Serializable{
 		setAccuracy(6);
 		setDodge(6);
 		setSpellPower(6);
-		setBaseHp(80);
+		setBaseHp(90);
 		setSpeed(7);
 		setCritChance(3);
 		setCritDamage(20);

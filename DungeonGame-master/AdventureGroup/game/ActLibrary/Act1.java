@@ -246,7 +246,7 @@ public class Act1 extends Act{
 		int maxRoomInteractions=5;
 		room= new EmptyRoom(game);
 		ArrayList<RoomInteraction> act1Interactions;		
-		int randomInteractionAmount=(int) (Math.pow(Math.random(), 6)*maxRoomInteractions);
+		int randomInteractionAmount=(int) (Math.pow(Math.random(), 5)*maxRoomInteractions);
 		for (int i = 0; i < randomInteractionAmount; i++) {
 			act1Interactions= new ArrayList<RoomInteraction>();
 			act1Interactions.add(new Sack(game,40));
