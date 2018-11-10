@@ -3,43 +3,111 @@ package game.RoomInteractionLibrary;
 import java.util.LinkedList;
 
 import game.Game;
+import game.Player;
 import game.Quest;
 import game.RoomInteraction;
+import gameEncounter.GameEquations;
 import gameEncounter.Hero;
+import gameEncounter.ItemLibrary.usables.PotionOfHealth;
 
 
 public class MedicineMan extends RoomInteraction{
 	private LinkedList<Hero> heroestress=new LinkedList<Hero>();
 	private LinkedList<Hero> heroeswound=new LinkedList<Hero>();
+	private int baseHealFee=6;
+	private int baseWoundHealFee=110;
+	private int baseStressHealFee=10;
+	private int freeTreatments = 0;
+	private boolean giveRatFurReward=false;
+	private Quest ratFurQuest;
 	public MedicineMan(Game game) {
 		super(game);
-		//image=game.imageLoader.getImage(107);
+		ratFurQuest= new medicineManQuestRatFur(game);
 		setImageNumber(107);
 		name="medicine man";
 
 	}
-
+	public int computeHealFee(Hero hero) {
+		if (freeTreatments>0) {
+			return 0;
+		}else {
+			return baseHealFee*(hero.getLevel()+2);
+		}		
+	}
+	public int computeStressHealFee(Hero hero) {
+		return baseStressHealFee*(hero.getLevel()+2);
+	}
+	public int computeWoundHealFee(Hero hero) {
+		return baseWoundHealFee*(hero.getLevel()+2);
+	}
+	public boolean purchaseHealing(Hero hero){
+		if (hero.getWounds()>0) {
+			if(game.getPlayer().getHeroes().contains(hero)) {
+				if(game.getPlayer().getGold()>=computeHealFee(hero)) {
+						game.getPlayer().gainGold(-computeHealFee(hero));
+						if (freeTreatments>0) {
+							freeTreatments--;
+						}
+						hero.heal(GameEquations.maxHealthCalc(hero));
+						return true;
+				}
+			}
+		}else {
+			game.log.addLine("hero has no wounds");
+		}
+		
+		return false;
+	}
+	public boolean purchaseStressHealing(Hero hero){
+		if (hero.getStress()>0) {
+			if(game.getPlayer().getHeroes().contains(hero)) {
+				if(game.getPlayer().getGold()>=computeStressHealFee(hero)) {
+						game.getPlayer().gainGold(-computeStressHealFee(hero));
+						hero.healStress(50);
+						return true;
+				}
+			}
+		}else {
+			game.log.addLine("hero is not stressed");
+		}
+		
+		return false;
+	}
+	public boolean purchaseWoundHealing(Hero hero){
+		if (hero.getHp()<GameEquations.maxHealthCalc(hero)) {
+			if(game.getPlayer().getHeroes().contains(hero)&&hero.getWounds()>0) {
+				if(game.getPlayer().getGold()>=computeWoundHealFee(hero)) {
+						game.getPlayer().gainGold(-computeWoundHealFee(hero));
+						hero.setWounds(hero.getWounds()-1);
+						return true;
+				}
+			}
+		}else {
+			game.log.addLine("allready at full health");
+		}
+		
+		return false;
+	}
 	@Override
 	public void onEnter(Game game) {
-//		for(int i=0; i<heroestress.size();i++) {
-//			game.getPlayer().getAvailableHeroes().add(heroestress.get(i));
-//			heroestress.get(i).setStress(0);
-//		}
-//		heroestress=new LinkedList<Hero>();
-//		for(int i=0; i<heroeswound.size();i++) {
-//			game.getPlayer().getAvailableHeroes().add(heroeswound.get(i));
-//			heroeswound.get(i).setWounds(0);
-//		}
-//		heroeswound=new LinkedList<Hero>();
+		
 	}
 
 	@Override
 	public void onInteraction(Hero hero) {
-		// TODO Auto-generated method stub
 		if(hero!=null) {
 			hero.getPlayer().getGame().log.addLine("entering medicine hut");
 			hero.getPlayer().getGame().getRoom().setMedicine(this);
 			hero.getPlayer().getGame().getRoom().setMedicineOpen(true);
+			if (giveRatFurReward) {
+				game.getPlayer().addItemtoInventory(new PotionOfHealth());
+				game.getAvailableQuests().remove(ratFurQuest);
+				giveRatFurReward=false;
+			}else {
+				if (!game.getAvailableQuests().contains(ratFurQuest)&&!ratFurQuest.isFinished()) {
+					game.addNewQuest(ratFurQuest);
+				}
+			}
 		}
 		
 	}
@@ -57,6 +125,44 @@ public class MedicineMan extends RoomInteraction{
 
 	public void setHeroeswound(LinkedList<Hero> heroeswound) {
 		this.heroeswound = heroeswound;
+	}
+	private class medicineManQuestRatFur extends Quest{
+		public medicineManQuestRatFur(Game game) {
+			super(game);
+			gamePoints=200;
+			experienceReward=20;
+			description= "collect 5 ratFur and bring them to the medicine man";
+		}
+
+		@Override
+		public boolean checkIfQuestFullfilled(Player player) {
+			int ratFurCount=0;
+			for (int i = 0; i < player.getInventory().size(); i++) {
+				if (player.getInventory().get(i).getItemClass().equals("ratFur")) {
+					ratFurCount++;
+				}
+			}
+			System.out.println(ratFurCount);
+			if(ratFurCount>=5) {
+				game.log.addLine("You brought the ratFur requested by the medicine man. Visit him to claim your reward!");
+				giveRatFurReward=true;
+				int furToRemove=5;
+				while(furToRemove>5) {
+				for (int i = 0; i < player.getInventory().size(); i++) {
+					if (player.getInventory().get(i).getItemClass().equals("ratFur")) {
+						game.getPlayer().getInventory().remove(player.getInventory().get(i));
+						furToRemove--;
+					}
+				}			
+				giveReward(player);
+				finished=true;
+				return true;
+			}
+				
+			}			
+			return false;
+		}
+		
 	}
 
 }

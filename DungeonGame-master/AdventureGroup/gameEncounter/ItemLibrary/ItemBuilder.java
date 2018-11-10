@@ -18,17 +18,18 @@ public class ItemBuilder extends Item{
 	Game game;
 	double suffixProbability;
 	int maxSuffixes;
-	public ItemBuilder(Game game) {
+	protected String filename;
+	public ItemBuilder(Game game, String filename) {
 		super();
 		this.game=game;
 		suffixProbability=0.2;
 		maxSuffixes=3;
+		this.filename=filename;
 		//put all card data into hashmap
 		map = new HashMap<String,String>();
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			String filename = "resources/items.properties";
 			input = getClass().getClassLoader().getResourceAsStream(filename);
 			if (input == null) {
 				System.out.println("Sorry, unable to find " + filename);

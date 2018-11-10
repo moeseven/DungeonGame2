@@ -74,6 +74,9 @@ public class RaceRat extends MonsterRace{
 		hero.setGold(0);
 		hero.setExperienceValue(4);
 		hero.setImageNumber(54);	
+		
+		//loot
+		hero.getLoot().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
 	}
 	private class RatWarrior extends CharacterClass{
 

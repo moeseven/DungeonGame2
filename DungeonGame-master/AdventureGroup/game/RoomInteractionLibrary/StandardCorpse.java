@@ -17,8 +17,8 @@ public class StandardCorpse extends RoomInteraction{
 		hasBeenLooted=false;
 		this.corpse=corpse;
 		items= new LinkedList<Item>();
+		items.addAll(corpse.getLoot());
 		items.addAll(corpse.getEquipment().getAllEquippedItems());
-		
 		name=corpse.getName()+" corpse";
 	}
 

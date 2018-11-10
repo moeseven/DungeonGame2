@@ -14,6 +14,7 @@ import gameEncounter.Hero;
 import gameEncounter.Item;
 import gameEncounter.CardLibrary.CardBuilder;
 import gameEncounter.ItemLibrary.ItemBuilder;
+import gameEncounter.ItemLibrary.ItemSpecialBuilder;
 import gameEncounter.ItemLibrary.ItemSuffixBuilder;
 import tools.MyLog;
 
@@ -25,6 +26,7 @@ public class Game implements Serializable {
 	// public MyImageLoader imageLoader;
 	public CardBuilder cardBuilder;
 	public ItemBuilder itemBuilder;
+	public ItemSpecialBuilder itemSpecialBuilder;
 	public ItemSuffixBuilder itemSuffixBuilder;
 	public int turn = 0;
 	public int points = 0;
@@ -32,7 +34,6 @@ public class Game implements Serializable {
 	private Room room;
 	private Room town;
 	private LinkedList<Quest> availableQuests;
-	private Quest activeQuest;
 	private Act activeAct;
 	private int idleStressRelief = 10;
 
@@ -40,16 +41,17 @@ public class Game implements Serializable {
 		super();
 		player = new Player(this);
 		cardBuilder = new CardBuilder();
-		itemBuilder = new ItemBuilder(this);
+		itemBuilder = new ItemBuilder(this,"resources/items.properties");
+		itemSpecialBuilder = new ItemSpecialBuilder(this,"resources/itemsSpecial.properties");
 		itemSuffixBuilder = new ItemSuffixBuilder();
 		dungeonMaster = new DungeonMaster(this);
 		generator = new GeneratorRandom(this);
 		log = new MyLog();
-		this.availableQuests = new LinkedList<Quest>();
+		availableQuests = new LinkedList<Quest>();
 		town = new Town(this);	
 		activeAct = new Act1(this);
 		room = activeAct.getStartRoom();
-		activeQuest = activeAct.getMainQuest();
+		availableQuests.add(activeAct.getMainQuest());
 		
 		// cardBuilder.printMap();
 	}
@@ -167,12 +169,19 @@ public class Game implements Serializable {
 			}
 		}
 		Room previousRoom = town;
-		if (activeQuest.getRooms().indexOf(room) > 0) {
-			previousRoom = activeQuest.getRooms().get(activeQuest.getRooms().indexOf(room) - 1);
-		}
+		//maybe not go back to town
 		this.enterRoom(previousRoom);
 	}
-
+	public void addNewQuest(Quest quest) {
+		availableQuests.add(quest);
+		log.addLine("new Quest:");
+		log.addLine(quest.getDescription());
+	}
+	public void questFulfilledCheck() {
+		for (int i = 0; i < availableQuests.size(); i++) {
+			availableQuests.get(i).onReturnToTown(player);
+		}
+	}
 	public Room getTown() {
 		return town;
 	}
@@ -183,14 +192,6 @@ public class Game implements Serializable {
 
 	public void setAvailableQuests(LinkedList<Quest> availableQuests) {
 		this.availableQuests = availableQuests;
-	}
-
-	public Quest getActiveQuest() {
-		return activeQuest;
-	}
-
-	public void setActiveQuest(Quest activeQuest) {
-		this.activeQuest = activeQuest;
 	}
 
 	public Act getActiveAct() {

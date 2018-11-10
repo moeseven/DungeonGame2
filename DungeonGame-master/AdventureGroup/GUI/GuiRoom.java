@@ -499,9 +499,7 @@ protected void paintComponent(Graphics g){
 		private RectangleClicker rc;
 		private RoomWindow gw;
 		private MedicineMan mm;
-		private int woundhealfee=110;
-		private int stresshealfee=10;
-		private int healfee=5;
+		
 		private MedicineInterface(RoomWindow roomWindow, MedicineMan s) {
 		this.gw=roomWindow;
 		this.mm=s;
@@ -518,71 +516,41 @@ protected void paintComponent(Graphics g){
 				rc.addRect(new ClickableRectangle("heal hero",405,120,220,30) {
 					@Override
 					public void onClick() {
-						// TODO Auto-generated method stub
-						if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
-							if(gw.getGame().getPlayer().getGold()>=healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
-									gw.getGame().getPlayer().gainGold(-healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
-									gw.getGame().getPlayer().getSelectedHero().heal(GameEquations.maxHealthCalc(gw.getGame().getPlayer().getSelectedHero()));
-							}
-						}										
+						mm.purchaseHealing(gw.getGame().getPlayer().getSelectedHero());										
 					}
 					@Override
 					public void updateCaption() {
 						caption=new LinkedList<String>();
 						caption.add("heal "+gw.getGame().getPlayer().getSelectedHero().getName()+".");
-						caption.add("cost: "+healfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+						caption.add("cost: "+mm.computeHealFee(gw.getGame().getPlayer().getSelectedHero())+" gold");
 					}		
 				});
 		//wound heal
 		rc.addRect(new ClickableRectangle("woundheal hero",405,40,220,40) {
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
-				if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {
-					if(gw.getGame().getPlayer().getGold()>=woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
-						if(gw.getGame().getPlayer().getHeroes().size()>1) {
-							Hero selectedHero=gw.getGame().getPlayer().getSelectedHero();
-							gw.getGame().getPlayer().getHeroes().remove(selectedHero);
-							mm.getHeroeswound().add(selectedHero);
-							gw.getGame().getPlayer().gainGold(-woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
-						}else {
-							gw.getGame().log.addLine("you have to keep at least one hero in your adventure Group!");
-						}						
-					}
-				}										
+				mm.purchaseWoundHealing(gw.getGame().getPlayer().getSelectedHero());										
 			}
 			@Override
 			public void updateCaption() {
 				caption=new LinkedList<String>();
 				caption.add("treat "+gw.getGame().getPlayer().getSelectedHero().getName()+" for wound healing.");
 				caption.add("("+gw.getGame().getPlayer().getSelectedHero().getWounds()+" wounds)");
-				caption.add("cost: "+woundhealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+				caption.add("cost: "+mm.computeWoundHealFee(gw.getGame().getPlayer().getSelectedHero())+" gold");
 			}		
 		});
 		//stress heal
 		rc.addRect(new ClickableRectangle("stressheal hero",405,80,220,40) {
 			@Override
 			public void onClick() {
-				// TODO Auto-generated method stub
-				if(gw.getGame().getPlayer().getHeroes().contains(gw.getGame().getPlayer().getSelectedHero())) {			
-					if(gw.getGame().getPlayer().getHeroes().size()>1) {
-						if(gw.getGame().getPlayer().getGold()>=stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)) {
-							Hero selectedHero=gw.getGame().getPlayer().getSelectedHero();
-							gw.getGame().getPlayer().getHeroes().remove(selectedHero);
-							mm.getHeroestress().add(selectedHero);
-							gw.getGame().getPlayer().gainGold(-stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2));
-						}
-					}else {
-						gw.getGame().log.addLine("you have to keep at least one hero in your adventure Group!");
-					}	
-				}										
+				mm.purchaseStressHealing(gw.getGame().getPlayer().getSelectedHero());										
 			}
 			@Override
 			public void updateCaption() {
 				caption=new LinkedList<String>();
 				caption.add("treat "+gw.getGame().getPlayer().getSelectedHero().getName()+" for stress healing.");
 				caption.add("("+gw.getGame().getPlayer().getSelectedHero().getStress()+" stress)");
-				caption.add("cost: "+stresshealfee*(gw.getGame().getPlayer().getSelectedHero().getLevel()+2)+" gold");
+				caption.add("cost: "+mm.computeStressHealFee(gw.getGame().getPlayer().getSelectedHero())+" gold");
 			}		
 		});
 		//gold

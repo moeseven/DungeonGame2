@@ -44,6 +44,11 @@ public class CharacterBuilder {
 			hero= new Hero(name, game.getPlayer(),charRaces.getFirst(), new Weakling(game));
 			hero.gainExp(1000);
 			hero.getPlayer().gainGold(10000);
+			hero.getPlayer().getInventory().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
+			hero.getPlayer().getInventory().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
+			hero.getPlayer().getInventory().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
+			hero.getPlayer().getInventory().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
+			hero.getPlayer().getInventory().add(game.itemSpecialBuilder.buildItem("ratFur", 3));
 		}else {
 			hero=new Hero(name, game.getPlayer(),charRaces.getFirst(), charClasses.getFirst());
 			

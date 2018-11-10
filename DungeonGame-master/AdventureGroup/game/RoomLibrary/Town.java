@@ -25,11 +25,9 @@ public class Town extends Room{
 
 	@Override
 	public void enterRoom() {
-		super.enterRoom();
-		
-
+		super.enterRoom();		
 		game.log.addLine("Day: "+game.turn/7);
-		game.getActiveQuest().onReturnToTown(game.getPlayer());
+		game.questFulfilledCheck();
 	}
 	
 

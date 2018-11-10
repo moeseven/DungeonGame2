@@ -31,11 +31,8 @@ public class Chest extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		setImageNumber(90);
 		if(charges>0) {
-			if(Math.random()<0.18) {
+			if(Math.random()<0.22) {
 				items.add(game.generator.generateRandomItem(1.5));
-			}
-			if (Math.random()<0.4) {
-				items.add(ItemConsumable.generateRandomConsumable());
 			}
 			charges+=-1;
 			hero.getPlayer().gainGold(gold);

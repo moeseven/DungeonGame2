@@ -22,8 +22,9 @@ public class Hero implements Serializable{
 	private boolean isSummon=false;
 	private int imageScale=3;
 	private LinkedList<Buff> buffs;
-	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();;
+	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
+	private LinkedList<Item> loot = new LinkedList<Item>();
 	private Equipment equipment;
 	protected String name;
 	//protected BufferedImage image;
@@ -1455,6 +1456,12 @@ public class Hero implements Serializable{
 	}
 	public void setUndead(boolean undead) {
 		this.undead = undead;
+	}
+	public LinkedList<Item> getLoot() {
+		return loot;
+	}
+	public void setLoot(LinkedList<Item> loot) {
+		this.loot = loot;
 	}
 
 	

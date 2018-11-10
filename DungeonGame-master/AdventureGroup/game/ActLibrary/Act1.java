@@ -190,7 +190,10 @@ public class Act1 extends Act{
 		room.setHasFight(true);
 		addRoom(room, 4, 7);
 		//room 6,5
-		addRandomRoom(6, 5);
+		room=new EmptyRoom(game);
+		interaction = new PotionShelf(game);
+		room.getInteractions().add(interaction);
+		addRoom(room, 6,5);
 		//room 6,7
 		addRandomRoom(6, 7);
 		//room 5,7
@@ -242,7 +245,7 @@ public class Act1 extends Act{
 	
 	@Override
 	public boolean addRandomRoom(int x, int y) {
-		double fightProbability=0.3;
+		double fightProbability=0.33;
 		int maxRoomInteractions=5;
 		room= new EmptyRoom(game);
 		ArrayList<RoomInteraction> act1Interactions;		
