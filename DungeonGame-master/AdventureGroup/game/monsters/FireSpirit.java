@@ -24,36 +24,53 @@ public class FireSpirit extends MonsterRace{
 
 	public void modifyHero(Hero hero) {
 		super.modifyHero(hero);
-//		hero.setImage(hero.getPlayer().getGame().imageLoader.getImage(52));
-		hero.setImageNumber(52);
-		hero.setSpeed(19);
-		hero.setBaseHp(52);		
-		//stats
+		//all stats		
 		hero.setStrength(7);
-		hero.setDexterity(8);
+		hero.setDexterity(8);		
 		hero.setIntelligence(9);
 		hero.setVitality(6);
-		//
-		//attack/defence
+		//main attributes
 		hero.setAttackSkill(88);
-		hero.setBlockSkill(25);
-		hero.setAccuracy(9);
-		hero.setDodge(9);
-		hero.setSpellPower(9);
-		hero.setSpellResist(0);
+		hero.setBlockSkill(55);
+		hero.setAccuracy(20);
+		hero.setDodge(22);
+		hero.setSpellPower(15);
+		hero.setSpellDuration(3);
 		//
-		//resistances
+		hero.setArmor(19);
+		hero.setSpeed(13);					
+		hero.setThorns(0);
+		hero.setDraw(4);
+		hero.setManaPower(2);
+		//offensive
+		hero.setCritChance(5);
+		hero.setCritDamage(40);
+		//elemental bonus
+		hero.setStunChance(0);
+		hero.setFireDmg(10);
+		hero.setColdDmg(0);
+		hero.setLightningDmg(5);
+		hero.setPoisonDmg(5);
+		hero.setBleedDmg(5);
+		hero.setMagicDmg(5);		
+		//resistance		
 		hero.setResistFire(95);
 		hero.setResistCold(-50);
+		hero.setResistLightning(5);
 		hero.setResistBleed(95);
 		hero.setResistPoison(55);
 		hero.setResistStun(5);
+		hero.setResistSpell(7);
+		hero.setStressCap(81);
 		//
-		hero.setArmor(4);
+		hero.setTrapDisarm(10);
+		hero.setBaseHp(90);		
+		//
+		hero.setImageNumber(52);	
+		//
 		hero.setGood(false);
-		hero.setGold((int)(Math.random()*5.0));
-		hero.setExperienceValue(60);
-		hero.setStressCap(61);
+		hero.setGold((int)(Math.random()*19.0));
+		hero.setExperienceValue(20);
 		//deck		
 		
 	}
@@ -64,15 +81,12 @@ public class FireSpirit extends MonsterRace{
 			name="";				
 			for (int i=0; i<3;i++) {
 				cards.add(game.cardBuilder.buildCard("fireFist"));
+				cards.add(game.cardBuilder.buildCard("basicAttack"));
 			}
-//			cards.add(new FireFist());
-//			cards.add(new FireFist());
-//			cards.add(new FireFist());
-//			cards.add(new FireFist());
+			cards.add(game.cardBuilder.buildCard("delayedCombustion"));
 			for (int i=0; i<7;i++) {
 				cards.add(game.cardBuilder.buildCard("basicBlock"));
 			}
-//			cards.add(new Blaze());
 		}
 
 		public void modifyHero(Hero hero) {

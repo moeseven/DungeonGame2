@@ -21,36 +21,32 @@ import game.RoomInteractionLibrary.*;
 import game.RoomLibrary.EmptyRoom;
 import game.RoomLibrary.GoblinRoom1;
 import game.monsters.BossNecromancer;
+import game.monsters.FireSpirit;
 import game.monsters.RaceGoblin;
 import game.monsters.RaceRat;
+import game.monsters.RaceSkeletton;
 import game.monsters.RaceZombie;
+import game.monsters.Thornback;
 import gameEncounter.Hero;
 import gameEncounter.Item;
 
-public class Act1 extends Act{
+public class Act2 extends Act{
 	protected Room room;
 	protected RoomInteraction interaction;
 	HashMap<MonsterRace,Integer> act1Monsters= new HashMap<MonsterRace,Integer>();
 	protected MonsterRace monster;
-	public Act1(Game game) {
+	public Act2(Game game) {
 		super(game);
 		//possible monsters	in act1
-		act1Monsters.put(new RaceGoblin(game),1);
-		act1Monsters.put(new RaceGoblin(game),2);
-		act1Monsters.put(new RaceGoblin(game),2);
-		act1Monsters.put(new RaceGoblin(game),2);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceGoblin(game),3);
-		act1Monsters.put(new RaceZombie(game),2);
-		act1Monsters.put(new RaceRat(game),2);
-		act1Monsters.put(new RaceRat(game),3);
-		act1Monsters.put(new RaceRat(game),4);
+		act1Monsters.put(new RaceGoblin(game),4);
+		act1Monsters.put(new RaceGoblin(game),4);
+		act1Monsters.put(new RaceSkeletton(game),3);
+		act1Monsters.put(new FireSpirit(game),2);
+		act1Monsters.put(new FireSpirit(game),1);
+		act1Monsters.put(new RaceZombie(game),4);
 		//start room
-		room=new EmptyRoom(game);
-		room.getInteractions().add(new Sack(game, 15));
-		startRoom=room;
-		addRoom(room, 4, 0);
+		startRoom=game.getTown();
+		addRoom(game.getTown(), 4, 0);
 		//tutorial fight room
 		room=new EmptyRoom(game);
 		monster=new RaceRat(game);
@@ -68,20 +64,12 @@ public class Act1 extends Act{
 		monster=new RaceGoblin(game);
 		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		addRoom(room, 4, 3);
-		//town
-		addRoom(game.getTown(), 4, 4);
-		//test room
-		room=new EmptyRoom(game);
-		interaction = new Altar(game);
-		room.setHasFight(true);
-		monster=new BossNecromancer(game);
-		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
-		room.getInteractions().add(interaction);
-		//addRoom(questRoom, 4, 5);
+		//4,4
+		addRandomRoom(4,4);
 		//room 6,4
 		addRoom(new EmptyRoom(game), 6, 4);
 		//room 6,3
-		addRoom(new GoblinRoom1(game), 6, 3);
+		addRandomRoom(6,3);
 		//room 9,3
 		room=new EmptyRoom(game);
 		interaction = new SleepingOgre(game);
@@ -109,7 +97,7 @@ public class Act1 extends Act{
 		interaction = new Chest(game);
 		room.getInteractions().add(interaction);
 		room.setHasFight(true);
-		monster=new RaceGoblin(game);		
+		monster=new FireSpirit(game);		
 		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(1).getFirst()));
 		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
@@ -122,15 +110,10 @@ public class Act1 extends Act{
 		interaction = new Chest(game);
 		room.getInteractions().add(interaction);
 		room.getInteractions().add(new UndeadCorpse(game,30,(int) Math.random()*50));
-		room.getInteractions().add(new UndeadCorpse(game,90,(int) Math.random()*50));
 		addRoom(room, 2,1);
 		//room 8,7
 		room=new EmptyRoom(game);
-		interaction= new Sack(game, 30);
-		room.getInteractions().add(interaction);
 		interaction = new Well(game);
-		room.getInteractions().add(interaction);
-		interaction= new Sack(game, 30);
 		room.getInteractions().add(interaction);
 		addRoom(room, 8,7);
 		//room 8,6
@@ -140,12 +123,12 @@ public class Act1 extends Act{
 		addRoom(room, 8,6);
 		//room 8,5
 		room=new EmptyRoom(game);
-		interaction = new Well(game);
+		interaction = new AncientTome(game);
 		room.getInteractions().add(interaction);
 		addRoom(room, 8,5);
 		//room 5,4
 		room=new EmptyRoom(game);
-		interaction = new AncientTome(game);
+		interaction = new Well(game);	
 		room.getInteractions().add(interaction);
 		addRoom(room, 5, 4);
 		//room 9,6
@@ -153,8 +136,8 @@ public class Act1 extends Act{
 		Chest chest = new Chest(game);
 		chest.setGold(chest.getGold()+50);
 		room.getInteractions().add(chest);
-		monster=new RaceGoblin(game);
-		for (int i = 1; i < 5; i++) {
+		monster=new Thornback(game);
+		for (int i = 1; i < 4; i++) {
 			room.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		room.setHasFight(true);
@@ -162,7 +145,7 @@ public class Act1 extends Act{
 		//room 7,1
 		room=new EmptyRoom(game);
 		monster=new RaceGoblin(game);
-		for (int i = 4; i > 1; i--) {
+		for (int i = 5; i > 1; i--) {
 			room.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		room.setHasFight(true);;
@@ -331,8 +314,6 @@ public class Act1 extends Act{
 			if(player.getInventory().contains(questItem)) {
 				giveReward(player);
 				player.getInventory().remove(questItem);
-				finished=true;
-				game.getActList().add(new Act2(game));
 				return true;
 			}
 			return false;

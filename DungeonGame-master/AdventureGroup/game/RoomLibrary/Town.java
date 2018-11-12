@@ -5,6 +5,7 @@ import game.Game;
 import game.Room;
 import game.RoomInteractionLibrary.Altar;
 import game.RoomInteractionLibrary.MedicineMan;
+import game.RoomInteractionLibrary.Portal;
 import game.RoomInteractionLibrary.QuestBoard;
 import game.RoomInteractionLibrary.Shop;
 import game.RoomInteractionLibrary.Tavern;
@@ -21,6 +22,7 @@ public class Town extends Room{
 		getInteractions().add(new MedicineMan(game)); 
 		getInteractions().add(new QuestBoard(game));
 		getInteractions().add(new TeleportStone(game));
+		getInteractions().add(new Portal(game));
 	}
 
 	@Override

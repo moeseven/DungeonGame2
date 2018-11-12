@@ -34,6 +34,7 @@ public class Game implements Serializable {
 	private Room room;
 	private Room town;
 	private LinkedList<Quest> availableQuests;
+	private LinkedList<Act> actList;
 	private Act activeAct;
 	private int idleStressRelief = 10;
 
@@ -49,7 +50,11 @@ public class Game implements Serializable {
 		log = new MyLog();
 		availableQuests = new LinkedList<Quest>();
 		town = new Town(this);	
-		activeAct = new Act1(this);
+		//all acts
+		actList= new LinkedList<Act>();
+		actList.add(new Act1(this));
+		activeAct = actList.getFirst();
+		
 		room = activeAct.getStartRoom();
 		availableQuests.add(activeAct.getMainQuest());
 		
@@ -204,6 +209,14 @@ public class Game implements Serializable {
 
 	public int getMaximumGroupSize() {
 		return maximumGroupSize;
+	}
+
+	public LinkedList<Act> getActList() {
+		return actList;
+	}
+
+	public void setActList(LinkedList<Act> actList) {
+		this.actList = actList;
 	}
 
 }
