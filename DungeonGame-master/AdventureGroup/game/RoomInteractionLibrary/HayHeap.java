@@ -30,7 +30,7 @@ public class HayHeap extends RoomInteraction{
 
 	@Override
 	public void onInteraction(Hero hero) {
-		hero.becomeStressed((int) (Math.random()*6));
+		hero.looseMoral((int) (Math.random()*6));
 		setImageNumber(95-Math.max(1, charges));
 		if(charges>0) {
 			charges+=-1;
@@ -46,7 +46,7 @@ public class HayHeap extends RoomInteraction{
 	}
 	private void ratsApear(Game game) {
 		for (int i=0; i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).becomeStressed((int) (Math.random()*12));
+			game.getPlayer().getHeroes().get(i).looseMoral((int) (Math.random()*12));
 		}	
 		MonsterRace monsterRace= new RaceRat(game);
 		int monstersAmount= (int) Math.max(1, (Math.random()*5));

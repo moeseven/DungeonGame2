@@ -170,7 +170,7 @@ public class Game implements Serializable {
 			for (int i = 0; i < player.getHeroes().size(); i++) {
 				player.getHeroes().get(i).setUpDrawPile();
 				player.getHeroes().get(i).turnBegin();
-				player.getHeroes().get(i).becomeStressed(12);
+				player.getHeroes().get(i).looseMoral(12);
 			}
 		}
 		Room previousRoom = town;

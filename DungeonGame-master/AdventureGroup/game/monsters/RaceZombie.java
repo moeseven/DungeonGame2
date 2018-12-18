@@ -66,7 +66,7 @@ public class RaceZombie extends MonsterRace{
 		hero.setResistBleed(15);
 		hero.setResistStun(35);
 		hero.setResistStress(90);
-		hero.setStressCap(81);
+		hero.setStressCap(90);
 		//
 		hero.setTrapDisarm(10);
 		hero.setBaseHp(120);		

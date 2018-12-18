@@ -62,8 +62,8 @@ public class RaceRat extends MonsterRace{
 		hero.setResistPoison(40);
 		hero.setResistBleed(10);
 		hero.setResistStun(10);
-		hero.setResistStress(-20);
-		hero.setStressCap(81);
+		hero.setResistStress(10);
+		hero.setStressCap(80);
 		//
 		hero.setTrapDisarm(10);
 		hero.setBaseHp(40);		

@@ -28,8 +28,7 @@ public class TypeThief extends CharacterClass{
 		cardPool.add("diminishingAttack");
 		cardPool.add("diminishingBlock");
 		cardPool.add("heavyPoison");
-		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
-		startItem.setGoldValue(0);
+		Item startItem = game.itemBuilder.buildItem("rustyBlade",5);
 		items.add(startItem);
 		cards.add(game.cardBuilder.buildCard("feint"));
 		cards.add(game.cardBuilder.buildCard("daggerThrow"));	

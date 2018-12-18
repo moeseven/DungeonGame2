@@ -55,7 +55,7 @@ public class Spectre extends MonsterRace{
 		hero.setGood(false);
 		hero.setGold((int)(Math.random()*15.0));
 		hero.setExperienceValue(65);
-		hero.setStressCap(81);
+		hero.setStressCap(100);
 		//deck		
 		
 	}

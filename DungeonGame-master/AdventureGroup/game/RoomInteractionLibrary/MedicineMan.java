@@ -40,7 +40,7 @@ public class MedicineMan extends RoomInteraction{
 	public int computeWoundHealFee(Hero hero) {
 		return baseWoundHealFee*(hero.getLevel()+2);
 	}
-	public boolean purchaseHealing(Hero hero){
+	public boolean purchaseWoundHealing(Hero hero){
 		if (hero.getWounds()>0) {
 			if(game.getPlayer().getHeroes().contains(hero)) {
 				if(game.getPlayer().getGold()>=computeHealFee(hero)) {
@@ -63,7 +63,7 @@ public class MedicineMan extends RoomInteraction{
 			if(game.getPlayer().getHeroes().contains(hero)) {
 				if(game.getPlayer().getGold()>=computeStressHealFee(hero)) {
 						game.getPlayer().gainGold(-computeStressHealFee(hero));
-						hero.healStress(50);
+						hero.gainMoral(50);
 						return true;
 				}
 			}
@@ -73,7 +73,7 @@ public class MedicineMan extends RoomInteraction{
 		
 		return false;
 	}
-	public boolean purchaseWoundHealing(Hero hero){
+	public boolean purchaseHealing(Hero hero){
 		if (hero.getHp()<GameEquations.maxHealthCalc(hero)) {
 			if(game.getPlayer().getHeroes().contains(hero)&&hero.getWounds()>0) {
 				if(game.getPlayer().getGold()>=computeWoundHealFee(hero)) {

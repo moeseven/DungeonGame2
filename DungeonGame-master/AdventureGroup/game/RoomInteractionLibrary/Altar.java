@@ -63,7 +63,7 @@ public class Altar extends RoomInteraction{
 	}
 	public void pray(Hero hero) {
 		if (sacrefices>0) {
-			hero.healStress(hero.getStress()/2);
+			hero.gainMoral(hero.getStress()/2);
 			reduceSacreficePoints();
 		}
 	}

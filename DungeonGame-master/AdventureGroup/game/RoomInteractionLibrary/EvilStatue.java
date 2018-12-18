@@ -28,10 +28,12 @@ public class EvilStatue extends RoomInteraction{
 	@Override
 	public void onInteraction(Hero hero) {
 		if (charges>0) {
+			charges--;
 			hero.getPlayer().getGame().log.addLine("it gazes viciously and "+hero.getName()+" changes.");
 			hero.getPlayer().getGame().generator.generateRandomHeroQuirk().gainQuirk(hero);
+			hero.looseMoral(5);
 		}else {
-			hero.becomeStressed(10);
+			hero.looseMoral(10);
 		}						
 	}
 

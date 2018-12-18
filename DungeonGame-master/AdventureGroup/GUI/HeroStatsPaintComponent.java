@@ -40,7 +40,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add(player.getSelectedHero().getName()+" ("+player.getSelectedHero().getCharRace().getName()+", "+player.getSelectedHero().getCharClass().getName()+")");
 		lines.add("");
 		lines.add("health: "+player.getSelectedHero().getHp()+"/"+GameEquations.maxHealthCalc(player.getSelectedHero())+" ("+player.getSelectedHero().getLevel()+")");
-		lines.add("stress: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
+		lines.add("moral: "+player.getSelectedHero().getStress()+"/"+player.getSelectedHero().getStressCap());
 		lines.add("");
 //		if(player.getSelectedHero().getEquipment().getHand1() instanceof Weapon) {
 //			Weapon weapon= (Weapon) player.getSelectedHero().getEquipment().getHand1();
@@ -75,7 +75,7 @@ public class HeroStatsPaintComponent extends JComponent{
 		lines.add("bleed damage: "+player.getSelectedHero().getBleedDmg()+"%");
 		lines.add("");
 		//defensive
-		lines.add("armor: "+player.getSelectedHero().getArmor()+"("+(100-GameEquations.damageReducedByArmor(100, player.getSelectedHero().getArmor()))+"%)");
+		lines.add("armor: "+player.getSelectedHero().getArmor());
 		lines.add("spell resist: "+player.getSelectedHero().getSpellResist()+"%");
 		lines.add("fire resistance: "+player.getSelectedHero().getResistFire()+"%");
 		lines.add("lightning resistance: "+player.getSelectedHero().getResistLightning()+"%");

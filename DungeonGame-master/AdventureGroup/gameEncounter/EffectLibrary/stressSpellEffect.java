@@ -18,7 +18,7 @@ public class stressSpellEffect extends CardEffect{
 	@Override
 	public boolean applyEffect(Hero self, Card card) {
 		for (int i = 0; i < self.getTargets().size(); i++) {
-			self.getTargets().get(i).becomeStressed(GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self));
+			self.getTargets().get(i).looseMoral(GameEquations.calculateSpellMagicDamage(Integer.parseInt(pars.get(1)), self));
 		}		
 		return true;
 	}

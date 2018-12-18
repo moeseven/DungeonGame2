@@ -26,7 +26,6 @@ public class TypeMage extends CharacterClass{
 		cardPool.add("slow");
 		name="mage";		
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
-		startItem.setGoldValue(0);
 		items.add(startItem);
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("magicMissile"));
@@ -57,6 +56,7 @@ public class TypeMage extends CharacterClass{
 			hero.setImageNumber(126);
 		}
 		//mainstats
+		hero.setArmor(hero.getArmor()-1);
 		hero.setIntelligence(hero.getIntelligence()+6);
 		hero.setVitality(hero.getVitality()+1);
 		hero.setFireDmg(hero.getFireDmg()+5);

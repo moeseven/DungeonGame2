@@ -31,8 +31,7 @@ public class TypeWarrior extends CharacterClass{
 		cardPool.add("blockMastery");
 		cardPool.add("fortify");
 		name="warrior";
-		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
-		startItem.setGoldValue(0);
+		Item startItem = game.itemBuilder.buildItem("rustyBlade",7);
 		items.add(startItem);		
 		cards.add(game.cardBuilder.buildCard("meeleAttack"));
 		cards.add(game.cardBuilder.buildCard("meeleAttack"));
@@ -61,6 +60,7 @@ public class TypeWarrior extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+0);
 		hero.setVitality(hero.getVitality()+5);
 		//
+		hero.setArmor(hero.getArmor()+2);
 		hero.setBleedDmg(hero.getBleedDmg()+5);
 		hero.setCritChance(hero.getCritChance()+1);
 		hero.setCritDamage(hero.getCritDamage()+6);

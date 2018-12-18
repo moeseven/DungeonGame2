@@ -9,6 +9,7 @@ public class addCardsToHandBuff extends Buff{
 	public addCardsToHandBuff(Hero hero, String cardName, int cardAmount) {
 		this.cardName=cardName;
 		this.cardAmount=cardAmount;
+		duration=hero.getSpellDuration();
 	}
 	@Override
 	public void onTick(Hero hero) {

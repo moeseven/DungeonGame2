@@ -28,7 +28,7 @@ public class AncientTome extends RoomInteraction{
 		if(charges>0) {
 			charges+=-1;			
 			if (Math.random()<0.3) {
-				hero.becomeStressed(15);
+				hero.looseMoral(15);
 				hero.gainExp(10);
 			}else {
 				hero.gainExp(55);

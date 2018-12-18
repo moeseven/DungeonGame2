@@ -65,7 +65,7 @@ public class UndeadCorpse extends RoomInteraction{
 	}
 	private void razeUndead(int amount) {
 		for (int i=0; i<game.getPlayer().getHeroes().size();i++) {
-			game.getPlayer().getHeroes().get(i).becomeStressed((int) (Math.random()*12));
+			game.getPlayer().getHeroes().get(i).looseMoral((int) (Math.random()*12));
 		}	
 		MonsterRace monsterRace= new RaceZombie(game);
 		for(int i=0; i<Math.min(game.dungeonMaster.getGroupSize(),amount);i++) {

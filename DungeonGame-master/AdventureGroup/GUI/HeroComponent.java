@@ -54,13 +54,13 @@ public class HeroComponent extends JComponent{
 		}
 		if(hero.getBlock()>0) {
 			g.setColor(Color.blue);
-			g.drawString(""+hero.getBlock(), 14, 155);
+			g.drawString(""+hero.getBlock()+"/"+hero.getArmor(), 14, 140);
 		}
 		g.setColor(Color.red);
 		g.drawString(""+hero.getHp()+"/"+GameEquations.maxHealthCalc(hero), 30, 155);		
-		if (!(hero.getPlayer() instanceof DungeonMaster)) {
-			g.setColor(Color.GRAY);
-			g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
-		}
+
+		g.setColor(Color.GRAY);
+		g.drawString(""+hero.getStress()+"/"+hero.getStressCap(), 30, 170);
+
 	}
 }

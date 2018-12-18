@@ -28,7 +28,7 @@ public class Well extends RoomInteraction{
 	public void onInteraction(Hero hero) {
 		if(charges>0) {
 			hero.heal(GameEquations.maxHealthCalc(hero)/3);
-			hero.becomeStressed(-7);
+			hero.looseMoral(-7);
 			charges+=-1;
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" receives a refreshment and looses 3 stress");
 		}else {		

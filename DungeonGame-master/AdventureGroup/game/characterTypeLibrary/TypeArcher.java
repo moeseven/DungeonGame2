@@ -24,8 +24,7 @@ public class TypeArcher extends CharacterClass{
 		cardPool.add("zenBlock");
 		cardPool.add("zenShot");
 		name="archer";
-		Item startItem = game.itemBuilder.buildItem("shortBow",6);
-		startItem.setGoldValue(0);
+		Item startItem = game.itemBuilder.buildItem("shortBow",7);
 		items.add(startItem);	
 		for (int i=0; i<2;i++) {
 			cards.add(game.cardBuilder.buildCard("rangedAttack"));
@@ -59,6 +58,7 @@ public class TypeArcher extends CharacterClass{
 		hero.setDexterity(hero.getDexterity()+3);
 		hero.setIntelligence(hero.getIntelligence()+1);
 		//
+		hero.setArmor(hero.getArmor()-1);
 		hero.setCritChance(hero.getCritChance()+4);
 		hero.setCritDamage(hero.getCritDamage()+15);
 		hero.setAttackSkill(hero.getAttackSkill()+6);

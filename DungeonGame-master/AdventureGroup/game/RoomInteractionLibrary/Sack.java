@@ -39,7 +39,7 @@ public class Sack extends RoomInteraction{
 				}
 			}else {
 				hero.getPlayer().getGame().log.addLine("rotten remains");
-				hero.becomeStressed((int) (Math.random()*11));
+				hero.looseMoral((int) (Math.random()*11));
 			}
 						
 		}else {			

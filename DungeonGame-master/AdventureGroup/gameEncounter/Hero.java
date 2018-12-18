@@ -92,7 +92,7 @@ public class Hero implements Serializable{
 	protected int vitality;
 	protected int dexterity;
 	protected int intelligence;
-	protected int stressCap=100;
+	protected int maxMoral=100;
 	////
 	//status
 	protected boolean stunned;
@@ -108,7 +108,7 @@ public class Hero implements Serializable{
 	private LinkedList<Card> discardPile=new LinkedList<Card>();
 	private int mana;
 	protected int hp;
-	protected int stress=0;	
+	protected int moral=maxMoral;	
 	private int block;
 	private LinkedList<Card> hand;
 	//
@@ -173,9 +173,15 @@ public class Hero implements Serializable{
 	public void initialize() {			
 		isDead=false;
 		isReady=false;	
+		moral=maxMoral;	
 		hp=GameEquations.maxHealthCalc(this);
 	}
 	//functions
+	public void startFight(Fight fight) {
+		this.fight=fight;
+		block=armor;
+		setUpDrawPile();
+	}
 	public void setUpDrawPile() {
 		//shuffle
 		hand=new LinkedList<Card>();
@@ -263,7 +269,10 @@ public class Hero implements Serializable{
 			this.discardHand();
 			cardsPlayedThisRound=0;
 			//turn block
-			this.block=GameEquations.calculateBlockAmount(turnBlock, this);
+			if (block>armor) {
+				block=armor;
+			}
+			this.block+=GameEquations.calculateBlockAmount(turnBlock, this);
 			//
 			this.mana=manaPower;
 			for(int i=0; i<draw;i++) {
@@ -338,31 +347,26 @@ public class Hero implements Serializable{
 			dealAttackDamage(damagingHero, thorns, true);
 		}
 		if(damage>0) {			
-			//crit roll here, make sure to not use this for poison/bleed/burn
-			if (damagingHero!=this) {
-				damage=GameEquations.rollForCrit(damagingHero, damage);
+			//crit roll here
+			if (damagingHero!=this) {//make sure to not use this for poison/bleed/burn
+				if (GameEquations.rollForCrit(damagingHero)) {
+					damage=GameEquations.computeCritDamage(damagingHero, damage);
+					this.looseMoral((int) (20.0*damage/hp));
+				}				
 				player.getGame().log.addLine(damagingHero.getName()+" deals "+damage+" damage to "+name);
 			}else {
 				player.getGame().log.addLine(name+" suffers "+damage+" damage");
 			}
 			finalDamage(damage);	
-			//option for wounds instead of death
-//				if(damage>hp/1.6) {	//wounds
-//					if(Math.random()>wounds/(deck.getCards().size()*1.8)) {
-//						player.getGame().log.addLine(name+"suffered a wound");
-//						wounds+=1;
-//						discardPile.add(new Wound());
-//					}else {
-//						finalDamage(damage);
-//					}					
-//				}else {
-//					finalDamage(damage);
-//				}
-//			}			
 		}		
 	}
 	public void finalDamage(int damage) {
-		
+		//wounding
+		if (Math.pow(damage*1.0/hp,2)>Math.random()+0.15) {
+			player.getGame().log.addLine(name+"suffered a wound");
+			wounds+=1;
+			discardPile.add(new Wound());
+		}
 		this.setHp(hp-damage);
 		//player.getGame().log.addLine(name+" took "+damage+" damage");
 		if(hp<=0) {
@@ -384,7 +388,7 @@ public class Hero implements Serializable{
 				player.getHeroes().remove(this);
 			}		
 			for(int i=0;i<player.getHeroes().size();i++) {
-				player.getHeroes().get(i).becomeStressed(33);
+				player.getHeroes().get(i).looseMoral(33);
 			}			
 		}else {
 			player.getGame().log.addLine(name+ " allready dead");
@@ -409,10 +413,10 @@ public class Hero implements Serializable{
 			hand.removeFirst();
 		}		
 	}
-	public void healStress(int heal) {
-		stress-=heal;
-		if (stress<0) {
-			stress=0;
+	public void gainMoral(int heal) {
+		moral+=heal;
+		if (moral>maxMoral) {
+			moral=maxMoral;
 		}
 	}
 	public void heal(int heal) {//prevent overhealing
@@ -515,7 +519,7 @@ public class Hero implements Serializable{
 	public void levelUP() {
 		level+=1;
 		strength+=1;dexterity+=1;intelligence+=1;vitality+=1;
-		stressCap+=1;
+		maxMoral+=1;
 		skillPoints+=1;
 		if(cardPoints==0) {
 			generatelvlUpCards();
@@ -581,21 +585,21 @@ public class Hero implements Serializable{
 		return false;
 	}
 	//
-	public void becomeStressed(int s) {
+	public void looseMoral(int s) {
 		if(!isDead) {
 			int sDamage=(int)(s*(1-resistStress/100));
-			stress+=sDamage;
+			moral-=sDamage;
 			player.getGame().log.addLine(name+" gets stressed for "+sDamage+" stress!");
-			if(stress>stressCap) {
-				stress=stressCap;
-				if(player instanceof DungeonMaster) {
-					player.getGame().log.addLine(getName()+" flees in fear!");
-				}else {
-					player.getGame().log.addLine(getName()+"is stressed out ("+stressCap+") and will not continue adventuring with that much stress!");
-				}			
+			if(moral>maxMoral) {
+				moral=maxMoral;							
 			}else {
-				if(stress<0) {
-					stress=0;
+				if(moral<0) {
+					moral=0;
+					if(player instanceof DungeonMaster) {
+						player.getGame().log.addLine(getName()+" flees in fear!");
+					}else {
+						player.getGame().log.addLine(getName()+"is stressed out ("+maxMoral+") and will not continue adventuring with that much stress!");
+					}
 				}
 			}
 		}				
@@ -1296,13 +1300,13 @@ public class Hero implements Serializable{
 		this.cold = cold;
 	}
 	public int getStress() {
-		return stress;
+		return moral;
 	}
 	public int getStressCap() {
-		return stressCap;
+		return maxMoral;
 	}
 	public void setStressCap(int stressCap) {
-		this.stressCap = stressCap;
+		this.maxMoral = stressCap;
 	}
 	public int getTrapDisarm() {
 		return trapDisarm;
@@ -1326,7 +1330,7 @@ public class Hero implements Serializable{
 		this.quirks = quirks;
 	}
 	public void setStress(int stress) {
-		this.stress = stress;
+		this.moral = stress;
 	}
 	public int getWounds() {
 		return wounds;

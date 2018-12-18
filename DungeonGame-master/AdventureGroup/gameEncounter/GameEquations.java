@@ -63,15 +63,24 @@ public class GameEquations {
 //				return false;
 //			}
 //		}
+	//moral factor
+	public static double moralFactor(Hero hero) {
+		return hero.getStress()/150.0+0.34;
+	}
 	//crit combat calculation
-	public static int rollForCrit(Hero hero, int damage) {
-		if (Math.random()*100<critChanceCalc(hero)) {
+	public static int computeCritDamage(Hero hero, int damage) {						
+		damage=(int)(damage*(critDamageCalc(hero)/100.0));
+		return damage;
+	}
+	public static boolean rollForCrit(Hero hero) {
+		if (Math.random()*100<critChanceCalc(hero)) {			
 			if (hero.getPlayer().getGame()!=null) {
 				hero.getPlayer().getGame().log.addLine("crit!");
-			}			
-			damage=(int)(damage*(critDamageCalc(hero)/100.0));
+			}
+			return true;
+		}else {
+			return false;
 		}
-		return damage;
 	}
 		
 	//dodge chance calculation
@@ -107,36 +116,39 @@ public class GameEquations {
 		}
 
 	}
+	
+	//different damage types
 	public static int calculateSpellFireDamage(int dmg,Hero hero) {
-		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getFireDmg()/100.0));
+		return (int) (moralFactor(hero)*(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getFireDmg()/100.0));
 	}
 	public static int calculateSpellColdDamage(int dmg,Hero hero) {
-		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getColdDmg()/100.0));
+		return (int) (moralFactor(hero)*(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getColdDmg()/100.0));
 	}
 	public static int calculateSpellLightningDamage(int dmg,Hero hero) {
-		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getLightningDmg()/100.0));
+		return (int) (moralFactor(hero)*(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getLightningDmg()/100.0));
 	}
 	public static int calculateSpellMagicDamage(int dmg,Hero hero) {
-		return (int) ((dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0));
+		return (int) (moralFactor(hero)*(dmg*(1+(spellPowerCalc(hero))/100.0))*(1+hero.getMagicDmg()/100.0));
 	}
 	public static int calculatePoisonDamage(int dmg, Hero hero) {
 		//return (int) (dmg*(1+hero.getPoisonDmg()/100.0)); //already scales due to hp percent
-		return dmg;
+		return (int) (moralFactor(hero)*dmg);
 	}
 	public static int calculateBleedDamage(int dmg, Hero hero) {
-		return (int) (dmg*(1+hero.getBleedDmg()/100.0));
+		return (int) (dmg*moralFactor(hero)*(1+hero.getBleedDmg()/100.0));
 	}
 	//damage for attacks
 	public static int calculateAttackDamage(Card card,Hero hero) {
-		return (int) (card.getAttackDamage()*(1+(attackSkillCalc(hero))/100.0));
+		return (int) (moralFactor(hero)*card.getAttackDamage()*(1+(attackSkillCalc(hero))/100.0));
 	}
 	public static int calculateAttackDamage(int damage,Hero hero) {
-		return (int) (damage*(1+(attackSkillCalc(hero))/100.0));
+		return (int) (moralFactor(hero)*damage*(1+(attackSkillCalc(hero))/100.0));
 	}
 	//block amount calculation
 	public static int calculateBlockAmount(int block,Hero hero) {
-		return (int) (block*(1+(blockSkillCalc(hero))/100.0));
+		return (int) (moralFactor(hero)*block*(1+(blockSkillCalc(hero))/100.0));
 	}
+	
 	//damage factor from strength and dexterity old!
 	public static double damageBonus(double strfac,int strength, int dexterity) {
 		return 1+(strfac*strength+(1-strfac)*dexterity)/30;
@@ -193,7 +205,9 @@ public class GameEquations {
 	
 	//damage reduction by armor
 	public static int damageReducedByArmor(int damage, int armor) {
-		return (int) (damage/(1+armor/100.0));
+		//!!!!armor changed to block keeping mechanic
+		return damage;
+		//return (int) (damage/(1+armor/100.0));
 	}
 	
 	//unarmed fist damage

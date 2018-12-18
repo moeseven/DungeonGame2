@@ -28,11 +28,11 @@ public class Fight implements Serializable{
 		this.monsters=monsters;
 		this.heroes=heroes;
 		for (Hero h : heroes) {		
-		    h.setUpDrawPile();
+		    h.startFight(this);
 		    h.setFight(this);
 		}
 		for (Hero m : monsters) {	
-		    m.setUpDrawPile();	 
+		    m.startFight(this);	 
 		    m.setFight(this);		    
 		}
 		for (Hero m : monsters) {	
@@ -48,13 +48,13 @@ public class Fight implements Serializable{
 		turnOrder=new LinkedList<Hero>();
 		turnOrderCounter=-1;
 		for (Hero h : heroes) {		
-			if(!h.isDead()&&h.getStress()<h.getStressCap()) {
+			if(!h.isDead()&&h.getStress()>0) {
 				h.setCurrentSpeed(h.rollSpeed());
 				allFightParticipants.add(h);
 			}			
 		}
 		for (Hero m : monsters) {
-			if(!m.isDead()&&m.getStress()<m.getStressCap()) {
+			if(!m.isDead()&&m.getStress()>0) {
 				m.setCurrentSpeed(m.rollSpeed());
 				allFightParticipants.add(m);
 			}
@@ -86,7 +86,7 @@ public class Fight implements Serializable{
 						h.gainExp(exp);			
 				}
 			}else {
-				if(monsters.get(i).getStress()>=monsters.get(i).getStressCap()) {
+				if(monsters.get(i).getStress()<=0) {
 					stressed.add(monsters.get(i));
 				}
 			}
@@ -101,7 +101,7 @@ public class Fight implements Serializable{
 			if(heroes.get(i).isDead()) {//remove bodies from fight and handle experience
 				dead.add(heroes.get(i));
 			}else {
-				if(heroes.get(i).getStress()>=heroes.get(i).getStressCap()) {
+				if(heroes.get(i).getStress()<=0) {
 					stressed.add(heroes.get(i));
 				}
 			}
@@ -122,7 +122,11 @@ public class Fight implements Serializable{
 		if (this.isFightOver()){
 			fightOverHandling();
 			if(heroes.size()>0) {
+				
 				game.log.addLine("§§§§§§§§§§ Fight won! §§§§§§§§§§");
+				for (int i = 0; i < heroes.size(); i++) {
+					heroes.get(i).gainMoral(10);
+				}
 			}else {
 				game.log.addLine("§§§§§§ Devastating defeat! §§§§§§");
 			}			
@@ -216,12 +220,12 @@ public class Fight implements Serializable{
 	public void fightOverHandling() {
 		retreatWish=0;
 		for(int i=0; i<heroes.size();i++) {
-			heroes.get(i).setBlock(0);
+			heroes.get(i).setBlock(heroes.get(i).getArmor());
 			heroes.get(i).removeBuffs();	
 			heroes.get(i).applyNegativeTurnEffects();
 		}
 		for(int i=0; i<monsters.size();i++) {
-			monsters.get(i).setBlock(0);
+			monsters.get(i).setBlock(monsters.get(i).getArmor());
 			monsters.get(i).removeBuffs();	
 			monsters.get(i).applyNegativeTurnEffects();
 			monsters.get(i).applyNegativeTurnEffects();

@@ -28,7 +28,6 @@ public class TypeCleric extends CharacterClass{
 		cardPool.add("doubleBlock");
 		name="cleric";
 		Item startItem = game.itemBuilder.buildItem("rustyBlade",6);
-		startItem.setGoldValue(0);
 		items.add(startItem);
 		cards.add(game.cardBuilder.buildCard("bash"));
 		cards.add(game.cardBuilder.buildCard("divineGrace"));
@@ -63,6 +62,7 @@ public class TypeCleric extends CharacterClass{
 		hero.setIntelligence(hero.getIntelligence()+4);
 		hero.setVitality(hero.getVitality()+5);
 		//
+		hero.setArmor(hero.getArmor()+1);
 		hero.setSpellDuration(hero.getSpellDuration()+1);
 		hero.setMagicDmg(hero.getMagicDmg()+5);
 		hero.setBlockSkill(hero.getBlockSkill()+3);

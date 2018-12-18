@@ -24,7 +24,7 @@ public class PoisonTrap extends Trap{
 		if(trapStats.attackHero(hero,card)) {
 			hero.getPlayer().getGame().log.addLine(hero.getName()+" triggered a "+getName());
 			trapStats.doPoisonDamage((int) (9*Math.random()), hero,95);
-			hero.becomeStressed(19);
+			hero.looseMoral(19);
 			disarmed=true;
 		}
 	}
