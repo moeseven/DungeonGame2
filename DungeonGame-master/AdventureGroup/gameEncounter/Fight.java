@@ -125,7 +125,7 @@ public class Fight implements Serializable{
 				
 				game.log.addLine("§§§§§§§§§§ Fight won! §§§§§§§§§§");
 				for (int i = 0; i < heroes.size(); i++) {
-					heroes.get(i).gainMoral(10);
+					heroes.get(i).gainMoral(5);
 				}
 			}else {
 				game.log.addLine("§§§§§§ Devastating defeat! §§§§§§");

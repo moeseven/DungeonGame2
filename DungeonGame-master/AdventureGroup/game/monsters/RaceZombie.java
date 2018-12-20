@@ -40,7 +40,7 @@ public class RaceZombie extends MonsterRace{
 		hero.setSpellPower(15);
 		hero.setSpellDuration(7);
 		//
-		hero.setArmor(7);
+		hero.setArmor(0);
 		hero.setSpeed(2);					
 		hero.setThorns(0);
 		//
@@ -109,7 +109,6 @@ public class RaceZombie extends MonsterRace{
 			hero.setIntelligence(hero.getIntelligence()+0);
 			hero.setVitality(hero.getVitality()+6);
 			//
-			hero.setArmor(hero.getArmor()+5);
 			hero.setAttackSkill(hero.getAttackSkill()+3);
 			hero.setBlockSkill(hero.getBlockSkill()+5);
 		}

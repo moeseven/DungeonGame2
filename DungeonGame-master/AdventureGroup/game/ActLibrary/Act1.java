@@ -70,6 +70,7 @@ public class Act1 extends Act{
 		addRoom(room, 4, 3);
 		//town
 		addRoom(game.getTown(), 4, 4);
+		
 		//test room
 		room=new EmptyRoom(game);
 		interaction = new Altar(game);
@@ -77,7 +78,8 @@ public class Act1 extends Act{
 		monster=new BossNecromancer(game);
 		room.addMonster(new Hero("", game.dungeonMaster, monster, monster.getPositionClasses(5).getFirst()));
 		room.getInteractions().add(interaction);
-		//addRoom(questRoom, 4, 5);
+		//addRoom(room, 4, 5);
+		
 		//room 6,4
 		addRoom(new EmptyRoom(game), 6, 4);
 		//room 6,3

@@ -46,7 +46,7 @@ public class summonEffect extends CardEffect{
 		}else {
 			monster.enhance(GameEquations.calculateSpellMagicDamage(80, self));
 		}		
-		self.getPlayer().getGame().getRoom().getFight().addSummonToFight(monster);
+		self.getFight().addSummonToFight(monster);
 		return returnValue;		
 	}
 

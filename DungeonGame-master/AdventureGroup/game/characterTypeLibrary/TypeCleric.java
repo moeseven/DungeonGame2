@@ -58,7 +58,7 @@ public class TypeCleric extends CharacterClass{
 		//mainstats
 		
 		hero.setStrength(hero.getStrength()+3);
-		hero.setDexterity(hero.getDexterity()+0);
+		hero.setDexterity(hero.getDexterity()-1);
 		hero.setIntelligence(hero.getIntelligence()+4);
 		hero.setVitality(hero.getVitality()+5);
 		//

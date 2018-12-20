@@ -62,7 +62,7 @@ public class RaceGoblin extends MonsterRace{
 		hero.setResistBleed(10);
 		hero.setResistStun(0);
 		hero.setResistStress(0);
-		hero.setStressCap(50);
+		hero.setStressCap(55);
 		//
 		hero.setTrapDisarm(10);
 		hero.setBaseHp(45);		

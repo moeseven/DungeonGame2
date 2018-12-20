@@ -56,7 +56,7 @@ public class TypeWarrior extends CharacterClass{
 		super.modifyHero(hero);
 		//mainstats
 		hero.setStrength(hero.getStrength()+3);
-		hero.setDexterity(hero.getDexterity()+2);
+		hero.setDexterity(hero.getDexterity()+1);
 		hero.setIntelligence(hero.getIntelligence()+0);
 		hero.setVitality(hero.getVitality()+5);
 		//

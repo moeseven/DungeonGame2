@@ -847,7 +847,7 @@ public class Hero implements Serializable{
 		if (stat.equals("intelligence")) {			
 			return intelligence;
 		}
-		System.out.println("stat resolve error!");
+		System.out.println("stat resolve error!"+"("+stat+")");
 		return 0;
 		
 	}
