@@ -26,5 +26,10 @@ public class summonBuff extends Buff{
 		hero.setDead(true);
 		hero.getPlayer().removeHero(hero);		
 	}
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
 
 }

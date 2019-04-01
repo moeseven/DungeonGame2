@@ -3,6 +3,8 @@ package tools;
 import java.awt.Color;
 import java.util.LinkedList;
 
+import java.awt.event.MouseEvent;
+
 public abstract class ClickableRectangle {
 	private int imageNumber=1;
 	private Color firstLineColor=Color.black;
@@ -29,7 +31,7 @@ public abstract class ClickableRectangle {
 			return false;
 		}
 	}
-	public abstract void onClick();
+	public abstract void onClick(MouseEvent e);
 	public abstract void updateCaption();
 	public void cleanImageNumber() {
 		imageNumber=1;

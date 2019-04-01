@@ -19,6 +19,8 @@ public class EffectBuilder {
         	return new addCardToTargetDeckEffect(p);
         case "addCardToTargetDeckSpell":
         	return new addCardToTargetDeckSpellEffect(p);  
+        case "protectBuff":
+        	return new protectBuffEffect(p);  
         case "allResistSpell":
         	return new allResistSpellEffect(p);      
         case "attack":

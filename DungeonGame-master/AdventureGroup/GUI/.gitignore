@@ -148,3 +148,8 @@
 /HeroInventoryPaintComponent$14.class
 /GuiRoom$AltarInterface$5.class
 /GuiRoom$TavernInterface$5.class
+/FightAnimationPanel.class
+/FightAnimationPanel$MyMouseListener.class
+/FightAnimationPanel$1.class
+/FightAnimationPanel$ClickableRectangleHero.class
+/FightAnimationPanel$AnimatedClickableRectangleHero.class

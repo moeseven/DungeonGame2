@@ -25,6 +25,11 @@ public class RegenerationBuff extends Buff{
 	public void onTick(Hero hero) {
 		hero.heal(regen);
 	}
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
 	
 
 }

@@ -30,5 +30,10 @@ public class statGrowthBuff extends Buff{
 		hero.modifyStat(stat, -growingStatValue);
 		hero.getPlayer().getGame().log.addLine(stat+" buff ended");
 	}
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
 
 }

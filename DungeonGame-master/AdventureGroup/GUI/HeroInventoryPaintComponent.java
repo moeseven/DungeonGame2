@@ -44,7 +44,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//Inventory
 			rc.addRect(new ClickableRectangle("search inventory",305,120,300,20) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getInventory().size()>0) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
@@ -57,13 +57,18 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}
 				@Override
 				public void updateCaption() {
-					// TODO Auto-generated method stub					
+					caption=new LinkedList<>();
+					if (gw.getGame().getPlayer().getInventory().size()<1) {
+						caption.add("empty inventory");
+					}else {
+						caption.add(this.name);
+					}
 				}		
 			});
 			//item description
 			rc.addRect(new ClickableRectangle("description",305,10,300,110) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 
 				}
 				@Override
@@ -90,7 +95,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//item picture
 			rc.addRect(new ClickableRectangle("",515,50,80,70) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 
 				}
 				@Override
@@ -106,7 +111,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			rc.addRect(new ClickableRectangle("drop",210,35,55,20) {
 
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
@@ -133,7 +138,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//use
 			rc.addRect(new ClickableRectangle("use",210,60,55,20) {
 				@Override
-				public void onClick() {					
+				public void onClick(MouseEvent e) {					
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						Item itemUsable=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
 						if(gw.getGame().getPlayer().getInventory().contains(itemUsable)) {
@@ -152,7 +157,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//equip/unequip
 			rc.addRect(new ClickableRectangle("equip",210,10,55,20) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					// TODO Auto-generated method stub
 					if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 						if(gw.getGame().getPlayer().getInventory().contains(gw.getGame().getPlayer().getSelectedHero().getSelectedItem())) {
@@ -182,7 +187,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//gold
 			rc.addRect(new ClickableRectangle("gold",515,120,90,20) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					// TODO Auto-generated method stub
 				}
 				@Override
@@ -199,7 +204,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//potion
 			rc.addRect(new ClickableRectangle("potion",60,142,50,34) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion());
 					}
@@ -220,7 +225,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//head
 			rc.addRect(new ClickableRectangle("head",60,10,50,50) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHead());
 					}
@@ -242,7 +247,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//body
 			rc.addRect(new ClickableRectangle("body",60,70,50,70) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getBody());
 					}
@@ -265,7 +270,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//hand1
 			rc.addRect(new ClickableRectangle("hand1",5,70,50,70) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand1());
 					}
@@ -287,7 +292,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//hand2
 			rc.addRect(new ClickableRectangle("hand2",115,70,50,70) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getHand2());
 					}
@@ -309,7 +314,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//ring1
 			rc.addRect(new ClickableRectangle("ring1",15,142,30,30) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing1());
 					}
@@ -330,7 +335,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//ring2
 			rc.addRect(new ClickableRectangle("ring2",125,142,30,30) {
 				@Override
-				public void onClick() {
+				public void onClick(MouseEvent e) {
 					if(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2()!=null) {
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getSelectedHero().getEquipment().getRing2());
 					}
@@ -355,7 +360,7 @@ public class HeroInventoryPaintComponent extends JComponent{
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());												
+				rc.triggerClick(e);												
 			}else{
 				if (e.getButton()==3){
 					//new CardView(card);

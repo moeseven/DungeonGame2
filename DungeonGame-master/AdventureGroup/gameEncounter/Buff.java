@@ -5,6 +5,7 @@ import java.io.Serializable;
 public abstract class Buff implements Serializable{
 protected int duration=2;
 public abstract void onTick(Hero hero);
+public abstract Hero onBeeingTargeted(Hero hero);
 public abstract void mod(Hero hero);
 public abstract void demod(Hero hero);
 public void tick(Hero hero) {	

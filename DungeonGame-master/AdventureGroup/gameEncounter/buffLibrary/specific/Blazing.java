@@ -32,4 +32,10 @@ public class Blazing extends Buff{
 		hero.setResistFire(hero.getResistFire()-50);
 	}
 
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
+
 }

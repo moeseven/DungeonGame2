@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import gameEncounter.ItemLibrary.usables.HealingPotion;
+import gameEncounter.buffLibrary.GuardedBuff;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int imageNumber=99;
@@ -73,6 +74,13 @@ public abstract class Card implements Serializable,Cloneable{
 			handleManaCost(self);		
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
+			//handle protection		not TESTED!	
+			for (int i = 0; i < self.getTarget().getBuffs().size(); i++) {
+				if (self.getTarget().getBuffs().get(i) instanceof GuardedBuff) {
+					self.getTargets().remove(self.getTarget());
+					self.addTarget(self.getTarget().getBuffs().get(i).onBeeingTargeted(self));
+				}				
+			}
 			buildLogEntry(self);
 			applyEffect(self);
 			self.setCardsPlayedThisRound(self.getCardsPlayedThisRound()+1);

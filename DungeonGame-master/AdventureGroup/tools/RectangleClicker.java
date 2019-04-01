@@ -2,6 +2,8 @@ package tools;
 
 import java.util.LinkedList;
 
+import java.awt.event.MouseEvent;
+
 public class RectangleClicker {
 	public LinkedList<ClickableRectangle> rectAngles;
 	public RectangleClicker() {
@@ -11,10 +13,11 @@ public class RectangleClicker {
 	public void addRect(ClickableRectangle rect) {
 		rectAngles.add(rect);
 	}
-	public void triggerClick(int x, int y) {		
+	public void triggerClick(MouseEvent e) {
+		int x= e.getX(); int y= e.getY();
 		for(int i=0; i<rectAngles.size();i++) {
 			if(rectAngles.get(i).isClicked(x, y)){
-				rectAngles.get(i).onClick();
+				rectAngles.get(i).onClick(e);
 			}
 		}				
 	}
@@ -23,4 +26,12 @@ public class RectangleClicker {
 			rectAngles.get(i).updateCaption();
 		}
 	}
+	//getters and setters
+	public LinkedList<ClickableRectangle> getRectAngles() {
+		return rectAngles;
+	}
+	public void setRectAngles(LinkedList<ClickableRectangle> rectAngles) {
+		this.rectAngles = rectAngles;
+	}
+	
 }

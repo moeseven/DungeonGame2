@@ -33,5 +33,10 @@ public class lightningClowdBuff extends Buff{
 	public void demod(Hero hero) {
 		hero.getPlayer().getGame().log.addLine("lightning clowd buff ended");
 	}
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
 
 }

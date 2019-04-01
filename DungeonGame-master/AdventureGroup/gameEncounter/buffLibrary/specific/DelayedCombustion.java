@@ -42,4 +42,10 @@ public class DelayedCombustion extends Buff{
 		}
 	}
 
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
+
 }

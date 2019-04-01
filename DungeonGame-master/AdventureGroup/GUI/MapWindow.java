@@ -63,7 +63,7 @@ public class MapWindow extends JFrame{
 				for (int y = 0;y < game.getActiveAct().getRoomMap()[1].length; y++) {
 						rc.addRect(new ClickableRectangle(""+x+"/"+y,x*roomSquareSize,y*roomSquareSize,roomSquareSize-1,roomSquareSize-1) {
 						@Override
-						public void onClick() {		
+						public void onClick(MouseEvent e) {		
 							//move to clicked room if adjacent
 							int currentRoomX=game.getRoom().getxCoordinate();
 							int currentRoomY=game.getRoom().getyCoordinate();
@@ -96,7 +96,7 @@ public class MapWindow extends JFrame{
 		private class MyMouseListener extends MouseAdapter{
 			public void mousePressed(MouseEvent e){	
 				if(e.getButton()==1){
-					rc.triggerClick(e.getX(), e.getY());
+					rc.triggerClick(e);
 					rc.updateCaptions();
 					revalidate();
 					repaint();	

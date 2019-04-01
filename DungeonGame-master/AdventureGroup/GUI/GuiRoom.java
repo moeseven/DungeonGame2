@@ -123,7 +123,7 @@ public class GuiRoom extends JPanel{
 		//Inventory player
 		rc.addRect(new ClickableRectangle("search inventory",375,80,90,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 					if(gw.getGame().getPlayer().getInventory().size()>1) {
@@ -140,7 +140,7 @@ public class GuiRoom extends JPanel{
 		//Inventory shop
 		rc.addRect(new ClickableRectangle("search shop",465,80,90,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(shop.getItems().size()>0) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());
@@ -159,7 +159,7 @@ public class GuiRoom extends JPanel{
 		//item description
 		rc.addRect(new ClickableRectangle("description",305,10,250,110) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 
 			}
 			@Override
@@ -189,7 +189,7 @@ public class GuiRoom extends JPanel{
 		//sell
 		rc.addRect(new ClickableRectangle("sell",510,35,45,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
@@ -219,7 +219,7 @@ public class GuiRoom extends JPanel{
 		});
 		rc.addRect(new ClickableRectangle("buy",510,10,45,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
@@ -255,7 +255,7 @@ public class GuiRoom extends JPanel{
 		//gold
 		rc.addRect(new ClickableRectangle("gold",305,120,250,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 			}
 			@Override
@@ -280,7 +280,7 @@ public class GuiRoom extends JPanel{
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());
+				rc.triggerClick(e);
 				rc.updateCaptions();
 				upadate();
 				revalidate();
@@ -331,7 +331,7 @@ public class GuiRoom extends JPanel{
 		//Tavern Heroes
 		rc.addRect(new ClickableRectangle("look around in tavern",545,30,145,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(tavern.getHeroes().size()>0) {
 					gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
@@ -349,7 +349,7 @@ public class GuiRoom extends JPanel{
 		//hire/release to tavern
 		rc.addRect(new ClickableRectangle("release to tavern",545,90,145,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
@@ -393,7 +393,7 @@ public class GuiRoom extends JPanel{
 		rc.addRect(new ClickableRectangle("increase Tavern slots",545,130,145,20) {
 			int goldcost=(gw.getGame().getPlayer().getHeroes().size()+gw.getGame().getPlayer().getAvailableHeroes().size())*18-15;
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				if (gw.getGame().getPlayer().getGold()>= goldcost){
 					gw.getGame().getPlayer().gainGold(-goldcost);
 					gw.getGame().getPlayer().getAvailableHeroes().add(gw.getGame().generator.generateRandomHero(gw.getGame().getPlayer()));
@@ -410,7 +410,7 @@ public class GuiRoom extends JPanel{
 		//dismiss hero
 		rc.addRect(new ClickableRectangle("dismiss hero",545,110,145,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
@@ -450,7 +450,7 @@ public class GuiRoom extends JPanel{
 		//hero name
 		rc.addRect(new ClickableRectangle("hero",545,70,145,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 
 			}
 			@Override
@@ -468,7 +468,7 @@ private class MyMouseListener extends MouseAdapter{
 	public void mousePressed(MouseEvent e){	
 		if(e.getButton()==1){
 			//get equipment position from click
-			rc.triggerClick(e.getX(), e.getY());
+			rc.triggerClick(e);
 			rc.updateCaptions();
 			upadate();
 			revalidate();
@@ -515,7 +515,7 @@ protected void paintComponent(Graphics g){
 		//health heal
 				rc.addRect(new ClickableRectangle("heal hero",405,120,220,30) {
 					@Override
-					public void onClick() {
+					public void onClick(MouseEvent e) {
 						mm.purchaseHealing(gw.getGame().getPlayer().getSelectedHero());										
 					}
 					@Override
@@ -528,7 +528,7 @@ protected void paintComponent(Graphics g){
 		//wound heal
 		rc.addRect(new ClickableRectangle("woundheal hero",405,40,220,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				mm.purchaseWoundHealing(gw.getGame().getPlayer().getSelectedHero());										
 			}
 			@Override
@@ -542,7 +542,7 @@ protected void paintComponent(Graphics g){
 		//stress heal
 		rc.addRect(new ClickableRectangle("stressheal hero",405,80,220,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				mm.purchaseStressHealing(gw.getGame().getPlayer().getSelectedHero());										
 			}
 			@Override
@@ -556,7 +556,7 @@ protected void paintComponent(Graphics g){
 		//gold
 		rc.addRect(new ClickableRectangle("gold",405,150,220,20) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 			}
 			@Override
@@ -573,7 +573,7 @@ protected void paintComponent(Graphics g){
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());
+				rc.triggerClick(e);
 				rc.updateCaptions();
 				upadate();
 				revalidate();
@@ -614,7 +614,7 @@ protected void paintComponent(Graphics g){
 		///from shop
 		rc.addRect(new ClickableRectangle("search inventory",455,10,90,40) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
 					if(gw.getGame().getPlayer().getInventory().size()>1) {
@@ -631,7 +631,7 @@ protected void paintComponent(Graphics g){
 		//item description
 		rc.addRect(new ClickableRectangle("description",305,10,145,110) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 
 			}
 			@Override
@@ -661,7 +661,7 @@ protected void paintComponent(Graphics g){
 		//pray
 		rc.addRect(new ClickableRectangle("pray",455,50,90,25) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method st
 				altar.pray(gw.getGame().getPlayer().getSelectedHero());
 			}
@@ -673,7 +673,7 @@ protected void paintComponent(Graphics g){
 		//sacrifice
 		rc.addRect(new ClickableRectangle("sacrifice item",455,75,90,25) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				if(gw.getGame().getPlayer().getSelectedHero().getSelectedItem()!=null) {
 					Hero hero=gw.getGame().getPlayer().getSelectedHero();
 					Item item=gw.getGame().getPlayer().getSelectedHero().getSelectedItem();
@@ -697,7 +697,7 @@ protected void paintComponent(Graphics g){
 		//sacrifice blood
 		rc.addRect(new ClickableRectangle("sacrifice blood",455,100,90,25) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				altar.goldForBlood(gw.getGame().getPlayer().getSelectedHero());
 				rc.rectAngles.remove(this);
 			}
@@ -713,7 +713,7 @@ protected void paintComponent(Graphics g){
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());
+				rc.triggerClick(e);
 				rc.updateCaptions();
 				upadate();
 				revalidate();

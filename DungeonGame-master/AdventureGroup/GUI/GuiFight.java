@@ -27,6 +27,7 @@ public class GuiFight extends JPanel{
 	private FightWindow fw;
 	private HeroFightExtraComponent hc;
 	private CombatComponent mc;
+	private FightAnimationPanel animation;
 	private LogComponent lc;
 	private JButton b;
 	private JButton buttonRetreat;
@@ -79,10 +80,12 @@ public class GuiFight extends JPanel{
 	public void myUpdate() {
 		hc=new HeroFightExtraComponent(this.fw);
 		mc=new CombatComponent(this.fw);
+		animation= new FightAnimationPanel(this.fw);
 		lc=new LogComponent(fw.getGame().log);
 		jp_mid_1= new JPanel();
 		jp_mid_1.setLayout(new BorderLayout());
-		jp_mid_1.add(mc,BorderLayout.NORTH);
+		//jp_mid_1.add(mc,BorderLayout.NORTH);
+		jp_mid_1.add(animation,BorderLayout.NORTH); //test
 		jp_mid_1.add(hc,BorderLayout.CENTER);
 		jp_mid_1.add(lc,BorderLayout.SOUTH);
 		this.add(jp_mid_1,BorderLayout.CENTER);
@@ -103,7 +106,8 @@ public class GuiFight extends JPanel{
 		lc=new LogComponent(fw.getGame().log);
 		jp_mid_1= new JPanel();
 		jp_mid_1.setLayout(new BorderLayout());
-		jp_mid_1.add(mc,BorderLayout.NORTH);
+		//jp_mid_1.add(mc,BorderLayout.NORTH);
+		jp_mid_1.add(animation,BorderLayout.NORTH); //test
 		jp_mid_1.add(hc,BorderLayout.CENTER);
 		jp_mid_1.add(lc,BorderLayout.SOUTH);
 		this.add(jp_mid_1,BorderLayout.CENTER);

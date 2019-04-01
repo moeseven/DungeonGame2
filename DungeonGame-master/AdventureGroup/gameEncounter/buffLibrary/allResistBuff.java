@@ -34,5 +34,10 @@ public class allResistBuff extends Buff{
 		hero.setResistStress(hero.getResistStress()-resist);
 		hero.getPlayer().getGame().log.addLine("all resist modification ended");
 	}
+	@Override
+	public Hero onBeeingTargeted(Hero hero) {
+		// TODO Auto-generated method stub
+		return hero;
+	}
 
 }

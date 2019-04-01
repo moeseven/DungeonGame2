@@ -32,7 +32,7 @@ public class HeroFightManaComponent extends JComponent{
 		//use potion
 		ClickableRectangle potion = new ClickableRectangle("",94,0,30,30) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(fw.getGame().getPlayer().getHeroes().contains(fw.getGame().getPlayer().getSelectedHero())&&fw.getGame().getPlayer().getSelectedHero().getEquipment().getPotion()!=null) {
 					fw.getGame().getPlayer().getSelectedHero().getEquipment().drinkPotion();
@@ -56,7 +56,7 @@ public class HeroFightManaComponent extends JComponent{
 		//move forward fight movement
 		rc.addRect(new ClickableRectangle(">",70,10,20,10) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(fw.getGame().getPlayer().getHeroes().contains(fw.getGame().getPlayer().getSelectedHero())&&fw.getGame().getPlayer().getSelectedHero().getMana()>=1&&fw.getGame().getPlayer().getSelectedHero().getPosition()>0) {
 					fw.getGame().getPlayer().getSelectedHero().setMana(fw.getGame().getPlayer().getSelectedHero().getMana()-1);
@@ -73,7 +73,7 @@ public class HeroFightManaComponent extends JComponent{
 		//move backward fight movement
 		rc.addRect(new ClickableRectangle("<",50,10,20,10) {
 			@Override
-			public void onClick() {
+			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(fw.getGame().getPlayer().getHeroes().contains(fw.getGame().getPlayer().getSelectedHero())&&fw.getGame().getPlayer().getSelectedHero().getMana()>=1&&fw.getGame().getPlayer().getSelectedHero().getPosition()<fw.getGame().getPlayer().getHeroes().size()-1) {
 					fw.getGame().getPlayer().getSelectedHero().setMana(fw.getGame().getPlayer().getSelectedHero().getMana()-1);
@@ -94,7 +94,7 @@ public class HeroFightManaComponent extends JComponent{
 		public void mousePressed(MouseEvent e){	
 			if(e.getButton()==1){
 				//get equipment position from click
-				rc.triggerClick(e.getX(), e.getY());
+				rc.triggerClick(e);
 				rc.updateCaptions();
 				fw.repaint();				
 			}else{

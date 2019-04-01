@@ -25,6 +25,7 @@ public class Hero implements Serializable{
 	private LinkedList<HeroQuirk> quirks=new LinkedList<HeroQuirk>();
 	private LinkedList<Card> lvlUpCards=new LinkedList<Card>();
 	private LinkedList<Item> loot = new LinkedList<Item>();
+	private LinkedList<CardEffect> startOfFightEffects = new LinkedList<CardEffect>();
 	private Equipment equipment;
 	protected String name;
 	//protected BufferedImage image;
@@ -178,18 +179,23 @@ public class Hero implements Serializable{
 	}
 	//functions
 	public void startFight(Fight fight) {
-		this.fight=fight;
+		this.fight=fight;		
 		block=armor;
 		setUpDrawPile();
+		for (int i = 0; i < startOfFightEffects.size(); i++) {
+			this.setNewTarget(this); //need target for effect
+			startOfFightEffects.get(i).applyEffect(this, null);
+		}
 	}
+	
 	public void setUpDrawPile() {
 		//shuffle
 		hand=new LinkedList<Card>();
 		drawPile=new LinkedList<Card>();
-		discardPile=new LinkedList<Card>();
+		discardPile=new LinkedList<Card>();		
 		for(Card c: this.getDeck().getCards()) {
 	    	this.getDrawPile().add(c);
-	    }
+	    }		
 		for(int i=0;i<wounds;i++) {
 			drawPile.add(new Wound());
 		}
@@ -272,7 +278,7 @@ public class Hero implements Serializable{
 			if (block>armor) {
 				block=armor;
 			}
-			this.block+=GameEquations.calculateBlockAmount(turnBlock, this);
+			block+=GameEquations.calculateBlockAmount(turnBlock, this);
 			//
 			this.mana=manaPower;
 			for(int i=0; i<draw;i++) {
@@ -413,6 +419,13 @@ public class Hero implements Serializable{
 			hand.removeFirst();
 		}		
 	}
+//	public void becomeTarget(Hero targeter) {//for guarding purposes
+//		targeter.addTarget(this);
+//		for (int i = 0; i < buffs.size(); i++) {
+//			buffs.get(i).onBeeingTargeted(targeter);
+//		}
+//	}
+
 	public void gainMoral(int heal) {
 		moral+=heal;
 		if (moral>maxMoral) {
@@ -973,6 +986,14 @@ public class Hero implements Serializable{
 	//
 	public int getPosition() {
 		return player.getHeroes().indexOf(this);
+	}
+	public void addStartOfFightEffect(CardEffect effect) {
+		startOfFightEffects.add(effect);
+	}
+	public void removeStartOfFightEffect(CardEffect effect) {
+		if (startOfFightEffects.contains(effect)) {
+			startOfFightEffects.remove(effect);
+		}		
 	}
 	//Getters and Setters
 	public int getGold() {
