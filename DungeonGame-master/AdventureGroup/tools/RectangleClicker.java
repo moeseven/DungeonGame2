@@ -3,8 +3,9 @@ package tools;
 import java.util.LinkedList;
 
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class RectangleClicker {
+public class RectangleClicker implements Serializable{
 	public LinkedList<ClickableRectangle> rectAngles;
 	public RectangleClicker() {
 		// TODO Auto-generated constructor stub

@@ -407,31 +407,30 @@ public class GuiRoom extends JPanel{
 				caption.addFirst(name+"("+goldcost+" gold)");						
 			}		
 		});
-		//dismiss hero
-		rc.addRect(new ClickableRectangle("dismiss hero",545,110,145,20) {
+		//dismiss hero //disabled for now
+		rc.addRect(new ClickableRectangle("",545,110,145,20) {
 			@Override
-			public void onClick(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
-					Hero hero=gw.getGame().getPlayer().getSelectedHero();
-					if(gw.getGame().getPlayer().getHeroes().contains(hero)&&gw.getGame().getPlayer().getHeroes().size()>1) {
-						//dismiss from roster
-						gw.getGame().getPlayer().removeHero(hero);						
-						if(gw.getGame().getPlayer().getHeroes().size()>0) {
-							gw.getGame().getPlayer().setSelectedHero(gw.getGame().getPlayer().getHeroes().getFirst());
-						}
-					}else {
-						if(tavern.getHeroes().contains(hero)) {
-							//dismiss from tavern
-							tavern.getHeroes().remove(hero);				
-							if(tavern.getHeroes().size()>0) {
-								gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
-							}
-						}
-					}				
-				}
+			public void onClick(MouseEvent e) {				
+//				if(gw.getGame().getPlayer().getSelectedHero()!=null) {
+//					Hero hero=gw.getGame().getPlayer().getSelectedHero();
+//					if(gw.getGame().getPlayer().getHeroes().contains(hero)&&gw.getGame().getPlayer().getHeroes().size()>1) {
+//						//dismiss from roster
+//						gw.getGame().getPlayer().removeHero(hero);						
+//						if(gw.getGame().getPlayer().getHeroes().size()>0) {
+//							gw.getGame().getPlayer().setSelectedHero(gw.getGame().getPlayer().getHeroes().getFirst());
+//						}
+//					}else {
+//						if(tavern.getHeroes().contains(hero)) {
+//							//dismiss from tavern
+//							tavern.getHeroes().remove(hero);				
+//							if(tavern.getHeroes().size()>0) {
+//								gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
+//							}
+//						}
+//					}				
+//				}
 				
-				gw.getGuiRoom().upadate();
+//				gw.getGuiRoom().upadate();
 			}
 			@Override
 			public void updateCaption() {

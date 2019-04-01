@@ -3,6 +3,7 @@ package game;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import GUI.animations.AnimationHandler;
 import GUI.grafics.MyImageLoader;
 import game.ActLibrary.Act1;
 import game.QuestLibrary.QuestReturnRelic;
@@ -20,6 +21,7 @@ import tools.MyLog;
 
 public class Game implements Serializable {
 	private Player player; // change this for multiplayer
+	private AnimationHandler animationHandler;
 	protected int maximumGroupSize=5;
 	public Player dungeonMaster;
 	public GeneratorRandom generator;
@@ -37,10 +39,12 @@ public class Game implements Serializable {
 	private LinkedList<Act> actList;
 	private Act activeAct;
 	private int idleStressRelief = 10;
-
+	private Hero lastCaster;
 	public Game() {
 		super();
+		animationHandler = new AnimationHandler(this);
 		player = new Player(this);
+		lastCaster= null;
 		cardBuilder = new CardBuilder();
 		itemBuilder = new ItemBuilder(this,"resources/items.properties");
 		itemSpecialBuilder = new ItemSpecialBuilder(this,"resources/itemsSpecial.properties");
@@ -217,6 +221,22 @@ public class Game implements Serializable {
 
 	public void setActList(LinkedList<Act> actList) {
 		this.actList = actList;
+	}
+
+	public AnimationHandler getAnimationHandler() {
+		return animationHandler;
+	}
+
+	public void setAnimationHandler(AnimationHandler animationHandler) {
+		this.animationHandler = animationHandler;
+	}
+
+	public Hero getLastCaster() {
+		return lastCaster;
+	}
+
+	public void setLastCaster(Hero lastCaster) {
+		this.lastCaster = lastCaster;
 	}
 
 }

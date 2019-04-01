@@ -74,12 +74,24 @@ public abstract class Card implements Serializable,Cloneable{
 			handleManaCost(self);		
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
+			self.getPlayer().getGame().setLastCaster(self);
+			//card animations triggered here
+			
+			
 			//handle protection		not TESTED!	
 			for (int i = 0; i < self.getTarget().getBuffs().size(); i++) {
 				if (self.getTarget().getBuffs().get(i) instanceof GuardedBuff) {
 					self.getTargets().remove(self.getTarget());
 					self.addTarget(self.getTarget().getBuffs().get(i).onBeeingTargeted(self));
 				}				
+			}
+			if (isFriendly) {
+				//run friendly animation
+				self.getPlayer().getGame().getAnimationHandler().produceFriendlyAnimation(self);
+			}else {
+				//run forward move of caster 
+				//run backward move of target
+				self.getPlayer().getGame().getAnimationHandler().produceCombatAnimation(self, self.getTarget());
 			}
 			buildLogEntry(self);
 			applyEffect(self);

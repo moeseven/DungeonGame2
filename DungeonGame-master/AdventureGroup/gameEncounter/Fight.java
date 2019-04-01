@@ -154,10 +154,13 @@ public class Fight implements Serializable{
 								if (!targetMap.get(monster).get(monster.getHand().get(i)).isDead()) {
 									monster.setNewTarget(targetMap.get(monster).get(monster.getHand().get(i)));					
 									monster.getHand().get(i).cast(monster);
+									//wait for animation
 									i=i-1;
 								}
 							}
-						}														
+						}
+						//waiting for animations
+						
 //					    for(int i=0; i<turnOrder.get(turnOrderCounter).getHand().size(); i++){
 //					   
 //					    	LinkedList<Hero> targets = new LinkedList<Hero>();
