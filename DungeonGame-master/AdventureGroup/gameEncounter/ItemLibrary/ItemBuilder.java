@@ -58,7 +58,7 @@ public class ItemBuilder extends Item{
 	}	
 	public Item buildItem(String name,double power) {
 		Item_new item=new Item_new(power,map.get(name+".weight"), map.get(name+".goldValue"), map.get(name+".category"), map.get(name+".droppable"), map.get(name+".critChance"), map.get(name+".critDamage"), map.get(name+".attack"), map.get(name+".block"), map.get(name+".spell"), map.get(name+".accuracy"), map.get(name+".dodge"), map.get(name+".speed"), map.get(name+".draw"), map.get(name+".mana"), map.get(name+".thorns"),map.get(name+".armor"), map.get(name+".health"), map.get(name+".resistSpell"),map.get(name+".resistLightning"), map.get(name+".resistFire"), map.get(name+".resistCold"), map.get(name+".resistPoison"), map.get(name+".resistBleed"), map.get(name+".resistStun"), map.get(name+".resistStress"), map.get(name+".duration")
-				, map.get(name+".fireDmg"), map.get(name+".coldDmg"), map.get(name+".lightningDmg"), map.get(name+".bleedDmg")	, map.get(name+".poisonDmg"), map.get(name+".magicDmg"), map.get(name+".stunChance"),map.get(name+".itemClass"),map.get(name+".imageNumber"),map.get(name+".turnBlock"),name);				
+				, map.get(name+".fireDmg"), map.get(name+".coldDmg"), map.get(name+".lightningDmg"), map.get(name+".bleedDmg")	, map.get(name+".poisonDmg"), map.get(name+".magicDmg"), map.get(name+".stunChance"),map.get(name+".itemClass"),map.get(name+".imageNumber"),map.get(name+".turnBlock"),map.get(name+".bonusExp"),name);				
 		if (power<6) {
 			addSuffixes(item);
 		}		

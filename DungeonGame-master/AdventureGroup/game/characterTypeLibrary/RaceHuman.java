@@ -46,6 +46,7 @@ public class RaceHuman extends CharacterRace{
 		hero.setTrapDisarm(12);
 		hero.setStunChance(4);
 		hero.setArmor(3);
+		hero.setLearning(10);
 		//
 		hero.setMagicDmg(5);
 		hero.setCritDamage(10);

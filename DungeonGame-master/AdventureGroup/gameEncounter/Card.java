@@ -3,6 +3,7 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import GUI.animations.AnimationHandler;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 import gameEncounter.buffLibrary.GuardedBuff;
 

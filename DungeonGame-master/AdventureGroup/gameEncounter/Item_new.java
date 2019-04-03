@@ -46,6 +46,7 @@ public class Item_new extends Item implements Serializable{
 	protected int magicDmg=0;
 	protected int stunChance=0;
 	protected int turnBlock=0;
+	protected int bonusExp=0;
 	//
 	protected LinkedList<String> description;
 	protected String name="";
@@ -53,7 +54,7 @@ public class Item_new extends Item implements Serializable{
 	public Item_new(double power,String weight, String goldValue, String category, String droppable, String critChance,String critDamage,String attack, String block, String spell,
 			String accuracy, String dodge, String speed, String draw, String mana, String thorns, String armor, String health, String resistSpell,
 			String resistLightning,String resistFire, String resistCold, String resistPoison, String resistBleed, String resistStun, String resistStress,String duration,
-			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass,String imageNumber,String turnBlock, String name) {
+			String fireDmg, String coldDmg, String lightningDmg, String bleedDmg, String poisonDmg, String magicDmg, String stunChance,String itemClass,String imageNumber,String turnBlock,String bonusExp, String name) {
 		super();
 		this.name = name;
 		//random attributes here
@@ -172,6 +173,9 @@ public class Item_new extends Item implements Serializable{
 		if (turnBlock!=null) {
 			this.turnBlock= GameEquations.RandomizeItemStat(turnBlock,this,power);
 		}
+		if (bonusExp!=null) {
+			this.bonusExp= GameEquations.RandomizeItemStat(bonusExp,this,power);
+		}
 		if (numberOfModifications!=0) {
 			itemQuality=itemQuality/numberOfModifications;
 		}
@@ -231,6 +235,7 @@ public class Item_new extends Item implements Serializable{
 			magicDmg+=suffix.magicDmg;
 			stunChance+=suffix.stunChance;
 			turnBlock+=suffix.turnBlock;
+			bonusExp+=suffix.bonusExp;
 			//gold value change
 			goldValue=(int) (goldValue*(1+suffix.getItemQuality()));
 			//name change
@@ -275,6 +280,7 @@ public class Item_new extends Item implements Serializable{
 	    hero.setCritChance(hero.getCritChance()+critChance*fac);
 	    hero.setCritDamage(hero.getCritDamage()+critDamage*fac);
 	    hero.setTurnBlock(hero.getTurnBlock()+turnBlock*fac);
+	    hero.setLearning(hero.getLearning()+bonusExp*fac);
 	}
 	public void mod(Hero hero) {
 		modification(hero, 1);

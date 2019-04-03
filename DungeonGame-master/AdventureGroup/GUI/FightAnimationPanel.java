@@ -33,27 +33,33 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 	public int[] animationValues = new int[3];
 	private int animationValue1=0;
 	public FightAnimationPanel(final FightWindow fw) {
-		this.fw=fw;
-		
-	
+		this.fw=fw;			
 		fw.getGame().getAnimationHandler().attachFightAnimationPanel(this);
-		super.setPreferredSize(new Dimension(40,180));
+		super.setPreferredSize(new Dimension(40,180));		
+		generateRectanglesForLivingHeroes();
+		this.addMouseListener(new MyMouseListener());
+	}
+	private void generateRectanglesForLivingHeroes(){
+		//heroes as clickable rightangles
 		heroes= new RectangleClicker();
 		monsters= new RectangleClicker();
-		//heroes as clickable rightangles
 		int heroCount = fw.getGame().getPlayer().getHeroes().size();
 		for (int h = 0; h < heroCount ; h++) {
-			heroes.addRect(new AnimatedClickableRectangleHero(fw.getGame().getPlayer().getHeroes().get(h),(heroCount-h-1)*heroWidth, heroY, heroWidth, heroHeight));
+			if (!fw.getGame().getPlayer().getHeroes().get(h).isDead()) {
+				heroes.addRect(new AnimatedClickableRectangleHero(fw.getGame().getPlayer().getHeroes().get(h),(heroCount-h-1)*heroWidth, heroY, heroWidth, heroHeight));
+			}
 		}
 		for (int m = 0; m < fw.getGame().getRoom().getFight().getMonsters().size(); m++) {
-			monsters.addRect(new AnimatedClickableRectangleHero(fw.getGame().dungeonMaster.getHeroes().get(m),100+(m+heroCount)*heroWidth, heroY, heroWidth, heroHeight));
+			if (!fw.getGame().dungeonMaster.getHeroes().get(m).isDead()) {
+				monsters.addRect(new AnimatedClickableRectangleHero(fw.getGame().dungeonMaster.getHeroes().get(m),100+(m+heroCount)*heroWidth, heroY, heroWidth, heroHeight));		
+			}
 		}
-		this.addMouseListener(new MyMouseListener());
 	}
 	public void resetAnimation(){
 		for (int j = 0; j < animationValues.length; j++) {
 			animationValues[j]=0;
 		}
+		generateRectanglesForLivingHeroes();
 	}
 	private void paintStatus(Graphics g,int xShift, int yShift, Hero hero){
 		

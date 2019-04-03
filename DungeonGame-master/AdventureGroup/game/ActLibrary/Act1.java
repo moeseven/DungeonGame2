@@ -156,7 +156,7 @@ public class Act1 extends Act{
 		chest.setGold(chest.getGold()+50);
 		room.getInteractions().add(chest);
 		monster=new RaceGoblin(game);
-		for (int i = 1; i < 5; i++) {
+		for (int i = 4; i >=0; i--) {
 			room.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		room.setHasFight(true);
@@ -185,7 +185,7 @@ public class Act1 extends Act{
 		chest.setGold(chest.getGold()+20);
 		room.getInteractions().add(chest);
 		monster=new RaceGoblin(game);
-		for (int i = 1; i < 4; i++) {
+		for (int i = 3; i >=0; i--) {
 			room.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		room.setHasFight(true);
@@ -223,7 +223,7 @@ public class Act1 extends Act{
 		room=new EmptyRoom(game);
 		room.getInteractions().add(new Chest(game));
 		monster=new RaceGoblin(game);
-		for (int i = 1; i < 2; i++) {
+		for (int i = 2; i >=0; i--) {
 			room.addMonster(new Hero("", game.dungeonMaster,monster, monster.getPositionClasses(i).get((int) Math.min(monster.getPositionClasses(i).size()-1, Math.random()*monster.getPositionClasses(i).size()))));
 		}
 		room.setHasFight(true);

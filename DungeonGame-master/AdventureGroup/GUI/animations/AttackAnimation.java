@@ -14,10 +14,11 @@ public class AttackAnimation extends Animation implements ActionListener, Serial
 	public AttackAnimation(FightAnimationPanel jp) {
 		super(jp);
 		stepCount=40;max=60;velX=3;stepCount2=20;
+		//runAnimation();
 	}
+
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub		
+	public void cycleEvent() {
 		stepCount--;
 		if (stepCount<0) {
 			stepCount2--;
@@ -28,6 +29,7 @@ public class AttackAnimation extends Animation implements ActionListener, Serial
 			jp.repaint();
 			if (stepCount2<0) {				
 				timer1.stop();
+				keepRunning=false;
 				jp.resetAnimation();
 			}			
 		}else {
@@ -37,6 +39,7 @@ public class AttackAnimation extends Animation implements ActionListener, Serial
 			jp.animationValues[0]+=velX;
 			jp.repaint();
 		}
+		
 	}
 	
 }

@@ -93,6 +93,7 @@ public class GeneratorRandom implements Serializable{
 		heroQuirkPool.add(new SimpleMinded(game));
 		heroQuirkPool.add(new Sleeper(game));
 		heroQuirkPool.add(new Enchanter(game));
+		heroQuirkPool.add(new Talented(game));
 		////
 		heroRacePool=new LinkedList<CharacterRace>();
 		heroRacePool.add(new RaceHuman(game));

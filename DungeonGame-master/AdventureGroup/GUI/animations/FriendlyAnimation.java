@@ -13,10 +13,11 @@ public class FriendlyAnimation extends Animation implements ActionListener, Seri
 	public FriendlyAnimation(FightAnimationPanel jp) {
 		super(jp);
 		stepCount=20;max=20;velX=2;
+		//runAnimation();
 	}
+	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void cycleEvent() {
 		if (jp.animationValues[1]>max||jp.animationValues[1]<0) {
 			velX=-velX;
 		}
@@ -25,6 +26,7 @@ public class FriendlyAnimation extends Animation implements ActionListener, Seri
 		stepCount--;
 		if (stepCount<0) {				
 			timer1.stop();
+			keepRunning=false;
 			jp.resetAnimation();
 		}		
 	}

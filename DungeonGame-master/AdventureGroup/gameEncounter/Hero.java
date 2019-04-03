@@ -87,6 +87,7 @@ public class Hero implements Serializable{
 	protected int resistStun;
 	protected int resistStress;	
 	//
+	protected int learning=0;
 	protected int trapDisarm;
 	protected int baseHp;
 	protected int strength;
@@ -516,7 +517,8 @@ public class Hero implements Serializable{
 			tick.get(i).tick(this);
 		}
 	}
-	public void gainExp(int exp) {	
+	public void gainExp(int ep) {	
+		int exp=(int) (ep*(1+learning/100.0));
 		if (!isSummon) {
 			int expToNextLvl=GameEquations.experienceThresholdForLevelUp(level)-experience;
 			if(expToNextLvl<exp) {
@@ -1488,7 +1490,13 @@ public class Hero implements Serializable{
 	public void setLoot(LinkedList<Item> loot) {
 		this.loot = loot;
 	}
-
+	public int getLearning() {
+		return learning;
+	}
+	public void setLearning(int learning) {
+		this.learning = learning;
+	}
+	
 	
 	
 }

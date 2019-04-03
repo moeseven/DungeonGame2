@@ -42,13 +42,10 @@ public class MedicineMan extends RoomInteraction{
 	}
 	public boolean purchaseWoundHealing(Hero hero){
 		if (hero.getWounds()>0) {
-			if(game.getPlayer().getHeroes().contains(hero)) {
-				if(game.getPlayer().getGold()>=computeHealFee(hero)) {
-						game.getPlayer().gainGold(-computeHealFee(hero));
-						if (freeTreatments>0) {
-							freeTreatments--;
-						}
-						hero.heal(GameEquations.maxHealthCalc(hero));
+			if(game.getPlayer().getHeroes().contains(hero)&&hero.getWounds()>0) {
+				if(game.getPlayer().getGold()>=computeWoundHealFee(hero)) {
+						game.getPlayer().gainGold(-computeWoundHealFee(hero));
+						hero.setWounds(hero.getWounds()-1);
 						return true;
 				}
 			}
@@ -75,13 +72,17 @@ public class MedicineMan extends RoomInteraction{
 	}
 	public boolean purchaseHealing(Hero hero){
 		if (hero.getHp()<GameEquations.maxHealthCalc(hero)) {
-			if(game.getPlayer().getHeroes().contains(hero)&&hero.getWounds()>0) {
-				if(game.getPlayer().getGold()>=computeWoundHealFee(hero)) {
-						game.getPlayer().gainGold(-computeWoundHealFee(hero));
-						hero.setWounds(hero.getWounds()-1);
+			if(game.getPlayer().getHeroes().contains(hero)) {
+				if(game.getPlayer().getGold()>=computeHealFee(hero)) {
+						game.getPlayer().gainGold(-computeHealFee(hero));
+						if (freeTreatments>0) {
+							freeTreatments--;
+						}
+						hero.heal(GameEquations.maxHealthCalc(hero));
 						return true;
 				}
 			}
+			
 		}else {
 			game.log.addLine("allready at full health");
 		}
