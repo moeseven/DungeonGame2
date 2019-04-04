@@ -365,7 +365,10 @@ public class GuiRoom extends JPanel{
 							//hire
 							if(gw.getGame().getPlayer().addHero(hero)) {
 								tavern.getHeroes().remove(hero);
-							}					
+								gw.getGame().log.addLine(hero.getName()+" joined your Quest!");
+							}else {
+								gw.getGame().log.addLine("you cant field more than "+gw.getGame().getPlayer().getHeroes().size()+" heroes!");
+							}
 							if(tavern.getHeroes().size()>0) {
 								gw.getGame().getPlayer().setSelectedHero(tavern.getHeroes().getFirst());
 							}

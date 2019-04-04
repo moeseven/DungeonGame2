@@ -3,7 +3,7 @@ package gameEncounter;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import GUI.animations.AnimationHandler;
+import GUI.animations.*;
 import gameEncounter.ItemLibrary.usables.HealingPotion;
 import gameEncounter.buffLibrary.GuardedBuff;
 
@@ -76,7 +76,7 @@ public abstract class Card implements Serializable,Cloneable{
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
 			self.getPlayer().getGame().setLastCaster(self);
-			//card animations triggered here
+			
 			
 			
 			//handle protection		not TESTED!	
@@ -86,13 +86,16 @@ public abstract class Card implements Serializable,Cloneable{
 					self.addTarget(self.getTarget().getBuffs().get(i).onBeeingTargeted(self));
 				}				
 			}
+			//card animations triggered here
+			AnimationHandler ah=self.getPlayer().getGame().getAnimationHandler();
 			if (isFriendly) {
 				//run friendly animation
-				self.getPlayer().getGame().getAnimationHandler().produceFriendlyAnimation(self);
+				ah.addAnimation(new FriendlyAnimation(ah,ah.getAnimationIndexX(self)+1));
 			}else {
 				//run forward move of caster 
+				ah.addAnimation(new AttackingAnimation(ah,ah.getAnimationIndexX(self)));
 				//run backward move of target
-				self.getPlayer().getGame().getAnimationHandler().produceCombatAnimation(self, self.getTarget());
+				ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTarget())));
 			}
 			buildLogEntry(self);
 			applyEffect(self);

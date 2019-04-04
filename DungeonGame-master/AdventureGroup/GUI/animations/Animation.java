@@ -16,25 +16,32 @@ public abstract class Animation implements ActionListener, Serializable{
 	protected int stepCount;
 	protected int cycleTime;
 	protected boolean keepRunning;
-	protected FightAnimationPanel jp;
-	public Animation(FightAnimationPanel jp) {
-		this.jp=jp;
+	protected AnimationHandler ah;
+	protected int animationIndex;
+	public Animation(AnimationHandler ah,int animationIndex) {
+		this.ah=ah;
+		this.animationIndex=animationIndex;
 		cycleTime=5;
-		keepRunning=true;
-		timer1 = new Timer(cycleTime,this);
-		timer1.start();
-		
+		keepRunning=true;				
 	}
 	public void runAnimation() {
-		while(keepRunning) {
-			try {
-				Thread.sleep(cycleTime);
-				cycleEvent();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		timer1 = new Timer(cycleTime,this);
+		timer1.start();
+	}	
+	public void resetAnimation() {
+		timer1.stop();
+		ah.animationArray[animationIndex]=0;
+	}
+//	public void runAnimation() {
+//		while(keepRunning) {
+//			try {
+//				Thread.sleep(cycleTime);
+//				cycleEvent();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 //		Thread t= new MyThread();
 //		t.run();
 //		try {
@@ -43,7 +50,7 @@ public abstract class Animation implements ActionListener, Serializable{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		cycleEvent();

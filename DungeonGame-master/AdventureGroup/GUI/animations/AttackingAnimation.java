@@ -9,10 +9,10 @@ import javax.swing.Timer;
 
 import GUI.FightAnimationPanel;
 
-public class FriendlyAnimation extends Animation implements ActionListener, Serializable{
-	public FriendlyAnimation(AnimationHandler ah, int animationIndex) {
+public class AttackingAnimation extends Animation implements ActionListener, Serializable{
+	public AttackingAnimation(AnimationHandler ah, int animationIndex) {
 		super(ah, animationIndex);
-		stepCount=20;max=20;velX=2;
+		stepCount=40;max=60;velX=3;
 		//runAnimation();
 	}
 	
@@ -25,6 +25,7 @@ public class FriendlyAnimation extends Animation implements ActionListener, Seri
 		stepCount--;
 		if (stepCount<0) {				
 			resetAnimation();
+			//jp.resetAnimation();
 		}		
 	}
 	

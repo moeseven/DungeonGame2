@@ -987,7 +987,12 @@ public class Hero implements Serializable{
 	}
 	//
 	public int getPosition() {
-		return player.getHeroes().indexOf(this);
+		if (player.getHeroes().contains(this)) {
+			return player.getHeroes().indexOf(this);
+		}else {
+			System.out.println("getPosition() is not applicable on "+getName()+"!");
+			return 0;
+		}		
 	}
 	public void addStartOfFightEffect(CardEffect effect) {
 		startOfFightEffects.add(effect);

@@ -394,6 +394,9 @@ public class Item_new extends Item implements Serializable{
 		if (turnBlock!=0) {
 			description.add("shielding: +"+turnBlock);
 		}
+		if (bonusExp!=0) {
+			description.add("learning: +"+bonusExp+"%");
+		}
 		//
 	} 
 	

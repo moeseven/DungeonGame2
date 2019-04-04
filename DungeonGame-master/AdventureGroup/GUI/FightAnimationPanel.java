@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import GUI.animations.Animation;
+import GUI.animations.AnimationHandler;
 import GUI.grafics.StaticImageLoader;
 import game.DungeonMaster;
 import gameEncounter.GameEquations;
@@ -23,21 +24,24 @@ import gameEncounter.Hero;
 import tools.ClickableRectangle;
 import tools.RectangleClicker;
 
-public class FightAnimationPanel extends JPanel implements Serializable{
+public class FightAnimationPanel extends JPanel implements ActionListener{
 	private FightWindow fw;
+	private AnimationHandler ah;
 	private RectangleClicker heroes;
 	private RectangleClicker monsters;
 	private final int heroWidth=120;
 	private final int heroHeight=170;
 	private final int heroY=30; //y positon of hero in panel
-	public int[] animationValues = new int[3];
-	private int animationValue1=0;
+	private Timer animationTimer;
+	private int cycleTime=5;
 	public FightAnimationPanel(final FightWindow fw) {
-		this.fw=fw;			
-		fw.getGame().getAnimationHandler().attachFightAnimationPanel(this);
-		super.setPreferredSize(new Dimension(40,180));		
+		this.fw=fw;	
+		this.ah= fw.getGame().getAnimationHandler();
+		super.setPreferredSize(new Dimension(40,220));		
 		generateRectanglesForLivingHeroes();
 		this.addMouseListener(new MyMouseListener());
+		animationTimer = new Timer(cycleTime,this);
+		animationTimer.start();
 	}
 	private void generateRectanglesForLivingHeroes(){
 		//heroes as clickable rightangles
@@ -55,14 +59,35 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 			}
 		}
 	}
-	public void resetAnimation(){
-		for (int j = 0; j < animationValues.length; j++) {
-			animationValues[j]=0;
-		}
-		generateRectanglesForLivingHeroes();
+	public void stopAnimations() {
+		animationTimer.stop();
 	}
-	private void paintStatus(Graphics g,int xShift, int yShift, Hero hero){
-		
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		ah.runAnimations();
+		repaint();
+		generateRectanglesForLivingHeroes();		
+	}
+//	public void resetAnimation(){
+////		for (int j = 0; j < animationValues.length; j++) {
+////			animationValues[j]=0;
+////		}
+//		
+//	}
+	private void paintHeroRect(Graphics g,AnimatedClickableRectangleHero rect){
+		Hero hero = rect.getHero();
+		int xShift,yShift;
+		if (hero.isDead()) {
+			xShift=rect.getX();
+			yShift=rect.getY();
+		}else {
+			if (hero.getPlayer() instanceof DungeonMaster) {
+				xShift=rect.getX()-ah.animationArray[ah.getAnimationIndexX(hero)];
+			}else {
+				xShift=rect.getX()+ah.animationArray[ah.getAnimationIndexX(hero)];
+			}
+			yShift = rect.getY()+ah.animationArray[ah.getAnimationIndexX(hero)+1];
+		}				
 		g.drawImage(StaticImageLoader.getImage(hero.getImageNumber()).getScaledInstance(60*hero.getImageScale(), 51*hero.getImageScale(), hero.getImageScale()),-40+xShift,yShift,null);
 		if(fw.getGame().getPlayer().getSelectedHero()==hero){
 			g.setColor(Color.green);
@@ -124,18 +149,18 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 		}
 	}
 	
-	public int[] getAnimationValues() {
-		return animationValues;
-	}
-	public void setAnimationValues(int[] animationValues) {
-		this.animationValues = animationValues;
-	}
-	public int getAnimationValue1() {
-		return animationValue1;
-	}
-	public void setAnimationValue1(int animationValue1) {
-		this.animationValue1 = animationValue1;
-	}
+//	public int[] getAnimationValues() {
+//		return animationValues;
+//	}
+//	public void setAnimationValues(int[] animationValues) {
+//		this.animationValues = animationValues;
+//	}
+//	public int getAnimationValue1() {
+//		return animationValue1;
+//	}
+//	public void setAnimationValue1(int animationValue1) {
+//		this.animationValue1 = animationValue1;
+//	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//paint all fight participants
@@ -143,23 +168,11 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 		AnimatedClickableRectangleHero rect;
 		for (int h = 0; h < heroCount; h++) {
 			rect=(AnimatedClickableRectangleHero) heroes.getRectAngles().get(h);
-			if (rect.getHero().equals(fw.getGame().getLastCaster())) {
-				paintStatus(g,rect.getX()+animationValues[0],animationValues[1], rect.getHero());
-			}else if (fw.getGame().getLastCaster().getTargets().contains(rect.getHero())) {
-				paintStatus(g,rect.getX()-animationValues[2],0, rect.getHero());
-			} else{
-				paintStatus(g,rect.getX(),0, rect.getHero());
-			}			
+			paintHeroRect(g,rect);			
 		}
 		for (int m = 0; m < monsters.getRectAngles().size(); m++) {
 			rect=(AnimatedClickableRectangleHero) monsters.getRectAngles().get(m);
-			if (rect.getHero().equals(fw.getGame().getLastCaster())) {
-				paintStatus(g,rect.getX()-animationValues[0],animationValues[1], rect.getHero());
-			}else if (fw.getGame().getLastCaster().getTargets().contains(rect.getHero())) {
-				paintStatus(g,rect.getX()+animationValues[2],0, rect.getHero());
-			} else{
-				paintStatus(g,rect.getX(),0, rect.getHero());
-			}		
+			paintHeroRect(g, rect);		
 		}
 		
 	}
@@ -175,11 +188,11 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 	}
 	private class AnimatedClickableRectangleHero extends ClickableRectangle{
 		private Hero hero;
-		private boolean runningAnimation;
+		private LinkedList<Animation> animations;
 		public AnimatedClickableRectangleHero(Hero hero, int x, int y, int length, int height) {
 			super(hero.getName(), x, y, length, height);
 			this.hero=hero;
-			runningAnimation=true;
+			animations=new LinkedList<Animation>();
 		}
 
 		@Override
@@ -204,14 +217,6 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 			
 		}
 
-		public boolean isRunningAnimation() {
-			return runningAnimation;
-		}
-
-		public void setRunningAnimation(boolean runningAnimation) {
-			this.runningAnimation = runningAnimation;
-		}
-
 		public Hero getHero() {
 			return hero;
 		}
@@ -219,7 +224,15 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 		public void setHero(Hero hero) {
 			this.hero = hero;
 		}
-			
+		public LinkedList<Animation> getAnimations() {
+			return animations;
+		}
+		public void addAnimation(Animation animation) {
+			animations.add(animation);
+		}
+		public void runAnimation() {
+			//TODO
+		}
 	}
 //public HeroFightComponent(FightWindow fw, Hero hero) {
 //	super(hero, fw.getGame());
@@ -231,6 +244,7 @@ public class FightAnimationPanel extends JPanel implements Serializable{
 //	setLayout(new BorderLayout());
 //	setVisible(true);
 //}
+
 
  
 }
