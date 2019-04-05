@@ -94,6 +94,8 @@ public abstract class Card implements Serializable,Cloneable{
 			}else {
 				//run forward move of caster 
 				ah.addAnimation(new AttackingAnimation(ah,ah.getAnimationIndexX(self)));
+				//missile test not working yet
+				//ah.addAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), 260));
 				//run backward move of target
 				ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTarget())));
 			}

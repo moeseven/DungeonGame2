@@ -31,6 +31,8 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 	private RectangleClicker monsters;
 	private final int heroWidth=120;
 	private final int heroHeight=170;
+	private final int heroMonsterSpace=100;
+	private final int missileHeight=55;
 	private final int heroY=30; //y positon of hero in panel
 	private Timer animationTimer;
 	private int cycleTime=5;
@@ -55,7 +57,7 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 		}
 		for (int m = 0; m < fw.getGame().getRoom().getFight().getMonsters().size(); m++) {
 			if (!fw.getGame().dungeonMaster.getHeroes().get(m).isDead()) {
-				monsters.addRect(new AnimatedClickableRectangleHero(fw.getGame().dungeonMaster.getHeroes().get(m),100+(m+heroCount)*heroWidth, heroY, heroWidth, heroHeight));		
+				monsters.addRect(new AnimatedClickableRectangleHero(fw.getGame().dungeonMaster.getHeroes().get(m),heroMonsterSpace+(m+heroCount)*heroWidth, heroY, heroWidth, heroHeight));		
 			}
 		}
 	}
@@ -66,14 +68,13 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		ah.runAnimations();
 		repaint();
-		generateRectanglesForLivingHeroes();		
+		if (fw.getGame().getRoom().getFight().isFightOver()) {
+			animationTimer.stop();
+		}else {
+			generateRectanglesForLivingHeroes();	
+		}
+		
 	}
-//	public void resetAnimation(){
-////		for (int j = 0; j < animationValues.length; j++) {
-////			animationValues[j]=0;
-////		}
-//		
-//	}
 	private void paintHeroRect(Graphics g,AnimatedClickableRectangleHero rect){
 		Hero hero = rect.getHero();
 		int xShift,yShift;
@@ -148,19 +149,23 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 			g.drawOval(47+xShift, 47+yShift, 20, 15);
 		}
 	}
-	
-//	public int[] getAnimationValues() {
-//		return animationValues;
-//	}
-//	public void setAnimationValues(int[] animationValues) {
-//		this.animationValues = animationValues;
-//	}
-//	public int getAnimationValue1() {
-//		return animationValue1;
-//	}
-//	public void setAnimationValue1(int animationValue1) {
-//		this.animationValue1 = animationValue1;
-//	}
+	private void paintMissiles(Graphics g, AnimatedClickableRectangleHero rect) {
+		for (int i = 2; i < ah.animationArray.length; i+=3) {
+			if (ah.animationArray[i]!=0) {
+				int missileImage = ah.getMissileImage()[ah.getAnimationIndexX(rect.getHero())];
+				g.drawImage(StaticImageLoader.getImage(missileImage).getScaledInstance(60, 51, 1),(int) (-40+ah.animationArray[i]/100.0*computeShootingDistance(rect.getHero(), rect.getHero().getTarget())),missileHeight,null);
+			}
+		}
+	}
+	private int computeShootingDistance(Hero shooter, Hero shot) {
+		int shootingDistance; int heroCount=shooter.getPlayer().getGame().getPlayer().getHeroes().size();
+		if (shooter.getPlayer() instanceof DungeonMaster) {
+			shootingDistance=(heroCount-shot.getPosition()-1)*heroWidth-(heroMonsterSpace+(shooter.getPosition()+heroCount)*heroWidth);
+		}else {
+			shootingDistance=heroMonsterSpace+(shot.getPosition()+heroCount)*heroWidth-(heroCount-shooter.getPosition()-1)*heroWidth;
+		}
+		return shootingDistance;
+	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//paint all fight participants
@@ -173,6 +178,15 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 		for (int m = 0; m < monsters.getRectAngles().size(); m++) {
 			rect=(AnimatedClickableRectangleHero) monsters.getRectAngles().get(m);
 			paintHeroRect(g, rect);		
+		}
+		//paint missile animations
+		for (int h = 0; h < heroCount; h++) {
+			rect=(AnimatedClickableRectangleHero) heroes.getRectAngles().get(h);
+			paintMissiles(g,rect);			
+		}
+		for (int m = 0; m < monsters.getRectAngles().size(); m++) {
+			rect=(AnimatedClickableRectangleHero) monsters.getRectAngles().get(m);
+			paintMissiles(g,rect);	
 		}
 		
 	}
@@ -234,16 +248,6 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 			//TODO
 		}
 	}
-//public HeroFightComponent(FightWindow fw, Hero hero) {
-//	super(hero, fw.getGame());
-//	this.hero=hero;
-//	this.fw=fw;
-//	super.setPreferredSize(new Dimension(width,170));
-//	ml = new MyMouseListener();
-//	super.addMouseListener(ml);
-//	setLayout(new BorderLayout());
-//	setVisible(true);
-//}
 
 
  

@@ -13,7 +13,6 @@ public class AttackingAnimation extends Animation implements ActionListener, Ser
 	public AttackingAnimation(AnimationHandler ah, int animationIndex) {
 		super(ah, animationIndex);
 		stepCount=40;max=60;velX=3;
-		//runAnimation();
 	}
 	
 	@Override
@@ -25,7 +24,6 @@ public class AttackingAnimation extends Animation implements ActionListener, Ser
 		stepCount--;
 		if (stepCount<0) {				
 			resetAnimation();
-			//jp.resetAnimation();
 		}		
 	}
 	

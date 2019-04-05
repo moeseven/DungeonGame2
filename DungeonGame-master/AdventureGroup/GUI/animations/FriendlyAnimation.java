@@ -12,8 +12,7 @@ import GUI.FightAnimationPanel;
 public class FriendlyAnimation extends Animation implements ActionListener, Serializable{
 	public FriendlyAnimation(AnimationHandler ah, int animationIndex) {
 		super(ah, animationIndex);
-		stepCount=20;max=20;velX=2;
-		//runAnimation();
+		stepCount=10;max=10;velX=1;
 	}
 	
 	@Override

@@ -13,7 +13,6 @@ public class GettingHitAnimation extends Animation implements ActionListener, Se
 	public GettingHitAnimation(AnimationHandler ah, int animationIndex) {
 		super(ah, animationIndex);
 		stepCount=20;max=-30;velX=-3;
-		//runAnimation();
 	}
 	
 	@Override
