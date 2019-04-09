@@ -9,6 +9,7 @@ import gameEncounter.buffLibrary.GuardedBuff;
 
 public abstract class Card implements Serializable,Cloneable{
 	protected int imageNumber=99;
+	protected int missileImage=0;
 	protected int critChance=0;
 	protected int manaCost;
 	protected boolean xCostCard=false;
@@ -94,8 +95,10 @@ public abstract class Card implements Serializable,Cloneable{
 			}else {
 				//run forward move of caster 
 				ah.addAnimation(new AttackingAnimation(ah,ah.getAnimationIndexX(self)));
-				//missile test not working yet
-				//ah.addAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), 260));
+				//missile
+				if (missileImage!=0) {
+					ah.addMissileAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), missileImage, self, self.getTarget()));
+				}				
 				//run backward move of target
 				ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTarget())));
 			}

@@ -7,22 +7,25 @@ import java.io.Serializable;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import GUI.FightAnimationPanel;
+import game.DungeonMaster;
 import gameEncounter.Hero;
 
 public class MissileAnimation extends Animation implements ActionListener, Serializable{
 	protected int missileImage;
-	public MissileAnimation(AnimationHandler ah, int animationIndex, int missileImage) {
+	protected Hero shooter,shot;
+	public MissileAnimation(AnimationHandler ah, int animationIndex, int missileImage, Hero shooter, Hero shot) {
 		super(ah, animationIndex+2);
-		velX=4;
-		max=100;
-		stepCount=25;
-		ah.missileImage[animationIndex]=missileImage;
+		//negative value is monsters 3,2,1,0  -1,-2,-3,-4,-5
+		this.shooter=shooter;
+		this.shot= shot;
+		this.missileImage=missileImage;
+		velX=1;
+		max=100; 
+		stepCount=100;		
 	}
-	
 	@Override
 	public void cycleEvent() {
-		ah.animationArray[animationIndex]+=velX;
+		currentX+=velX;		
 		stepCount--;
 		if (stepCount<0) {				
 			resetAnimation();
@@ -35,6 +38,18 @@ public class MissileAnimation extends Animation implements ActionListener, Seria
 
 	public void setMissileImage(int missileImage) {
 		this.missileImage = missileImage;
+	}
+	public Hero getShooter() {
+		return shooter;
+	}
+	public void setShooter(Hero shooter) {
+		this.shooter = shooter;
+	}
+	public Hero getShot() {
+		return shot;
+	}
+	public void setShot(Hero shot) {
+		this.shot = shot;
 	}
 	
 }

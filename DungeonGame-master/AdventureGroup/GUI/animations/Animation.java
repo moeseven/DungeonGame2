@@ -15,14 +15,16 @@ public abstract class Animation implements ActionListener, Serializable{
 	protected int max;
 	protected int stepCount;
 	protected int cycleTime;
-	protected boolean keepRunning;
+	protected boolean over;
 	protected AnimationHandler ah;
 	protected int animationIndex;
+	protected int currentX=0;//0-100% multiply value by distance when used in gui
+	protected int currentY=0;
 	public Animation(AnimationHandler ah,int animationIndex) {
 		this.ah=ah;
 		this.animationIndex=animationIndex;
 		cycleTime=5;
-		keepRunning=true;				
+						
 	}
 	public void runAnimation() {
 		timer1 = new Timer(cycleTime,this);
@@ -30,51 +32,27 @@ public abstract class Animation implements ActionListener, Serializable{
 	}	
 	public void resetAnimation() {
 		timer1.stop();
+		over=true;
 		ah.animationArray[animationIndex]=0;
 	}
-//	public void runAnimation() {
-//		while(keepRunning) {
-//			try {
-//				Thread.sleep(cycleTime);
-//				cycleEvent();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		Thread t= new MyThread();
-//		t.run();
-//		try {
-//			t.join();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		cycleEvent();
 	}
 	public abstract void cycleEvent();
-	private class MyThread extends Thread{
-		private MyThread() {
-			
-		}
-
-		@Override
-		public void run() {
-			super.run();
-			while(keepRunning) {
-				try {
-					sleep(cycleTime);
-					cycleEvent();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			
-		}
+	//
+	public int getCurrentX() {
+		return currentX;
 	}
+	public void setCurrentX(int currentX) {
+		this.currentX = currentX;
+	}
+	public int getCurrentY() {
+		return currentY;
+	}
+	public void setCurrentY(int currentY) {
+		this.currentY = currentY;
+	}
+	
 }

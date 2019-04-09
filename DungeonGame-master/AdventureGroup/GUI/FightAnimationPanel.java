@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -17,6 +21,7 @@ import javax.swing.Timer;
 
 import GUI.animations.Animation;
 import GUI.animations.AnimationHandler;
+import GUI.animations.MissileAnimation;
 import GUI.grafics.StaticImageLoader;
 import game.DungeonMaster;
 import gameEncounter.GameEquations;
@@ -36,6 +41,7 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 	private final int heroY=30; //y positon of hero in panel
 	private Timer animationTimer;
 	private int cycleTime=5;
+	private int endAnimationCounter=25;
 	public FightAnimationPanel(final FightWindow fw) {
 		this.fw=fw;	
 		this.ah= fw.getGame().getAnimationHandler();
@@ -61,15 +67,28 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 			}
 		}
 	}
-	public void stopAnimations() {
-		animationTimer.stop();
+	public int getXPosition(Hero hero){
+		int x=0;
+		int pos= hero.getPosition();
+		int heroCount = fw.getGame().getPlayer().getHeroes().size();
+		if (hero.getPlayer() instanceof DungeonMaster) {
+			x=heroMonsterSpace+(pos+heroCount)*heroWidth;
+		}else {
+			x=(heroCount-pos-1)*heroWidth;
+		}
+		return x;
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		ah.runAnimations();
 		repaint();
 		if (fw.getGame().getRoom().getFight().isFightOver()) {
-			animationTimer.stop();
+			endAnimationCounter--;
+			if (endAnimationCounter<0) {
+				animationTimer.stop();
+				endAnimationCounter=25;
+			}
+			
 		}else {
 			generateRectanglesForLivingHeroes();	
 		}
@@ -149,12 +168,18 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 			g.drawOval(47+xShift, 47+yShift, 20, 15);
 		}
 	}
-	private void paintMissiles(Graphics g, AnimatedClickableRectangleHero rect) {
-		for (int i = 2; i < ah.animationArray.length; i+=3) {
-			if (ah.animationArray[i]!=0) {
-				int missileImage = ah.getMissileImage()[ah.getAnimationIndexX(rect.getHero())];
-				g.drawImage(StaticImageLoader.getImage(missileImage).getScaledInstance(60, 51, 1),(int) (-40+ah.animationArray[i]/100.0*computeShootingDistance(rect.getHero(), rect.getHero().getTarget())),missileHeight,null);
-			}
+	private void paintMissiles(Graphics g) {
+		for (int i = 0; i < ah.getMissiles().size(); i++) {
+				MissileAnimation missile= ah.getMissiles().get(i);
+				Image mirror=StaticImageLoader.getImage(missile.getMissileImage());
+				
+				if (missile.getShooter().getPlayer() instanceof DungeonMaster) {
+					AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+					tx.translate(-mirror.getWidth(null), 0);
+					AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+					mirror = op.filter((BufferedImage) mirror, null);
+				}
+				g.drawImage(mirror.getScaledInstance(60*missile.getShooter().getImageScale(), 51*missile.getShooter().getImageScale(), missile.getShooter().getImageScale()),(int) (-40+getXPosition(missile.getShooter())+missile.getCurrentX()/100.0*computeShootingDistance(missile.getShooter(), missile.getShot())),missileHeight,null);
 		}
 	}
 	private int computeShootingDistance(Hero shooter, Hero shot) {
@@ -180,15 +205,7 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 			paintHeroRect(g, rect);		
 		}
 		//paint missile animations
-		for (int h = 0; h < heroCount; h++) {
-			rect=(AnimatedClickableRectangleHero) heroes.getRectAngles().get(h);
-			paintMissiles(g,rect);			
-		}
-		for (int m = 0; m < monsters.getRectAngles().size(); m++) {
-			rect=(AnimatedClickableRectangleHero) monsters.getRectAngles().get(m);
-			paintMissiles(g,rect);	
-		}
-		
+		paintMissiles(g);		
 	}
 	private class MyMouseListener extends MouseAdapter{
 		public void mousePressed(MouseEvent e){	

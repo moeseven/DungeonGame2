@@ -21,7 +21,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 
 	public Card_new(String manaCost, String legalCastPositions, String legalTargetPositions, String name,
 			String accuracy, String critChance, String block, String attackDamage, String spellDamage, String effect,
-			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5, String castConditions, String drawEffect) {
+			String effect2, String effect3,String isFriendly, String text, String effect4, String effect5, String castConditions, String drawEffect, String missileImage) {
 		super();
 		assert manaCost!=null;
 		if (manaCost!=null) {
@@ -56,6 +56,9 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		if (spellDamage!=null) {
 			this.spellDamage = Integer.parseInt(spellDamage);
 		}
+		if (missileImage!=null) {
+			this.missileImage= Integer.parseInt(missileImage);
+		}
 		//
 		if (effect!=null) {
 			allEffects.add(EffectBuilder.buildEffect(new EffectParameters(effect)));
@@ -78,6 +81,7 @@ public class Card_new extends Card implements Serializable,Cloneable{
 		if (castConditions!=null) {
 			this.castConditions.add(CastConditionBuilder.buildCastCondition(castConditions));
 		}
+
 		//
 		if (isFriendly!=null) {
 			if (Integer.parseInt(isFriendly)!=0) {

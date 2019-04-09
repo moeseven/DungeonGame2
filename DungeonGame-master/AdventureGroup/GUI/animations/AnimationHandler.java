@@ -14,16 +14,19 @@ public class AnimationHandler implements Serializable{
 	private int missileAnimations =1;
 	//hero1X(index0), hero1Y, hero2X ... heroLastY(index19), monster1X(index20), monster2X,..
 	public int[] animationArray;// TODO put the animation itself in the array
-	public int[] missileImage;
 	private LinkedList<Animation> animationStack;
+	private LinkedList<MissileAnimation> missiles;
 	public AnimationHandler(Game game){
 		this.game=game;
 		animationArray= new int[3*maxFightParticipants];
-		missileImage= new int[3*maxFightParticipants];
 		animationStack= new LinkedList<Animation>();
+		missiles= new LinkedList<MissileAnimation>();
 	}
 	public void addAnimation(Animation animation) {
 		animationStack.add(animation);
+	}
+	public void addMissileAnimation(MissileAnimation animation) {
+		missiles.add(animation);
 	}
 	public void runAnimations() {		
 		if (animationStack.size()>0) {
@@ -32,7 +35,19 @@ public class AnimationHandler implements Serializable{
 			}else {
 				animationStack.add(animationStack.removeFirst());				
 			}
-		}		
+		}	
+		if (missiles.size()>0) {
+			missiles.getFirst().runAnimation();
+			missiles.add(missiles.removeFirst());
+			deleteFinishedAnimations();
+		}
+	}
+	public void deleteFinishedAnimations() {
+		for (int i = 0; i < missiles.size(); i++) {
+			if (missiles.get(i).over) {
+				missiles.remove(i);
+			}
+		}
 	}
 	public int getAnimationIndexX(Hero hero) {//use this for animation 
 		if (hero.getPlayer() instanceof DungeonMaster) {
@@ -61,11 +76,11 @@ public class AnimationHandler implements Serializable{
 	public void setMissileAnimations(int missileAnimations) {
 		this.missileAnimations = missileAnimations;
 	}
-	public int[] getMissileImage() {
-		return missileImage;
+	public LinkedList<MissileAnimation> getMissiles() {
+		return missiles;
 	}
-	public void setMissileImage(int[] missileImage) {
-		this.missileImage = missileImage;
+	public void setMissiles(LinkedList<MissileAnimation> missiles) {
+		this.missiles = missiles;
 	}
 	
 }
