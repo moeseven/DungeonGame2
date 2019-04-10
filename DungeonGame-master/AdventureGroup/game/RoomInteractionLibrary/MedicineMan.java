@@ -56,7 +56,7 @@ public class MedicineMan extends RoomInteraction{
 		return false;
 	}
 	public boolean purchaseStressHealing(Hero hero){
-		if (hero.getStress()>0) {
+		if (hero.getStress()<hero.getStressCap()) {
 			if(game.getPlayer().getHeroes().contains(hero)) {
 				if(game.getPlayer().getGold()>=computeStressHealFee(hero)) {
 						game.getPlayer().gainGold(-computeStressHealFee(hero));
@@ -103,6 +103,7 @@ public class MedicineMan extends RoomInteraction{
 			if (giveRatFurReward) {
 				game.getPlayer().addItemtoInventory(new PotionOfHealth());
 				game.getAvailableQuests().remove(ratFurQuest);
+			
 				giveRatFurReward=false;
 			}else {
 				if (!game.getAvailableQuests().contains(ratFurQuest)&&!ratFurQuest.isFinished()) {
@@ -148,18 +149,15 @@ public class MedicineMan extends RoomInteraction{
 				game.log.addLine("You brought the ratFur requested by the medicine man. Visit him to claim your reward!");
 				giveRatFurReward=true;
 				int furToRemove=5;
-				while(furToRemove>5) {
 				for (int i = 0; i < player.getInventory().size(); i++) {
 					if (player.getInventory().get(i).getItemClass().equals("ratFur")) {
 						game.getPlayer().getInventory().remove(player.getInventory().get(i));
 						furToRemove--;
 					}
-				}			
+				}	
 				giveReward(player);
 				finished=true;
 				return true;
-			}
-				
 			}			
 			return false;
 		}

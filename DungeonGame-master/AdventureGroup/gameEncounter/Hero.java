@@ -982,7 +982,7 @@ public class Hero implements Serializable{
 			intelligence+=value;
 			return true;
 		}
-		System.out.println("stat resolve error!");
+		System.out.println("stat resolve error:"+ stat+"!");
 		return false;
 	}
 	//

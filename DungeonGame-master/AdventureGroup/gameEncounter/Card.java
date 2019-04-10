@@ -76,10 +76,7 @@ public abstract class Card implements Serializable,Cloneable{
 			handleManaCost(self);		
 			self.getHand().remove(this);
 			self.getDiscardPile().add(this);
-			self.getPlayer().getGame().setLastCaster(self);
-			
-			
-			
+			self.getPlayer().getGame().setLastCaster(self);					
 			//handle protection		not TESTED!	
 			for (int i = 0; i < self.getTarget().getBuffs().size(); i++) {
 				if (self.getTarget().getBuffs().get(i) instanceof GuardedBuff) {
@@ -87,6 +84,8 @@ public abstract class Card implements Serializable,Cloneable{
 					self.addTarget(self.getTarget().getBuffs().get(i).onBeeingTargeted(self));
 				}				
 			}
+			
+			buildLogEntry(self);
 			//card animations triggered here
 			AnimationHandler ah=self.getPlayer().getGame().getAnimationHandler();
 			if (isFriendly) {
@@ -95,14 +94,15 @@ public abstract class Card implements Serializable,Cloneable{
 			}else {
 				//run forward move of caster 
 				ah.addAnimation(new AttackingAnimation(ah,ah.getAnimationIndexX(self)));
-				//missile
-				if (missileImage!=0) {
-					ah.addMissileAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), missileImage, self, self.getTarget()));
-				}				
-				//run backward move of target
-				ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTarget())));
-			}
-			buildLogEntry(self);
+				for (int i = 0; i < self.getTargets().size(); i++) {
+					//missile
+					if (missileImage!=0) {
+						ah.addMissileAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), missileImage, self, self.getTargets().get(i)));
+					}				
+					//run backward move of target
+					ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTargets().get(i))));					
+					}
+				}
 			applyEffect(self);
 			self.setCardsPlayedThisRound(self.getCardsPlayedThisRound()+1);
 			if (self.getHand().size()>0) {
