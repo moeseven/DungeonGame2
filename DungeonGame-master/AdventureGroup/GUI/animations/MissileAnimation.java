@@ -20,8 +20,8 @@ public class MissileAnimation extends Animation implements ActionListener, Seria
 		this.shot= shot;
 		this.missileImage=missileImage;
 		velX=1;
-		max=100; 
-		stepCount=100;		
+		max=150; 
+		stepCount=150;		
 	}
 	@Override
 	public void cycleEvent() {

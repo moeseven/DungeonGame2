@@ -94,21 +94,16 @@ public abstract class Card implements Serializable,Cloneable{
 			}else {
 				//run forward move of caster 
 				ah.addAnimation(new AttackingAnimation(ah,ah.getAnimationIndexX(self)));
-				for (int i = 0; i < self.getTargets().size(); i++) {
-					//missile
-					if (missileImage!=0) {
-						ah.addMissileAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), missileImage, self, self.getTargets().get(i)));
-					}				
-					//run backward move of target
-					ah.addAnimation(new GettingHitAnimation(ah,ah.getAnimationIndexX(self.getTargets().get(i))));					
-					}
+				if (missileImage!=0) {//missile
+						ah.addMissileAnimation(new MissileAnimation(ah, ah.getAnimationIndexX(self), missileImage, self, self.getTarget()));
 				}
+			}
 			applyEffect(self);
 			self.setCardsPlayedThisRound(self.getCardsPlayedThisRound()+1);
 			if (self.getHand().size()>0) {
 				self.setSelectedCard(self.getHand().getFirst());
 			}			
-		}		
+		}
 	}
 	public abstract boolean extraCastConditions(Hero hero);
 	public abstract boolean applyEffect(Hero self);// here happens the magic

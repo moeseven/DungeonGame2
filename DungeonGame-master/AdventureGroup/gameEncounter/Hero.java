@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import GUI.animations.DodgeAnimation;
+import GUI.animations.GettingHitAnimation;
+import GUI.animations.MissileAnimation;
 import game.CharacterClass;
 import game.CharacterRace;
 import game.DungeonMaster;
@@ -312,9 +315,12 @@ public class Hero implements Serializable{
 	}
 	//Cast missile spell
 	public boolean castMissileSpellOnHero(Hero hero, Card card) {
-		if(!GameEquations.dodge(this, hero,card)) {
+		if(!GameEquations.dodge(this, hero,card)) {			//run backward move of target
+			player.getGame().getAnimationHandler().addAnimation(new GettingHitAnimation(player.getGame().getAnimationHandler(),player.getGame().getAnimationHandler().getAnimationIndexX(hero)));	
 			return true;			
-		}else {
+		}else {				
+
+			player.getGame().getAnimationHandler().addAnimation(new DodgeAnimation(player.getGame().getAnimationHandler(),player.getGame().getAnimationHandler().getAnimationIndexX(hero)));					
 			return false;
 		}
 	}
@@ -334,8 +340,10 @@ public class Hero implements Serializable{
 	//Step 1: check if attack hits
 	public boolean attackHero(Hero hero, Card card) {
 		if(!GameEquations.dodge(this, hero,card)) {
+			player.getGame().getAnimationHandler().addAnimation(new GettingHitAnimation(player.getGame().getAnimationHandler(),player.getGame().getAnimationHandler().getAnimationIndexX(hero)));	
 			return true;			
 		}else {
+			player.getGame().getAnimationHandler().addAnimation(new DodgeAnimation(player.getGame().getAnimationHandler(),player.getGame().getAnimationHandler().getAnimationIndexX(hero)));	
 			return false;
 		}		
 	}
