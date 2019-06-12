@@ -42,7 +42,21 @@ public class HeroInventoryPaintComponent extends JComponent{
 			//rectangles
 			rc=new RectangleClicker();
 			//Inventory
-			rc.addRect(new ClickableRectangle("search inventory",305,120,300,20) {
+			rc.addRect(new ClickableRectangle("search inventory",305,120,110,20) {
+				@Override
+				public void onClick(MouseEvent e) {
+				}
+				@Override
+				public void updateCaption() {
+					caption=new LinkedList<>();
+					if (gw.getGame().getPlayer().getInventory().size()<1) {
+						caption.add("empty inventory");
+					}else {
+						caption.add(this.name);
+					}
+				}		
+			});
+			rc.addRect(new ClickableRectangle("<-",415,120,50,20) {
 				@Override
 				public void onClick(MouseEvent e) {
 					// TODO Auto-generated method stub
@@ -57,12 +71,23 @@ public class HeroInventoryPaintComponent extends JComponent{
 				}
 				@Override
 				public void updateCaption() {
-					caption=new LinkedList<>();
-					if (gw.getGame().getPlayer().getInventory().size()<1) {
-						caption.add("empty inventory");
-					}else {
-						caption.add(this.name);
-					}
+				}		
+			});
+			rc.addRect(new ClickableRectangle("->",465,120,50,20) {
+				@Override
+				public void onClick(MouseEvent e) {
+					// TODO Auto-generated method stub
+					if(gw.getGame().getPlayer().getInventory().size()>0) {
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+						if(gw.getGame().getPlayer().getInventory().size()>1) {
+							gw.getGame().getPlayer().getInventory().addFirst(gw.getGame().getPlayer().getInventory().removeLast());
+							gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+						}
+					}					
+						
+				}
+				@Override
+				public void updateCaption() {
 				}		
 			});
 			//item description

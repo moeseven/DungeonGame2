@@ -59,4 +59,13 @@ public class StaticImageLoader {
 		}
 		return image;
 	}
+	public static BufferedImage getBackgroundImage(){
+		BufferedImage image = new BufferedImage(1, 1, 1);
+		try {
+			 image= ImageIO.read(new File("./res/LandscapePicture"+".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return image;
+	}
 }

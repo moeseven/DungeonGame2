@@ -20,6 +20,7 @@ public class Player implements Serializable{
 	protected int groupSize;
 	private Game game;
 	private int gold;
+	private boolean cheat=false;
 	public Player(Game game) {
 		this.game=game;
 		tpLocation=game.getTown();
@@ -32,8 +33,10 @@ public class Player implements Serializable{
 	}
 	public void gainGold(int g) {
 		gold+=g;
-		if(g>0) {
-			game.log.addLine("gained "+g+" gold.");
+		if(g>=0) {
+			if(g!=0) {
+				game.log.addLine("gained "+g+" gold.");
+			}			
 		}else {
 			game.log.addLine("lost "+(-g)+" gold.");
 		}
@@ -186,5 +189,11 @@ public class Player implements Serializable{
 	public void setTpLocation(Room tpLocation) {
 		this.tpLocation = tpLocation;
 	}
-	
+	public boolean hasCheat() {
+		// TODO Auto-generated method stub
+		return cheat;
+	}
+	public void setCheat(boolean c) {
+		cheat=c;
+	}
 }

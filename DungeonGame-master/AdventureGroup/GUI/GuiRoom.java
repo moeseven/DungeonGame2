@@ -121,7 +121,15 @@ public class GuiRoom extends JPanel{
 		//rectangles
 		rc=new RectangleClicker();
 		//Inventory player
-		rc.addRect(new ClickableRectangle("search inventory",375,80,90,40) {
+		rc.addRect(new ClickableRectangle("inventory",375,80,90,20) {
+			@Override
+			public void onClick(MouseEvent e) {	
+			}
+			@Override
+			public void updateCaption() {					
+			}		
+		});
+		rc.addRect(new ClickableRectangle("<-",375,100,45,20) {
 			@Override
 			public void onClick(MouseEvent e) {
 				if(gw.getGame().getPlayer().getInventory().size()>0) {
@@ -137,8 +145,33 @@ public class GuiRoom extends JPanel{
 			public void updateCaption() {					
 			}		
 		});
+		rc.addRect(new ClickableRectangle("->",420,100,45,20) {
+			@Override
+			public void onClick(MouseEvent e) {
+				if(gw.getGame().getPlayer().getInventory().size()>0) {
+					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					if(gw.getGame().getPlayer().getInventory().size()>1) {
+						gw.getGame().getPlayer().getInventory().addFirst(gw.getGame().getPlayer().getInventory().removeLast());
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(gw.getGame().getPlayer().getInventory().getFirst());
+					}
+				}					
+					
+			}
+			@Override
+			public void updateCaption() {					
+			}		
+		});
 		//Inventory shop
-		rc.addRect(new ClickableRectangle("search shop",465,80,90,40) {
+		rc.addRect(new ClickableRectangle("shop",465,80,90,20) {
+			@Override
+			public void onClick(MouseEvent e) {									
+			}
+
+			@Override
+			public void updateCaption() {
+			}		
+		});
+		rc.addRect(new ClickableRectangle("<-",465,100,45,20) {
 			@Override
 			public void onClick(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -146,6 +179,23 @@ public class GuiRoom extends JPanel{
 					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());
 					if(shop.getItems().size()>1) {
 						shop.getItems().addLast(shop.getItems().removeFirst());
+						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());					}
+				}					
+					
+			}
+			@Override
+			public void updateCaption() {
+				// TODO Auto-generated method stub					
+			}		
+		});
+		rc.addRect(new ClickableRectangle("->",510,100,45,20) {
+			@Override
+			public void onClick(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(shop.getItems().size()>0) {
+					gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());
+					if(shop.getItems().size()>1) {
+						shop.getItems().addFirst(shop.getItems().removeLast());
 						gw.getGame().getPlayer().getSelectedHero().setSelectedItem(shop.getItems().getFirst());					}
 				}					
 					

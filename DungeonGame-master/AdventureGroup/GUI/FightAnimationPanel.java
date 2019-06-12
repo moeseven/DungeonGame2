@@ -193,6 +193,9 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 	}
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
+		//paint background (is incredibly slow)
+		int backgroundScale=4;
+		//g.drawImage(StaticImageLoader.getBackgroundImage().getScaledInstance(60*backgroundScale, 51*backgroundScale, backgroundScale),0,0,null);
 		//paint all fight participants
 		int heroCount = heroes.getRectAngles().size();
 		AnimatedClickableRectangleHero rect;

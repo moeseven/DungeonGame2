@@ -69,7 +69,7 @@ public class MapWindow extends JFrame{
 							int currentRoomY=game.getRoom().getyCoordinate();
 							Room room=game.getActiveAct().getRoomMap()[getX()/roomSquareSize][getY()/roomSquareSize];
 							int distance=Math.abs(currentRoomX-getX()/roomSquareSize)+Math.abs(currentRoomY-getY()/roomSquareSize);
-							if(distance==1) {
+							if(distance==1 || (game.getPlayer().hasCheat()&&distance>0)) {
 								if (room!=null) {
 									if (room.isVisited()&&!room.isHasFight()) {
 										game.enterRoom(room);

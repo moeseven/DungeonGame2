@@ -41,6 +41,7 @@ public class CharacterBuilder {
 	}
 	public void createHero(String name) {
 		if (name.equals("super")) {//cheat code
+			game.getPlayer().setCheat(true);
 			hero= new Hero(name, game.getPlayer(),charRaces.getFirst(), new Weakling(game));
 			hero.gainExp(1000);
 			hero.getPlayer().gainGold(10000);
