@@ -20,16 +20,26 @@ public class MissileAnimation extends Animation implements ActionListener, Seria
 		this.shot= shot;
 		this.missileImage=missileImage;
 		velX=1;
-		max=150; 
-		stepCount=150;		
+//		max=150; 
+//		stepCount=150;		
 	}
 	@Override
-	public void cycleEvent() {
+	public void cycleEvent() {//has to be stopped by animation handler
 		currentX+=velX;		
-		stepCount--;
-		if (stepCount<0) {				
-			resetAnimation();
-		}		
+//		stepCount--;
+//		if (stepCount<0) {				
+//			resetAnimation();
+//		}		
+	}
+	
+	@Override
+	public void runAnimation() {
+		// TODO Auto-generated method stub
+		super.runAnimation();
+	}
+	@Override
+	public void resetAnimation() {
+		over=true;
 	}
 	//getters and setters
 	public int getMissileImage() {

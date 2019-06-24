@@ -172,20 +172,30 @@ public class FightAnimationPanel extends JPanel implements ActionListener{
 		for (int i = 0; i < ah.getMissiles().size(); i++) {
 				MissileAnimation missile= ah.getMissiles().get(i);
 				Image mirror=StaticImageLoader.getImage(missile.getMissileImage());
-				
+				boolean mirrored=false;
 				if (missile.getShooter().getPlayer() instanceof DungeonMaster) {
+					mirrored=true;
 					AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 					tx.translate(-mirror.getWidth(null), 0);
 					AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 					mirror = op.filter((BufferedImage) mirror, null);
 				}
-				g.drawImage(mirror.getScaledInstance(60*missile.getShooter().getImageScale(), 51*missile.getShooter().getImageScale(), missile.getShooter().getImageScale()),(int) (-40+getXPosition(missile.getShooter())+missile.getCurrentX()/100.0*computeShootingDistance(missile.getShooter(), missile.getShot())),missileHeight,null);
+				if(missile.getCurrentX()<computeShootingDistance(missile.getShooter(), missile.getShot())) {
+					if(mirrored) {
+						g.drawImage(mirror.getScaledInstance(60*missile.getShooter().getImageScale(), 51*missile.getShooter().getImageScale(), missile.getShooter().getImageScale()),(int) (-40+getXPosition(missile.getShooter())-missile.getCurrentX()),missileHeight,null);
+					}else {
+						g.drawImage(mirror.getScaledInstance(60*missile.getShooter().getImageScale(), 51*missile.getShooter().getImageScale(), missile.getShooter().getImageScale()),(int) (-40+getXPosition(missile.getShooter())+missile.getCurrentX()),missileHeight,null);
+					}					
+				}else {
+					missile.resetAnimation();
+				}
+//				g.drawImage(mirror.getScaledInstance(60*missile.getShooter().getImageScale(), 51*missile.getShooter().getImageScale(), missile.getShooter().getImageScale()),(int) (-40+getXPosition(missile.getShooter())+missile.getCurrentX()/100.0*computeShootingDistance(missile.getShooter(), missile.getShot())),missileHeight,null);
 		}
 	}
 	private int computeShootingDistance(Hero shooter, Hero shot) {
 		int shootingDistance; int heroCount=shooter.getPlayer().getGame().getPlayer().getHeroes().size();
 		if (shooter.getPlayer() instanceof DungeonMaster) {
-			shootingDistance=(heroCount-shot.getPosition()-1)*heroWidth-(heroMonsterSpace+(shooter.getPosition()+heroCount)*heroWidth);
+			shootingDistance=-((heroCount-shot.getPosition()-1)*heroWidth-(heroMonsterSpace+(shooter.getPosition()+heroCount)*heroWidth));
 		}else {
 			shootingDistance=heroMonsterSpace+(shot.getPosition()+heroCount)*heroWidth-(heroCount-shooter.getPosition()-1)*heroWidth;
 		}
